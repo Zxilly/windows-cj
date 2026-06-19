@@ -287,6 +287,146 @@ public class DispatcherQueue <: windows_interface.InterfaceWrapperBase & windows
     }
 }
 
+// Microsoft.UI.Dispatching.DispatcherQueueController (synthetic:Microsoft_UI_Dispatching_DispatcherQueueController)
+@When[Microsoft_UI_Dispatching == "on"]
+public class DispatcherQueueController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DispatcherQueueController> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DispatcherQueueController {
+        DispatcherQueueController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DispatcherQueueController {
+        DispatcherQueueController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDispatcherQueueController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DispatcherQueueController> {
+        let ancestors = [IDispatcherQueueController.iid(), IDispatcherQueueController2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DispatcherQueueController>("DispatcherQueueController", IDispatcherQueueController.iid(), ancestors, { raw => DispatcherQueueController.fromAbiTake(raw) }, { raw => DispatcherQueueController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDispatcherQueueController {
+        match (unsafe { query(IDispatcherQueueController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDispatcherQueueController(): IDispatcherQueueController {
+        defaultInterface()
+    }
+
+    public func asIDispatcherQueueController2(): IDispatcherQueueController2 {
+        match (unsafe { query<IDispatcherQueueController2>(IDispatcherQueueController2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop DispatcherQueue: DispatcherQueue {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DispatcherQueue(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<DispatcherQueue>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return DispatcherQueue.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func ShutdownQueueAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ShutdownQueueAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateOnDedicatedThread(): DispatcherQueueController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DispatcherQueueController, IDispatcherQueueControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateOnDedicatedThread(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DispatcherQueueController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DispatcherQueueController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateOnCurrentThread(): DispatcherQueueController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DispatcherQueueController, IDispatcherQueueControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateOnCurrentThread(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DispatcherQueueController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DispatcherQueueController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Dispatching.DispatcherQueueController"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Dispatching.DispatcherQueueController;{" + IDispatcherQueueController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Dispatching.DispatcherQueueController", DispatcherQueueController.signature(), IDispatcherQueueController.iid())
+    }
+
+    public static func intoWinrtHandle(value: DispatcherQueueController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DispatcherQueueController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DispatcherQueueController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DispatcherQueueController {
+        DispatcherQueueController.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Dispatching.DispatcherQueueHandler (synthetic:Microsoft_UI_Dispatching_DispatcherQueueHandler)
 @When[Microsoft_UI_Dispatching == "on"]
 @C
@@ -457,19 +597,19 @@ func buildDispatcherQueueHandlerBoxVtbl(): DispatcherQueueHandlerVtbl {
 @When[Microsoft_UI_Dispatching == "on"]
 public struct DispatcherQueuePriority {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Dispatching == "on"]
-public let DispatcherQueuePriority_Low = DispatcherQueuePriority(-10)
+public const DispatcherQueuePriority_Low = DispatcherQueuePriority(-10)
 @When[Microsoft_UI_Dispatching == "on"]
-public let DispatcherQueuePriority_Normal = DispatcherQueuePriority(0)
+public const DispatcherQueuePriority_Normal = DispatcherQueuePriority(0)
 @When[Microsoft_UI_Dispatching == "on"]
-public let DispatcherQueuePriority_High = DispatcherQueuePriority(10)
+public const DispatcherQueuePriority_High = DispatcherQueuePriority(10)
 
 // Microsoft.UI.Dispatching.DispatcherQueueShutdownStartingEventArgs (synthetic:Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs)
 @When[Microsoft_UI_Dispatching == "on"]
@@ -725,10 +865,10 @@ public class DispatcherQueueTimer <: windows_interface.InterfaceWrapperBase & wi
 @When[Microsoft_UI_Dispatching == "on"]
 public struct DispatcherRunOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: DispatcherRunOptions): Bool {
@@ -748,11 +888,11 @@ public struct DispatcherRunOptions {
     }
 }
 @When[Microsoft_UI_Dispatching == "on"]
-public let DispatcherRunOptions_None = DispatcherRunOptions(0)
+public const DispatcherRunOptions_None = DispatcherRunOptions(0)
 @When[Microsoft_UI_Dispatching == "on"]
-public let DispatcherRunOptions_ContinueOnQuit = DispatcherRunOptions(1)
+public const DispatcherRunOptions_ContinueOnQuit = DispatcherRunOptions(1)
 @When[Microsoft_UI_Dispatching == "on"]
-public let DispatcherRunOptions_QuitOnlyLocalLoop = DispatcherRunOptions(2)
+public const DispatcherRunOptions_QuitOnlyLocalLoop = DispatcherRunOptions(2)
 
 // Microsoft.UI.Dispatching.IDispatcherExitDeferral (synthetic:Microsoft_UI_Dispatching_IDispatcherExitDeferral)
 @When[Microsoft_UI_Dispatching == "on"]
@@ -793,6 +933,29 @@ public interface IDispatcherQueue3 <: IInspectable {
     func RemoveFrameworkShutdownStarting(token: Int64): Int32
     func FrameworkShutdownCompleted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
     func RemoveFrameworkShutdownCompleted(token: Int64): Int32
+}
+
+// Microsoft.UI.Dispatching.IDispatcherQueueController (synthetic:Microsoft_UI_Dispatching_IDispatcherQueueController)
+@When[Microsoft_UI_Dispatching == "on"]
+@Interface["bce8178d-2183-584c-9e5b-f9366f6ae484", "Microsoft.UI.Dispatching.IDispatcherQueueController", "DispatcherQueue.value=Com;ShutdownQueueAsync.operation=Com"]
+public interface IDispatcherQueueController <: IInspectable {
+    func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
+    func ShutdownQueueAsync(operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Dispatching.IDispatcherQueueController2 (synthetic:Microsoft_UI_Dispatching_IDispatcherQueueController2)
+@When[Microsoft_UI_Dispatching == "on"]
+@Interface["4c68ee2a-1cb1-5591-a3a2-9b590b8f8b9a", "Microsoft.UI.Dispatching.IDispatcherQueueController2"]
+public interface IDispatcherQueueController2 <: IInspectable {
+    func ShutdownQueue(): Int32
+}
+
+// Microsoft.UI.Dispatching.IDispatcherQueueControllerStatics (synthetic:Microsoft_UI_Dispatching_IDispatcherQueueControllerStatics)
+@When[Microsoft_UI_Dispatching == "on"]
+@Interface["f18d6145-722b-593d-bcf2-a61e713f0037", "Microsoft.UI.Dispatching.IDispatcherQueueControllerStatics", "CreateOnDedicatedThread.result=Com;CreateOnCurrentThread.result=Com"]
+public interface IDispatcherQueueControllerStatics <: IInspectable {
+    func CreateOnDedicatedThread(result: CPointer<CPointer<Unit>>): Int32
+    func CreateOnCurrentThread(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Dispatching.IDispatcherQueueShutdownStartingEventArgs (synthetic:Microsoft_UI_Dispatching_IDispatcherQueueShutdownStartingEventArgs)

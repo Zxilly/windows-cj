@@ -15,6 +15,8 @@ import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 import windows_sys.Foundation.Numerics as Windows_Foundation_Numerics
 @When[Windows_Graphics == "on"]
 import windows_sys.Graphics as Windows_Graphics
+@When[Windows_Graphics_DirectX == "on"]
+import windows_sys.Graphics.DirectX as Windows_Graphics_DirectX
 @When[Windows_Graphics_Effects == "on"]
 import windows_sys.Graphics.Effects as Windows_Graphics_Effects
 @When[Windows_System == "on"]
@@ -416,89 +418,89 @@ public class AnimationController <: windows_interface.InterfaceWrapperBase & win
 @When[Windows_UI_Composition == "on"]
 public struct AnimationControllerProgressBehavior {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let AnimationControllerProgressBehavior_Default = AnimationControllerProgressBehavior(0)
+public const AnimationControllerProgressBehavior_Default = AnimationControllerProgressBehavior(0)
 @When[Windows_UI_Composition == "on"]
-public let AnimationControllerProgressBehavior_IncludesDelayTime = AnimationControllerProgressBehavior(1)
+public const AnimationControllerProgressBehavior_IncludesDelayTime = AnimationControllerProgressBehavior(1)
 
 // Windows.UI.Composition.AnimationDelayBehavior (synthetic:Windows_UI_Composition_AnimationDelayBehavior)
 @When[Windows_UI_Composition == "on"]
 public struct AnimationDelayBehavior {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let AnimationDelayBehavior_SetInitialValueAfterDelay = AnimationDelayBehavior(0)
+public const AnimationDelayBehavior_SetInitialValueAfterDelay = AnimationDelayBehavior(0)
 @When[Windows_UI_Composition == "on"]
-public let AnimationDelayBehavior_SetInitialValueBeforeDelay = AnimationDelayBehavior(1)
+public const AnimationDelayBehavior_SetInitialValueBeforeDelay = AnimationDelayBehavior(1)
 
 // Windows.UI.Composition.AnimationDirection (synthetic:Windows_UI_Composition_AnimationDirection)
 @When[Windows_UI_Composition == "on"]
 public struct AnimationDirection {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let AnimationDirection_Normal = AnimationDirection(0)
+public const AnimationDirection_Normal = AnimationDirection(0)
 @When[Windows_UI_Composition == "on"]
-public let AnimationDirection_Reverse = AnimationDirection(1)
+public const AnimationDirection_Reverse = AnimationDirection(1)
 @When[Windows_UI_Composition == "on"]
-public let AnimationDirection_Alternate = AnimationDirection(2)
+public const AnimationDirection_Alternate = AnimationDirection(2)
 @When[Windows_UI_Composition == "on"]
-public let AnimationDirection_AlternateReverse = AnimationDirection(3)
+public const AnimationDirection_AlternateReverse = AnimationDirection(3)
 
 // Windows.UI.Composition.AnimationIterationBehavior (synthetic:Windows_UI_Composition_AnimationIterationBehavior)
 @When[Windows_UI_Composition == "on"]
 public struct AnimationIterationBehavior {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let AnimationIterationBehavior_Count = AnimationIterationBehavior(0)
+public const AnimationIterationBehavior_Count = AnimationIterationBehavior(0)
 @When[Windows_UI_Composition == "on"]
-public let AnimationIterationBehavior_Forever = AnimationIterationBehavior(1)
+public const AnimationIterationBehavior_Forever = AnimationIterationBehavior(1)
 
 // Windows.UI.Composition.AnimationPropertyAccessMode (synthetic:Windows_UI_Composition_AnimationPropertyAccessMode)
 @When[Windows_UI_Composition == "on"]
 public struct AnimationPropertyAccessMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let AnimationPropertyAccessMode_None = AnimationPropertyAccessMode(0)
+public const AnimationPropertyAccessMode_None = AnimationPropertyAccessMode(0)
 @When[Windows_UI_Composition == "on"]
-public let AnimationPropertyAccessMode_ReadOnly = AnimationPropertyAccessMode(1)
+public const AnimationPropertyAccessMode_ReadOnly = AnimationPropertyAccessMode(1)
 @When[Windows_UI_Composition == "on"]
-public let AnimationPropertyAccessMode_WriteOnly = AnimationPropertyAccessMode(2)
+public const AnimationPropertyAccessMode_WriteOnly = AnimationPropertyAccessMode(2)
 @When[Windows_UI_Composition == "on"]
-public let AnimationPropertyAccessMode_ReadWrite = AnimationPropertyAccessMode(3)
+public const AnimationPropertyAccessMode_ReadWrite = AnimationPropertyAccessMode(3)
 
 // Windows.UI.Composition.AnimationPropertyInfo (synthetic:Windows_UI_Composition_AnimationPropertyInfo)
 @When[Windows_UI_Composition == "on"]
@@ -654,19 +656,19 @@ public class AnimationPropertyInfo <: windows_interface.InterfaceWrapperBase & w
 @When[Windows_UI_Composition == "on"]
 public struct AnimationStopBehavior {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let AnimationStopBehavior_LeaveCurrentValue = AnimationStopBehavior(0)
+public const AnimationStopBehavior_LeaveCurrentValue = AnimationStopBehavior(0)
 @When[Windows_UI_Composition == "on"]
-public let AnimationStopBehavior_SetToInitialValue = AnimationStopBehavior(1)
+public const AnimationStopBehavior_SetToInitialValue = AnimationStopBehavior(1)
 @When[Windows_UI_Composition == "on"]
-public let AnimationStopBehavior_SetToFinalValue = AnimationStopBehavior(2)
+public const AnimationStopBehavior_SetToFinalValue = AnimationStopBehavior(2)
 
 // Windows.UI.Composition.BackEasingFunction (synthetic:Windows_UI_Composition_BackEasingFunction)
 @When[Windows_UI_Composition == "on"]
@@ -2746,19 +2748,19 @@ public class CompositionBackdropBrush <: windows_interface.InterfaceWrapperBase 
 @When[Windows_UI_Composition == "on"]
 public struct CompositionBackfaceVisibility {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionBackfaceVisibility_Inherit = CompositionBackfaceVisibility(0)
+public const CompositionBackfaceVisibility_Inherit = CompositionBackfaceVisibility(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBackfaceVisibility_Visible = CompositionBackfaceVisibility(1)
+public const CompositionBackfaceVisibility_Visible = CompositionBackfaceVisibility(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBackfaceVisibility_Hidden = CompositionBackfaceVisibility(2)
+public const CompositionBackfaceVisibility_Hidden = CompositionBackfaceVisibility(2)
 
 // Windows.UI.Composition.CompositionBatchCompletedEventArgs (synthetic:Windows_UI_Composition_CompositionBatchCompletedEventArgs)
 @When[Windows_UI_Composition == "on"]
@@ -2888,10 +2890,10 @@ public class CompositionBatchCompletedEventArgs <: windows_interface.InterfaceWr
 @When[Windows_UI_Composition == "on"]
 public struct CompositionBatchTypes {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: CompositionBatchTypes): Bool {
@@ -2911,65 +2913,65 @@ public struct CompositionBatchTypes {
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionBatchTypes_None = CompositionBatchTypes(0)
+public const CompositionBatchTypes_None = CompositionBatchTypes(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBatchTypes_Animation = CompositionBatchTypes(1)
+public const CompositionBatchTypes_Animation = CompositionBatchTypes(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBatchTypes_Effect = CompositionBatchTypes(2)
+public const CompositionBatchTypes_Effect = CompositionBatchTypes(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBatchTypes_InfiniteAnimation = CompositionBatchTypes(4)
+public const CompositionBatchTypes_InfiniteAnimation = CompositionBatchTypes(4)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBatchTypes_AllAnimations = CompositionBatchTypes(5)
+public const CompositionBatchTypes_AllAnimations = CompositionBatchTypes(5)
 
 // Windows.UI.Composition.CompositionBitmapInterpolationMode (synthetic:Windows_UI_Composition_CompositionBitmapInterpolationMode)
 @When[Windows_UI_Composition == "on"]
 public struct CompositionBitmapInterpolationMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_NearestNeighbor = CompositionBitmapInterpolationMode(0)
+public const CompositionBitmapInterpolationMode_NearestNeighbor = CompositionBitmapInterpolationMode(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_Linear = CompositionBitmapInterpolationMode(1)
+public const CompositionBitmapInterpolationMode_Linear = CompositionBitmapInterpolationMode(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagLinearMinLinearMipLinear = CompositionBitmapInterpolationMode(2)
+public const CompositionBitmapInterpolationMode_MagLinearMinLinearMipLinear = CompositionBitmapInterpolationMode(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagLinearMinLinearMipNearest = CompositionBitmapInterpolationMode(3)
+public const CompositionBitmapInterpolationMode_MagLinearMinLinearMipNearest = CompositionBitmapInterpolationMode(3)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagLinearMinNearestMipLinear = CompositionBitmapInterpolationMode(4)
+public const CompositionBitmapInterpolationMode_MagLinearMinNearestMipLinear = CompositionBitmapInterpolationMode(4)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagLinearMinNearestMipNearest = CompositionBitmapInterpolationMode(5)
+public const CompositionBitmapInterpolationMode_MagLinearMinNearestMipNearest = CompositionBitmapInterpolationMode(5)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagNearestMinLinearMipLinear = CompositionBitmapInterpolationMode(6)
+public const CompositionBitmapInterpolationMode_MagNearestMinLinearMipLinear = CompositionBitmapInterpolationMode(6)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagNearestMinLinearMipNearest = CompositionBitmapInterpolationMode(7)
+public const CompositionBitmapInterpolationMode_MagNearestMinLinearMipNearest = CompositionBitmapInterpolationMode(7)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagNearestMinNearestMipLinear = CompositionBitmapInterpolationMode(8)
+public const CompositionBitmapInterpolationMode_MagNearestMinNearestMipLinear = CompositionBitmapInterpolationMode(8)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBitmapInterpolationMode_MagNearestMinNearestMipNearest = CompositionBitmapInterpolationMode(9)
+public const CompositionBitmapInterpolationMode_MagNearestMinNearestMipNearest = CompositionBitmapInterpolationMode(9)
 
 // Windows.UI.Composition.CompositionBorderMode (synthetic:Windows_UI_Composition_CompositionBorderMode)
 @When[Windows_UI_Composition == "on"]
 public struct CompositionBorderMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionBorderMode_Inherit = CompositionBorderMode(0)
+public const CompositionBorderMode_Inherit = CompositionBorderMode(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBorderMode_Soft = CompositionBorderMode(1)
+public const CompositionBorderMode_Soft = CompositionBorderMode(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionBorderMode_Hard = CompositionBorderMode(2)
+public const CompositionBorderMode_Hard = CompositionBorderMode(2)
 
 // Windows.UI.Composition.CompositionBrush (synthetic:Windows_UI_Composition_CompositionBrush)
 @When[Windows_UI_Composition == "on"]
@@ -3092,6 +3094,135 @@ public class CompositionBrush <: windows_interface.InterfaceWrapperBase & window
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionBrush {
         CompositionBrush.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.CompositionCapabilities (synthetic:Windows_UI_Composition_CompositionCapabilities)
+@When[Windows_UI_Composition == "on"]
+public class CompositionCapabilities <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionCapabilities> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionCapabilities {
+        CompositionCapabilities(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionCapabilities {
+        CompositionCapabilities(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionCapabilities.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionCapabilities> {
+        let ancestors = [ICompositionCapabilities.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionCapabilities>("CompositionCapabilities", ICompositionCapabilities.iid(), ancestors, { raw => CompositionCapabilities.fromAbiTake(raw) }, { raw => CompositionCapabilities.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionCapabilities {
+        match (unsafe { query(ICompositionCapabilities.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionCapabilities(): ICompositionCapabilities {
+        defaultInterface()
+    }
+
+    public func addChanged(handler: Windows_Foundation.TypedEventHandler<CompositionCapabilities, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CompositionCapabilities, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Changed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func AreEffectsSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AreEffectsSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func AreEffectsFast(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AreEffectsFast(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GetForCurrentView(): CompositionCapabilities {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositionCapabilities, ICompositionCapabilitiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CompositionCapabilities>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CompositionCapabilities.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionCapabilities"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionCapabilities;{" + ICompositionCapabilities.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionCapabilities", CompositionCapabilities.signature(), ICompositionCapabilities.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionCapabilities): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionCapabilities {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionCapabilities.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionCapabilities {
+        CompositionCapabilities.viewOf(raw)
     }
 }
 
@@ -3631,23 +3762,23 @@ public class CompositionColorGradientStopCollection <: windows_interface.Interfa
 @When[Windows_UI_Composition == "on"]
 public struct CompositionColorSpace {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionColorSpace_Auto = CompositionColorSpace(0)
+public const CompositionColorSpace_Auto = CompositionColorSpace(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionColorSpace_Hsl = CompositionColorSpace(1)
+public const CompositionColorSpace_Hsl = CompositionColorSpace(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionColorSpace_Rgb = CompositionColorSpace(2)
+public const CompositionColorSpace_Rgb = CompositionColorSpace(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionColorSpace_HslLinear = CompositionColorSpace(3)
+public const CompositionColorSpace_HslLinear = CompositionColorSpace(3)
 @When[Windows_UI_Composition == "on"]
-public let CompositionColorSpace_RgbLinear = CompositionColorSpace(4)
+public const CompositionColorSpace_RgbLinear = CompositionColorSpace(4)
 
 // Windows.UI.Composition.CompositionCommitBatch (synthetic:Windows_UI_Composition_CompositionCommitBatch)
 @When[Windows_UI_Composition == "on"]
@@ -3821,21 +3952,21 @@ public class CompositionCommitBatch <: windows_interface.InterfaceWrapperBase & 
 @When[Windows_UI_Composition == "on"]
 public struct CompositionCompositeMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionCompositeMode_Inherit = CompositionCompositeMode(0)
+public const CompositionCompositeMode_Inherit = CompositionCompositeMode(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionCompositeMode_SourceOver = CompositionCompositeMode(1)
+public const CompositionCompositeMode_SourceOver = CompositionCompositeMode(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionCompositeMode_DestinationInvert = CompositionCompositeMode(2)
+public const CompositionCompositeMode_DestinationInvert = CompositionCompositeMode(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionCompositeMode_MinBlend = CompositionCompositeMode(3)
+public const CompositionCompositeMode_MinBlend = CompositionCompositeMode(3)
 
 // Windows.UI.Composition.CompositionContainerShape (synthetic:Windows_UI_Composition_CompositionContainerShape)
 @When[Windows_UI_Composition == "on"]
@@ -3984,21 +4115,195 @@ public class CompositionContainerShape <: windows_interface.InterfaceWrapperBase
     }
 }
 
+// Windows.UI.Composition.CompositionDrawingSurface (synthetic:Windows_UI_Composition_CompositionDrawingSurface)
+@When[Windows_UI_Composition == "on"]
+public class CompositionDrawingSurface <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionDrawingSurface> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionDrawingSurface {
+        CompositionDrawingSurface(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionDrawingSurface {
+        CompositionDrawingSurface(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionDrawingSurface.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionDrawingSurface> {
+        let ancestors = [ICompositionDrawingSurface.iid(), ICompositionDrawingSurface2.iid(), ICompositionSurface.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionDrawingSurface>("CompositionDrawingSurface", ICompositionDrawingSurface.iid(), ancestors, { raw => CompositionDrawingSurface.fromAbiTake(raw) }, { raw => CompositionDrawingSurface.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionDrawingSurface {
+        match (unsafe { query(ICompositionDrawingSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionDrawingSurface(): ICompositionDrawingSurface {
+        defaultInterface()
+    }
+
+    public func asICompositionDrawingSurface2(): ICompositionDrawingSurface2 {
+        match (unsafe { query<ICompositionDrawingSurface2>(ICompositionDrawingSurface2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionSurface(): ICompositionSurface {
+        match (unsafe { query<ICompositionSurface>(ICompositionSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop AlphaMode: Windows_Graphics_DirectX.DirectXAlphaMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlphaMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Graphics_DirectX.DirectXAlphaMode(result__)
+        }
+    }
+
+    public prop PixelFormat: Windows_Graphics_DirectX.DirectXPixelFormat {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PixelFormat(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Graphics_DirectX.DirectXPixelFormat(result__)
+        }
+    }
+
+    public prop Size: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Size(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionDrawingSurface"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionDrawingSurface;{" + ICompositionDrawingSurface.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionDrawingSurface", CompositionDrawingSurface.signature(), ICompositionDrawingSurface.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionDrawingSurface): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionDrawingSurface {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionDrawingSurface.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionDrawingSurface {
+        CompositionDrawingSurface.viewOf(raw)
+    }
+}
+
 // Windows.UI.Composition.CompositionDropShadowSourcePolicy (synthetic:Windows_UI_Composition_CompositionDropShadowSourcePolicy)
 @When[Windows_UI_Composition == "on"]
 public struct CompositionDropShadowSourcePolicy {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionDropShadowSourcePolicy_Default = CompositionDropShadowSourcePolicy(0)
+public const CompositionDropShadowSourcePolicy_Default = CompositionDropShadowSourcePolicy(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionDropShadowSourcePolicy_InheritFromVisualContent = CompositionDropShadowSourcePolicy(1)
+public const CompositionDropShadowSourcePolicy_InheritFromVisualContent = CompositionDropShadowSourcePolicy(1)
 
 // Windows.UI.Composition.CompositionEasingFunction (synthetic:Windows_UI_Composition_CompositionEasingFunction)
 @When[Windows_UI_Composition == "on"]
@@ -4304,19 +4609,19 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
 @When[Windows_UI_Composition == "on"]
 public struct CompositionEasingFunctionMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionEasingFunctionMode_In = CompositionEasingFunctionMode(0)
+public const CompositionEasingFunctionMode_In = CompositionEasingFunctionMode(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionEasingFunctionMode_Out = CompositionEasingFunctionMode(1)
+public const CompositionEasingFunctionMode_Out = CompositionEasingFunctionMode(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionEasingFunctionMode_InOut = CompositionEasingFunctionMode(2)
+public const CompositionEasingFunctionMode_InOut = CompositionEasingFunctionMode(2)
 
 // Windows.UI.Composition.CompositionEffectBrush (synthetic:Windows_UI_Composition_CompositionEffectBrush)
 @When[Windows_UI_Composition == "on"]
@@ -4643,21 +4948,135 @@ public class CompositionEffectFactory <: windows_interface.InterfaceWrapperBase 
 @When[Windows_UI_Composition == "on"]
 public struct CompositionEffectFactoryLoadStatus {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionEffectFactoryLoadStatus_Success = CompositionEffectFactoryLoadStatus(0)
+public const CompositionEffectFactoryLoadStatus_Success = CompositionEffectFactoryLoadStatus(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionEffectFactoryLoadStatus_EffectTooComplex = CompositionEffectFactoryLoadStatus(1)
+public const CompositionEffectFactoryLoadStatus_EffectTooComplex = CompositionEffectFactoryLoadStatus(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionEffectFactoryLoadStatus_Pending = CompositionEffectFactoryLoadStatus(2)
+public const CompositionEffectFactoryLoadStatus_Pending = CompositionEffectFactoryLoadStatus(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionEffectFactoryLoadStatus_Other = CompositionEffectFactoryLoadStatus(-1)
+public const CompositionEffectFactoryLoadStatus_Other = CompositionEffectFactoryLoadStatus(-1)
+
+// Windows.UI.Composition.CompositionEffectSourceParameter (synthetic:Windows_UI_Composition_CompositionEffectSourceParameter)
+@When[Windows_UI_Composition == "on"]
+public class CompositionEffectSourceParameter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionEffectSourceParameter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionEffectSourceParameter {
+        CompositionEffectSourceParameter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionEffectSourceParameter {
+        CompositionEffectSourceParameter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionEffectSourceParameter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionEffectSourceParameter> {
+        let ancestors = [ICompositionEffectSourceParameter.iid(), Windows_Graphics_Effects.IGraphicsEffectSource.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionEffectSourceParameter>("CompositionEffectSourceParameter", ICompositionEffectSourceParameter.iid(), ancestors, { raw => CompositionEffectSourceParameter.fromAbiTake(raw) }, { raw => CompositionEffectSourceParameter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionEffectSourceParameter {
+        match (unsafe { query(ICompositionEffectSourceParameter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionEffectSourceParameter(): ICompositionEffectSourceParameter {
+        defaultInterface()
+    }
+
+    public func asIGraphicsEffectSource(): Windows_Graphics_Effects.IGraphicsEffectSource {
+        match (unsafe { query<Windows_Graphics_Effects.IGraphicsEffectSource>(Windows_Graphics_Effects.IGraphicsEffectSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Name: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Name(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func Create(name: windows_core.HString): CompositionEffectSourceParameter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name)) {
+            try (factory__ = windows_core.factory<CompositionEffectSourceParameter, ICompositionEffectSourceParameterFactory>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CompositionEffectSourceParameter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CompositionEffectSourceParameter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionEffectSourceParameter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionEffectSourceParameter;{" + ICompositionEffectSourceParameter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionEffectSourceParameter", CompositionEffectSourceParameter.signature(), ICompositionEffectSourceParameter.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionEffectSourceParameter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionEffectSourceParameter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionEffectSourceParameter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionEffectSourceParameter {
+        CompositionEffectSourceParameter.viewOf(raw)
+    }
+}
 
 // Windows.UI.Composition.CompositionEllipseGeometry (synthetic:Windows_UI_Composition_CompositionEllipseGeometry)
 @When[Windows_UI_Composition == "on"]
@@ -5201,19 +5620,19 @@ public class CompositionGeometry <: windows_interface.InterfaceWrapperBase & win
 @When[Windows_UI_Composition == "on"]
 public struct CompositionGetValueStatus {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionGetValueStatus_Succeeded = CompositionGetValueStatus(0)
+public const CompositionGetValueStatus_Succeeded = CompositionGetValueStatus(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionGetValueStatus_TypeMismatch = CompositionGetValueStatus(1)
+public const CompositionGetValueStatus_TypeMismatch = CompositionGetValueStatus(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionGetValueStatus_NotFound = CompositionGetValueStatus(2)
+public const CompositionGetValueStatus_NotFound = CompositionGetValueStatus(2)
 
 // Windows.UI.Composition.CompositionGradientBrush (synthetic:Windows_UI_Composition_CompositionGradientBrush)
 @When[Windows_UI_Composition == "on"]
@@ -5544,19 +5963,198 @@ public class CompositionGradientBrush <: windows_interface.InterfaceWrapperBase 
 @When[Windows_UI_Composition == "on"]
 public struct CompositionGradientExtendMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionGradientExtendMode_Clamp = CompositionGradientExtendMode(0)
+public const CompositionGradientExtendMode_Clamp = CompositionGradientExtendMode(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionGradientExtendMode_Wrap = CompositionGradientExtendMode(1)
+public const CompositionGradientExtendMode_Wrap = CompositionGradientExtendMode(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionGradientExtendMode_Mirror = CompositionGradientExtendMode(2)
+public const CompositionGradientExtendMode_Mirror = CompositionGradientExtendMode(2)
+
+// Windows.UI.Composition.CompositionGraphicsDevice (synthetic:Windows_UI_Composition_CompositionGraphicsDevice)
+@When[Windows_UI_Composition == "on"]
+public class CompositionGraphicsDevice <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionGraphicsDevice> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionGraphicsDevice {
+        CompositionGraphicsDevice(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionGraphicsDevice {
+        CompositionGraphicsDevice(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionGraphicsDevice.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionGraphicsDevice> {
+        let ancestors = [ICompositionGraphicsDevice.iid(), ICompositionGraphicsDevice2.iid(), ICompositionGraphicsDevice3.iid(), ICompositionGraphicsDevice4.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionGraphicsDevice>("CompositionGraphicsDevice", ICompositionGraphicsDevice.iid(), ancestors, { raw => CompositionGraphicsDevice.fromAbiTake(raw) }, { raw => CompositionGraphicsDevice.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionGraphicsDevice {
+        match (unsafe { query(ICompositionGraphicsDevice.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionGraphicsDevice(): ICompositionGraphicsDevice {
+        defaultInterface()
+    }
+
+    public func asICompositionGraphicsDevice2(): ICompositionGraphicsDevice2 {
+        match (unsafe { query<ICompositionGraphicsDevice2>(ICompositionGraphicsDevice2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionGraphicsDevice3(): ICompositionGraphicsDevice3 {
+        match (unsafe { query<ICompositionGraphicsDevice3>(ICompositionGraphicsDevice3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionGraphicsDevice4(): ICompositionGraphicsDevice4 {
+        match (unsafe { query<ICompositionGraphicsDevice4>(ICompositionGraphicsDevice4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func addRenderingDeviceReplaced(handler: Windows_Foundation.TypedEventHandler<CompositionGraphicsDevice, RenderingDeviceReplacedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CompositionGraphicsDevice, RenderingDeviceReplacedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RenderingDeviceReplaced(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeRenderingDeviceReplaced(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveRenderingDeviceReplaced(token) }
+        }
+        hr__.check()
+    }
+
+    public func CreateDrawingSurface(sizePixels: Windows_Foundation.Size, pixelFormat: Windows_Graphics_DirectX.DirectXPixelFormat, alphaMode: Windows_Graphics_DirectX.DirectXAlphaMode): CompositionDrawingSurface {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CreateDrawingSurface(sizePixels, pixelFormat.value, alphaMode.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CompositionDrawingSurface>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CompositionDrawingSurface.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionGraphicsDevice"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionGraphicsDevice;{" + ICompositionGraphicsDevice.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionGraphicsDevice", CompositionGraphicsDevice.signature(), ICompositionGraphicsDevice.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionGraphicsDevice): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionGraphicsDevice {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionGraphicsDevice.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionGraphicsDevice {
+        CompositionGraphicsDevice.viewOf(raw)
+    }
+}
 
 // Windows.UI.Composition.CompositionLight (synthetic:Windows_UI_Composition_CompositionLight)
 @When[Windows_UI_Composition == "on"]
@@ -6068,17 +6666,17 @@ public class CompositionLinearGradientBrush <: windows_interface.InterfaceWrappe
 @When[Windows_UI_Composition == "on"]
 public struct CompositionMappingMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionMappingMode_Absolute = CompositionMappingMode(0)
+public const CompositionMappingMode_Absolute = CompositionMappingMode(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionMappingMode_Relative = CompositionMappingMode(1)
+public const CompositionMappingMode_Relative = CompositionMappingMode(1)
 
 // Windows.UI.Composition.CompositionMaskBrush (synthetic:Windows_UI_Composition_CompositionMaskBrush)
 @When[Windows_UI_Composition == "on"]
@@ -6258,6 +6856,199 @@ public class CompositionMaskBrush <: windows_interface.InterfaceWrapperBase & wi
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionMaskBrush {
         CompositionMaskBrush.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.CompositionMipmapSurface (synthetic:Windows_UI_Composition_CompositionMipmapSurface)
+@When[Windows_UI_Composition == "on"]
+public class CompositionMipmapSurface <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionMipmapSurface> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionMipmapSurface {
+        CompositionMipmapSurface(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionMipmapSurface {
+        CompositionMipmapSurface(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionMipmapSurface.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionMipmapSurface> {
+        let ancestors = [ICompositionMipmapSurface.iid(), ICompositionSurface.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionMipmapSurface>("CompositionMipmapSurface", ICompositionMipmapSurface.iid(), ancestors, { raw => CompositionMipmapSurface.fromAbiTake(raw) }, { raw => CompositionMipmapSurface.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionMipmapSurface {
+        match (unsafe { query(ICompositionMipmapSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionMipmapSurface(): ICompositionMipmapSurface {
+        defaultInterface()
+    }
+
+    public func asICompositionSurface(): ICompositionSurface {
+        match (unsafe { query<ICompositionSurface>(ICompositionSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop AlphaMode: Windows_Graphics_DirectX.DirectXAlphaMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlphaMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Graphics_DirectX.DirectXAlphaMode(result__)
+        }
+    }
+
+    public prop LevelCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LevelCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PixelFormat: Windows_Graphics_DirectX.DirectXPixelFormat {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PixelFormat(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Graphics_DirectX.DirectXPixelFormat(result__)
+        }
+    }
+
+    public prop SizeInt32: Windows_Graphics.SizeInt32 {
+        get() {
+            var result__ = Windows_Graphics.SizeInt32()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SizeInt32(CPointer<Windows_Graphics.SizeInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func GetDrawingSurfaceForLevel(level: UInt32): CompositionDrawingSurface {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDrawingSurfaceForLevel(level, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CompositionDrawingSurface>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CompositionDrawingSurface.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionMipmapSurface"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionMipmapSurface;{" + ICompositionMipmapSurface.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionMipmapSurface", CompositionMipmapSurface.signature(), ICompositionMipmapSurface.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionMipmapSurface): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionMipmapSurface {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionMipmapSurface.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionMipmapSurface {
+        CompositionMipmapSurface.viewOf(raw)
     }
 }
 
@@ -10197,41 +10988,41 @@ public class CompositionSpriteShape <: windows_interface.InterfaceWrapperBase & 
 @When[Windows_UI_Composition == "on"]
 public struct CompositionStretch {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionStretch_None = CompositionStretch(0)
+public const CompositionStretch_None = CompositionStretch(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStretch_Fill = CompositionStretch(1)
+public const CompositionStretch_Fill = CompositionStretch(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStretch_Uniform = CompositionStretch(2)
+public const CompositionStretch_Uniform = CompositionStretch(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStretch_UniformToFill = CompositionStretch(3)
+public const CompositionStretch_UniformToFill = CompositionStretch(3)
 
 // Windows.UI.Composition.CompositionStrokeCap (synthetic:Windows_UI_Composition_CompositionStrokeCap)
 @When[Windows_UI_Composition == "on"]
 public struct CompositionStrokeCap {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeCap_Flat = CompositionStrokeCap(0)
+public const CompositionStrokeCap_Flat = CompositionStrokeCap(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeCap_Square = CompositionStrokeCap(1)
+public const CompositionStrokeCap_Square = CompositionStrokeCap(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeCap_Round = CompositionStrokeCap(2)
+public const CompositionStrokeCap_Round = CompositionStrokeCap(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeCap_Triangle = CompositionStrokeCap(3)
+public const CompositionStrokeCap_Triangle = CompositionStrokeCap(3)
 
 // Windows.UI.Composition.CompositionStrokeDashArray (synthetic:Windows_UI_Composition_CompositionStrokeDashArray)
 @When[Windows_UI_Composition == "on"]
@@ -10530,21 +11321,21 @@ public class CompositionStrokeDashArray <: windows_interface.InterfaceWrapperBas
 @When[Windows_UI_Composition == "on"]
 public struct CompositionStrokeLineJoin {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeLineJoin_Miter = CompositionStrokeLineJoin(0)
+public const CompositionStrokeLineJoin_Miter = CompositionStrokeLineJoin(0)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeLineJoin_Bevel = CompositionStrokeLineJoin(1)
+public const CompositionStrokeLineJoin_Bevel = CompositionStrokeLineJoin(1)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeLineJoin_Round = CompositionStrokeLineJoin(2)
+public const CompositionStrokeLineJoin_Round = CompositionStrokeLineJoin(2)
 @When[Windows_UI_Composition == "on"]
-public let CompositionStrokeLineJoin_MiterOrBevel = CompositionStrokeLineJoin(3)
+public const CompositionStrokeLineJoin_MiterOrBevel = CompositionStrokeLineJoin(3)
 
 // Windows.UI.Composition.CompositionSurfaceBrush (synthetic:Windows_UI_Composition_CompositionSurfaceBrush)
 @When[Windows_UI_Composition == "on"]
@@ -10941,6 +11732,318 @@ public class CompositionTarget <: windows_interface.InterfaceWrapperBase & windo
     }
 }
 
+// Windows.UI.Composition.CompositionTexture (synthetic:Windows_UI_Composition_CompositionTexture)
+@When[Windows_UI_Composition == "on"]
+public class CompositionTexture <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionTexture> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionTexture {
+        CompositionTexture(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionTexture {
+        CompositionTexture(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionTexture.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionTexture> {
+        let ancestors = [ICompositionTexture.iid(), ICompositionSurface.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionTexture>("CompositionTexture", ICompositionTexture.iid(), ancestors, { raw => CompositionTexture.fromAbiTake(raw) }, { raw => CompositionTexture.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionTexture {
+        match (unsafe { query(ICompositionTexture.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionTexture(): ICompositionTexture {
+        defaultInterface()
+    }
+
+    public func asICompositionSurface(): ICompositionSurface {
+        match (unsafe { query<ICompositionSurface>(ICompositionSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop AlphaMode: Windows_Graphics_DirectX.DirectXAlphaMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlphaMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Graphics_DirectX.DirectXAlphaMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAlphaMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ColorSpace: Windows_Graphics_DirectX.DirectXColorSpace {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ColorSpace(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Graphics_DirectX.DirectXColorSpace(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetColorSpace(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SourceRect: Windows_Graphics.RectInt32 {
+        get() {
+            var result__ = Windows_Graphics.RectInt32()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SourceRect(CPointer<Windows_Graphics.RectInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSourceRect(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionTexture"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionTexture;{" + ICompositionTexture.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionTexture", CompositionTexture.signature(), ICompositionTexture.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionTexture): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionTexture {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionTexture.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionTexture {
+        CompositionTexture.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.CompositionTransform (synthetic:Windows_UI_Composition_CompositionTransform)
+@When[Windows_UI_Composition == "on"]
+public class CompositionTransform <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionTransform> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionTransform {
+        CompositionTransform(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionTransform {
+        CompositionTransform(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionTransform.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionTransform> {
+        let ancestors = [ICompositionTransform.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionTransform>("CompositionTransform", ICompositionTransform.iid(), ancestors, { raw => CompositionTransform.fromAbiTake(raw) }, { raw => CompositionTransform.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionTransform {
+        match (unsafe { query(ICompositionTransform.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionTransform(): ICompositionTransform {
+        defaultInterface()
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionTransform"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionTransform;{" + ICompositionTransform.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionTransform", CompositionTransform.signature(), ICompositionTransform.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionTransform): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionTransform {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionTransform.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionTransform {
+        CompositionTransform.viewOf(raw)
+    }
+}
+
 // Windows.UI.Composition.CompositionViewBox (synthetic:Windows_UI_Composition_CompositionViewBox)
 @When[Windows_UI_Composition == "on"]
 public class CompositionViewBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionViewBox> {
@@ -11157,6 +12260,166 @@ public class CompositionViewBox <: windows_interface.InterfaceWrapperBase & wind
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionViewBox {
         CompositionViewBox.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.CompositionVirtualDrawingSurface (synthetic:Windows_UI_Composition_CompositionVirtualDrawingSurface)
+@When[Windows_UI_Composition == "on"]
+public class CompositionVirtualDrawingSurface <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositionVirtualDrawingSurface> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositionVirtualDrawingSurface {
+        CompositionVirtualDrawingSurface(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositionVirtualDrawingSurface {
+        CompositionVirtualDrawingSurface(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositionVirtualDrawingSurface.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositionVirtualDrawingSurface> {
+        let ancestors = [ICompositionVirtualDrawingSurface.iid(), ICompositionDrawingSurface.iid(), ICompositionDrawingSurface2.iid(), ICompositionSurface.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositionVirtualDrawingSurface>("CompositionVirtualDrawingSurface", ICompositionVirtualDrawingSurface.iid(), ancestors, { raw => CompositionVirtualDrawingSurface.fromAbiTake(raw) }, { raw => CompositionVirtualDrawingSurface.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositionVirtualDrawingSurface {
+        match (unsafe { query(ICompositionVirtualDrawingSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionVirtualDrawingSurface(): ICompositionVirtualDrawingSurface {
+        defaultInterface()
+    }
+
+    public func asICompositionDrawingSurface(): ICompositionDrawingSurface {
+        match (unsafe { query<ICompositionDrawingSurface>(ICompositionDrawingSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionDrawingSurface2(): ICompositionDrawingSurface2 {
+        match (unsafe { query<ICompositionDrawingSurface2>(ICompositionDrawingSurface2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionSurface(): ICompositionSurface {
+        match (unsafe { query<ICompositionSurface>(ICompositionSurface.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func Trim(rects: Array<Windows_Graphics.RectInt32>): Unit {
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Windows_Graphics.RectInt32>(rects.size, { index => rects[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Windows_Graphics.RectInt32>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Trim(__arg0Len, __arg0Raw) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionVirtualDrawingSurface"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionVirtualDrawingSurface;{" + ICompositionVirtualDrawingSurface.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionVirtualDrawingSurface", CompositionVirtualDrawingSurface.signature(), ICompositionVirtualDrawingSurface.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositionVirtualDrawingSurface): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositionVirtualDrawingSurface {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositionVirtualDrawingSurface.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositionVirtualDrawingSurface {
+        CompositionVirtualDrawingSurface.viewOf(raw)
     }
 }
 
@@ -12210,6 +13473,249 @@ public class CubicBezierEasingFunction <: windows_interface.InterfaceWrapperBase
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): CubicBezierEasingFunction {
         CubicBezierEasingFunction.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.DelegatedInkTrailVisual (synthetic:Windows_UI_Composition_DelegatedInkTrailVisual)
+@When[Windows_UI_Composition == "on"]
+public class DelegatedInkTrailVisual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DelegatedInkTrailVisual> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DelegatedInkTrailVisual {
+        DelegatedInkTrailVisual(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DelegatedInkTrailVisual {
+        DelegatedInkTrailVisual(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDelegatedInkTrailVisual.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DelegatedInkTrailVisual> {
+        let ancestors = [IDelegatedInkTrailVisual.iid(), IVisual.iid(), IVisual2.iid(), IVisual3.iid(), IVisual4.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DelegatedInkTrailVisual>("DelegatedInkTrailVisual", IDelegatedInkTrailVisual.iid(), ancestors, { raw => DelegatedInkTrailVisual.fromAbiTake(raw) }, { raw => DelegatedInkTrailVisual.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDelegatedInkTrailVisual {
+        match (unsafe { query(IDelegatedInkTrailVisual.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDelegatedInkTrailVisual(): IDelegatedInkTrailVisual {
+        defaultInterface()
+    }
+
+    public func asIVisual(): IVisual {
+        match (unsafe { query<IVisual>(IVisual.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisual2(): IVisual2 {
+        match (unsafe { query<IVisual2>(IVisual2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisual3(): IVisual3 {
+        match (unsafe { query<IVisual3>(IVisual3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisual4(): IVisual4 {
+        match (unsafe { query<IVisual4>(IVisual4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func AddTrailPoints(inkPoints: Array<InkTrailPoint>): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<InkTrailPoint>(inkPoints.size, { index => inkPoints[index] })
+        let __arg0AbiArray = windows_core.AbiArray<InkTrailPoint>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AddTrailPoints(__arg0Len, __arg0Raw, CPointer<UInt32>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func AddTrailPointsWithPrediction(inkPoints: Array<InkTrailPoint>, predictedInkPoints: Array<InkTrailPoint>): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<InkTrailPoint>(inkPoints.size, { index => inkPoints[index] })
+        let __arg0AbiArray = windows_core.AbiArray<InkTrailPoint>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            let __arg1AbiValues = Array<InkTrailPoint>(predictedInkPoints.size, { index => predictedInkPoints[index] })
+            let __arg1AbiArray = windows_core.AbiArray<InkTrailPoint>.fromSlice(__arg1AbiValues)
+            let (__arg1Raw, __arg1Len) = __arg1AbiArray.intoAbi()
+            try {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.AddTrailPointsWithPrediction(__arg0Len, __arg0Raw, __arg1Len, __arg1Raw, CPointer<UInt32>(inout result__)) }
+                }
+            } finally {
+                windows_core.coTaskMemFree(CPointer<Unit>(__arg1Raw))
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RemoveTrailPoints(generationId: UInt32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveTrailPoints(generationId) }
+        }
+        hr__.check()
+    }
+
+    public func StartNewTrail(color: Windows_UI.Color): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.StartNewTrail(color) }
+        }
+        hr__.check()
+    }
+
+    public static func Create(compositor: Compositor): DelegatedInkTrailVisual {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(compositor)) {
+            try (factory__ = windows_core.factory<DelegatedInkTrailVisual, IDelegatedInkTrailVisualStatics>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DelegatedInkTrailVisual>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DelegatedInkTrailVisual.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateForSwapChain(compositor: Compositor, swapChain: ICompositionSurface): DelegatedInkTrailVisual {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(compositor)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ICompositionSurface>(swapChain)) {
+                try (factory__ = windows_core.factory<DelegatedInkTrailVisual, IDelegatedInkTrailVisualStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateForSwapChain(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DelegatedInkTrailVisual>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DelegatedInkTrailVisual.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.DelegatedInkTrailVisual"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.DelegatedInkTrailVisual;{" + IDelegatedInkTrailVisual.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.DelegatedInkTrailVisual", DelegatedInkTrailVisual.signature(), IDelegatedInkTrailVisual.iid())
+    }
+
+    public static func intoWinrtHandle(value: DelegatedInkTrailVisual): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DelegatedInkTrailVisual {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DelegatedInkTrailVisual.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DelegatedInkTrailVisual {
+        DelegatedInkTrailVisual.viewOf(raw)
     }
 }
 
@@ -13391,6 +14897,23 @@ public interface ICompositionBrush <: IInspectable {
 public interface ICompositionBrushFactory <: IInspectable {
 }
 
+// Windows.UI.Composition.ICompositionCapabilities (synthetic:Windows_UI_Composition_ICompositionCapabilities)
+@When[Windows_UI_Composition == "on"]
+@Interface["8253353e-b517-48bc-b1e8-4b3561a2e181", "Windows.UI.Composition.ICompositionCapabilities"]
+public interface ICompositionCapabilities <: IInspectable {
+    func AreEffectsSupported(result: CPointer<Bool>): Int32
+    func AreEffectsFast(result: CPointer<Bool>): Int32
+    func Changed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveChanged(token: Int64): Int32
+}
+
+// Windows.UI.Composition.ICompositionCapabilitiesStatics (synthetic:Windows_UI_Composition_ICompositionCapabilitiesStatics)
+@When[Windows_UI_Composition == "on"]
+@Interface["f7b7a86e-6416-49e5-8ddf-afe949e20562", "Windows.UI.Composition.ICompositionCapabilitiesStatics", "GetForCurrentView.result=Com"]
+public interface ICompositionCapabilitiesStatics <: IInspectable {
+    func GetForCurrentView(result: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.UI.Composition.ICompositionClip (synthetic:Windows_UI_Composition_ICompositionClip)
 @When[Windows_UI_Composition == "on"]
 @Interface["1ccd2a52-cfc7-4ace-9983-146bb8eb6a3c", "Windows.UI.Composition.ICompositionClip"]
@@ -13464,6 +14987,33 @@ public interface ICompositionContainerShape <: IInspectable {
     func Shapes(value: CPointer<CPointer<Unit>>): Int32
 }
 
+// Windows.UI.Composition.ICompositionDrawingSurface (synthetic:Windows_UI_Composition_ICompositionDrawingSurface)
+@When[Windows_UI_Composition == "on"]
+@Interface["a166c300-fad0-4d11-9e67-e433162ff49e", "Windows.UI.Composition.ICompositionDrawingSurface"]
+public interface ICompositionDrawingSurface <: IInspectable {
+    func AlphaMode(value: CPointer<Int32>): Int32
+    func PixelFormat(value: CPointer<Int32>): Int32
+    func Size(value: CPointer<Windows_Foundation.Size>): Int32
+}
+
+// Windows.UI.Composition.ICompositionDrawingSurface2 (synthetic:Windows_UI_Composition_ICompositionDrawingSurface2)
+@When[Windows_UI_Composition == "on"]
+@Interface["fad0e88b-e354-44e8-8e3d-c4880d5a213f", "Windows.UI.Composition.ICompositionDrawingSurface2"]
+public interface ICompositionDrawingSurface2 <: IInspectable {
+    func SizeInt32(value: CPointer<Windows_Graphics.SizeInt32>): Int32
+    func Resize(sizePixels: Windows_Graphics.SizeInt32): Int32
+    func Scroll(offset: Windows_Graphics.PointInt32): Int32
+    func ScrollRect(offset: Windows_Graphics.PointInt32, scrollRect: Windows_Graphics.RectInt32): Int32
+    func ScrollWithClip(offset: Windows_Graphics.PointInt32, clipRect: Windows_Graphics.RectInt32): Int32
+    func ScrollRectWithClip(offset: Windows_Graphics.PointInt32, clipRect: Windows_Graphics.RectInt32, scrollRect: Windows_Graphics.RectInt32): Int32
+}
+
+// Windows.UI.Composition.ICompositionDrawingSurfaceFactory (synthetic:Windows_UI_Composition_ICompositionDrawingSurfaceFactory)
+@When[Windows_UI_Composition == "on"]
+@Interface["9497b00a-312d-46b9-9db3-412fd79464c8", "Windows.UI.Composition.ICompositionDrawingSurfaceFactory"]
+public interface ICompositionDrawingSurfaceFactory <: IInspectable {
+}
+
 // Windows.UI.Composition.ICompositionEasingFunction (synthetic:Windows_UI_Composition_ICompositionEasingFunction)
 @When[Windows_UI_Composition == "on"]
 @Interface["5145e356-bf79-4ea8-8cc2-6b5b472e6c9a", "Windows.UI.Composition.ICompositionEasingFunction"]
@@ -13508,6 +15058,20 @@ public interface ICompositionEffectFactory <: IInspectable {
     func CreateBrush(result: CPointer<CPointer<Unit>>): Int32
     func ExtendedError(value: CPointer<Int32>): Int32
     func LoadStatus(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Composition.ICompositionEffectSourceParameter (synthetic:Windows_UI_Composition_ICompositionEffectSourceParameter)
+@When[Windows_UI_Composition == "on"]
+@Interface["858ab13a-3292-4e4e-b3bb-2b6c6544a6ee", "Windows.UI.Composition.ICompositionEffectSourceParameter", "Name.value=HString"]
+public interface ICompositionEffectSourceParameter <: IInspectable {
+    func Name(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Composition.ICompositionEffectSourceParameterFactory (synthetic:Windows_UI_Composition_ICompositionEffectSourceParameterFactory)
+@When[Windows_UI_Composition == "on"]
+@Interface["b3d9f276-aba3-4724-acf3-d0397464db1c", "Windows.UI.Composition.ICompositionEffectSourceParameterFactory", "Create.value=Com"]
+public interface ICompositionEffectSourceParameterFactory <: IInspectable {
+    func Create(name: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Composition.ICompositionEllipseGeometry (synthetic:Windows_UI_Composition_ICompositionEllipseGeometry)
@@ -13587,6 +15151,38 @@ public interface ICompositionGradientBrush2 <: IInspectable {
 public interface ICompositionGradientBrushFactory <: IInspectable {
 }
 
+// Windows.UI.Composition.ICompositionGraphicsDevice (synthetic:Windows_UI_Composition_ICompositionGraphicsDevice)
+@When[Windows_UI_Composition == "on"]
+@Interface["fb22c6e1-80a2-4667-9936-dbeaf6eefe95", "Windows.UI.Composition.ICompositionGraphicsDevice", "CreateDrawingSurface.result=Com"]
+public interface ICompositionGraphicsDevice <: IInspectable {
+    func CreateDrawingSurface(sizePixels: Windows_Foundation.Size, pixelFormat: Int32, alphaMode: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func RenderingDeviceReplaced(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveRenderingDeviceReplaced(token: Int64): Int32
+}
+
+// Windows.UI.Composition.ICompositionGraphicsDevice2 (synthetic:Windows_UI_Composition_ICompositionGraphicsDevice2)
+@When[Windows_UI_Composition == "on"]
+@Interface["0fb8bdf6-c0f0-4bcc-9fb8-084982490d7d", "Windows.UI.Composition.ICompositionGraphicsDevice2", "CreateDrawingSurface2.result=Com;CreateVirtualDrawingSurface.result=Com"]
+public interface ICompositionGraphicsDevice2 <: IInspectable {
+    func CreateDrawingSurface2(sizePixels: Windows_Graphics.SizeInt32, pixelFormat: Int32, alphaMode: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func CreateVirtualDrawingSurface(sizePixels: Windows_Graphics.SizeInt32, pixelFormat: Int32, alphaMode: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Composition.ICompositionGraphicsDevice3 (synthetic:Windows_UI_Composition_ICompositionGraphicsDevice3)
+@When[Windows_UI_Composition == "on"]
+@Interface["37f67514-d3ef-49d1-b69d-0d8eabeb3626", "Windows.UI.Composition.ICompositionGraphicsDevice3", "CreateMipmapSurface.result=Com"]
+public interface ICompositionGraphicsDevice3 <: IInspectable {
+    func CreateMipmapSurface(sizePixels: Windows_Graphics.SizeInt32, pixelFormat: Int32, alphaMode: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func Trim(): Int32
+}
+
+// Windows.UI.Composition.ICompositionGraphicsDevice4 (synthetic:Windows_UI_Composition_ICompositionGraphicsDevice4)
+@When[Windows_UI_Composition == "on"]
+@Interface["5a73bff9-a97f-4cf5-ba46-98ef358e71b1", "Windows.UI.Composition.ICompositionGraphicsDevice4", "CaptureAsync.operation=Com"]
+public interface ICompositionGraphicsDevice4 <: IInspectable {
+    func CaptureAsync(captureVisual: CPointer<Unit>, size: Windows_Graphics.SizeInt32, pixelFormat: Int32, alphaMode: Int32, sdrBoost: Float32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.UI.Composition.ICompositionLight (synthetic:Windows_UI_Composition_ICompositionLight)
 @When[Windows_UI_Composition == "on"]
 @Interface["41a6d7c2-2e5d-4bc1-b09e-8f0a03e3d8d3", "Windows.UI.Composition.ICompositionLight", "Targets.value=Com"]
@@ -13643,6 +15239,17 @@ public interface ICompositionMaskBrush <: IInspectable {
     func SetMask(value: CPointer<Unit>): Int32
     func Source(value: CPointer<CPointer<Unit>>): Int32
     func SetSource(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Composition.ICompositionMipmapSurface (synthetic:Windows_UI_Composition_ICompositionMipmapSurface)
+@When[Windows_UI_Composition == "on"]
+@Interface["4863675c-cf4a-4b1c-9ece-c5ec0c2b2fe6", "Windows.UI.Composition.ICompositionMipmapSurface", "GetDrawingSurfaceForLevel.result=Com"]
+public interface ICompositionMipmapSurface <: IInspectable {
+    func LevelCount(value: CPointer<UInt32>): Int32
+    func AlphaMode(value: CPointer<Int32>): Int32
+    func PixelFormat(value: CPointer<Int32>): Int32
+    func SizeInt32(value: CPointer<Windows_Graphics.SizeInt32>): Int32
+    func GetDrawingSurfaceForLevel(level: UInt32, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Composition.ICompositionNineGridBrush (synthetic:Windows_UI_Composition_ICompositionNineGridBrush)
@@ -13960,6 +15567,14 @@ public interface ICompositionSpriteShape <: IInspectable {
     func SetStrokeThickness(value: Float32): Int32
 }
 
+// Windows.UI.Composition.ICompositionSupportsSystemBackdrop (synthetic:Windows_UI_Composition_ICompositionSupportsSystemBackdrop)
+@When[Windows_UI_Composition == "on"]
+@Interface["397dafe4-b6c2-5bb9-951d-f5707de8b7bc", "Windows.UI.Composition.ICompositionSupportsSystemBackdrop", "SystemBackdrop.value=Com"]
+public interface ICompositionSupportsSystemBackdrop <: IInspectable {
+    func SystemBackdrop(value: CPointer<CPointer<Unit>>): Int32
+    func SetSystemBackdrop(value: CPointer<Unit>): Int32
+}
+
 // Windows.UI.Composition.ICompositionSurface (synthetic:Windows_UI_Composition_ICompositionSurface)
 @When[Windows_UI_Composition == "on"]
 @Interface["1527540d-42c7-47a6-a408-668f79a90dfb", "Windows.UI.Composition.ICompositionSurface"]
@@ -14010,6 +15625,13 @@ public interface ICompositionSurfaceBrush3 <: IInspectable {
     func SetSnapToPixels(value: Bool): Int32
 }
 
+// Windows.UI.Composition.ICompositionSurfaceFacade (synthetic:Windows_UI_Composition_ICompositionSurfaceFacade)
+@When[Windows_UI_Composition == "on"]
+@Interface["e01622c8-2332-55c7-8868-a7312c5c229d", "Windows.UI.Composition.ICompositionSurfaceFacade", "GetRealSurface.result=Com"]
+public interface ICompositionSurfaceFacade <: IInspectable {
+    func GetRealSurface(result: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.UI.Composition.ICompositionTarget (synthetic:Windows_UI_Composition_ICompositionTarget)
 @When[Windows_UI_Composition == "on"]
 @Interface["a1bea8ba-d726-4663-8129-6b5e7927ffa6", "Windows.UI.Composition.ICompositionTarget", "Root.value=Com"]
@@ -14022,6 +15644,36 @@ public interface ICompositionTarget <: IInspectable {
 @When[Windows_UI_Composition == "on"]
 @Interface["93cd9d2b-8516-4b14-a8ce-f49e2119ec42", "Windows.UI.Composition.ICompositionTargetFactory"]
 public interface ICompositionTargetFactory <: IInspectable {
+}
+
+// Windows.UI.Composition.ICompositionTexture (synthetic:Windows_UI_Composition_ICompositionTexture)
+@When[Windows_UI_Composition == "on"]
+@Interface["347d03a0-1c0a-4c0b-b232-8570b2b1a4ea", "Windows.UI.Composition.ICompositionTexture"]
+public interface ICompositionTexture <: IInspectable {
+    func SourceRect(value: CPointer<Windows_Graphics.RectInt32>): Int32
+    func SetSourceRect(value: Windows_Graphics.RectInt32): Int32
+    func AlphaMode(value: CPointer<Int32>): Int32
+    func SetAlphaMode(value: Int32): Int32
+    func ColorSpace(value: CPointer<Int32>): Int32
+    func SetColorSpace(value: Int32): Int32
+}
+
+// Windows.UI.Composition.ICompositionTextureFactory (synthetic:Windows_UI_Composition_ICompositionTextureFactory)
+@When[Windows_UI_Composition == "on"]
+@Interface["09d9523d-471c-5ab5-b053-b568ee46ebfb", "Windows.UI.Composition.ICompositionTextureFactory"]
+public interface ICompositionTextureFactory <: IInspectable {
+}
+
+// Windows.UI.Composition.ICompositionTransform (synthetic:Windows_UI_Composition_ICompositionTransform)
+@When[Windows_UI_Composition == "on"]
+@Interface["7cd54529-fbed-4112-abc5-185906dd927c", "Windows.UI.Composition.ICompositionTransform"]
+public interface ICompositionTransform <: IInspectable {
+}
+
+// Windows.UI.Composition.ICompositionTransformFactory (synthetic:Windows_UI_Composition_ICompositionTransformFactory)
+@When[Windows_UI_Composition == "on"]
+@Interface["aaaeca26-c149-517a-8f72-6bff7a65ce08", "Windows.UI.Composition.ICompositionTransformFactory"]
+public interface ICompositionTransformFactory <: IInspectable {
 }
 
 // Windows.UI.Composition.ICompositionViewBox (synthetic:Windows_UI_Composition_ICompositionViewBox)
@@ -14038,6 +15690,19 @@ public interface ICompositionViewBox <: IInspectable {
     func SetStretch(value: Int32): Int32
     func VerticalAlignmentRatio(value: CPointer<Float32>): Int32
     func SetVerticalAlignmentRatio(value: Float32): Int32
+}
+
+// Windows.UI.Composition.ICompositionVirtualDrawingSurface (synthetic:Windows_UI_Composition_ICompositionVirtualDrawingSurface)
+@When[Windows_UI_Composition == "on"]
+@Interface["a9c384db-8740-4f94-8b9d-b68521e7863d", "Windows.UI.Composition.ICompositionVirtualDrawingSurface"]
+public interface ICompositionVirtualDrawingSurface <: IInspectable {
+    func Trim(rectsSize: UInt32, rects: CPointer<Windows_Graphics.RectInt32>): Int32
+}
+
+// Windows.UI.Composition.ICompositionVirtualDrawingSurfaceFactory (synthetic:Windows_UI_Composition_ICompositionVirtualDrawingSurfaceFactory)
+@When[Windows_UI_Composition == "on"]
+@Interface["6766106c-d56b-4a49-b1df-5076a0620768", "Windows.UI.Composition.ICompositionVirtualDrawingSurfaceFactory"]
+public interface ICompositionVirtualDrawingSurfaceFactory <: IInspectable {
 }
 
 // Windows.UI.Composition.ICompositionVisualSurface (synthetic:Windows_UI_Composition_ICompositionVisualSurface)
@@ -14232,6 +15897,24 @@ public interface IContainerVisualFactory <: IInspectable {
 public interface ICubicBezierEasingFunction <: IInspectable {
     func ControlPoint1(value: CPointer<Windows_Foundation_Numerics.Vector2>): Int32
     func ControlPoint2(value: CPointer<Windows_Foundation_Numerics.Vector2>): Int32
+}
+
+// Windows.UI.Composition.IDelegatedInkTrailVisual (synthetic:Windows_UI_Composition_IDelegatedInkTrailVisual)
+@When[Windows_UI_Composition == "on"]
+@Interface["856e60b1-e1ab-5b23-8e3d-d513f221c998", "Windows.UI.Composition.IDelegatedInkTrailVisual"]
+public interface IDelegatedInkTrailVisual <: IInspectable {
+    func AddTrailPoints(inkPointsSize: UInt32, inkPoints: CPointer<InkTrailPoint>, result: CPointer<UInt32>): Int32
+    func AddTrailPointsWithPrediction(inkPointsSize: UInt32, inkPoints: CPointer<InkTrailPoint>, predictedInkPointsSize: UInt32, predictedInkPoints: CPointer<InkTrailPoint>, result: CPointer<UInt32>): Int32
+    func RemoveTrailPoints(generationId: UInt32): Int32
+    func StartNewTrail(color: Windows_UI.Color): Int32
+}
+
+// Windows.UI.Composition.IDelegatedInkTrailVisualStatics (synthetic:Windows_UI_Composition_IDelegatedInkTrailVisualStatics)
+@When[Windows_UI_Composition == "on"]
+@Interface["0daf6bd5-42c6-555c-9267-e0ac663af836", "Windows.UI.Composition.IDelegatedInkTrailVisualStatics", "Create.result=Com;CreateForSwapChain.result=Com"]
+public interface IDelegatedInkTrailVisualStatics <: IInspectable {
+    func Create(compositor: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateForSwapChain(compositor: CPointer<Unit>, swapChain: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Composition.IDistantLight (synthetic:Windows_UI_Composition_IDistantLight)
@@ -14492,6 +16175,13 @@ public interface IRectangleClip <: IInspectable {
 public interface IRedirectVisual <: IInspectable {
     func Source(value: CPointer<CPointer<Unit>>): Int32
     func SetSource(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Composition.IRenderingDeviceReplacedEventArgs (synthetic:Windows_UI_Composition_IRenderingDeviceReplacedEventArgs)
+@When[Windows_UI_Composition == "on"]
+@Interface["3a31ac7d-28bf-4e7a-8524-71679d480f38", "Windows.UI.Composition.IRenderingDeviceReplacedEventArgs", "GraphicsDevice.value=Com"]
+public interface IRenderingDeviceReplacedEventArgs <: IInspectable {
+    func GraphicsDevice(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Composition.IScalarKeyFrameAnimation (synthetic:Windows_UI_Composition_IScalarKeyFrameAnimation)
@@ -14786,6 +16476,19 @@ public interface IVisualCollection <: IInspectable {
     func InsertBelow(newChild: CPointer<Unit>, sibling: CPointer<Unit>): Int32
     func Remove(child: CPointer<Unit>): Int32
     func RemoveAll(): Int32
+}
+
+// Windows.UI.Composition.IVisualElement (synthetic:Windows_UI_Composition_IVisualElement)
+@When[Windows_UI_Composition == "on"]
+@Interface["01e64612-1d82-42f4-8e3f-a722ded33fc7", "Windows.UI.Composition.IVisualElement"]
+public interface IVisualElement <: IInspectable {
+}
+
+// Windows.UI.Composition.IVisualElement2 (synthetic:Windows_UI_Composition_IVisualElement2)
+@When[Windows_UI_Composition == "on"]
+@Interface["993ae8a0-6057-5e40-918c-e06e0b7e7c64", "Windows.UI.Composition.IVisualElement2", "GetVisualInternal.result=Com"]
+public interface IVisualElement2 <: IInspectable {
+    func GetVisualInternal(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Composition.IVisualFactory (synthetic:Windows_UI_Composition_IVisualFactory)
@@ -15156,6 +16859,14 @@ public class InitialValueExpressionCollection <: windows_interface.InterfaceWrap
     public static func viewWinrtHandle(raw: CPointer<Unit>): InitialValueExpressionCollection {
         InitialValueExpressionCollection.viewOf(raw)
     }
+}
+
+// Windows.UI.Composition.InkTrailPoint (synthetic:Windows_UI_Composition_InkTrailPoint)
+@When[Windows_UI_Composition == "on"]
+@C
+public struct InkTrailPoint {
+    public var Point: Windows_Foundation.Point = Windows_Foundation.Point()
+    public var Radius: Float32 = 0.0f32
 }
 
 // Windows.UI.Composition.InsetClip (synthetic:Windows_UI_Composition_InsetClip)
@@ -17517,6 +19228,146 @@ public class RedirectVisual <: windows_interface.InterfaceWrapperBase & windows_
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): RedirectVisual {
         RedirectVisual.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.RenderingDeviceReplacedEventArgs (synthetic:Windows_UI_Composition_RenderingDeviceReplacedEventArgs)
+@When[Windows_UI_Composition == "on"]
+public class RenderingDeviceReplacedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RenderingDeviceReplacedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RenderingDeviceReplacedEventArgs {
+        RenderingDeviceReplacedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RenderingDeviceReplacedEventArgs {
+        RenderingDeviceReplacedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRenderingDeviceReplacedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RenderingDeviceReplacedEventArgs> {
+        let ancestors = [IRenderingDeviceReplacedEventArgs.iid(), ICompositionObject.iid(), ICompositionObject2.iid(), ICompositionObject3.iid(), ICompositionObject4.iid(), ICompositionObject5.iid(), Windows_Foundation.IClosable.iid(), IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RenderingDeviceReplacedEventArgs>("RenderingDeviceReplacedEventArgs", IRenderingDeviceReplacedEventArgs.iid(), ancestors, { raw => RenderingDeviceReplacedEventArgs.fromAbiTake(raw) }, { raw => RenderingDeviceReplacedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRenderingDeviceReplacedEventArgs {
+        match (unsafe { query(IRenderingDeviceReplacedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRenderingDeviceReplacedEventArgs(): IRenderingDeviceReplacedEventArgs {
+        defaultInterface()
+    }
+
+    public func asICompositionObject(): ICompositionObject {
+        match (unsafe { query<ICompositionObject>(ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): ICompositionObject2 {
+        match (unsafe { query<ICompositionObject2>(ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): ICompositionObject3 {
+        match (unsafe { query<ICompositionObject3>(ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): ICompositionObject4 {
+        match (unsafe { query<ICompositionObject4>(ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): ICompositionObject5 {
+        match (unsafe { query<ICompositionObject5>(ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): IAnimationObject {
+        match (unsafe { query<IAnimationObject>(IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop GraphicsDevice: CompositionGraphicsDevice {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GraphicsDevice(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CompositionGraphicsDevice>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CompositionGraphicsDevice.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.RenderingDeviceReplacedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.RenderingDeviceReplacedEventArgs;{" + IRenderingDeviceReplacedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.RenderingDeviceReplacedEventArgs", RenderingDeviceReplacedEventArgs.signature(), IRenderingDeviceReplacedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RenderingDeviceReplacedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RenderingDeviceReplacedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RenderingDeviceReplacedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RenderingDeviceReplacedEventArgs {
+        RenderingDeviceReplacedEventArgs.viewOf(raw)
     }
 }
 
@@ -20071,7 +21922,7 @@ public class Vector2NaturalMotionAnimation <: windows_interface.InterfaceWrapper
         }
     }
 
-    public mut prop FinalValue: windows_interface.IInspectable {
+    public mut prop FinalValue: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -20079,15 +21930,15 @@ public class Vector2NaturalMotionAnimation <: windows_interface.InterfaceWrapper
                 hr__ = unsafe { interface__.FinalValue(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetFinalValue(__argBorrow0.asRaw()) }
                 }
@@ -20096,7 +21947,7 @@ public class Vector2NaturalMotionAnimation <: windows_interface.InterfaceWrapper
         }
     }
 
-    public mut prop InitialValue: windows_interface.IInspectable {
+    public mut prop InitialValue: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -20104,15 +21955,15 @@ public class Vector2NaturalMotionAnimation <: windows_interface.InterfaceWrapper
                 hr__ = unsafe { interface__.InitialValue(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetInitialValue(__argBorrow0.asRaw()) }
                 }
@@ -20504,7 +22355,7 @@ public class Vector3NaturalMotionAnimation <: windows_interface.InterfaceWrapper
         }
     }
 
-    public mut prop FinalValue: windows_interface.IInspectable {
+    public mut prop FinalValue: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -20512,15 +22363,15 @@ public class Vector3NaturalMotionAnimation <: windows_interface.InterfaceWrapper
                 hr__ = unsafe { interface__.FinalValue(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetFinalValue(__argBorrow0.asRaw()) }
                 }
@@ -20529,7 +22380,7 @@ public class Vector3NaturalMotionAnimation <: windows_interface.InterfaceWrapper
         }
     }
 
-    public mut prop InitialValue: windows_interface.IInspectable {
+    public mut prop InitialValue: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -20537,15 +22388,15 @@ public class Vector3NaturalMotionAnimation <: windows_interface.InterfaceWrapper
                 hr__ = unsafe { interface__.InitialValue(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetInitialValue(__argBorrow0.asRaw()) }
                 }

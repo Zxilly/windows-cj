@@ -13,6 +13,8 @@ import windows_sys.Foundation as Windows_Foundation
 import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 @When[Windows_Storage_FileProperties == "on"]
 import windows_sys.Storage.FileProperties as Windows_Storage_FileProperties
+@When[Windows_Storage_Provider == "on"]
+import windows_sys.Storage.Provider as Windows_Storage_Provider
 @When[Windows_Storage_Search == "on"]
 import windows_sys.Storage.Search as Windows_Storage_Search
 @When[Windows_Storage_Streams == "on"]
@@ -20,50 +22,1382 @@ import windows_sys.Storage.Streams as Windows_Storage_Streams
 @When[Windows_System == "on"]
 import windows_sys.System as Windows_System
 
-// Windows.Storage.CreationCollisionOption (synthetic:Windows_Storage_CreationCollisionOption)
+// Windows.Storage.AppDataPaths (synthetic:Windows_Storage_AppDataPaths)
 @When[Windows_Storage == "on"]
-public struct CreationCollisionOption {
+public class AppDataPaths <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AppDataPaths> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AppDataPaths {
+        AppDataPaths(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AppDataPaths {
+        AppDataPaths(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAppDataPaths.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AppDataPaths> {
+        let ancestors = [IAppDataPaths.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AppDataPaths>("AppDataPaths", IAppDataPaths.iid(), ancestors, { raw => AppDataPaths.fromAbiTake(raw) }, { raw => AppDataPaths.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAppDataPaths {
+        match (unsafe { query(IAppDataPaths.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppDataPaths(): IAppDataPaths {
+        defaultInterface()
+    }
+
+    public prop Cookies: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cookies(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Desktop: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Desktop(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Documents: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Documents(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Favorites: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Favorites(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop History: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.History(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop InternetCache: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InternetCache(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop LocalAppData: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LocalAppData(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop ProgramData: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProgramData(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop RoamingAppData: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RoamingAppData(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func GetForUser(user: Windows_System.User): AppDataPaths {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<AppDataPaths, IAppDataPathsStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AppDataPaths>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AppDataPaths.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDefault(): AppDataPaths {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AppDataPaths, IAppDataPathsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetDefault(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AppDataPaths>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AppDataPaths.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.AppDataPaths"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.AppDataPaths;{" + IAppDataPaths.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.AppDataPaths", AppDataPaths.signature(), IAppDataPaths.iid())
+    }
+
+    public static func intoWinrtHandle(value: AppDataPaths): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AppDataPaths {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AppDataPaths.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AppDataPaths {
+        AppDataPaths.viewOf(raw)
+    }
+}
+
+// Windows.Storage.ApplicationData (synthetic:Windows_Storage_ApplicationData)
+@When[Windows_Storage == "on"]
+public class ApplicationData <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationData> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationData {
+        ApplicationData(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationData {
+        ApplicationData(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IApplicationData.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationData> {
+        let ancestors = [IApplicationData.iid(), IApplicationData2.iid(), IApplicationData3.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationData>("ApplicationData", IApplicationData.iid(), ancestors, { raw => ApplicationData.fromAbiTake(raw) }, { raw => ApplicationData.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IApplicationData {
+        match (unsafe { query(IApplicationData.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIApplicationData(): IApplicationData {
+        defaultInterface()
+    }
+
+    public func asIApplicationData2(): IApplicationData2 {
+        match (unsafe { query<IApplicationData2>(IApplicationData2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIApplicationData3(): IApplicationData3 {
+        match (unsafe { query<IApplicationData3>(IApplicationData3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop LocalFolder: StorageFolder {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LocalFolder(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return StorageFolder.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop LocalSettings: ApplicationDataContainer {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LocalSettings(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ApplicationDataContainer>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ApplicationDataContainer.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop RoamingFolder: StorageFolder {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RoamingFolder(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return StorageFolder.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop RoamingSettings: ApplicationDataContainer {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RoamingSettings(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ApplicationDataContainer>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ApplicationDataContainer.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop RoamingStorageQuota: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RoamingStorageQuota(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop TemporaryFolder: StorageFolder {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TemporaryFolder(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return StorageFolder.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Version: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Version(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func addDataChanged(handler: Windows_Foundation.TypedEventHandler<ApplicationData, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ApplicationData, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DataChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeDataChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveDataChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func SetVersionAsync(desiredVersion: UInt32, handler: ApplicationDataSetVersionHandler): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ApplicationDataSetVersionHandler>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetVersionAsync(desiredVersion, __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func ClearAllAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ClearAllAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func ClearAsync(locality: ApplicationDataLocality): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ClearAsync(locality.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func SignalDataChanged(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SignalDataChanged() }
+        }
+        hr__.check()
+    }
+
+    public static func Current(): ApplicationData {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationData, IApplicationDataStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Current(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ApplicationData>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ApplicationData.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetForUserAsync(user: Windows_System.User): Windows_Foundation.IAsyncOperation<ApplicationData> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<ApplicationData, IApplicationDataStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUserAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ApplicationData>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ApplicationData>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.ApplicationData"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.ApplicationData;{" + IApplicationData.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.ApplicationData", ApplicationData.signature(), IApplicationData.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationData): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationData {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationData.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationData {
+        ApplicationData.viewOf(raw)
+    }
+}
+
+// Windows.Storage.ApplicationDataCompositeValue (synthetic:Windows_Storage_ApplicationDataCompositeValue)
+@When[Windows_Storage == "on"]
+public class ApplicationDataCompositeValue <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationDataCompositeValue> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationDataCompositeValue {
+        ApplicationDataCompositeValue(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataCompositeValue {
+        ApplicationDataCompositeValue(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_Foundation_Collections.IPropertySet.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationDataCompositeValue> {
+        let ancestors = [Windows_Foundation_Collections.IPropertySet.iid(), Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable>.iid(), Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable>.iid(), Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationDataCompositeValue>("ApplicationDataCompositeValue", Windows_Foundation_Collections.IPropertySet.iid(), ancestors, { raw => ApplicationDataCompositeValue.fromAbiTake(raw) }, { raw => ApplicationDataCompositeValue.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_Foundation_Collections.IPropertySet {
+        match (unsafe { query(Windows_Foundation_Collections.IPropertySet.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPropertySet(): Windows_Foundation_Collections.IPropertySet {
+        defaultInterface()
+    }
+
+    public func asIObservableMap(): Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable>>(Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIMap(): Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable>>(Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIIterable(): Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>> {
+        match (unsafe { query<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>>(Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func new(): ApplicationDataCompositeValue {
+        var created__: Option<ApplicationDataCompositeValue> = Option<ApplicationDataCompositeValue>.None
+        try (factory__ = windows_core.factory<ApplicationDataCompositeValue, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ApplicationDataCompositeValue>(ApplicationDataCompositeValue.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ApplicationDataCompositeValue")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.ApplicationDataCompositeValue"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.ApplicationDataCompositeValue;{" + Windows_Foundation_Collections.IPropertySet.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.ApplicationDataCompositeValue", ApplicationDataCompositeValue.signature(), Windows_Foundation_Collections.IPropertySet.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationDataCompositeValue): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationDataCompositeValue {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationDataCompositeValue.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationDataCompositeValue {
+        ApplicationDataCompositeValue.viewOf(raw)
+    }
+}
+
+// Windows.Storage.ApplicationDataContainer (synthetic:Windows_Storage_ApplicationDataContainer)
+@When[Windows_Storage == "on"]
+public class ApplicationDataContainer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationDataContainer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationDataContainer {
+        ApplicationDataContainer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataContainer {
+        ApplicationDataContainer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IApplicationDataContainer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationDataContainer> {
+        let ancestors = [IApplicationDataContainer.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationDataContainer>("ApplicationDataContainer", IApplicationDataContainer.iid(), ancestors, { raw => ApplicationDataContainer.fromAbiTake(raw) }, { raw => ApplicationDataContainer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IApplicationDataContainer {
+        match (unsafe { query(IApplicationDataContainer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIApplicationDataContainer(): IApplicationDataContainer {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Containers: Windows_Foundation_Collections.IMapView<windows_core.HString, ApplicationDataContainer> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Containers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IMapView<windows_core.HString, ApplicationDataContainer>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IMapView<windows_core.HString, ApplicationDataContainer>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Locality: ApplicationDataLocality {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Locality(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ApplicationDataLocality(result__)
+        }
+    }
+
+    public prop Name: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Name(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Values: Windows_Foundation_Collections.IPropertySet {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Values(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IPropertySet>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IPropertySet.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func CreateContainer(name: windows_core.HString, disposition: ApplicationDataCreateDisposition): ApplicationDataContainer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateContainer(__argBorrow0.asRaw(), disposition.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ApplicationDataContainer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ApplicationDataContainer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DeleteContainer(name: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeleteContainer(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.ApplicationDataContainer"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.ApplicationDataContainer;{" + IApplicationDataContainer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.ApplicationDataContainer", ApplicationDataContainer.signature(), IApplicationDataContainer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationDataContainer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationDataContainer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationDataContainer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationDataContainer {
+        ApplicationDataContainer.viewOf(raw)
+    }
+}
+
+// Windows.Storage.ApplicationDataContainerSettings (synthetic:Windows_Storage_ApplicationDataContainerSettings)
+@When[Windows_Storage == "on"]
+public class ApplicationDataContainerSettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationDataContainerSettings> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationDataContainerSettings {
+        ApplicationDataContainerSettings(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataContainerSettings {
+        ApplicationDataContainerSettings(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_Foundation_Collections.IPropertySet.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationDataContainerSettings> {
+        let ancestors = [Windows_Foundation_Collections.IPropertySet.iid(), Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable>.iid(), Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable>.iid(), Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationDataContainerSettings>("ApplicationDataContainerSettings", Windows_Foundation_Collections.IPropertySet.iid(), ancestors, { raw => ApplicationDataContainerSettings.fromAbiTake(raw) }, { raw => ApplicationDataContainerSettings.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_Foundation_Collections.IPropertySet {
+        match (unsafe { query(Windows_Foundation_Collections.IPropertySet.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPropertySet(): Windows_Foundation_Collections.IPropertySet {
+        defaultInterface()
+    }
+
+    public func asIObservableMap(): Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable>>(Windows_Foundation_Collections.IObservableMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIMap(): Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable>>(Windows_Foundation_Collections.IMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIIterable(): Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>> {
+        match (unsafe { query<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>>(Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.ApplicationDataContainerSettings"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.ApplicationDataContainerSettings;{" + Windows_Foundation_Collections.IPropertySet.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.ApplicationDataContainerSettings", ApplicationDataContainerSettings.signature(), Windows_Foundation_Collections.IPropertySet.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationDataContainerSettings): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationDataContainerSettings {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationDataContainerSettings.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationDataContainerSettings {
+        ApplicationDataContainerSettings.viewOf(raw)
+    }
+}
+
+// Windows.Storage.ApplicationDataCreateDisposition (synthetic:Windows_Storage_ApplicationDataCreateDisposition)
+@When[Windows_Storage == "on"]
+public struct ApplicationDataCreateDisposition {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage == "on"]
-public let CreationCollisionOption_GenerateUniqueName = CreationCollisionOption(0)
+public const ApplicationDataCreateDisposition_Always = ApplicationDataCreateDisposition(0)
 @When[Windows_Storage == "on"]
-public let CreationCollisionOption_ReplaceExisting = CreationCollisionOption(1)
+public const ApplicationDataCreateDisposition_Existing = ApplicationDataCreateDisposition(1)
+
+// Windows.Storage.ApplicationDataLocality (synthetic:Windows_Storage_ApplicationDataLocality)
 @When[Windows_Storage == "on"]
-public let CreationCollisionOption_FailIfExists = CreationCollisionOption(2)
+public struct ApplicationDataLocality {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
 @When[Windows_Storage == "on"]
-public let CreationCollisionOption_OpenIfExists = CreationCollisionOption(3)
+public const ApplicationDataLocality_Local = ApplicationDataLocality(0)
+@When[Windows_Storage == "on"]
+public const ApplicationDataLocality_Roaming = ApplicationDataLocality(1)
+@When[Windows_Storage == "on"]
+public const ApplicationDataLocality_Temporary = ApplicationDataLocality(2)
+@When[Windows_Storage == "on"]
+public const ApplicationDataLocality_LocalCache = ApplicationDataLocality(3)
+@When[Windows_Storage == "on"]
+public const ApplicationDataLocality_SharedLocal = ApplicationDataLocality(4)
+
+// Windows.Storage.ApplicationDataSetVersionHandler (synthetic:Windows_Storage_ApplicationDataSetVersionHandler)
+@When[Windows_Storage == "on"]
+@C
+public struct ApplicationDataSetVersionHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+@When[Windows_Storage == "on"]
+public open class ApplicationDataSetVersionHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<ApplicationDataSetVersionHandler> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationDataSetVersionHandler {
+        OwnedApplicationDataSetVersionHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationDataSetVersionHandler {
+        ApplicationDataSetVersionHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2690093542u32, 52383u16, 18055u16, 172u8, 171u8, 163u8, 100u8, 253u8, 120u8, 84u8, 99u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationDataSetVersionHandler> {
+        windows_interface.InterfaceDescriptor<ApplicationDataSetVersionHandler>("Windows.Storage.ApplicationDataSetVersionHandler", ApplicationDataSetVersionHandler.iid(), [windows_interface.IUnknown.iid()], { raw => ApplicationDataSetVersionHandler.fromAbiTake(raw) }, { raw => ApplicationDataSetVersionHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Storage.ApplicationDataSetVersionHandler", ApplicationDataSetVersionHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "ApplicationDataSetVersionHandlerVtbl", "ApplicationDataSetVersionHandler", "ApplicationDataSetVersionHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("setVersionRequest", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(ApplicationDataSetVersionHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Windows.Storage.ApplicationDataSetVersionHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.ApplicationDataSetVersionHandler", ApplicationDataSetVersionHandler.signature(), ApplicationDataSetVersionHandler.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = ApplicationDataSetVersionHandler.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): ApplicationDataSetVersionHandlerVtbl {
+        readVtbl<ApplicationDataSetVersionHandlerVtbl>(ApplicationDataSetVersionHandlerVtbl())
+    }
+
+    public unsafe func Invoke(setVersionRequest: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, setVersionRequest)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>) -> Unit): ApplicationDataSetVersionHandler {
+        let box = ApplicationDataSetVersionHandlerBox(invoke)
+        let object = windows_core.ComObject<ApplicationDataSetVersionHandlerBox>.new(box, [ApplicationDataSetVersionHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(ApplicationDataSetVersionHandler.descriptor())
+    }
+}
+
+@When[Windows_Storage == "on"]
+private class OwnedApplicationDataSetVersionHandler <: ApplicationDataSetVersionHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+@When[Windows_Storage == "on"]
+public interface ApplicationDataSetVersionHandlerInvokerErased {
+    func __winrtThunk_Invoke(setVersionRequest: CPointer<Unit>): Int32
+}
+
+@When[Windows_Storage == "on"]
+public interface ApplicationDataSetVersionHandlerInvoker <: ApplicationDataSetVersionHandlerInvokerErased {
+    func Invoke(setVersionRequest: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(setVersionRequest: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(setVersionRequest)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+@When[Windows_Storage == "on"]
+private class ApplicationDataSetVersionHandlerBox <: ApplicationDataSetVersionHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<ApplicationDataSetVersionHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<ApplicationDataSetVersionHandlerVtbl>(buildApplicationDataSetVersionHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(setVersionRequest: CPointer<Unit>): Unit {
+        invoke_(setVersionRequest)
+    }
+}
+
+@When[Windows_Storage == "on"]
+func buildApplicationDataSetVersionHandlerBoxVtbl(): ApplicationDataSetVersionHandlerVtbl {
+    var vtbl = ApplicationDataSetVersionHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, setVersionRequest: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<ApplicationDataSetVersionHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(setVersionRequest)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Windows.Storage.CachedFileManager (synthetic:Windows_Storage_CachedFileManager)
+@When[Windows_Storage == "on"]
+public struct CachedFileManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func DeferUpdates(file: IStorageFile): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<CachedFileManager, ICachedFileManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.DeferUpdates(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func CompleteUpdatesAsync(file: IStorageFile): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<CachedFileManager, ICachedFileManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CompleteUpdatesAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.CachedFileManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.CachedFileManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.CachedFileManager", CachedFileManager.signature())
+    }
+}
+
+// Windows.Storage.CreationCollisionOption (synthetic:Windows_Storage_CreationCollisionOption)
+@When[Windows_Storage == "on"]
+public struct CreationCollisionOption {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Storage == "on"]
+public const CreationCollisionOption_GenerateUniqueName = CreationCollisionOption(0)
+@When[Windows_Storage == "on"]
+public const CreationCollisionOption_ReplaceExisting = CreationCollisionOption(1)
+@When[Windows_Storage == "on"]
+public const CreationCollisionOption_FailIfExists = CreationCollisionOption(2)
+@When[Windows_Storage == "on"]
+public const CreationCollisionOption_OpenIfExists = CreationCollisionOption(3)
+
+// Windows.Storage.DownloadsFolder (synthetic:Windows_Storage_DownloadsFolder)
+@When[Windows_Storage == "on"]
+public struct DownloadsFolder <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CreateFileAsync(desiredName: windows_core.HString): Windows_Foundation.IAsyncOperation<StorageFile> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+            try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateFileAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFile>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFile>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFolderAsync(desiredName: windows_core.HString): Windows_Foundation.IAsyncOperation<StorageFolder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+            try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateFolderAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFolder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFileWithCollisionOptionAsync(desiredName: windows_core.HString, option: CreationCollisionOption): Windows_Foundation.IAsyncOperation<StorageFile> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+            try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateFileWithCollisionOptionAsync(__argBorrow0.asRaw(), option.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFile>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFile>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFolderWithCollisionOptionAsync(desiredName: windows_core.HString, option: CreationCollisionOption): Windows_Foundation.IAsyncOperation<StorageFolder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+            try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateFolderWithCollisionOptionAsync(__argBorrow0.asRaw(), option.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFolder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFileForUserAsync(user: Windows_System.User, desiredName: windows_core.HString): Windows_Foundation.IAsyncOperation<StorageFile> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+                try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateFileForUserAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFile>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFile>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFolderForUserAsync(user: Windows_System.User, desiredName: windows_core.HString): Windows_Foundation.IAsyncOperation<StorageFolder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+                try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateFolderForUserAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFolder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFileForUserWithCollisionOptionAsync(user: Windows_System.User, desiredName: windows_core.HString, option: CreationCollisionOption): Windows_Foundation.IAsyncOperation<StorageFile> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+                try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateFileForUserWithCollisionOptionAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), option.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFile>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFile>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFolderForUserWithCollisionOptionAsync(user: Windows_System.User, desiredName: windows_core.HString, option: CreationCollisionOption): Windows_Foundation.IAsyncOperation<StorageFolder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+                try (factory__ = windows_core.factory<DownloadsFolder, IDownloadsFolderStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateFolderForUserWithCollisionOptionAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), option.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFolder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.DownloadsFolder"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.DownloadsFolder)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.DownloadsFolder", DownloadsFolder.signature())
+    }
+}
 
 // Windows.Storage.FileAccessMode (synthetic:Windows_Storage_FileAccessMode)
 @When[Windows_Storage == "on"]
 public struct FileAccessMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage == "on"]
-public let FileAccessMode_Read = FileAccessMode(0)
+public const FileAccessMode_Read = FileAccessMode(0)
 @When[Windows_Storage == "on"]
-public let FileAccessMode_ReadWrite = FileAccessMode(1)
+public const FileAccessMode_ReadWrite = FileAccessMode(1)
 
 // Windows.Storage.FileAttributes (synthetic:Windows_Storage_FileAttributes)
 @When[Windows_Storage == "on"]
 public struct FileAttributes {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: FileAttributes): Bool {
@@ -83,17 +1417,533 @@ public struct FileAttributes {
     }
 }
 @When[Windows_Storage == "on"]
-public let FileAttributes_Normal = FileAttributes(0)
+public const FileAttributes_Normal = FileAttributes(0)
 @When[Windows_Storage == "on"]
-public let FileAttributes_ReadOnly = FileAttributes(1)
+public const FileAttributes_ReadOnly = FileAttributes(1)
 @When[Windows_Storage == "on"]
-public let FileAttributes_Directory = FileAttributes(16)
+public const FileAttributes_Directory = FileAttributes(16)
 @When[Windows_Storage == "on"]
-public let FileAttributes_Archive = FileAttributes(32)
+public const FileAttributes_Archive = FileAttributes(32)
 @When[Windows_Storage == "on"]
-public let FileAttributes_Temporary = FileAttributes(256)
+public const FileAttributes_Temporary = FileAttributes(256)
 @When[Windows_Storage == "on"]
-public let FileAttributes_LocallyIncomplete = FileAttributes(512)
+public const FileAttributes_LocallyIncomplete = FileAttributes(512)
+
+// Windows.Storage.FileIO (synthetic:Windows_Storage_FileIO)
+@When[Windows_Storage == "on"]
+public struct FileIO <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func ReadTextAsync(file: IStorageFile): Windows_Foundation.IAsyncOperation<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadTextAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadTextWithEncodingAsync(file: IStorageFile, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncOperation<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadTextWithEncodingAsync(__argBorrow0.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteTextAsync(file: IStorageFile, contents: windows_core.HString): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteTextAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteTextWithEncodingAsync(file: IStorageFile, contents: windows_core.HString, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteTextWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendTextAsync(file: IStorageFile, contents: windows_core.HString): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendTextAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendTextWithEncodingAsync(file: IStorageFile, contents: windows_core.HString, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendTextWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadLinesAsync(file: IStorageFile): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadLinesAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadLinesWithEncodingAsync(file: IStorageFile, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadLinesWithEncodingAsync(__argBorrow0.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteLinesAsync(file: IStorageFile, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteLinesAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteLinesWithEncodingAsync(file: IStorageFile, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteLinesWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendLinesAsync(file: IStorageFile, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendLinesAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendLinesWithEncodingAsync(file: IStorageFile, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendLinesWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadBufferAsync(file: IStorageFile): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadBufferAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteBufferAsync(file: IStorageFile, buffer: Windows_Storage_Streams.IBuffer): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IBuffer>(buffer)) {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteBufferAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteBytesAsync(file: IStorageFile, buffer: Array<UInt8>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IStorageFile>(file)) {
+            let __arg1AbiValues = Array<UInt8>(buffer.size, { index => buffer[index] })
+            let __arg1AbiArray = windows_core.AbiArray<UInt8>.fromSlice(__arg1AbiValues)
+            let (__arg1Raw, __arg1Len) = __arg1AbiArray.intoAbi()
+            try {
+                try (factory__ = windows_core.factory<FileIO, IFileIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteBytesAsync(__argBorrow0.asRaw(), __arg1Len, __arg1Raw, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            } finally {
+                windows_core.coTaskMemFree(CPointer<Unit>(__arg1Raw))
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.FileIO"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.FileIO)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.FileIO", FileIO.signature())
+    }
+}
+
+// Windows.Storage.IAppDataPaths (synthetic:Windows_Storage_IAppDataPaths)
+@When[Windows_Storage == "on"]
+@Interface["7301d60a-79a2-48c9-9ec0-3fda092f79e1", "Windows.Storage.IAppDataPaths", "Cookies.value=HString;Desktop.value=HString;Documents.value=HString;Favorites.value=HString;History.value=HString;InternetCache.value=HString;LocalAppData.value=HString;ProgramData.value=HString;RoamingAppData.value=HString"]
+public interface IAppDataPaths <: IInspectable {
+    func Cookies(value: CPointer<CPointer<Unit>>): Int32
+    func Desktop(value: CPointer<CPointer<Unit>>): Int32
+    func Documents(value: CPointer<CPointer<Unit>>): Int32
+    func Favorites(value: CPointer<CPointer<Unit>>): Int32
+    func History(value: CPointer<CPointer<Unit>>): Int32
+    func InternetCache(value: CPointer<CPointer<Unit>>): Int32
+    func LocalAppData(value: CPointer<CPointer<Unit>>): Int32
+    func ProgramData(value: CPointer<CPointer<Unit>>): Int32
+    func RoamingAppData(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IAppDataPathsStatics (synthetic:Windows_Storage_IAppDataPathsStatics)
+@When[Windows_Storage == "on"]
+@Interface["d8eb2afe-a9d9-4b14-b999-e3921379d903", "Windows.Storage.IAppDataPathsStatics", "GetForUser.result=Com;GetDefault.result=Com"]
+public interface IAppDataPathsStatics <: IInspectable {
+    func GetForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetDefault(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IApplicationData (synthetic:Windows_Storage_IApplicationData)
+@When[Windows_Storage == "on"]
+@Interface["c3da6fb7-b744-4b45-b0b8-223a0938d0dc", "Windows.Storage.IApplicationData", "SetVersionAsync.setVersionOperation=Com;ClearAllAsync.clearOperation=Com;ClearAsync.clearOperation=Com;LocalSettings.value=Com;RoamingSettings.value=Com;LocalFolder.value=Com;RoamingFolder.value=Com;TemporaryFolder.value=Com"]
+public interface IApplicationData <: IInspectable {
+    func Version(value: CPointer<UInt32>): Int32
+    func SetVersionAsync(desiredVersion: UInt32, handler: CPointer<Unit>, setVersionOperation: CPointer<CPointer<Unit>>): Int32
+    func ClearAllAsync(clearOperation: CPointer<CPointer<Unit>>): Int32
+    func ClearAsync(locality: Int32, clearOperation: CPointer<CPointer<Unit>>): Int32
+    func LocalSettings(value: CPointer<CPointer<Unit>>): Int32
+    func RoamingSettings(value: CPointer<CPointer<Unit>>): Int32
+    func LocalFolder(value: CPointer<CPointer<Unit>>): Int32
+    func RoamingFolder(value: CPointer<CPointer<Unit>>): Int32
+    func TemporaryFolder(value: CPointer<CPointer<Unit>>): Int32
+    func DataChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveDataChanged(token: Int64): Int32
+    func SignalDataChanged(): Int32
+    func RoamingStorageQuota(value: CPointer<UInt64>): Int32
+}
+
+// Windows.Storage.IApplicationData2 (synthetic:Windows_Storage_IApplicationData2)
+@When[Windows_Storage == "on"]
+@Interface["9e65cd69-0ba3-4e32-be29-b02de6607638", "Windows.Storage.IApplicationData2", "LocalCacheFolder.value=Com"]
+public interface IApplicationData2 <: IInspectable {
+    func LocalCacheFolder(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IApplicationData3 (synthetic:Windows_Storage_IApplicationData3)
+@When[Windows_Storage == "on"]
+@Interface["dc222cf4-2772-4c1d-aa2c-c9f743ade8d1", "Windows.Storage.IApplicationData3", "GetPublisherCacheFolder.value=Com;ClearPublisherCacheFolderAsync.clearOperation=Com;SharedLocalFolder.value=Com"]
+public interface IApplicationData3 <: IInspectable {
+    func GetPublisherCacheFolder(folderName: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func ClearPublisherCacheFolderAsync(folderName: CPointer<Unit>, clearOperation: CPointer<CPointer<Unit>>): Int32
+    func SharedLocalFolder(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IApplicationDataContainer (synthetic:Windows_Storage_IApplicationDataContainer)
+@When[Windows_Storage == "on"]
+@Interface["c5aefd1e-f467-40ba-8566-ab640a441e1d", "Windows.Storage.IApplicationDataContainer", "Name.value=HString;Values.value=Com;Containers.value=Com;CreateContainer.container=Com"]
+public interface IApplicationDataContainer <: IInspectable {
+    func Name(value: CPointer<CPointer<Unit>>): Int32
+    func Locality(value: CPointer<Int32>): Int32
+    func Values(value: CPointer<CPointer<Unit>>): Int32
+    func Containers(value: CPointer<CPointer<Unit>>): Int32
+    func CreateContainer(name: CPointer<Unit>, disposition: Int32, container: CPointer<CPointer<Unit>>): Int32
+    func DeleteContainer(name: CPointer<Unit>): Int32
+}
+
+// Windows.Storage.IApplicationDataStatics (synthetic:Windows_Storage_IApplicationDataStatics)
+@When[Windows_Storage == "on"]
+@Interface["5612147b-e843-45e3-94d8-06169e3c8e17", "Windows.Storage.IApplicationDataStatics", "Current.value=Com"]
+public interface IApplicationDataStatics <: IInspectable {
+    func Current(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IApplicationDataStatics2 (synthetic:Windows_Storage_IApplicationDataStatics2)
+@When[Windows_Storage == "on"]
+@Interface["cd606211-cf49-40a4-a47c-c7f0dbba8107", "Windows.Storage.IApplicationDataStatics2", "GetForUserAsync.getForUserOperation=Com"]
+public interface IApplicationDataStatics2 <: IInspectable {
+    func GetForUserAsync(user: CPointer<Unit>, getForUserOperation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ICachedFileManagerStatics (synthetic:Windows_Storage_ICachedFileManagerStatics)
+@When[Windows_Storage == "on"]
+@Interface["8ffc224a-e782-495d-b614-654c4f0b2370", "Windows.Storage.ICachedFileManagerStatics", "CompleteUpdatesAsync.operation=Com"]
+public interface ICachedFileManagerStatics <: IInspectable {
+    func DeferUpdates(file: CPointer<Unit>): Int32
+    func CompleteUpdatesAsync(file: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IDownloadsFolderStatics (synthetic:Windows_Storage_IDownloadsFolderStatics)
+@When[Windows_Storage == "on"]
+@Interface["27862ed0-404e-47df-a1e2-e37308be7b37", "Windows.Storage.IDownloadsFolderStatics", "CreateFileAsync.operation=Com;CreateFolderAsync.operation=Com;CreateFileWithCollisionOptionAsync.operation=Com;CreateFolderWithCollisionOptionAsync.operation=Com"]
+public interface IDownloadsFolderStatics <: IInspectable {
+    func CreateFileAsync(desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func CreateFolderAsync(desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func CreateFileWithCollisionOptionAsync(desiredName: CPointer<Unit>, option: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func CreateFolderWithCollisionOptionAsync(desiredName: CPointer<Unit>, option: Int32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IDownloadsFolderStatics2 (synthetic:Windows_Storage_IDownloadsFolderStatics2)
+@When[Windows_Storage == "on"]
+@Interface["e93045bd-8ef8-4f8e-8d15-ac0e265f390d", "Windows.Storage.IDownloadsFolderStatics2", "CreateFileForUserAsync.operation=Com;CreateFolderForUserAsync.operation=Com;CreateFileForUserWithCollisionOptionAsync.operation=Com;CreateFolderForUserWithCollisionOptionAsync.operation=Com"]
+public interface IDownloadsFolderStatics2 <: IInspectable {
+    func CreateFileForUserAsync(user: CPointer<Unit>, desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func CreateFolderForUserAsync(user: CPointer<Unit>, desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func CreateFileForUserWithCollisionOptionAsync(user: CPointer<Unit>, desiredName: CPointer<Unit>, option: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func CreateFolderForUserWithCollisionOptionAsync(user: CPointer<Unit>, desiredName: CPointer<Unit>, option: Int32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IFileIOStatics (synthetic:Windows_Storage_IFileIOStatics)
+@When[Windows_Storage == "on"]
+@Interface["887411eb-7f54-4732-a5f0-5e43e3b8c2f5", "Windows.Storage.IFileIOStatics", "ReadTextAsync.textOperation=Com;ReadTextWithEncodingAsync.textOperation=Com;WriteTextAsync.textOperation=Com;WriteTextWithEncodingAsync.textOperation=Com;AppendTextAsync.textOperation=Com;AppendTextWithEncodingAsync.textOperation=Com;ReadLinesAsync.linesOperation=Com;ReadLinesWithEncodingAsync.linesOperation=Com;WriteLinesAsync.operation=Com;WriteLinesWithEncodingAsync.operation=Com;AppendLinesAsync.operation=Com;AppendLinesWithEncodingAsync.operation=Com;ReadBufferAsync.operation=Com;WriteBufferAsync.operation=Com;WriteBytesAsync.operation=Com"]
+public interface IFileIOStatics <: IInspectable {
+    func ReadTextAsync(file: CPointer<Unit>, textOperation: CPointer<CPointer<Unit>>): Int32
+    func ReadTextWithEncodingAsync(file: CPointer<Unit>, encoding: Int32, textOperation: CPointer<CPointer<Unit>>): Int32
+    func WriteTextAsync(file: CPointer<Unit>, contents: CPointer<Unit>, textOperation: CPointer<CPointer<Unit>>): Int32
+    func WriteTextWithEncodingAsync(file: CPointer<Unit>, contents: CPointer<Unit>, encoding: Int32, textOperation: CPointer<CPointer<Unit>>): Int32
+    func AppendTextAsync(file: CPointer<Unit>, contents: CPointer<Unit>, textOperation: CPointer<CPointer<Unit>>): Int32
+    func AppendTextWithEncodingAsync(file: CPointer<Unit>, contents: CPointer<Unit>, encoding: Int32, textOperation: CPointer<CPointer<Unit>>): Int32
+    func ReadLinesAsync(file: CPointer<Unit>, linesOperation: CPointer<CPointer<Unit>>): Int32
+    func ReadLinesWithEncodingAsync(file: CPointer<Unit>, encoding: Int32, linesOperation: CPointer<CPointer<Unit>>): Int32
+    func WriteLinesAsync(file: CPointer<Unit>, lines: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func WriteLinesWithEncodingAsync(file: CPointer<Unit>, lines: CPointer<Unit>, encoding: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func AppendLinesAsync(file: CPointer<Unit>, lines: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func AppendLinesWithEncodingAsync(file: CPointer<Unit>, lines: CPointer<Unit>, encoding: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func ReadBufferAsync(file: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func WriteBufferAsync(file: CPointer<Unit>, buffer: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func WriteBytesAsync(file: CPointer<Unit>, bufferSize: UInt32, buffer: CPointer<UInt8>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IKnownFoldersCameraRollStatics (synthetic:Windows_Storage_IKnownFoldersCameraRollStatics)
+@When[Windows_Storage == "on"]
+@Interface["5d115e66-27e8-492f-b8e5-2f90896cd4cd", "Windows.Storage.IKnownFoldersCameraRollStatics", "CameraRoll.value=Com"]
+public interface IKnownFoldersCameraRollStatics <: IInspectable {
+    func CameraRoll(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IKnownFoldersPlaylistsStatics (synthetic:Windows_Storage_IKnownFoldersPlaylistsStatics)
+@When[Windows_Storage == "on"]
+@Interface["dad5ecd6-306f-4d6a-b496-46ba8eb106ce", "Windows.Storage.IKnownFoldersPlaylistsStatics", "Playlists.value=Com"]
+public interface IKnownFoldersPlaylistsStatics <: IInspectable {
+    func Playlists(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IKnownFoldersSavedPicturesStatics (synthetic:Windows_Storage_IKnownFoldersSavedPicturesStatics)
+@When[Windows_Storage == "on"]
+@Interface["055c93ea-253d-467c-b6ca-a97da1e9a18d", "Windows.Storage.IKnownFoldersSavedPicturesStatics", "SavedPictures.value=Com"]
+public interface IKnownFoldersSavedPicturesStatics <: IInspectable {
+    func SavedPictures(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IKnownFoldersStatics (synthetic:Windows_Storage_IKnownFoldersStatics)
+@When[Windows_Storage == "on"]
+@Interface["5a2a7520-4802-452d-9ad9-4351ada7ec35", "Windows.Storage.IKnownFoldersStatics", "MusicLibrary.value=Com;PicturesLibrary.value=Com;VideosLibrary.value=Com;DocumentsLibrary.value=Com;HomeGroup.value=Com;RemovableDevices.value=Com;MediaServerDevices.value=Com"]
+public interface IKnownFoldersStatics <: IInspectable {
+    func MusicLibrary(value: CPointer<CPointer<Unit>>): Int32
+    func PicturesLibrary(value: CPointer<CPointer<Unit>>): Int32
+    func VideosLibrary(value: CPointer<CPointer<Unit>>): Int32
+    func DocumentsLibrary(value: CPointer<CPointer<Unit>>): Int32
+    func HomeGroup(value: CPointer<CPointer<Unit>>): Int32
+    func RemovableDevices(value: CPointer<CPointer<Unit>>): Int32
+    func MediaServerDevices(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IKnownFoldersStatics2 (synthetic:Windows_Storage_IKnownFoldersStatics2)
+@When[Windows_Storage == "on"]
+@Interface["194bd0cd-cf6e-4d07-9d53-e9163a2536e9", "Windows.Storage.IKnownFoldersStatics2", "Objects3D.value=Com;AppCaptures.value=Com;RecordedCalls.value=Com"]
+public interface IKnownFoldersStatics2 <: IInspectable {
+    func Objects3D(value: CPointer<CPointer<Unit>>): Int32
+    func AppCaptures(value: CPointer<CPointer<Unit>>): Int32
+    func RecordedCalls(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IKnownFoldersStatics3 (synthetic:Windows_Storage_IKnownFoldersStatics3)
+@When[Windows_Storage == "on"]
+@Interface["c5194341-9742-4ed5-823d-fc1401148764", "Windows.Storage.IKnownFoldersStatics3", "GetFolderForUserAsync.operation=Com"]
+public interface IKnownFoldersStatics3 <: IInspectable {
+    func GetFolderForUserAsync(user: CPointer<Unit>, folderId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IKnownFoldersStatics4 (synthetic:Windows_Storage_IKnownFoldersStatics4)
+@When[Windows_Storage == "on"]
+@Interface["1722e6bf-9ff9-4b21-bed5-90ecb13a192e", "Windows.Storage.IKnownFoldersStatics4", "RequestAccessAsync.operation=Com;RequestAccessForUserAsync.operation=Com;GetFolderAsync.operation=Com"]
+public interface IKnownFoldersStatics4 <: IInspectable {
+    func RequestAccessAsync(folderId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessForUserAsync(user: CPointer<Unit>, folderId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func GetFolderAsync(folderId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IPathIOStatics (synthetic:Windows_Storage_IPathIOStatics)
+@When[Windows_Storage == "on"]
+@Interface["0f2f3758-8ec7-4381-922b-8f6c07d288f3", "Windows.Storage.IPathIOStatics", "ReadTextAsync.textOperation=Com;ReadTextWithEncodingAsync.textOperation=Com;WriteTextAsync.textOperation=Com;WriteTextWithEncodingAsync.textOperation=Com;AppendTextAsync.textOperation=Com;AppendTextWithEncodingAsync.textOperation=Com;ReadLinesAsync.linesOperation=Com;ReadLinesWithEncodingAsync.linesOperation=Com;WriteLinesAsync.operation=Com;WriteLinesWithEncodingAsync.operation=Com;AppendLinesAsync.operation=Com;AppendLinesWithEncodingAsync.operation=Com;ReadBufferAsync.operation=Com;WriteBufferAsync.operation=Com;WriteBytesAsync.operation=Com"]
+public interface IPathIOStatics <: IInspectable {
+    func ReadTextAsync(absolutePath: CPointer<Unit>, textOperation: CPointer<CPointer<Unit>>): Int32
+    func ReadTextWithEncodingAsync(absolutePath: CPointer<Unit>, encoding: Int32, textOperation: CPointer<CPointer<Unit>>): Int32
+    func WriteTextAsync(absolutePath: CPointer<Unit>, contents: CPointer<Unit>, textOperation: CPointer<CPointer<Unit>>): Int32
+    func WriteTextWithEncodingAsync(absolutePath: CPointer<Unit>, contents: CPointer<Unit>, encoding: Int32, textOperation: CPointer<CPointer<Unit>>): Int32
+    func AppendTextAsync(absolutePath: CPointer<Unit>, contents: CPointer<Unit>, textOperation: CPointer<CPointer<Unit>>): Int32
+    func AppendTextWithEncodingAsync(absolutePath: CPointer<Unit>, contents: CPointer<Unit>, encoding: Int32, textOperation: CPointer<CPointer<Unit>>): Int32
+    func ReadLinesAsync(absolutePath: CPointer<Unit>, linesOperation: CPointer<CPointer<Unit>>): Int32
+    func ReadLinesWithEncodingAsync(absolutePath: CPointer<Unit>, encoding: Int32, linesOperation: CPointer<CPointer<Unit>>): Int32
+    func WriteLinesAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func WriteLinesWithEncodingAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, encoding: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func AppendLinesAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func AppendLinesWithEncodingAsync(absolutePath: CPointer<Unit>, lines: CPointer<Unit>, encoding: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func ReadBufferAsync(absolutePath: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func WriteBufferAsync(absolutePath: CPointer<Unit>, buffer: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func WriteBytesAsync(absolutePath: CPointer<Unit>, bufferSize: UInt32, buffer: CPointer<UInt8>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISetVersionDeferral (synthetic:Windows_Storage_ISetVersionDeferral)
+@When[Windows_Storage == "on"]
+@Interface["033508a2-781a-437a-b078-3f32badcfe47", "Windows.Storage.ISetVersionDeferral"]
+public interface ISetVersionDeferral <: IInspectable {
+    func Complete(): Int32
+}
+
+// Windows.Storage.ISetVersionRequest (synthetic:Windows_Storage_ISetVersionRequest)
+@When[Windows_Storage == "on"]
+@Interface["b9c76b9b-1056-4e69-8330-162619956f9b", "Windows.Storage.ISetVersionRequest", "GetDeferral.deferral=Com"]
+public interface ISetVersionRequest <: IInspectable {
+    func CurrentVersion(currentVersion: CPointer<UInt32>): Int32
+    func DesiredVersion(desiredVersion: CPointer<UInt32>): Int32
+    func GetDeferral(deferral: CPointer<CPointer<Unit>>): Int32
+}
 
 // Windows.Storage.IStorageFile (synthetic:Windows_Storage_IStorageFile)
 @When[Windows_Storage == "on"]
@@ -244,6 +2094,32 @@ public interface IStorageItemPropertiesWithProvider <: IInspectable {
     func Provider(value: CPointer<CPointer<Unit>>): Int32
 }
 
+// Windows.Storage.IStorageLibrary (synthetic:Windows_Storage_IStorageLibrary)
+@When[Windows_Storage == "on"]
+@Interface["1edd7103-0e5e-4d6c-b5e8-9318983d6a03", "Windows.Storage.IStorageLibrary", "RequestAddFolderAsync.operation=Com;RequestRemoveFolderAsync.operation=Com;Folders.value=Com;SaveFolder.value=Com"]
+public interface IStorageLibrary <: IInspectable {
+    func RequestAddFolderAsync(operation: CPointer<CPointer<Unit>>): Int32
+    func RequestRemoveFolderAsync(folder: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func Folders(value: CPointer<CPointer<Unit>>): Int32
+    func SaveFolder(value: CPointer<CPointer<Unit>>): Int32
+    func DefinitionChanged(handler: CPointer<Unit>, eventCookie: CPointer<Int64>): Int32
+    func RemoveDefinitionChanged(eventCookie: Int64): Int32
+}
+
+// Windows.Storage.IStorageLibrary2 (synthetic:Windows_Storage_IStorageLibrary2)
+@When[Windows_Storage == "on"]
+@Interface["5b0ce348-fcb3-4031-afb0-a68d7bd44534", "Windows.Storage.IStorageLibrary2", "ChangeTracker.value=Com"]
+public interface IStorageLibrary2 <: IInspectable {
+    func ChangeTracker(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IStorageLibrary3 (synthetic:Windows_Storage_IStorageLibrary3)
+@When[Windows_Storage == "on"]
+@Interface["8a281291-2154-4201-8113-d2c05ce1ad23", "Windows.Storage.IStorageLibrary3", "AreFolderSuggestionsAvailableAsync.operation=Com"]
+public interface IStorageLibrary3 <: IInspectable {
+    func AreFolderSuggestionsAvailableAsync(operation: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.Storage.IStorageLibraryChange (synthetic:Windows_Storage_IStorageLibraryChange)
 @When[Windows_Storage == "on"]
 @Interface["00980b23-2be2-4909-aa48-159f5203a51e", "Windows.Storage.IStorageLibraryChange", "Path.value=HString;PreviousPath.value=HString;GetStorageItemAsync.operation=Com"]
@@ -295,6 +2171,33 @@ public interface IStorageLibraryChangeTrackerOptions <: IInspectable {
     func SetTrackChangeDetails(value: Bool): Int32
 }
 
+// Windows.Storage.IStorageLibraryLastChangeId (synthetic:Windows_Storage_IStorageLibraryLastChangeId)
+@When[Windows_Storage == "on"]
+@Interface["5281826a-bbe1-53bc-82ca-81cc7f039329", "Windows.Storage.IStorageLibraryLastChangeId"]
+public interface IStorageLibraryLastChangeId <: IInspectable {
+}
+
+// Windows.Storage.IStorageLibraryLastChangeIdStatics (synthetic:Windows_Storage_IStorageLibraryLastChangeIdStatics)
+@When[Windows_Storage == "on"]
+@Interface["81a49128-2ca3-5309-b0d1-cf0788e40762", "Windows.Storage.IStorageLibraryLastChangeIdStatics"]
+public interface IStorageLibraryLastChangeIdStatics <: IInspectable {
+    func Unknown(value: CPointer<UInt64>): Int32
+}
+
+// Windows.Storage.IStorageLibraryStatics (synthetic:Windows_Storage_IStorageLibraryStatics)
+@When[Windows_Storage == "on"]
+@Interface["4208a6db-684a-49c6-9e59-90121ee050d6", "Windows.Storage.IStorageLibraryStatics", "GetLibraryAsync.operation=Com"]
+public interface IStorageLibraryStatics <: IInspectable {
+    func GetLibraryAsync(libraryId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IStorageLibraryStatics2 (synthetic:Windows_Storage_IStorageLibraryStatics2)
+@When[Windows_Storage == "on"]
+@Interface["ffb08ddc-fa75-4695-b9d1-7f81f97832e3", "Windows.Storage.IStorageLibraryStatics2", "GetLibraryForUserAsync.operation=Com"]
+public interface IStorageLibraryStatics2 <: IInspectable {
+    func GetLibraryForUserAsync(user: CPointer<Unit>, libraryId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.Storage.IStorageProvider (synthetic:Windows_Storage_IStorageProvider)
 @When[Windows_Storage == "on"]
 @Interface["e705eed4-d478-47d6-ba46-1a8ebe114a20", "Windows.Storage.IStorageProvider", "Id.value=HString;DisplayName.value=HString"]
@@ -325,39 +2228,1028 @@ public interface IStreamedFileDataRequest <: IInspectable {
     func FailAndClose(failureMode: Int32): Int32
 }
 
-// Windows.Storage.NameCollisionOption (synthetic:Windows_Storage_NameCollisionOption)
+// Windows.Storage.ISystemAudioProperties (synthetic:Windows_Storage_ISystemAudioProperties)
 @When[Windows_Storage == "on"]
-public struct NameCollisionOption {
+@Interface["3f8f38b7-308c-47e1-924d-8645348e5db7", "Windows.Storage.ISystemAudioProperties", "EncodingBitrate.value=HString"]
+public interface ISystemAudioProperties <: IInspectable {
+    func EncodingBitrate(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemDataPaths (synthetic:Windows_Storage_ISystemDataPaths)
+@When[Windows_Storage == "on"]
+@Interface["e32abf70-d8fa-45ec-a942-d2e26fb60ba5", "Windows.Storage.ISystemDataPaths", "Fonts.value=HString;ProgramData.value=HString;Public.value=HString;PublicDesktop.value=HString;PublicDocuments.value=HString;PublicDownloads.value=HString;PublicMusic.value=HString;PublicPictures.value=HString;PublicVideos.value=HString;System.value=HString;SystemHost.value=HString;SystemX86.value=HString;SystemX64.value=HString;SystemArm.value=HString;UserProfiles.value=HString;Windows.value=HString"]
+public interface ISystemDataPaths <: IInspectable {
+    func Fonts(value: CPointer<CPointer<Unit>>): Int32
+    func ProgramData(value: CPointer<CPointer<Unit>>): Int32
+    func Public(value: CPointer<CPointer<Unit>>): Int32
+    func PublicDesktop(value: CPointer<CPointer<Unit>>): Int32
+    func PublicDocuments(value: CPointer<CPointer<Unit>>): Int32
+    func PublicDownloads(value: CPointer<CPointer<Unit>>): Int32
+    func PublicMusic(value: CPointer<CPointer<Unit>>): Int32
+    func PublicPictures(value: CPointer<CPointer<Unit>>): Int32
+    func PublicVideos(value: CPointer<CPointer<Unit>>): Int32
+    func System(value: CPointer<CPointer<Unit>>): Int32
+    func SystemHost(value: CPointer<CPointer<Unit>>): Int32
+    func SystemX86(value: CPointer<CPointer<Unit>>): Int32
+    func SystemX64(value: CPointer<CPointer<Unit>>): Int32
+    func SystemArm(value: CPointer<CPointer<Unit>>): Int32
+    func UserProfiles(value: CPointer<CPointer<Unit>>): Int32
+    func Windows(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemDataPathsStatics (synthetic:Windows_Storage_ISystemDataPathsStatics)
+@When[Windows_Storage == "on"]
+@Interface["e0f96fd0-9920-4bca-b379-f96fdf7caad8", "Windows.Storage.ISystemDataPathsStatics", "GetDefault.result=Com"]
+public interface ISystemDataPathsStatics <: IInspectable {
+    func GetDefault(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemGPSProperties (synthetic:Windows_Storage_ISystemGPSProperties)
+@When[Windows_Storage == "on"]
+@Interface["c0f46eb4-c174-481a-bc25-921986f6a6f3", "Windows.Storage.ISystemGPSProperties", "LatitudeDecimal.value=HString;LongitudeDecimal.value=HString"]
+public interface ISystemGPSProperties <: IInspectable {
+    func LatitudeDecimal(value: CPointer<CPointer<Unit>>): Int32
+    func LongitudeDecimal(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemImageProperties (synthetic:Windows_Storage_ISystemImageProperties)
+@When[Windows_Storage == "on"]
+@Interface["011b2e30-8b39-4308-bea1-e8aa61e47826", "Windows.Storage.ISystemImageProperties", "HorizontalSize.value=HString;VerticalSize.value=HString"]
+public interface ISystemImageProperties <: IInspectable {
+    func HorizontalSize(value: CPointer<CPointer<Unit>>): Int32
+    func VerticalSize(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemMediaProperties (synthetic:Windows_Storage_ISystemMediaProperties)
+@When[Windows_Storage == "on"]
+@Interface["a42b3316-8415-40dc-8c44-98361d235430", "Windows.Storage.ISystemMediaProperties", "Duration.value=HString;Producer.value=HString;Publisher.value=HString;SubTitle.value=HString;Writer.value=HString;Year.value=HString"]
+public interface ISystemMediaProperties <: IInspectable {
+    func Duration(value: CPointer<CPointer<Unit>>): Int32
+    func Producer(value: CPointer<CPointer<Unit>>): Int32
+    func Publisher(value: CPointer<CPointer<Unit>>): Int32
+    func SubTitle(value: CPointer<CPointer<Unit>>): Int32
+    func Writer(value: CPointer<CPointer<Unit>>): Int32
+    func Year(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemMusicProperties (synthetic:Windows_Storage_ISystemMusicProperties)
+@When[Windows_Storage == "on"]
+@Interface["b47988d5-67af-4bc3-8d39-5b89022026a1", "Windows.Storage.ISystemMusicProperties", "AlbumArtist.value=HString;AlbumTitle.value=HString;Artist.value=HString;Composer.value=HString;Conductor.value=HString;DisplayArtist.value=HString;Genre.value=HString;TrackNumber.value=HString"]
+public interface ISystemMusicProperties <: IInspectable {
+    func AlbumArtist(value: CPointer<CPointer<Unit>>): Int32
+    func AlbumTitle(value: CPointer<CPointer<Unit>>): Int32
+    func Artist(value: CPointer<CPointer<Unit>>): Int32
+    func Composer(value: CPointer<CPointer<Unit>>): Int32
+    func Conductor(value: CPointer<CPointer<Unit>>): Int32
+    func DisplayArtist(value: CPointer<CPointer<Unit>>): Int32
+    func Genre(value: CPointer<CPointer<Unit>>): Int32
+    func TrackNumber(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemPhotoProperties (synthetic:Windows_Storage_ISystemPhotoProperties)
+@When[Windows_Storage == "on"]
+@Interface["4734fc3d-ab21-4424-b735-f4353a56c8fc", "Windows.Storage.ISystemPhotoProperties", "CameraManufacturer.value=HString;CameraModel.value=HString;DateTaken.value=HString;Orientation.value=HString;PeopleNames.value=HString"]
+public interface ISystemPhotoProperties <: IInspectable {
+    func CameraManufacturer(value: CPointer<CPointer<Unit>>): Int32
+    func CameraModel(value: CPointer<CPointer<Unit>>): Int32
+    func DateTaken(value: CPointer<CPointer<Unit>>): Int32
+    func Orientation(value: CPointer<CPointer<Unit>>): Int32
+    func PeopleNames(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemProperties (synthetic:Windows_Storage_ISystemProperties)
+@When[Windows_Storage == "on"]
+@Interface["917a71c1-85f3-4dd1-b001-a50bfd21c8d2", "Windows.Storage.ISystemProperties", "Author.value=HString;Comment.value=HString;ItemNameDisplay.value=HString;Keywords.value=HString;Rating.value=HString;Title.value=HString;Audio.value=Com;GPS.value=Com;Media.value=Com;Music.value=Com;Photo.value=Com;Video.value=Com;Image.value=Com"]
+public interface ISystemProperties <: IInspectable {
+    func Author(value: CPointer<CPointer<Unit>>): Int32
+    func Comment(value: CPointer<CPointer<Unit>>): Int32
+    func ItemNameDisplay(value: CPointer<CPointer<Unit>>): Int32
+    func Keywords(value: CPointer<CPointer<Unit>>): Int32
+    func Rating(value: CPointer<CPointer<Unit>>): Int32
+    func Title(value: CPointer<CPointer<Unit>>): Int32
+    func Audio(value: CPointer<CPointer<Unit>>): Int32
+    func GPS(value: CPointer<CPointer<Unit>>): Int32
+    func Media(value: CPointer<CPointer<Unit>>): Int32
+    func Music(value: CPointer<CPointer<Unit>>): Int32
+    func Photo(value: CPointer<CPointer<Unit>>): Int32
+    func Video(value: CPointer<CPointer<Unit>>): Int32
+    func Image(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.ISystemVideoProperties (synthetic:Windows_Storage_ISystemVideoProperties)
+@When[Windows_Storage == "on"]
+@Interface["2040f715-67f8-4322-9b80-4fa9fefb83e8", "Windows.Storage.ISystemVideoProperties", "Director.value=HString;FrameHeight.value=HString;FrameWidth.value=HString;Orientation.value=HString;TotalBitrate.value=HString"]
+public interface ISystemVideoProperties <: IInspectable {
+    func Director(value: CPointer<CPointer<Unit>>): Int32
+    func FrameHeight(value: CPointer<CPointer<Unit>>): Int32
+    func FrameWidth(value: CPointer<CPointer<Unit>>): Int32
+    func Orientation(value: CPointer<CPointer<Unit>>): Int32
+    func TotalBitrate(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IUserDataPaths (synthetic:Windows_Storage_IUserDataPaths)
+@When[Windows_Storage == "on"]
+@Interface["f9c53912-abc4-46ff-8a2b-dc9d7fa6e52f", "Windows.Storage.IUserDataPaths", "CameraRoll.value=HString;Cookies.value=HString;Desktop.value=HString;Documents.value=HString;Downloads.value=HString;Favorites.value=HString;History.value=HString;InternetCache.value=HString;LocalAppData.value=HString;LocalAppDataLow.value=HString;Music.value=HString;Pictures.value=HString;Profile.value=HString;Recent.value=HString;RoamingAppData.value=HString;SavedPictures.value=HString;Screenshots.value=HString;Templates.value=HString;Videos.value=HString"]
+public interface IUserDataPaths <: IInspectable {
+    func CameraRoll(value: CPointer<CPointer<Unit>>): Int32
+    func Cookies(value: CPointer<CPointer<Unit>>): Int32
+    func Desktop(value: CPointer<CPointer<Unit>>): Int32
+    func Documents(value: CPointer<CPointer<Unit>>): Int32
+    func Downloads(value: CPointer<CPointer<Unit>>): Int32
+    func Favorites(value: CPointer<CPointer<Unit>>): Int32
+    func History(value: CPointer<CPointer<Unit>>): Int32
+    func InternetCache(value: CPointer<CPointer<Unit>>): Int32
+    func LocalAppData(value: CPointer<CPointer<Unit>>): Int32
+    func LocalAppDataLow(value: CPointer<CPointer<Unit>>): Int32
+    func Music(value: CPointer<CPointer<Unit>>): Int32
+    func Pictures(value: CPointer<CPointer<Unit>>): Int32
+    func Profile(value: CPointer<CPointer<Unit>>): Int32
+    func Recent(value: CPointer<CPointer<Unit>>): Int32
+    func RoamingAppData(value: CPointer<CPointer<Unit>>): Int32
+    func SavedPictures(value: CPointer<CPointer<Unit>>): Int32
+    func Screenshots(value: CPointer<CPointer<Unit>>): Int32
+    func Templates(value: CPointer<CPointer<Unit>>): Int32
+    func Videos(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.IUserDataPathsStatics (synthetic:Windows_Storage_IUserDataPathsStatics)
+@When[Windows_Storage == "on"]
+@Interface["01b29def-e062-48a1-8b0c-f2c7a9ca56c0", "Windows.Storage.IUserDataPathsStatics", "GetForUser.result=Com;GetDefault.result=Com"]
+public interface IUserDataPathsStatics <: IInspectable {
+    func GetForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetDefault(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.KnownFolderId (synthetic:Windows_Storage_KnownFolderId)
+@When[Windows_Storage == "on"]
+public struct KnownFolderId {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage == "on"]
-public let NameCollisionOption_GenerateUniqueName = NameCollisionOption(0)
+public const KnownFolderId_AppCaptures = KnownFolderId(0)
 @When[Windows_Storage == "on"]
-public let NameCollisionOption_ReplaceExisting = NameCollisionOption(1)
+public const KnownFolderId_CameraRoll = KnownFolderId(1)
 @When[Windows_Storage == "on"]
-public let NameCollisionOption_FailIfExists = NameCollisionOption(2)
+public const KnownFolderId_DocumentsLibrary = KnownFolderId(2)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_HomeGroup = KnownFolderId(3)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_MediaServerDevices = KnownFolderId(4)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_MusicLibrary = KnownFolderId(5)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_Objects3D = KnownFolderId(6)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_PicturesLibrary = KnownFolderId(7)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_Playlists = KnownFolderId(8)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_RecordedCalls = KnownFolderId(9)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_RemovableDevices = KnownFolderId(10)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_SavedPictures = KnownFolderId(11)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_Screenshots = KnownFolderId(12)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_VideosLibrary = KnownFolderId(13)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_AllAppMods = KnownFolderId(14)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_CurrentAppMods = KnownFolderId(15)
+@When[Windows_Storage == "on"]
+public const KnownFolderId_DownloadsFolder = KnownFolderId(16)
+
+// Windows.Storage.KnownFolders (synthetic:Windows_Storage_KnownFolders)
+@When[Windows_Storage == "on"]
+public struct KnownFolders <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func MusicLibrary(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MusicLibrary(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PicturesLibrary(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PicturesLibrary(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func VideosLibrary(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VideosLibrary(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DocumentsLibrary(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DocumentsLibrary(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HomeGroup(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HomeGroup(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RemovableDevices(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemovableDevices(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MediaServerDevices(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediaServerDevices(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetFolderForUserAsync(user: Windows_System.User, folderId: KnownFolderId): Windows_Foundation.IAsyncOperation<StorageFolder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics3>().unwrap()) {
+                hr__ = unsafe { factory__.GetFolderForUserAsync(__argBorrow0.asRaw(), folderId.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFolder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CameraRoll(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersCameraRollStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CameraRoll(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessAsync(folderId: KnownFolderId): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics4>().unwrap()) {
+            hr__ = unsafe { factory__.RequestAccessAsync(folderId.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessForUserAsync(user: Windows_System.User, folderId: KnownFolderId): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics4>().unwrap()) {
+                hr__ = unsafe { factory__.RequestAccessForUserAsync(__argBorrow0.asRaw(), folderId.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetFolderAsync(folderId: KnownFolderId): Windows_Foundation.IAsyncOperation<StorageFolder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics4>().unwrap()) {
+            hr__ = unsafe { factory__.GetFolderAsync(folderId.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFolder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SavedPictures(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersSavedPicturesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SavedPictures(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Objects3D(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.Objects3D(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppCaptures(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.AppCaptures(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RecordedCalls(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.RecordedCalls(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Playlists(): StorageFolder {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownFolders, IKnownFoldersPlaylistsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Playlists(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return StorageFolder.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.KnownFolders"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.KnownFolders)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.KnownFolders", KnownFolders.signature())
+    }
+}
+
+// Windows.Storage.KnownFoldersAccessStatus (synthetic:Windows_Storage_KnownFoldersAccessStatus)
+@When[Windows_Storage == "on"]
+public struct KnownFoldersAccessStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Storage == "on"]
+public const KnownFoldersAccessStatus_DeniedBySystem = KnownFoldersAccessStatus(0)
+@When[Windows_Storage == "on"]
+public const KnownFoldersAccessStatus_NotDeclaredByApp = KnownFoldersAccessStatus(1)
+@When[Windows_Storage == "on"]
+public const KnownFoldersAccessStatus_DeniedByUser = KnownFoldersAccessStatus(2)
+@When[Windows_Storage == "on"]
+public const KnownFoldersAccessStatus_UserPromptRequired = KnownFoldersAccessStatus(3)
+@When[Windows_Storage == "on"]
+public const KnownFoldersAccessStatus_Allowed = KnownFoldersAccessStatus(4)
+@When[Windows_Storage == "on"]
+public const KnownFoldersAccessStatus_AllowedPerAppFolder = KnownFoldersAccessStatus(5)
+
+// Windows.Storage.KnownLibraryId (synthetic:Windows_Storage_KnownLibraryId)
+@When[Windows_Storage == "on"]
+public struct KnownLibraryId {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Storage == "on"]
+public const KnownLibraryId_Music = KnownLibraryId(0)
+@When[Windows_Storage == "on"]
+public const KnownLibraryId_Pictures = KnownLibraryId(1)
+@When[Windows_Storage == "on"]
+public const KnownLibraryId_Videos = KnownLibraryId(2)
+@When[Windows_Storage == "on"]
+public const KnownLibraryId_Documents = KnownLibraryId(3)
+
+// Windows.Storage.NameCollisionOption (synthetic:Windows_Storage_NameCollisionOption)
+@When[Windows_Storage == "on"]
+public struct NameCollisionOption {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Storage == "on"]
+public const NameCollisionOption_GenerateUniqueName = NameCollisionOption(0)
+@When[Windows_Storage == "on"]
+public const NameCollisionOption_ReplaceExisting = NameCollisionOption(1)
+@When[Windows_Storage == "on"]
+public const NameCollisionOption_FailIfExists = NameCollisionOption(2)
+
+// Windows.Storage.PathIO (synthetic:Windows_Storage_PathIO)
+@When[Windows_Storage == "on"]
+public struct PathIO <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func ReadTextAsync(absolutePath: windows_core.HString): Windows_Foundation.IAsyncOperation<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadTextAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadTextWithEncodingAsync(absolutePath: windows_core.HString, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncOperation<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadTextWithEncodingAsync(__argBorrow0.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteTextAsync(absolutePath: windows_core.HString, contents: windows_core.HString): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteTextAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteTextWithEncodingAsync(absolutePath: windows_core.HString, contents: windows_core.HString, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteTextWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendTextAsync(absolutePath: windows_core.HString, contents: windows_core.HString): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendTextAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendTextWithEncodingAsync(absolutePath: windows_core.HString, contents: windows_core.HString, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contents)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendTextWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadLinesAsync(absolutePath: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadLinesAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadLinesWithEncodingAsync(absolutePath: windows_core.HString, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadLinesWithEncodingAsync(__argBorrow0.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVector<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteLinesAsync(absolutePath: windows_core.HString, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteLinesAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteLinesWithEncodingAsync(absolutePath: windows_core.HString, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteLinesWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendLinesAsync(absolutePath: windows_core.HString, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendLinesAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AppendLinesWithEncodingAsync(absolutePath: windows_core.HString, lines: Windows_Foundation_Collections.IIterable<windows_core.HString>, encoding: Windows_Storage_Streams.UnicodeEncoding): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(lines)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.AppendLinesWithEncodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), encoding.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ReadBufferAsync(absolutePath: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ReadBufferAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteBufferAsync(absolutePath: windows_core.HString, buffer: Windows_Storage_Streams.IBuffer): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IBuffer>(buffer)) {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteBufferAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WriteBytesAsync(absolutePath: windows_core.HString, buffer: Array<UInt8>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(absolutePath)) {
+            let __arg1AbiValues = Array<UInt8>(buffer.size, { index => buffer[index] })
+            let __arg1AbiArray = windows_core.AbiArray<UInt8>.fromSlice(__arg1AbiValues)
+            let (__arg1Raw, __arg1Len) = __arg1AbiArray.intoAbi()
+            try {
+                try (factory__ = windows_core.factory<PathIO, IPathIOStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.WriteBytesAsync(__argBorrow0.asRaw(), __arg1Len, __arg1Raw, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            } finally {
+                windows_core.coTaskMemFree(CPointer<Unit>(__arg1Raw))
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.PathIO"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.PathIO)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.PathIO", PathIO.signature())
+    }
+}
+
+// Windows.Storage.SetVersionDeferral (synthetic:Windows_Storage_SetVersionDeferral)
+@When[Windows_Storage == "on"]
+public class SetVersionDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SetVersionDeferral> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SetVersionDeferral {
+        SetVersionDeferral(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SetVersionDeferral {
+        SetVersionDeferral(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISetVersionDeferral.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SetVersionDeferral> {
+        let ancestors = [ISetVersionDeferral.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SetVersionDeferral>("SetVersionDeferral", ISetVersionDeferral.iid(), ancestors, { raw => SetVersionDeferral.fromAbiTake(raw) }, { raw => SetVersionDeferral.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISetVersionDeferral {
+        match (unsafe { query(ISetVersionDeferral.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISetVersionDeferral(): ISetVersionDeferral {
+        defaultInterface()
+    }
+
+    public func Complete(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Complete() }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SetVersionDeferral"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SetVersionDeferral;{" + ISetVersionDeferral.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SetVersionDeferral", SetVersionDeferral.signature(), ISetVersionDeferral.iid())
+    }
+
+    public static func intoWinrtHandle(value: SetVersionDeferral): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SetVersionDeferral {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SetVersionDeferral.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SetVersionDeferral {
+        SetVersionDeferral.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SetVersionRequest (synthetic:Windows_Storage_SetVersionRequest)
+@When[Windows_Storage == "on"]
+public class SetVersionRequest <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SetVersionRequest> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SetVersionRequest {
+        SetVersionRequest(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SetVersionRequest {
+        SetVersionRequest(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISetVersionRequest.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SetVersionRequest> {
+        let ancestors = [ISetVersionRequest.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SetVersionRequest>("SetVersionRequest", ISetVersionRequest.iid(), ancestors, { raw => SetVersionRequest.fromAbiTake(raw) }, { raw => SetVersionRequest.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISetVersionRequest {
+        match (unsafe { query(ISetVersionRequest.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISetVersionRequest(): ISetVersionRequest {
+        defaultInterface()
+    }
+
+    public prop CurrentVersion: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CurrentVersion(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop DesiredVersion: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DesiredVersion(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func GetDeferral(): SetVersionDeferral {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDeferral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SetVersionDeferral>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SetVersionDeferral.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SetVersionRequest"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SetVersionRequest;{" + ISetVersionRequest.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SetVersionRequest", SetVersionRequest.signature(), ISetVersionRequest.iid())
+    }
+
+    public static func intoWinrtHandle(value: SetVersionRequest): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SetVersionRequest {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SetVersionRequest.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SetVersionRequest {
+        SetVersionRequest.viewOf(raw)
+    }
+}
 
 // Windows.Storage.StorageDeleteOption (synthetic:Windows_Storage_StorageDeleteOption)
 @When[Windows_Storage == "on"]
 public struct StorageDeleteOption {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage == "on"]
-public let StorageDeleteOption_Default = StorageDeleteOption(0)
+public const StorageDeleteOption_Default = StorageDeleteOption(0)
 @When[Windows_Storage == "on"]
-public let StorageDeleteOption_PermanentDelete = StorageDeleteOption(1)
+public const StorageDeleteOption_PermanentDelete = StorageDeleteOption(1)
 
 // Windows.Storage.StorageFile (synthetic:Windows_Storage_StorageFile)
 @When[Windows_Storage == "on"]
@@ -1146,10 +4038,10 @@ public class StorageFolder <: windows_interface.InterfaceWrapperBase & windows_i
 @When[Windows_Storage == "on"]
 public struct StorageItemTypes {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: StorageItemTypes): Bool {
@@ -1169,11 +4061,212 @@ public struct StorageItemTypes {
     }
 }
 @When[Windows_Storage == "on"]
-public let StorageItemTypes_None = StorageItemTypes(0)
+public const StorageItemTypes_None = StorageItemTypes(0)
 @When[Windows_Storage == "on"]
-public let StorageItemTypes_File = StorageItemTypes(1)
+public const StorageItemTypes_File = StorageItemTypes(1)
 @When[Windows_Storage == "on"]
-public let StorageItemTypes_Folder = StorageItemTypes(2)
+public const StorageItemTypes_Folder = StorageItemTypes(2)
+
+// Windows.Storage.StorageLibrary (synthetic:Windows_Storage_StorageLibrary)
+@When[Windows_Storage == "on"]
+public class StorageLibrary <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<StorageLibrary> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageLibrary {
+        StorageLibrary(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageLibrary {
+        StorageLibrary(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IStorageLibrary.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<StorageLibrary> {
+        let ancestors = [IStorageLibrary.iid(), IStorageLibrary2.iid(), IStorageLibrary3.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<StorageLibrary>("StorageLibrary", IStorageLibrary.iid(), ancestors, { raw => StorageLibrary.fromAbiTake(raw) }, { raw => StorageLibrary.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IStorageLibrary {
+        match (unsafe { query(IStorageLibrary.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIStorageLibrary(): IStorageLibrary {
+        defaultInterface()
+    }
+
+    public func asIStorageLibrary2(): IStorageLibrary2 {
+        match (unsafe { query<IStorageLibrary2>(IStorageLibrary2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIStorageLibrary3(): IStorageLibrary3 {
+        match (unsafe { query<IStorageLibrary3>(IStorageLibrary3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Folders: Windows_Foundation_Collections.IObservableVector<StorageFolder> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Folders(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IObservableVector<StorageFolder>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IObservableVector<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop SaveFolder: StorageFolder {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SaveFolder(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<StorageFolder>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return StorageFolder.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func addDefinitionChanged(handler: Windows_Foundation.TypedEventHandler<StorageLibrary, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<StorageLibrary, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DefinitionChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeDefinitionChanged(eventCookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveDefinitionChanged(eventCookie) }
+        }
+        hr__.check()
+    }
+
+    public func RequestAddFolderAsync(): Windows_Foundation.IAsyncOperation<StorageFolder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RequestAddFolderAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageFolder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageFolder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RequestRemoveFolderAsync(folder: StorageFolder): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<StorageFolder>(folder)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RequestRemoveFolderAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLibraryForUserAsync(user: Windows_System.User, libraryId: KnownLibraryId): Windows_Foundation.IAsyncOperation<StorageLibrary> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<StorageLibrary, IStorageLibraryStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetLibraryForUserAsync(__argBorrow0.asRaw(), libraryId.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageLibrary>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageLibrary>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLibraryAsync(libraryId: KnownLibraryId): Windows_Foundation.IAsyncOperation<StorageLibrary> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StorageLibrary, IStorageLibraryStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetLibraryAsync(libraryId.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<StorageLibrary>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<StorageLibrary>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.StorageLibrary"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.StorageLibrary;{" + IStorageLibrary.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.StorageLibrary", StorageLibrary.signature(), IStorageLibrary.iid())
+    }
+
+    public static func intoWinrtHandle(value: StorageLibrary): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): StorageLibrary {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        StorageLibrary.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): StorageLibrary {
+        StorageLibrary.viewOf(raw)
+    }
+}
 
 // Windows.Storage.StorageLibraryChange (synthetic:Windows_Storage_StorageLibraryChange)
 @When[Windows_Storage == "on"]
@@ -1649,42 +4742,127 @@ public class StorageLibraryChangeTrackerOptions <: windows_interface.InterfaceWr
 @When[Windows_Storage == "on"]
 public struct StorageLibraryChangeType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_Created = StorageLibraryChangeType(0)
+public const StorageLibraryChangeType_Created = StorageLibraryChangeType(0)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_Deleted = StorageLibraryChangeType(1)
+public const StorageLibraryChangeType_Deleted = StorageLibraryChangeType(1)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_MovedOrRenamed = StorageLibraryChangeType(2)
+public const StorageLibraryChangeType_MovedOrRenamed = StorageLibraryChangeType(2)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_ContentsChanged = StorageLibraryChangeType(3)
+public const StorageLibraryChangeType_ContentsChanged = StorageLibraryChangeType(3)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_MovedOutOfLibrary = StorageLibraryChangeType(4)
+public const StorageLibraryChangeType_MovedOutOfLibrary = StorageLibraryChangeType(4)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_MovedIntoLibrary = StorageLibraryChangeType(5)
+public const StorageLibraryChangeType_MovedIntoLibrary = StorageLibraryChangeType(5)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_ContentsReplaced = StorageLibraryChangeType(6)
+public const StorageLibraryChangeType_ContentsReplaced = StorageLibraryChangeType(6)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_IndexingStatusChanged = StorageLibraryChangeType(7)
+public const StorageLibraryChangeType_IndexingStatusChanged = StorageLibraryChangeType(7)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_EncryptionChanged = StorageLibraryChangeType(8)
+public const StorageLibraryChangeType_EncryptionChanged = StorageLibraryChangeType(8)
 @When[Windows_Storage == "on"]
-public let StorageLibraryChangeType_ChangeTrackingLost = StorageLibraryChangeType(9)
+public const StorageLibraryChangeType_ChangeTrackingLost = StorageLibraryChangeType(9)
+
+// Windows.Storage.StorageLibraryLastChangeId (synthetic:Windows_Storage_StorageLibraryLastChangeId)
+@When[Windows_Storage == "on"]
+public class StorageLibraryLastChangeId <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<StorageLibraryLastChangeId> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): StorageLibraryLastChangeId {
+        StorageLibraryLastChangeId(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StorageLibraryLastChangeId {
+        StorageLibraryLastChangeId(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IStorageLibraryLastChangeId.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<StorageLibraryLastChangeId> {
+        let ancestors = [IStorageLibraryLastChangeId.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<StorageLibraryLastChangeId>("StorageLibraryLastChangeId", IStorageLibraryLastChangeId.iid(), ancestors, { raw => StorageLibraryLastChangeId.fromAbiTake(raw) }, { raw => StorageLibraryLastChangeId.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IStorageLibraryLastChangeId {
+        match (unsafe { query(IStorageLibraryLastChangeId.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIStorageLibraryLastChangeId(): IStorageLibraryLastChangeId {
+        defaultInterface()
+    }
+
+    public static func Unknown(): UInt64 {
+        var result__ = 0u64
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StorageLibraryLastChangeId, IStorageLibraryLastChangeIdStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Unknown(CPointer<UInt64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.StorageLibraryLastChangeId"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.StorageLibraryLastChangeId;{" + IStorageLibraryLastChangeId.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.StorageLibraryLastChangeId", StorageLibraryLastChangeId.signature(), IStorageLibraryLastChangeId.iid())
+    }
+
+    public static func intoWinrtHandle(value: StorageLibraryLastChangeId): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): StorageLibraryLastChangeId {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        StorageLibraryLastChangeId.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): StorageLibraryLastChangeId {
+        StorageLibraryLastChangeId.viewOf(raw)
+    }
+}
 
 // Windows.Storage.StorageOpenOptions (synthetic:Windows_Storage_StorageOpenOptions)
 @When[Windows_Storage == "on"]
 public struct StorageOpenOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: StorageOpenOptions): Bool {
@@ -1704,11 +4882,11 @@ public struct StorageOpenOptions {
     }
 }
 @When[Windows_Storage == "on"]
-public let StorageOpenOptions_None = StorageOpenOptions(0)
+public const StorageOpenOptions_None = StorageOpenOptions(0)
 @When[Windows_Storage == "on"]
-public let StorageOpenOptions_AllowOnlyReaders = StorageOpenOptions(1)
+public const StorageOpenOptions_AllowOnlyReaders = StorageOpenOptions(1)
 @When[Windows_Storage == "on"]
-public let StorageOpenOptions_AllowReadersAndWriters = StorageOpenOptions(2)
+public const StorageOpenOptions_AllowReadersAndWriters = StorageOpenOptions(2)
 
 // Windows.Storage.StorageProvider (synthetic:Windows_Storage_StorageProvider)
 @When[Windows_Storage == "on"]
@@ -2225,16 +5403,1963 @@ func buildStreamedFileDataRequestedHandlerBoxVtbl(): StreamedFileDataRequestedHa
 @When[Windows_Storage == "on"]
 public struct StreamedFileFailureMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage == "on"]
-public let StreamedFileFailureMode_Failed = StreamedFileFailureMode(0)
+public const StreamedFileFailureMode_Failed = StreamedFileFailureMode(0)
 @When[Windows_Storage == "on"]
-public let StreamedFileFailureMode_CurrentlyUnavailable = StreamedFileFailureMode(1)
+public const StreamedFileFailureMode_CurrentlyUnavailable = StreamedFileFailureMode(1)
 @When[Windows_Storage == "on"]
-public let StreamedFileFailureMode_Incomplete = StreamedFileFailureMode(2)
+public const StreamedFileFailureMode_Incomplete = StreamedFileFailureMode(2)
+
+// Windows.Storage.SystemAudioProperties (synthetic:Windows_Storage_SystemAudioProperties)
+@When[Windows_Storage == "on"]
+public class SystemAudioProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemAudioProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemAudioProperties {
+        SystemAudioProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemAudioProperties {
+        SystemAudioProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemAudioProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemAudioProperties> {
+        let ancestors = [ISystemAudioProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemAudioProperties>("SystemAudioProperties", ISystemAudioProperties.iid(), ancestors, { raw => SystemAudioProperties.fromAbiTake(raw) }, { raw => SystemAudioProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemAudioProperties {
+        match (unsafe { query(ISystemAudioProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemAudioProperties(): ISystemAudioProperties {
+        defaultInterface()
+    }
+
+    public prop EncodingBitrate: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.EncodingBitrate(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemAudioProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemAudioProperties;{" + ISystemAudioProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemAudioProperties", SystemAudioProperties.signature(), ISystemAudioProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemAudioProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemAudioProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemAudioProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemAudioProperties {
+        SystemAudioProperties.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SystemDataPaths (synthetic:Windows_Storage_SystemDataPaths)
+@When[Windows_Storage == "on"]
+public class SystemDataPaths <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemDataPaths> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemDataPaths {
+        SystemDataPaths(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemDataPaths {
+        SystemDataPaths(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemDataPaths.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemDataPaths> {
+        let ancestors = [ISystemDataPaths.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemDataPaths>("SystemDataPaths", ISystemDataPaths.iid(), ancestors, { raw => SystemDataPaths.fromAbiTake(raw) }, { raw => SystemDataPaths.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemDataPaths {
+        match (unsafe { query(ISystemDataPaths.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemDataPaths(): ISystemDataPaths {
+        defaultInterface()
+    }
+
+    public prop Fonts: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Fonts(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop ProgramData: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProgramData(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Public: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Public(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PublicDesktop: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PublicDesktop(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PublicDocuments: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PublicDocuments(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PublicDownloads: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PublicDownloads(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PublicMusic: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PublicMusic(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PublicPictures: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PublicPictures(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PublicVideos: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PublicVideos(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop System: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.System(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop SystemArm: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemArm(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop SystemHost: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemHost(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop SystemX64: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemX64(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop SystemX86: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemX86(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop UserProfiles: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UserProfiles(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Windows: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Windows(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func GetDefault(): SystemDataPaths {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemDataPaths, ISystemDataPathsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetDefault(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemDataPaths>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemDataPaths.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemDataPaths"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemDataPaths;{" + ISystemDataPaths.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemDataPaths", SystemDataPaths.signature(), ISystemDataPaths.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemDataPaths): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemDataPaths {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemDataPaths.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemDataPaths {
+        SystemDataPaths.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SystemGPSProperties (synthetic:Windows_Storage_SystemGPSProperties)
+@When[Windows_Storage == "on"]
+public class SystemGPSProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemGPSProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemGPSProperties {
+        SystemGPSProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemGPSProperties {
+        SystemGPSProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemGPSProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemGPSProperties> {
+        let ancestors = [ISystemGPSProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemGPSProperties>("SystemGPSProperties", ISystemGPSProperties.iid(), ancestors, { raw => SystemGPSProperties.fromAbiTake(raw) }, { raw => SystemGPSProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemGPSProperties {
+        match (unsafe { query(ISystemGPSProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemGPSProperties(): ISystemGPSProperties {
+        defaultInterface()
+    }
+
+    public prop LatitudeDecimal: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LatitudeDecimal(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop LongitudeDecimal: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LongitudeDecimal(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemGPSProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemGPSProperties;{" + ISystemGPSProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemGPSProperties", SystemGPSProperties.signature(), ISystemGPSProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemGPSProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemGPSProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemGPSProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemGPSProperties {
+        SystemGPSProperties.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SystemImageProperties (synthetic:Windows_Storage_SystemImageProperties)
+@When[Windows_Storage == "on"]
+public class SystemImageProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemImageProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemImageProperties {
+        SystemImageProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemImageProperties {
+        SystemImageProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemImageProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemImageProperties> {
+        let ancestors = [ISystemImageProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemImageProperties>("SystemImageProperties", ISystemImageProperties.iid(), ancestors, { raw => SystemImageProperties.fromAbiTake(raw) }, { raw => SystemImageProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemImageProperties {
+        match (unsafe { query(ISystemImageProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemImageProperties(): ISystemImageProperties {
+        defaultInterface()
+    }
+
+    public prop HorizontalSize: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HorizontalSize(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop VerticalSize: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.VerticalSize(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemImageProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemImageProperties;{" + ISystemImageProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemImageProperties", SystemImageProperties.signature(), ISystemImageProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemImageProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemImageProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemImageProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemImageProperties {
+        SystemImageProperties.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SystemMediaProperties (synthetic:Windows_Storage_SystemMediaProperties)
+@When[Windows_Storage == "on"]
+public class SystemMediaProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemMediaProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemMediaProperties {
+        SystemMediaProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemMediaProperties {
+        SystemMediaProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemMediaProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemMediaProperties> {
+        let ancestors = [ISystemMediaProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemMediaProperties>("SystemMediaProperties", ISystemMediaProperties.iid(), ancestors, { raw => SystemMediaProperties.fromAbiTake(raw) }, { raw => SystemMediaProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemMediaProperties {
+        match (unsafe { query(ISystemMediaProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemMediaProperties(): ISystemMediaProperties {
+        defaultInterface()
+    }
+
+    public prop Duration: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Duration(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Producer: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Producer(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Publisher: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Publisher(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop SubTitle: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SubTitle(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Writer: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Writer(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Year: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Year(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemMediaProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemMediaProperties;{" + ISystemMediaProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemMediaProperties", SystemMediaProperties.signature(), ISystemMediaProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemMediaProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemMediaProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemMediaProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemMediaProperties {
+        SystemMediaProperties.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SystemMusicProperties (synthetic:Windows_Storage_SystemMusicProperties)
+@When[Windows_Storage == "on"]
+public class SystemMusicProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemMusicProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemMusicProperties {
+        SystemMusicProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemMusicProperties {
+        SystemMusicProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemMusicProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemMusicProperties> {
+        let ancestors = [ISystemMusicProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemMusicProperties>("SystemMusicProperties", ISystemMusicProperties.iid(), ancestors, { raw => SystemMusicProperties.fromAbiTake(raw) }, { raw => SystemMusicProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemMusicProperties {
+        match (unsafe { query(ISystemMusicProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemMusicProperties(): ISystemMusicProperties {
+        defaultInterface()
+    }
+
+    public prop AlbumArtist: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlbumArtist(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop AlbumTitle: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlbumTitle(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Artist: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Artist(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Composer: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Composer(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Conductor: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Conductor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop DisplayArtist: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayArtist(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Genre: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Genre(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop TrackNumber: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TrackNumber(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemMusicProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemMusicProperties;{" + ISystemMusicProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemMusicProperties", SystemMusicProperties.signature(), ISystemMusicProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemMusicProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemMusicProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemMusicProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemMusicProperties {
+        SystemMusicProperties.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SystemPhotoProperties (synthetic:Windows_Storage_SystemPhotoProperties)
+@When[Windows_Storage == "on"]
+public class SystemPhotoProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemPhotoProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemPhotoProperties {
+        SystemPhotoProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemPhotoProperties {
+        SystemPhotoProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemPhotoProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemPhotoProperties> {
+        let ancestors = [ISystemPhotoProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemPhotoProperties>("SystemPhotoProperties", ISystemPhotoProperties.iid(), ancestors, { raw => SystemPhotoProperties.fromAbiTake(raw) }, { raw => SystemPhotoProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemPhotoProperties {
+        match (unsafe { query(ISystemPhotoProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemPhotoProperties(): ISystemPhotoProperties {
+        defaultInterface()
+    }
+
+    public prop CameraManufacturer: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CameraManufacturer(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop CameraModel: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CameraModel(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop DateTaken: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DateTaken(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Orientation: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Orientation(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PeopleNames: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PeopleNames(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemPhotoProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemPhotoProperties;{" + ISystemPhotoProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemPhotoProperties", SystemPhotoProperties.signature(), ISystemPhotoProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemPhotoProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemPhotoProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemPhotoProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemPhotoProperties {
+        SystemPhotoProperties.viewOf(raw)
+    }
+}
+
+// Windows.Storage.SystemProperties (synthetic:Windows_Storage_SystemProperties)
+@When[Windows_Storage == "on"]
+public struct SystemProperties <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Author(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Author(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Comment(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Comment(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ItemNameDisplay(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.ItemNameDisplay(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Keywords(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Keywords(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Rating(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Rating(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Title(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Title(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Audio(): SystemAudioProperties {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Audio(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemAudioProperties>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemAudioProperties.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GPS(): SystemGPSProperties {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.GPS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemGPSProperties>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemGPSProperties.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Media(): SystemMediaProperties {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Media(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemMediaProperties>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemMediaProperties.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Music(): SystemMusicProperties {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Music(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemMusicProperties>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemMusicProperties.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Photo(): SystemPhotoProperties {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Photo(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemPhotoProperties>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemPhotoProperties.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Video(): SystemVideoProperties {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Video(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemVideoProperties>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemVideoProperties.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Image(): SystemImageProperties {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemProperties, ISystemProperties>().unwrap()) {
+            hr__ = unsafe { factory__.Image(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemImageProperties>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemImageProperties.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemProperties)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemProperties", SystemProperties.signature())
+    }
+}
+
+// Windows.Storage.SystemVideoProperties (synthetic:Windows_Storage_SystemVideoProperties)
+@When[Windows_Storage == "on"]
+public class SystemVideoProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemVideoProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemVideoProperties {
+        SystemVideoProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemVideoProperties {
+        SystemVideoProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemVideoProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemVideoProperties> {
+        let ancestors = [ISystemVideoProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemVideoProperties>("SystemVideoProperties", ISystemVideoProperties.iid(), ancestors, { raw => SystemVideoProperties.fromAbiTake(raw) }, { raw => SystemVideoProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemVideoProperties {
+        match (unsafe { query(ISystemVideoProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemVideoProperties(): ISystemVideoProperties {
+        defaultInterface()
+    }
+
+    public prop Director: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Director(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop FrameHeight: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FrameHeight(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop FrameWidth: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FrameWidth(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Orientation: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Orientation(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop TotalBitrate: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TotalBitrate(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.SystemVideoProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.SystemVideoProperties;{" + ISystemVideoProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.SystemVideoProperties", SystemVideoProperties.signature(), ISystemVideoProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemVideoProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemVideoProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemVideoProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemVideoProperties {
+        SystemVideoProperties.viewOf(raw)
+    }
+}
+
+// Windows.Storage.UserDataPaths (synthetic:Windows_Storage_UserDataPaths)
+@When[Windows_Storage == "on"]
+public class UserDataPaths <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UserDataPaths> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UserDataPaths {
+        UserDataPaths(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UserDataPaths {
+        UserDataPaths(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUserDataPaths.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UserDataPaths> {
+        let ancestors = [IUserDataPaths.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UserDataPaths>("UserDataPaths", IUserDataPaths.iid(), ancestors, { raw => UserDataPaths.fromAbiTake(raw) }, { raw => UserDataPaths.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUserDataPaths {
+        match (unsafe { query(IUserDataPaths.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUserDataPaths(): IUserDataPaths {
+        defaultInterface()
+    }
+
+    public prop CameraRoll: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CameraRoll(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Cookies: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cookies(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Desktop: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Desktop(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Documents: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Documents(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Downloads: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Downloads(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Favorites: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Favorites(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop History: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.History(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop InternetCache: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InternetCache(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop LocalAppData: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LocalAppData(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop LocalAppDataLow: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LocalAppDataLow(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Music: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Music(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Pictures: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Pictures(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Profile: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Profile(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Recent: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Recent(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop RoamingAppData: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RoamingAppData(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop SavedPictures: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SavedPictures(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Screenshots: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Screenshots(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Templates: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Templates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Videos: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Videos(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func GetForUser(user: Windows_System.User): UserDataPaths {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<UserDataPaths, IUserDataPathsStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<UserDataPaths>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return UserDataPaths.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDefault(): UserDataPaths {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UserDataPaths, IUserDataPathsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetDefault(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<UserDataPaths>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return UserDataPaths.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.UserDataPaths"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.UserDataPaths;{" + IUserDataPaths.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.UserDataPaths", UserDataPaths.signature(), IUserDataPaths.iid())
+    }
+
+    public static func intoWinrtHandle(value: UserDataPaths): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UserDataPaths {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UserDataPaths.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UserDataPaths {
+        UserDataPaths.viewOf(raw)
+    }
+}

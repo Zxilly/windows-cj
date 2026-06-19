@@ -7,10 +7,14 @@ import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+@When[Windows_Devices_Geolocation == "on"]
+import windows_sys.Devices.Geolocation as Windows_Devices_Geolocation
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
 @When[Windows_Foundation_Collections == "on"]
 import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_Storage == "on"]
+import windows_sys.Storage as Windows_Storage
 @When[Windows_Storage_Streams == "on"]
 import windows_sys.Storage.Streams as Windows_Storage_Streams
 
@@ -296,6 +300,80 @@ public class DocumentProperties <: windows_interface.InterfaceWrapperBase & wind
     }
 }
 
+// Windows.Storage.FileProperties.GeotagHelper (synthetic:Windows_Storage_FileProperties_GeotagHelper)
+@When[Windows_Storage_FileProperties == "on"]
+public struct GeotagHelper <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func GetGeotagAsync(file: Windows_Storage.IStorageFile): Windows_Foundation.IAsyncOperation<Windows_Devices_Geolocation.Geopoint> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<GeotagHelper, IGeotagHelperStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetGeotagAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Devices_Geolocation.Geopoint>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Devices_Geolocation.Geopoint>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SetGeotagFromGeolocatorAsync(file: Windows_Storage.IStorageFile, geolocator: Windows_Devices_Geolocation.Geolocator): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Devices_Geolocation.Geolocator>(geolocator)) {
+                try (factory__ = windows_core.factory<GeotagHelper, IGeotagHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetGeotagFromGeolocatorAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SetGeotagAsync(file: Windows_Storage.IStorageFile, geopoint: Windows_Devices_Geolocation.Geopoint): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(file)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Devices_Geolocation.Geopoint>(geopoint)) {
+                try (factory__ = windows_core.factory<GeotagHelper, IGeotagHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetGeotagAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.FileProperties.GeotagHelper"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.FileProperties.GeotagHelper)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.FileProperties.GeotagHelper", GeotagHelper.signature())
+    }
+}
+
 // Windows.Storage.FileProperties.IBasicProperties (synthetic:Windows_Storage_FileProperties_IBasicProperties)
 @When[Windows_Storage_FileProperties == "on"]
 @Interface["d05d55db-785e-4a66-be02-9beec58aea81", "Windows.Storage.FileProperties.IBasicProperties"]
@@ -315,6 +393,15 @@ public interface IDocumentProperties <: IInspectable {
     func Keywords(value: CPointer<CPointer<Unit>>): Int32
     func Comment(value: CPointer<CPointer<Unit>>): Int32
     func SetComment(value: CPointer<Unit>): Int32
+}
+
+// Windows.Storage.FileProperties.IGeotagHelperStatics (synthetic:Windows_Storage_FileProperties_IGeotagHelperStatics)
+@When[Windows_Storage_FileProperties == "on"]
+@Interface["41493244-2524-4655-86a6-ed16f5fc716b", "Windows.Storage.FileProperties.IGeotagHelperStatics", "GetGeotagAsync.operation=Com;SetGeotagFromGeolocatorAsync.operation=Com;SetGeotagAsync.operation=Com"]
+public interface IGeotagHelperStatics <: IInspectable {
+    func GetGeotagAsync(file: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func SetGeotagFromGeolocatorAsync(file: CPointer<Unit>, geolocator: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func SetGeotagAsync(file: CPointer<Unit>, geopoint: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.FileProperties.IImageProperties (synthetic:Windows_Storage_FileProperties_IImageProperties)
@@ -1119,40 +1206,40 @@ public class MusicProperties <: windows_interface.InterfaceWrapperBase & windows
 @When[Windows_Storage_FileProperties == "on"]
 public struct PhotoOrientation {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_Unspecified = PhotoOrientation(0)
+public const PhotoOrientation_Unspecified = PhotoOrientation(0)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_Normal = PhotoOrientation(1)
+public const PhotoOrientation_Normal = PhotoOrientation(1)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_FlipHorizontal = PhotoOrientation(2)
+public const PhotoOrientation_FlipHorizontal = PhotoOrientation(2)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_Rotate180 = PhotoOrientation(3)
+public const PhotoOrientation_Rotate180 = PhotoOrientation(3)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_FlipVertical = PhotoOrientation(4)
+public const PhotoOrientation_FlipVertical = PhotoOrientation(4)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_Transpose = PhotoOrientation(5)
+public const PhotoOrientation_Transpose = PhotoOrientation(5)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_Rotate270 = PhotoOrientation(6)
+public const PhotoOrientation_Rotate270 = PhotoOrientation(6)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_Transverse = PhotoOrientation(7)
+public const PhotoOrientation_Transverse = PhotoOrientation(7)
 @When[Windows_Storage_FileProperties == "on"]
-public let PhotoOrientation_Rotate90 = PhotoOrientation(8)
+public const PhotoOrientation_Rotate90 = PhotoOrientation(8)
 
 // Windows.Storage.FileProperties.PropertyPrefetchOptions (synthetic:Windows_Storage_FileProperties_PropertyPrefetchOptions)
 @When[Windows_Storage_FileProperties == "on"]
 public struct PropertyPrefetchOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: PropertyPrefetchOptions): Bool {
@@ -1172,17 +1259,17 @@ public struct PropertyPrefetchOptions {
     }
 }
 @When[Windows_Storage_FileProperties == "on"]
-public let PropertyPrefetchOptions_None = PropertyPrefetchOptions(0)
+public const PropertyPrefetchOptions_None = PropertyPrefetchOptions(0)
 @When[Windows_Storage_FileProperties == "on"]
-public let PropertyPrefetchOptions_MusicProperties = PropertyPrefetchOptions(1)
+public const PropertyPrefetchOptions_MusicProperties = PropertyPrefetchOptions(1)
 @When[Windows_Storage_FileProperties == "on"]
-public let PropertyPrefetchOptions_VideoProperties = PropertyPrefetchOptions(2)
+public const PropertyPrefetchOptions_VideoProperties = PropertyPrefetchOptions(2)
 @When[Windows_Storage_FileProperties == "on"]
-public let PropertyPrefetchOptions_ImageProperties = PropertyPrefetchOptions(4)
+public const PropertyPrefetchOptions_ImageProperties = PropertyPrefetchOptions(4)
 @When[Windows_Storage_FileProperties == "on"]
-public let PropertyPrefetchOptions_DocumentProperties = PropertyPrefetchOptions(8)
+public const PropertyPrefetchOptions_DocumentProperties = PropertyPrefetchOptions(8)
 @When[Windows_Storage_FileProperties == "on"]
-public let PropertyPrefetchOptions_BasicProperties = PropertyPrefetchOptions(16)
+public const PropertyPrefetchOptions_BasicProperties = PropertyPrefetchOptions(16)
 
 // Windows.Storage.FileProperties.StorageItemContentProperties (synthetic:Windows_Storage_FileProperties_StorageItemContentProperties)
 @When[Windows_Storage_FileProperties == "on"]
@@ -1443,34 +1530,34 @@ public class StorageItemThumbnail <: windows_interface.InterfaceWrapperBase & wi
 @When[Windows_Storage_FileProperties == "on"]
 public struct ThumbnailMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailMode_PicturesView = ThumbnailMode(0)
+public const ThumbnailMode_PicturesView = ThumbnailMode(0)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailMode_VideosView = ThumbnailMode(1)
+public const ThumbnailMode_VideosView = ThumbnailMode(1)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailMode_MusicView = ThumbnailMode(2)
+public const ThumbnailMode_MusicView = ThumbnailMode(2)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailMode_DocumentsView = ThumbnailMode(3)
+public const ThumbnailMode_DocumentsView = ThumbnailMode(3)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailMode_ListView = ThumbnailMode(4)
+public const ThumbnailMode_ListView = ThumbnailMode(4)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailMode_SingleItem = ThumbnailMode(5)
+public const ThumbnailMode_SingleItem = ThumbnailMode(5)
 
 // Windows.Storage.FileProperties.ThumbnailOptions (synthetic:Windows_Storage_FileProperties_ThumbnailOptions)
 @When[Windows_Storage_FileProperties == "on"]
 public struct ThumbnailOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: ThumbnailOptions): Bool {
@@ -1490,49 +1577,49 @@ public struct ThumbnailOptions {
     }
 }
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailOptions_None = ThumbnailOptions(0)
+public const ThumbnailOptions_None = ThumbnailOptions(0)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailOptions_ReturnOnlyIfCached = ThumbnailOptions(1)
+public const ThumbnailOptions_ReturnOnlyIfCached = ThumbnailOptions(1)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailOptions_ResizeThumbnail = ThumbnailOptions(2)
+public const ThumbnailOptions_ResizeThumbnail = ThumbnailOptions(2)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailOptions_UseCurrentScale = ThumbnailOptions(4)
+public const ThumbnailOptions_UseCurrentScale = ThumbnailOptions(4)
 
 // Windows.Storage.FileProperties.ThumbnailType (synthetic:Windows_Storage_FileProperties_ThumbnailType)
 @When[Windows_Storage_FileProperties == "on"]
 public struct ThumbnailType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailType_Image = ThumbnailType(0)
+public const ThumbnailType_Image = ThumbnailType(0)
 @When[Windows_Storage_FileProperties == "on"]
-public let ThumbnailType_Icon = ThumbnailType(1)
+public const ThumbnailType_Icon = ThumbnailType(1)
 
 // Windows.Storage.FileProperties.VideoOrientation (synthetic:Windows_Storage_FileProperties_VideoOrientation)
 @When[Windows_Storage_FileProperties == "on"]
 public struct VideoOrientation {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Storage_FileProperties == "on"]
-public let VideoOrientation_Normal = VideoOrientation(0)
+public const VideoOrientation_Normal = VideoOrientation(0)
 @When[Windows_Storage_FileProperties == "on"]
-public let VideoOrientation_Rotate90 = VideoOrientation(90)
+public const VideoOrientation_Rotate90 = VideoOrientation(90)
 @When[Windows_Storage_FileProperties == "on"]
-public let VideoOrientation_Rotate180 = VideoOrientation(180)
+public const VideoOrientation_Rotate180 = VideoOrientation(180)
 @When[Windows_Storage_FileProperties == "on"]
-public let VideoOrientation_Rotate270 = VideoOrientation(270)
+public const VideoOrientation_Rotate270 = VideoOrientation(270)
 
 // Windows.Storage.FileProperties.VideoProperties (synthetic:Windows_Storage_FileProperties_VideoProperties)
 @When[Windows_Storage_FileProperties == "on"]

@@ -2,31 +2,6008 @@
 
 package windows_sys.Globalization
 
+import windows_core as windows_core
+import windows_interface as windows_interface
+import windows_interface.IInspectable
+import windows_interface.macros.Interface
+
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_System == "on"]
+import windows_sys.System as Windows_System
+
+// Windows.Globalization.ApplicationLanguages (synthetic:Windows_Globalization_ApplicationLanguages)
+@When[Windows_Globalization == "on"]
+public struct ApplicationLanguages <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func PrimaryLanguageOverride(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationLanguages, IApplicationLanguagesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PrimaryLanguageOverride(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetPrimaryLanguageOverride(value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (factory__ = windows_core.factory<ApplicationLanguages, IApplicationLanguagesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetPrimaryLanguageOverride(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func Languages(): Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationLanguages, IApplicationLanguagesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Languages(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ManifestLanguages(): Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationLanguages, IApplicationLanguagesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ManifestLanguages(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLanguagesForUser(user: Windows_System.User): Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<ApplicationLanguages, IApplicationLanguagesStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetLanguagesForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.ApplicationLanguages"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.ApplicationLanguages)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.ApplicationLanguages", ApplicationLanguages.signature())
+    }
+}
+
+// Windows.Globalization.Calendar (synthetic:Windows_Globalization_Calendar)
+@When[Windows_Globalization == "on"]
+public class Calendar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Calendar> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Calendar {
+        Calendar(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Calendar {
+        Calendar(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICalendar.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Calendar> {
+        let ancestors = [ICalendar.iid(), ITimeZoneOnCalendar.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Calendar>("Calendar", ICalendar.iid(), ancestors, { raw => Calendar.fromAbiTake(raw) }, { raw => Calendar.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICalendar {
+        match (unsafe { query(ICalendar.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendar(): ICalendar {
+        defaultInterface()
+    }
+
+    public func asITimeZoneOnCalendar(): ITimeZoneOnCalendar {
+        match (unsafe { query<ITimeZoneOnCalendar>(ITimeZoneOnCalendar.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Day: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Day(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDay(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop DayOfWeek: DayOfWeek {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayOfWeek(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return DayOfWeek(result__)
+        }
+    }
+
+    public mut prop Era: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Era(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetEra(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop FirstDayInThisMonth: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstDayInThisMonth(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop FirstEra: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstEra(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop FirstHourInThisPeriod: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstHourInThisPeriod(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop FirstMinuteInThisHour: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstMinuteInThisHour(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop FirstMonthInThisYear: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstMonthInThisYear(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop FirstPeriodInThisDay: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstPeriodInThisDay(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop FirstSecondInThisMinute: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstSecondInThisMinute(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop FirstYearInThisEra: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstYearInThisEra(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Hour: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Hour(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHour(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop IsDaylightSavingTime: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsDaylightSavingTime(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Languages: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Languages(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop LastDayInThisMonth: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastDayInThisMonth(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastEra: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastEra(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastHourInThisPeriod: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastHourInThisPeriod(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastMinuteInThisHour: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastMinuteInThisHour(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastMonthInThisYear: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastMonthInThisYear(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastPeriodInThisDay: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastPeriodInThisDay(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastSecondInThisMinute: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastSecondInThisMinute(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastYearInThisEra: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastYearInThisEra(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Minute: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Minute(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMinute(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Month: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Month(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMonth(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Nanosecond: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Nanosecond(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetNanosecond(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop NumberOfDaysInThisMonth: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfDaysInThisMonth(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop NumberOfEras: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfEras(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop NumberOfHoursInThisPeriod: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfHoursInThisPeriod(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop NumberOfMinutesInThisHour: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfMinutesInThisHour(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop NumberOfMonthsInThisYear: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfMonthsInThisYear(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop NumberOfPeriodsInThisDay: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfPeriodsInThisDay(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop NumberOfSecondsInThisMinute: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfSecondsInThisMinute(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop NumberOfYearsInThisEra: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfYearsInThisEra(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop NumeralSystem: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumeralSystem(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetNumeralSystem(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Period: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Period(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPeriod(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop ResolvedLanguage: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResolvedLanguage(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public mut prop Second: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Second(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSecond(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Year: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Year(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetYear(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func Clone(): Calendar {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Clone(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Calendar>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Calendar.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func SetToMin(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetToMin() }
+        }
+        hr__.check()
+    }
+
+    public func SetToMax(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetToMax() }
+        }
+        hr__.check()
+    }
+
+    public func GetCalendarSystem(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetCalendarSystem(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func ChangeCalendarSystem(value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChangeCalendarSystem(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func GetClock(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetClock(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func ChangeClock(value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChangeClock(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func GetDateTime(): Windows_Foundation.DateTime {
+        var result__ = Windows_Foundation.DateTime()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDateTime(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func SetDateTime(value: Windows_Foundation.DateTime): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetDateTime(value) }
+        }
+        hr__.check()
+    }
+
+    public func SetToNow(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetToNow() }
+        }
+        hr__.check()
+    }
+
+    public func AddEras(eras: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddEras(eras) }
+        }
+        hr__.check()
+    }
+
+    public func EraAsFullString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.EraAsFullString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func EraAsString(idealLength: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.EraAsString(idealLength, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddYears(years: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddYears(years) }
+        }
+        hr__.check()
+    }
+
+    public func YearAsString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.YearAsString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func YearAsTruncatedString(remainingDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.YearAsTruncatedString(remainingDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func YearAsPaddedString(minDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.YearAsPaddedString(minDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddMonths(months: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddMonths(months) }
+        }
+        hr__.check()
+    }
+
+    public func MonthAsFullString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MonthAsFullString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func MonthAsString(idealLength: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MonthAsString(idealLength, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func MonthAsFullSoloString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MonthAsFullSoloString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func MonthAsSoloString(idealLength: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MonthAsSoloString(idealLength, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func MonthAsNumericString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MonthAsNumericString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func MonthAsPaddedNumericString(minDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MonthAsPaddedNumericString(minDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddWeeks(weeks: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddWeeks(weeks) }
+        }
+        hr__.check()
+    }
+
+    public func AddDays(days: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddDays(days) }
+        }
+        hr__.check()
+    }
+
+    public func DayAsString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DayAsString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func DayAsPaddedString(minDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DayAsPaddedString(minDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func DayOfWeekAsFullString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DayOfWeekAsFullString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func DayOfWeekAsString(idealLength: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DayOfWeekAsString(idealLength, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func DayOfWeekAsFullSoloString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DayOfWeekAsFullSoloString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func DayOfWeekAsSoloString(idealLength: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DayOfWeekAsSoloString(idealLength, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddPeriods(periods: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddPeriods(periods) }
+        }
+        hr__.check()
+    }
+
+    public func PeriodAsFullString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.PeriodAsFullString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func PeriodAsString(idealLength: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.PeriodAsString(idealLength, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddHours(hours: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddHours(hours) }
+        }
+        hr__.check()
+    }
+
+    public func HourAsString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.HourAsString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func HourAsPaddedString(minDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.HourAsPaddedString(minDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddMinutes(minutes: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddMinutes(minutes) }
+        }
+        hr__.check()
+    }
+
+    public func MinuteAsString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MinuteAsString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func MinuteAsPaddedString(minDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MinuteAsPaddedString(minDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddSeconds(seconds: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddSeconds(seconds) }
+        }
+        hr__.check()
+    }
+
+    public func SecondAsString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SecondAsString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func SecondAsPaddedString(minDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SecondAsPaddedString(minDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func AddNanoseconds(nanoseconds: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AddNanoseconds(nanoseconds) }
+        }
+        hr__.check()
+    }
+
+    public func NanosecondAsString(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.NanosecondAsString(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func NanosecondAsPaddedString(minDigits: Int32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.NanosecondAsPaddedString(minDigits, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func Compare(other: Calendar): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Calendar>(other)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Compare(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func CompareDateTime(other: Windows_Foundation.DateTime): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CompareDateTime(other, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func CopyTo(other: Calendar): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Calendar>(other)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CopyTo(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func new(): Calendar {
+        var created__: Option<Calendar> = Option<Calendar>.None
+        try (factory__ = windows_core.factory<Calendar, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Calendar>(Calendar.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce Calendar")
+        }
+    }
+
+    public static func CreateCalendarWithTimeZone(languages: Windows_Foundation_Collections.IIterable<windows_core.HString>, calendar: windows_core.HString, clock: windows_core.HString, timeZoneId: windows_core.HString): Calendar {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(calendar)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(clock)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<windows_core.HString>(timeZoneId)) {
+                        try (factory__ = windows_core.factory<Calendar, ICalendarFactory2>().unwrap()) {
+                            hr__ = unsafe { factory__.CreateCalendarWithTimeZone(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Calendar>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Calendar.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateCalendarDefaultCalendarAndClock(languages: Windows_Foundation_Collections.IIterable<windows_core.HString>): Calendar {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+            try (factory__ = windows_core.factory<Calendar, ICalendarFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateCalendarDefaultCalendarAndClock(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Calendar>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Calendar.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateCalendar(languages: Windows_Foundation_Collections.IIterable<windows_core.HString>, calendar: windows_core.HString, clock: windows_core.HString): Calendar {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(calendar)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(clock)) {
+                    try (factory__ = windows_core.factory<Calendar, ICalendarFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateCalendar(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Calendar>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Calendar.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.Calendar"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.Calendar;{" + ICalendar.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.Calendar", Calendar.signature(), ICalendar.iid())
+    }
+
+    public static func intoWinrtHandle(value: Calendar): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Calendar {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Calendar.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Calendar {
+        Calendar.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.CalendarIdentifiers (synthetic:Windows_Globalization_CalendarIdentifiers)
+@When[Windows_Globalization == "on"]
+public struct CalendarIdentifiers <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Gregorian(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Gregorian(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Hebrew(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Hebrew(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Hijri(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Hijri(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Japanese(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Japanese(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Julian(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Julian(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Korean(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Korean(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Taiwan(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Taiwan(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Thai(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Thai(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func UmAlQura(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UmAlQura(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Persian(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.Persian(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ChineseLunar(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.ChineseLunar(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func JapaneseLunar(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.JapaneseLunar(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KoreanLunar(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.KoreanLunar(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TaiwanLunar(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.TaiwanLunar(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func VietnameseLunar(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CalendarIdentifiers, ICalendarIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.VietnameseLunar(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.CalendarIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.CalendarIdentifiers)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.CalendarIdentifiers", CalendarIdentifiers.signature())
+    }
+}
+
+// Windows.Globalization.ClockIdentifiers (synthetic:Windows_Globalization_ClockIdentifiers)
+@When[Windows_Globalization == "on"]
+public struct ClockIdentifiers <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func TwelveHour(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ClockIdentifiers, IClockIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TwelveHour(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TwentyFourHour(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ClockIdentifiers, IClockIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TwentyFourHour(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.ClockIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.ClockIdentifiers)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.ClockIdentifiers", ClockIdentifiers.signature())
+    }
+}
+
+// Windows.Globalization.CurrencyAmount (synthetic:Windows_Globalization_CurrencyAmount)
+@When[Windows_Globalization == "on"]
+public class CurrencyAmount <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CurrencyAmount> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CurrencyAmount {
+        CurrencyAmount(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CurrencyAmount {
+        CurrencyAmount(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICurrencyAmount.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CurrencyAmount> {
+        let ancestors = [ICurrencyAmount.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CurrencyAmount>("CurrencyAmount", ICurrencyAmount.iid(), ancestors, { raw => CurrencyAmount.fromAbiTake(raw) }, { raw => CurrencyAmount.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICurrencyAmount {
+        match (unsafe { query(ICurrencyAmount.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICurrencyAmount(): ICurrencyAmount {
+        defaultInterface()
+    }
+
+    public prop Amount: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Amount(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Currency: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Currency(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func Create(amount: windows_core.HString, currency: windows_core.HString): CurrencyAmount {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(amount)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(currency)) {
+                try (factory__ = windows_core.factory<CurrencyAmount, ICurrencyAmountFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CurrencyAmount>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CurrencyAmount.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.CurrencyAmount"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.CurrencyAmount;{" + ICurrencyAmount.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.CurrencyAmount", CurrencyAmount.signature(), ICurrencyAmount.iid())
+    }
+
+    public static func intoWinrtHandle(value: CurrencyAmount): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CurrencyAmount {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CurrencyAmount.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CurrencyAmount {
+        CurrencyAmount.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.CurrencyIdentifiers (synthetic:Windows_Globalization_CurrencyIdentifiers)
+@When[Windows_Globalization == "on"]
+public struct CurrencyIdentifiers <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func AED(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AED(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func AFN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AFN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ALL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ALL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func AMD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AMD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ANG(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ANG(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func AOA(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AOA(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ARS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ARS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func AUD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AUD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func AWG(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AWG(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func AZN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AZN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BAM(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BAM(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BBD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BBD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BDT(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BDT(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BGN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BGN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BHD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BHD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BIF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BIF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BMD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BMD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BND(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BND(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BOB(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BOB(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BRL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BRL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BSD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BSD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BTN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BTN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BWP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BWP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BYR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BYR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BZD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BZD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CAD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CAD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CDF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CDF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CHF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CHF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CLP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CLP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CNY(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CNY(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func COP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.COP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CRC(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CRC(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CUP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CUP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CVE(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CVE(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CZK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CZK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func DJF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DJF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func DKK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DKK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func DOP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DOP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func DZD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DZD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func EGP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.EGP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ERN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ERN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ETB(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ETB(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func EUR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.EUR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func FJD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FJD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func FKP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FKP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GBP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GBP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GEL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GEL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GHS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GHS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GIP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GIP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GMD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GMD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GNF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GNF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GTQ(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GTQ(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GYD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GYD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HKD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HKD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HNL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HNL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HRK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HRK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HTG(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HTG(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HUF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HUF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func IDR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IDR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ILS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ILS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func INR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.INR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func IQD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IQD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func IRR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IRR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ISK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ISK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func JMD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.JMD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func JOD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.JOD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func JPY(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.JPY(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KES(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KES(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KGS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KGS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KHR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KHR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KMF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KMF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KPW(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KPW(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KRW(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KRW(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KWD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KWD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KYD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KYD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func KZT(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KZT(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LAK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LAK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LBP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LBP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LKR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LKR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LRD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LRD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LSL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LSL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LTL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LTL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LVL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LVL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LYD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LYD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MAD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MAD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MDL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MDL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MGA(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MGA(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MKD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MKD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MMK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MMK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MNT(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MNT(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MOP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MOP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MRO(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MRO(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MUR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MUR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MVR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MVR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MWK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MWK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MXN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MXN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MYR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MYR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MZN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MZN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func NAD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NAD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func NGN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NGN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func NIO(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NIO(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func NOK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NOK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func NPR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NPR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func NZD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NZD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func OMR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OMR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PAB(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PAB(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PEN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PEN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PGK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PGK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PHP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PHP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PKR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PKR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PLN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PLN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PYG(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PYG(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func QAR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.QAR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func RON(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RON(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func RSD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RSD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func RUB(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RUB(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func RWF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RWF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SAR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SAR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SBD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SBD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SCR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SCR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SDG(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SDG(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SEK(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SEK(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SGD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SGD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SHP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SHP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SLL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SLL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SOS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SOS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SRD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SRD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func STD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.STD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SYP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SYP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SZL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SZL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func THB(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.THB(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TJS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TJS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TMT(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TMT(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TND(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TND(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TOP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TOP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TRY(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TRY(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TTD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TTD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TWD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TWD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TZS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TZS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func UAH(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UAH(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func UGX(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UGX(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func USD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.USD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func UYU(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UYU(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func UZS(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UZS(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func VEF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VEF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func VND(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VND(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func VUV(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VUV(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func WST(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.WST(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func XAF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.XAF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func XCD(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.XCD(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func XOF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.XOF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func XPF(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.XPF(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func XXX(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.XXX(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func YER(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.YER(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZAR(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ZAR(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZMW(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ZMW(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZWL(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ZWL(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MRU(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.MRU(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SSP(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.SSP(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func STN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.STN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func VES(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.VES(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BYN(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CurrencyIdentifiers, ICurrencyIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.BYN(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.CurrencyIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.CurrencyIdentifiers)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.CurrencyIdentifiers", CurrencyIdentifiers.signature())
+    }
+}
 
 // Windows.Globalization.DayOfWeek (synthetic:Windows_Globalization_DayOfWeek)
 @When[Windows_Globalization == "on"]
 public struct DayOfWeek {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Globalization == "on"]
-public let DayOfWeek_Sunday = DayOfWeek(0)
+public const DayOfWeek_Sunday = DayOfWeek(0)
 @When[Windows_Globalization == "on"]
-public let DayOfWeek_Monday = DayOfWeek(1)
+public const DayOfWeek_Monday = DayOfWeek(1)
 @When[Windows_Globalization == "on"]
-public let DayOfWeek_Tuesday = DayOfWeek(2)
+public const DayOfWeek_Tuesday = DayOfWeek(2)
 @When[Windows_Globalization == "on"]
-public let DayOfWeek_Wednesday = DayOfWeek(3)
+public const DayOfWeek_Wednesday = DayOfWeek(3)
 @When[Windows_Globalization == "on"]
-public let DayOfWeek_Thursday = DayOfWeek(4)
+public const DayOfWeek_Thursday = DayOfWeek(4)
 @When[Windows_Globalization == "on"]
-public let DayOfWeek_Friday = DayOfWeek(5)
+public const DayOfWeek_Friday = DayOfWeek(5)
 @When[Windows_Globalization == "on"]
-public let DayOfWeek_Saturday = DayOfWeek(6)
+public const DayOfWeek_Saturday = DayOfWeek(6)
+
+// Windows.Globalization.GeographicRegion (synthetic:Windows_Globalization_GeographicRegion)
+@When[Windows_Globalization == "on"]
+public class GeographicRegion <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GeographicRegion> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GeographicRegion {
+        GeographicRegion(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GeographicRegion {
+        GeographicRegion(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGeographicRegion.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GeographicRegion> {
+        let ancestors = [IGeographicRegion.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GeographicRegion>("GeographicRegion", IGeographicRegion.iid(), ancestors, { raw => GeographicRegion.fromAbiTake(raw) }, { raw => GeographicRegion.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGeographicRegion {
+        match (unsafe { query(IGeographicRegion.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGeographicRegion(): IGeographicRegion {
+        defaultInterface()
+    }
+
+    public prop Code: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Code(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop CodeThreeDigit: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CodeThreeDigit(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop CodeThreeLetter: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CodeThreeLetter(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop CodeTwoLetter: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CodeTwoLetter(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop CurrenciesInUse: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CurrenciesInUse(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop DisplayName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop NativeName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NativeName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func new(): GeographicRegion {
+        var created__: Option<GeographicRegion> = Option<GeographicRegion>.None
+        try (factory__ = windows_core.factory<GeographicRegion, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<GeographicRegion>(GeographicRegion.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce GeographicRegion")
+        }
+    }
+
+    public static func CreateGeographicRegion(geographicRegionCode: windows_core.HString): GeographicRegion {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(geographicRegionCode)) {
+            try (factory__ = windows_core.factory<GeographicRegion, IGeographicRegionFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateGeographicRegion(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<GeographicRegion>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return GeographicRegion.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsSupported(geographicRegionCode: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(geographicRegionCode)) {
+            try (factory__ = windows_core.factory<GeographicRegion, IGeographicRegionStatics>().unwrap()) {
+                hr__ = unsafe { factory__.IsSupported(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.GeographicRegion"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.GeographicRegion;{" + IGeographicRegion.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.GeographicRegion", GeographicRegion.signature(), IGeographicRegion.iid())
+    }
+
+    public static func intoWinrtHandle(value: GeographicRegion): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GeographicRegion {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GeographicRegion.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GeographicRegion {
+        GeographicRegion.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.GlobalizationJapanesePhoneticAnalyzerContract (synthetic:Windows_Globalization_GlobalizationJapanesePhoneticAnalyzerContract)
+@When[Windows_Globalization == "on"]
+@C
+public struct GlobalizationJapanesePhoneticAnalyzerContract {
+    public var reserved: Int32 = 0
+}
+
+// Windows.Globalization.IApplicationLanguagesStatics (synthetic:Windows_Globalization_IApplicationLanguagesStatics)
+@When[Windows_Globalization == "on"]
+@Interface["75b40847-0a4c-4a92-9565-fd63c95f7aed", "Windows.Globalization.IApplicationLanguagesStatics", "PrimaryLanguageOverride.value=HString;Languages.value=Com;ManifestLanguages.value=Com"]
+public interface IApplicationLanguagesStatics <: IInspectable {
+    func PrimaryLanguageOverride(value: CPointer<CPointer<Unit>>): Int32
+    func SetPrimaryLanguageOverride(value: CPointer<Unit>): Int32
+    func Languages(value: CPointer<CPointer<Unit>>): Int32
+    func ManifestLanguages(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.IApplicationLanguagesStatics2 (synthetic:Windows_Globalization_IApplicationLanguagesStatics2)
+@When[Windows_Globalization == "on"]
+@Interface["1df0de4f-072b-4d7b-8f06-cb2db40f2bb5", "Windows.Globalization.IApplicationLanguagesStatics2", "GetLanguagesForUser.value=Com"]
+public interface IApplicationLanguagesStatics2 <: IInspectable {
+    func GetLanguagesForUser(user: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICalendar (synthetic:Windows_Globalization_ICalendar)
+@When[Windows_Globalization == "on"]
+@Interface["ca30221d-86d9-40fb-a26b-d44eb7cf08ea", "Windows.Globalization.ICalendar", "Clone.value=Com;Languages.value=Com;NumeralSystem.value=HString;GetCalendarSystem.value=HString;GetClock.value=HString;EraAsFullString.result=HString;EraAsString.result=HString;YearAsString.result=HString;YearAsTruncatedString.result=HString;YearAsPaddedString.result=HString;MonthAsFullString.result=HString;MonthAsString.result=HString;MonthAsFullSoloString.result=HString;MonthAsSoloString.result=HString;MonthAsNumericString.result=HString;MonthAsPaddedNumericString.result=HString;DayAsString.result=HString;DayAsPaddedString.result=HString;DayOfWeekAsFullString.result=HString;DayOfWeekAsString.result=HString;DayOfWeekAsFullSoloString.result=HString;DayOfWeekAsSoloString.result=HString;PeriodAsFullString.result=HString;PeriodAsString.result=HString;HourAsString.result=HString;HourAsPaddedString.result=HString;MinuteAsString.result=HString;MinuteAsPaddedString.result=HString;SecondAsString.result=HString;SecondAsPaddedString.result=HString;NanosecondAsString.result=HString;NanosecondAsPaddedString.result=HString;ResolvedLanguage.value=HString"]
+public interface ICalendar <: IInspectable {
+    func Clone(value: CPointer<CPointer<Unit>>): Int32
+    func SetToMin(): Int32
+    func SetToMax(): Int32
+    func Languages(value: CPointer<CPointer<Unit>>): Int32
+    func NumeralSystem(value: CPointer<CPointer<Unit>>): Int32
+    func SetNumeralSystem(value: CPointer<Unit>): Int32
+    func GetCalendarSystem(value: CPointer<CPointer<Unit>>): Int32
+    func ChangeCalendarSystem(value: CPointer<Unit>): Int32
+    func GetClock(value: CPointer<CPointer<Unit>>): Int32
+    func ChangeClock(value: CPointer<Unit>): Int32
+    func GetDateTime(result: CPointer<Windows_Foundation.DateTime>): Int32
+    func SetDateTime(value: Windows_Foundation.DateTime): Int32
+    func SetToNow(): Int32
+    func FirstEra(value: CPointer<Int32>): Int32
+    func LastEra(value: CPointer<Int32>): Int32
+    func NumberOfEras(value: CPointer<Int32>): Int32
+    func Era(value: CPointer<Int32>): Int32
+    func SetEra(value: Int32): Int32
+    func AddEras(eras: Int32): Int32
+    func EraAsFullString(result: CPointer<CPointer<Unit>>): Int32
+    func EraAsString(idealLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func FirstYearInThisEra(value: CPointer<Int32>): Int32
+    func LastYearInThisEra(value: CPointer<Int32>): Int32
+    func NumberOfYearsInThisEra(value: CPointer<Int32>): Int32
+    func Year(value: CPointer<Int32>): Int32
+    func SetYear(value: Int32): Int32
+    func AddYears(years: Int32): Int32
+    func YearAsString(result: CPointer<CPointer<Unit>>): Int32
+    func YearAsTruncatedString(remainingDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func YearAsPaddedString(minDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func FirstMonthInThisYear(value: CPointer<Int32>): Int32
+    func LastMonthInThisYear(value: CPointer<Int32>): Int32
+    func NumberOfMonthsInThisYear(value: CPointer<Int32>): Int32
+    func Month(value: CPointer<Int32>): Int32
+    func SetMonth(value: Int32): Int32
+    func AddMonths(months: Int32): Int32
+    func MonthAsFullString(result: CPointer<CPointer<Unit>>): Int32
+    func MonthAsString(idealLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func MonthAsFullSoloString(result: CPointer<CPointer<Unit>>): Int32
+    func MonthAsSoloString(idealLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func MonthAsNumericString(result: CPointer<CPointer<Unit>>): Int32
+    func MonthAsPaddedNumericString(minDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func AddWeeks(weeks: Int32): Int32
+    func FirstDayInThisMonth(value: CPointer<Int32>): Int32
+    func LastDayInThisMonth(value: CPointer<Int32>): Int32
+    func NumberOfDaysInThisMonth(value: CPointer<Int32>): Int32
+    func Day(value: CPointer<Int32>): Int32
+    func SetDay(value: Int32): Int32
+    func AddDays(days: Int32): Int32
+    func DayAsString(result: CPointer<CPointer<Unit>>): Int32
+    func DayAsPaddedString(minDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func DayOfWeek(value: CPointer<Int32>): Int32
+    func DayOfWeekAsFullString(result: CPointer<CPointer<Unit>>): Int32
+    func DayOfWeekAsString(idealLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func DayOfWeekAsFullSoloString(result: CPointer<CPointer<Unit>>): Int32
+    func DayOfWeekAsSoloString(idealLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func FirstPeriodInThisDay(value: CPointer<Int32>): Int32
+    func LastPeriodInThisDay(value: CPointer<Int32>): Int32
+    func NumberOfPeriodsInThisDay(value: CPointer<Int32>): Int32
+    func Period(value: CPointer<Int32>): Int32
+    func SetPeriod(value: Int32): Int32
+    func AddPeriods(periods: Int32): Int32
+    func PeriodAsFullString(result: CPointer<CPointer<Unit>>): Int32
+    func PeriodAsString(idealLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func FirstHourInThisPeriod(value: CPointer<Int32>): Int32
+    func LastHourInThisPeriod(value: CPointer<Int32>): Int32
+    func NumberOfHoursInThisPeriod(value: CPointer<Int32>): Int32
+    func Hour(value: CPointer<Int32>): Int32
+    func SetHour(value: Int32): Int32
+    func AddHours(hours: Int32): Int32
+    func HourAsString(result: CPointer<CPointer<Unit>>): Int32
+    func HourAsPaddedString(minDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func Minute(value: CPointer<Int32>): Int32
+    func SetMinute(value: Int32): Int32
+    func AddMinutes(minutes: Int32): Int32
+    func MinuteAsString(result: CPointer<CPointer<Unit>>): Int32
+    func MinuteAsPaddedString(minDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func Second(value: CPointer<Int32>): Int32
+    func SetSecond(value: Int32): Int32
+    func AddSeconds(seconds: Int32): Int32
+    func SecondAsString(result: CPointer<CPointer<Unit>>): Int32
+    func SecondAsPaddedString(minDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func Nanosecond(value: CPointer<Int32>): Int32
+    func SetNanosecond(value: Int32): Int32
+    func AddNanoseconds(nanoseconds: Int32): Int32
+    func NanosecondAsString(result: CPointer<CPointer<Unit>>): Int32
+    func NanosecondAsPaddedString(minDigits: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func Compare(other: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func CompareDateTime(other: Windows_Foundation.DateTime, result: CPointer<Int32>): Int32
+    func CopyTo(other: CPointer<Unit>): Int32
+    func FirstMinuteInThisHour(value: CPointer<Int32>): Int32
+    func LastMinuteInThisHour(value: CPointer<Int32>): Int32
+    func NumberOfMinutesInThisHour(value: CPointer<Int32>): Int32
+    func FirstSecondInThisMinute(value: CPointer<Int32>): Int32
+    func LastSecondInThisMinute(value: CPointer<Int32>): Int32
+    func NumberOfSecondsInThisMinute(value: CPointer<Int32>): Int32
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func IsDaylightSavingTime(value: CPointer<Bool>): Int32
+}
+
+// Windows.Globalization.ICalendarFactory (synthetic:Windows_Globalization_ICalendarFactory)
+@When[Windows_Globalization == "on"]
+@Interface["83f58412-e56b-4c75-a66e-0f63d57758a6", "Windows.Globalization.ICalendarFactory", "CreateCalendarDefaultCalendarAndClock.result=Com;CreateCalendar.result=Com"]
+public interface ICalendarFactory <: IInspectable {
+    func CreateCalendarDefaultCalendarAndClock(languages: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateCalendar(languages: CPointer<Unit>, calendar: CPointer<Unit>, clock: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICalendarFactory2 (synthetic:Windows_Globalization_ICalendarFactory2)
+@When[Windows_Globalization == "on"]
+@Interface["b44b378c-ca7e-4590-9e72-ea2bec1a5115", "Windows.Globalization.ICalendarFactory2", "CreateCalendarWithTimeZone.result=Com"]
+public interface ICalendarFactory2 <: IInspectable {
+    func CreateCalendarWithTimeZone(languages: CPointer<Unit>, calendar: CPointer<Unit>, clock: CPointer<Unit>, timeZoneId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICalendarIdentifiersStatics (synthetic:Windows_Globalization_ICalendarIdentifiersStatics)
+@When[Windows_Globalization == "on"]
+@Interface["80653f68-2cb2-4c1f-b590-f0f52bf4fd1a", "Windows.Globalization.ICalendarIdentifiersStatics", "Gregorian.value=HString;Hebrew.value=HString;Hijri.value=HString;Japanese.value=HString;Julian.value=HString;Korean.value=HString;Taiwan.value=HString;Thai.value=HString;UmAlQura.value=HString"]
+public interface ICalendarIdentifiersStatics <: IInspectable {
+    func Gregorian(value: CPointer<CPointer<Unit>>): Int32
+    func Hebrew(value: CPointer<CPointer<Unit>>): Int32
+    func Hijri(value: CPointer<CPointer<Unit>>): Int32
+    func Japanese(value: CPointer<CPointer<Unit>>): Int32
+    func Julian(value: CPointer<CPointer<Unit>>): Int32
+    func Korean(value: CPointer<CPointer<Unit>>): Int32
+    func Taiwan(value: CPointer<CPointer<Unit>>): Int32
+    func Thai(value: CPointer<CPointer<Unit>>): Int32
+    func UmAlQura(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICalendarIdentifiersStatics2 (synthetic:Windows_Globalization_ICalendarIdentifiersStatics2)
+@When[Windows_Globalization == "on"]
+@Interface["7df4d488-5fd0-42a7-95b5-7d98d823075f", "Windows.Globalization.ICalendarIdentifiersStatics2", "Persian.value=HString"]
+public interface ICalendarIdentifiersStatics2 <: IInspectable {
+    func Persian(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICalendarIdentifiersStatics3 (synthetic:Windows_Globalization_ICalendarIdentifiersStatics3)
+@When[Windows_Globalization == "on"]
+@Interface["2c225423-1fad-40c0-9334-a8eb90db04f5", "Windows.Globalization.ICalendarIdentifiersStatics3", "ChineseLunar.value=HString;JapaneseLunar.value=HString;KoreanLunar.value=HString;TaiwanLunar.value=HString;VietnameseLunar.value=HString"]
+public interface ICalendarIdentifiersStatics3 <: IInspectable {
+    func ChineseLunar(value: CPointer<CPointer<Unit>>): Int32
+    func JapaneseLunar(value: CPointer<CPointer<Unit>>): Int32
+    func KoreanLunar(value: CPointer<CPointer<Unit>>): Int32
+    func TaiwanLunar(value: CPointer<CPointer<Unit>>): Int32
+    func VietnameseLunar(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.IClockIdentifiersStatics (synthetic:Windows_Globalization_IClockIdentifiersStatics)
+@When[Windows_Globalization == "on"]
+@Interface["523805bb-12ec-4f83-bc31-b1b4376b0808", "Windows.Globalization.IClockIdentifiersStatics", "TwelveHour.value=HString;TwentyFourHour.value=HString"]
+public interface IClockIdentifiersStatics <: IInspectable {
+    func TwelveHour(value: CPointer<CPointer<Unit>>): Int32
+    func TwentyFourHour(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICurrencyAmount (synthetic:Windows_Globalization_ICurrencyAmount)
+@When[Windows_Globalization == "on"]
+@Interface["74b49942-eb75-443a-95b3-7d723f56f93c", "Windows.Globalization.ICurrencyAmount", "Amount.value=HString;Currency.value=HString"]
+public interface ICurrencyAmount <: IInspectable {
+    func Amount(value: CPointer<CPointer<Unit>>): Int32
+    func Currency(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICurrencyAmountFactory (synthetic:Windows_Globalization_ICurrencyAmountFactory)
+@When[Windows_Globalization == "on"]
+@Interface["48d7168f-ef3b-4aee-a6a1-4b036fe03ff0", "Windows.Globalization.ICurrencyAmountFactory", "Create.result=Com"]
+public interface ICurrencyAmountFactory <: IInspectable {
+    func Create(amount: CPointer<Unit>, currency: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICurrencyIdentifiersStatics (synthetic:Windows_Globalization_ICurrencyIdentifiersStatics)
+@When[Windows_Globalization == "on"]
+@Interface["9f1d091b-d586-4913-9b6a-a9bd2dc12874", "Windows.Globalization.ICurrencyIdentifiersStatics", "AED.value=HString;AFN.value=HString;ALL.value=HString;AMD.value=HString;ANG.value=HString;AOA.value=HString;ARS.value=HString;AUD.value=HString;AWG.value=HString;AZN.value=HString;BAM.value=HString;BBD.value=HString;BDT.value=HString;BGN.value=HString;BHD.value=HString;BIF.value=HString;BMD.value=HString;BND.value=HString;BOB.value=HString;BRL.value=HString;BSD.value=HString;BTN.value=HString;BWP.value=HString;BYR.value=HString;BZD.value=HString;CAD.value=HString;CDF.value=HString;CHF.value=HString;CLP.value=HString;CNY.value=HString;COP.value=HString;CRC.value=HString;CUP.value=HString;CVE.value=HString;CZK.value=HString;DJF.value=HString;DKK.value=HString;DOP.value=HString;DZD.value=HString;EGP.value=HString;ERN.value=HString;ETB.value=HString;EUR.value=HString;FJD.value=HString;FKP.value=HString;GBP.value=HString;GEL.value=HString;GHS.value=HString;GIP.value=HString;GMD.value=HString;GNF.value=HString;GTQ.value=HString;GYD.value=HString;HKD.value=HString;HNL.value=HString;HRK.value=HString;HTG.value=HString;HUF.value=HString;IDR.value=HString;ILS.value=HString;INR.value=HString;IQD.value=HString;IRR.value=HString;ISK.value=HString;JMD.value=HString;JOD.value=HString;JPY.value=HString;KES.value=HString;KGS.value=HString;KHR.value=HString;KMF.value=HString;KPW.value=HString;KRW.value=HString;KWD.value=HString;KYD.value=HString;KZT.value=HString;LAK.value=HString;LBP.value=HString;LKR.value=HString;LRD.value=HString;LSL.value=HString;LTL.value=HString;LVL.value=HString;LYD.value=HString;MAD.value=HString;MDL.value=HString;MGA.value=HString;MKD.value=HString;MMK.value=HString;MNT.value=HString;MOP.value=HString;MRO.value=HString;MUR.value=HString;MVR.value=HString;MWK.value=HString;MXN.value=HString;MYR.value=HString;MZN.value=HString;NAD.value=HString;NGN.value=HString;NIO.value=HString;NOK.value=HString;NPR.value=HString;NZD.value=HString;OMR.value=HString;PAB.value=HString;PEN.value=HString;PGK.value=HString;PHP.value=HString;PKR.value=HString;PLN.value=HString;PYG.value=HString;QAR.value=HString;RON.value=HString;RSD.value=HString;RUB.value=HString;RWF.value=HString;SAR.value=HString;SBD.value=HString;SCR.value=HString;SDG.value=HString;SEK.value=HString;SGD.value=HString;SHP.value=HString;SLL.value=HString;SOS.value=HString;SRD.value=HString;STD.value=HString;SYP.value=HString;SZL.value=HString;THB.value=HString;TJS.value=HString;TMT.value=HString;TND.value=HString;TOP.value=HString;TRY.value=HString;TTD.value=HString;TWD.value=HString;TZS.value=HString;UAH.value=HString;UGX.value=HString;USD.value=HString;UYU.value=HString;UZS.value=HString;VEF.value=HString;VND.value=HString;VUV.value=HString;WST.value=HString;XAF.value=HString;XCD.value=HString;XOF.value=HString;XPF.value=HString;XXX.value=HString;YER.value=HString;ZAR.value=HString;ZMW.value=HString;ZWL.value=HString"]
+public interface ICurrencyIdentifiersStatics <: IInspectable {
+    func AED(value: CPointer<CPointer<Unit>>): Int32
+    func AFN(value: CPointer<CPointer<Unit>>): Int32
+    func ALL(value: CPointer<CPointer<Unit>>): Int32
+    func AMD(value: CPointer<CPointer<Unit>>): Int32
+    func ANG(value: CPointer<CPointer<Unit>>): Int32
+    func AOA(value: CPointer<CPointer<Unit>>): Int32
+    func ARS(value: CPointer<CPointer<Unit>>): Int32
+    func AUD(value: CPointer<CPointer<Unit>>): Int32
+    func AWG(value: CPointer<CPointer<Unit>>): Int32
+    func AZN(value: CPointer<CPointer<Unit>>): Int32
+    func BAM(value: CPointer<CPointer<Unit>>): Int32
+    func BBD(value: CPointer<CPointer<Unit>>): Int32
+    func BDT(value: CPointer<CPointer<Unit>>): Int32
+    func BGN(value: CPointer<CPointer<Unit>>): Int32
+    func BHD(value: CPointer<CPointer<Unit>>): Int32
+    func BIF(value: CPointer<CPointer<Unit>>): Int32
+    func BMD(value: CPointer<CPointer<Unit>>): Int32
+    func BND(value: CPointer<CPointer<Unit>>): Int32
+    func BOB(value: CPointer<CPointer<Unit>>): Int32
+    func BRL(value: CPointer<CPointer<Unit>>): Int32
+    func BSD(value: CPointer<CPointer<Unit>>): Int32
+    func BTN(value: CPointer<CPointer<Unit>>): Int32
+    func BWP(value: CPointer<CPointer<Unit>>): Int32
+    func BYR(value: CPointer<CPointer<Unit>>): Int32
+    func BZD(value: CPointer<CPointer<Unit>>): Int32
+    func CAD(value: CPointer<CPointer<Unit>>): Int32
+    func CDF(value: CPointer<CPointer<Unit>>): Int32
+    func CHF(value: CPointer<CPointer<Unit>>): Int32
+    func CLP(value: CPointer<CPointer<Unit>>): Int32
+    func CNY(value: CPointer<CPointer<Unit>>): Int32
+    func COP(value: CPointer<CPointer<Unit>>): Int32
+    func CRC(value: CPointer<CPointer<Unit>>): Int32
+    func CUP(value: CPointer<CPointer<Unit>>): Int32
+    func CVE(value: CPointer<CPointer<Unit>>): Int32
+    func CZK(value: CPointer<CPointer<Unit>>): Int32
+    func DJF(value: CPointer<CPointer<Unit>>): Int32
+    func DKK(value: CPointer<CPointer<Unit>>): Int32
+    func DOP(value: CPointer<CPointer<Unit>>): Int32
+    func DZD(value: CPointer<CPointer<Unit>>): Int32
+    func EGP(value: CPointer<CPointer<Unit>>): Int32
+    func ERN(value: CPointer<CPointer<Unit>>): Int32
+    func ETB(value: CPointer<CPointer<Unit>>): Int32
+    func EUR(value: CPointer<CPointer<Unit>>): Int32
+    func FJD(value: CPointer<CPointer<Unit>>): Int32
+    func FKP(value: CPointer<CPointer<Unit>>): Int32
+    func GBP(value: CPointer<CPointer<Unit>>): Int32
+    func GEL(value: CPointer<CPointer<Unit>>): Int32
+    func GHS(value: CPointer<CPointer<Unit>>): Int32
+    func GIP(value: CPointer<CPointer<Unit>>): Int32
+    func GMD(value: CPointer<CPointer<Unit>>): Int32
+    func GNF(value: CPointer<CPointer<Unit>>): Int32
+    func GTQ(value: CPointer<CPointer<Unit>>): Int32
+    func GYD(value: CPointer<CPointer<Unit>>): Int32
+    func HKD(value: CPointer<CPointer<Unit>>): Int32
+    func HNL(value: CPointer<CPointer<Unit>>): Int32
+    func HRK(value: CPointer<CPointer<Unit>>): Int32
+    func HTG(value: CPointer<CPointer<Unit>>): Int32
+    func HUF(value: CPointer<CPointer<Unit>>): Int32
+    func IDR(value: CPointer<CPointer<Unit>>): Int32
+    func ILS(value: CPointer<CPointer<Unit>>): Int32
+    func INR(value: CPointer<CPointer<Unit>>): Int32
+    func IQD(value: CPointer<CPointer<Unit>>): Int32
+    func IRR(value: CPointer<CPointer<Unit>>): Int32
+    func ISK(value: CPointer<CPointer<Unit>>): Int32
+    func JMD(value: CPointer<CPointer<Unit>>): Int32
+    func JOD(value: CPointer<CPointer<Unit>>): Int32
+    func JPY(value: CPointer<CPointer<Unit>>): Int32
+    func KES(value: CPointer<CPointer<Unit>>): Int32
+    func KGS(value: CPointer<CPointer<Unit>>): Int32
+    func KHR(value: CPointer<CPointer<Unit>>): Int32
+    func KMF(value: CPointer<CPointer<Unit>>): Int32
+    func KPW(value: CPointer<CPointer<Unit>>): Int32
+    func KRW(value: CPointer<CPointer<Unit>>): Int32
+    func KWD(value: CPointer<CPointer<Unit>>): Int32
+    func KYD(value: CPointer<CPointer<Unit>>): Int32
+    func KZT(value: CPointer<CPointer<Unit>>): Int32
+    func LAK(value: CPointer<CPointer<Unit>>): Int32
+    func LBP(value: CPointer<CPointer<Unit>>): Int32
+    func LKR(value: CPointer<CPointer<Unit>>): Int32
+    func LRD(value: CPointer<CPointer<Unit>>): Int32
+    func LSL(value: CPointer<CPointer<Unit>>): Int32
+    func LTL(value: CPointer<CPointer<Unit>>): Int32
+    func LVL(value: CPointer<CPointer<Unit>>): Int32
+    func LYD(value: CPointer<CPointer<Unit>>): Int32
+    func MAD(value: CPointer<CPointer<Unit>>): Int32
+    func MDL(value: CPointer<CPointer<Unit>>): Int32
+    func MGA(value: CPointer<CPointer<Unit>>): Int32
+    func MKD(value: CPointer<CPointer<Unit>>): Int32
+    func MMK(value: CPointer<CPointer<Unit>>): Int32
+    func MNT(value: CPointer<CPointer<Unit>>): Int32
+    func MOP(value: CPointer<CPointer<Unit>>): Int32
+    func MRO(value: CPointer<CPointer<Unit>>): Int32
+    func MUR(value: CPointer<CPointer<Unit>>): Int32
+    func MVR(value: CPointer<CPointer<Unit>>): Int32
+    func MWK(value: CPointer<CPointer<Unit>>): Int32
+    func MXN(value: CPointer<CPointer<Unit>>): Int32
+    func MYR(value: CPointer<CPointer<Unit>>): Int32
+    func MZN(value: CPointer<CPointer<Unit>>): Int32
+    func NAD(value: CPointer<CPointer<Unit>>): Int32
+    func NGN(value: CPointer<CPointer<Unit>>): Int32
+    func NIO(value: CPointer<CPointer<Unit>>): Int32
+    func NOK(value: CPointer<CPointer<Unit>>): Int32
+    func NPR(value: CPointer<CPointer<Unit>>): Int32
+    func NZD(value: CPointer<CPointer<Unit>>): Int32
+    func OMR(value: CPointer<CPointer<Unit>>): Int32
+    func PAB(value: CPointer<CPointer<Unit>>): Int32
+    func PEN(value: CPointer<CPointer<Unit>>): Int32
+    func PGK(value: CPointer<CPointer<Unit>>): Int32
+    func PHP(value: CPointer<CPointer<Unit>>): Int32
+    func PKR(value: CPointer<CPointer<Unit>>): Int32
+    func PLN(value: CPointer<CPointer<Unit>>): Int32
+    func PYG(value: CPointer<CPointer<Unit>>): Int32
+    func QAR(value: CPointer<CPointer<Unit>>): Int32
+    func RON(value: CPointer<CPointer<Unit>>): Int32
+    func RSD(value: CPointer<CPointer<Unit>>): Int32
+    func RUB(value: CPointer<CPointer<Unit>>): Int32
+    func RWF(value: CPointer<CPointer<Unit>>): Int32
+    func SAR(value: CPointer<CPointer<Unit>>): Int32
+    func SBD(value: CPointer<CPointer<Unit>>): Int32
+    func SCR(value: CPointer<CPointer<Unit>>): Int32
+    func SDG(value: CPointer<CPointer<Unit>>): Int32
+    func SEK(value: CPointer<CPointer<Unit>>): Int32
+    func SGD(value: CPointer<CPointer<Unit>>): Int32
+    func SHP(value: CPointer<CPointer<Unit>>): Int32
+    func SLL(value: CPointer<CPointer<Unit>>): Int32
+    func SOS(value: CPointer<CPointer<Unit>>): Int32
+    func SRD(value: CPointer<CPointer<Unit>>): Int32
+    func STD(value: CPointer<CPointer<Unit>>): Int32
+    func SYP(value: CPointer<CPointer<Unit>>): Int32
+    func SZL(value: CPointer<CPointer<Unit>>): Int32
+    func THB(value: CPointer<CPointer<Unit>>): Int32
+    func TJS(value: CPointer<CPointer<Unit>>): Int32
+    func TMT(value: CPointer<CPointer<Unit>>): Int32
+    func TND(value: CPointer<CPointer<Unit>>): Int32
+    func TOP(value: CPointer<CPointer<Unit>>): Int32
+    func TRY(value: CPointer<CPointer<Unit>>): Int32
+    func TTD(value: CPointer<CPointer<Unit>>): Int32
+    func TWD(value: CPointer<CPointer<Unit>>): Int32
+    func TZS(value: CPointer<CPointer<Unit>>): Int32
+    func UAH(value: CPointer<CPointer<Unit>>): Int32
+    func UGX(value: CPointer<CPointer<Unit>>): Int32
+    func USD(value: CPointer<CPointer<Unit>>): Int32
+    func UYU(value: CPointer<CPointer<Unit>>): Int32
+    func UZS(value: CPointer<CPointer<Unit>>): Int32
+    func VEF(value: CPointer<CPointer<Unit>>): Int32
+    func VND(value: CPointer<CPointer<Unit>>): Int32
+    func VUV(value: CPointer<CPointer<Unit>>): Int32
+    func WST(value: CPointer<CPointer<Unit>>): Int32
+    func XAF(value: CPointer<CPointer<Unit>>): Int32
+    func XCD(value: CPointer<CPointer<Unit>>): Int32
+    func XOF(value: CPointer<CPointer<Unit>>): Int32
+    func XPF(value: CPointer<CPointer<Unit>>): Int32
+    func XXX(value: CPointer<CPointer<Unit>>): Int32
+    func YER(value: CPointer<CPointer<Unit>>): Int32
+    func ZAR(value: CPointer<CPointer<Unit>>): Int32
+    func ZMW(value: CPointer<CPointer<Unit>>): Int32
+    func ZWL(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICurrencyIdentifiersStatics2 (synthetic:Windows_Globalization_ICurrencyIdentifiersStatics2)
+@When[Windows_Globalization == "on"]
+@Interface["1814797f-c3b2-4c33-9591-980011950d37", "Windows.Globalization.ICurrencyIdentifiersStatics2", "BYN.value=HString"]
+public interface ICurrencyIdentifiersStatics2 <: IInspectable {
+    func BYN(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ICurrencyIdentifiersStatics3 (synthetic:Windows_Globalization_ICurrencyIdentifiersStatics3)
+@When[Windows_Globalization == "on"]
+@Interface["4fb23bfa-ed25-4f4d-857f-237f1748c21c", "Windows.Globalization.ICurrencyIdentifiersStatics3", "MRU.value=HString;SSP.value=HString;STN.value=HString;VES.value=HString"]
+public interface ICurrencyIdentifiersStatics3 <: IInspectable {
+    func MRU(value: CPointer<CPointer<Unit>>): Int32
+    func SSP(value: CPointer<CPointer<Unit>>): Int32
+    func STN(value: CPointer<CPointer<Unit>>): Int32
+    func VES(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.IGeographicRegion (synthetic:Windows_Globalization_IGeographicRegion)
+@When[Windows_Globalization == "on"]
+@Interface["01e9a621-4a64-4ed9-954f-9edeb07bd903", "Windows.Globalization.IGeographicRegion", "Code.value=HString;CodeTwoLetter.value=HString;CodeThreeLetter.value=HString;CodeThreeDigit.value=HString;DisplayName.value=HString;NativeName.value=HString;CurrenciesInUse.value=Com"]
+public interface IGeographicRegion <: IInspectable {
+    func Code(value: CPointer<CPointer<Unit>>): Int32
+    func CodeTwoLetter(value: CPointer<CPointer<Unit>>): Int32
+    func CodeThreeLetter(value: CPointer<CPointer<Unit>>): Int32
+    func CodeThreeDigit(value: CPointer<CPointer<Unit>>): Int32
+    func DisplayName(value: CPointer<CPointer<Unit>>): Int32
+    func NativeName(value: CPointer<CPointer<Unit>>): Int32
+    func CurrenciesInUse(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.IGeographicRegionFactory (synthetic:Windows_Globalization_IGeographicRegionFactory)
+@When[Windows_Globalization == "on"]
+@Interface["53425270-77b4-426b-859f-81e19d512546", "Windows.Globalization.IGeographicRegionFactory", "CreateGeographicRegion.result=Com"]
+public interface IGeographicRegionFactory <: IInspectable {
+    func CreateGeographicRegion(geographicRegionCode: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.IGeographicRegionStatics (synthetic:Windows_Globalization_IGeographicRegionStatics)
+@When[Windows_Globalization == "on"]
+@Interface["29e28974-7ad9-4ef4-8799-b3b44fadec08", "Windows.Globalization.IGeographicRegionStatics"]
+public interface IGeographicRegionStatics <: IInspectable {
+    func IsSupported(geographicRegionCode: CPointer<Unit>, result: CPointer<Bool>): Int32
+}
+
+// Windows.Globalization.IJapanesePhoneme (synthetic:Windows_Globalization_IJapanesePhoneme)
+@When[Windows_Globalization == "on"]
+@Interface["2f6a9300-e85b-43e6-897d-5d82f862df21", "Windows.Globalization.IJapanesePhoneme", "DisplayText.value=HString;YomiText.value=HString"]
+public interface IJapanesePhoneme <: IInspectable {
+    func DisplayText(value: CPointer<CPointer<Unit>>): Int32
+    func YomiText(value: CPointer<CPointer<Unit>>): Int32
+    func IsPhraseStart(value: CPointer<Bool>): Int32
+}
+
+// Windows.Globalization.IJapanesePhoneticAnalyzerStatics (synthetic:Windows_Globalization_IJapanesePhoneticAnalyzerStatics)
+@When[Windows_Globalization == "on"]
+@Interface["88ab9e90-93de-41b2-b4d5-8edb227fd1c2", "Windows.Globalization.IJapanesePhoneticAnalyzerStatics", "GetWords.result=Com;GetWordsWithMonoRubyOption.result=Com"]
+public interface IJapanesePhoneticAnalyzerStatics <: IInspectable {
+    func GetWords(input: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetWordsWithMonoRubyOption(input: CPointer<Unit>, monoRuby: Bool, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ILanguage (synthetic:Windows_Globalization_ILanguage)
+@When[Windows_Globalization == "on"]
+@Interface["ea79a752-f7c2-4265-b1bd-c4dec4e4f080", "Windows.Globalization.ILanguage", "LanguageTag.value=HString;DisplayName.value=HString;NativeName.value=HString;Script.value=HString"]
+public interface ILanguage <: IInspectable {
+    func LanguageTag(value: CPointer<CPointer<Unit>>): Int32
+    func DisplayName(value: CPointer<CPointer<Unit>>): Int32
+    func NativeName(value: CPointer<CPointer<Unit>>): Int32
+    func Script(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ILanguage2 (synthetic:Windows_Globalization_ILanguage2)
+@When[Windows_Globalization == "on"]
+@Interface["6a47e5b5-d94d-4886-a404-a5a5b9d5b494", "Windows.Globalization.ILanguage2"]
+public interface ILanguage2 <: IInspectable {
+    func LayoutDirection(value: CPointer<Int32>): Int32
+}
+
+// Windows.Globalization.ILanguage3 (synthetic:Windows_Globalization_ILanguage3)
+@When[Windows_Globalization == "on"]
+@Interface["c6af3d10-641a-5ba4-bb43-5e12aed75954", "Windows.Globalization.ILanguage3", "AbbreviatedName.value=HString"]
+public interface ILanguage3 <: IInspectable {
+    func AbbreviatedName(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ILanguageExtensionSubtags (synthetic:Windows_Globalization_ILanguageExtensionSubtags)
+@When[Windows_Globalization == "on"]
+@Interface["7d7daf45-368d-4364-852b-dec927037b85", "Windows.Globalization.ILanguageExtensionSubtags", "GetExtensionSubtags.value=Com"]
+public interface ILanguageExtensionSubtags <: IInspectable {
+    func GetExtensionSubtags(singleton: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ILanguageFactory (synthetic:Windows_Globalization_ILanguageFactory)
+@When[Windows_Globalization == "on"]
+@Interface["9b0252ac-0c27-44f8-b792-9793fb66c63e", "Windows.Globalization.ILanguageFactory", "CreateLanguage.result=Com"]
+public interface ILanguageFactory <: IInspectable {
+    func CreateLanguage(languageTag: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ILanguageStatics (synthetic:Windows_Globalization_ILanguageStatics)
+@When[Windows_Globalization == "on"]
+@Interface["b23cd557-0865-46d4-89b8-d59be8990f0d", "Windows.Globalization.ILanguageStatics", "CurrentInputMethodLanguageTag.value=HString"]
+public interface ILanguageStatics <: IInspectable {
+    func IsWellFormed(languageTag: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func CurrentInputMethodLanguageTag(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ILanguageStatics2 (synthetic:Windows_Globalization_ILanguageStatics2)
+@When[Windows_Globalization == "on"]
+@Interface["30199f6e-914b-4b2a-9d6e-e3b0e27dbe4f", "Windows.Globalization.ILanguageStatics2"]
+public interface ILanguageStatics2 <: IInspectable {
+    func TrySetInputMethodLanguageTag(languageTag: CPointer<Unit>, result: CPointer<Bool>): Int32
+}
+
+// Windows.Globalization.ILanguageStatics3 (synthetic:Windows_Globalization_ILanguageStatics3)
+@When[Windows_Globalization == "on"]
+@Interface["d15ecb5a-71de-5752-9542-fac5b4f27261", "Windows.Globalization.ILanguageStatics3", "GetMuiCompatibleLanguageListFromLanguageTags.result=Com"]
+public interface ILanguageStatics3 <: IInspectable {
+    func GetMuiCompatibleLanguageListFromLanguageTags(languageTags: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.INumeralSystemIdentifiersStatics (synthetic:Windows_Globalization_INumeralSystemIdentifiersStatics)
+@When[Windows_Globalization == "on"]
+@Interface["a5c662c3-68c9-4d3d-b765-972029e21dec", "Windows.Globalization.INumeralSystemIdentifiersStatics", "Arab.value=HString;ArabExt.value=HString;Bali.value=HString;Beng.value=HString;Cham.value=HString;Deva.value=HString;FullWide.value=HString;Gujr.value=HString;Guru.value=HString;HaniDec.value=HString;Java.value=HString;Kali.value=HString;Khmr.value=HString;Knda.value=HString;Lana.value=HString;LanaTham.value=HString;Laoo.value=HString;Latn.value=HString;Lepc.value=HString;Limb.value=HString;Mlym.value=HString;Mong.value=HString;Mtei.value=HString;Mymr.value=HString;MymrShan.value=HString;Nkoo.value=HString;Olck.value=HString;Orya.value=HString;Saur.value=HString;Sund.value=HString;Talu.value=HString;TamlDec.value=HString;Telu.value=HString;Thai.value=HString;Tibt.value=HString;Vaii.value=HString"]
+public interface INumeralSystemIdentifiersStatics <: IInspectable {
+    func Arab(value: CPointer<CPointer<Unit>>): Int32
+    func ArabExt(value: CPointer<CPointer<Unit>>): Int32
+    func Bali(value: CPointer<CPointer<Unit>>): Int32
+    func Beng(value: CPointer<CPointer<Unit>>): Int32
+    func Cham(value: CPointer<CPointer<Unit>>): Int32
+    func Deva(value: CPointer<CPointer<Unit>>): Int32
+    func FullWide(value: CPointer<CPointer<Unit>>): Int32
+    func Gujr(value: CPointer<CPointer<Unit>>): Int32
+    func Guru(value: CPointer<CPointer<Unit>>): Int32
+    func HaniDec(value: CPointer<CPointer<Unit>>): Int32
+    func Java(value: CPointer<CPointer<Unit>>): Int32
+    func Kali(value: CPointer<CPointer<Unit>>): Int32
+    func Khmr(value: CPointer<CPointer<Unit>>): Int32
+    func Knda(value: CPointer<CPointer<Unit>>): Int32
+    func Lana(value: CPointer<CPointer<Unit>>): Int32
+    func LanaTham(value: CPointer<CPointer<Unit>>): Int32
+    func Laoo(value: CPointer<CPointer<Unit>>): Int32
+    func Latn(value: CPointer<CPointer<Unit>>): Int32
+    func Lepc(value: CPointer<CPointer<Unit>>): Int32
+    func Limb(value: CPointer<CPointer<Unit>>): Int32
+    func Mlym(value: CPointer<CPointer<Unit>>): Int32
+    func Mong(value: CPointer<CPointer<Unit>>): Int32
+    func Mtei(value: CPointer<CPointer<Unit>>): Int32
+    func Mymr(value: CPointer<CPointer<Unit>>): Int32
+    func MymrShan(value: CPointer<CPointer<Unit>>): Int32
+    func Nkoo(value: CPointer<CPointer<Unit>>): Int32
+    func Olck(value: CPointer<CPointer<Unit>>): Int32
+    func Orya(value: CPointer<CPointer<Unit>>): Int32
+    func Saur(value: CPointer<CPointer<Unit>>): Int32
+    func Sund(value: CPointer<CPointer<Unit>>): Int32
+    func Talu(value: CPointer<CPointer<Unit>>): Int32
+    func TamlDec(value: CPointer<CPointer<Unit>>): Int32
+    func Telu(value: CPointer<CPointer<Unit>>): Int32
+    func Thai(value: CPointer<CPointer<Unit>>): Int32
+    func Tibt(value: CPointer<CPointer<Unit>>): Int32
+    func Vaii(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.INumeralSystemIdentifiersStatics2 (synthetic:Windows_Globalization_INumeralSystemIdentifiersStatics2)
+@When[Windows_Globalization == "on"]
+@Interface["7f003228-9ddb-4a34-9104-0260c091a7c7", "Windows.Globalization.INumeralSystemIdentifiersStatics2", "Brah.value=HString;Osma.value=HString;MathBold.value=HString;MathDbl.value=HString;MathSans.value=HString;MathSanb.value=HString;MathMono.value=HString;ZmthBold.value=HString;ZmthDbl.value=HString;ZmthSans.value=HString;ZmthSanb.value=HString;ZmthMono.value=HString"]
+public interface INumeralSystemIdentifiersStatics2 <: IInspectable {
+    func Brah(value: CPointer<CPointer<Unit>>): Int32
+    func Osma(value: CPointer<CPointer<Unit>>): Int32
+    func MathBold(value: CPointer<CPointer<Unit>>): Int32
+    func MathDbl(value: CPointer<CPointer<Unit>>): Int32
+    func MathSans(value: CPointer<CPointer<Unit>>): Int32
+    func MathSanb(value: CPointer<CPointer<Unit>>): Int32
+    func MathMono(value: CPointer<CPointer<Unit>>): Int32
+    func ZmthBold(value: CPointer<CPointer<Unit>>): Int32
+    func ZmthDbl(value: CPointer<CPointer<Unit>>): Int32
+    func ZmthSans(value: CPointer<CPointer<Unit>>): Int32
+    func ZmthSanb(value: CPointer<CPointer<Unit>>): Int32
+    func ZmthMono(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.ITimeZoneOnCalendar (synthetic:Windows_Globalization_ITimeZoneOnCalendar)
+@When[Windows_Globalization == "on"]
+@Interface["bb3c25e5-46cf-4317-a3f5-02621ad54478", "Windows.Globalization.ITimeZoneOnCalendar", "GetTimeZone.value=HString;TimeZoneAsFullString.result=HString;TimeZoneAsString.result=HString"]
+public interface ITimeZoneOnCalendar <: IInspectable {
+    func GetTimeZone(value: CPointer<CPointer<Unit>>): Int32
+    func ChangeTimeZone(timeZoneId: CPointer<Unit>): Int32
+    func TimeZoneAsFullString(result: CPointer<CPointer<Unit>>): Int32
+    func TimeZoneAsString(idealLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.JapanesePhoneme (synthetic:Windows_Globalization_JapanesePhoneme)
+@When[Windows_Globalization == "on"]
+public class JapanesePhoneme <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<JapanesePhoneme> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): JapanesePhoneme {
+        JapanesePhoneme(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): JapanesePhoneme {
+        JapanesePhoneme(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IJapanesePhoneme.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<JapanesePhoneme> {
+        let ancestors = [IJapanesePhoneme.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<JapanesePhoneme>("JapanesePhoneme", IJapanesePhoneme.iid(), ancestors, { raw => JapanesePhoneme.fromAbiTake(raw) }, { raw => JapanesePhoneme.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IJapanesePhoneme {
+        match (unsafe { query(IJapanesePhoneme.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIJapanesePhoneme(): IJapanesePhoneme {
+        defaultInterface()
+    }
+
+    public prop DisplayText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop IsPhraseStart: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsPhraseStart(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop YomiText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.YomiText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.JapanesePhoneme"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.JapanesePhoneme;{" + IJapanesePhoneme.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.JapanesePhoneme", JapanesePhoneme.signature(), IJapanesePhoneme.iid())
+    }
+
+    public static func intoWinrtHandle(value: JapanesePhoneme): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): JapanesePhoneme {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        JapanesePhoneme.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): JapanesePhoneme {
+        JapanesePhoneme.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.JapanesePhoneticAnalyzer (synthetic:Windows_Globalization_JapanesePhoneticAnalyzer)
+@When[Windows_Globalization == "on"]
+public struct JapanesePhoneticAnalyzer <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func GetWords(input: windows_core.HString): Windows_Foundation_Collections.IVectorView<JapanesePhoneme> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(input)) {
+            try (factory__ = windows_core.factory<JapanesePhoneticAnalyzer, IJapanesePhoneticAnalyzerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetWords(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<JapanesePhoneme>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<JapanesePhoneme>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetWordsWithMonoRubyOption(input: windows_core.HString, monoRuby: Bool): Windows_Foundation_Collections.IVectorView<JapanesePhoneme> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(input)) {
+            try (factory__ = windows_core.factory<JapanesePhoneticAnalyzer, IJapanesePhoneticAnalyzerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetWordsWithMonoRubyOption(__argBorrow0.asRaw(), monoRuby, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<JapanesePhoneme>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<JapanesePhoneme>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.JapanesePhoneticAnalyzer"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.JapanesePhoneticAnalyzer)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.JapanesePhoneticAnalyzer", JapanesePhoneticAnalyzer.signature())
+    }
+}
+
+// Windows.Globalization.Language (synthetic:Windows_Globalization_Language)
+@When[Windows_Globalization == "on"]
+public class Language <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Language> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Language {
+        Language(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Language {
+        Language(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ILanguage.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Language> {
+        let ancestors = [ILanguage.iid(), ILanguageExtensionSubtags.iid(), ILanguage2.iid(), ILanguage3.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Language>("Language", ILanguage.iid(), ancestors, { raw => Language.fromAbiTake(raw) }, { raw => Language.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ILanguage {
+        match (unsafe { query(ILanguage.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asILanguage(): ILanguage {
+        defaultInterface()
+    }
+
+    public func asILanguageExtensionSubtags(): ILanguageExtensionSubtags {
+        match (unsafe { query<ILanguageExtensionSubtags>(ILanguageExtensionSubtags.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asILanguage2(): ILanguage2 {
+        match (unsafe { query<ILanguage2>(ILanguage2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asILanguage3(): ILanguage3 {
+        match (unsafe { query<ILanguage3>(ILanguage3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop DisplayName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop LanguageTag: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LanguageTag(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop NativeName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NativeName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Script: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Script(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func CreateLanguage(languageTag: windows_core.HString): Language {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(languageTag)) {
+            try (factory__ = windows_core.factory<Language, ILanguageFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateLanguage(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Language>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Language.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetMuiCompatibleLanguageListFromLanguageTags(languageTags: Windows_Foundation_Collections.IIterable<windows_core.HString>): Windows_Foundation_Collections.IVector<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languageTags)) {
+            try (factory__ = windows_core.factory<Language, ILanguageStatics3>().unwrap()) {
+                hr__ = unsafe { factory__.GetMuiCompatibleLanguageListFromLanguageTags(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVector<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TrySetInputMethodLanguageTag(languageTag: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(languageTag)) {
+            try (factory__ = windows_core.factory<Language, ILanguageStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.TrySetInputMethodLanguageTag(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsWellFormed(languageTag: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(languageTag)) {
+            try (factory__ = windows_core.factory<Language, ILanguageStatics>().unwrap()) {
+                hr__ = unsafe { factory__.IsWellFormed(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func CurrentInputMethodLanguageTag(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Language, ILanguageStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CurrentInputMethodLanguageTag(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.Language"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.Language;{" + ILanguage.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.Language", Language.signature(), ILanguage.iid())
+    }
+
+    public static func intoWinrtHandle(value: Language): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Language {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Language.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Language {
+        Language.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.LanguageLayoutDirection (synthetic:Windows_Globalization_LanguageLayoutDirection)
+@When[Windows_Globalization == "on"]
+public struct LanguageLayoutDirection {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Globalization == "on"]
+public const LanguageLayoutDirection_Ltr = LanguageLayoutDirection(0)
+@When[Windows_Globalization == "on"]
+public const LanguageLayoutDirection_Rtl = LanguageLayoutDirection(1)
+@When[Windows_Globalization == "on"]
+public const LanguageLayoutDirection_TtbLtr = LanguageLayoutDirection(2)
+@When[Windows_Globalization == "on"]
+public const LanguageLayoutDirection_TtbRtl = LanguageLayoutDirection(3)
+
+// Windows.Globalization.NumeralSystemIdentifiers (synthetic:Windows_Globalization_NumeralSystemIdentifiers)
+@When[Windows_Globalization == "on"]
+public struct NumeralSystemIdentifiers <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Brah(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.Brah(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Osma(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.Osma(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MathBold(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.MathBold(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MathDbl(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.MathDbl(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MathSans(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.MathSans(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MathSanb(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.MathSanb(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MathMono(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.MathMono(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZmthBold(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.ZmthBold(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZmthDbl(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.ZmthDbl(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZmthSans(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.ZmthSans(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZmthSanb(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.ZmthSanb(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ZmthMono(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.ZmthMono(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Arab(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Arab(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ArabExt(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ArabExt(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Bali(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Bali(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Beng(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Beng(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Cham(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Cham(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Deva(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Deva(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func FullWide(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FullWide(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Gujr(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Gujr(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Guru(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Guru(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HaniDec(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HaniDec(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Java(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Java(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Kali(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Kali(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Khmr(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Khmr(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Knda(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Knda(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Lana(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Lana(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LanaTham(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LanaTham(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Laoo(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Laoo(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Latn(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Latn(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Lepc(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Lepc(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Limb(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Limb(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Mlym(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Mlym(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Mong(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Mong(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Mtei(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Mtei(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Mymr(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Mymr(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MymrShan(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MymrShan(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Nkoo(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Nkoo(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Olck(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Olck(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Orya(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Orya(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Saur(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Saur(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Sund(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Sund(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Talu(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Talu(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TamlDec(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TamlDec(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Telu(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Telu(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Thai(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Thai(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Tibt(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Tibt(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Vaii(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<NumeralSystemIdentifiers, INumeralSystemIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Vaii(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumeralSystemIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumeralSystemIdentifiers)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumeralSystemIdentifiers", NumeralSystemIdentifiers.signature())
+    }
+}

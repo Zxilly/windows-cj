@@ -7,12 +7,1863 @@ import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+@When[Windows_Devices_Haptics == "on"]
+import windows_sys.Devices.Haptics as Windows_Devices_Haptics
 @When[Windows_Devices_Input == "on"]
 import windows_sys.Devices.Input as Windows_Devices_Input
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
 @When[Windows_Foundation_Collections == "on"]
 import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_Storage_Streams == "on"]
+import windows_sys.Storage.Streams as Windows_Storage_Streams
+@When[Windows_System == "on"]
+import windows_sys.System as Windows_System
+@When[Windows_UI_Core == "on"]
+import windows_sys.UI.Core as Windows_UI_Core
+
+// Windows.UI.Input.AttachableInputObject (synthetic:Windows_UI_Input_AttachableInputObject)
+@When[Windows_UI_Input == "on"]
+public class AttachableInputObject <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AttachableInputObject> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AttachableInputObject {
+        AttachableInputObject(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AttachableInputObject {
+        AttachableInputObject(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAttachableInputObject.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AttachableInputObject> {
+        let ancestors = [IAttachableInputObject.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AttachableInputObject>("AttachableInputObject", IAttachableInputObject.iid(), ancestors, { raw => AttachableInputObject.fromAbiTake(raw) }, { raw => AttachableInputObject.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAttachableInputObject {
+        match (unsafe { query(IAttachableInputObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAttachableInputObject(): IAttachableInputObject {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.AttachableInputObject"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.AttachableInputObject;{" + IAttachableInputObject.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.AttachableInputObject", AttachableInputObject.signature(), IAttachableInputObject.iid())
+    }
+
+    public static func intoWinrtHandle(value: AttachableInputObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AttachableInputObject {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AttachableInputObject.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AttachableInputObject {
+        AttachableInputObject.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.CrossSlideThresholds (synthetic:Windows_UI_Input_CrossSlideThresholds)
+@When[Windows_UI_Input == "on"]
+@C
+public struct CrossSlideThresholds {
+    public var SelectionStart: Float32 = 0.0f32
+    public var SpeedBumpStart: Float32 = 0.0f32
+    public var SpeedBumpEnd: Float32 = 0.0f32
+    public var RearrangeStart: Float32 = 0.0f32
+}
+
+// Windows.UI.Input.CrossSlidingEventArgs (synthetic:Windows_UI_Input_CrossSlidingEventArgs)
+@When[Windows_UI_Input == "on"]
+public class CrossSlidingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CrossSlidingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CrossSlidingEventArgs {
+        CrossSlidingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CrossSlidingEventArgs {
+        CrossSlidingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICrossSlidingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CrossSlidingEventArgs> {
+        let ancestors = [ICrossSlidingEventArgs.iid(), ICrossSlidingEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CrossSlidingEventArgs>("CrossSlidingEventArgs", ICrossSlidingEventArgs.iid(), ancestors, { raw => CrossSlidingEventArgs.fromAbiTake(raw) }, { raw => CrossSlidingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICrossSlidingEventArgs {
+        match (unsafe { query(ICrossSlidingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICrossSlidingEventArgs(): ICrossSlidingEventArgs {
+        defaultInterface()
+    }
+
+    public func asICrossSlidingEventArgs2(): ICrossSlidingEventArgs2 {
+        match (unsafe { query<ICrossSlidingEventArgs2>(ICrossSlidingEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop CrossSlidingState: CrossSlidingState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CrossSlidingState(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return CrossSlidingState(result__)
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.CrossSlidingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.CrossSlidingEventArgs;{" + ICrossSlidingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.CrossSlidingEventArgs", CrossSlidingEventArgs.signature(), ICrossSlidingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: CrossSlidingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CrossSlidingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CrossSlidingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CrossSlidingEventArgs {
+        CrossSlidingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.CrossSlidingState (synthetic:Windows_UI_Input_CrossSlidingState)
+@When[Windows_UI_Input == "on"]
+public struct CrossSlidingState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const CrossSlidingState_Started = CrossSlidingState(0)
+@When[Windows_UI_Input == "on"]
+public const CrossSlidingState_Dragging = CrossSlidingState(1)
+@When[Windows_UI_Input == "on"]
+public const CrossSlidingState_Selecting = CrossSlidingState(2)
+@When[Windows_UI_Input == "on"]
+public const CrossSlidingState_SelectSpeedBumping = CrossSlidingState(3)
+@When[Windows_UI_Input == "on"]
+public const CrossSlidingState_SpeedBumping = CrossSlidingState(4)
+@When[Windows_UI_Input == "on"]
+public const CrossSlidingState_Rearranging = CrossSlidingState(5)
+@When[Windows_UI_Input == "on"]
+public const CrossSlidingState_Completed = CrossSlidingState(6)
+
+// Windows.UI.Input.DraggingEventArgs (synthetic:Windows_UI_Input_DraggingEventArgs)
+@When[Windows_UI_Input == "on"]
+public class DraggingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DraggingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DraggingEventArgs {
+        DraggingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DraggingEventArgs {
+        DraggingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDraggingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DraggingEventArgs> {
+        let ancestors = [IDraggingEventArgs.iid(), IDraggingEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DraggingEventArgs>("DraggingEventArgs", IDraggingEventArgs.iid(), ancestors, { raw => DraggingEventArgs.fromAbiTake(raw) }, { raw => DraggingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDraggingEventArgs {
+        match (unsafe { query(IDraggingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDraggingEventArgs(): IDraggingEventArgs {
+        defaultInterface()
+    }
+
+    public func asIDraggingEventArgs2(): IDraggingEventArgs2 {
+        match (unsafe { query<IDraggingEventArgs2>(IDraggingEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop DraggingState: DraggingState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DraggingState(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return DraggingState(result__)
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.DraggingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.DraggingEventArgs;{" + IDraggingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.DraggingEventArgs", DraggingEventArgs.signature(), IDraggingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: DraggingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DraggingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DraggingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DraggingEventArgs {
+        DraggingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.DraggingState (synthetic:Windows_UI_Input_DraggingState)
+@When[Windows_UI_Input == "on"]
+public struct DraggingState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const DraggingState_Started = DraggingState(0)
+@When[Windows_UI_Input == "on"]
+public const DraggingState_Continuing = DraggingState(1)
+@When[Windows_UI_Input == "on"]
+public const DraggingState_Completed = DraggingState(2)
+
+// Windows.UI.Input.EdgeGesture (synthetic:Windows_UI_Input_EdgeGesture)
+@When[Windows_UI_Input == "on"]
+public class EdgeGesture <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<EdgeGesture> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): EdgeGesture {
+        EdgeGesture(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): EdgeGesture {
+        EdgeGesture(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IEdgeGesture.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<EdgeGesture> {
+        let ancestors = [IEdgeGesture.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<EdgeGesture>("EdgeGesture", IEdgeGesture.iid(), ancestors, { raw => EdgeGesture.fromAbiTake(raw) }, { raw => EdgeGesture.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IEdgeGesture {
+        match (unsafe { query(IEdgeGesture.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIEdgeGesture(): IEdgeGesture {
+        defaultInterface()
+    }
+
+    public func addCanceled(handler: Windows_Foundation.TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Canceled(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeCanceled(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveCanceled(token) }
+        }
+        hr__.check()
+    }
+
+    public func addCompleted(handler: Windows_Foundation.TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Completed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeCompleted(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveCompleted(token) }
+        }
+        hr__.check()
+    }
+
+    public func addStarting(handler: Windows_Foundation.TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Starting(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeStarting(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveStarting(token) }
+        }
+        hr__.check()
+    }
+
+    public static func GetForCurrentView(): EdgeGesture {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<EdgeGesture, IEdgeGestureStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<EdgeGesture>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return EdgeGesture.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.EdgeGesture"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.EdgeGesture;{" + IEdgeGesture.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.EdgeGesture", EdgeGesture.signature(), IEdgeGesture.iid())
+    }
+
+    public static func intoWinrtHandle(value: EdgeGesture): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): EdgeGesture {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        EdgeGesture.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): EdgeGesture {
+        EdgeGesture.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.EdgeGestureEventArgs (synthetic:Windows_UI_Input_EdgeGestureEventArgs)
+@When[Windows_UI_Input == "on"]
+public class EdgeGestureEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<EdgeGestureEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): EdgeGestureEventArgs {
+        EdgeGestureEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): EdgeGestureEventArgs {
+        EdgeGestureEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IEdgeGestureEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<EdgeGestureEventArgs> {
+        let ancestors = [IEdgeGestureEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<EdgeGestureEventArgs>("EdgeGestureEventArgs", IEdgeGestureEventArgs.iid(), ancestors, { raw => EdgeGestureEventArgs.fromAbiTake(raw) }, { raw => EdgeGestureEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IEdgeGestureEventArgs {
+        match (unsafe { query(IEdgeGestureEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIEdgeGestureEventArgs(): IEdgeGestureEventArgs {
+        defaultInterface()
+    }
+
+    public prop Kind: EdgeGestureKind {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Kind(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return EdgeGestureKind(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.EdgeGestureEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.EdgeGestureEventArgs;{" + IEdgeGestureEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.EdgeGestureEventArgs", EdgeGestureEventArgs.signature(), IEdgeGestureEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: EdgeGestureEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): EdgeGestureEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        EdgeGestureEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): EdgeGestureEventArgs {
+        EdgeGestureEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.EdgeGestureKind (synthetic:Windows_UI_Input_EdgeGestureKind)
+@When[Windows_UI_Input == "on"]
+public struct EdgeGestureKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const EdgeGestureKind_Touch = EdgeGestureKind(0)
+@When[Windows_UI_Input == "on"]
+public const EdgeGestureKind_Keyboard = EdgeGestureKind(1)
+@When[Windows_UI_Input == "on"]
+public const EdgeGestureKind_Mouse = EdgeGestureKind(2)
+
+// Windows.UI.Input.GazeInputAccessStatus (synthetic:Windows_UI_Input_GazeInputAccessStatus)
+@When[Windows_UI_Input == "on"]
+public struct GazeInputAccessStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const GazeInputAccessStatus_Unspecified = GazeInputAccessStatus(0)
+@When[Windows_UI_Input == "on"]
+public const GazeInputAccessStatus_Allowed = GazeInputAccessStatus(1)
+@When[Windows_UI_Input == "on"]
+public const GazeInputAccessStatus_DeniedByUser = GazeInputAccessStatus(2)
+@When[Windows_UI_Input == "on"]
+public const GazeInputAccessStatus_DeniedBySystem = GazeInputAccessStatus(3)
+
+// Windows.UI.Input.GestureRecognizer (synthetic:Windows_UI_Input_GestureRecognizer)
+@When[Windows_UI_Input == "on"]
+public class GestureRecognizer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GestureRecognizer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GestureRecognizer {
+        GestureRecognizer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GestureRecognizer {
+        GestureRecognizer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGestureRecognizer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GestureRecognizer> {
+        let ancestors = [IGestureRecognizer.iid(), IGestureRecognizer2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GestureRecognizer>("GestureRecognizer", IGestureRecognizer.iid(), ancestors, { raw => GestureRecognizer.fromAbiTake(raw) }, { raw => GestureRecognizer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGestureRecognizer {
+        match (unsafe { query(IGestureRecognizer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGestureRecognizer(): IGestureRecognizer {
+        defaultInterface()
+    }
+
+    public func asIGestureRecognizer2(): IGestureRecognizer2 {
+        match (unsafe { query<IGestureRecognizer2>(IGestureRecognizer2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop AutoProcessInertia: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AutoProcessInertia(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAutoProcessInertia(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CrossSlideExact: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CrossSlideExact(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCrossSlideExact(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CrossSlideHorizontally: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CrossSlideHorizontally(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCrossSlideHorizontally(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CrossSlideThresholds: CrossSlideThresholds {
+        get() {
+            var result__ = CrossSlideThresholds()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CrossSlideThresholds(CPointer<CrossSlideThresholds>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCrossSlideThresholds(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop GestureSettings: GestureSettings {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GestureSettings(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return GestureSettings(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetGestureSettings(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InertiaExpansion: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InertiaExpansion(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInertiaExpansion(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InertiaExpansionDeceleration: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InertiaExpansionDeceleration(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInertiaExpansionDeceleration(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InertiaRotationAngle: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InertiaRotationAngle(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInertiaRotationAngle(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InertiaRotationDeceleration: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InertiaRotationDeceleration(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInertiaRotationDeceleration(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InertiaTranslationDeceleration: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InertiaTranslationDeceleration(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInertiaTranslationDeceleration(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InertiaTranslationDisplacement: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InertiaTranslationDisplacement(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInertiaTranslationDisplacement(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop IsActive: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsActive(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop IsInertial: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInertial(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop ManipulationExact: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationExact(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetManipulationExact(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop MouseWheelParameters: MouseWheelParameters {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MouseWheelParameters(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<MouseWheelParameters>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return MouseWheelParameters.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop PivotCenter: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PivotCenter(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPivotCenter(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop PivotRadius: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PivotRadius(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPivotRadius(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ShowGestureFeedback: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ShowGestureFeedback(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetShowGestureFeedback(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addCrossSliding(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, CrossSlidingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, CrossSlidingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CrossSliding(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeCrossSliding(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveCrossSliding(token) }
+        }
+        hr__.check()
+    }
+
+    public func addDragging(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, DraggingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, DraggingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Dragging(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeDragging(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveDragging(token) }
+        }
+        hr__.check()
+    }
+
+    public func addHolding(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, HoldingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, HoldingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Holding(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeHolding(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveHolding(token) }
+        }
+        hr__.check()
+    }
+
+    public func addManipulationCompleted(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationCompletedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationCompletedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationCompleted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeManipulationCompleted(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveManipulationCompleted(token) }
+        }
+        hr__.check()
+    }
+
+    public func addManipulationInertiaStarting(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationInertiaStartingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationInertiaStartingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationInertiaStarting(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeManipulationInertiaStarting(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveManipulationInertiaStarting(token) }
+        }
+        hr__.check()
+    }
+
+    public func addManipulationStarted(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationStartedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationStartedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationStarted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeManipulationStarted(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveManipulationStarted(token) }
+        }
+        hr__.check()
+    }
+
+    public func addManipulationUpdated(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationUpdatedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, ManipulationUpdatedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationUpdated(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeManipulationUpdated(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveManipulationUpdated(token) }
+        }
+        hr__.check()
+    }
+
+    public func addRightTapped(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, RightTappedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, RightTappedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RightTapped(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeRightTapped(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveRightTapped(token) }
+        }
+        hr__.check()
+    }
+
+    public func addTapped(handler: Windows_Foundation.TypedEventHandler<GestureRecognizer, TappedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<GestureRecognizer, TappedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Tapped(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeTapped(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveTapped(token) }
+        }
+        hr__.check()
+    }
+
+    public func CanBeDoubleTap(value: PointerPoint): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<PointerPoint>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanBeDoubleTap(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ProcessDownEvent(value: PointerPoint): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<PointerPoint>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProcessDownEvent(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ProcessMoveEvents(value: Windows_Foundation_Collections.IVector<PointerPoint>): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IVector<PointerPoint>>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProcessMoveEvents(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ProcessUpEvent(value: PointerPoint): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<PointerPoint>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProcessUpEvent(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ProcessMouseWheelEvent(value: PointerPoint, isShiftKeyDown: Bool, isControlKeyDown: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<PointerPoint>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProcessMouseWheelEvent(__argBorrow0.asRaw(), isShiftKeyDown, isControlKeyDown) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ProcessInertia(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ProcessInertia() }
+        }
+        hr__.check()
+    }
+
+    public func CompleteGesture(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CompleteGesture() }
+        }
+        hr__.check()
+    }
+
+    public static func new(): GestureRecognizer {
+        var created__: Option<GestureRecognizer> = Option<GestureRecognizer>.None
+        try (factory__ = windows_core.factory<GestureRecognizer, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<GestureRecognizer>(GestureRecognizer.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce GestureRecognizer")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.GestureRecognizer"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.GestureRecognizer;{" + IGestureRecognizer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.GestureRecognizer", GestureRecognizer.signature(), IGestureRecognizer.iid())
+    }
+
+    public static func intoWinrtHandle(value: GestureRecognizer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GestureRecognizer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GestureRecognizer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GestureRecognizer {
+        GestureRecognizer.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.GestureSettings (synthetic:Windows_UI_Input_GestureSettings)
+@When[Windows_UI_Input == "on"]
+public struct GestureSettings {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: GestureSettings): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: GestureSettings): GestureSettings {
+        return GestureSettings(value | other.value)
+    }
+    public operator func &(other: GestureSettings): GestureSettings {
+        return GestureSettings(value & other.value)
+    }
+    public operator func ^(other: GestureSettings): GestureSettings {
+        return GestureSettings(value ^ other.value)
+    }
+    public operator func !(): GestureSettings {
+        return GestureSettings(!value)
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_None = GestureSettings(0)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_Tap = GestureSettings(1)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_DoubleTap = GestureSettings(2)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_Hold = GestureSettings(4)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_HoldWithMouse = GestureSettings(8)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_RightTap = GestureSettings(16)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_Drag = GestureSettings(32)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationTranslateX = GestureSettings(64)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationTranslateY = GestureSettings(128)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationTranslateRailsX = GestureSettings(256)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationTranslateRailsY = GestureSettings(512)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationRotate = GestureSettings(1024)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationScale = GestureSettings(2048)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationTranslateInertia = GestureSettings(4096)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationRotateInertia = GestureSettings(8192)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationScaleInertia = GestureSettings(16384)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_CrossSlide = GestureSettings(32768)
+@When[Windows_UI_Input == "on"]
+public const GestureSettings_ManipulationMultipleFingerPanning = GestureSettings(65536)
+
+// Windows.UI.Input.HoldingEventArgs (synthetic:Windows_UI_Input_HoldingEventArgs)
+@When[Windows_UI_Input == "on"]
+public class HoldingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<HoldingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): HoldingEventArgs {
+        HoldingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): HoldingEventArgs {
+        HoldingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IHoldingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<HoldingEventArgs> {
+        let ancestors = [IHoldingEventArgs.iid(), IHoldingEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<HoldingEventArgs>("HoldingEventArgs", IHoldingEventArgs.iid(), ancestors, { raw => HoldingEventArgs.fromAbiTake(raw) }, { raw => HoldingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IHoldingEventArgs {
+        match (unsafe { query(IHoldingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIHoldingEventArgs(): IHoldingEventArgs {
+        defaultInterface()
+    }
+
+    public func asIHoldingEventArgs2(): IHoldingEventArgs2 {
+        match (unsafe { query<IHoldingEventArgs2>(IHoldingEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop HoldingState: HoldingState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HoldingState(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return HoldingState(result__)
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.HoldingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.HoldingEventArgs;{" + IHoldingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.HoldingEventArgs", HoldingEventArgs.signature(), IHoldingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: HoldingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HoldingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        HoldingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): HoldingEventArgs {
+        HoldingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.HoldingState (synthetic:Windows_UI_Input_HoldingState)
+@When[Windows_UI_Input == "on"]
+public struct HoldingState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const HoldingState_Started = HoldingState(0)
+@When[Windows_UI_Input == "on"]
+public const HoldingState_Completed = HoldingState(1)
+@When[Windows_UI_Input == "on"]
+public const HoldingState_Canceled = HoldingState(2)
+
+// Windows.UI.Input.IAttachableInputObject (synthetic:Windows_UI_Input_IAttachableInputObject)
+@When[Windows_UI_Input == "on"]
+@Interface["9b822734-a3c1-542a-b2f4-0e32b773fb07", "Windows.UI.Input.IAttachableInputObject"]
+public interface IAttachableInputObject <: IInspectable {
+}
+
+// Windows.UI.Input.IAttachableInputObjectFactory (synthetic:Windows_UI_Input_IAttachableInputObjectFactory)
+@When[Windows_UI_Input == "on"]
+@Interface["a4c54c4e-42bc-58fa-a640-ea1516f4c06b", "Windows.UI.Input.IAttachableInputObjectFactory"]
+public interface IAttachableInputObjectFactory <: IInspectable {
+}
+
+// Windows.UI.Input.ICrossSlidingEventArgs (synthetic:Windows_UI_Input_ICrossSlidingEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["e9374738-6f88-41d9-8720-78e08e398349", "Windows.UI.Input.ICrossSlidingEventArgs"]
+public interface ICrossSlidingEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func CrossSlidingState(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Input.ICrossSlidingEventArgs2 (synthetic:Windows_UI_Input_ICrossSlidingEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["eefb7d48-c070-59f3-8dab-bcaf621d8687", "Windows.UI.Input.ICrossSlidingEventArgs2"]
+public interface ICrossSlidingEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.IDraggingEventArgs (synthetic:Windows_UI_Input_IDraggingEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["1c905384-083c-4bd3-b559-179cddeb33ec", "Windows.UI.Input.IDraggingEventArgs"]
+public interface IDraggingEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func DraggingState(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Input.IDraggingEventArgs2 (synthetic:Windows_UI_Input_IDraggingEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["71efdbf9-382a-55ca-b4b9-008123c1bf1a", "Windows.UI.Input.IDraggingEventArgs2"]
+public interface IDraggingEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.IEdgeGesture (synthetic:Windows_UI_Input_IEdgeGesture)
+@When[Windows_UI_Input == "on"]
+@Interface["580d5292-2ab1-49aa-a7f0-33bd3f8df9f1", "Windows.UI.Input.IEdgeGesture"]
+public interface IEdgeGesture <: IInspectable {
+    func Starting(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveStarting(token: Int64): Int32
+    func Completed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveCompleted(token: Int64): Int32
+    func Canceled(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveCanceled(token: Int64): Int32
+}
+
+// Windows.UI.Input.IEdgeGestureEventArgs (synthetic:Windows_UI_Input_IEdgeGestureEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["44fa4a24-2d09-42e1-8b5e-368208796a4c", "Windows.UI.Input.IEdgeGestureEventArgs"]
+public interface IEdgeGestureEventArgs <: IInspectable {
+    func Kind(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Input.IEdgeGestureStatics (synthetic:Windows_UI_Input_IEdgeGestureStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["bc6a8519-18ee-4043-9839-4fc584d60a14", "Windows.UI.Input.IEdgeGestureStatics", "GetForCurrentView.current=Com"]
+public interface IEdgeGestureStatics <: IInspectable {
+    func GetForCurrentView(current: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IGestureRecognizer (synthetic:Windows_UI_Input_IGestureRecognizer)
+@When[Windows_UI_Input == "on"]
+@Interface["b47a37bf-3d6b-4f88-83e8-6dcb4012ffb0", "Windows.UI.Input.IGestureRecognizer", "MouseWheelParameters.value=Com"]
+public interface IGestureRecognizer <: IInspectable {
+    func GestureSettings(value: CPointer<UInt32>): Int32
+    func SetGestureSettings(value: UInt32): Int32
+    func IsInertial(value: CPointer<Bool>): Int32
+    func IsActive(value: CPointer<Bool>): Int32
+    func ShowGestureFeedback(value: CPointer<Bool>): Int32
+    func SetShowGestureFeedback(value: Bool): Int32
+    func PivotCenter(value: CPointer<Windows_Foundation.Point>): Int32
+    func SetPivotCenter(value: Windows_Foundation.Point): Int32
+    func PivotRadius(value: CPointer<Float32>): Int32
+    func SetPivotRadius(value: Float32): Int32
+    func InertiaTranslationDeceleration(value: CPointer<Float32>): Int32
+    func SetInertiaTranslationDeceleration(value: Float32): Int32
+    func InertiaRotationDeceleration(value: CPointer<Float32>): Int32
+    func SetInertiaRotationDeceleration(value: Float32): Int32
+    func InertiaExpansionDeceleration(value: CPointer<Float32>): Int32
+    func SetInertiaExpansionDeceleration(value: Float32): Int32
+    func InertiaTranslationDisplacement(value: CPointer<Float32>): Int32
+    func SetInertiaTranslationDisplacement(value: Float32): Int32
+    func InertiaRotationAngle(value: CPointer<Float32>): Int32
+    func SetInertiaRotationAngle(value: Float32): Int32
+    func InertiaExpansion(value: CPointer<Float32>): Int32
+    func SetInertiaExpansion(value: Float32): Int32
+    func ManipulationExact(value: CPointer<Bool>): Int32
+    func SetManipulationExact(value: Bool): Int32
+    func CrossSlideThresholds(value: CPointer<CrossSlideThresholds>): Int32
+    func SetCrossSlideThresholds(value: CrossSlideThresholds): Int32
+    func CrossSlideHorizontally(value: CPointer<Bool>): Int32
+    func SetCrossSlideHorizontally(value: Bool): Int32
+    func CrossSlideExact(value: CPointer<Bool>): Int32
+    func SetCrossSlideExact(value: Bool): Int32
+    func AutoProcessInertia(value: CPointer<Bool>): Int32
+    func SetAutoProcessInertia(value: Bool): Int32
+    func MouseWheelParameters(value: CPointer<CPointer<Unit>>): Int32
+    func CanBeDoubleTap(value: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func ProcessDownEvent(value: CPointer<Unit>): Int32
+    func ProcessMoveEvents(value: CPointer<Unit>): Int32
+    func ProcessUpEvent(value: CPointer<Unit>): Int32
+    func ProcessMouseWheelEvent(value: CPointer<Unit>, isShiftKeyDown: Bool, isControlKeyDown: Bool): Int32
+    func ProcessInertia(): Int32
+    func CompleteGesture(): Int32
+    func Tapped(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveTapped(token: Int64): Int32
+    func RightTapped(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveRightTapped(token: Int64): Int32
+    func Holding(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveHolding(token: Int64): Int32
+    func Dragging(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveDragging(token: Int64): Int32
+    func ManipulationStarted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveManipulationStarted(token: Int64): Int32
+    func ManipulationUpdated(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveManipulationUpdated(token: Int64): Int32
+    func ManipulationInertiaStarting(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveManipulationInertiaStarting(token: Int64): Int32
+    func ManipulationCompleted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveManipulationCompleted(token: Int64): Int32
+    func CrossSliding(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveCrossSliding(token: Int64): Int32
+}
+
+// Windows.UI.Input.IGestureRecognizer2 (synthetic:Windows_UI_Input_IGestureRecognizer2)
+@When[Windows_UI_Input == "on"]
+@Interface["d646097f-6ef7-5746-8ba8-8ff2206e6f3b", "Windows.UI.Input.IGestureRecognizer2"]
+public interface IGestureRecognizer2 <: IInspectable {
+    func TapMinContactCount(value: CPointer<UInt32>): Int32
+    func SetTapMinContactCount(value: UInt32): Int32
+    func TapMaxContactCount(value: CPointer<UInt32>): Int32
+    func SetTapMaxContactCount(value: UInt32): Int32
+    func HoldMinContactCount(value: CPointer<UInt32>): Int32
+    func SetHoldMinContactCount(value: UInt32): Int32
+    func HoldMaxContactCount(value: CPointer<UInt32>): Int32
+    func SetHoldMaxContactCount(value: UInt32): Int32
+    func HoldRadius(value: CPointer<Float32>): Int32
+    func SetHoldRadius(value: Float32): Int32
+    func HoldStartDelay(value: CPointer<Windows_Foundation.TimeSpan>): Int32
+    func SetHoldStartDelay(value: Windows_Foundation.TimeSpan): Int32
+    func TranslationMinContactCount(value: CPointer<UInt32>): Int32
+    func SetTranslationMinContactCount(value: UInt32): Int32
+    func TranslationMaxContactCount(value: CPointer<UInt32>): Int32
+    func SetTranslationMaxContactCount(value: UInt32): Int32
+}
+
+// Windows.UI.Input.IHoldingEventArgs (synthetic:Windows_UI_Input_IHoldingEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["2bf755c5-e799-41b4-bb40-242f40959b71", "Windows.UI.Input.IHoldingEventArgs"]
+public interface IHoldingEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func HoldingState(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Input.IHoldingEventArgs2 (synthetic:Windows_UI_Input_IHoldingEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["141da9ea-4c79-5674-afea-493fdeb91f19", "Windows.UI.Input.IHoldingEventArgs2"]
+public interface IHoldingEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+    func CurrentContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.IInputActivationListener (synthetic:Windows_UI_Input_IInputActivationListener)
+@When[Windows_UI_Input == "on"]
+@Interface["5d6d4ed2-28c7-5ae3-aa74-c918a9f243ca", "Windows.UI.Input.IInputActivationListener"]
+public interface IInputActivationListener <: IInspectable {
+    func State(value: CPointer<Int32>): Int32
+    func InputActivationChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveInputActivationChanged(token: Int64): Int32
+}
+
+// Windows.UI.Input.IInputActivationListenerActivationChangedEventArgs (synthetic:Windows_UI_Input_IInputActivationListenerActivationChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["7699b465-1dcf-5791-b4b9-6cafbeed2056", "Windows.UI.Input.IInputActivationListenerActivationChangedEventArgs"]
+public interface IInputActivationListenerActivationChangedEventArgs <: IInspectable {
+    func State(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Input.IKeyboardDeliveryInterceptor (synthetic:Windows_UI_Input_IKeyboardDeliveryInterceptor)
+@When[Windows_UI_Input == "on"]
+@Interface["b4baf068-8f49-446c-8db5-8c0ffe85cc9e", "Windows.UI.Input.IKeyboardDeliveryInterceptor"]
+public interface IKeyboardDeliveryInterceptor <: IInspectable {
+    func IsInterceptionEnabledWhenInForeground(value: CPointer<Bool>): Int32
+    func SetIsInterceptionEnabledWhenInForeground(value: Bool): Int32
+    func KeyDown(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveKeyDown(token: Int64): Int32
+    func KeyUp(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveKeyUp(token: Int64): Int32
+}
+
+// Windows.UI.Input.IKeyboardDeliveryInterceptorStatics (synthetic:Windows_UI_Input_IKeyboardDeliveryInterceptorStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["f9f63ba2-ceba-4755-8a7e-14c0ffecd239", "Windows.UI.Input.IKeyboardDeliveryInterceptorStatics", "GetForCurrentView.keyboardDeliverySettings=Com"]
+public interface IKeyboardDeliveryInterceptorStatics <: IInspectable {
+    func GetForCurrentView(keyboardDeliverySettings: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IManipulationCompletedEventArgs (synthetic:Windows_UI_Input_IManipulationCompletedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["b34ab22b-d19b-46ff-9f38-dec7754bb9e7", "Windows.UI.Input.IManipulationCompletedEventArgs"]
+public interface IManipulationCompletedEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func Cumulative(value: CPointer<ManipulationDelta>): Int32
+    func Velocities(value: CPointer<ManipulationVelocities>): Int32
+}
+
+// Windows.UI.Input.IManipulationCompletedEventArgs2 (synthetic:Windows_UI_Input_IManipulationCompletedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["f0c0dce7-30a9-5b96-886f-6560a85e4757", "Windows.UI.Input.IManipulationCompletedEventArgs2"]
+public interface IManipulationCompletedEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+    func CurrentContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.IManipulationInertiaStartingEventArgs (synthetic:Windows_UI_Input_IManipulationInertiaStartingEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["dd37a898-26bf-467a-9ce5-ccf3fb11371e", "Windows.UI.Input.IManipulationInertiaStartingEventArgs"]
+public interface IManipulationInertiaStartingEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func Delta(value: CPointer<ManipulationDelta>): Int32
+    func Cumulative(value: CPointer<ManipulationDelta>): Int32
+    func Velocities(value: CPointer<ManipulationVelocities>): Int32
+}
+
+// Windows.UI.Input.IManipulationInertiaStartingEventArgs2 (synthetic:Windows_UI_Input_IManipulationInertiaStartingEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["c25409b8-f9fa-5a45-bd97-dcbbb2201860", "Windows.UI.Input.IManipulationInertiaStartingEventArgs2"]
+public interface IManipulationInertiaStartingEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.IManipulationStartedEventArgs (synthetic:Windows_UI_Input_IManipulationStartedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["ddec873e-cfce-4932-8c1d-3c3d011a34c0", "Windows.UI.Input.IManipulationStartedEventArgs"]
+public interface IManipulationStartedEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func Cumulative(value: CPointer<ManipulationDelta>): Int32
+}
+
+// Windows.UI.Input.IManipulationStartedEventArgs2 (synthetic:Windows_UI_Input_IManipulationStartedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["2da3db4e-e583-5055-afaa-16fd986531a6", "Windows.UI.Input.IManipulationStartedEventArgs2"]
+public interface IManipulationStartedEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.IManipulationUpdatedEventArgs (synthetic:Windows_UI_Input_IManipulationUpdatedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["cb354ce5-abb8-4f9f-b3ce-8181aa61ad82", "Windows.UI.Input.IManipulationUpdatedEventArgs"]
+public interface IManipulationUpdatedEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func Delta(value: CPointer<ManipulationDelta>): Int32
+    func Cumulative(value: CPointer<ManipulationDelta>): Int32
+    func Velocities(value: CPointer<ManipulationVelocities>): Int32
+}
+
+// Windows.UI.Input.IManipulationUpdatedEventArgs2 (synthetic:Windows_UI_Input_IManipulationUpdatedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["f3dfb96a-3306-5903-a1c5-ff9757a8689e", "Windows.UI.Input.IManipulationUpdatedEventArgs2"]
+public interface IManipulationUpdatedEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+    func CurrentContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.IMouseWheelParameters (synthetic:Windows_UI_Input_IMouseWheelParameters)
+@When[Windows_UI_Input == "on"]
+@Interface["ead0ca44-9ded-4037-8149-5e4cc2564468", "Windows.UI.Input.IMouseWheelParameters"]
+public interface IMouseWheelParameters <: IInspectable {
+    func CharTranslation(value: CPointer<Windows_Foundation.Point>): Int32
+    func SetCharTranslation(value: Windows_Foundation.Point): Int32
+    func DeltaScale(value: CPointer<Float32>): Int32
+    func SetDeltaScale(value: Float32): Int32
+    func DeltaRotationAngle(value: CPointer<Float32>): Int32
+    func SetDeltaRotationAngle(value: Float32): Int32
+    func PageTranslation(value: CPointer<Windows_Foundation.Point>): Int32
+    func SetPageTranslation(value: Windows_Foundation.Point): Int32
+}
+
+// Windows.UI.Input.IPhysicalGestureRecognizer (synthetic:Windows_UI_Input_IPhysicalGestureRecognizer)
+@When[Windows_UI_Input == "on"]
+@Interface["79a29f4d-32a6-5aa5-a999-42b0b420c66d", "Windows.UI.Input.IPhysicalGestureRecognizer"]
+public interface IPhysicalGestureRecognizer <: IInspectable {
+    func IsActive(value: CPointer<Bool>): Int32
+    func GestureSettings(value: CPointer<UInt32>): Int32
+    func SetGestureSettings(value: UInt32): Int32
+    func TapMinContactCount(value: CPointer<UInt32>): Int32
+    func SetTapMinContactCount(value: UInt32): Int32
+    func TapMaxContactCount(value: CPointer<UInt32>): Int32
+    func SetTapMaxContactCount(value: UInt32): Int32
+    func HoldMinContactCount(value: CPointer<UInt32>): Int32
+    func SetHoldMinContactCount(value: UInt32): Int32
+    func HoldMaxContactCount(value: CPointer<UInt32>): Int32
+    func SetHoldMaxContactCount(value: UInt32): Int32
+    func HoldRadius(value: CPointer<Float32>): Int32
+    func SetHoldRadius(value: Float32): Int32
+    func HoldStartDelay(value: CPointer<Windows_Foundation.TimeSpan>): Int32
+    func SetHoldStartDelay(value: Windows_Foundation.TimeSpan): Int32
+    func TranslationMinContactCount(value: CPointer<UInt32>): Int32
+    func SetTranslationMinContactCount(value: UInt32): Int32
+    func TranslationMaxContactCount(value: CPointer<UInt32>): Int32
+    func SetTranslationMaxContactCount(value: UInt32): Int32
+    func ProcessDownEvent(value: CPointer<Unit>): Int32
+    func ProcessMoveEvents(value: CPointer<Unit>): Int32
+    func ProcessUpEvent(value: CPointer<Unit>): Int32
+    func CompleteGesture(): Int32
+    func ManipulationStarted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveManipulationStarted(token: Int64): Int32
+    func ManipulationUpdated(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveManipulationUpdated(token: Int64): Int32
+    func ManipulationCompleted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveManipulationCompleted(token: Int64): Int32
+    func Tapped(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveTapped(token: Int64): Int32
+    func Holding(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveHolding(token: Int64): Int32
+}
 
 // Windows.UI.Input.IPointerPoint (synthetic:Windows_UI_Input_IPointerPoint)
 @When[Windows_UI_Input == "on"]
@@ -90,6 +1941,1858 @@ public interface IPointerPointTransform <: IInspectable {
     func Inverse(value: CPointer<CPointer<Unit>>): Int32
     func TryTransform(inPoint: Windows_Foundation.Point, outPoint: CPointer<Windows_Foundation.Point>, returnValue: CPointer<Bool>): Int32
     func TransformBounds(rect: Windows_Foundation.Rect, returnValue: CPointer<Windows_Foundation.Rect>): Int32
+}
+
+// Windows.UI.Input.IPointerVisualizationSettings (synthetic:Windows_UI_Input_IPointerVisualizationSettings)
+@When[Windows_UI_Input == "on"]
+@Interface["4d1e6461-84f7-499d-bd91-2a36e2b7aaa2", "Windows.UI.Input.IPointerVisualizationSettings"]
+public interface IPointerVisualizationSettings <: IInspectable {
+    func SetIsContactFeedbackEnabled(value: Bool): Int32
+    func IsContactFeedbackEnabled(value: CPointer<Bool>): Int32
+    func SetIsBarrelButtonFeedbackEnabled(value: Bool): Int32
+    func IsBarrelButtonFeedbackEnabled(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Input.IPointerVisualizationSettingsStatics (synthetic:Windows_UI_Input_IPointerVisualizationSettingsStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["68870edb-165b-4214-b4f3-584eca8c8a69", "Windows.UI.Input.IPointerVisualizationSettingsStatics", "GetForCurrentView.visualizationSettings=Com"]
+public interface IPointerVisualizationSettingsStatics <: IInspectable {
+    func GetForCurrentView(visualizationSettings: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialController (synthetic:Windows_UI_Input_IRadialController)
+@When[Windows_UI_Input == "on"]
+@Interface["3055d1c8-df51-43d4-b23b-0e1037467a09", "Windows.UI.Input.IRadialController", "Menu.value=Com"]
+public interface IRadialController <: IInspectable {
+    func Menu(value: CPointer<CPointer<Unit>>): Int32
+    func RotationResolutionInDegrees(value: CPointer<Float64>): Int32
+    func SetRotationResolutionInDegrees(value: Float64): Int32
+    func UseAutomaticHapticFeedback(value: CPointer<Bool>): Int32
+    func SetUseAutomaticHapticFeedback(value: Bool): Int32
+    func ScreenContactStarted(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveScreenContactStarted(cookie: Int64): Int32
+    func ScreenContactEnded(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveScreenContactEnded(cookie: Int64): Int32
+    func ScreenContactContinued(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveScreenContactContinued(cookie: Int64): Int32
+    func ControlLost(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveControlLost(cookie: Int64): Int32
+    func RotationChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveRotationChanged(token: Int64): Int32
+    func ButtonClicked(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveButtonClicked(token: Int64): Int32
+    func ControlAcquired(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveControlAcquired(cookie: Int64): Int32
+}
+
+// Windows.UI.Input.IRadialController2 (synthetic:Windows_UI_Input_IRadialController2)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577eff-4cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialController2"]
+public interface IRadialController2 <: IInspectable {
+    func ButtonPressed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveButtonPressed(token: Int64): Int32
+    func ButtonHolding(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveButtonHolding(token: Int64): Int32
+    func ButtonReleased(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveButtonReleased(token: Int64): Int32
+}
+
+// Windows.UI.Input.IRadialControllerButtonClickedEventArgs (synthetic:Windows_UI_Input_IRadialControllerButtonClickedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["206aa438-e651-11e5-bf62-2c27d7404e85", "Windows.UI.Input.IRadialControllerButtonClickedEventArgs", "Contact.value=Com"]
+public interface IRadialControllerButtonClickedEventArgs <: IInspectable {
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerButtonClickedEventArgs2 (synthetic:Windows_UI_Input_IRadialControllerButtonClickedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577ef3-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerButtonClickedEventArgs2", "SimpleHapticsController.value=Com"]
+public interface IRadialControllerButtonClickedEventArgs2 <: IInspectable {
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerButtonHoldingEventArgs (synthetic:Windows_UI_Input_IRadialControllerButtonHoldingEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577eee-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerButtonHoldingEventArgs", "Contact.value=Com;SimpleHapticsController.value=Com"]
+public interface IRadialControllerButtonHoldingEventArgs <: IInspectable {
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerButtonPressedEventArgs (synthetic:Windows_UI_Input_IRadialControllerButtonPressedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577eed-4cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerButtonPressedEventArgs", "Contact.value=Com;SimpleHapticsController.value=Com"]
+public interface IRadialControllerButtonPressedEventArgs <: IInspectable {
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerButtonReleasedEventArgs (synthetic:Windows_UI_Input_IRadialControllerButtonReleasedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577eef-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerButtonReleasedEventArgs", "Contact.value=Com;SimpleHapticsController.value=Com"]
+public interface IRadialControllerButtonReleasedEventArgs <: IInspectable {
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerConfiguration (synthetic:Windows_UI_Input_IRadialControllerConfiguration)
+@When[Windows_UI_Input == "on"]
+@Interface["a6b79ecb-6a52-4430-910c-56370a9d6b42", "Windows.UI.Input.IRadialControllerConfiguration"]
+public interface IRadialControllerConfiguration <: IInspectable {
+    func SetDefaultMenuItems(buttons: CPointer<Unit>): Int32
+    func ResetToDefaultMenuItems(): Int32
+    func TrySelectDefaultMenuItem(type_: Int32, result: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerConfiguration2 (synthetic:Windows_UI_Input_IRadialControllerConfiguration2)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577ef7-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerConfiguration2", "ActiveControllerWhenMenuIsSuppressed.value=Com"]
+public interface IRadialControllerConfiguration2 <: IInspectable {
+    func SetActiveControllerWhenMenuIsSuppressed(value: CPointer<Unit>): Int32
+    func ActiveControllerWhenMenuIsSuppressed(value: CPointer<CPointer<Unit>>): Int32
+    func SetIsMenuSuppressed(value: Bool): Int32
+    func IsMenuSuppressed(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerConfigurationStatics (synthetic:Windows_UI_Input_IRadialControllerConfigurationStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["79b6b0e5-069a-4486-a99d-8db772b9642f", "Windows.UI.Input.IRadialControllerConfigurationStatics", "GetForCurrentView.configuration=Com"]
+public interface IRadialControllerConfigurationStatics <: IInspectable {
+    func GetForCurrentView(configuration: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerConfigurationStatics2 (synthetic:Windows_UI_Input_IRadialControllerConfigurationStatics2)
+@When[Windows_UI_Input == "on"]
+@Interface["53e08b17-e205-48d3-9caf-80ff47c4d7c7", "Windows.UI.Input.IRadialControllerConfigurationStatics2", "AppController.value=Com"]
+public interface IRadialControllerConfigurationStatics2 <: IInspectable {
+    func SetAppController(value: CPointer<Unit>): Int32
+    func AppController(value: CPointer<CPointer<Unit>>): Int32
+    func SetIsAppControllerEnabled(value: Bool): Int32
+    func IsAppControllerEnabled(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerControlAcquiredEventArgs (synthetic:Windows_UI_Input_IRadialControllerControlAcquiredEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["206aa439-e651-11e5-bf62-2c27d7404e85", "Windows.UI.Input.IRadialControllerControlAcquiredEventArgs", "Contact.value=Com"]
+public interface IRadialControllerControlAcquiredEventArgs <: IInspectable {
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerControlAcquiredEventArgs2 (synthetic:Windows_UI_Input_IRadialControllerControlAcquiredEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577ef4-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerControlAcquiredEventArgs2", "SimpleHapticsController.value=Com"]
+public interface IRadialControllerControlAcquiredEventArgs2 <: IInspectable {
+    func IsButtonPressed(value: CPointer<Bool>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerMenu (synthetic:Windows_UI_Input_IRadialControllerMenu)
+@When[Windows_UI_Input == "on"]
+@Interface["8506b35d-f640-4412-aba0-bad077e5ea8a", "Windows.UI.Input.IRadialControllerMenu", "Items.value=Com;GetSelectedMenuItem.result=Com"]
+public interface IRadialControllerMenu <: IInspectable {
+    func Items(value: CPointer<CPointer<Unit>>): Int32
+    func IsEnabled(value: CPointer<Bool>): Int32
+    func SetIsEnabled(value: Bool): Int32
+    func GetSelectedMenuItem(result: CPointer<CPointer<Unit>>): Int32
+    func SelectMenuItem(menuItem: CPointer<Unit>): Int32
+    func TrySelectPreviouslySelectedMenuItem(result: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerMenuItem (synthetic:Windows_UI_Input_IRadialControllerMenuItem)
+@When[Windows_UI_Input == "on"]
+@Interface["c80fc98d-ad0b-4c9c-8f2f-136a2373a6ba", "Windows.UI.Input.IRadialControllerMenuItem", "DisplayText.value=HString;Tag.value=Com"]
+public interface IRadialControllerMenuItem <: IInspectable {
+    func DisplayText(value: CPointer<CPointer<Unit>>): Int32
+    func Tag(value: CPointer<CPointer<Unit>>): Int32
+    func SetTag(value: CPointer<Unit>): Int32
+    func Invoked(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveInvoked(token: Int64): Int32
+}
+
+// Windows.UI.Input.IRadialControllerMenuItemStatics (synthetic:Windows_UI_Input_IRadialControllerMenuItemStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["249e0887-d842-4524-9df8-e0d647edc887", "Windows.UI.Input.IRadialControllerMenuItemStatics", "CreateFromIcon.result=Com;CreateFromKnownIcon.result=Com"]
+public interface IRadialControllerMenuItemStatics <: IInspectable {
+    func CreateFromIcon(displayText: CPointer<Unit>, icon: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateFromKnownIcon(displayText: CPointer<Unit>, value: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerMenuItemStatics2 (synthetic:Windows_UI_Input_IRadialControllerMenuItemStatics2)
+@When[Windows_UI_Input == "on"]
+@Interface["0cbb70be-7e3e-48bd-be04-2c7fcaa9c1ff", "Windows.UI.Input.IRadialControllerMenuItemStatics2", "CreateFromFontGlyph.result=Com;CreateFromFontGlyphWithUri.result=Com"]
+public interface IRadialControllerMenuItemStatics2 <: IInspectable {
+    func CreateFromFontGlyph(displayText: CPointer<Unit>, glyph: CPointer<Unit>, fontFamily: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateFromFontGlyphWithUri(displayText: CPointer<Unit>, glyph: CPointer<Unit>, fontFamily: CPointer<Unit>, fontUri: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerRotationChangedEventArgs (synthetic:Windows_UI_Input_IRadialControllerRotationChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["206aa435-e651-11e5-bf62-2c27d7404e85", "Windows.UI.Input.IRadialControllerRotationChangedEventArgs", "Contact.value=Com"]
+public interface IRadialControllerRotationChangedEventArgs <: IInspectable {
+    func RotationDeltaInDegrees(value: CPointer<Float64>): Int32
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerRotationChangedEventArgs2 (synthetic:Windows_UI_Input_IRadialControllerRotationChangedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577eec-4cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerRotationChangedEventArgs2", "SimpleHapticsController.value=Com"]
+public interface IRadialControllerRotationChangedEventArgs2 <: IInspectable {
+    func IsButtonPressed(value: CPointer<Bool>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerScreenContact (synthetic:Windows_UI_Input_IRadialControllerScreenContact)
+@When[Windows_UI_Input == "on"]
+@Interface["206aa434-e651-11e5-bf62-2c27d7404e85", "Windows.UI.Input.IRadialControllerScreenContact"]
+public interface IRadialControllerScreenContact <: IInspectable {
+    func Bounds(value: CPointer<Windows_Foundation.Rect>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerScreenContactContinuedEventArgs (synthetic:Windows_UI_Input_IRadialControllerScreenContactContinuedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["206aa437-e651-11e5-bf62-2c27d7404e85", "Windows.UI.Input.IRadialControllerScreenContactContinuedEventArgs", "Contact.value=Com"]
+public interface IRadialControllerScreenContactContinuedEventArgs <: IInspectable {
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerScreenContactContinuedEventArgs2 (synthetic:Windows_UI_Input_IRadialControllerScreenContactContinuedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577ef1-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerScreenContactContinuedEventArgs2", "SimpleHapticsController.value=Com"]
+public interface IRadialControllerScreenContactContinuedEventArgs2 <: IInspectable {
+    func IsButtonPressed(value: CPointer<Bool>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerScreenContactEndedEventArgs (synthetic:Windows_UI_Input_IRadialControllerScreenContactEndedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577ef2-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerScreenContactEndedEventArgs", "SimpleHapticsController.value=Com"]
+public interface IRadialControllerScreenContactEndedEventArgs <: IInspectable {
+    func IsButtonPressed(value: CPointer<Bool>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerScreenContactStartedEventArgs (synthetic:Windows_UI_Input_IRadialControllerScreenContactStartedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["206aa436-e651-11e5-bf62-2c27d7404e85", "Windows.UI.Input.IRadialControllerScreenContactStartedEventArgs", "Contact.value=Com"]
+public interface IRadialControllerScreenContactStartedEventArgs <: IInspectable {
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerScreenContactStartedEventArgs2 (synthetic:Windows_UI_Input_IRadialControllerScreenContactStartedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["3d577ef0-3cee-11e6-b535-001bdc06ab3b", "Windows.UI.Input.IRadialControllerScreenContactStartedEventArgs2", "SimpleHapticsController.value=Com"]
+public interface IRadialControllerScreenContactStartedEventArgs2 <: IInspectable {
+    func IsButtonPressed(value: CPointer<Bool>): Int32
+    func SimpleHapticsController(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRadialControllerStatics (synthetic:Windows_UI_Input_IRadialControllerStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["faded0b7-b84c-4894-87aa-8f25aa5f288b", "Windows.UI.Input.IRadialControllerStatics", "CreateForCurrentView.result=Com"]
+public interface IRadialControllerStatics <: IInspectable {
+    func IsSupported(result: CPointer<Bool>): Int32
+    func CreateForCurrentView(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.IRightTappedEventArgs (synthetic:Windows_UI_Input_IRightTappedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["4cbf40bd-af7a-4a36-9476-b1dce141709a", "Windows.UI.Input.IRightTappedEventArgs"]
+public interface IRightTappedEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+}
+
+// Windows.UI.Input.IRightTappedEventArgs2 (synthetic:Windows_UI_Input_IRightTappedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["61c7b7bb-9f57-5857-a33c-c58c3dfa959e", "Windows.UI.Input.IRightTappedEventArgs2"]
+public interface IRightTappedEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.ISystemButtonEventController (synthetic:Windows_UI_Input_ISystemButtonEventController)
+@When[Windows_UI_Input == "on"]
+@Interface["59b893a9-73bc-52b5-ba41-82511b2cb46c", "Windows.UI.Input.ISystemButtonEventController"]
+public interface ISystemButtonEventController <: IInspectable {
+    func SystemFunctionButtonPressed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveSystemFunctionButtonPressed(token: Int64): Int32
+    func SystemFunctionButtonReleased(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveSystemFunctionButtonReleased(token: Int64): Int32
+    func SystemFunctionLockChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveSystemFunctionLockChanged(token: Int64): Int32
+    func SystemFunctionLockIndicatorChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveSystemFunctionLockIndicatorChanged(token: Int64): Int32
+}
+
+// Windows.UI.Input.ISystemButtonEventControllerStatics (synthetic:Windows_UI_Input_ISystemButtonEventControllerStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["632fb07b-20bd-5e15-af4a-00dbf2064ffa", "Windows.UI.Input.ISystemButtonEventControllerStatics", "CreateForDispatcherQueue.result=Com"]
+public interface ISystemButtonEventControllerStatics <: IInspectable {
+    func CreateForDispatcherQueue(queue: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.ISystemFunctionButtonEventArgs (synthetic:Windows_UI_Input_ISystemFunctionButtonEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["4833896f-80d1-5dd6-92a7-62a508ffef5a", "Windows.UI.Input.ISystemFunctionButtonEventArgs"]
+public interface ISystemFunctionButtonEventArgs <: IInspectable {
+    func Timestamp(value: CPointer<UInt64>): Int32
+    func Handled(value: CPointer<Bool>): Int32
+    func SetHandled(value: Bool): Int32
+}
+
+// Windows.UI.Input.ISystemFunctionLockChangedEventArgs (synthetic:Windows_UI_Input_ISystemFunctionLockChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["cd040608-fcf9-585c-beab-f1d2eaf364ab", "Windows.UI.Input.ISystemFunctionLockChangedEventArgs"]
+public interface ISystemFunctionLockChangedEventArgs <: IInspectable {
+    func Timestamp(value: CPointer<UInt64>): Int32
+    func IsLocked(value: CPointer<Bool>): Int32
+    func Handled(value: CPointer<Bool>): Int32
+    func SetHandled(value: Bool): Int32
+}
+
+// Windows.UI.Input.ISystemFunctionLockIndicatorChangedEventArgs (synthetic:Windows_UI_Input_ISystemFunctionLockIndicatorChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["b212b94e-7a6f-58ae-b304-bae61d0371b9", "Windows.UI.Input.ISystemFunctionLockIndicatorChangedEventArgs"]
+public interface ISystemFunctionLockIndicatorChangedEventArgs <: IInspectable {
+    func Timestamp(value: CPointer<UInt64>): Int32
+    func IsIndicatorOn(value: CPointer<Bool>): Int32
+    func Handled(value: CPointer<Bool>): Int32
+    func SetHandled(value: Bool): Int32
+}
+
+// Windows.UI.Input.ITappedEventArgs (synthetic:Windows_UI_Input_ITappedEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["cfa126e4-253a-4c3c-953b-395c37aed309", "Windows.UI.Input.ITappedEventArgs"]
+public interface ITappedEventArgs <: IInspectable {
+    func PointerDeviceType(value: CPointer<Int32>): Int32
+    func Position(value: CPointer<Windows_Foundation.Point>): Int32
+    func TapCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.ITappedEventArgs2 (synthetic:Windows_UI_Input_ITappedEventArgs2)
+@When[Windows_UI_Input == "on"]
+@Interface["294388f2-177e-51d5-be56-ee0866fa968c", "Windows.UI.Input.ITappedEventArgs2"]
+public interface ITappedEventArgs2 <: IInspectable {
+    func ContactCount(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Input.ITouchpadGesturesController (synthetic:Windows_UI_Input_ITouchpadGesturesController)
+@When[Windows_UI_Input == "on"]
+@Interface["28c13cdd-e068-549f-89c6-1a440c6fc327", "Windows.UI.Input.ITouchpadGesturesController"]
+public interface ITouchpadGesturesController <: IInspectable {
+    func Enabled(value: CPointer<Bool>): Int32
+    func SetEnabled(value: Bool): Int32
+    func SupportedGestures(value: CPointer<UInt32>): Int32
+    func SetSupportedGestures(value: UInt32): Int32
+    func PointerPressed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemovePointerPressed(token: Int64): Int32
+    func PointerMoved(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemovePointerMoved(token: Int64): Int32
+    func PointerReleased(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemovePointerReleased(token: Int64): Int32
+    func GlobalActionPerformed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveGlobalActionPerformed(token: Int64): Int32
+}
+
+// Windows.UI.Input.ITouchpadGesturesControllerStatics (synthetic:Windows_UI_Input_ITouchpadGesturesControllerStatics)
+@When[Windows_UI_Input == "on"]
+@Interface["207ef171-1a73-51cd-a694-8840e09dbafa", "Windows.UI.Input.ITouchpadGesturesControllerStatics", "CreateForProcess.result=Com"]
+public interface ITouchpadGesturesControllerStatics <: IInspectable {
+    func IsSupported(result: CPointer<Bool>): Int32
+    func CreateForProcess(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.ITouchpadGlobalActionEventArgs (synthetic:Windows_UI_Input_ITouchpadGlobalActionEventArgs)
+@When[Windows_UI_Input == "on"]
+@Interface["6edad206-e4e3-5f39-9d13-8575e8e2a12b", "Windows.UI.Input.ITouchpadGlobalActionEventArgs", "PointerDevice.value=Com"]
+public interface ITouchpadGlobalActionEventArgs <: IInspectable {
+    func Action(value: CPointer<Int32>): Int32
+    func PointerDevice(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Input.InputActivationListener (synthetic:Windows_UI_Input_InputActivationListener)
+@When[Windows_UI_Input == "on"]
+public class InputActivationListener <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<InputActivationListener> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): InputActivationListener {
+        InputActivationListener(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): InputActivationListener {
+        InputActivationListener(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IInputActivationListener.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<InputActivationListener> {
+        let ancestors = [IInputActivationListener.iid(), IAttachableInputObject.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<InputActivationListener>("InputActivationListener", IInputActivationListener.iid(), ancestors, { raw => InputActivationListener.fromAbiTake(raw) }, { raw => InputActivationListener.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IInputActivationListener {
+        match (unsafe { query(IInputActivationListener.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIInputActivationListener(): IInputActivationListener {
+        defaultInterface()
+    }
+
+    public func asIAttachableInputObject(): IAttachableInputObject {
+        match (unsafe { query<IAttachableInputObject>(IAttachableInputObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop State: InputActivationState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.State(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return InputActivationState(result__)
+        }
+    }
+
+    public func addInputActivationChanged(handler: Windows_Foundation.TypedEventHandler<InputActivationListener, InputActivationListenerActivationChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<InputActivationListener, InputActivationListenerActivationChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InputActivationChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeInputActivationChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveInputActivationChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.InputActivationListener"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.InputActivationListener;{" + IInputActivationListener.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.InputActivationListener", InputActivationListener.signature(), IInputActivationListener.iid())
+    }
+
+    public static func intoWinrtHandle(value: InputActivationListener): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): InputActivationListener {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        InputActivationListener.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): InputActivationListener {
+        InputActivationListener.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.InputActivationListenerActivationChangedEventArgs (synthetic:Windows_UI_Input_InputActivationListenerActivationChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class InputActivationListenerActivationChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<InputActivationListenerActivationChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): InputActivationListenerActivationChangedEventArgs {
+        InputActivationListenerActivationChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): InputActivationListenerActivationChangedEventArgs {
+        InputActivationListenerActivationChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IInputActivationListenerActivationChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<InputActivationListenerActivationChangedEventArgs> {
+        let ancestors = [IInputActivationListenerActivationChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<InputActivationListenerActivationChangedEventArgs>("InputActivationListenerActivationChangedEventArgs", IInputActivationListenerActivationChangedEventArgs.iid(), ancestors, { raw => InputActivationListenerActivationChangedEventArgs.fromAbiTake(raw) }, { raw => InputActivationListenerActivationChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IInputActivationListenerActivationChangedEventArgs {
+        match (unsafe { query(IInputActivationListenerActivationChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIInputActivationListenerActivationChangedEventArgs(): IInputActivationListenerActivationChangedEventArgs {
+        defaultInterface()
+    }
+
+    public prop State: InputActivationState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.State(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return InputActivationState(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.InputActivationListenerActivationChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.InputActivationListenerActivationChangedEventArgs;{" + IInputActivationListenerActivationChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.InputActivationListenerActivationChangedEventArgs", InputActivationListenerActivationChangedEventArgs.signature(), IInputActivationListenerActivationChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: InputActivationListenerActivationChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): InputActivationListenerActivationChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        InputActivationListenerActivationChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): InputActivationListenerActivationChangedEventArgs {
+        InputActivationListenerActivationChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.InputActivationState (synthetic:Windows_UI_Input_InputActivationState)
+@When[Windows_UI_Input == "on"]
+public struct InputActivationState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const InputActivationState_None = InputActivationState(0)
+@When[Windows_UI_Input == "on"]
+public const InputActivationState_Deactivated = InputActivationState(1)
+@When[Windows_UI_Input == "on"]
+public const InputActivationState_ActivatedNotForeground = InputActivationState(2)
+@When[Windows_UI_Input == "on"]
+public const InputActivationState_ActivatedInForeground = InputActivationState(3)
+
+// Windows.UI.Input.KeyboardDeliveryInterceptor (synthetic:Windows_UI_Input_KeyboardDeliveryInterceptor)
+@When[Windows_UI_Input == "on"]
+public class KeyboardDeliveryInterceptor <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<KeyboardDeliveryInterceptor> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): KeyboardDeliveryInterceptor {
+        KeyboardDeliveryInterceptor(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): KeyboardDeliveryInterceptor {
+        KeyboardDeliveryInterceptor(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IKeyboardDeliveryInterceptor.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<KeyboardDeliveryInterceptor> {
+        let ancestors = [IKeyboardDeliveryInterceptor.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<KeyboardDeliveryInterceptor>("KeyboardDeliveryInterceptor", IKeyboardDeliveryInterceptor.iid(), ancestors, { raw => KeyboardDeliveryInterceptor.fromAbiTake(raw) }, { raw => KeyboardDeliveryInterceptor.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IKeyboardDeliveryInterceptor {
+        match (unsafe { query(IKeyboardDeliveryInterceptor.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIKeyboardDeliveryInterceptor(): IKeyboardDeliveryInterceptor {
+        defaultInterface()
+    }
+
+    public mut prop IsInterceptionEnabledWhenInForeground: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInterceptionEnabledWhenInForeground(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsInterceptionEnabledWhenInForeground(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addKeyDown(handler: Windows_Foundation.TypedEventHandler<KeyboardDeliveryInterceptor, Windows_UI_Core.KeyEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<KeyboardDeliveryInterceptor, Windows_UI_Core.KeyEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.KeyDown(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeKeyDown(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveKeyDown(token) }
+        }
+        hr__.check()
+    }
+
+    public func addKeyUp(handler: Windows_Foundation.TypedEventHandler<KeyboardDeliveryInterceptor, Windows_UI_Core.KeyEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<KeyboardDeliveryInterceptor, Windows_UI_Core.KeyEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.KeyUp(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeKeyUp(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveKeyUp(token) }
+        }
+        hr__.check()
+    }
+
+    public static func GetForCurrentView(): KeyboardDeliveryInterceptor {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KeyboardDeliveryInterceptor, IKeyboardDeliveryInterceptorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<KeyboardDeliveryInterceptor>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return KeyboardDeliveryInterceptor.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.KeyboardDeliveryInterceptor"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.KeyboardDeliveryInterceptor;{" + IKeyboardDeliveryInterceptor.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.KeyboardDeliveryInterceptor", KeyboardDeliveryInterceptor.signature(), IKeyboardDeliveryInterceptor.iid())
+    }
+
+    public static func intoWinrtHandle(value: KeyboardDeliveryInterceptor): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): KeyboardDeliveryInterceptor {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        KeyboardDeliveryInterceptor.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): KeyboardDeliveryInterceptor {
+        KeyboardDeliveryInterceptor.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.ManipulationCompletedEventArgs (synthetic:Windows_UI_Input_ManipulationCompletedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class ManipulationCompletedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ManipulationCompletedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ManipulationCompletedEventArgs {
+        ManipulationCompletedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ManipulationCompletedEventArgs {
+        ManipulationCompletedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IManipulationCompletedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ManipulationCompletedEventArgs> {
+        let ancestors = [IManipulationCompletedEventArgs.iid(), IManipulationCompletedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ManipulationCompletedEventArgs>("ManipulationCompletedEventArgs", IManipulationCompletedEventArgs.iid(), ancestors, { raw => ManipulationCompletedEventArgs.fromAbiTake(raw) }, { raw => ManipulationCompletedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IManipulationCompletedEventArgs {
+        match (unsafe { query(IManipulationCompletedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationCompletedEventArgs(): IManipulationCompletedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIManipulationCompletedEventArgs2(): IManipulationCompletedEventArgs2 {
+        match (unsafe { query<IManipulationCompletedEventArgs2>(IManipulationCompletedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Cumulative: ManipulationDelta {
+        get() {
+            var result__ = ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cumulative(CPointer<ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Velocities: ManipulationVelocities {
+        get() {
+            var result__ = ManipulationVelocities()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Velocities(CPointer<ManipulationVelocities>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.ManipulationCompletedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.ManipulationCompletedEventArgs;{" + IManipulationCompletedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.ManipulationCompletedEventArgs", ManipulationCompletedEventArgs.signature(), IManipulationCompletedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ManipulationCompletedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ManipulationCompletedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ManipulationCompletedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ManipulationCompletedEventArgs {
+        ManipulationCompletedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.ManipulationDelta (synthetic:Windows_UI_Input_ManipulationDelta)
+@When[Windows_UI_Input == "on"]
+@C
+public struct ManipulationDelta {
+    public var Translation: Windows_Foundation.Point = Windows_Foundation.Point()
+    public var Scale: Float32 = 0.0f32
+    public var Rotation: Float32 = 0.0f32
+    public var Expansion: Float32 = 0.0f32
+}
+
+// Windows.UI.Input.ManipulationInertiaStartingEventArgs (synthetic:Windows_UI_Input_ManipulationInertiaStartingEventArgs)
+@When[Windows_UI_Input == "on"]
+public class ManipulationInertiaStartingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ManipulationInertiaStartingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ManipulationInertiaStartingEventArgs {
+        ManipulationInertiaStartingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ManipulationInertiaStartingEventArgs {
+        ManipulationInertiaStartingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IManipulationInertiaStartingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ManipulationInertiaStartingEventArgs> {
+        let ancestors = [IManipulationInertiaStartingEventArgs.iid(), IManipulationInertiaStartingEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ManipulationInertiaStartingEventArgs>("ManipulationInertiaStartingEventArgs", IManipulationInertiaStartingEventArgs.iid(), ancestors, { raw => ManipulationInertiaStartingEventArgs.fromAbiTake(raw) }, { raw => ManipulationInertiaStartingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IManipulationInertiaStartingEventArgs {
+        match (unsafe { query(IManipulationInertiaStartingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationInertiaStartingEventArgs(): IManipulationInertiaStartingEventArgs {
+        defaultInterface()
+    }
+
+    public func asIManipulationInertiaStartingEventArgs2(): IManipulationInertiaStartingEventArgs2 {
+        match (unsafe { query<IManipulationInertiaStartingEventArgs2>(IManipulationInertiaStartingEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Cumulative: ManipulationDelta {
+        get() {
+            var result__ = ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cumulative(CPointer<ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Delta: ManipulationDelta {
+        get() {
+            var result__ = ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Delta(CPointer<ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Velocities: ManipulationVelocities {
+        get() {
+            var result__ = ManipulationVelocities()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Velocities(CPointer<ManipulationVelocities>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.ManipulationInertiaStartingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.ManipulationInertiaStartingEventArgs;{" + IManipulationInertiaStartingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.ManipulationInertiaStartingEventArgs", ManipulationInertiaStartingEventArgs.signature(), IManipulationInertiaStartingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ManipulationInertiaStartingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ManipulationInertiaStartingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ManipulationInertiaStartingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ManipulationInertiaStartingEventArgs {
+        ManipulationInertiaStartingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.ManipulationStartedEventArgs (synthetic:Windows_UI_Input_ManipulationStartedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class ManipulationStartedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ManipulationStartedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ManipulationStartedEventArgs {
+        ManipulationStartedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ManipulationStartedEventArgs {
+        ManipulationStartedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IManipulationStartedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ManipulationStartedEventArgs> {
+        let ancestors = [IManipulationStartedEventArgs.iid(), IManipulationStartedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ManipulationStartedEventArgs>("ManipulationStartedEventArgs", IManipulationStartedEventArgs.iid(), ancestors, { raw => ManipulationStartedEventArgs.fromAbiTake(raw) }, { raw => ManipulationStartedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IManipulationStartedEventArgs {
+        match (unsafe { query(IManipulationStartedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationStartedEventArgs(): IManipulationStartedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIManipulationStartedEventArgs2(): IManipulationStartedEventArgs2 {
+        match (unsafe { query<IManipulationStartedEventArgs2>(IManipulationStartedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Cumulative: ManipulationDelta {
+        get() {
+            var result__ = ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cumulative(CPointer<ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.ManipulationStartedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.ManipulationStartedEventArgs;{" + IManipulationStartedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.ManipulationStartedEventArgs", ManipulationStartedEventArgs.signature(), IManipulationStartedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ManipulationStartedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ManipulationStartedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ManipulationStartedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ManipulationStartedEventArgs {
+        ManipulationStartedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.ManipulationUpdatedEventArgs (synthetic:Windows_UI_Input_ManipulationUpdatedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class ManipulationUpdatedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ManipulationUpdatedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ManipulationUpdatedEventArgs {
+        ManipulationUpdatedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ManipulationUpdatedEventArgs {
+        ManipulationUpdatedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IManipulationUpdatedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ManipulationUpdatedEventArgs> {
+        let ancestors = [IManipulationUpdatedEventArgs.iid(), IManipulationUpdatedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ManipulationUpdatedEventArgs>("ManipulationUpdatedEventArgs", IManipulationUpdatedEventArgs.iid(), ancestors, { raw => ManipulationUpdatedEventArgs.fromAbiTake(raw) }, { raw => ManipulationUpdatedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IManipulationUpdatedEventArgs {
+        match (unsafe { query(IManipulationUpdatedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationUpdatedEventArgs(): IManipulationUpdatedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIManipulationUpdatedEventArgs2(): IManipulationUpdatedEventArgs2 {
+        match (unsafe { query<IManipulationUpdatedEventArgs2>(IManipulationUpdatedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Cumulative: ManipulationDelta {
+        get() {
+            var result__ = ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cumulative(CPointer<ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Delta: ManipulationDelta {
+        get() {
+            var result__ = ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Delta(CPointer<ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Velocities: ManipulationVelocities {
+        get() {
+            var result__ = ManipulationVelocities()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Velocities(CPointer<ManipulationVelocities>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.ManipulationUpdatedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.ManipulationUpdatedEventArgs;{" + IManipulationUpdatedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.ManipulationUpdatedEventArgs", ManipulationUpdatedEventArgs.signature(), IManipulationUpdatedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ManipulationUpdatedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ManipulationUpdatedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ManipulationUpdatedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ManipulationUpdatedEventArgs {
+        ManipulationUpdatedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.ManipulationVelocities (synthetic:Windows_UI_Input_ManipulationVelocities)
+@When[Windows_UI_Input == "on"]
+@C
+public struct ManipulationVelocities {
+    public var Linear: Windows_Foundation.Point = Windows_Foundation.Point()
+    public var Angular: Float32 = 0.0f32
+    public var Expansion: Float32 = 0.0f32
+}
+
+// Windows.UI.Input.MouseWheelParameters (synthetic:Windows_UI_Input_MouseWheelParameters)
+@When[Windows_UI_Input == "on"]
+public class MouseWheelParameters <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MouseWheelParameters> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MouseWheelParameters {
+        MouseWheelParameters(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MouseWheelParameters {
+        MouseWheelParameters(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMouseWheelParameters.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MouseWheelParameters> {
+        let ancestors = [IMouseWheelParameters.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MouseWheelParameters>("MouseWheelParameters", IMouseWheelParameters.iid(), ancestors, { raw => MouseWheelParameters.fromAbiTake(raw) }, { raw => MouseWheelParameters.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMouseWheelParameters {
+        match (unsafe { query(IMouseWheelParameters.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMouseWheelParameters(): IMouseWheelParameters {
+        defaultInterface()
+    }
+
+    public mut prop CharTranslation: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CharTranslation(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCharTranslation(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DeltaRotationAngle: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeltaRotationAngle(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDeltaRotationAngle(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DeltaScale: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeltaScale(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDeltaScale(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop PageTranslation: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PageTranslation(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPageTranslation(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.MouseWheelParameters"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.MouseWheelParameters;{" + IMouseWheelParameters.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.MouseWheelParameters", MouseWheelParameters.signature(), IMouseWheelParameters.iid())
+    }
+
+    public static func intoWinrtHandle(value: MouseWheelParameters): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MouseWheelParameters {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MouseWheelParameters.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MouseWheelParameters {
+        MouseWheelParameters.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.PhysicalGestureRecognizer (synthetic:Windows_UI_Input_PhysicalGestureRecognizer)
+@When[Windows_UI_Input == "on"]
+public class PhysicalGestureRecognizer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PhysicalGestureRecognizer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PhysicalGestureRecognizer {
+        PhysicalGestureRecognizer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PhysicalGestureRecognizer {
+        PhysicalGestureRecognizer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPhysicalGestureRecognizer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PhysicalGestureRecognizer> {
+        let ancestors = [IPhysicalGestureRecognizer.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PhysicalGestureRecognizer>("PhysicalGestureRecognizer", IPhysicalGestureRecognizer.iid(), ancestors, { raw => PhysicalGestureRecognizer.fromAbiTake(raw) }, { raw => PhysicalGestureRecognizer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPhysicalGestureRecognizer {
+        match (unsafe { query(IPhysicalGestureRecognizer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPhysicalGestureRecognizer(): IPhysicalGestureRecognizer {
+        defaultInterface()
+    }
+
+    public mut prop GestureSettings: GestureSettings {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GestureSettings(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return GestureSettings(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetGestureSettings(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HoldMaxContactCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HoldMaxContactCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHoldMaxContactCount(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HoldMinContactCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HoldMinContactCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHoldMinContactCount(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HoldRadius: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HoldRadius(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHoldRadius(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HoldStartDelay: Windows_Foundation.TimeSpan {
+        get() {
+            var result__ = Windows_Foundation.TimeSpan()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HoldStartDelay(CPointer<Windows_Foundation.TimeSpan>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHoldStartDelay(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop IsActive: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsActive(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop TapMaxContactCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TapMaxContactCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTapMaxContactCount(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TapMinContactCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TapMinContactCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTapMinContactCount(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TranslationMaxContactCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TranslationMaxContactCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTranslationMaxContactCount(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TranslationMinContactCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TranslationMinContactCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTranslationMinContactCount(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addHolding(handler: Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, HoldingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, HoldingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Holding(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeHolding(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveHolding(token) }
+        }
+        hr__.check()
+    }
+
+    public func addManipulationCompleted(handler: Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, ManipulationCompletedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, ManipulationCompletedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationCompleted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeManipulationCompleted(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveManipulationCompleted(token) }
+        }
+        hr__.check()
+    }
+
+    public func addManipulationStarted(handler: Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, ManipulationStartedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, ManipulationStartedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationStarted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeManipulationStarted(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveManipulationStarted(token) }
+        }
+        hr__.check()
+    }
+
+    public func addManipulationUpdated(handler: Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, ManipulationUpdatedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, ManipulationUpdatedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ManipulationUpdated(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeManipulationUpdated(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveManipulationUpdated(token) }
+        }
+        hr__.check()
+    }
+
+    public func addTapped(handler: Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, TappedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<PhysicalGestureRecognizer, TappedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Tapped(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeTapped(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveTapped(token) }
+        }
+        hr__.check()
+    }
+
+    public func ProcessDownEvent(value: PointerPoint): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<PointerPoint>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProcessDownEvent(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ProcessMoveEvents(value: Windows_Foundation_Collections.IVector<PointerPoint>): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IVector<PointerPoint>>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProcessMoveEvents(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ProcessUpEvent(value: PointerPoint): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<PointerPoint>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProcessUpEvent(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func CompleteGesture(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CompleteGesture() }
+        }
+        hr__.check()
+    }
+
+    public static func new(): PhysicalGestureRecognizer {
+        var created__: Option<PhysicalGestureRecognizer> = Option<PhysicalGestureRecognizer>.None
+        try (factory__ = windows_core.factory<PhysicalGestureRecognizer, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<PhysicalGestureRecognizer>(PhysicalGestureRecognizer.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce PhysicalGestureRecognizer")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.PhysicalGestureRecognizer"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.PhysicalGestureRecognizer;{" + IPhysicalGestureRecognizer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.PhysicalGestureRecognizer", PhysicalGestureRecognizer.signature(), IPhysicalGestureRecognizer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PhysicalGestureRecognizer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PhysicalGestureRecognizer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PhysicalGestureRecognizer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PhysicalGestureRecognizer {
+        PhysicalGestureRecognizer.viewOf(raw)
+    }
 }
 
 // Windows.UI.Input.PointerPoint (synthetic:Windows_UI_Input_PointerPoint)
@@ -708,32 +4411,3200 @@ public class PointerPointProperties <: windows_interface.InterfaceWrapperBase & 
 @When[Windows_UI_Input == "on"]
 public struct PointerUpdateKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_Other = PointerUpdateKind(0)
+public const PointerUpdateKind_Other = PointerUpdateKind(0)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_LeftButtonPressed = PointerUpdateKind(1)
+public const PointerUpdateKind_LeftButtonPressed = PointerUpdateKind(1)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_LeftButtonReleased = PointerUpdateKind(2)
+public const PointerUpdateKind_LeftButtonReleased = PointerUpdateKind(2)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_RightButtonPressed = PointerUpdateKind(3)
+public const PointerUpdateKind_RightButtonPressed = PointerUpdateKind(3)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_RightButtonReleased = PointerUpdateKind(4)
+public const PointerUpdateKind_RightButtonReleased = PointerUpdateKind(4)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_MiddleButtonPressed = PointerUpdateKind(5)
+public const PointerUpdateKind_MiddleButtonPressed = PointerUpdateKind(5)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_MiddleButtonReleased = PointerUpdateKind(6)
+public const PointerUpdateKind_MiddleButtonReleased = PointerUpdateKind(6)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_XButton1Pressed = PointerUpdateKind(7)
+public const PointerUpdateKind_XButton1Pressed = PointerUpdateKind(7)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_XButton1Released = PointerUpdateKind(8)
+public const PointerUpdateKind_XButton1Released = PointerUpdateKind(8)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_XButton2Pressed = PointerUpdateKind(9)
+public const PointerUpdateKind_XButton2Pressed = PointerUpdateKind(9)
 @When[Windows_UI_Input == "on"]
-public let PointerUpdateKind_XButton2Released = PointerUpdateKind(10)
+public const PointerUpdateKind_XButton2Released = PointerUpdateKind(10)
+
+// Windows.UI.Input.PointerVisualizationSettings (synthetic:Windows_UI_Input_PointerVisualizationSettings)
+@When[Windows_UI_Input == "on"]
+public class PointerVisualizationSettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PointerVisualizationSettings> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PointerVisualizationSettings {
+        PointerVisualizationSettings(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PointerVisualizationSettings {
+        PointerVisualizationSettings(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPointerVisualizationSettings.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PointerVisualizationSettings> {
+        let ancestors = [IPointerVisualizationSettings.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PointerVisualizationSettings>("PointerVisualizationSettings", IPointerVisualizationSettings.iid(), ancestors, { raw => PointerVisualizationSettings.fromAbiTake(raw) }, { raw => PointerVisualizationSettings.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPointerVisualizationSettings {
+        match (unsafe { query(IPointerVisualizationSettings.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPointerVisualizationSettings(): IPointerVisualizationSettings {
+        defaultInterface()
+    }
+
+    public mut prop IsBarrelButtonFeedbackEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsBarrelButtonFeedbackEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsBarrelButtonFeedbackEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsContactFeedbackEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsContactFeedbackEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsContactFeedbackEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func GetForCurrentView(): PointerVisualizationSettings {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PointerVisualizationSettings, IPointerVisualizationSettingsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PointerVisualizationSettings>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PointerVisualizationSettings.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.PointerVisualizationSettings"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.PointerVisualizationSettings;{" + IPointerVisualizationSettings.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.PointerVisualizationSettings", PointerVisualizationSettings.signature(), IPointerVisualizationSettings.iid())
+    }
+
+    public static func intoWinrtHandle(value: PointerVisualizationSettings): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PointerVisualizationSettings {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PointerVisualizationSettings.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PointerVisualizationSettings {
+        PointerVisualizationSettings.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialController (synthetic:Windows_UI_Input_RadialController)
+@When[Windows_UI_Input == "on"]
+public class RadialController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialController> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialController {
+        RadialController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialController {
+        RadialController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialController> {
+        let ancestors = [IRadialController.iid(), IRadialController2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialController>("RadialController", IRadialController.iid(), ancestors, { raw => RadialController.fromAbiTake(raw) }, { raw => RadialController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialController {
+        match (unsafe { query(IRadialController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialController(): IRadialController {
+        defaultInterface()
+    }
+
+    public func asIRadialController2(): IRadialController2 {
+        match (unsafe { query<IRadialController2>(IRadialController2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Menu: RadialControllerMenu {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Menu(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerMenu>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerMenu.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop RotationResolutionInDegrees: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RotationResolutionInDegrees(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRotationResolutionInDegrees(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop UseAutomaticHapticFeedback: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UseAutomaticHapticFeedback(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetUseAutomaticHapticFeedback(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addButtonClicked(handler: Windows_Foundation.TypedEventHandler<RadialController, RadialControllerButtonClickedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialController, RadialControllerButtonClickedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonClicked(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeButtonClicked(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveButtonClicked(token) }
+        }
+        hr__.check()
+    }
+
+    public func addControlAcquired(handler: Windows_Foundation.TypedEventHandler<RadialController, RadialControllerControlAcquiredEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialController, RadialControllerControlAcquiredEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ControlAcquired(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeControlAcquired(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveControlAcquired(cookie) }
+        }
+        hr__.check()
+    }
+
+    public func addControlLost(handler: Windows_Foundation.TypedEventHandler<RadialController, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialController, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ControlLost(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeControlLost(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveControlLost(cookie) }
+        }
+        hr__.check()
+    }
+
+    public func addRotationChanged(handler: Windows_Foundation.TypedEventHandler<RadialController, RadialControllerRotationChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialController, RadialControllerRotationChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RotationChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeRotationChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveRotationChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func addScreenContactContinued(handler: Windows_Foundation.TypedEventHandler<RadialController, RadialControllerScreenContactContinuedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialController, RadialControllerScreenContactContinuedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScreenContactContinued(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeScreenContactContinued(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveScreenContactContinued(cookie) }
+        }
+        hr__.check()
+    }
+
+    public func addScreenContactEnded(handler: Windows_Foundation.TypedEventHandler<RadialController, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialController, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScreenContactEnded(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeScreenContactEnded(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveScreenContactEnded(cookie) }
+        }
+        hr__.check()
+    }
+
+    public func addScreenContactStarted(handler: Windows_Foundation.TypedEventHandler<RadialController, RadialControllerScreenContactStartedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialController, RadialControllerScreenContactStartedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScreenContactStarted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeScreenContactStarted(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveScreenContactStarted(cookie) }
+        }
+        hr__.check()
+    }
+
+    public static func IsSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RadialController, IRadialControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func CreateForCurrentView(): RadialController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RadialController, IRadialControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialController"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialController;{" + IRadialController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialController", RadialController.signature(), IRadialController.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialController {
+        RadialController.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerButtonClickedEventArgs (synthetic:Windows_UI_Input_RadialControllerButtonClickedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerButtonClickedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerButtonClickedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerButtonClickedEventArgs {
+        RadialControllerButtonClickedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerButtonClickedEventArgs {
+        RadialControllerButtonClickedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerButtonClickedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerButtonClickedEventArgs> {
+        let ancestors = [IRadialControllerButtonClickedEventArgs.iid(), IRadialControllerButtonClickedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerButtonClickedEventArgs>("RadialControllerButtonClickedEventArgs", IRadialControllerButtonClickedEventArgs.iid(), ancestors, { raw => RadialControllerButtonClickedEventArgs.fromAbiTake(raw) }, { raw => RadialControllerButtonClickedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerButtonClickedEventArgs {
+        match (unsafe { query(IRadialControllerButtonClickedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerButtonClickedEventArgs(): IRadialControllerButtonClickedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRadialControllerButtonClickedEventArgs2(): IRadialControllerButtonClickedEventArgs2 {
+        match (unsafe { query<IRadialControllerButtonClickedEventArgs2>(IRadialControllerButtonClickedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerButtonClickedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerButtonClickedEventArgs;{" + IRadialControllerButtonClickedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerButtonClickedEventArgs", RadialControllerButtonClickedEventArgs.signature(), IRadialControllerButtonClickedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerButtonClickedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonClickedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerButtonClickedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonClickedEventArgs {
+        RadialControllerButtonClickedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerButtonHoldingEventArgs (synthetic:Windows_UI_Input_RadialControllerButtonHoldingEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerButtonHoldingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerButtonHoldingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerButtonHoldingEventArgs {
+        RadialControllerButtonHoldingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerButtonHoldingEventArgs {
+        RadialControllerButtonHoldingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerButtonHoldingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerButtonHoldingEventArgs> {
+        let ancestors = [IRadialControllerButtonHoldingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerButtonHoldingEventArgs>("RadialControllerButtonHoldingEventArgs", IRadialControllerButtonHoldingEventArgs.iid(), ancestors, { raw => RadialControllerButtonHoldingEventArgs.fromAbiTake(raw) }, { raw => RadialControllerButtonHoldingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerButtonHoldingEventArgs {
+        match (unsafe { query(IRadialControllerButtonHoldingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerButtonHoldingEventArgs(): IRadialControllerButtonHoldingEventArgs {
+        defaultInterface()
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop SimpleHapticsController: Windows_Devices_Haptics.SimpleHapticsController {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SimpleHapticsController(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Devices_Haptics.SimpleHapticsController>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Devices_Haptics.SimpleHapticsController.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerButtonHoldingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerButtonHoldingEventArgs;{" + IRadialControllerButtonHoldingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerButtonHoldingEventArgs", RadialControllerButtonHoldingEventArgs.signature(), IRadialControllerButtonHoldingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerButtonHoldingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonHoldingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerButtonHoldingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonHoldingEventArgs {
+        RadialControllerButtonHoldingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerButtonPressedEventArgs (synthetic:Windows_UI_Input_RadialControllerButtonPressedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerButtonPressedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerButtonPressedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerButtonPressedEventArgs {
+        RadialControllerButtonPressedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerButtonPressedEventArgs {
+        RadialControllerButtonPressedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerButtonPressedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerButtonPressedEventArgs> {
+        let ancestors = [IRadialControllerButtonPressedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerButtonPressedEventArgs>("RadialControllerButtonPressedEventArgs", IRadialControllerButtonPressedEventArgs.iid(), ancestors, { raw => RadialControllerButtonPressedEventArgs.fromAbiTake(raw) }, { raw => RadialControllerButtonPressedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerButtonPressedEventArgs {
+        match (unsafe { query(IRadialControllerButtonPressedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerButtonPressedEventArgs(): IRadialControllerButtonPressedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop SimpleHapticsController: Windows_Devices_Haptics.SimpleHapticsController {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SimpleHapticsController(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Devices_Haptics.SimpleHapticsController>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Devices_Haptics.SimpleHapticsController.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerButtonPressedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerButtonPressedEventArgs;{" + IRadialControllerButtonPressedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerButtonPressedEventArgs", RadialControllerButtonPressedEventArgs.signature(), IRadialControllerButtonPressedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerButtonPressedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonPressedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerButtonPressedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonPressedEventArgs {
+        RadialControllerButtonPressedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerButtonReleasedEventArgs (synthetic:Windows_UI_Input_RadialControllerButtonReleasedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerButtonReleasedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerButtonReleasedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerButtonReleasedEventArgs {
+        RadialControllerButtonReleasedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerButtonReleasedEventArgs {
+        RadialControllerButtonReleasedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerButtonReleasedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerButtonReleasedEventArgs> {
+        let ancestors = [IRadialControllerButtonReleasedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerButtonReleasedEventArgs>("RadialControllerButtonReleasedEventArgs", IRadialControllerButtonReleasedEventArgs.iid(), ancestors, { raw => RadialControllerButtonReleasedEventArgs.fromAbiTake(raw) }, { raw => RadialControllerButtonReleasedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerButtonReleasedEventArgs {
+        match (unsafe { query(IRadialControllerButtonReleasedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerButtonReleasedEventArgs(): IRadialControllerButtonReleasedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop SimpleHapticsController: Windows_Devices_Haptics.SimpleHapticsController {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SimpleHapticsController(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Devices_Haptics.SimpleHapticsController>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Devices_Haptics.SimpleHapticsController.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerButtonReleasedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerButtonReleasedEventArgs;{" + IRadialControllerButtonReleasedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerButtonReleasedEventArgs", RadialControllerButtonReleasedEventArgs.signature(), IRadialControllerButtonReleasedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerButtonReleasedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonReleasedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerButtonReleasedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerButtonReleasedEventArgs {
+        RadialControllerButtonReleasedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerConfiguration (synthetic:Windows_UI_Input_RadialControllerConfiguration)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerConfiguration <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerConfiguration> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerConfiguration {
+        RadialControllerConfiguration(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerConfiguration {
+        RadialControllerConfiguration(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerConfiguration.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerConfiguration> {
+        let ancestors = [IRadialControllerConfiguration.iid(), IRadialControllerConfiguration2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerConfiguration>("RadialControllerConfiguration", IRadialControllerConfiguration.iid(), ancestors, { raw => RadialControllerConfiguration.fromAbiTake(raw) }, { raw => RadialControllerConfiguration.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerConfiguration {
+        match (unsafe { query(IRadialControllerConfiguration.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerConfiguration(): IRadialControllerConfiguration {
+        defaultInterface()
+    }
+
+    public func asIRadialControllerConfiguration2(): IRadialControllerConfiguration2 {
+        match (unsafe { query<IRadialControllerConfiguration2>(IRadialControllerConfiguration2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func SetDefaultMenuItems(buttons: Windows_Foundation_Collections.IIterable<windows_interface.IInspectable>): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_interface.IInspectable>>(buttons)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDefaultMenuItems(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ResetToDefaultMenuItems(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ResetToDefaultMenuItems() }
+        }
+        hr__.check()
+    }
+
+    public func TrySelectDefaultMenuItem(type_: RadialControllerSystemMenuItemKind): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.TrySelectDefaultMenuItem(type_.value, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GetForCurrentView(): RadialControllerConfiguration {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RadialControllerConfiguration, IRadialControllerConfigurationStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialControllerConfiguration>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialControllerConfiguration.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SetAppController(value: RadialController): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<RadialController>(value)) {
+            try (factory__ = windows_core.factory<RadialControllerConfiguration, IRadialControllerConfigurationStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.SetAppController(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func AppController(): RadialController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RadialControllerConfiguration, IRadialControllerConfigurationStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.AppController(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SetIsAppControllerEnabled(value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RadialControllerConfiguration, IRadialControllerConfigurationStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.SetIsAppControllerEnabled(value) }
+        }
+        hr__.check()
+    }
+
+    public static func IsAppControllerEnabled(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RadialControllerConfiguration, IRadialControllerConfigurationStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.IsAppControllerEnabled(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerConfiguration"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerConfiguration;{" + IRadialControllerConfiguration.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerConfiguration", RadialControllerConfiguration.signature(), IRadialControllerConfiguration.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerConfiguration): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerConfiguration {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerConfiguration.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerConfiguration {
+        RadialControllerConfiguration.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerControlAcquiredEventArgs (synthetic:Windows_UI_Input_RadialControllerControlAcquiredEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerControlAcquiredEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerControlAcquiredEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerControlAcquiredEventArgs {
+        RadialControllerControlAcquiredEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerControlAcquiredEventArgs {
+        RadialControllerControlAcquiredEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerControlAcquiredEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerControlAcquiredEventArgs> {
+        let ancestors = [IRadialControllerControlAcquiredEventArgs.iid(), IRadialControllerControlAcquiredEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerControlAcquiredEventArgs>("RadialControllerControlAcquiredEventArgs", IRadialControllerControlAcquiredEventArgs.iid(), ancestors, { raw => RadialControllerControlAcquiredEventArgs.fromAbiTake(raw) }, { raw => RadialControllerControlAcquiredEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerControlAcquiredEventArgs {
+        match (unsafe { query(IRadialControllerControlAcquiredEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerControlAcquiredEventArgs(): IRadialControllerControlAcquiredEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRadialControllerControlAcquiredEventArgs2(): IRadialControllerControlAcquiredEventArgs2 {
+        match (unsafe { query<IRadialControllerControlAcquiredEventArgs2>(IRadialControllerControlAcquiredEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerControlAcquiredEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerControlAcquiredEventArgs;{" + IRadialControllerControlAcquiredEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerControlAcquiredEventArgs", RadialControllerControlAcquiredEventArgs.signature(), IRadialControllerControlAcquiredEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerControlAcquiredEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerControlAcquiredEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerControlAcquiredEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerControlAcquiredEventArgs {
+        RadialControllerControlAcquiredEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerMenu (synthetic:Windows_UI_Input_RadialControllerMenu)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerMenu <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerMenu> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerMenu {
+        RadialControllerMenu(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerMenu {
+        RadialControllerMenu(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerMenu.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerMenu> {
+        let ancestors = [IRadialControllerMenu.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerMenu>("RadialControllerMenu", IRadialControllerMenu.iid(), ancestors, { raw => RadialControllerMenu.fromAbiTake(raw) }, { raw => RadialControllerMenu.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerMenu {
+        match (unsafe { query(IRadialControllerMenu.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerMenu(): IRadialControllerMenu {
+        defaultInterface()
+    }
+
+    public mut prop IsEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Items: Windows_Foundation_Collections.IVector<RadialControllerMenuItem> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Items(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<RadialControllerMenuItem>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<RadialControllerMenuItem>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func GetSelectedMenuItem(): RadialControllerMenuItem {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetSelectedMenuItem(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialControllerMenuItem>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialControllerMenuItem.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func SelectMenuItem(menuItem: RadialControllerMenuItem): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<RadialControllerMenuItem>(menuItem)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectMenuItem(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func TrySelectPreviouslySelectedMenuItem(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.TrySelectPreviouslySelectedMenuItem(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerMenu"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerMenu;{" + IRadialControllerMenu.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerMenu", RadialControllerMenu.signature(), IRadialControllerMenu.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerMenu): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerMenu {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerMenu.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerMenu {
+        RadialControllerMenu.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerMenuItem (synthetic:Windows_UI_Input_RadialControllerMenuItem)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerMenuItem <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerMenuItem> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerMenuItem {
+        RadialControllerMenuItem(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerMenuItem {
+        RadialControllerMenuItem(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerMenuItem.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerMenuItem> {
+        let ancestors = [IRadialControllerMenuItem.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerMenuItem>("RadialControllerMenuItem", IRadialControllerMenuItem.iid(), ancestors, { raw => RadialControllerMenuItem.fromAbiTake(raw) }, { raw => RadialControllerMenuItem.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerMenuItem {
+        match (unsafe { query(IRadialControllerMenuItem.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerMenuItem(): IRadialControllerMenuItem {
+        defaultInterface()
+    }
+
+    public prop DisplayText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public mut prop Tag: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Tag(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTag(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addInvoked(handler: Windows_Foundation.TypedEventHandler<RadialControllerMenuItem, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<RadialControllerMenuItem, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Invoked(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeInvoked(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveInvoked(token) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateFromIcon(displayText: windows_core.HString, icon: Windows_Storage_Streams.RandomAccessStreamReference): RadialControllerMenuItem {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(displayText)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.RandomAccessStreamReference>(icon)) {
+                try (factory__ = windows_core.factory<RadialControllerMenuItem, IRadialControllerMenuItemStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateFromIcon(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialControllerMenuItem>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialControllerMenuItem.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFromKnownIcon(displayText: windows_core.HString, value: RadialControllerMenuKnownIcon): RadialControllerMenuItem {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(displayText)) {
+            try (factory__ = windows_core.factory<RadialControllerMenuItem, IRadialControllerMenuItemStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateFromKnownIcon(__argBorrow0.asRaw(), value.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialControllerMenuItem>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialControllerMenuItem.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFromFontGlyph(displayText: windows_core.HString, glyph: windows_core.HString, fontFamily: windows_core.HString): RadialControllerMenuItem {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(displayText)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(glyph)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(fontFamily)) {
+                    try (factory__ = windows_core.factory<RadialControllerMenuItem, IRadialControllerMenuItemStatics2>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateFromFontGlyph(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialControllerMenuItem>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialControllerMenuItem.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateFromFontGlyphWithUri(displayText: windows_core.HString, glyph: windows_core.HString, fontFamily: windows_core.HString, fontUri: Windows_Foundation.Uri): RadialControllerMenuItem {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(displayText)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(glyph)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(fontFamily)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(fontUri)) {
+                        try (factory__ = windows_core.factory<RadialControllerMenuItem, IRadialControllerMenuItemStatics2>().unwrap()) {
+                            hr__ = unsafe { factory__.CreateFromFontGlyphWithUri(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadialControllerMenuItem>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return RadialControllerMenuItem.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerMenuItem"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerMenuItem;{" + IRadialControllerMenuItem.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerMenuItem", RadialControllerMenuItem.signature(), IRadialControllerMenuItem.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerMenuItem): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerMenuItem {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerMenuItem.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerMenuItem {
+        RadialControllerMenuItem.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerMenuKnownIcon (synthetic:Windows_UI_Input_RadialControllerMenuKnownIcon)
+@When[Windows_UI_Input == "on"]
+public struct RadialControllerMenuKnownIcon {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_Scroll = RadialControllerMenuKnownIcon(0)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_Zoom = RadialControllerMenuKnownIcon(1)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_UndoRedo = RadialControllerMenuKnownIcon(2)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_Volume = RadialControllerMenuKnownIcon(3)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_NextPreviousTrack = RadialControllerMenuKnownIcon(4)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_Ruler = RadialControllerMenuKnownIcon(5)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_InkColor = RadialControllerMenuKnownIcon(6)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_InkThickness = RadialControllerMenuKnownIcon(7)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerMenuKnownIcon_PenType = RadialControllerMenuKnownIcon(8)
+
+// Windows.UI.Input.RadialControllerRotationChangedEventArgs (synthetic:Windows_UI_Input_RadialControllerRotationChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerRotationChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerRotationChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerRotationChangedEventArgs {
+        RadialControllerRotationChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerRotationChangedEventArgs {
+        RadialControllerRotationChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerRotationChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerRotationChangedEventArgs> {
+        let ancestors = [IRadialControllerRotationChangedEventArgs.iid(), IRadialControllerRotationChangedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerRotationChangedEventArgs>("RadialControllerRotationChangedEventArgs", IRadialControllerRotationChangedEventArgs.iid(), ancestors, { raw => RadialControllerRotationChangedEventArgs.fromAbiTake(raw) }, { raw => RadialControllerRotationChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerRotationChangedEventArgs {
+        match (unsafe { query(IRadialControllerRotationChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerRotationChangedEventArgs(): IRadialControllerRotationChangedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRadialControllerRotationChangedEventArgs2(): IRadialControllerRotationChangedEventArgs2 {
+        match (unsafe { query<IRadialControllerRotationChangedEventArgs2>(IRadialControllerRotationChangedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop RotationDeltaInDegrees: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RotationDeltaInDegrees(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerRotationChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerRotationChangedEventArgs;{" + IRadialControllerRotationChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerRotationChangedEventArgs", RadialControllerRotationChangedEventArgs.signature(), IRadialControllerRotationChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerRotationChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerRotationChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerRotationChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerRotationChangedEventArgs {
+        RadialControllerRotationChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerScreenContact (synthetic:Windows_UI_Input_RadialControllerScreenContact)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerScreenContact <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerScreenContact> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerScreenContact {
+        RadialControllerScreenContact(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerScreenContact {
+        RadialControllerScreenContact(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerScreenContact.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerScreenContact> {
+        let ancestors = [IRadialControllerScreenContact.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerScreenContact>("RadialControllerScreenContact", IRadialControllerScreenContact.iid(), ancestors, { raw => RadialControllerScreenContact.fromAbiTake(raw) }, { raw => RadialControllerScreenContact.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerScreenContact {
+        match (unsafe { query(IRadialControllerScreenContact.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerScreenContact(): IRadialControllerScreenContact {
+        defaultInterface()
+    }
+
+    public prop Bounds: Windows_Foundation.Rect {
+        get() {
+            var result__ = Windows_Foundation.Rect()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Bounds(CPointer<Windows_Foundation.Rect>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerScreenContact"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerScreenContact;{" + IRadialControllerScreenContact.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerScreenContact", RadialControllerScreenContact.signature(), IRadialControllerScreenContact.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerScreenContact): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContact {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerScreenContact.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContact {
+        RadialControllerScreenContact.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerScreenContactContinuedEventArgs (synthetic:Windows_UI_Input_RadialControllerScreenContactContinuedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerScreenContactContinuedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerScreenContactContinuedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerScreenContactContinuedEventArgs {
+        RadialControllerScreenContactContinuedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerScreenContactContinuedEventArgs {
+        RadialControllerScreenContactContinuedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerScreenContactContinuedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerScreenContactContinuedEventArgs> {
+        let ancestors = [IRadialControllerScreenContactContinuedEventArgs.iid(), IRadialControllerScreenContactContinuedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerScreenContactContinuedEventArgs>("RadialControllerScreenContactContinuedEventArgs", IRadialControllerScreenContactContinuedEventArgs.iid(), ancestors, { raw => RadialControllerScreenContactContinuedEventArgs.fromAbiTake(raw) }, { raw => RadialControllerScreenContactContinuedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerScreenContactContinuedEventArgs {
+        match (unsafe { query(IRadialControllerScreenContactContinuedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerScreenContactContinuedEventArgs(): IRadialControllerScreenContactContinuedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRadialControllerScreenContactContinuedEventArgs2(): IRadialControllerScreenContactContinuedEventArgs2 {
+        match (unsafe { query<IRadialControllerScreenContactContinuedEventArgs2>(IRadialControllerScreenContactContinuedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerScreenContactContinuedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerScreenContactContinuedEventArgs;{" + IRadialControllerScreenContactContinuedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerScreenContactContinuedEventArgs", RadialControllerScreenContactContinuedEventArgs.signature(), IRadialControllerScreenContactContinuedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerScreenContactContinuedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContactContinuedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerScreenContactContinuedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContactContinuedEventArgs {
+        RadialControllerScreenContactContinuedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerScreenContactEndedEventArgs (synthetic:Windows_UI_Input_RadialControllerScreenContactEndedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerScreenContactEndedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerScreenContactEndedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerScreenContactEndedEventArgs {
+        RadialControllerScreenContactEndedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerScreenContactEndedEventArgs {
+        RadialControllerScreenContactEndedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerScreenContactEndedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerScreenContactEndedEventArgs> {
+        let ancestors = [IRadialControllerScreenContactEndedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerScreenContactEndedEventArgs>("RadialControllerScreenContactEndedEventArgs", IRadialControllerScreenContactEndedEventArgs.iid(), ancestors, { raw => RadialControllerScreenContactEndedEventArgs.fromAbiTake(raw) }, { raw => RadialControllerScreenContactEndedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerScreenContactEndedEventArgs {
+        match (unsafe { query(IRadialControllerScreenContactEndedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerScreenContactEndedEventArgs(): IRadialControllerScreenContactEndedEventArgs {
+        defaultInterface()
+    }
+
+    public prop IsButtonPressed: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsButtonPressed(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop SimpleHapticsController: Windows_Devices_Haptics.SimpleHapticsController {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SimpleHapticsController(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Devices_Haptics.SimpleHapticsController>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Devices_Haptics.SimpleHapticsController.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerScreenContactEndedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerScreenContactEndedEventArgs;{" + IRadialControllerScreenContactEndedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerScreenContactEndedEventArgs", RadialControllerScreenContactEndedEventArgs.signature(), IRadialControllerScreenContactEndedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerScreenContactEndedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContactEndedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerScreenContactEndedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContactEndedEventArgs {
+        RadialControllerScreenContactEndedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerScreenContactStartedEventArgs (synthetic:Windows_UI_Input_RadialControllerScreenContactStartedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RadialControllerScreenContactStartedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadialControllerScreenContactStartedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadialControllerScreenContactStartedEventArgs {
+        RadialControllerScreenContactStartedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadialControllerScreenContactStartedEventArgs {
+        RadialControllerScreenContactStartedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadialControllerScreenContactStartedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadialControllerScreenContactStartedEventArgs> {
+        let ancestors = [IRadialControllerScreenContactStartedEventArgs.iid(), IRadialControllerScreenContactStartedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadialControllerScreenContactStartedEventArgs>("RadialControllerScreenContactStartedEventArgs", IRadialControllerScreenContactStartedEventArgs.iid(), ancestors, { raw => RadialControllerScreenContactStartedEventArgs.fromAbiTake(raw) }, { raw => RadialControllerScreenContactStartedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadialControllerScreenContactStartedEventArgs {
+        match (unsafe { query(IRadialControllerScreenContactStartedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadialControllerScreenContactStartedEventArgs(): IRadialControllerScreenContactStartedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRadialControllerScreenContactStartedEventArgs2(): IRadialControllerScreenContactStartedEventArgs2 {
+        match (unsafe { query<IRadialControllerScreenContactStartedEventArgs2>(IRadialControllerScreenContactStartedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Contact: RadialControllerScreenContact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<RadialControllerScreenContact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return RadialControllerScreenContact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RadialControllerScreenContactStartedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RadialControllerScreenContactStartedEventArgs;{" + IRadialControllerScreenContactStartedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RadialControllerScreenContactStartedEventArgs", RadialControllerScreenContactStartedEventArgs.signature(), IRadialControllerScreenContactStartedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadialControllerScreenContactStartedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContactStartedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadialControllerScreenContactStartedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadialControllerScreenContactStartedEventArgs {
+        RadialControllerScreenContactStartedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.RadialControllerSystemMenuItemKind (synthetic:Windows_UI_Input_RadialControllerSystemMenuItemKind)
+@When[Windows_UI_Input == "on"]
+public struct RadialControllerSystemMenuItemKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const RadialControllerSystemMenuItemKind_Scroll = RadialControllerSystemMenuItemKind(0)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerSystemMenuItemKind_Zoom = RadialControllerSystemMenuItemKind(1)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerSystemMenuItemKind_UndoRedo = RadialControllerSystemMenuItemKind(2)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerSystemMenuItemKind_Volume = RadialControllerSystemMenuItemKind(3)
+@When[Windows_UI_Input == "on"]
+public const RadialControllerSystemMenuItemKind_NextPreviousTrack = RadialControllerSystemMenuItemKind(4)
+
+// Windows.UI.Input.RightTappedEventArgs (synthetic:Windows_UI_Input_RightTappedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class RightTappedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RightTappedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RightTappedEventArgs {
+        RightTappedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RightTappedEventArgs {
+        RightTappedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRightTappedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RightTappedEventArgs> {
+        let ancestors = [IRightTappedEventArgs.iid(), IRightTappedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RightTappedEventArgs>("RightTappedEventArgs", IRightTappedEventArgs.iid(), ancestors, { raw => RightTappedEventArgs.fromAbiTake(raw) }, { raw => RightTappedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRightTappedEventArgs {
+        match (unsafe { query(IRightTappedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRightTappedEventArgs(): IRightTappedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRightTappedEventArgs2(): IRightTappedEventArgs2 {
+        match (unsafe { query<IRightTappedEventArgs2>(IRightTappedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.RightTappedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.RightTappedEventArgs;{" + IRightTappedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.RightTappedEventArgs", RightTappedEventArgs.signature(), IRightTappedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: RightTappedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RightTappedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RightTappedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RightTappedEventArgs {
+        RightTappedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.SystemButtonEventController (synthetic:Windows_UI_Input_SystemButtonEventController)
+@When[Windows_UI_Input == "on"]
+public class SystemButtonEventController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemButtonEventController> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemButtonEventController {
+        SystemButtonEventController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemButtonEventController {
+        SystemButtonEventController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemButtonEventController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemButtonEventController> {
+        let ancestors = [ISystemButtonEventController.iid(), IAttachableInputObject.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemButtonEventController>("SystemButtonEventController", ISystemButtonEventController.iid(), ancestors, { raw => SystemButtonEventController.fromAbiTake(raw) }, { raw => SystemButtonEventController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemButtonEventController {
+        match (unsafe { query(ISystemButtonEventController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemButtonEventController(): ISystemButtonEventController {
+        defaultInterface()
+    }
+
+    public func asIAttachableInputObject(): IAttachableInputObject {
+        match (unsafe { query<IAttachableInputObject>(IAttachableInputObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func addSystemFunctionButtonPressed(handler: Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionButtonEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionButtonEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemFunctionButtonPressed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeSystemFunctionButtonPressed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveSystemFunctionButtonPressed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addSystemFunctionButtonReleased(handler: Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionButtonEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionButtonEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemFunctionButtonReleased(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeSystemFunctionButtonReleased(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveSystemFunctionButtonReleased(token) }
+        }
+        hr__.check()
+    }
+
+    public func addSystemFunctionLockChanged(handler: Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionLockChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionLockChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemFunctionLockChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeSystemFunctionLockChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveSystemFunctionLockChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func addSystemFunctionLockIndicatorChanged(handler: Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionLockIndicatorChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<SystemButtonEventController, SystemFunctionLockIndicatorChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemFunctionLockIndicatorChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeSystemFunctionLockIndicatorChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveSystemFunctionLockIndicatorChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateForDispatcherQueue(queue: Windows_System.DispatcherQueue): SystemButtonEventController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.DispatcherQueue>(queue)) {
+            try (factory__ = windows_core.factory<SystemButtonEventController, ISystemButtonEventControllerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateForDispatcherQueue(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemButtonEventController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemButtonEventController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.SystemButtonEventController"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.SystemButtonEventController;{" + ISystemButtonEventController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.SystemButtonEventController", SystemButtonEventController.signature(), ISystemButtonEventController.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemButtonEventController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemButtonEventController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemButtonEventController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemButtonEventController {
+        SystemButtonEventController.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.SystemFunctionButtonEventArgs (synthetic:Windows_UI_Input_SystemFunctionButtonEventArgs)
+@When[Windows_UI_Input == "on"]
+public class SystemFunctionButtonEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemFunctionButtonEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemFunctionButtonEventArgs {
+        SystemFunctionButtonEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemFunctionButtonEventArgs {
+        SystemFunctionButtonEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemFunctionButtonEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemFunctionButtonEventArgs> {
+        let ancestors = [ISystemFunctionButtonEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemFunctionButtonEventArgs>("SystemFunctionButtonEventArgs", ISystemFunctionButtonEventArgs.iid(), ancestors, { raw => SystemFunctionButtonEventArgs.fromAbiTake(raw) }, { raw => SystemFunctionButtonEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemFunctionButtonEventArgs {
+        match (unsafe { query(ISystemFunctionButtonEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemFunctionButtonEventArgs(): ISystemFunctionButtonEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Timestamp: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Timestamp(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.SystemFunctionButtonEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.SystemFunctionButtonEventArgs;{" + ISystemFunctionButtonEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.SystemFunctionButtonEventArgs", SystemFunctionButtonEventArgs.signature(), ISystemFunctionButtonEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemFunctionButtonEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemFunctionButtonEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemFunctionButtonEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemFunctionButtonEventArgs {
+        SystemFunctionButtonEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.SystemFunctionLockChangedEventArgs (synthetic:Windows_UI_Input_SystemFunctionLockChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class SystemFunctionLockChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemFunctionLockChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemFunctionLockChangedEventArgs {
+        SystemFunctionLockChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemFunctionLockChangedEventArgs {
+        SystemFunctionLockChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemFunctionLockChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemFunctionLockChangedEventArgs> {
+        let ancestors = [ISystemFunctionLockChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemFunctionLockChangedEventArgs>("SystemFunctionLockChangedEventArgs", ISystemFunctionLockChangedEventArgs.iid(), ancestors, { raw => SystemFunctionLockChangedEventArgs.fromAbiTake(raw) }, { raw => SystemFunctionLockChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemFunctionLockChangedEventArgs {
+        match (unsafe { query(ISystemFunctionLockChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemFunctionLockChangedEventArgs(): ISystemFunctionLockChangedEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop IsLocked: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsLocked(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Timestamp: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Timestamp(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.SystemFunctionLockChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.SystemFunctionLockChangedEventArgs;{" + ISystemFunctionLockChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.SystemFunctionLockChangedEventArgs", SystemFunctionLockChangedEventArgs.signature(), ISystemFunctionLockChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemFunctionLockChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemFunctionLockChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemFunctionLockChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemFunctionLockChangedEventArgs {
+        SystemFunctionLockChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.SystemFunctionLockIndicatorChangedEventArgs (synthetic:Windows_UI_Input_SystemFunctionLockIndicatorChangedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class SystemFunctionLockIndicatorChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemFunctionLockIndicatorChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemFunctionLockIndicatorChangedEventArgs {
+        SystemFunctionLockIndicatorChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemFunctionLockIndicatorChangedEventArgs {
+        SystemFunctionLockIndicatorChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemFunctionLockIndicatorChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemFunctionLockIndicatorChangedEventArgs> {
+        let ancestors = [ISystemFunctionLockIndicatorChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemFunctionLockIndicatorChangedEventArgs>("SystemFunctionLockIndicatorChangedEventArgs", ISystemFunctionLockIndicatorChangedEventArgs.iid(), ancestors, { raw => SystemFunctionLockIndicatorChangedEventArgs.fromAbiTake(raw) }, { raw => SystemFunctionLockIndicatorChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemFunctionLockIndicatorChangedEventArgs {
+        match (unsafe { query(ISystemFunctionLockIndicatorChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemFunctionLockIndicatorChangedEventArgs(): ISystemFunctionLockIndicatorChangedEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop IsIndicatorOn: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsIndicatorOn(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Timestamp: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Timestamp(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.SystemFunctionLockIndicatorChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.SystemFunctionLockIndicatorChangedEventArgs;{" + ISystemFunctionLockIndicatorChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.SystemFunctionLockIndicatorChangedEventArgs", SystemFunctionLockIndicatorChangedEventArgs.signature(), ISystemFunctionLockIndicatorChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemFunctionLockIndicatorChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemFunctionLockIndicatorChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemFunctionLockIndicatorChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemFunctionLockIndicatorChangedEventArgs {
+        SystemFunctionLockIndicatorChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.TappedEventArgs (synthetic:Windows_UI_Input_TappedEventArgs)
+@When[Windows_UI_Input == "on"]
+public class TappedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TappedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TappedEventArgs {
+        TappedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TappedEventArgs {
+        TappedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITappedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TappedEventArgs> {
+        let ancestors = [ITappedEventArgs.iid(), ITappedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TappedEventArgs>("TappedEventArgs", ITappedEventArgs.iid(), ancestors, { raw => TappedEventArgs.fromAbiTake(raw) }, { raw => TappedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITappedEventArgs {
+        match (unsafe { query(ITappedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITappedEventArgs(): ITappedEventArgs {
+        defaultInterface()
+    }
+
+    public func asITappedEventArgs2(): ITappedEventArgs2 {
+        match (unsafe { query<ITappedEventArgs2>(ITappedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop PointerDeviceType: Windows_Devices_Input.PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation.Point {
+        get() {
+            var result__ = Windows_Foundation.Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation.Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop TapCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TapCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.TappedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.TappedEventArgs;{" + ITappedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.TappedEventArgs", TappedEventArgs.signature(), ITappedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: TappedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TappedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TappedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TappedEventArgs {
+        TappedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.TouchpadGesturesController (synthetic:Windows_UI_Input_TouchpadGesturesController)
+@When[Windows_UI_Input == "on"]
+public class TouchpadGesturesController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TouchpadGesturesController> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TouchpadGesturesController {
+        TouchpadGesturesController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TouchpadGesturesController {
+        TouchpadGesturesController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITouchpadGesturesController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TouchpadGesturesController> {
+        let ancestors = [ITouchpadGesturesController.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TouchpadGesturesController>("TouchpadGesturesController", ITouchpadGesturesController.iid(), ancestors, { raw => TouchpadGesturesController.fromAbiTake(raw) }, { raw => TouchpadGesturesController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITouchpadGesturesController {
+        match (unsafe { query(ITouchpadGesturesController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITouchpadGesturesController(): ITouchpadGesturesController {
+        defaultInterface()
+    }
+
+    public mut prop Enabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Enabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SupportedGestures: TouchpadGlobalGestureKinds {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SupportedGestures(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return TouchpadGlobalGestureKinds(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSupportedGestures(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addGlobalActionPerformed(handler: Windows_Foundation.TypedEventHandler<TouchpadGesturesController, TouchpadGlobalActionEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<TouchpadGesturesController, TouchpadGlobalActionEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GlobalActionPerformed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeGlobalActionPerformed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveGlobalActionPerformed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addPointerMoved(handler: Windows_Foundation.TypedEventHandler<TouchpadGesturesController, Windows_UI_Core.PointerEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<TouchpadGesturesController, Windows_UI_Core.PointerEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerMoved(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removePointerMoved(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemovePointerMoved(token) }
+        }
+        hr__.check()
+    }
+
+    public func addPointerPressed(handler: Windows_Foundation.TypedEventHandler<TouchpadGesturesController, Windows_UI_Core.PointerEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<TouchpadGesturesController, Windows_UI_Core.PointerEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerPressed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removePointerPressed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemovePointerPressed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addPointerReleased(handler: Windows_Foundation.TypedEventHandler<TouchpadGesturesController, Windows_UI_Core.PointerEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<TouchpadGesturesController, Windows_UI_Core.PointerEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerReleased(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removePointerReleased(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemovePointerReleased(token) }
+        }
+        hr__.check()
+    }
+
+    public static func IsSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TouchpadGesturesController, ITouchpadGesturesControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func CreateForProcess(): TouchpadGesturesController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TouchpadGesturesController, ITouchpadGesturesControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateForProcess(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TouchpadGesturesController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TouchpadGesturesController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.TouchpadGesturesController"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.TouchpadGesturesController;{" + ITouchpadGesturesController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.TouchpadGesturesController", TouchpadGesturesController.signature(), ITouchpadGesturesController.iid())
+    }
+
+    public static func intoWinrtHandle(value: TouchpadGesturesController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TouchpadGesturesController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TouchpadGesturesController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TouchpadGesturesController {
+        TouchpadGesturesController.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.TouchpadGlobalAction (synthetic:Windows_UI_Input_TouchpadGlobalAction)
+@When[Windows_UI_Input == "on"]
+public struct TouchpadGlobalAction {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_ThreeFingerTap = TouchpadGlobalAction(0)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_FourFingerTap = TouchpadGlobalAction(1)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_FiveFingerTap = TouchpadGlobalAction(2)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_ThreeFingerPressDown = TouchpadGlobalAction(3)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_FourFingerPressDown = TouchpadGlobalAction(4)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_FiveFingerPressDown = TouchpadGlobalAction(5)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_ThreeFingerPressUp = TouchpadGlobalAction(6)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_FourFingerPressUp = TouchpadGlobalAction(7)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalAction_FiveFingerPressUp = TouchpadGlobalAction(8)
+
+// Windows.UI.Input.TouchpadGlobalActionEventArgs (synthetic:Windows_UI_Input_TouchpadGlobalActionEventArgs)
+@When[Windows_UI_Input == "on"]
+public class TouchpadGlobalActionEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TouchpadGlobalActionEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TouchpadGlobalActionEventArgs {
+        TouchpadGlobalActionEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TouchpadGlobalActionEventArgs {
+        TouchpadGlobalActionEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITouchpadGlobalActionEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TouchpadGlobalActionEventArgs> {
+        let ancestors = [ITouchpadGlobalActionEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TouchpadGlobalActionEventArgs>("TouchpadGlobalActionEventArgs", ITouchpadGlobalActionEventArgs.iid(), ancestors, { raw => TouchpadGlobalActionEventArgs.fromAbiTake(raw) }, { raw => TouchpadGlobalActionEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITouchpadGlobalActionEventArgs {
+        match (unsafe { query(ITouchpadGlobalActionEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITouchpadGlobalActionEventArgs(): ITouchpadGlobalActionEventArgs {
+        defaultInterface()
+    }
+
+    public prop Action: TouchpadGlobalAction {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Action(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return TouchpadGlobalAction(result__)
+        }
+    }
+
+    public prop PointerDevice: Windows_Devices_Input.PointerDevice {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDevice(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Devices_Input.PointerDevice>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Devices_Input.PointerDevice.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Input.TouchpadGlobalActionEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Input.TouchpadGlobalActionEventArgs;{" + ITouchpadGlobalActionEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Input.TouchpadGlobalActionEventArgs", TouchpadGlobalActionEventArgs.signature(), ITouchpadGlobalActionEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: TouchpadGlobalActionEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TouchpadGlobalActionEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TouchpadGlobalActionEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TouchpadGlobalActionEventArgs {
+        TouchpadGlobalActionEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Input.TouchpadGlobalGestureKinds (synthetic:Windows_UI_Input_TouchpadGlobalGestureKinds)
+@When[Windows_UI_Input == "on"]
+public struct TouchpadGlobalGestureKinds {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: TouchpadGlobalGestureKinds): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: TouchpadGlobalGestureKinds): TouchpadGlobalGestureKinds {
+        return TouchpadGlobalGestureKinds(value | other.value)
+    }
+    public operator func &(other: TouchpadGlobalGestureKinds): TouchpadGlobalGestureKinds {
+        return TouchpadGlobalGestureKinds(value & other.value)
+    }
+    public operator func ^(other: TouchpadGlobalGestureKinds): TouchpadGlobalGestureKinds {
+        return TouchpadGlobalGestureKinds(value ^ other.value)
+    }
+    public operator func !(): TouchpadGlobalGestureKinds {
+        return TouchpadGlobalGestureKinds(!value)
+    }
+}
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalGestureKinds_None = TouchpadGlobalGestureKinds(0)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalGestureKinds_ThreeFingerManipulations = TouchpadGlobalGestureKinds(1)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalGestureKinds_FourFingerManipulations = TouchpadGlobalGestureKinds(2)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalGestureKinds_FiveFingerManipulations = TouchpadGlobalGestureKinds(4)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalGestureKinds_ThreeFingerActions = TouchpadGlobalGestureKinds(8)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalGestureKinds_FourFingerActions = TouchpadGlobalGestureKinds(16)
+@When[Windows_UI_Input == "on"]
+public const TouchpadGlobalGestureKinds_FiveFingerActions = TouchpadGlobalGestureKinds(32)

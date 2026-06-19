@@ -18,14 +18,14 @@ import windows_sys.Win32.Foundation.SYSTEMTIME
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func RtlGetVersion(info: CPointer<OSVERSIONINFOEXW>): Int32 {
-    let proc = CFunc<(CPointer<OSVERSIONINFOEXW>) -> Int32>(windows_libloading.resolveProc("ntdll.dll", "RtlGetVersion"))
-    return unsafe { proc(info) }
+    let proc__ = CFunc<(CPointer<OSVERSIONINFOEXW>) -> Int32>(windows_libloading.resolveProc("ntdll.dll", "RtlGetVersion"))
+    return unsafe { proc__(info) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GlobalMemoryStatusEx(lpBuffer: CPointer<MEMORYSTATUSEX>): Bool {
-    let proc = CFunc<(CPointer<MEMORYSTATUSEX>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GlobalMemoryStatusEx"))
-    return unsafe { proc(lpBuffer) } != 0
+    let proc__ = CFunc<(CPointer<MEMORYSTATUSEX>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GlobalMemoryStatusEx"))
+    return unsafe { proc__(lpBuffer) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -38,50 +38,50 @@ public func GlobalMemoryStatusExChecked(lpBuffer: CPointer<MEMORYSTATUSEX>): win
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFO>): Unit {
-    let proc = CFunc<(CPointer<SYSTEM_INFO>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemInfo"))
-    unsafe { proc(lpSystemInfo) }
+    let proc__ = CFunc<(CPointer<SYSTEM_INFO>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemInfo"))
+    unsafe { proc__(lpSystemInfo) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemTime(lpSystemTime: CPointer<SYSTEMTIME>): Unit {
-    let proc = CFunc<(CPointer<SYSTEMTIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTime"))
-    unsafe { proc(lpSystemTime) }
+    let proc__ = CFunc<(CPointer<SYSTEMTIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTime"))
+    unsafe { proc__(lpSystemTime) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemTimeAsFileTime(lpSystemTimeAsFileTime: CPointer<FILETIME>): Unit {
-    let proc = CFunc<(CPointer<FILETIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTimeAsFileTime"))
-    unsafe { proc(lpSystemTimeAsFileTime) }
+    let proc__ = CFunc<(CPointer<FILETIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTimeAsFileTime"))
+    unsafe { proc__(lpSystemTimeAsFileTime) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetLocalTime(lpSystemTime: CPointer<SYSTEMTIME>): Unit {
-    let proc = CFunc<(CPointer<SYSTEMTIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetLocalTime"))
-    unsafe { proc(lpSystemTime) }
+    let proc__ = CFunc<(CPointer<SYSTEMTIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetLocalTime"))
+    unsafe { proc__(lpSystemTime) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func IsUserCetAvailableInEnvironment(UserCetEnvironment: UInt32): Bool {
-    let proc = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "IsUserCetAvailableInEnvironment"))
-    return unsafe { proc(UserCetEnvironment) } != 0
+    let proc__ = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "IsUserCetAvailableInEnvironment"))
+    return unsafe { proc__(UserCetEnvironment) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemLeapSecondInformation(Enabled: CPointer<Int32>, Flags: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Int32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemLeapSecondInformation"))
-    return unsafe { proc(Enabled, Flags) } != 0
+    let proc__ = CFunc<(CPointer<Int32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemLeapSecondInformation"))
+    return unsafe { proc__(Enabled, Flags) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetVersion(): UInt32 {
-    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetVersion"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetVersion"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetLocalTime(lpSystemTime: CPointer<SYSTEMTIME>): Bool {
-    let proc = CFunc<(CPointer<SYSTEMTIME>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetLocalTime"))
-    return unsafe { proc(lpSystemTime) } != 0
+    let proc__ = CFunc<(CPointer<SYSTEMTIME>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetLocalTime"))
+    return unsafe { proc__(lpSystemTime) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -94,20 +94,20 @@ public func SetLocalTimeChecked(lpSystemTime: CPointer<SYSTEMTIME>): windows_cor
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetTickCount(): UInt32 {
-    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetTickCount"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetTickCount"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetTickCount64(): UInt64 {
-    let proc = CFunc<() -> UInt64>(windows_libloading.resolveProc("KERNEL32.dll", "GetTickCount64"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> UInt64>(windows_libloading.resolveProc("KERNEL32.dll", "GetTickCount64"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemTimeAdjustment(lpTimeAdjustment: CPointer<UInt32>, lpTimeIncrement: CPointer<UInt32>, lpTimeAdjustmentDisabled: CPointer<Int32>): Bool {
-    let proc = CFunc<(CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTimeAdjustment"))
-    return unsafe { proc(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled) } != 0
+    let proc__ = CFunc<(CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTimeAdjustment"))
+    return unsafe { proc__(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -120,8 +120,8 @@ public func GetSystemTimeAdjustmentChecked(lpTimeAdjustment: CPointer<UInt32>, l
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemTimeAdjustmentPrecise(lpTimeAdjustment: CPointer<UInt64>, lpTimeIncrement: CPointer<UInt64>, lpTimeAdjustmentDisabled: CPointer<Int32>): Bool {
-    let proc = CFunc<(CPointer<UInt64>, CPointer<UInt64>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-4.dll", "GetSystemTimeAdjustmentPrecise"))
-    return unsafe { proc(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled) } != 0
+    let proc__ = CFunc<(CPointer<UInt64>, CPointer<UInt64>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-4.dll", "GetSystemTimeAdjustmentPrecise"))
+    return unsafe { proc__(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -134,8 +134,8 @@ public func GetSystemTimeAdjustmentPreciseChecked(lpTimeAdjustment: CPointer<UIn
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemDirectoryA"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemDirectoryA"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -149,8 +149,8 @@ public func GetSystemDirectoryAChecked(lpBuffer: windows_strings.PSTR, uSize: UI
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemDirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemDirectoryW"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemDirectoryW"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -164,8 +164,8 @@ public func GetSystemDirectoryWChecked(lpBuffer: windows_strings.PWSTR, uSize: U
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetWindowsDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetWindowsDirectoryA"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetWindowsDirectoryA"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -179,8 +179,8 @@ public func GetWindowsDirectoryAChecked(lpBuffer: windows_strings.PSTR, uSize: U
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetWindowsDirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetWindowsDirectoryW"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetWindowsDirectoryW"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -194,8 +194,8 @@ public func GetWindowsDirectoryWChecked(lpBuffer: windows_strings.PWSTR, uSize: 
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemWindowsDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWindowsDirectoryA"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWindowsDirectoryA"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -209,8 +209,8 @@ public func GetSystemWindowsDirectoryAChecked(lpBuffer: windows_strings.PSTR, uS
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemWindowsDirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWindowsDirectoryW"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWindowsDirectoryW"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -224,8 +224,8 @@ public func GetSystemWindowsDirectoryWChecked(lpBuffer: windows_strings.PWSTR, u
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetComputerNameExA(NameType: Int32, lpBuffer: windows_strings.PSTR, nSize: CPointer<UInt32>): Bool {
-    let proc = CFunc<(Int32, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetComputerNameExA"))
-    return unsafe { proc(NameType, lpBuffer.asPtr(), nSize) } != 0
+    let proc__ = CFunc<(Int32, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetComputerNameExA"))
+    return unsafe { proc__(NameType, lpBuffer.asPtr(), nSize) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -238,8 +238,8 @@ public func GetComputerNameExAChecked(NameType: Int32, lpBuffer: windows_strings
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetComputerNameExW(NameType: Int32, lpBuffer: windows_strings.PWSTR, nSize: CPointer<UInt32>): Bool {
-    let proc = CFunc<(Int32, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetComputerNameExW"))
-    return unsafe { proc(NameType, lpBuffer.asPtr(), nSize) } != 0
+    let proc__ = CFunc<(Int32, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetComputerNameExW"))
+    return unsafe { proc__(NameType, lpBuffer.asPtr(), nSize) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -252,8 +252,8 @@ public func GetComputerNameExWChecked(NameType: Int32, lpBuffer: windows_strings
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetComputerNameExW(NameType: Int32, lpBuffer: windows_strings.PWSTR): Bool {
-    let proc = CFunc<(Int32, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameExW"))
-    return unsafe { proc(NameType, lpBuffer.asPtr()) } != 0
+    let proc__ = CFunc<(Int32, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameExW"))
+    return unsafe { proc__(NameType, lpBuffer.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -266,8 +266,8 @@ public func SetComputerNameExWChecked(NameType: Int32, lpBuffer: windows_strings
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetSystemTime(lpSystemTime: CPointer<SYSTEMTIME>): Bool {
-    let proc = CFunc<(CPointer<SYSTEMTIME>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetSystemTime"))
-    return unsafe { proc(lpSystemTime) } != 0
+    let proc__ = CFunc<(CPointer<SYSTEMTIME>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetSystemTime"))
+    return unsafe { proc__(lpSystemTime) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -280,8 +280,8 @@ public func SetSystemTimeChecked(lpSystemTime: CPointer<SYSTEMTIME>): windows_co
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetVersionExA(lpVersionInformation: CPointer<OSVERSIONINFOA>): Bool {
-    let proc = CFunc<(CPointer<OSVERSIONINFOA>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetVersionExA"))
-    return unsafe { proc(lpVersionInformation) } != 0
+    let proc__ = CFunc<(CPointer<OSVERSIONINFOA>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetVersionExA"))
+    return unsafe { proc__(lpVersionInformation) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -294,8 +294,8 @@ public func GetVersionExAChecked(lpVersionInformation: CPointer<OSVERSIONINFOA>)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetVersionExW(lpVersionInformation: CPointer<OSVERSIONINFOW>): Bool {
-    let proc = CFunc<(CPointer<OSVERSIONINFOW>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetVersionExW"))
-    return unsafe { proc(lpVersionInformation) } != 0
+    let proc__ = CFunc<(CPointer<OSVERSIONINFOW>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetVersionExW"))
+    return unsafe { proc__(lpVersionInformation) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -308,8 +308,8 @@ public func GetVersionExWChecked(lpVersionInformation: CPointer<OSVERSIONINFOW>)
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetLogicalProcessorInformation(Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>, ReturnedLength: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLogicalProcessorInformation"))
-    return unsafe { proc(Buffer, ReturnedLength) } != 0
+    let proc__ = CFunc<(CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLogicalProcessorInformation"))
+    return unsafe { proc__(Buffer, ReturnedLength) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -322,8 +322,8 @@ public func GetLogicalProcessorInformationChecked(Buffer: CPointer<SYSTEM_LOGICA
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetLogicalProcessorInformationEx(RelationshipType: Int32, Buffer: CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX>, ReturnedLength: CPointer<UInt32>): Bool {
-    let proc = CFunc<(Int32, CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLogicalProcessorInformationEx"))
-    return unsafe { proc(RelationshipType, Buffer, ReturnedLength) } != 0
+    let proc__ = CFunc<(Int32, CPointer<SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLogicalProcessorInformationEx"))
+    return unsafe { proc__(RelationshipType, Buffer, ReturnedLength) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -336,38 +336,38 @@ public func GetLogicalProcessorInformationExChecked(RelationshipType: Int32, Buf
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetNativeSystemInfo(lpSystemInfo: CPointer<SYSTEM_INFO>): Unit {
-    let proc = CFunc<(CPointer<SYSTEM_INFO>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetNativeSystemInfo"))
-    unsafe { proc(lpSystemInfo) }
+    let proc__ = CFunc<(CPointer<SYSTEM_INFO>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetNativeSystemInfo"))
+    unsafe { proc__(lpSystemInfo) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemTimePreciseAsFileTime(lpSystemTimeAsFileTime: CPointer<FILETIME>): Unit {
-    let proc = CFunc<(CPointer<FILETIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTimePreciseAsFileTime"))
-    unsafe { proc(lpSystemTimeAsFileTime) }
+    let proc__ = CFunc<(CPointer<FILETIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemTimePreciseAsFileTime"))
+    unsafe { proc__(lpSystemTimeAsFileTime) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetProductInfo(dwOSMajorVersion: UInt32, dwOSMinorVersion: UInt32, dwSpMajorVersion: UInt32, dwSpMinorVersion: UInt32, pdwReturnedProductType: CPointer<UInt32>): Bool {
-    let proc = CFunc<(UInt32, UInt32, UInt32, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProductInfo"))
-    return unsafe { proc(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion, pdwReturnedProductType) } != 0
+    let proc__ = CFunc<(UInt32, UInt32, UInt32, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProductInfo"))
+    return unsafe { proc__(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion, pdwReturnedProductType) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func VerSetConditionMask(ConditionMask: UInt64, TypeMask: UInt32, Condition: UInt8): UInt64 {
-    let proc = CFunc<(UInt64, UInt32, UInt8) -> UInt64>(windows_libloading.resolveProc("KERNEL32.dll", "VerSetConditionMask"))
-    return unsafe { proc(ConditionMask, TypeMask, Condition) }
+    let proc__ = CFunc<(UInt64, UInt32, UInt8) -> UInt64>(windows_libloading.resolveProc("KERNEL32.dll", "VerSetConditionMask"))
+    return unsafe { proc__(ConditionMask, TypeMask, Condition) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetOsSafeBootMode(Flags: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-0.dll", "GetOsSafeBootMode"))
-    return unsafe { proc(Flags) } != 0
+    let proc__ = CFunc<(CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-0.dll", "GetOsSafeBootMode"))
+    return unsafe { proc__(Flags) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func EnumSystemFirmwareTables(FirmwareTableProviderSignature: UInt32, pFirmwareTableEnumBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32 {
-    let proc = CFunc<(UInt32, CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "EnumSystemFirmwareTables"))
-    return unsafe { proc(FirmwareTableProviderSignature, pFirmwareTableEnumBuffer, BufferSize) }
+    let proc__ = CFunc<(UInt32, CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "EnumSystemFirmwareTables"))
+    return unsafe { proc__(FirmwareTableProviderSignature, pFirmwareTableEnumBuffer, BufferSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -381,8 +381,8 @@ public func EnumSystemFirmwareTablesChecked(FirmwareTableProviderSignature: UInt
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemFirmwareTable(FirmwareTableProviderSignature: UInt32, FirmwareTableID: UInt32, pFirmwareTableBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32 {
-    let proc = CFunc<(UInt32, UInt32, CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemFirmwareTable"))
-    return unsafe { proc(FirmwareTableProviderSignature, FirmwareTableID, pFirmwareTableBuffer, BufferSize) }
+    let proc__ = CFunc<(UInt32, UInt32, CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemFirmwareTable"))
+    return unsafe { proc__(FirmwareTableProviderSignature, FirmwareTableID, pFirmwareTableBuffer, BufferSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -396,14 +396,14 @@ public func GetSystemFirmwareTableChecked(FirmwareTableProviderSignature: UInt32
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func DnsHostnameToComputerNameExW(Hostname: windows_strings.PWSTR, ComputerName: windows_strings.PWSTR, nSize: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "DnsHostnameToComputerNameExW"))
-    return unsafe { proc(Hostname.asPtr(), ComputerName.asPtr(), nSize) } != 0
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "DnsHostnameToComputerNameExW"))
+    return unsafe { proc__(Hostname.asPtr(), ComputerName.asPtr(), nSize) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes: CPointer<UInt64>): Bool {
-    let proc = CFunc<(CPointer<UInt64>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetPhysicallyInstalledSystemMemory"))
-    return unsafe { proc(TotalMemoryInKilobytes) } != 0
+    let proc__ = CFunc<(CPointer<UInt64>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetPhysicallyInstalledSystemMemory"))
+    return unsafe { proc__(TotalMemoryInKilobytes) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -416,14 +416,14 @@ public func GetPhysicallyInstalledSystemMemoryChecked(TotalMemoryInKilobytes: CP
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetComputerNameEx2W(NameType: Int32, Flags: UInt32, lpBuffer: windows_strings.PWSTR): Bool {
-    let proc = CFunc<(Int32, UInt32, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameEx2W"))
-    return unsafe { proc(NameType, Flags, lpBuffer.asPtr()) } != 0
+    let proc__ = CFunc<(Int32, UInt32, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameEx2W"))
+    return unsafe { proc__(NameType, Flags, lpBuffer.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetSystemTimeAdjustment(dwTimeAdjustment: UInt32, bTimeAdjustmentDisabled: Bool): Bool {
-    let proc = CFunc<(UInt32, Int32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetSystemTimeAdjustment"))
-    return unsafe { proc(dwTimeAdjustment, if (bTimeAdjustmentDisabled) { 1 } else { 0 }) } != 0
+    let proc__ = CFunc<(UInt32, Int32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetSystemTimeAdjustment"))
+    return unsafe { proc__(dwTimeAdjustment, if (bTimeAdjustmentDisabled) { 1 } else { 0 }) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -436,8 +436,8 @@ public func SetSystemTimeAdjustmentChecked(dwTimeAdjustment: UInt32, bTimeAdjust
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetSystemTimeAdjustmentPrecise(dwTimeAdjustment: UInt64, bTimeAdjustmentDisabled: Bool): Bool {
-    let proc = CFunc<(UInt64, Int32) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-4.dll", "SetSystemTimeAdjustmentPrecise"))
-    return unsafe { proc(dwTimeAdjustment, if (bTimeAdjustmentDisabled) { 1 } else { 0 }) } != 0
+    let proc__ = CFunc<(UInt64, Int32) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-4.dll", "SetSystemTimeAdjustmentPrecise"))
+    return unsafe { proc__(dwTimeAdjustment, if (bTimeAdjustmentDisabled) { 1 } else { 0 }) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -450,8 +450,8 @@ public func SetSystemTimeAdjustmentPreciseChecked(dwTimeAdjustment: UInt64, bTim
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetProcessorSystemCycleTime(Group: UInt16, Buffer: CPointer<SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION>, ReturnedLength: CPointer<UInt32>): Bool {
-    let proc = CFunc<(UInt16, CPointer<SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessorSystemCycleTime"))
-    return unsafe { proc(Group, Buffer, ReturnedLength) } != 0
+    let proc__ = CFunc<(UInt16, CPointer<SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessorSystemCycleTime"))
+    return unsafe { proc__(Group, Buffer, ReturnedLength) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -464,14 +464,14 @@ public func GetProcessorSystemCycleTimeChecked(Group: UInt16, Buffer: CPointer<S
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetOsManufacturingMode(pbEnabled: CPointer<Int32>): Bool {
-    let proc = CFunc<(CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-3.dll", "GetOsManufacturingMode"))
-    return unsafe { proc(pbEnabled) } != 0
+    let proc__ = CFunc<(CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-3.dll", "GetOsManufacturingMode"))
+    return unsafe { proc__(pbEnabled) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetIntegratedDisplaySize(sizeInInches: CPointer<Float64>): Int32 {
-    let proc = CFunc<(CPointer<Float64>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-3.dll", "GetIntegratedDisplaySize"))
-    return unsafe { proc(sizeInInches) }
+    let proc__ = CFunc<(CPointer<Float64>) -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-3.dll", "GetIntegratedDisplaySize"))
+    return unsafe { proc__(sizeInInches) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -481,8 +481,8 @@ public func GetIntegratedDisplaySizeChecked(sizeInInches: CPointer<Float64>): wi
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetComputerNameA(lpComputerName: windows_strings.PSTR): Bool {
-    let proc = CFunc<(CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameA"))
-    return unsafe { proc(lpComputerName.asPtr()) } != 0
+    let proc__ = CFunc<(CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameA"))
+    return unsafe { proc__(lpComputerName.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -495,8 +495,8 @@ public func SetComputerNameAChecked(lpComputerName: windows_strings.PSTR): windo
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetComputerNameW(lpComputerName: windows_strings.PWSTR): Bool {
-    let proc = CFunc<(CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameW"))
-    return unsafe { proc(lpComputerName.asPtr()) } != 0
+    let proc__ = CFunc<(CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameW"))
+    return unsafe { proc__(lpComputerName.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -509,8 +509,8 @@ public func SetComputerNameWChecked(lpComputerName: windows_strings.PWSTR): wind
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func SetComputerNameExA(NameType: Int32, lpBuffer: windows_strings.PSTR): Bool {
-    let proc = CFunc<(Int32, CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameExA"))
-    return unsafe { proc(NameType, lpBuffer.asPtr()) } != 0
+    let proc__ = CFunc<(Int32, CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameExA"))
+    return unsafe { proc__(NameType, lpBuffer.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -523,26 +523,26 @@ public func SetComputerNameExAChecked(NameType: Int32, lpBuffer: windows_strings
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetDeveloperDriveEnablementState(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-6.dll", "GetDeveloperDriveEnablementState"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("api-ms-win-core-sysinfo-l1-2-6.dll", "GetDeveloperDriveEnablementState"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetRuntimeAttestationReport(Nonce: CPointer<UInt8>, PackageVersion: UInt16, ReportTypesBitmap: UInt64, ReportBuffer: CPointer<Unit>, ReportBufferSize: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<UInt8>, UInt16, UInt64, CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetRuntimeAttestationReport"))
-    return unsafe { proc(Nonce, PackageVersion, ReportTypesBitmap, ReportBuffer, ReportBufferSize) } != 0
+    let proc__ = CFunc<(CPointer<UInt8>, UInt16, UInt64, CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetRuntimeAttestationReport"))
+    return unsafe { proc__(Nonce, PackageVersion, ReportTypesBitmap, ReportBuffer, ReportBufferSize) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemCpuSetInformation(Information: CPointer<SYSTEM_CPU_SET_INFORMATION>, BufferLength: UInt32, ReturnedLength: CPointer<UInt32>, Process: HANDLE): Bool {
-    let proc = CFunc<(CPointer<SYSTEM_CPU_SET_INFORMATION>, UInt32, CPointer<UInt32>, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemCpuSetInformation"))
-    return unsafe { proc(Information, BufferLength, ReturnedLength, Process.Value, 0u32) } != 0
+    let proc__ = CFunc<(CPointer<SYSTEM_CPU_SET_INFORMATION>, UInt32, CPointer<UInt32>, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemCpuSetInformation"))
+    return unsafe { proc__(Information, BufferLength, ReturnedLength, Process.Value, 0u32) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemWow64DirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWow64DirectoryA"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWow64DirectoryA"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -556,8 +556,8 @@ public func GetSystemWow64DirectoryAChecked(lpBuffer: windows_strings.PSTR, uSiz
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemWow64DirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
-    let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWow64DirectoryW"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize) }
+    let proc__ = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWow64DirectoryW"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -571,8 +571,8 @@ public func GetSystemWow64DirectoryWChecked(lpBuffer: windows_strings.PWSTR, uSi
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemWow64Directory2A(lpBuffer: windows_strings.PSTR, uSize: UInt32, ImageFileMachineType: UInt16): UInt32 {
-    let proc = CFunc<(CPointer<UInt8>, UInt32, UInt16) -> UInt32>(windows_libloading.resolveProc("api-ms-win-core-wow64-l1-1-1.dll", "GetSystemWow64Directory2A"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize, ImageFileMachineType) }
+    let proc__ = CFunc<(CPointer<UInt8>, UInt32, UInt16) -> UInt32>(windows_libloading.resolveProc("api-ms-win-core-wow64-l1-1-1.dll", "GetSystemWow64Directory2A"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize, ImageFileMachineType) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -586,8 +586,8 @@ public func GetSystemWow64Directory2AChecked(lpBuffer: windows_strings.PSTR, uSi
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemWow64Directory2W(lpBuffer: windows_strings.PWSTR, uSize: UInt32, ImageFileMachineType: UInt16): UInt32 {
-    let proc = CFunc<(CPointer<UInt16>, UInt32, UInt16) -> UInt32>(windows_libloading.resolveProc("api-ms-win-core-wow64-l1-1-1.dll", "GetSystemWow64Directory2W"))
-    return unsafe { proc(lpBuffer.asPtr(), uSize, ImageFileMachineType) }
+    let proc__ = CFunc<(CPointer<UInt16>, UInt32, UInt16) -> UInt32>(windows_libloading.resolveProc("api-ms-win-core-wow64-l1-1-1.dll", "GetSystemWow64Directory2W"))
+    return unsafe { proc__(lpBuffer.asPtr(), uSize, ImageFileMachineType) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -601,8 +601,8 @@ public func GetSystemWow64Directory2WChecked(lpBuffer: windows_strings.PWSTR, uS
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func IsWow64GuestMachineSupported(WowGuestMachine: UInt16, MachineIsSupported: CPointer<Int32>): Int32 {
-    let proc = CFunc<(UInt16, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "IsWow64GuestMachineSupported"))
-    return unsafe { proc(WowGuestMachine, MachineIsSupported) }
+    let proc__ = CFunc<(UInt16, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "IsWow64GuestMachineSupported"))
+    return unsafe { proc__(WowGuestMachine, MachineIsSupported) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -612,56 +612,56 @@ public func IsWow64GuestMachineSupportedChecked(WowGuestMachine: UInt16, Machine
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func RtlGetProductInfo(OSMajorVersion: UInt32, OSMinorVersion: UInt32, SpMajorVersion: UInt32, SpMinorVersion: UInt32, ReturnedProductType: CPointer<UInt32>): Bool {
-    let proc = CFunc<(UInt32, UInt32, UInt32, UInt32, CPointer<UInt32>) -> UInt8>(windows_libloading.resolveProc("ntdll.dll", "RtlGetProductInfo"))
-    return unsafe { proc(OSMajorVersion, OSMinorVersion, SpMajorVersion, SpMinorVersion, ReturnedProductType) } != 0u8
+    let proc__ = CFunc<(UInt32, UInt32, UInt32, UInt32, CPointer<UInt32>) -> UInt8>(windows_libloading.resolveProc("ntdll.dll", "RtlGetProductInfo"))
+    return unsafe { proc__(OSMajorVersion, OSMinorVersion, SpMajorVersion, SpMinorVersion, ReturnedProductType) } != 0u8
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func RtlOsDeploymentState(Flags: UInt32): Int32 {
-    let proc = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("ntdll.dll", "RtlOsDeploymentState"))
-    return unsafe { proc(Flags) }
+    let proc__ = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("ntdll.dll", "RtlOsDeploymentState"))
+    return unsafe { proc__(Flags) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func RtlGetSystemGlobalData(DataId: Int32, Buffer: CPointer<Unit>, Size: UInt32): UInt32 {
-    let proc = CFunc<(Int32, CPointer<Unit>, UInt32) -> UInt32>(windows_libloading.resolveProc("ntdllk.dll", "RtlGetSystemGlobalData"))
-    return unsafe { proc(DataId, Buffer, Size) }
+    let proc__ = CFunc<(Int32, CPointer<Unit>, UInt32) -> UInt32>(windows_libloading.resolveProc("ntdllk.dll", "RtlGetSystemGlobalData"))
+    return unsafe { proc__(DataId, Buffer, Size) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func RtlGetDeviceFamilyInfoEnum(pullUAPInfo: CPointer<UInt64>, pulDeviceFamily: CPointer<UInt32>, pulDeviceForm: CPointer<UInt32>): Unit {
-    let proc = CFunc<(CPointer<UInt64>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>(windows_libloading.resolveProc("ntdll.dll", "RtlGetDeviceFamilyInfoEnum"))
-    unsafe { proc(pullUAPInfo, pulDeviceFamily, pulDeviceForm) }
+    let proc__ = CFunc<(CPointer<UInt64>, CPointer<UInt32>, CPointer<UInt32>) -> Unit>(windows_libloading.resolveProc("ntdll.dll", "RtlGetDeviceFamilyInfoEnum"))
+    unsafe { proc__(pullUAPInfo, pulDeviceFamily, pulDeviceForm) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func RtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize: CPointer<UInt32>, pulDeviceFormBufferSize: CPointer<UInt32>, DeviceFamily: windows_strings.PWSTR, DeviceForm: windows_strings.PWSTR): UInt32 {
-    let proc = CFunc<(CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt16>) -> UInt32>(windows_libloading.resolveProc("ntdll.dll", "RtlConvertDeviceFamilyInfoToString"))
-    return unsafe { proc(pulDeviceFamilyBufferSize, pulDeviceFormBufferSize, DeviceFamily.asPtr(), DeviceForm.asPtr()) }
+    let proc__ = CFunc<(CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt16>) -> UInt32>(windows_libloading.resolveProc("ntdll.dll", "RtlConvertDeviceFamilyInfoToString"))
+    return unsafe { proc__(pulDeviceFamilyBufferSize, pulDeviceFormBufferSize, DeviceFamily.asPtr(), DeviceForm.asPtr()) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func RtlSwitchedVVI(VersionInfo: CPointer<OSVERSIONINFOEXW>, TypeMask: UInt32, ConditionMask: UInt64): UInt32 {
-    let proc = CFunc<(CPointer<OSVERSIONINFOEXW>, UInt32, UInt64) -> UInt32>(windows_libloading.resolveProc("ntdll.dll", "RtlSwitchedVVI"))
-    return unsafe { proc(VersionInfo, TypeMask, ConditionMask) }
+    let proc__ = CFunc<(CPointer<OSVERSIONINFOEXW>, UInt32, UInt64) -> UInt32>(windows_libloading.resolveProc("ntdll.dll", "RtlSwitchedVVI"))
+    return unsafe { proc__(VersionInfo, TypeMask, ConditionMask) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GlobalMemoryStatus(lpBuffer: CPointer<MEMORYSTATUS>): Unit {
-    let proc = CFunc<(CPointer<MEMORYSTATUS>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GlobalMemoryStatus"))
-    unsafe { proc(lpBuffer) }
+    let proc__ = CFunc<(CPointer<MEMORYSTATUS>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GlobalMemoryStatus"))
+    unsafe { proc__(lpBuffer) }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetSystemDEPPolicy(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemDEPPolicy"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemDEPPolicy"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func GetFirmwareType(FirmwareType: CPointer<Int32>): Bool {
-    let proc = CFunc<(CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetFirmwareType"))
-    return unsafe { proc(FirmwareType) } != 0
+    let proc__ = CFunc<(CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetFirmwareType"))
+    return unsafe { proc__(FirmwareType) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -674,8 +674,8 @@ public func GetFirmwareTypeChecked(FirmwareType: CPointer<Int32>): windows_core.
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func VerifyVersionInfoA(lpVersionInformation: CPointer<OSVERSIONINFOEXA>, dwTypeMask: UInt32, dwlConditionMask: UInt64): Bool {
-    let proc = CFunc<(CPointer<OSVERSIONINFOEXA>, UInt32, UInt64) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "VerifyVersionInfoA"))
-    return unsafe { proc(lpVersionInformation, dwTypeMask, dwlConditionMask) } != 0
+    let proc__ = CFunc<(CPointer<OSVERSIONINFOEXA>, UInt32, UInt64) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "VerifyVersionInfoA"))
+    return unsafe { proc__(lpVersionInformation, dwTypeMask, dwlConditionMask) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]
@@ -688,8 +688,8 @@ public func VerifyVersionInfoAChecked(lpVersionInformation: CPointer<OSVERSIONIN
 
 @When[Windows_Win32_System_SystemInformation == "on"]
 public func VerifyVersionInfoW(lpVersionInformation: CPointer<OSVERSIONINFOEXW>, dwTypeMask: UInt32, dwlConditionMask: UInt64): Bool {
-    let proc = CFunc<(CPointer<OSVERSIONINFOEXW>, UInt32, UInt64) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "VerifyVersionInfoW"))
-    return unsafe { proc(lpVersionInformation, dwTypeMask, dwlConditionMask) } != 0
+    let proc__ = CFunc<(CPointer<OSVERSIONINFOEXW>, UInt32, UInt64) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "VerifyVersionInfoW"))
+    return unsafe { proc__(lpVersionInformation, dwTypeMask, dwlConditionMask) } != 0
 }
 
 @When[Windows_Win32_System_SystemInformation == "on"]

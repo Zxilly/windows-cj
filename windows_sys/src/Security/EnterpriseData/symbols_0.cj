@@ -2,23 +2,2936 @@
 
 package windows_sys.Security.EnterpriseData
 
+import windows_core as windows_core
+import windows_interface as windows_interface
+import windows_interface.IInspectable
+import windows_interface.macros.Interface
+
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_Networking == "on"]
+import windows_sys.Networking as Windows_Networking
+@When[Windows_Storage == "on"]
+import windows_sys.Storage as Windows_Storage
+@When[Windows_Storage_Streams == "on"]
+import windows_sys.Storage.Streams as Windows_Storage_Streams
+
+// Windows.Security.EnterpriseData.BufferProtectUnprotectResult (synthetic:Windows_Security_EnterpriseData_BufferProtectUnprotectResult)
+@When[Windows_Security_EnterpriseData == "on"]
+public class BufferProtectUnprotectResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BufferProtectUnprotectResult> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BufferProtectUnprotectResult {
+        BufferProtectUnprotectResult(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BufferProtectUnprotectResult {
+        BufferProtectUnprotectResult(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBufferProtectUnprotectResult.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BufferProtectUnprotectResult> {
+        let ancestors = [IBufferProtectUnprotectResult.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BufferProtectUnprotectResult>("BufferProtectUnprotectResult", IBufferProtectUnprotectResult.iid(), ancestors, { raw => BufferProtectUnprotectResult.fromAbiTake(raw) }, { raw => BufferProtectUnprotectResult.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBufferProtectUnprotectResult {
+        match (unsafe { query(IBufferProtectUnprotectResult.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBufferProtectUnprotectResult(): IBufferProtectUnprotectResult {
+        defaultInterface()
+    }
+
+    public prop Buffer: Windows_Storage_Streams.IBuffer {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Buffer(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Storage_Streams.IBuffer>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Storage_Streams.IBuffer.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop ProtectionInfo: DataProtectionInfo {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProtectionInfo(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<DataProtectionInfo>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return DataProtectionInfo.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.BufferProtectUnprotectResult"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.BufferProtectUnprotectResult;{" + IBufferProtectUnprotectResult.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.BufferProtectUnprotectResult", BufferProtectUnprotectResult.signature(), IBufferProtectUnprotectResult.iid())
+    }
+
+    public static func intoWinrtHandle(value: BufferProtectUnprotectResult): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BufferProtectUnprotectResult {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BufferProtectUnprotectResult.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BufferProtectUnprotectResult {
+        BufferProtectUnprotectResult.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.DataProtectionInfo (synthetic:Windows_Security_EnterpriseData_DataProtectionInfo)
+@When[Windows_Security_EnterpriseData == "on"]
+public class DataProtectionInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DataProtectionInfo> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DataProtectionInfo {
+        DataProtectionInfo(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DataProtectionInfo {
+        DataProtectionInfo(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDataProtectionInfo.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DataProtectionInfo> {
+        let ancestors = [IDataProtectionInfo.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DataProtectionInfo>("DataProtectionInfo", IDataProtectionInfo.iid(), ancestors, { raw => DataProtectionInfo.fromAbiTake(raw) }, { raw => DataProtectionInfo.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDataProtectionInfo {
+        match (unsafe { query(IDataProtectionInfo.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDataProtectionInfo(): IDataProtectionInfo {
+        defaultInterface()
+    }
+
+    public prop Identity: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Identity(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Status: DataProtectionStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Status(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return DataProtectionStatus(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.DataProtectionInfo"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.DataProtectionInfo;{" + IDataProtectionInfo.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.DataProtectionInfo", DataProtectionInfo.signature(), IDataProtectionInfo.iid())
+    }
+
+    public static func intoWinrtHandle(value: DataProtectionInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DataProtectionInfo {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DataProtectionInfo.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DataProtectionInfo {
+        DataProtectionInfo.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.DataProtectionManager (synthetic:Windows_Security_EnterpriseData_DataProtectionManager)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct DataProtectionManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func ProtectAsync(data: Windows_Storage_Streams.IBuffer, identity: windows_core.HString): Windows_Foundation.IAsyncOperation<BufferProtectUnprotectResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IBuffer>(data)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+                try (factory__ = windows_core.factory<DataProtectionManager, IDataProtectionManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.ProtectAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BufferProtectUnprotectResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BufferProtectUnprotectResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func UnprotectAsync(data: Windows_Storage_Streams.IBuffer): Windows_Foundation.IAsyncOperation<BufferProtectUnprotectResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IBuffer>(data)) {
+            try (factory__ = windows_core.factory<DataProtectionManager, IDataProtectionManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.UnprotectAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BufferProtectUnprotectResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BufferProtectUnprotectResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ProtectStreamAsync(unprotectedStream: Windows_Storage_Streams.IInputStream, identity: windows_core.HString, protectedStream: Windows_Storage_Streams.IOutputStream): Windows_Foundation.IAsyncOperation<DataProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IInputStream>(unprotectedStream)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IOutputStream>(protectedStream)) {
+                    try (factory__ = windows_core.factory<DataProtectionManager, IDataProtectionManagerStatics>().unwrap()) {
+                        hr__ = unsafe { factory__.ProtectStreamAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<DataProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<DataProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func UnprotectStreamAsync(protectedStream: Windows_Storage_Streams.IInputStream, unprotectedStream: Windows_Storage_Streams.IOutputStream): Windows_Foundation.IAsyncOperation<DataProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IInputStream>(protectedStream)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IOutputStream>(unprotectedStream)) {
+                try (factory__ = windows_core.factory<DataProtectionManager, IDataProtectionManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.UnprotectStreamAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<DataProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<DataProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetProtectionInfoAsync(protectedData: Windows_Storage_Streams.IBuffer): Windows_Foundation.IAsyncOperation<DataProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IBuffer>(protectedData)) {
+            try (factory__ = windows_core.factory<DataProtectionManager, IDataProtectionManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetProtectionInfoAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<DataProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<DataProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetStreamProtectionInfoAsync(protectedStream: Windows_Storage_Streams.IInputStream): Windows_Foundation.IAsyncOperation<DataProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IInputStream>(protectedStream)) {
+            try (factory__ = windows_core.factory<DataProtectionManager, IDataProtectionManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetStreamProtectionInfoAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<DataProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<DataProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.DataProtectionManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.DataProtectionManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.DataProtectionManager", DataProtectionManager.signature())
+    }
+}
+
+// Windows.Security.EnterpriseData.DataProtectionStatus (synthetic:Windows_Security_EnterpriseData_DataProtectionStatus)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct DataProtectionStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Security_EnterpriseData == "on"]
+public const DataProtectionStatus_ProtectedToOtherIdentity = DataProtectionStatus(0)
+@When[Windows_Security_EnterpriseData == "on"]
+public const DataProtectionStatus_Protected = DataProtectionStatus(1)
+@When[Windows_Security_EnterpriseData == "on"]
+public const DataProtectionStatus_Revoked = DataProtectionStatus(2)
+@When[Windows_Security_EnterpriseData == "on"]
+public const DataProtectionStatus_Unprotected = DataProtectionStatus(3)
+@When[Windows_Security_EnterpriseData == "on"]
+public const DataProtectionStatus_LicenseExpired = DataProtectionStatus(4)
+@When[Windows_Security_EnterpriseData == "on"]
+public const DataProtectionStatus_AccessSuspended = DataProtectionStatus(5)
+
+// Windows.Security.EnterpriseData.EnforcementLevel (synthetic:Windows_Security_EnterpriseData_EnforcementLevel)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct EnforcementLevel {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Security_EnterpriseData == "on"]
+public const EnforcementLevel_NoProtection = EnforcementLevel(0)
+@When[Windows_Security_EnterpriseData == "on"]
+public const EnforcementLevel_Silent = EnforcementLevel(1)
+@When[Windows_Security_EnterpriseData == "on"]
+public const EnforcementLevel_Override = EnforcementLevel(2)
+@When[Windows_Security_EnterpriseData == "on"]
+public const EnforcementLevel_Block = EnforcementLevel(3)
+
+// Windows.Security.EnterpriseData.EnterpriseDataContract (synthetic:Windows_Security_EnterpriseData_EnterpriseDataContract)
+@When[Windows_Security_EnterpriseData == "on"]
+@C
+public struct EnterpriseDataContract {
+    public var reserved: Int32 = 0
+}
+
+// Windows.Security.EnterpriseData.FileProtectionInfo (synthetic:Windows_Security_EnterpriseData_FileProtectionInfo)
+@When[Windows_Security_EnterpriseData == "on"]
+public class FileProtectionInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FileProtectionInfo> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FileProtectionInfo {
+        FileProtectionInfo(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FileProtectionInfo {
+        FileProtectionInfo(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFileProtectionInfo.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FileProtectionInfo> {
+        let ancestors = [IFileProtectionInfo.iid(), IFileProtectionInfo2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FileProtectionInfo>("FileProtectionInfo", IFileProtectionInfo.iid(), ancestors, { raw => FileProtectionInfo.fromAbiTake(raw) }, { raw => FileProtectionInfo.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFileProtectionInfo {
+        match (unsafe { query(IFileProtectionInfo.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFileProtectionInfo(): IFileProtectionInfo {
+        defaultInterface()
+    }
+
+    public func asIFileProtectionInfo2(): IFileProtectionInfo2 {
+        match (unsafe { query<IFileProtectionInfo2>(IFileProtectionInfo2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Identity: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Identity(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop IsRoamable: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsRoamable(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Status: FileProtectionStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Status(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return FileProtectionStatus(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.FileProtectionInfo"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.FileProtectionInfo;{" + IFileProtectionInfo.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.FileProtectionInfo", FileProtectionInfo.signature(), IFileProtectionInfo.iid())
+    }
+
+    public static func intoWinrtHandle(value: FileProtectionInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FileProtectionInfo {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FileProtectionInfo.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FileProtectionInfo {
+        FileProtectionInfo.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.FileProtectionManager (synthetic:Windows_Security_EnterpriseData_FileProtectionManager)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct FileProtectionManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func IsContainerAsync(file: Windows_Storage.IStorageFile): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(file)) {
+            try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.IsContainerAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LoadFileFromContainerWithTargetAndNameCollisionOptionAsync(containerFile: Windows_Storage.IStorageFile, target: Windows_Storage.IStorageItem, collisionOption: Windows_Storage.NameCollisionOption): Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(containerFile)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(target)) {
+                try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.LoadFileFromContainerWithTargetAndNameCollisionOptionAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), collisionOption.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SaveFileAsContainerWithSharingAsync(protectedFile: Windows_Storage.IStorageFile, sharedWithIdentities: Windows_Foundation_Collections.IIterable<windows_core.HString>): Windows_Foundation.IAsyncOperation<ProtectedContainerExportResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(protectedFile)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(sharedWithIdentities)) {
+                try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.SaveFileAsContainerWithSharingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ProtectedContainerExportResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ProtectedContainerExportResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ProtectAsync(target: Windows_Storage.IStorageItem, identity: windows_core.HString): Windows_Foundation.IAsyncOperation<FileProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(target)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+                try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.ProtectAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<FileProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<FileProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CopyProtectionAsync(source: Windows_Storage.IStorageItem, target: Windows_Storage.IStorageItem): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(source)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(target)) {
+                try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CopyProtectionAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetProtectionInfoAsync(source: Windows_Storage.IStorageItem): Windows_Foundation.IAsyncOperation<FileProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(source)) {
+            try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetProtectionInfoAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<FileProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<FileProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SaveFileAsContainerAsync(protectedFile: Windows_Storage.IStorageFile): Windows_Foundation.IAsyncOperation<ProtectedContainerExportResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(protectedFile)) {
+            try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SaveFileAsContainerAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ProtectedContainerExportResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ProtectedContainerExportResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LoadFileFromContainerAsync(containerFile: Windows_Storage.IStorageFile): Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(containerFile)) {
+            try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.LoadFileFromContainerAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LoadFileFromContainerWithTargetAsync(containerFile: Windows_Storage.IStorageFile, target: Windows_Storage.IStorageItem): Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFile>(containerFile)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(target)) {
+                try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.LoadFileFromContainerWithTargetAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ProtectedContainerImportResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateProtectedAndOpenAsync(parentFolder: Windows_Storage.IStorageFolder, desiredName: windows_core.HString, identity: windows_core.HString, collisionOption: Windows_Storage.CreationCollisionOption): Windows_Foundation.IAsyncOperation<ProtectedFileCreateResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFolder>(parentFolder)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+                    try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateProtectedAndOpenAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), collisionOption.value, CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ProtectedFileCreateResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ProtectedFileCreateResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func UnprotectAsync(target: Windows_Storage.IStorageItem): Windows_Foundation.IAsyncOperation<FileProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(target)) {
+            try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics3>().unwrap()) {
+                hr__ = unsafe { factory__.UnprotectAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<FileProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<FileProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func UnprotectWithOptionsAsync(target: Windows_Storage.IStorageItem, options: FileUnprotectOptions): Windows_Foundation.IAsyncOperation<FileProtectionInfo> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(target)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<FileUnprotectOptions>(options)) {
+                try (factory__ = windows_core.factory<FileProtectionManager, IFileProtectionManagerStatics3>().unwrap()) {
+                    hr__ = unsafe { factory__.UnprotectWithOptionsAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<FileProtectionInfo>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<FileProtectionInfo>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.FileProtectionManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.FileProtectionManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.FileProtectionManager", FileProtectionManager.signature())
+    }
+}
+
+// Windows.Security.EnterpriseData.FileProtectionStatus (synthetic:Windows_Security_EnterpriseData_FileProtectionStatus)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct FileProtectionStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_Undetermined = FileProtectionStatus(0)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_Unknown = FileProtectionStatus(0)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_Unprotected = FileProtectionStatus(1)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_Revoked = FileProtectionStatus(2)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_Protected = FileProtectionStatus(3)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_ProtectedByOtherUser = FileProtectionStatus(4)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_ProtectedToOtherEnterprise = FileProtectionStatus(5)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_NotProtectable = FileProtectionStatus(6)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_ProtectedToOtherIdentity = FileProtectionStatus(7)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_LicenseExpired = FileProtectionStatus(8)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_AccessSuspended = FileProtectionStatus(9)
+@When[Windows_Security_EnterpriseData == "on"]
+public const FileProtectionStatus_FileInUse = FileProtectionStatus(10)
+
+// Windows.Security.EnterpriseData.FileRevocationManager (synthetic:Windows_Security_EnterpriseData_FileRevocationManager)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct FileRevocationManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func ProtectAsync(storageItem: Windows_Storage.IStorageItem, enterpriseIdentity: windows_core.HString): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(storageItem)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(enterpriseIdentity)) {
+                try (factory__ = windows_core.factory<FileRevocationManager, IFileRevocationManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.ProtectAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CopyProtectionAsync(sourceStorageItem: Windows_Storage.IStorageItem, targetStorageItem: Windows_Storage.IStorageItem): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(sourceStorageItem)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(targetStorageItem)) {
+                try (factory__ = windows_core.factory<FileRevocationManager, IFileRevocationManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CopyProtectionAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Revoke(enterpriseIdentity: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(enterpriseIdentity)) {
+            try (factory__ = windows_core.factory<FileRevocationManager, IFileRevocationManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.Revoke(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func GetStatusAsync(storageItem: Windows_Storage.IStorageItem): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(storageItem)) {
+            try (factory__ = windows_core.factory<FileRevocationManager, IFileRevocationManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetStatusAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.FileRevocationManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.FileRevocationManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.FileRevocationManager", FileRevocationManager.signature())
+    }
+}
+
+// Windows.Security.EnterpriseData.FileUnprotectOptions (synthetic:Windows_Security_EnterpriseData_FileUnprotectOptions)
+@When[Windows_Security_EnterpriseData == "on"]
+public class FileUnprotectOptions <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FileUnprotectOptions> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FileUnprotectOptions {
+        FileUnprotectOptions(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FileUnprotectOptions {
+        FileUnprotectOptions(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFileUnprotectOptions.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FileUnprotectOptions> {
+        let ancestors = [IFileUnprotectOptions.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FileUnprotectOptions>("FileUnprotectOptions", IFileUnprotectOptions.iid(), ancestors, { raw => FileUnprotectOptions.fromAbiTake(raw) }, { raw => FileUnprotectOptions.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFileUnprotectOptions {
+        match (unsafe { query(IFileUnprotectOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFileUnprotectOptions(): IFileUnprotectOptions {
+        defaultInterface()
+    }
+
+    public mut prop Audit: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Audit(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAudit(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func Create(audit: Bool): FileUnprotectOptions {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FileUnprotectOptions, IFileUnprotectOptionsFactory>().unwrap()) {
+            hr__ = unsafe { factory__.Create(audit, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<FileUnprotectOptions>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return FileUnprotectOptions.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.FileUnprotectOptions"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.FileUnprotectOptions;{" + IFileUnprotectOptions.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.FileUnprotectOptions", FileUnprotectOptions.signature(), IFileUnprotectOptions.iid())
+    }
+
+    public static func intoWinrtHandle(value: FileUnprotectOptions): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FileUnprotectOptions {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FileUnprotectOptions.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FileUnprotectOptions {
+        FileUnprotectOptions.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.IBufferProtectUnprotectResult (synthetic:Windows_Security_EnterpriseData_IBufferProtectUnprotectResult)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["47995edc-6cec-4e3a-b251-9e7485d79e7a", "Windows.Security.EnterpriseData.IBufferProtectUnprotectResult", "Buffer.value=Com;ProtectionInfo.value=Com"]
+public interface IBufferProtectUnprotectResult <: IInspectable {
+    func Buffer(value: CPointer<CPointer<Unit>>): Int32
+    func ProtectionInfo(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IDataProtectionInfo (synthetic:Windows_Security_EnterpriseData_IDataProtectionInfo)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["8420b0c1-5e31-4405-9540-3f943af0cb26", "Windows.Security.EnterpriseData.IDataProtectionInfo", "Identity.value=HString"]
+public interface IDataProtectionInfo <: IInspectable {
+    func Status(value: CPointer<Int32>): Int32
+    func Identity(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IDataProtectionManagerStatics (synthetic:Windows_Security_EnterpriseData_IDataProtectionManagerStatics)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["b6149b74-9144-4ee4-8a8a-30b5f361430e", "Windows.Security.EnterpriseData.IDataProtectionManagerStatics", "ProtectAsync.result=Com;UnprotectAsync.result=Com;ProtectStreamAsync.result=Com;UnprotectStreamAsync.result=Com;GetProtectionInfoAsync.result=Com;GetStreamProtectionInfoAsync.result=Com"]
+public interface IDataProtectionManagerStatics <: IInspectable {
+    func ProtectAsync(data: CPointer<Unit>, identity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func UnprotectAsync(data: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func ProtectStreamAsync(unprotectedStream: CPointer<Unit>, identity: CPointer<Unit>, protectedStream: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func UnprotectStreamAsync(protectedStream: CPointer<Unit>, unprotectedStream: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetProtectionInfoAsync(protectedData: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetStreamProtectionInfoAsync(protectedStream: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileProtectionInfo (synthetic:Windows_Security_EnterpriseData_IFileProtectionInfo)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["4ee96486-147e-4dd0-8faf-5253ed91ad0c", "Windows.Security.EnterpriseData.IFileProtectionInfo", "Identity.value=HString"]
+public interface IFileProtectionInfo <: IInspectable {
+    func Status(value: CPointer<Int32>): Int32
+    func IsRoamable(value: CPointer<Bool>): Int32
+    func Identity(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileProtectionInfo2 (synthetic:Windows_Security_EnterpriseData_IFileProtectionInfo2)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["82123a4c-557a-498d-8e94-944cd5836432", "Windows.Security.EnterpriseData.IFileProtectionInfo2"]
+public interface IFileProtectionInfo2 <: IInspectable {
+    func IsProtectWhileOpenSupported(value: CPointer<Bool>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileProtectionManagerStatics (synthetic:Windows_Security_EnterpriseData_IFileProtectionManagerStatics)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["5846fc9b-e613-426b-bb38-88cba1dc9adb", "Windows.Security.EnterpriseData.IFileProtectionManagerStatics", "ProtectAsync.result=Com;CopyProtectionAsync.result=Com;GetProtectionInfoAsync.result=Com;SaveFileAsContainerAsync.result=Com;LoadFileFromContainerAsync.result=Com;LoadFileFromContainerWithTargetAsync.result=Com;CreateProtectedAndOpenAsync.result=Com"]
+public interface IFileProtectionManagerStatics <: IInspectable {
+    func ProtectAsync(target: CPointer<Unit>, identity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CopyProtectionAsync(source: CPointer<Unit>, target: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetProtectionInfoAsync(source: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SaveFileAsContainerAsync(protectedFile: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func LoadFileFromContainerAsync(containerFile: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func LoadFileFromContainerWithTargetAsync(containerFile: CPointer<Unit>, target: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateProtectedAndOpenAsync(parentFolder: CPointer<Unit>, desiredName: CPointer<Unit>, identity: CPointer<Unit>, collisionOption: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileProtectionManagerStatics2 (synthetic:Windows_Security_EnterpriseData_IFileProtectionManagerStatics2)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["83d2a745-0483-41ab-b2d5-bc7f23d74ebb", "Windows.Security.EnterpriseData.IFileProtectionManagerStatics2", "IsContainerAsync.result=Com;LoadFileFromContainerWithTargetAndNameCollisionOptionAsync.result=Com;SaveFileAsContainerWithSharingAsync.result=Com"]
+public interface IFileProtectionManagerStatics2 <: IInspectable {
+    func IsContainerAsync(file: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func LoadFileFromContainerWithTargetAndNameCollisionOptionAsync(containerFile: CPointer<Unit>, target: CPointer<Unit>, collisionOption: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func SaveFileAsContainerWithSharingAsync(protectedFile: CPointer<Unit>, sharedWithIdentities: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileProtectionManagerStatics3 (synthetic:Windows_Security_EnterpriseData_IFileProtectionManagerStatics3)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["6918849a-624f-46d6-b241-e9cd5fdf3e3f", "Windows.Security.EnterpriseData.IFileProtectionManagerStatics3", "UnprotectAsync.result=Com;UnprotectWithOptionsAsync.result=Com"]
+public interface IFileProtectionManagerStatics3 <: IInspectable {
+    func UnprotectAsync(target: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func UnprotectWithOptionsAsync(target: CPointer<Unit>, options: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileRevocationManagerStatics (synthetic:Windows_Security_EnterpriseData_IFileRevocationManagerStatics)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["256bbc3d-1c5d-4260-8c75-9144cfb78ba9", "Windows.Security.EnterpriseData.IFileRevocationManagerStatics", "ProtectAsync.result=Com;CopyProtectionAsync.result=Com;GetStatusAsync.result=Com"]
+public interface IFileRevocationManagerStatics <: IInspectable {
+    func ProtectAsync(storageItem: CPointer<Unit>, enterpriseIdentity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CopyProtectionAsync(sourceStorageItem: CPointer<Unit>, targetStorageItem: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func Revoke(enterpriseIdentity: CPointer<Unit>): Int32
+    func GetStatusAsync(storageItem: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileUnprotectOptions (synthetic:Windows_Security_EnterpriseData_IFileUnprotectOptions)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["7d1312f1-3b0d-4dd8-a1f8-1ec53822e2f3", "Windows.Security.EnterpriseData.IFileUnprotectOptions"]
+public interface IFileUnprotectOptions <: IInspectable {
+    func SetAudit(value: Bool): Int32
+    func Audit(value: CPointer<Bool>): Int32
+}
+
+// Windows.Security.EnterpriseData.IFileUnprotectOptionsFactory (synthetic:Windows_Security_EnterpriseData_IFileUnprotectOptionsFactory)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["51aeb39c-da8c-4c3f-9bfb-cb73a7cce0dd", "Windows.Security.EnterpriseData.IFileUnprotectOptionsFactory", "Create.result=Com"]
+public interface IFileUnprotectOptionsFactory <: IInspectable {
+    func Create(audit: Bool, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectedAccessResumedEventArgs (synthetic:Windows_Security_EnterpriseData_IProtectedAccessResumedEventArgs)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["ac4dca59-5d80-4e95-8c5f-8539450eebe0", "Windows.Security.EnterpriseData.IProtectedAccessResumedEventArgs", "Identities.value=Com"]
+public interface IProtectedAccessResumedEventArgs <: IInspectable {
+    func Identities(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectedAccessSuspendingEventArgs (synthetic:Windows_Security_EnterpriseData_IProtectedAccessSuspendingEventArgs)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["75a193e0-a344-429f-b975-04fc1f88c185", "Windows.Security.EnterpriseData.IProtectedAccessSuspendingEventArgs", "Identities.value=Com;GetDeferral.result=Com"]
+public interface IProtectedAccessSuspendingEventArgs <: IInspectable {
+    func Identities(value: CPointer<CPointer<Unit>>): Int32
+    func Deadline(value: CPointer<Windows_Foundation.DateTime>): Int32
+    func GetDeferral(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectedContainerExportResult (synthetic:Windows_Security_EnterpriseData_IProtectedContainerExportResult)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["3948ef95-f7fb-4b42-afb0-df70b41543c1", "Windows.Security.EnterpriseData.IProtectedContainerExportResult", "File.value=Com"]
+public interface IProtectedContainerExportResult <: IInspectable {
+    func Status(value: CPointer<Int32>): Int32
+    func File(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectedContainerImportResult (synthetic:Windows_Security_EnterpriseData_IProtectedContainerImportResult)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["cdb780d1-e7bb-4d1a-9339-34dc41149f9b", "Windows.Security.EnterpriseData.IProtectedContainerImportResult", "File.value=Com"]
+public interface IProtectedContainerImportResult <: IInspectable {
+    func Status(value: CPointer<Int32>): Int32
+    func File(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectedContentRevokedEventArgs (synthetic:Windows_Security_EnterpriseData_IProtectedContentRevokedEventArgs)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["63686821-58b9-47ee-93d9-f0f741cf43f0", "Windows.Security.EnterpriseData.IProtectedContentRevokedEventArgs", "Identities.value=Com"]
+public interface IProtectedContentRevokedEventArgs <: IInspectable {
+    func Identities(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectedFileCreateResult (synthetic:Windows_Security_EnterpriseData_IProtectedFileCreateResult)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["28e3ed6a-e9e7-4a03-9f53-bdb16172699b", "Windows.Security.EnterpriseData.IProtectedFileCreateResult", "File.value=Com;Stream.value=Com;ProtectionInfo.value=Com"]
+public interface IProtectedFileCreateResult <: IInspectable {
+    func File(value: CPointer<CPointer<Unit>>): Int32
+    func Stream(value: CPointer<CPointer<Unit>>): Int32
+    func ProtectionInfo(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyAuditInfo (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyAuditInfo)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["425ab7e4-feb7-44fc-b3bb-c3c4d7ecbebb", "Windows.Security.EnterpriseData.IProtectionPolicyAuditInfo", "DataDescription.value=HString;SourceDescription.value=HString;TargetDescription.value=HString"]
+public interface IProtectionPolicyAuditInfo <: IInspectable {
+    func SetAction(value: Int32): Int32
+    func Action(value: CPointer<Int32>): Int32
+    func SetDataDescription(value: CPointer<Unit>): Int32
+    func DataDescription(value: CPointer<CPointer<Unit>>): Int32
+    func SetSourceDescription(value: CPointer<Unit>): Int32
+    func SourceDescription(value: CPointer<CPointer<Unit>>): Int32
+    func SetTargetDescription(value: CPointer<Unit>): Int32
+    func TargetDescription(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyAuditInfoFactory (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyAuditInfoFactory)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["7ed4180b-92e8-42d5-83d4-25440b423549", "Windows.Security.EnterpriseData.IProtectionPolicyAuditInfoFactory", "Create.result=Com;CreateWithActionAndDataDescription.result=Com"]
+public interface IProtectionPolicyAuditInfoFactory <: IInspectable {
+    func Create(action: Int32, dataDescription: CPointer<Unit>, sourceDescription: CPointer<Unit>, targetDescription: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateWithActionAndDataDescription(action: Int32, dataDescription: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyManager (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyManager)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["d5703e18-a08d-47e6-a240-9934d7165eb5", "Windows.Security.EnterpriseData.IProtectionPolicyManager", "Identity.value=HString"]
+public interface IProtectionPolicyManager <: IInspectable {
+    func SetIdentity(value: CPointer<Unit>): Int32
+    func Identity(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyManager2 (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyManager2)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["abf7527a-8435-417f-99b6-51beaf365888", "Windows.Security.EnterpriseData.IProtectionPolicyManager2"]
+public interface IProtectionPolicyManager2 <: IInspectable {
+    func SetShowEnterpriseIndicator(value: Bool): Int32
+    func ShowEnterpriseIndicator(value: CPointer<Bool>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyManagerStatics)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["c0bffc66-8c3d-4d56-8804-c68f0ad32ec5", "Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics", "CreateCurrentThreadNetworkContext.result=Com;GetPrimaryManagedIdentityForNetworkEndpointAsync.result=Com;GetForCurrentView.result=Com;RequestAccessAsync.result=Com"]
+public interface IProtectionPolicyManagerStatics <: IInspectable {
+    func IsIdentityManaged(identity: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func TryApplyProcessUIPolicy(identity: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func ClearProcessUIPolicy(): Int32
+    func CreateCurrentThreadNetworkContext(identity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetPrimaryManagedIdentityForNetworkEndpointAsync(endpointHost: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RevokeContent(identity: CPointer<Unit>): Int32
+    func GetForCurrentView(result: CPointer<CPointer<Unit>>): Int32
+    func ProtectedAccessSuspending(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveProtectedAccessSuspending(token: Int64): Int32
+    func ProtectedAccessResumed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveProtectedAccessResumed(token: Int64): Int32
+    func ProtectedContentRevoked(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveProtectedContentRevoked(token: Int64): Int32
+    func CheckAccess(sourceIdentity: CPointer<Unit>, targetIdentity: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func RequestAccessAsync(sourceIdentity: CPointer<Unit>, targetIdentity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2 (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyManagerStatics2)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["b68f9a8c-39e0-4649-b2e4-070ab8a579b3", "Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics2", "RequestAccessForAppAsync.result=Com"]
+public interface IProtectionPolicyManagerStatics2 <: IInspectable {
+    func HasContentBeenRevokedSince(identity: CPointer<Unit>, since: Windows_Foundation.DateTime, result: CPointer<Bool>): Int32
+    func CheckAccessForApp(sourceIdentity: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func RequestAccessForAppAsync(sourceIdentity: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetEnforcementLevel(identity: CPointer<Unit>, value: CPointer<Int32>): Int32
+    func IsUserDecryptionAllowed(identity: CPointer<Unit>, value: CPointer<Bool>): Int32
+    func IsProtectionUnderLockRequired(identity: CPointer<Unit>, value: CPointer<Bool>): Int32
+    func PolicyChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemovePolicyChanged(token: Int64): Int32
+    func IsProtectionEnabled(value: CPointer<Bool>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3 (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyManagerStatics3)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["48ff9e8c-6a6f-4d9f-bced-18ab537aa015", "Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics3", "RequestAccessWithAuditingInfoAsync.result=Com;RequestAccessWithMessageAsync.result=Com;RequestAccessForAppWithAuditingInfoAsync.result=Com;RequestAccessForAppWithMessageAsync.result=Com"]
+public interface IProtectionPolicyManagerStatics3 <: IInspectable {
+    func RequestAccessWithAuditingInfoAsync(sourceIdentity: CPointer<Unit>, targetIdentity: CPointer<Unit>, auditInfo: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessWithMessageAsync(sourceIdentity: CPointer<Unit>, targetIdentity: CPointer<Unit>, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessForAppWithAuditingInfoAsync(sourceIdentity: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, auditInfo: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessForAppWithMessageAsync(sourceIdentity: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func LogAuditEvent(sourceIdentity: CPointer<Unit>, targetIdentity: CPointer<Unit>, auditInfo: CPointer<Unit>): Int32
+}
+
+// Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4 (synthetic:Windows_Security_EnterpriseData_IProtectionPolicyManagerStatics4)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["20b794db-ccbd-490f-8c83-49ccb77aea6c", "Windows.Security.EnterpriseData.IProtectionPolicyManagerStatics4", "RequestAccessWithBehaviorAsync.result=Com;RequestAccessForAppWithBehaviorAsync.result=Com;RequestAccessToFilesForAppAsync.result=Com;RequestAccessToFilesForAppWithMessageAndBehaviorAsync.result=Com;RequestAccessToFilesForProcessAsync.result=Com;RequestAccessToFilesForProcessWithMessageAndBehaviorAsync.result=Com;IsFileProtectionRequiredAsync.result=Com;IsFileProtectionRequiredForNewFileAsync.result=Com;PrimaryManagedIdentity.value=HString;GetPrimaryManagedIdentityForIdentity.value=HString"]
+public interface IProtectionPolicyManagerStatics4 <: IInspectable {
+    func IsRoamableProtectionEnabled(identity: CPointer<Unit>, value: CPointer<Bool>): Int32
+    func RequestAccessWithBehaviorAsync(sourceIdentity: CPointer<Unit>, targetIdentity: CPointer<Unit>, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, behavior: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessForAppWithBehaviorAsync(sourceIdentity: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, behavior: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessToFilesForAppAsync(sourceItemList: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, auditInfo: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessToFilesForAppWithMessageAndBehaviorAsync(sourceItemList: CPointer<Unit>, appPackageFamilyName: CPointer<Unit>, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, behavior: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessToFilesForProcessAsync(sourceItemList: CPointer<Unit>, processId: UInt32, auditInfo: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAccessToFilesForProcessWithMessageAndBehaviorAsync(sourceItemList: CPointer<Unit>, processId: UInt32, auditInfo: CPointer<Unit>, messageFromApp: CPointer<Unit>, behavior: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func IsFileProtectionRequiredAsync(target: CPointer<Unit>, identity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func IsFileProtectionRequiredForNewFileAsync(parentFolder: CPointer<Unit>, identity: CPointer<Unit>, desiredName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func PrimaryManagedIdentity(value: CPointer<CPointer<Unit>>): Int32
+    func GetPrimaryManagedIdentityForIdentity(identity: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Security.EnterpriseData.IThreadNetworkContext (synthetic:Windows_Security_EnterpriseData_IThreadNetworkContext)
+@When[Windows_Security_EnterpriseData == "on"]
+@Interface["fa4ea8e9-ef13-405a-b12c-d7348c6f41fc", "Windows.Security.EnterpriseData.IThreadNetworkContext"]
+public interface IThreadNetworkContext <: IInspectable {
+}
+
+// Windows.Security.EnterpriseData.ProtectedAccessResumedEventArgs (synthetic:Windows_Security_EnterpriseData_ProtectedAccessResumedEventArgs)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectedAccessResumedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectedAccessResumedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectedAccessResumedEventArgs {
+        ProtectedAccessResumedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectedAccessResumedEventArgs {
+        ProtectedAccessResumedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectedAccessResumedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectedAccessResumedEventArgs> {
+        let ancestors = [IProtectedAccessResumedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectedAccessResumedEventArgs>("ProtectedAccessResumedEventArgs", IProtectedAccessResumedEventArgs.iid(), ancestors, { raw => ProtectedAccessResumedEventArgs.fromAbiTake(raw) }, { raw => ProtectedAccessResumedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectedAccessResumedEventArgs {
+        match (unsafe { query(IProtectedAccessResumedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectedAccessResumedEventArgs(): IProtectedAccessResumedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Identities: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Identities(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectedAccessResumedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectedAccessResumedEventArgs;{" + IProtectedAccessResumedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectedAccessResumedEventArgs", ProtectedAccessResumedEventArgs.signature(), IProtectedAccessResumedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectedAccessResumedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectedAccessResumedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectedAccessResumedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectedAccessResumedEventArgs {
+        ProtectedAccessResumedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.ProtectedAccessSuspendingEventArgs (synthetic:Windows_Security_EnterpriseData_ProtectedAccessSuspendingEventArgs)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectedAccessSuspendingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectedAccessSuspendingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectedAccessSuspendingEventArgs {
+        ProtectedAccessSuspendingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectedAccessSuspendingEventArgs {
+        ProtectedAccessSuspendingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectedAccessSuspendingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectedAccessSuspendingEventArgs> {
+        let ancestors = [IProtectedAccessSuspendingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectedAccessSuspendingEventArgs>("ProtectedAccessSuspendingEventArgs", IProtectedAccessSuspendingEventArgs.iid(), ancestors, { raw => ProtectedAccessSuspendingEventArgs.fromAbiTake(raw) }, { raw => ProtectedAccessSuspendingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectedAccessSuspendingEventArgs {
+        match (unsafe { query(IProtectedAccessSuspendingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectedAccessSuspendingEventArgs(): IProtectedAccessSuspendingEventArgs {
+        defaultInterface()
+    }
+
+    public prop Deadline: Windows_Foundation.DateTime {
+        get() {
+            var result__ = Windows_Foundation.DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Deadline(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Identities: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Identities(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func GetDeferral(): Windows_Foundation.Deferral {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDeferral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.Deferral>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.Deferral.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectedAccessSuspendingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectedAccessSuspendingEventArgs;{" + IProtectedAccessSuspendingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectedAccessSuspendingEventArgs", ProtectedAccessSuspendingEventArgs.signature(), IProtectedAccessSuspendingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectedAccessSuspendingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectedAccessSuspendingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectedAccessSuspendingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectedAccessSuspendingEventArgs {
+        ProtectedAccessSuspendingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.ProtectedContainerExportResult (synthetic:Windows_Security_EnterpriseData_ProtectedContainerExportResult)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectedContainerExportResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectedContainerExportResult> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectedContainerExportResult {
+        ProtectedContainerExportResult(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectedContainerExportResult {
+        ProtectedContainerExportResult(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectedContainerExportResult.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectedContainerExportResult> {
+        let ancestors = [IProtectedContainerExportResult.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectedContainerExportResult>("ProtectedContainerExportResult", IProtectedContainerExportResult.iid(), ancestors, { raw => ProtectedContainerExportResult.fromAbiTake(raw) }, { raw => ProtectedContainerExportResult.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectedContainerExportResult {
+        match (unsafe { query(IProtectedContainerExportResult.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectedContainerExportResult(): IProtectedContainerExportResult {
+        defaultInterface()
+    }
+
+    public prop File: Windows_Storage.StorageFile {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.File(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Storage.StorageFile>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Storage.StorageFile.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Status: ProtectedImportExportStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Status(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ProtectedImportExportStatus(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectedContainerExportResult"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectedContainerExportResult;{" + IProtectedContainerExportResult.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectedContainerExportResult", ProtectedContainerExportResult.signature(), IProtectedContainerExportResult.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectedContainerExportResult): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectedContainerExportResult {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectedContainerExportResult.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectedContainerExportResult {
+        ProtectedContainerExportResult.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.ProtectedContainerImportResult (synthetic:Windows_Security_EnterpriseData_ProtectedContainerImportResult)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectedContainerImportResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectedContainerImportResult> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectedContainerImportResult {
+        ProtectedContainerImportResult(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectedContainerImportResult {
+        ProtectedContainerImportResult(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectedContainerImportResult.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectedContainerImportResult> {
+        let ancestors = [IProtectedContainerImportResult.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectedContainerImportResult>("ProtectedContainerImportResult", IProtectedContainerImportResult.iid(), ancestors, { raw => ProtectedContainerImportResult.fromAbiTake(raw) }, { raw => ProtectedContainerImportResult.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectedContainerImportResult {
+        match (unsafe { query(IProtectedContainerImportResult.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectedContainerImportResult(): IProtectedContainerImportResult {
+        defaultInterface()
+    }
+
+    public prop File: Windows_Storage.StorageFile {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.File(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Storage.StorageFile>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Storage.StorageFile.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Status: ProtectedImportExportStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Status(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ProtectedImportExportStatus(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectedContainerImportResult"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectedContainerImportResult;{" + IProtectedContainerImportResult.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectedContainerImportResult", ProtectedContainerImportResult.signature(), IProtectedContainerImportResult.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectedContainerImportResult): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectedContainerImportResult {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectedContainerImportResult.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectedContainerImportResult {
+        ProtectedContainerImportResult.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.ProtectedContentRevokedEventArgs (synthetic:Windows_Security_EnterpriseData_ProtectedContentRevokedEventArgs)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectedContentRevokedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectedContentRevokedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectedContentRevokedEventArgs {
+        ProtectedContentRevokedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectedContentRevokedEventArgs {
+        ProtectedContentRevokedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectedContentRevokedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectedContentRevokedEventArgs> {
+        let ancestors = [IProtectedContentRevokedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectedContentRevokedEventArgs>("ProtectedContentRevokedEventArgs", IProtectedContentRevokedEventArgs.iid(), ancestors, { raw => ProtectedContentRevokedEventArgs.fromAbiTake(raw) }, { raw => ProtectedContentRevokedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectedContentRevokedEventArgs {
+        match (unsafe { query(IProtectedContentRevokedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectedContentRevokedEventArgs(): IProtectedContentRevokedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Identities: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Identities(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectedContentRevokedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectedContentRevokedEventArgs;{" + IProtectedContentRevokedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectedContentRevokedEventArgs", ProtectedContentRevokedEventArgs.signature(), IProtectedContentRevokedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectedContentRevokedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectedContentRevokedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectedContentRevokedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectedContentRevokedEventArgs {
+        ProtectedContentRevokedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.ProtectedFileCreateResult (synthetic:Windows_Security_EnterpriseData_ProtectedFileCreateResult)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectedFileCreateResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectedFileCreateResult> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectedFileCreateResult {
+        ProtectedFileCreateResult(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectedFileCreateResult {
+        ProtectedFileCreateResult(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectedFileCreateResult.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectedFileCreateResult> {
+        let ancestors = [IProtectedFileCreateResult.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectedFileCreateResult>("ProtectedFileCreateResult", IProtectedFileCreateResult.iid(), ancestors, { raw => ProtectedFileCreateResult.fromAbiTake(raw) }, { raw => ProtectedFileCreateResult.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectedFileCreateResult {
+        match (unsafe { query(IProtectedFileCreateResult.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectedFileCreateResult(): IProtectedFileCreateResult {
+        defaultInterface()
+    }
+
+    public prop File: Windows_Storage.StorageFile {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.File(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Storage.StorageFile>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Storage.StorageFile.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop ProtectionInfo: FileProtectionInfo {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProtectionInfo(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<FileProtectionInfo>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return FileProtectionInfo.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Stream: Windows_Storage_Streams.IRandomAccessStream {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Stream(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Storage_Streams.IRandomAccessStream>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Storage_Streams.IRandomAccessStream.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectedFileCreateResult"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectedFileCreateResult;{" + IProtectedFileCreateResult.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectedFileCreateResult", ProtectedFileCreateResult.signature(), IProtectedFileCreateResult.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectedFileCreateResult): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectedFileCreateResult {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectedFileCreateResult.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectedFileCreateResult {
+        ProtectedFileCreateResult.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.ProtectedImportExportStatus (synthetic:Windows_Security_EnterpriseData_ProtectedImportExportStatus)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct ProtectedImportExportStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_Ok = ProtectedImportExportStatus(0)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_Undetermined = ProtectedImportExportStatus(1)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_Unprotected = ProtectedImportExportStatus(2)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_Revoked = ProtectedImportExportStatus(3)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_NotRoamable = ProtectedImportExportStatus(4)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_ProtectedToOtherIdentity = ProtectedImportExportStatus(5)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_LicenseExpired = ProtectedImportExportStatus(6)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectedImportExportStatus_AccessSuspended = ProtectedImportExportStatus(7)
+
+// Windows.Security.EnterpriseData.ProtectionPolicyAuditAction (synthetic:Windows_Security_EnterpriseData_ProtectionPolicyAuditAction)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct ProtectionPolicyAuditAction {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectionPolicyAuditAction_Decrypt = ProtectionPolicyAuditAction(0)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectionPolicyAuditAction_CopyToLocation = ProtectionPolicyAuditAction(1)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectionPolicyAuditAction_SendToRecipient = ProtectionPolicyAuditAction(2)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectionPolicyAuditAction_Other = ProtectionPolicyAuditAction(3)
+
+// Windows.Security.EnterpriseData.ProtectionPolicyAuditInfo (synthetic:Windows_Security_EnterpriseData_ProtectionPolicyAuditInfo)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectionPolicyAuditInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectionPolicyAuditInfo> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectionPolicyAuditInfo {
+        ProtectionPolicyAuditInfo(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectionPolicyAuditInfo {
+        ProtectionPolicyAuditInfo(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectionPolicyAuditInfo.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectionPolicyAuditInfo> {
+        let ancestors = [IProtectionPolicyAuditInfo.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectionPolicyAuditInfo>("ProtectionPolicyAuditInfo", IProtectionPolicyAuditInfo.iid(), ancestors, { raw => ProtectionPolicyAuditInfo.fromAbiTake(raw) }, { raw => ProtectionPolicyAuditInfo.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectionPolicyAuditInfo {
+        match (unsafe { query(IProtectionPolicyAuditInfo.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectionPolicyAuditInfo(): IProtectionPolicyAuditInfo {
+        defaultInterface()
+    }
+
+    public mut prop Action: ProtectionPolicyAuditAction {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Action(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ProtectionPolicyAuditAction(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAction(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DataDescription: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DataDescription(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDataDescription(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SourceDescription: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SourceDescription(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSourceDescription(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TargetDescription: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TargetDescription(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTargetDescription(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func Create(action: ProtectionPolicyAuditAction, dataDescription: windows_core.HString, sourceDescription: windows_core.HString, targetDescription: windows_core.HString): ProtectionPolicyAuditInfo {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(dataDescription)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceDescription)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(targetDescription)) {
+                    try (factory__ = windows_core.factory<ProtectionPolicyAuditInfo, IProtectionPolicyAuditInfoFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.Create(action.value, __argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ProtectionPolicyAuditInfo>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ProtectionPolicyAuditInfo.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateWithActionAndDataDescription(action: ProtectionPolicyAuditAction, dataDescription: windows_core.HString): ProtectionPolicyAuditInfo {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(dataDescription)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyAuditInfo, IProtectionPolicyAuditInfoFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithActionAndDataDescription(action.value, __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ProtectionPolicyAuditInfo>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ProtectionPolicyAuditInfo.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectionPolicyAuditInfo"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectionPolicyAuditInfo;{" + IProtectionPolicyAuditInfo.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectionPolicyAuditInfo", ProtectionPolicyAuditInfo.signature(), IProtectionPolicyAuditInfo.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectionPolicyAuditInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectionPolicyAuditInfo {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectionPolicyAuditInfo.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectionPolicyAuditInfo {
+        ProtectionPolicyAuditInfo.viewOf(raw)
+    }
+}
 
 // Windows.Security.EnterpriseData.ProtectionPolicyEvaluationResult (synthetic:Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult)
 @When[Windows_Security_EnterpriseData == "on"]
 public struct ProtectionPolicyEvaluationResult {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Security_EnterpriseData == "on"]
-public let ProtectionPolicyEvaluationResult_Allowed = ProtectionPolicyEvaluationResult(0)
+public const ProtectionPolicyEvaluationResult_Allowed = ProtectionPolicyEvaluationResult(0)
 @When[Windows_Security_EnterpriseData == "on"]
-public let ProtectionPolicyEvaluationResult_Blocked = ProtectionPolicyEvaluationResult(1)
+public const ProtectionPolicyEvaluationResult_Blocked = ProtectionPolicyEvaluationResult(1)
 @When[Windows_Security_EnterpriseData == "on"]
-public let ProtectionPolicyEvaluationResult_ConsentRequired = ProtectionPolicyEvaluationResult(2)
+public const ProtectionPolicyEvaluationResult_ConsentRequired = ProtectionPolicyEvaluationResult(2)
+
+// Windows.Security.EnterpriseData.ProtectionPolicyManager (synthetic:Windows_Security_EnterpriseData_ProtectionPolicyManager)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ProtectionPolicyManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProtectionPolicyManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProtectionPolicyManager {
+        ProtectionPolicyManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProtectionPolicyManager {
+        ProtectionPolicyManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProtectionPolicyManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProtectionPolicyManager> {
+        let ancestors = [IProtectionPolicyManager.iid(), IProtectionPolicyManager2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProtectionPolicyManager>("ProtectionPolicyManager", IProtectionPolicyManager.iid(), ancestors, { raw => ProtectionPolicyManager.fromAbiTake(raw) }, { raw => ProtectionPolicyManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProtectionPolicyManager {
+        match (unsafe { query(IProtectionPolicyManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProtectionPolicyManager(): IProtectionPolicyManager {
+        defaultInterface()
+    }
+
+    public func asIProtectionPolicyManager2(): IProtectionPolicyManager2 {
+        match (unsafe { query<IProtectionPolicyManager2>(IProtectionPolicyManager2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Identity: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Identity(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetIdentity(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func IsIdentityManaged(identity: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.IsIdentityManaged(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func TryApplyProcessUIPolicy(identity: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.TryApplyProcessUIPolicy(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ClearProcessUIPolicy(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ClearProcessUIPolicy() }
+        }
+        hr__.check()
+    }
+
+    public static func CreateCurrentThreadNetworkContext(identity: windows_core.HString): ThreadNetworkContext {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateCurrentThreadNetworkContext(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ThreadNetworkContext>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ThreadNetworkContext.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetPrimaryManagedIdentityForNetworkEndpointAsync(endpointHost: Windows_Networking.HostName): Windows_Foundation.IAsyncOperation<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Networking.HostName>(endpointHost)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetPrimaryManagedIdentityForNetworkEndpointAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RevokeContent(identity: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.RevokeContent(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func GetForCurrentView(): ProtectionPolicyManager {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ProtectionPolicyManager>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ProtectionPolicyManager.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ProtectedAccessSuspending(handler: Windows_Foundation.EventHandler<ProtectedAccessSuspendingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.EventHandler<ProtectedAccessSuspendingEventArgs>>(handler)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ProtectedAccessSuspending(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemoveProtectedAccessSuspending(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemoveProtectedAccessSuspending(token) }
+        }
+        hr__.check()
+    }
+
+    public static func ProtectedAccessResumed(handler: Windows_Foundation.EventHandler<ProtectedAccessResumedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.EventHandler<ProtectedAccessResumedEventArgs>>(handler)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ProtectedAccessResumed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemoveProtectedAccessResumed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemoveProtectedAccessResumed(token) }
+        }
+        hr__.check()
+    }
+
+    public static func ProtectedContentRevoked(handler: Windows_Foundation.EventHandler<ProtectedContentRevokedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.EventHandler<ProtectedContentRevokedEventArgs>>(handler)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ProtectedContentRevoked(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemoveProtectedContentRevoked(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemoveProtectedContentRevoked(token) }
+        }
+        hr__.check()
+    }
+
+    public static func CheckAccess(sourceIdentity: windows_core.HString, targetIdentity: windows_core.HString): ProtectionPolicyEvaluationResult {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(targetIdentity)) {
+                try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CheckAccess(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<Int32>(inout result__)) }
+                }
+            }
+        }
+        hr__.check()
+        return ProtectionPolicyEvaluationResult(result__)
+    }
+
+    public static func RequestAccessAsync(sourceIdentity: windows_core.HString, targetIdentity: windows_core.HString): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(targetIdentity)) {
+                try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.RequestAccessAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HasContentBeenRevokedSince(identity: windows_core.HString, since: Windows_Foundation.DateTime): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.HasContentBeenRevokedSince(__argBorrow0.asRaw(), since, CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func CheckAccessForApp(sourceIdentity: windows_core.HString, appPackageFamilyName: windows_core.HString): ProtectionPolicyEvaluationResult {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(appPackageFamilyName)) {
+                try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.CheckAccessForApp(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<Int32>(inout result__)) }
+                }
+            }
+        }
+        hr__.check()
+        return ProtectionPolicyEvaluationResult(result__)
+    }
+
+    public static func RequestAccessForAppAsync(sourceIdentity: windows_core.HString, appPackageFamilyName: windows_core.HString): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(appPackageFamilyName)) {
+                try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+                    hr__ = unsafe { factory__.RequestAccessForAppAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetEnforcementLevel(identity: windows_core.HString): EnforcementLevel {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetEnforcementLevel(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return EnforcementLevel(result__)
+    }
+
+    public static func IsUserDecryptionAllowed(identity: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.IsUserDecryptionAllowed(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsProtectionUnderLockRequired(identity: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.IsProtectionUnderLockRequired(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PolicyChanged(handler: Windows_Foundation.EventHandler<windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.EventHandler<windows_interface.IInspectable>>(handler)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.PolicyChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemovePolicyChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.RemovePolicyChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public static func IsProtectionEnabled(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.IsProtectionEnabled(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsRoamableProtectionEnabled(identity: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                hr__ = unsafe { factory__.IsRoamableProtectionEnabled(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RequestAccessWithBehaviorAsync(sourceIdentity: windows_core.HString, targetIdentity: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: ProtectionPolicyRequestAccessBehavior): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(targetIdentity)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<windows_core.HString>(messageFromApp)) {
+                        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                            hr__ = unsafe { factory__.RequestAccessWithBehaviorAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), behavior.value, CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessForAppWithBehaviorAsync(sourceIdentity: windows_core.HString, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: ProtectionPolicyRequestAccessBehavior): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(appPackageFamilyName)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<windows_core.HString>(messageFromApp)) {
+                        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                            hr__ = unsafe { factory__.RequestAccessForAppWithBehaviorAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), behavior.value, CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessToFilesForAppAsync(sourceItemList: Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>>(sourceItemList)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(appPackageFamilyName)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                        hr__ = unsafe { factory__.RequestAccessToFilesForAppAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessToFilesForAppWithMessageAndBehaviorAsync(sourceItemList: Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: ProtectionPolicyRequestAccessBehavior): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>>(sourceItemList)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(appPackageFamilyName)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<windows_core.HString>(messageFromApp)) {
+                        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                            hr__ = unsafe { factory__.RequestAccessToFilesForAppWithMessageAndBehaviorAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), behavior.value, CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessToFilesForProcessAsync(sourceItemList: Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>, processId: UInt32, auditInfo: ProtectionPolicyAuditInfo): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>>(sourceItemList)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                    hr__ = unsafe { factory__.RequestAccessToFilesForProcessAsync(__argBorrow0.asRaw(), processId, __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessToFilesForProcessWithMessageAndBehaviorAsync(sourceItemList: Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>, processId: UInt32, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString, behavior: ProtectionPolicyRequestAccessBehavior): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Storage.IStorageItem>>(sourceItemList)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(messageFromApp)) {
+                    try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                        hr__ = unsafe { factory__.RequestAccessToFilesForProcessWithMessageAndBehaviorAsync(__argBorrow0.asRaw(), processId, __argBorrow1.asRaw(), __argBorrow2.asRaw(), behavior.value, CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsFileProtectionRequiredAsync(target: Windows_Storage.IStorageItem, identity: windows_core.HString): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageItem>(target)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+                try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                    hr__ = unsafe { factory__.IsFileProtectionRequiredAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsFileProtectionRequiredForNewFileAsync(parentFolder: Windows_Storage.IStorageFolder, identity: windows_core.HString, desiredName: windows_core.HString): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage.IStorageFolder>(parentFolder)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(desiredName)) {
+                    try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                        hr__ = unsafe { factory__.IsFileProtectionRequiredForNewFileAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PrimaryManagedIdentity(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+            hr__ = unsafe { factory__.PrimaryManagedIdentity(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GetPrimaryManagedIdentityForIdentity(identity: windows_core.HString): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(identity)) {
+            try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics4>().unwrap()) {
+                hr__ = unsafe { factory__.GetPrimaryManagedIdentityForIdentity(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func RequestAccessWithAuditingInfoAsync(sourceIdentity: windows_core.HString, targetIdentity: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(targetIdentity)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics3>().unwrap()) {
+                        hr__ = unsafe { factory__.RequestAccessWithAuditingInfoAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessWithMessageAsync(sourceIdentity: windows_core.HString, targetIdentity: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(targetIdentity)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<windows_core.HString>(messageFromApp)) {
+                        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics3>().unwrap()) {
+                            hr__ = unsafe { factory__.RequestAccessWithMessageAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessForAppWithAuditingInfoAsync(sourceIdentity: windows_core.HString, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(appPackageFamilyName)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics3>().unwrap()) {
+                        hr__ = unsafe { factory__.RequestAccessForAppWithAuditingInfoAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAccessForAppWithMessageAsync(sourceIdentity: windows_core.HString, appPackageFamilyName: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo, messageFromApp: windows_core.HString): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(appPackageFamilyName)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<windows_core.HString>(messageFromApp)) {
+                        try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics3>().unwrap()) {
+                            hr__ = unsafe { factory__.RequestAccessForAppWithMessageAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LogAuditEvent(sourceIdentity: windows_core.HString, targetIdentity: windows_core.HString, auditInfo: ProtectionPolicyAuditInfo): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(sourceIdentity)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(targetIdentity)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<ProtectionPolicyAuditInfo>(auditInfo)) {
+                    try (factory__ = windows_core.factory<ProtectionPolicyManager, IProtectionPolicyManagerStatics3>().unwrap()) {
+                        hr__ = unsafe { factory__.LogAuditEvent(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw()) }
+                    }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ProtectionPolicyManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ProtectionPolicyManager;{" + IProtectionPolicyManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ProtectionPolicyManager", ProtectionPolicyManager.signature(), IProtectionPolicyManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProtectionPolicyManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProtectionPolicyManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProtectionPolicyManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProtectionPolicyManager {
+        ProtectionPolicyManager.viewOf(raw)
+    }
+}
+
+// Windows.Security.EnterpriseData.ProtectionPolicyRequestAccessBehavior (synthetic:Windows_Security_EnterpriseData_ProtectionPolicyRequestAccessBehavior)
+@When[Windows_Security_EnterpriseData == "on"]
+public struct ProtectionPolicyRequestAccessBehavior {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectionPolicyRequestAccessBehavior_Decrypt = ProtectionPolicyRequestAccessBehavior(0)
+@When[Windows_Security_EnterpriseData == "on"]
+public const ProtectionPolicyRequestAccessBehavior_TreatOverridePolicyAsBlock = ProtectionPolicyRequestAccessBehavior(1)
+
+// Windows.Security.EnterpriseData.ThreadNetworkContext (synthetic:Windows_Security_EnterpriseData_ThreadNetworkContext)
+@When[Windows_Security_EnterpriseData == "on"]
+public class ThreadNetworkContext <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ThreadNetworkContext> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ThreadNetworkContext {
+        ThreadNetworkContext(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ThreadNetworkContext {
+        ThreadNetworkContext(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IThreadNetworkContext.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ThreadNetworkContext> {
+        let ancestors = [IThreadNetworkContext.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ThreadNetworkContext>("ThreadNetworkContext", IThreadNetworkContext.iid(), ancestors, { raw => ThreadNetworkContext.fromAbiTake(raw) }, { raw => ThreadNetworkContext.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IThreadNetworkContext {
+        match (unsafe { query(IThreadNetworkContext.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIThreadNetworkContext(): IThreadNetworkContext {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Security.EnterpriseData.ThreadNetworkContext"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Security.EnterpriseData.ThreadNetworkContext;{" + IThreadNetworkContext.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Security.EnterpriseData.ThreadNetworkContext", ThreadNetworkContext.signature(), IThreadNetworkContext.iid())
+    }
+
+    public static func intoWinrtHandle(value: ThreadNetworkContext): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ThreadNetworkContext {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ThreadNetworkContext.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ThreadNetworkContext {
+        ThreadNetworkContext.viewOf(raw)
+    }
+}

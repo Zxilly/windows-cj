@@ -256,19 +256,19 @@ public class ChildSiteLink <: windows_interface.InterfaceWrapperBase & windows_i
 @When[Microsoft_UI_Content == "on"]
 public struct ContentAutomationOptions {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Content == "on"]
-public let ContentAutomationOptions_None = ContentAutomationOptions(0)
+public const ContentAutomationOptions_None = ContentAutomationOptions(0)
 @When[Microsoft_UI_Content == "on"]
-public let ContentAutomationOptions_FrameworkBased = ContentAutomationOptions(1)
+public const ContentAutomationOptions_FrameworkBased = ContentAutomationOptions(1)
 @When[Microsoft_UI_Content == "on"]
-public let ContentAutomationOptions_FragmentBased = ContentAutomationOptions(2)
+public const ContentAutomationOptions_FragmentBased = ContentAutomationOptions(2)
 
 // Microsoft.UI.Content.ContentCoordinateConverter (synthetic:Microsoft_UI_Content_ContentCoordinateConverter)
 @When[Microsoft_UI_Content == "on"]
@@ -520,21 +520,21 @@ public class ContentCoordinateConverter <: windows_interface.InterfaceWrapperBas
 @When[Microsoft_UI_Content == "on"]
 public struct ContentCoordinateRoundingMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Content == "on"]
-public let ContentCoordinateRoundingMode_Auto = ContentCoordinateRoundingMode(0)
+public const ContentCoordinateRoundingMode_Auto = ContentCoordinateRoundingMode(0)
 @When[Microsoft_UI_Content == "on"]
-public let ContentCoordinateRoundingMode_Floor = ContentCoordinateRoundingMode(1)
+public const ContentCoordinateRoundingMode_Floor = ContentCoordinateRoundingMode(1)
 @When[Microsoft_UI_Content == "on"]
-public let ContentCoordinateRoundingMode_Round = ContentCoordinateRoundingMode(2)
+public const ContentCoordinateRoundingMode_Round = ContentCoordinateRoundingMode(2)
 @When[Microsoft_UI_Content == "on"]
-public let ContentCoordinateRoundingMode_Ceiling = ContentCoordinateRoundingMode(3)
+public const ContentCoordinateRoundingMode_Ceiling = ContentCoordinateRoundingMode(3)
 
 // Microsoft.UI.Content.ContentDeferral (synthetic:Microsoft_UI_Content_ContentDeferral)
 @When[Microsoft_UI_Content == "on"]
@@ -1775,17 +1775,399 @@ public class ContentIslandStateChangedEventArgs <: windows_interface.InterfaceWr
 @When[Microsoft_UI_Content == "on"]
 public struct ContentLayoutDirection {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Content == "on"]
-public let ContentLayoutDirection_LeftToRight = ContentLayoutDirection(0)
+public const ContentLayoutDirection_LeftToRight = ContentLayoutDirection(0)
 @When[Microsoft_UI_Content == "on"]
-public let ContentLayoutDirection_RightToLeft = ContentLayoutDirection(1)
+public const ContentLayoutDirection_RightToLeft = ContentLayoutDirection(1)
+
+// Microsoft.UI.Content.ContentSite (synthetic:Microsoft_UI_Content_ContentSite)
+@When[Microsoft_UI_Content == "on"]
+public class ContentSite <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContentSite> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContentSite {
+        ContentSite(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContentSite {
+        ContentSite(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContentSite.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContentSite> {
+        let ancestors = [IContentSite.iid(), IContentSite2.iid(), Windows_Foundation.IClosable.iid(), Microsoft_UI.IClosableNotifier.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContentSite>("ContentSite", IContentSite.iid(), ancestors, { raw => ContentSite.fromAbiTake(raw) }, { raw => ContentSite.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContentSite {
+        match (unsafe { query(IContentSite.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContentSite(): IContentSite {
+        defaultInterface()
+    }
+
+    public func asIContentSite2(): IContentSite2 {
+        match (unsafe { query<IContentSite2>(IContentSite2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosableNotifier(): Microsoft_UI.IClosableNotifier {
+        match (unsafe { query<Microsoft_UI.IClosableNotifier>(Microsoft_UI.IClosableNotifier.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop ActualSize: Windows_Foundation_Numerics.Vector2 {
+        get() {
+            var result__ = Windows_Foundation_Numerics.Vector2()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ActualSize(CPointer<Windows_Foundation_Numerics.Vector2>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetActualSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ClientSize: Windows_Graphics.SizeInt32 {
+        get() {
+            var result__ = Windows_Graphics.SizeInt32()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ClientSize(CPointer<Windows_Graphics.SizeInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetClientSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop CoordinateConverter: ContentCoordinateConverter {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CoordinateConverter(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContentCoordinateConverter>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContentCoordinateConverter.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop DispatcherQueue: Microsoft_UI_Dispatching.DispatcherQueue {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DispatcherQueue(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Dispatching.DispatcherQueue>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Dispatching.DispatcherQueue.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Environment: ContentSiteEnvironment {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Environment(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContentSiteEnvironment>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContentSiteEnvironment.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop IsConnected: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsConnected(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop IsSiteEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsSiteEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsSiteEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsSiteVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsSiteVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsSiteVisible(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LayoutDirection: ContentLayoutDirection {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LayoutDirection(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContentLayoutDirection(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLayoutDirection(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OverrideScale: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OverrideScale(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetOverrideScale(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ParentScale: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ParentScale(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetParentScale(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop RasterizationScale: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RasterizationScale(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop RequestedSize: Windows_Foundation_Numerics.Vector2 {
+        get() {
+            var result__ = Windows_Foundation_Numerics.Vector2()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RequestedSize(CPointer<Windows_Foundation_Numerics.Vector2>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop ShouldApplyRasterizationScale: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ShouldApplyRasterizationScale(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetShouldApplyRasterizationScale(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop View: ContentSiteView {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.View(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContentSiteView>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContentSiteView.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func addRequestedStateChanged(handler: Windows_Foundation.TypedEventHandler<ContentSite, ContentSiteRequestedStateChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ContentSite, ContentSiteRequestedStateChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RequestedStateChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeRequestedStateChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveRequestedStateChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func GetIslandStateChangeDeferral(): ContentDeferral {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetIslandStateChangeDeferral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContentDeferral>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContentDeferral.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Content.ContentSite"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Content.ContentSite;{" + IContentSite.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Content.ContentSite", ContentSite.signature(), IContentSite.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContentSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContentSite {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContentSite.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContentSite {
+        ContentSite.viewOf(raw)
+    }
+}
 
 // Microsoft.UI.Content.ContentSiteAutomationProviderRequestedEventArgs (synthetic:Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArgs)
 @When[Microsoft_UI_Content == "on"]
@@ -1906,6 +2288,152 @@ public class ContentSiteAutomationProviderRequestedEventArgs <: windows_interfac
     }
 }
 
+// Microsoft.UI.Content.ContentSiteEnvironment (synthetic:Microsoft_UI_Content_ContentSiteEnvironment)
+@When[Microsoft_UI_Content == "on"]
+public class ContentSiteEnvironment <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContentSiteEnvironment> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContentSiteEnvironment {
+        ContentSiteEnvironment(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContentSiteEnvironment {
+        ContentSiteEnvironment(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContentSiteEnvironment.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContentSiteEnvironment> {
+        let ancestors = [IContentSiteEnvironment.iid(), IContentSiteEnvironment2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContentSiteEnvironment>("ContentSiteEnvironment", IContentSiteEnvironment.iid(), ancestors, { raw => ContentSiteEnvironment.fromAbiTake(raw) }, { raw => ContentSiteEnvironment.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContentSiteEnvironment {
+        match (unsafe { query(IContentSiteEnvironment.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContentSiteEnvironment(): IContentSiteEnvironment {
+        defaultInterface()
+    }
+
+    public func asIContentSiteEnvironment2(): IContentSiteEnvironment2 {
+        match (unsafe { query<IContentSiteEnvironment2>(IContentSiteEnvironment2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop AppWindowId: Microsoft_UI.WindowId {
+        get() {
+            var result__ = Microsoft_UI.WindowId()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AppWindowId(CPointer<Microsoft_UI.WindowId>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAppWindowId(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DisplayId: Microsoft_UI.DisplayId {
+        get() {
+            var result__ = Microsoft_UI.DisplayId()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayId(CPointer<Microsoft_UI.DisplayId>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDisplayId(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop View: ContentSiteEnvironmentView {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.View(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContentSiteEnvironmentView>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContentSiteEnvironmentView.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func NotifySettingChanged(setting: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(setting)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NotifySettingChanged(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Content.ContentSiteEnvironment"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Content.ContentSiteEnvironment;{" + IContentSiteEnvironment.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Content.ContentSiteEnvironment", ContentSiteEnvironment.signature(), IContentSiteEnvironment.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContentSiteEnvironment): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContentSiteEnvironment {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContentSiteEnvironment.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContentSiteEnvironment {
+        ContentSiteEnvironment.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Content.ContentSiteEnvironmentView (synthetic:Microsoft_UI_Content_ContentSiteEnvironmentView)
 @When[Microsoft_UI_Content == "on"]
 public class ContentSiteEnvironmentView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContentSiteEnvironmentView> {
@@ -2009,6 +2537,93 @@ public class ContentSiteEnvironmentView <: windows_interface.InterfaceWrapperBas
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): ContentSiteEnvironmentView {
         ContentSiteEnvironmentView.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Content.ContentSiteRequestedStateChangedEventArgs (synthetic:Microsoft_UI_Content_ContentSiteRequestedStateChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
+public class ContentSiteRequestedStateChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContentSiteRequestedStateChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContentSiteRequestedStateChangedEventArgs {
+        ContentSiteRequestedStateChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContentSiteRequestedStateChangedEventArgs {
+        ContentSiteRequestedStateChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContentSiteRequestedStateChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContentSiteRequestedStateChangedEventArgs> {
+        let ancestors = [IContentSiteRequestedStateChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContentSiteRequestedStateChangedEventArgs>("ContentSiteRequestedStateChangedEventArgs", IContentSiteRequestedStateChangedEventArgs.iid(), ancestors, { raw => ContentSiteRequestedStateChangedEventArgs.fromAbiTake(raw) }, { raw => ContentSiteRequestedStateChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContentSiteRequestedStateChangedEventArgs {
+        match (unsafe { query(IContentSiteRequestedStateChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContentSiteRequestedStateChangedEventArgs(): IContentSiteRequestedStateChangedEventArgs {
+        defaultInterface()
+    }
+
+    public prop DidRequestedSizeChange: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DidRequestedSizeChange(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Content.ContentSiteRequestedStateChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Content.ContentSiteRequestedStateChangedEventArgs;{" + IContentSiteRequestedStateChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Content.ContentSiteRequestedStateChangedEventArgs", ContentSiteRequestedStateChangedEventArgs.signature(), IContentSiteRequestedStateChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContentSiteRequestedStateChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContentSiteRequestedStateChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContentSiteRequestedStateChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContentSiteRequestedStateChangedEventArgs {
+        ContentSiteRequestedStateChangedEventArgs.viewOf(raw)
     }
 }
 
@@ -2281,6 +2896,351 @@ public class ContentSiteView <: windows_interface.InterfaceWrapperBase & windows
     }
 }
 
+// Microsoft.UI.Content.ContentSizePolicy (synthetic:Microsoft_UI_Content_ContentSizePolicy)
+@When[Microsoft_UI_Content == "on"]
+public struct ContentSizePolicy {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Content == "on"]
+public const ContentSizePolicy_None = ContentSizePolicy(0)
+@When[Microsoft_UI_Content == "on"]
+public const ContentSizePolicy_ResizeContentToParentWindow = ContentSizePolicy(1)
+@When[Microsoft_UI_Content == "on"]
+public const ContentSizePolicy_ResizeParentWindowToContent = ContentSizePolicy(2)
+
+// Microsoft.UI.Content.DesktopAttachedSiteBridge (synthetic:Microsoft_UI_Content_DesktopAttachedSiteBridge)
+@When[Microsoft_UI_Content == "on"]
+public class DesktopAttachedSiteBridge <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopAttachedSiteBridge> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DesktopAttachedSiteBridge {
+        DesktopAttachedSiteBridge(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DesktopAttachedSiteBridge {
+        DesktopAttachedSiteBridge(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDesktopAttachedSiteBridge.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DesktopAttachedSiteBridge> {
+        let ancestors = [IDesktopAttachedSiteBridge.iid(), Windows_Foundation.IClosable.iid(), Microsoft_UI.IClosableNotifier.iid(), IContentSiteBridge.iid(), IContentSiteInput.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DesktopAttachedSiteBridge>("DesktopAttachedSiteBridge", IDesktopAttachedSiteBridge.iid(), ancestors, { raw => DesktopAttachedSiteBridge.fromAbiTake(raw) }, { raw => DesktopAttachedSiteBridge.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDesktopAttachedSiteBridge {
+        match (unsafe { query(IDesktopAttachedSiteBridge.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDesktopAttachedSiteBridge(): IDesktopAttachedSiteBridge {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosableNotifier(): Microsoft_UI.IClosableNotifier {
+        match (unsafe { query<Microsoft_UI.IClosableNotifier>(Microsoft_UI.IClosableNotifier.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentSiteBridge(): IContentSiteBridge {
+        match (unsafe { query<IContentSiteBridge>(IContentSiteBridge.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentSiteInput(): IContentSiteInput {
+        match (unsafe { query<IContentSiteInput>(IContentSiteInput.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop SiteView: ContentSiteView {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SiteView(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContentSiteView>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContentSiteView.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop WindowId: Microsoft_UI.WindowId {
+        get() {
+            var result__ = Microsoft_UI.WindowId()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WindowId(CPointer<Microsoft_UI.WindowId>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func Connect(content: ContentIsland): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ContentIsland>(content)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Connect(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func CreateFromWindowId(queue: Microsoft_UI_Dispatching.DispatcherQueue, windowId: Microsoft_UI.WindowId): DesktopAttachedSiteBridge {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Dispatching.DispatcherQueue>(queue)) {
+            try (factory__ = windows_core.factory<DesktopAttachedSiteBridge, IDesktopAttachedSiteBridgeStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateFromWindowId(__argBorrow0.asRaw(), windowId, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DesktopAttachedSiteBridge>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DesktopAttachedSiteBridge.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Content.DesktopAttachedSiteBridge"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Content.DesktopAttachedSiteBridge;{" + IDesktopAttachedSiteBridge.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Content.DesktopAttachedSiteBridge", DesktopAttachedSiteBridge.signature(), IDesktopAttachedSiteBridge.iid())
+    }
+
+    public static func intoWinrtHandle(value: DesktopAttachedSiteBridge): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DesktopAttachedSiteBridge {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DesktopAttachedSiteBridge.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DesktopAttachedSiteBridge {
+        DesktopAttachedSiteBridge.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Content.DesktopChildSiteBridge (synthetic:Microsoft_UI_Content_DesktopChildSiteBridge)
+@When[Microsoft_UI_Content == "on"]
+public class DesktopChildSiteBridge <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopChildSiteBridge> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DesktopChildSiteBridge {
+        DesktopChildSiteBridge(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DesktopChildSiteBridge {
+        DesktopChildSiteBridge(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDesktopChildSiteBridge.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DesktopChildSiteBridge> {
+        let ancestors = [IDesktopChildSiteBridge.iid(), IDesktopSiteBridge.iid(), Microsoft_UI.IClosableNotifier.iid(), IContentSiteBridge.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DesktopChildSiteBridge>("DesktopChildSiteBridge", IDesktopChildSiteBridge.iid(), ancestors, { raw => DesktopChildSiteBridge.fromAbiTake(raw) }, { raw => DesktopChildSiteBridge.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDesktopChildSiteBridge {
+        match (unsafe { query(IDesktopChildSiteBridge.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDesktopChildSiteBridge(): IDesktopChildSiteBridge {
+        defaultInterface()
+    }
+
+    public func asIDesktopSiteBridge(): IDesktopSiteBridge {
+        match (unsafe { query<IDesktopSiteBridge>(IDesktopSiteBridge.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosableNotifier(): Microsoft_UI.IClosableNotifier {
+        match (unsafe { query<Microsoft_UI.IClosableNotifier>(Microsoft_UI.IClosableNotifier.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentSiteBridge(): IContentSiteBridge {
+        match (unsafe { query<IContentSiteBridge>(IContentSiteBridge.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop ResizePolicy: ContentSizePolicy {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResizePolicy(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContentSizePolicy(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetResizePolicy(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop SiteView: ContentSiteView {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SiteView(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContentSiteView>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContentSiteView.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func CreateWithDispatcherQueue(queue: Microsoft_UI_Dispatching.DispatcherQueue, parentWindowId: Microsoft_UI.WindowId): DesktopChildSiteBridge {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Dispatching.DispatcherQueue>(queue)) {
+            try (factory__ = windows_core.factory<DesktopChildSiteBridge, IDesktopChildSiteBridgeStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithDispatcherQueue(__argBorrow0.asRaw(), parentWindowId, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DesktopChildSiteBridge>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DesktopChildSiteBridge.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Create(compositor: Microsoft_UI_Composition.Compositor, parentWindowId: Microsoft_UI.WindowId): DesktopChildSiteBridge {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition.Compositor>(compositor)) {
+            try (factory__ = windows_core.factory<DesktopChildSiteBridge, IDesktopChildSiteBridgeStatics>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), parentWindowId, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DesktopChildSiteBridge>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DesktopChildSiteBridge.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Content.DesktopChildSiteBridge"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Content.DesktopChildSiteBridge;{" + IDesktopChildSiteBridge.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Content.DesktopChildSiteBridge", DesktopChildSiteBridge.signature(), IDesktopChildSiteBridge.iid())
+    }
+
+    public static func intoWinrtHandle(value: DesktopChildSiteBridge): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DesktopChildSiteBridge {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DesktopChildSiteBridge.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DesktopChildSiteBridge {
+        DesktopChildSiteBridge.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Content.DesktopPopupSiteBridge (synthetic:Microsoft_UI_Content_DesktopPopupSiteBridge)
 @When[Microsoft_UI_Content == "on"]
 public class DesktopPopupSiteBridge <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopPopupSiteBridge> {
@@ -2540,6 +3500,222 @@ public class DesktopPopupSiteBridge <: windows_interface.InterfaceWrapperBase & 
     }
 }
 
+// Microsoft.UI.Content.DesktopSiteBridge (synthetic:Microsoft_UI_Content_DesktopSiteBridge)
+@When[Microsoft_UI_Content == "on"]
+public class DesktopSiteBridge <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopSiteBridge> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DesktopSiteBridge {
+        DesktopSiteBridge(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DesktopSiteBridge {
+        DesktopSiteBridge(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDesktopSiteBridge.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DesktopSiteBridge> {
+        let ancestors = [IDesktopSiteBridge.iid(), Microsoft_UI.IClosableNotifier.iid(), IContentSiteBridge.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DesktopSiteBridge>("DesktopSiteBridge", IDesktopSiteBridge.iid(), ancestors, { raw => DesktopSiteBridge.fromAbiTake(raw) }, { raw => DesktopSiteBridge.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDesktopSiteBridge {
+        match (unsafe { query(IDesktopSiteBridge.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDesktopSiteBridge(): IDesktopSiteBridge {
+        defaultInterface()
+    }
+
+    public func asIClosableNotifier(): Microsoft_UI.IClosableNotifier {
+        match (unsafe { query<Microsoft_UI.IClosableNotifier>(Microsoft_UI.IClosableNotifier.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentSiteBridge(): IContentSiteBridge {
+        match (unsafe { query<IContentSiteBridge>(IContentSiteBridge.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop IsEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop IsVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop WindowId: Microsoft_UI.WindowId {
+        get() {
+            var result__ = Microsoft_UI.WindowId()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WindowId(CPointer<Microsoft_UI.WindowId>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func Connect(content: ContentIsland): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ContentIsland>(content)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Connect(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Disable(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Disable() }
+        }
+        hr__.check()
+    }
+
+    public func Enable(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Enable() }
+        }
+        hr__.check()
+    }
+
+    public func Hide(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Hide() }
+        }
+        hr__.check()
+    }
+
+    public func MoveAndResize(rect: Windows_Graphics.RectInt32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MoveAndResize(rect) }
+        }
+        hr__.check()
+    }
+
+    public func MoveInZOrderAtBottom(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MoveInZOrderAtBottom() }
+        }
+        hr__.check()
+    }
+
+    public func MoveInZOrderAtTop(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MoveInZOrderAtTop() }
+        }
+        hr__.check()
+    }
+
+    public func MoveInZOrderBelow(windowId: Microsoft_UI.WindowId): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MoveInZOrderBelow(windowId) }
+        }
+        hr__.check()
+    }
+
+    public func Show(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Show() }
+        }
+        hr__.check()
+    }
+
+    public static func IsSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DesktopSiteBridge, IDesktopSiteBridgeStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Content.DesktopSiteBridge"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Content.DesktopSiteBridge;{" + IDesktopSiteBridge.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Content.DesktopSiteBridge", DesktopSiteBridge.signature(), IDesktopSiteBridge.iid())
+    }
+
+    public static func intoWinrtHandle(value: DesktopSiteBridge): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DesktopSiteBridge {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DesktopSiteBridge.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DesktopSiteBridge {
+        DesktopSiteBridge.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Content.IChildSiteLink (synthetic:Microsoft_UI_Content_IChildSiteLink)
 @When[Microsoft_UI_Content == "on"]
 @Interface["b5a64814-608b-5fb7-a7cb-eb628fd588cd", "Microsoft.UI.Content.IChildSiteLink", "DispatcherQueue.value=Com;SiteView.value=Com"]
@@ -2751,6 +3927,51 @@ public interface IContentIslandStatics2 <: IInspectable {
     func GetBySystemVisual(child: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
+// Microsoft.UI.Content.IContentSite (synthetic:Microsoft_UI_Content_IContentSite)
+@When[Microsoft_UI_Content == "on"]
+@Interface["996c60c4-02b2-5eef-93b0-dd6b1ec2fd7b", "Microsoft.UI.Content.IContentSite", "CoordinateConverter.value=Com;DispatcherQueue.value=Com;Environment.value=Com;View.value=Com;GetIslandStateChangeDeferral.result=Com"]
+public interface IContentSite <: IInspectable {
+    func ActualSize(value: CPointer<Windows_Foundation_Numerics.Vector2>): Int32
+    func SetActualSize(value: Windows_Foundation_Numerics.Vector2): Int32
+    func ClientSize(value: CPointer<Windows_Graphics.SizeInt32>): Int32
+    func SetClientSize(value: Windows_Graphics.SizeInt32): Int32
+    func CoordinateConverter(value: CPointer<CPointer<Unit>>): Int32
+    func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
+    func Environment(value: CPointer<CPointer<Unit>>): Int32
+    func IsConnected(value: CPointer<Bool>): Int32
+    func IsSiteEnabled(value: CPointer<Bool>): Int32
+    func SetIsSiteEnabled(value: Bool): Int32
+    func IsSiteVisible(value: CPointer<Bool>): Int32
+    func SetIsSiteVisible(value: Bool): Int32
+    func LayoutDirection(value: CPointer<Int32>): Int32
+    func SetLayoutDirection(value: Int32): Int32
+    func OverrideScale(value: CPointer<Float32>): Int32
+    func SetOverrideScale(value: Float32): Int32
+    func ParentScale(value: CPointer<Float32>): Int32
+    func SetParentScale(value: Float32): Int32
+    func RasterizationScale(value: CPointer<Float32>): Int32
+    func RequestedSize(value: CPointer<Windows_Foundation_Numerics.Vector2>): Int32
+    func ShouldApplyRasterizationScale(value: CPointer<Bool>): Int32
+    func SetShouldApplyRasterizationScale(value: Bool): Int32
+    func View(value: CPointer<CPointer<Unit>>): Int32
+    func GetIslandStateChangeDeferral(result: CPointer<CPointer<Unit>>): Int32
+    func RequestedStateChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveRequestedStateChanged(token: Int64): Int32
+}
+
+// Microsoft.UI.Content.IContentSite2 (synthetic:Microsoft_UI_Content_IContentSite2)
+@When[Microsoft_UI_Content == "on"]
+@Interface["c3f0149e-3f8c-5961-9d04-cd6c8a7f6026", "Microsoft.UI.Content.IContentSite2"]
+public interface IContentSite2 <: IInspectable {
+    func LocalToClientTransformMatrix(value: CPointer<Windows_Foundation_Numerics.Matrix4x4>): Int32
+    func LocalToParentTransformMatrix(value: CPointer<Windows_Foundation_Numerics.Matrix4x4>): Int32
+    func SetLocalToParentTransformMatrix(value: Windows_Foundation_Numerics.Matrix4x4): Int32
+    func ProcessesKeyboardInput(value: CPointer<Bool>): Int32
+    func SetProcessesKeyboardInput(value: Bool): Int32
+    func ProcessesPointerInput(value: CPointer<Bool>): Int32
+    func SetProcessesPointerInput(value: Bool): Int32
+}
+
 // Microsoft.UI.Content.IContentSiteAutomation (synthetic:Microsoft_UI_Content_IContentSiteAutomation)
 @When[Microsoft_UI_Content == "on"]
 @Interface["db4f4683-cd76-50d0-9ae1-044ceb3d3c7a", "Microsoft.UI.Content.IContentSiteAutomation", "AutomationProvider.value=Com"]
@@ -2789,6 +4010,32 @@ public interface IContentSiteBridge <: IInspectable {
     func SetOverrideScale(value: Float32): Int32
 }
 
+// Microsoft.UI.Content.IContentSiteEnvironment (synthetic:Microsoft_UI_Content_IContentSiteEnvironment)
+@When[Microsoft_UI_Content == "on"]
+@Interface["685d085d-be53-55d1-aec4-ba2273d5468b", "Microsoft.UI.Content.IContentSiteEnvironment", "View.value=Com"]
+public interface IContentSiteEnvironment <: IInspectable {
+    func AppWindowId(value: CPointer<Microsoft_UI.WindowId>): Int32
+    func SetAppWindowId(value: Microsoft_UI.WindowId): Int32
+    func DisplayId(value: CPointer<Microsoft_UI.DisplayId>): Int32
+    func SetDisplayId(value: Microsoft_UI.DisplayId): Int32
+    func View(value: CPointer<CPointer<Unit>>): Int32
+    func NotifySettingChanged(setting: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Content.IContentSiteEnvironment2 (synthetic:Microsoft_UI_Content_IContentSiteEnvironment2)
+@When[Microsoft_UI_Content == "on"]
+@Interface["381ae3cd-c780-5a69-ba6a-0ead8560a31f", "Microsoft.UI.Content.IContentSiteEnvironment2"]
+public interface IContentSiteEnvironment2 <: IInspectable {
+    func DisplayScale(value: CPointer<Float32>): Int32
+    func SetDisplayScale(value: Float32): Int32
+}
+
+// Microsoft.UI.Content.IContentSiteEnvironmentFactory (synthetic:Microsoft_UI_Content_IContentSiteEnvironmentFactory)
+@When[Microsoft_UI_Content == "on"]
+@Interface["0befa998-cb15-5f16-a4a5-c0ed1674e186", "Microsoft.UI.Content.IContentSiteEnvironmentFactory"]
+public interface IContentSiteEnvironmentFactory <: IInspectable {
+}
+
 // Microsoft.UI.Content.IContentSiteEnvironmentView (synthetic:Microsoft_UI_Content_IContentSiteEnvironmentView)
 @When[Microsoft_UI_Content == "on"]
 @Interface["5b6fe420-0bb3-54dd-8589-786cf02e38f1", "Microsoft.UI.Content.IContentSiteEnvironmentView"]
@@ -2810,6 +4057,12 @@ public interface IContentSiteEnvironmentView2 <: IInspectable {
 public interface IContentSiteEnvironmentViewFactory <: IInspectable {
 }
 
+// Microsoft.UI.Content.IContentSiteFactory (synthetic:Microsoft_UI_Content_IContentSiteFactory)
+@When[Microsoft_UI_Content == "on"]
+@Interface["72fb98d5-b28a-57f1-91fa-24c014a342c1", "Microsoft.UI.Content.IContentSiteFactory"]
+public interface IContentSiteFactory <: IInspectable {
+}
+
 // Microsoft.UI.Content.IContentSiteInput (synthetic:Microsoft_UI_Content_IContentSiteInput)
 @When[Microsoft_UI_Content == "on"]
 @Interface["0ead8189-10d3-550d-b747-8847bd7c9d21", "Microsoft.UI.Content.IContentSiteInput"]
@@ -2825,6 +4078,13 @@ public interface IContentSiteInput <: IInspectable {
 @Interface["d9247341-f5d0-5084-af66-f5df5f314fc0", "Microsoft.UI.Content.IContentSiteLink", "Parent.value=Com"]
 public interface IContentSiteLink <: IInspectable {
     func Parent(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Content.IContentSiteRequestedStateChangedEventArgs (synthetic:Microsoft_UI_Content_IContentSiteRequestedStateChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
+@Interface["1b55fd1d-7292-562b-b4a1-d4de7972e684", "Microsoft.UI.Content.IContentSiteRequestedStateChangedEventArgs"]
+public interface IContentSiteRequestedStateChangedEventArgs <: IInspectable {
+    func DidRequestedSizeChange(value: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Content.IContentSiteView (synthetic:Microsoft_UI_Content_IContentSiteView)
@@ -2870,6 +4130,45 @@ public interface IContentSiteViewAutomation <: IInspectable {
 public interface IContentSiteViewFactory <: IInspectable {
 }
 
+// Microsoft.UI.Content.IDesktopAttachedSiteBridge (synthetic:Microsoft_UI_Content_IDesktopAttachedSiteBridge)
+@When[Microsoft_UI_Content == "on"]
+@Interface["c8ad3758-c8d3-5ea5-a274-ce12d9cf6845", "Microsoft.UI.Content.IDesktopAttachedSiteBridge", "SiteView.value=Com"]
+public interface IDesktopAttachedSiteBridge <: IInspectable {
+    func SiteView(value: CPointer<CPointer<Unit>>): Int32
+    func WindowId(value: CPointer<Microsoft_UI.WindowId>): Int32
+    func Connect(content: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Content.IDesktopAttachedSiteBridgeStatics (synthetic:Microsoft_UI_Content_IDesktopAttachedSiteBridgeStatics)
+@When[Microsoft_UI_Content == "on"]
+@Interface["41f6930f-310e-5680-812c-6dac16dfff44", "Microsoft.UI.Content.IDesktopAttachedSiteBridgeStatics", "CreateFromWindowId.result=Com"]
+public interface IDesktopAttachedSiteBridgeStatics <: IInspectable {
+    func CreateFromWindowId(queue: CPointer<Unit>, windowId: Microsoft_UI.WindowId, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Content.IDesktopChildSiteBridge (synthetic:Microsoft_UI_Content_IDesktopChildSiteBridge)
+@When[Microsoft_UI_Content == "on"]
+@Interface["b2f2ff7b-1825-51b0-b80b-7599889c569f", "Microsoft.UI.Content.IDesktopChildSiteBridge", "SiteView.value=Com"]
+public interface IDesktopChildSiteBridge <: IInspectable {
+    func ResizePolicy(value: CPointer<Int32>): Int32
+    func SetResizePolicy(value: Int32): Int32
+    func SiteView(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Content.IDesktopChildSiteBridgeStatics (synthetic:Microsoft_UI_Content_IDesktopChildSiteBridgeStatics)
+@When[Microsoft_UI_Content == "on"]
+@Interface["ab6b82de-6a47-5de3-a860-613c8db679ab", "Microsoft.UI.Content.IDesktopChildSiteBridgeStatics", "Create.result=Com"]
+public interface IDesktopChildSiteBridgeStatics <: IInspectable {
+    func Create(compositor: CPointer<Unit>, parentWindowId: Microsoft_UI.WindowId, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Content.IDesktopChildSiteBridgeStatics2 (synthetic:Microsoft_UI_Content_IDesktopChildSiteBridgeStatics2)
+@When[Microsoft_UI_Content == "on"]
+@Interface["aae99407-e378-5c53-9aff-5a3b53e194a8", "Microsoft.UI.Content.IDesktopChildSiteBridgeStatics2", "CreateWithDispatcherQueue.result=Com"]
+public interface IDesktopChildSiteBridgeStatics2 <: IInspectable {
+    func CreateWithDispatcherQueue(queue: CPointer<Unit>, parentWindowId: Microsoft_UI.WindowId, result: CPointer<CPointer<Unit>>): Int32
+}
+
 // Microsoft.UI.Content.IDesktopPopupSiteBridge (synthetic:Microsoft_UI_Content_IDesktopPopupSiteBridge)
 @When[Microsoft_UI_Content == "on"]
 @Interface["84eaab23-f716-5ad8-ac00-3d77c01d42cc", "Microsoft.UI.Content.IDesktopPopupSiteBridge", "SiteView.value=Com"]
@@ -2906,20 +4205,51 @@ public interface IDesktopPopupSiteBridgeStatics <: IInspectable {
     func Create(parent: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
+// Microsoft.UI.Content.IDesktopSiteBridge (synthetic:Microsoft_UI_Content_IDesktopSiteBridge)
+@When[Microsoft_UI_Content == "on"]
+@Interface["f0ae8750-905c-50a2-8a12-4545c6245bb4", "Microsoft.UI.Content.IDesktopSiteBridge"]
+public interface IDesktopSiteBridge <: IInspectable {
+    func IsEnabled(value: CPointer<Bool>): Int32
+    func IsVisible(value: CPointer<Bool>): Int32
+    func WindowId(value: CPointer<Microsoft_UI.WindowId>): Int32
+    func Connect(content: CPointer<Unit>): Int32
+    func Disable(): Int32
+    func Enable(): Int32
+    func Hide(): Int32
+    func MoveAndResize(rect: Windows_Graphics.RectInt32): Int32
+    func MoveInZOrderAtBottom(): Int32
+    func MoveInZOrderAtTop(): Int32
+    func MoveInZOrderBelow(windowId: Microsoft_UI.WindowId): Int32
+    func Show(): Int32
+}
+
+// Microsoft.UI.Content.IDesktopSiteBridgeFactory (synthetic:Microsoft_UI_Content_IDesktopSiteBridgeFactory)
+@When[Microsoft_UI_Content == "on"]
+@Interface["d94ee1ff-3af1-54d0-9311-652b29c57c5b", "Microsoft.UI.Content.IDesktopSiteBridgeFactory"]
+public interface IDesktopSiteBridgeFactory <: IInspectable {
+}
+
+// Microsoft.UI.Content.IDesktopSiteBridgeStatics (synthetic:Microsoft_UI_Content_IDesktopSiteBridgeStatics)
+@When[Microsoft_UI_Content == "on"]
+@Interface["e0b38daf-9cd4-50c5-83ee-c76e3cf34eba", "Microsoft.UI.Content.IDesktopSiteBridgeStatics"]
+public interface IDesktopSiteBridgeStatics <: IInspectable {
+    func IsSupported(result: CPointer<Bool>): Int32
+}
+
 // Microsoft.UI.Content.PopupAnchor (synthetic:Microsoft_UI_Content_PopupAnchor)
 @When[Microsoft_UI_Content == "on"]
 public struct PopupAnchor {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Content == "on"]
-public let PopupAnchor_None = PopupAnchor(0)
+public const PopupAnchor_None = PopupAnchor(0)
 @When[Microsoft_UI_Content == "on"]
-public let PopupAnchor_TopLevelWindow = PopupAnchor(1)
+public const PopupAnchor_TopLevelWindow = PopupAnchor(1)
 @When[Microsoft_UI_Content == "on"]
-public let PopupAnchor_ParentIsland = PopupAnchor(2)
+public const PopupAnchor_ParentIsland = PopupAnchor(2)

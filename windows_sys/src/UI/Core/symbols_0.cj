@@ -15,8 +15,12 @@ import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 import windows_sys.System as Windows_System
 @When[Windows_UI == "on"]
 import windows_sys.UI as Windows_UI
+@When[Windows_UI_Composition == "on"]
+import windows_sys.UI.Composition as Windows_UI_Composition
 @When[Windows_UI_Input == "on"]
 import windows_sys.UI.Input as Windows_UI_Input
+@When[Windows_UI_Popups == "on"]
+import windows_sys.UI.Popups as Windows_UI_Popups
 
 // Windows.UI.Core.AcceleratorKeyEventArgs (synthetic:Windows_UI_Core_AcceleratorKeyEventArgs)
 @When[Windows_UI_Core == "on"]
@@ -143,6 +147,24 @@ public class AcceleratorKeyEventArgs <: windows_interface.InterfaceWrapperBase &
     }
 }
 
+// Windows.UI.Core.AppViewBackButtonVisibility (synthetic:Windows_UI_Core_AppViewBackButtonVisibility)
+@When[Windows_UI_Core == "on"]
+public struct AppViewBackButtonVisibility {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Core == "on"]
+public const AppViewBackButtonVisibility_Visible = AppViewBackButtonVisibility(0)
+@When[Windows_UI_Core == "on"]
+public const AppViewBackButtonVisibility_Collapsed = AppViewBackButtonVisibility(1)
+@When[Windows_UI_Core == "on"]
+public const AppViewBackButtonVisibility_Disabled = AppViewBackButtonVisibility(2)
+
 // Windows.UI.Core.AutomationProviderRequestedEventArgs (synthetic:Windows_UI_Core_AutomationProviderRequestedEventArgs)
 @When[Windows_UI_Core == "on"]
 public class AutomationProviderRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AutomationProviderRequestedEventArgs> {
@@ -247,6 +269,100 @@ public class AutomationProviderRequestedEventArgs <: windows_interface.Interface
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): AutomationProviderRequestedEventArgs {
         AutomationProviderRequestedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.BackRequestedEventArgs (synthetic:Windows_UI_Core_BackRequestedEventArgs)
+@When[Windows_UI_Core == "on"]
+public class BackRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BackRequestedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BackRequestedEventArgs {
+        BackRequestedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BackRequestedEventArgs {
+        BackRequestedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBackRequestedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BackRequestedEventArgs> {
+        let ancestors = [IBackRequestedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BackRequestedEventArgs>("BackRequestedEventArgs", IBackRequestedEventArgs.iid(), ancestors, { raw => BackRequestedEventArgs.fromAbiTake(raw) }, { raw => BackRequestedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBackRequestedEventArgs {
+        match (unsafe { query(IBackRequestedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBackRequestedEventArgs(): IBackRequestedEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.BackRequestedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.BackRequestedEventArgs;{" + IBackRequestedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.BackRequestedEventArgs", BackRequestedEventArgs.signature(), IBackRequestedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: BackRequestedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BackRequestedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BackRequestedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BackRequestedEventArgs {
+        BackRequestedEventArgs.viewOf(raw)
     }
 }
 
@@ -478,31 +594,305 @@ public class ClosestInteractiveBoundsRequestedEventArgs <: windows_interface.Int
 @When[Windows_UI_Core == "on"]
 public struct CoreAcceleratorKeyEventType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_Character = CoreAcceleratorKeyEventType(2)
+public const CoreAcceleratorKeyEventType_Character = CoreAcceleratorKeyEventType(2)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_DeadCharacter = CoreAcceleratorKeyEventType(3)
+public const CoreAcceleratorKeyEventType_DeadCharacter = CoreAcceleratorKeyEventType(3)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_KeyDown = CoreAcceleratorKeyEventType(0)
+public const CoreAcceleratorKeyEventType_KeyDown = CoreAcceleratorKeyEventType(0)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_KeyUp = CoreAcceleratorKeyEventType(1)
+public const CoreAcceleratorKeyEventType_KeyUp = CoreAcceleratorKeyEventType(1)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_SystemCharacter = CoreAcceleratorKeyEventType(6)
+public const CoreAcceleratorKeyEventType_SystemCharacter = CoreAcceleratorKeyEventType(6)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_SystemDeadCharacter = CoreAcceleratorKeyEventType(7)
+public const CoreAcceleratorKeyEventType_SystemDeadCharacter = CoreAcceleratorKeyEventType(7)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_SystemKeyDown = CoreAcceleratorKeyEventType(4)
+public const CoreAcceleratorKeyEventType_SystemKeyDown = CoreAcceleratorKeyEventType(4)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_SystemKeyUp = CoreAcceleratorKeyEventType(5)
+public const CoreAcceleratorKeyEventType_SystemKeyUp = CoreAcceleratorKeyEventType(5)
 @When[Windows_UI_Core == "on"]
-public let CoreAcceleratorKeyEventType_UnicodeCharacter = CoreAcceleratorKeyEventType(8)
+public const CoreAcceleratorKeyEventType_UnicodeCharacter = CoreAcceleratorKeyEventType(8)
+
+// Windows.UI.Core.CoreAcceleratorKeys (synthetic:Windows_UI_Core_CoreAcceleratorKeys)
+@When[Windows_UI_Core == "on"]
+public class CoreAcceleratorKeys <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreAcceleratorKeys> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreAcceleratorKeys {
+        CoreAcceleratorKeys(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreAcceleratorKeys {
+        CoreAcceleratorKeys(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreAcceleratorKeys.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreAcceleratorKeys> {
+        let ancestors = [ICoreAcceleratorKeys.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreAcceleratorKeys>("CoreAcceleratorKeys", ICoreAcceleratorKeys.iid(), ancestors, { raw => CoreAcceleratorKeys.fromAbiTake(raw) }, { raw => CoreAcceleratorKeys.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreAcceleratorKeys {
+        match (unsafe { query(ICoreAcceleratorKeys.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreAcceleratorKeys(): ICoreAcceleratorKeys {
+        defaultInterface()
+    }
+
+    public func addAcceleratorKeyActivated(handler: Windows_Foundation.TypedEventHandler<CoreDispatcher, AcceleratorKeyEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CoreDispatcher, AcceleratorKeyEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AcceleratorKeyActivated(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeAcceleratorKeyActivated(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveAcceleratorKeyActivated(cookie) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreAcceleratorKeys"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreAcceleratorKeys;{" + ICoreAcceleratorKeys.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreAcceleratorKeys", CoreAcceleratorKeys.signature(), ICoreAcceleratorKeys.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreAcceleratorKeys): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreAcceleratorKeys {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreAcceleratorKeys.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreAcceleratorKeys {
+        CoreAcceleratorKeys.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.CoreComponentInputSource (synthetic:Windows_UI_Core_CoreComponentInputSource)
+@When[Windows_UI_Core == "on"]
+public class CoreComponentInputSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreComponentInputSource> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreComponentInputSource {
+        CoreComponentInputSource(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreComponentInputSource {
+        CoreComponentInputSource(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreInputSourceBase.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreComponentInputSource> {
+        let ancestors = [ICoreInputSourceBase.iid(), ICorePointerInputSource.iid(), ICoreKeyboardInputSource.iid(), ICoreComponentFocusable.iid(), ICoreTouchHitTesting.iid(), ICoreClosestInteractiveBoundsRequested.iid(), ICoreKeyboardInputSource2.iid(), ICorePointerInputSource2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreComponentInputSource>("CoreComponentInputSource", ICoreInputSourceBase.iid(), ancestors, { raw => CoreComponentInputSource.fromAbiTake(raw) }, { raw => CoreComponentInputSource.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreInputSourceBase {
+        match (unsafe { query(ICoreInputSourceBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreInputSourceBase(): ICoreInputSourceBase {
+        defaultInterface()
+    }
+
+    public func asICorePointerInputSource(): ICorePointerInputSource {
+        match (unsafe { query<ICorePointerInputSource>(ICorePointerInputSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICoreKeyboardInputSource(): ICoreKeyboardInputSource {
+        match (unsafe { query<ICoreKeyboardInputSource>(ICoreKeyboardInputSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICoreComponentFocusable(): ICoreComponentFocusable {
+        match (unsafe { query<ICoreComponentFocusable>(ICoreComponentFocusable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICoreTouchHitTesting(): ICoreTouchHitTesting {
+        match (unsafe { query<ICoreTouchHitTesting>(ICoreTouchHitTesting.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICoreClosestInteractiveBoundsRequested(): ICoreClosestInteractiveBoundsRequested {
+        match (unsafe { query<ICoreClosestInteractiveBoundsRequested>(ICoreClosestInteractiveBoundsRequested.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICoreKeyboardInputSource2(): ICoreKeyboardInputSource2 {
+        match (unsafe { query<ICoreKeyboardInputSource2>(ICoreKeyboardInputSource2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICorePointerInputSource2(): ICorePointerInputSource2 {
+        match (unsafe { query<ICorePointerInputSource2>(ICorePointerInputSource2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Dispatcher: CoreDispatcher {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Dispatcher(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CoreDispatcher>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CoreDispatcher.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop IsInputEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInputEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsInputEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addInputEnabled(handler: Windows_Foundation.TypedEventHandler<windows_interface.IInspectable, InputEnabledEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<windows_interface.IInspectable, InputEnabledEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InputEnabled(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeInputEnabled(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveInputEnabled(cookie) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreComponentInputSource"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreComponentInputSource;{" + ICoreInputSourceBase.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreComponentInputSource", CoreComponentInputSource.signature(), ICoreInputSourceBase.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreComponentInputSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreComponentInputSource {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreComponentInputSource.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreComponentInputSource {
+        CoreComponentInputSource.viewOf(raw)
+    }
+}
 
 // Windows.UI.Core.CoreCursor (synthetic:Windows_UI_Core_CoreCursor)
 @When[Windows_UI_Core == "on"]
@@ -621,45 +1011,45 @@ public class CoreCursor <: windows_interface.InterfaceWrapperBase & windows_inte
 @When[Windows_UI_Core == "on"]
 public struct CoreCursorType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Arrow = CoreCursorType(0)
+public const CoreCursorType_Arrow = CoreCursorType(0)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Cross = CoreCursorType(1)
+public const CoreCursorType_Cross = CoreCursorType(1)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Custom = CoreCursorType(2)
+public const CoreCursorType_Custom = CoreCursorType(2)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Hand = CoreCursorType(3)
+public const CoreCursorType_Hand = CoreCursorType(3)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Help = CoreCursorType(4)
+public const CoreCursorType_Help = CoreCursorType(4)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_IBeam = CoreCursorType(5)
+public const CoreCursorType_IBeam = CoreCursorType(5)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_SizeAll = CoreCursorType(6)
+public const CoreCursorType_SizeAll = CoreCursorType(6)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_SizeNortheastSouthwest = CoreCursorType(7)
+public const CoreCursorType_SizeNortheastSouthwest = CoreCursorType(7)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_SizeNorthSouth = CoreCursorType(8)
+public const CoreCursorType_SizeNorthSouth = CoreCursorType(8)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_SizeNorthwestSoutheast = CoreCursorType(9)
+public const CoreCursorType_SizeNorthwestSoutheast = CoreCursorType(9)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_SizeWestEast = CoreCursorType(10)
+public const CoreCursorType_SizeWestEast = CoreCursorType(10)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_UniversalNo = CoreCursorType(11)
+public const CoreCursorType_UniversalNo = CoreCursorType(11)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_UpArrow = CoreCursorType(12)
+public const CoreCursorType_UpArrow = CoreCursorType(12)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Wait = CoreCursorType(13)
+public const CoreCursorType_Wait = CoreCursorType(13)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Pin = CoreCursorType(14)
+public const CoreCursorType_Pin = CoreCursorType(14)
 @When[Windows_UI_Core == "on"]
-public let CoreCursorType_Person = CoreCursorType(15)
+public const CoreCursorType_Person = CoreCursorType(15)
 
 // Windows.UI.Core.CoreDispatcher (synthetic:Windows_UI_Core_CoreDispatcher)
 @When[Windows_UI_Core == "on"]
@@ -813,21 +1203,430 @@ public class CoreDispatcher <: windows_interface.InterfaceWrapperBase & windows_
 @When[Windows_UI_Core == "on"]
 public struct CoreDispatcherPriority {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreDispatcherPriority_Idle = CoreDispatcherPriority(-2)
+public const CoreDispatcherPriority_Idle = CoreDispatcherPriority(-2)
 @When[Windows_UI_Core == "on"]
-public let CoreDispatcherPriority_Low = CoreDispatcherPriority(-1)
+public const CoreDispatcherPriority_Low = CoreDispatcherPriority(-1)
 @When[Windows_UI_Core == "on"]
-public let CoreDispatcherPriority_Normal = CoreDispatcherPriority(0)
+public const CoreDispatcherPriority_Normal = CoreDispatcherPriority(0)
 @When[Windows_UI_Core == "on"]
-public let CoreDispatcherPriority_High = CoreDispatcherPriority(1)
+public const CoreDispatcherPriority_High = CoreDispatcherPriority(1)
+
+// Windows.UI.Core.CoreIndependentInputFilters (synthetic:Windows_UI_Core_CoreIndependentInputFilters)
+@When[Windows_UI_Core == "on"]
+public struct CoreIndependentInputFilters {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: CoreIndependentInputFilters): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: CoreIndependentInputFilters): CoreIndependentInputFilters {
+        return CoreIndependentInputFilters(value | other.value)
+    }
+    public operator func &(other: CoreIndependentInputFilters): CoreIndependentInputFilters {
+        return CoreIndependentInputFilters(value & other.value)
+    }
+    public operator func ^(other: CoreIndependentInputFilters): CoreIndependentInputFilters {
+        return CoreIndependentInputFilters(value ^ other.value)
+    }
+    public operator func !(): CoreIndependentInputFilters {
+        return CoreIndependentInputFilters(!value)
+    }
+}
+@When[Windows_UI_Core == "on"]
+public const CoreIndependentInputFilters_None = CoreIndependentInputFilters(0)
+@When[Windows_UI_Core == "on"]
+public const CoreIndependentInputFilters_MouseButton = CoreIndependentInputFilters(1)
+@When[Windows_UI_Core == "on"]
+public const CoreIndependentInputFilters_MouseWheel = CoreIndependentInputFilters(2)
+@When[Windows_UI_Core == "on"]
+public const CoreIndependentInputFilters_MouseHover = CoreIndependentInputFilters(4)
+@When[Windows_UI_Core == "on"]
+public const CoreIndependentInputFilters_PenWithBarrel = CoreIndependentInputFilters(8)
+@When[Windows_UI_Core == "on"]
+public const CoreIndependentInputFilters_PenInverted = CoreIndependentInputFilters(16)
+
+// Windows.UI.Core.CoreIndependentInputSource (synthetic:Windows_UI_Core_CoreIndependentInputSource)
+@When[Windows_UI_Core == "on"]
+public class CoreIndependentInputSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreIndependentInputSource> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreIndependentInputSource {
+        CoreIndependentInputSource(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreIndependentInputSource {
+        CoreIndependentInputSource(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreInputSourceBase.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreIndependentInputSource> {
+        let ancestors = [ICoreInputSourceBase.iid(), ICorePointerInputSource.iid(), ICorePointerInputSource2.iid(), ICorePointerRedirector.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreIndependentInputSource>("CoreIndependentInputSource", ICoreInputSourceBase.iid(), ancestors, { raw => CoreIndependentInputSource.fromAbiTake(raw) }, { raw => CoreIndependentInputSource.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreInputSourceBase {
+        match (unsafe { query(ICoreInputSourceBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreInputSourceBase(): ICoreInputSourceBase {
+        defaultInterface()
+    }
+
+    public func asICorePointerInputSource(): ICorePointerInputSource {
+        match (unsafe { query<ICorePointerInputSource>(ICorePointerInputSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICorePointerInputSource2(): ICorePointerInputSource2 {
+        match (unsafe { query<ICorePointerInputSource2>(ICorePointerInputSource2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICorePointerRedirector(): ICorePointerRedirector {
+        match (unsafe { query<ICorePointerRedirector>(ICorePointerRedirector.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Dispatcher: CoreDispatcher {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Dispatcher(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CoreDispatcher>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CoreDispatcher.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop IsInputEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInputEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsInputEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addInputEnabled(handler: Windows_Foundation.TypedEventHandler<windows_interface.IInspectable, InputEnabledEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<windows_interface.IInspectable, InputEnabledEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InputEnabled(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeInputEnabled(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveInputEnabled(cookie) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreIndependentInputSource"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreIndependentInputSource;{" + ICoreInputSourceBase.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreIndependentInputSource", CoreIndependentInputSource.signature(), ICoreInputSourceBase.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreIndependentInputSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreIndependentInputSource {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreIndependentInputSource.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreIndependentInputSource {
+        CoreIndependentInputSource.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.CoreIndependentInputSourceController (synthetic:Windows_UI_Core_CoreIndependentInputSourceController)
+@When[Windows_UI_Core == "on"]
+public class CoreIndependentInputSourceController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreIndependentInputSourceController> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreIndependentInputSourceController {
+        CoreIndependentInputSourceController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreIndependentInputSourceController {
+        CoreIndependentInputSourceController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreIndependentInputSourceController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreIndependentInputSourceController> {
+        let ancestors = [ICoreIndependentInputSourceController.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreIndependentInputSourceController>("CoreIndependentInputSourceController", ICoreIndependentInputSourceController.iid(), ancestors, { raw => CoreIndependentInputSourceController.fromAbiTake(raw) }, { raw => CoreIndependentInputSourceController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreIndependentInputSourceController {
+        match (unsafe { query(ICoreIndependentInputSourceController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreIndependentInputSourceController(): ICoreIndependentInputSourceController {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop IsPalmRejectionEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsPalmRejectionEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsPalmRejectionEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsTransparentForUncontrolledInput: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsTransparentForUncontrolledInput(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsTransparentForUncontrolledInput(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Source: CoreIndependentInputSource {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Source(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CoreIndependentInputSource>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CoreIndependentInputSource.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func SetControlledInput(inputTypes: CoreInputDeviceTypes): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetControlledInput(inputTypes.value) }
+        }
+        hr__.check()
+    }
+
+    public func SetControlledInputWithFilters(inputTypes: CoreInputDeviceTypes, required: CoreIndependentInputFilters, excluded: CoreIndependentInputFilters): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetControlledInputWithFilters(inputTypes.value, required.value, excluded.value) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateForVisual(visual: Windows_UI_Composition.Visual): CoreIndependentInputSourceController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI_Composition.Visual>(visual)) {
+            try (factory__ = windows_core.factory<CoreIndependentInputSourceController, ICoreIndependentInputSourceControllerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateForVisual(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CoreIndependentInputSourceController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CoreIndependentInputSourceController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateForIVisualElement(visualElement: Windows_UI_Composition.IVisualElement): CoreIndependentInputSourceController {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI_Composition.IVisualElement>(visualElement)) {
+            try (factory__ = windows_core.factory<CoreIndependentInputSourceController, ICoreIndependentInputSourceControllerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateForIVisualElement(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CoreIndependentInputSourceController>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CoreIndependentInputSourceController.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreIndependentInputSourceController"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreIndependentInputSourceController;{" + ICoreIndependentInputSourceController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreIndependentInputSourceController", CoreIndependentInputSourceController.signature(), ICoreIndependentInputSourceController.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreIndependentInputSourceController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreIndependentInputSourceController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreIndependentInputSourceController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreIndependentInputSourceController {
+        CoreIndependentInputSourceController.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.CoreInputDeviceTypes (synthetic:Windows_UI_Core_CoreInputDeviceTypes)
+@When[Windows_UI_Core == "on"]
+public struct CoreInputDeviceTypes {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: CoreInputDeviceTypes): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: CoreInputDeviceTypes): CoreInputDeviceTypes {
+        return CoreInputDeviceTypes(value | other.value)
+    }
+    public operator func &(other: CoreInputDeviceTypes): CoreInputDeviceTypes {
+        return CoreInputDeviceTypes(value & other.value)
+    }
+    public operator func ^(other: CoreInputDeviceTypes): CoreInputDeviceTypes {
+        return CoreInputDeviceTypes(value ^ other.value)
+    }
+    public operator func !(): CoreInputDeviceTypes {
+        return CoreInputDeviceTypes(!value)
+    }
+}
+@When[Windows_UI_Core == "on"]
+public const CoreInputDeviceTypes_None = CoreInputDeviceTypes(0)
+@When[Windows_UI_Core == "on"]
+public const CoreInputDeviceTypes_Touch = CoreInputDeviceTypes(1)
+@When[Windows_UI_Core == "on"]
+public const CoreInputDeviceTypes_Pen = CoreInputDeviceTypes(2)
+@When[Windows_UI_Core == "on"]
+public const CoreInputDeviceTypes_Mouse = CoreInputDeviceTypes(4)
 
 // Windows.UI.Core.CorePhysicalKeyStatus (synthetic:Windows_UI_Core_CorePhysicalKeyStatus)
 @When[Windows_UI_Core == "on"]
@@ -845,21 +1644,21 @@ public struct CorePhysicalKeyStatus {
 @When[Windows_UI_Core == "on"]
 public struct CoreProcessEventsOption {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreProcessEventsOption_ProcessOneAndAllPending = CoreProcessEventsOption(0)
+public const CoreProcessEventsOption_ProcessOneAndAllPending = CoreProcessEventsOption(0)
 @When[Windows_UI_Core == "on"]
-public let CoreProcessEventsOption_ProcessOneIfPresent = CoreProcessEventsOption(1)
+public const CoreProcessEventsOption_ProcessOneIfPresent = CoreProcessEventsOption(1)
 @When[Windows_UI_Core == "on"]
-public let CoreProcessEventsOption_ProcessUntilQuit = CoreProcessEventsOption(2)
+public const CoreProcessEventsOption_ProcessUntilQuit = CoreProcessEventsOption(2)
 @When[Windows_UI_Core == "on"]
-public let CoreProcessEventsOption_ProcessAllIfPresent = CoreProcessEventsOption(3)
+public const CoreProcessEventsOption_ProcessAllIfPresent = CoreProcessEventsOption(3)
 
 // Windows.UI.Core.CoreProximityEvaluation (synthetic:Windows_UI_Core_CoreProximityEvaluation)
 @When[Windows_UI_Core == "on"]
@@ -869,14 +1668,30 @@ public struct CoreProximityEvaluation {
     public var AdjustedPoint: Windows_Foundation.Point = Windows_Foundation.Point()
 }
 
+// Windows.UI.Core.CoreProximityEvaluationScore (synthetic:Windows_UI_Core_CoreProximityEvaluationScore)
+@When[Windows_UI_Core == "on"]
+public struct CoreProximityEvaluationScore {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Core == "on"]
+public const CoreProximityEvaluationScore_Closest = CoreProximityEvaluationScore(0)
+@When[Windows_UI_Core == "on"]
+public const CoreProximityEvaluationScore_Farthest = CoreProximityEvaluationScore(2147483647)
+
 // Windows.UI.Core.CoreVirtualKeyStates (synthetic:Windows_UI_Core_CoreVirtualKeyStates)
 @When[Windows_UI_Core == "on"]
 public struct CoreVirtualKeyStates {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: CoreVirtualKeyStates): Bool {
@@ -896,11 +1711,11 @@ public struct CoreVirtualKeyStates {
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreVirtualKeyStates_None = CoreVirtualKeyStates(0)
+public const CoreVirtualKeyStates_None = CoreVirtualKeyStates(0)
 @When[Windows_UI_Core == "on"]
-public let CoreVirtualKeyStates_Down = CoreVirtualKeyStates(1)
+public const CoreVirtualKeyStates_Down = CoreVirtualKeyStates(1)
 @When[Windows_UI_Core == "on"]
-public let CoreVirtualKeyStates_Locked = CoreVirtualKeyStates(2)
+public const CoreVirtualKeyStates_Locked = CoreVirtualKeyStates(2)
 
 // Windows.UI.Core.CoreWindow (synthetic:Windows_UI_Core_CoreWindow)
 @When[Windows_UI_Core == "on"]
@@ -1576,39 +2391,329 @@ public class CoreWindow <: windows_interface.InterfaceWrapperBase & windows_inte
 @When[Windows_UI_Core == "on"]
 public struct CoreWindowActivationMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreWindowActivationMode_None = CoreWindowActivationMode(0)
+public const CoreWindowActivationMode_None = CoreWindowActivationMode(0)
 @When[Windows_UI_Core == "on"]
-public let CoreWindowActivationMode_Deactivated = CoreWindowActivationMode(1)
+public const CoreWindowActivationMode_Deactivated = CoreWindowActivationMode(1)
 @When[Windows_UI_Core == "on"]
-public let CoreWindowActivationMode_ActivatedNotForeground = CoreWindowActivationMode(2)
+public const CoreWindowActivationMode_ActivatedNotForeground = CoreWindowActivationMode(2)
 @When[Windows_UI_Core == "on"]
-public let CoreWindowActivationMode_ActivatedInForeground = CoreWindowActivationMode(3)
+public const CoreWindowActivationMode_ActivatedInForeground = CoreWindowActivationMode(3)
 
 // Windows.UI.Core.CoreWindowActivationState (synthetic:Windows_UI_Core_CoreWindowActivationState)
 @When[Windows_UI_Core == "on"]
 public struct CoreWindowActivationState {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreWindowActivationState_CodeActivated = CoreWindowActivationState(0)
+public const CoreWindowActivationState_CodeActivated = CoreWindowActivationState(0)
 @When[Windows_UI_Core == "on"]
-public let CoreWindowActivationState_Deactivated = CoreWindowActivationState(1)
+public const CoreWindowActivationState_Deactivated = CoreWindowActivationState(1)
 @When[Windows_UI_Core == "on"]
-public let CoreWindowActivationState_PointerActivated = CoreWindowActivationState(2)
+public const CoreWindowActivationState_PointerActivated = CoreWindowActivationState(2)
+
+// Windows.UI.Core.CoreWindowDialog (synthetic:Windows_UI_Core_CoreWindowDialog)
+@When[Windows_UI_Core == "on"]
+public class CoreWindowDialog <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreWindowDialog> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreWindowDialog {
+        CoreWindowDialog(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreWindowDialog {
+        CoreWindowDialog(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreWindowDialog.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreWindowDialog> {
+        let ancestors = [ICoreWindowDialog.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreWindowDialog>("CoreWindowDialog", ICoreWindowDialog.iid(), ancestors, { raw => CoreWindowDialog.fromAbiTake(raw) }, { raw => CoreWindowDialog.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreWindowDialog {
+        match (unsafe { query(ICoreWindowDialog.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreWindowDialog(): ICoreWindowDialog {
+        defaultInterface()
+    }
+
+    public mut prop BackButtonCommand: Windows_UI_Popups.UICommandInvokedHandler {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BackButtonCommand(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_UI_Popups.UICommandInvokedHandler>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_UI_Popups.UICommandInvokedHandler.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI_Popups.UICommandInvokedHandler>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBackButtonCommand(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CancelCommandIndex: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CancelCommandIndex(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCancelCommandIndex(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Commands: Windows_Foundation_Collections.IVector<Windows_UI_Popups.IUICommand> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Commands(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<Windows_UI_Popups.IUICommand>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<Windows_UI_Popups.IUICommand>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop DefaultCommandIndex: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DefaultCommandIndex(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDefaultCommandIndex(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsInteractionDelayed: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInteractionDelayed(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsInteractionDelayed(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop MaxSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop MinSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MinSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Title: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Title(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTitle(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addShowing(handler: Windows_Foundation.TypedEventHandler<CoreWindow, CoreWindowPopupShowingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CoreWindow, CoreWindowPopupShowingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Showing(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeShowing(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveShowing(cookie) }
+        }
+        hr__.check()
+    }
+
+    public func ShowAsync(): Windows_Foundation.IAsyncOperation<Windows_UI_Popups.IUICommand> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ShowAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_UI_Popups.IUICommand>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_UI_Popups.IUICommand>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func new(): CoreWindowDialog {
+        var created__: Option<CoreWindowDialog> = Option<CoreWindowDialog>.None
+        try (factory__ = windows_core.factory<CoreWindowDialog, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<CoreWindowDialog>(CoreWindowDialog.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce CoreWindowDialog")
+        }
+    }
+
+    public static func CreateWithTitle(title: windows_core.HString): CoreWindowDialog {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(title)) {
+            try (factory__ = windows_core.factory<CoreWindowDialog, ICoreWindowDialogFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithTitle(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CoreWindowDialog>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CoreWindowDialog.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreWindowDialog"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreWindowDialog;{" + ICoreWindowDialog.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreWindowDialog", CoreWindowDialog.signature(), ICoreWindowDialog.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreWindowDialog): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreWindowDialog {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreWindowDialog.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreWindowDialog {
+        CoreWindowDialog.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.CoreWindowDialogsContract (synthetic:Windows_UI_Core_CoreWindowDialogsContract)
+@When[Windows_UI_Core == "on"]
+@C
+public struct CoreWindowDialogsContract {
+    public var reserved: Int32 = 0
+}
 
 // Windows.UI.Core.CoreWindowEventArgs (synthetic:Windows_UI_Core_CoreWindowEventArgs)
 @When[Windows_UI_Core == "on"]
@@ -1708,17 +2813,471 @@ public class CoreWindowEventArgs <: windows_interface.InterfaceWrapperBase & win
 @When[Windows_UI_Core == "on"]
 public struct CoreWindowFlowDirection {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Core == "on"]
-public let CoreWindowFlowDirection_LeftToRight = CoreWindowFlowDirection(0)
+public const CoreWindowFlowDirection_LeftToRight = CoreWindowFlowDirection(0)
 @When[Windows_UI_Core == "on"]
-public let CoreWindowFlowDirection_RightToLeft = CoreWindowFlowDirection(1)
+public const CoreWindowFlowDirection_RightToLeft = CoreWindowFlowDirection(1)
+
+// Windows.UI.Core.CoreWindowFlyout (synthetic:Windows_UI_Core_CoreWindowFlyout)
+@When[Windows_UI_Core == "on"]
+public class CoreWindowFlyout <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreWindowFlyout> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreWindowFlyout {
+        CoreWindowFlyout(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreWindowFlyout {
+        CoreWindowFlyout(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreWindowFlyout.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreWindowFlyout> {
+        let ancestors = [ICoreWindowFlyout.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreWindowFlyout>("CoreWindowFlyout", ICoreWindowFlyout.iid(), ancestors, { raw => CoreWindowFlyout.fromAbiTake(raw) }, { raw => CoreWindowFlyout.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreWindowFlyout {
+        match (unsafe { query(ICoreWindowFlyout.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreWindowFlyout(): ICoreWindowFlyout {
+        defaultInterface()
+    }
+
+    public mut prop BackButtonCommand: Windows_UI_Popups.UICommandInvokedHandler {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BackButtonCommand(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_UI_Popups.UICommandInvokedHandler>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_UI_Popups.UICommandInvokedHandler.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI_Popups.UICommandInvokedHandler>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBackButtonCommand(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Commands: Windows_Foundation_Collections.IVector<Windows_UI_Popups.IUICommand> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Commands(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<Windows_UI_Popups.IUICommand>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<Windows_UI_Popups.IUICommand>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop DefaultCommandIndex: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DefaultCommandIndex(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDefaultCommandIndex(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsInteractionDelayed: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInteractionDelayed(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsInteractionDelayed(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop MaxSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop MinSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MinSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Title: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Title(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTitle(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addShowing(handler: Windows_Foundation.TypedEventHandler<CoreWindow, CoreWindowPopupShowingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CoreWindow, CoreWindowPopupShowingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Showing(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeShowing(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveShowing(cookie) }
+        }
+        hr__.check()
+    }
+
+    public func ShowAsync(): Windows_Foundation.IAsyncOperation<Windows_UI_Popups.IUICommand> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ShowAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_UI_Popups.IUICommand>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_UI_Popups.IUICommand>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Create(position: Windows_Foundation.Point): CoreWindowFlyout {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CoreWindowFlyout, ICoreWindowFlyoutFactory>().unwrap()) {
+            hr__ = unsafe { factory__.Create(position, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CoreWindowFlyout>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CoreWindowFlyout.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateWithTitle(position: Windows_Foundation.Point, title: windows_core.HString): CoreWindowFlyout {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(title)) {
+            try (factory__ = windows_core.factory<CoreWindowFlyout, ICoreWindowFlyoutFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithTitle(position, __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CoreWindowFlyout>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CoreWindowFlyout.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreWindowFlyout"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreWindowFlyout;{" + ICoreWindowFlyout.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreWindowFlyout", CoreWindowFlyout.signature(), ICoreWindowFlyout.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreWindowFlyout): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreWindowFlyout {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreWindowFlyout.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreWindowFlyout {
+        CoreWindowFlyout.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.CoreWindowPopupShowingEventArgs (synthetic:Windows_UI_Core_CoreWindowPopupShowingEventArgs)
+@When[Windows_UI_Core == "on"]
+public class CoreWindowPopupShowingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreWindowPopupShowingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreWindowPopupShowingEventArgs {
+        CoreWindowPopupShowingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreWindowPopupShowingEventArgs {
+        CoreWindowPopupShowingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreWindowPopupShowingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreWindowPopupShowingEventArgs> {
+        let ancestors = [ICoreWindowPopupShowingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreWindowPopupShowingEventArgs>("CoreWindowPopupShowingEventArgs", ICoreWindowPopupShowingEventArgs.iid(), ancestors, { raw => CoreWindowPopupShowingEventArgs.fromAbiTake(raw) }, { raw => CoreWindowPopupShowingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreWindowPopupShowingEventArgs {
+        match (unsafe { query(ICoreWindowPopupShowingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreWindowPopupShowingEventArgs(): ICoreWindowPopupShowingEventArgs {
+        defaultInterface()
+    }
+
+    public func SetDesiredSize(value: Windows_Foundation.Size): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetDesiredSize(value) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreWindowPopupShowingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreWindowPopupShowingEventArgs;{" + ICoreWindowPopupShowingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreWindowPopupShowingEventArgs", CoreWindowPopupShowingEventArgs.signature(), ICoreWindowPopupShowingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreWindowPopupShowingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreWindowPopupShowingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreWindowPopupShowingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreWindowPopupShowingEventArgs {
+        CoreWindowPopupShowingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.CoreWindowResizeManager (synthetic:Windows_UI_Core_CoreWindowResizeManager)
+@When[Windows_UI_Core == "on"]
+public class CoreWindowResizeManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CoreWindowResizeManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CoreWindowResizeManager {
+        CoreWindowResizeManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CoreWindowResizeManager {
+        CoreWindowResizeManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICoreWindowResizeManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CoreWindowResizeManager> {
+        let ancestors = [ICoreWindowResizeManager.iid(), ICoreWindowResizeManagerLayoutCapability.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CoreWindowResizeManager>("CoreWindowResizeManager", ICoreWindowResizeManager.iid(), ancestors, { raw => CoreWindowResizeManager.fromAbiTake(raw) }, { raw => CoreWindowResizeManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICoreWindowResizeManager {
+        match (unsafe { query(ICoreWindowResizeManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICoreWindowResizeManager(): ICoreWindowResizeManager {
+        defaultInterface()
+    }
+
+    public func asICoreWindowResizeManagerLayoutCapability(): ICoreWindowResizeManagerLayoutCapability {
+        match (unsafe { query<ICoreWindowResizeManagerLayoutCapability>(ICoreWindowResizeManagerLayoutCapability.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func NotifyLayoutCompleted(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.NotifyLayoutCompleted() }
+        }
+        hr__.check()
+    }
+
+    public static func GetForCurrentView(): CoreWindowResizeManager {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CoreWindowResizeManager, ICoreWindowResizeManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CoreWindowResizeManager>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CoreWindowResizeManager.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.CoreWindowResizeManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.CoreWindowResizeManager;{" + ICoreWindowResizeManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.CoreWindowResizeManager", CoreWindowResizeManager.signature(), ICoreWindowResizeManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: CoreWindowResizeManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CoreWindowResizeManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CoreWindowResizeManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CoreWindowResizeManager {
+        CoreWindowResizeManager.viewOf(raw)
+    }
+}
 
 // Windows.UI.Core.DispatchedHandler (synthetic:Windows_UI_Core_DispatchedHandler)
 @When[Windows_UI_Core == "on"]
@@ -1910,6 +3469,14 @@ public interface IAutomationProviderRequestedEventArgs <: IInspectable {
     func SetAutomationProvider(value: CPointer<Unit>): Int32
 }
 
+// Windows.UI.Core.IBackRequestedEventArgs (synthetic:Windows_UI_Core_IBackRequestedEventArgs)
+@When[Windows_UI_Core == "on"]
+@Interface["d603d28a-e411-4a4e-ba41-6a327a8675bc", "Windows.UI.Core.IBackRequestedEventArgs"]
+public interface IBackRequestedEventArgs <: IInspectable {
+    func Handled(value: CPointer<Bool>): Int32
+    func SetHandled(value: Bool): Int32
+}
+
 // Windows.UI.Core.ICharacterReceivedEventArgs (synthetic:Windows_UI_Core_ICharacterReceivedEventArgs)
 @When[Windows_UI_Core == "on"]
 @Interface["c584659f-99b2-4bcc-bd33-04e63f42902e", "Windows.UI.Core.ICharacterReceivedEventArgs"]
@@ -1934,6 +3501,25 @@ public interface IClosestInteractiveBoundsRequestedEventArgs <: IInspectable {
 public interface ICoreAcceleratorKeys <: IInspectable {
     func AcceleratorKeyActivated(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
     func RemoveAcceleratorKeyActivated(cookie: Int64): Int32
+}
+
+// Windows.UI.Core.ICoreClosestInteractiveBoundsRequested (synthetic:Windows_UI_Core_ICoreClosestInteractiveBoundsRequested)
+@When[Windows_UI_Core == "on"]
+@Interface["f303043a-e8bf-4e8e-ae69-c9dadd57a114", "Windows.UI.Core.ICoreClosestInteractiveBoundsRequested"]
+public interface ICoreClosestInteractiveBoundsRequested <: IInspectable {
+    func ClosestInteractiveBoundsRequested(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveClosestInteractiveBoundsRequested(cookie: Int64): Int32
+}
+
+// Windows.UI.Core.ICoreComponentFocusable (synthetic:Windows_UI_Core_ICoreComponentFocusable)
+@When[Windows_UI_Core == "on"]
+@Interface["52f96fa3-8742-4411-ae69-79a85f29ac8b", "Windows.UI.Core.ICoreComponentFocusable"]
+public interface ICoreComponentFocusable <: IInspectable {
+    func HasFocus(value: CPointer<Bool>): Int32
+    func GotFocus(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveGotFocus(cookie: Int64): Int32
+    func LostFocus(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveLostFocus(cookie: Int64): Int32
 }
 
 // Windows.UI.Core.ICoreCursor (synthetic:Windows_UI_Core_ICoreCursor)
@@ -1980,6 +3566,91 @@ public interface ICoreDispatcherWithTaskPriority <: IInspectable {
     func StopProcessEvents(): Int32
 }
 
+// Windows.UI.Core.ICoreIndependentInputSourceController (synthetic:Windows_UI_Core_ICoreIndependentInputSourceController)
+@When[Windows_UI_Core == "on"]
+@Interface["0963261c-84fe-578a-83ca-6425309ccde4", "Windows.UI.Core.ICoreIndependentInputSourceController", "Source.value=Com"]
+public interface ICoreIndependentInputSourceController <: IInspectable {
+    func IsTransparentForUncontrolledInput(value: CPointer<Bool>): Int32
+    func SetIsTransparentForUncontrolledInput(value: Bool): Int32
+    func IsPalmRejectionEnabled(value: CPointer<Bool>): Int32
+    func SetIsPalmRejectionEnabled(value: Bool): Int32
+    func Source(value: CPointer<CPointer<Unit>>): Int32
+    func SetControlledInput(inputTypes: UInt32): Int32
+    func SetControlledInputWithFilters(inputTypes: UInt32, required: UInt32, excluded: UInt32): Int32
+}
+
+// Windows.UI.Core.ICoreIndependentInputSourceControllerStatics (synthetic:Windows_UI_Core_ICoreIndependentInputSourceControllerStatics)
+@When[Windows_UI_Core == "on"]
+@Interface["3edc4e20-9a8a-5691-8586-fca4cb57526d", "Windows.UI.Core.ICoreIndependentInputSourceControllerStatics", "CreateForVisual.result=Com;CreateForIVisualElement.result=Com"]
+public interface ICoreIndependentInputSourceControllerStatics <: IInspectable {
+    func CreateForVisual(visual: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateForIVisualElement(visualElement: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Core.ICoreInputSourceBase (synthetic:Windows_UI_Core_ICoreInputSourceBase)
+@When[Windows_UI_Core == "on"]
+@Interface["9f488807-4580-4be8-be68-92a9311713bb", "Windows.UI.Core.ICoreInputSourceBase", "Dispatcher.value=Com"]
+public interface ICoreInputSourceBase <: IInspectable {
+    func Dispatcher(value: CPointer<CPointer<Unit>>): Int32
+    func IsInputEnabled(value: CPointer<Bool>): Int32
+    func SetIsInputEnabled(value: Bool): Int32
+    func InputEnabled(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveInputEnabled(cookie: Int64): Int32
+}
+
+// Windows.UI.Core.ICoreKeyboardInputSource (synthetic:Windows_UI_Core_ICoreKeyboardInputSource)
+@When[Windows_UI_Core == "on"]
+@Interface["231c9088-e469-4df1-b208-6e490d71cb90", "Windows.UI.Core.ICoreKeyboardInputSource"]
+public interface ICoreKeyboardInputSource <: IInspectable {
+    func GetCurrentKeyState(virtualKey: Int32, KeyState: CPointer<UInt32>): Int32
+    func CharacterReceived(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveCharacterReceived(cookie: Int64): Int32
+    func KeyDown(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveKeyDown(cookie: Int64): Int32
+    func KeyUp(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveKeyUp(cookie: Int64): Int32
+}
+
+// Windows.UI.Core.ICoreKeyboardInputSource2 (synthetic:Windows_UI_Core_ICoreKeyboardInputSource2)
+@When[Windows_UI_Core == "on"]
+@Interface["fa24cb94-f963-47a5-8778-207c482b0afd", "Windows.UI.Core.ICoreKeyboardInputSource2", "GetCurrentKeyEventDeviceId.value=HString"]
+public interface ICoreKeyboardInputSource2 <: IInspectable {
+    func GetCurrentKeyEventDeviceId(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Core.ICorePointerInputSource (synthetic:Windows_UI_Core_ICorePointerInputSource)
+@When[Windows_UI_Core == "on"]
+@Interface["bbf1bb18-e47a-48eb-8807-f8f8d3ea4551", "Windows.UI.Core.ICorePointerInputSource", "PointerCursor.value=Com"]
+public interface ICorePointerInputSource <: IInspectable {
+    func ReleasePointerCapture(): Int32
+    func SetPointerCapture(): Int32
+    func HasCapture(value: CPointer<Bool>): Int32
+    func PointerPosition(value: CPointer<Windows_Foundation.Point>): Int32
+    func PointerCursor(value: CPointer<CPointer<Unit>>): Int32
+    func SetPointerCursor(value: CPointer<Unit>): Int32
+    func PointerCaptureLost(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemovePointerCaptureLost(cookie: Int64): Int32
+    func PointerEntered(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemovePointerEntered(cookie: Int64): Int32
+    func PointerExited(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemovePointerExited(cookie: Int64): Int32
+    func PointerMoved(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemovePointerMoved(cookie: Int64): Int32
+    func PointerPressed(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemovePointerPressed(cookie: Int64): Int32
+    func PointerReleased(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemovePointerReleased(cookie: Int64): Int32
+    func PointerWheelChanged(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemovePointerWheelChanged(cookie: Int64): Int32
+}
+
+// Windows.UI.Core.ICorePointerInputSource2 (synthetic:Windows_UI_Core_ICorePointerInputSource2)
+@When[Windows_UI_Core == "on"]
+@Interface["d703708a-4516-4786-b1e5-2751d563f997", "Windows.UI.Core.ICorePointerInputSource2", "DispatcherQueue.value=Com"]
+public interface ICorePointerInputSource2 <: IInspectable {
+    func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.UI.Core.ICorePointerRedirector (synthetic:Windows_UI_Core_ICorePointerRedirector)
 @When[Windows_UI_Core == "on"]
 @Interface["8f9d0c94-5688-4b0c-a9f1-f931f7fa3dc3", "Windows.UI.Core.ICorePointerRedirector"]
@@ -1990,6 +3661,14 @@ public interface ICorePointerRedirector <: IInspectable {
     func RemovePointerRoutedTo(cookie: Int64): Int32
     func PointerRoutedReleased(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
     func RemovePointerRoutedReleased(cookie: Int64): Int32
+}
+
+// Windows.UI.Core.ICoreTouchHitTesting (synthetic:Windows_UI_Core_ICoreTouchHitTesting)
+@When[Windows_UI_Core == "on"]
+@Interface["b1d8a289-3acf-4124-9fa3-ea8aba353c21", "Windows.UI.Core.ICoreTouchHitTesting"]
+public interface ICoreTouchHitTesting <: IInspectable {
+    func TouchHitTesting(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
+    func RemoveTouchHitTesting(cookie: Int64): Int32
 }
 
 // Windows.UI.Core.ICoreWindow (synthetic:Windows_UI_Core_ICoreWindow)
@@ -2084,12 +3763,98 @@ public interface ICoreWindow5 <: IInspectable {
     func ActivationMode(value: CPointer<Int32>): Int32
 }
 
+// Windows.UI.Core.ICoreWindowDialog (synthetic:Windows_UI_Core_ICoreWindowDialog)
+@When[Windows_UI_Core == "on"]
+@Interface["e7392ce0-c78d-427e-8b2c-01ff420c69d5", "Windows.UI.Core.ICoreWindowDialog", "Title.value=HString;Commands.value=Com;BackButtonCommand.value=Com;ShowAsync.asyncInfo=Com"]
+public interface ICoreWindowDialog <: IInspectable {
+    func Showing(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveShowing(cookie: Int64): Int32
+    func MaxSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func MinSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func Title(value: CPointer<CPointer<Unit>>): Int32
+    func SetTitle(value: CPointer<Unit>): Int32
+    func IsInteractionDelayed(value: CPointer<Int32>): Int32
+    func SetIsInteractionDelayed(value: Int32): Int32
+    func Commands(value: CPointer<CPointer<Unit>>): Int32
+    func DefaultCommandIndex(value: CPointer<UInt32>): Int32
+    func SetDefaultCommandIndex(value: UInt32): Int32
+    func CancelCommandIndex(value: CPointer<UInt32>): Int32
+    func SetCancelCommandIndex(value: UInt32): Int32
+    func BackButtonCommand(value: CPointer<CPointer<Unit>>): Int32
+    func SetBackButtonCommand(value: CPointer<Unit>): Int32
+    func ShowAsync(asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Core.ICoreWindowDialogFactory (synthetic:Windows_UI_Core_ICoreWindowDialogFactory)
+@When[Windows_UI_Core == "on"]
+@Interface["cfb2a855-1c59-4b13-b1e5-16e29805f7c4", "Windows.UI.Core.ICoreWindowDialogFactory", "CreateWithTitle.coreWindowDialog=Com"]
+public interface ICoreWindowDialogFactory <: IInspectable {
+    func CreateWithTitle(title: CPointer<Unit>, coreWindowDialog: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.UI.Core.ICoreWindowEventArgs (synthetic:Windows_UI_Core_ICoreWindowEventArgs)
 @When[Windows_UI_Core == "on"]
 @Interface["272b1ef3-c633-4da5-a26c-c6d0f56b29da", "Windows.UI.Core.ICoreWindowEventArgs"]
 public interface ICoreWindowEventArgs <: IInspectable {
     func Handled(value: CPointer<Bool>): Int32
     func SetHandled(value: Bool): Int32
+}
+
+// Windows.UI.Core.ICoreWindowFlyout (synthetic:Windows_UI_Core_ICoreWindowFlyout)
+@When[Windows_UI_Core == "on"]
+@Interface["e89d854d-2050-40bb-b344-f6f355eeb314", "Windows.UI.Core.ICoreWindowFlyout", "Title.value=HString;Commands.value=Com;BackButtonCommand.value=Com;ShowAsync.asyncInfo=Com"]
+public interface ICoreWindowFlyout <: IInspectable {
+    func Showing(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveShowing(cookie: Int64): Int32
+    func MaxSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func MinSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func Title(value: CPointer<CPointer<Unit>>): Int32
+    func SetTitle(value: CPointer<Unit>): Int32
+    func IsInteractionDelayed(value: CPointer<Int32>): Int32
+    func SetIsInteractionDelayed(value: Int32): Int32
+    func Commands(value: CPointer<CPointer<Unit>>): Int32
+    func DefaultCommandIndex(value: CPointer<UInt32>): Int32
+    func SetDefaultCommandIndex(value: UInt32): Int32
+    func BackButtonCommand(value: CPointer<CPointer<Unit>>): Int32
+    func SetBackButtonCommand(value: CPointer<Unit>): Int32
+    func ShowAsync(asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Core.ICoreWindowFlyoutFactory (synthetic:Windows_UI_Core_ICoreWindowFlyoutFactory)
+@When[Windows_UI_Core == "on"]
+@Interface["dec4c6c4-93e8-4f7c-be27-cefaa1af68a7", "Windows.UI.Core.ICoreWindowFlyoutFactory", "Create.coreWindowFlyout=Com;CreateWithTitle.coreWindowFlyout=Com"]
+public interface ICoreWindowFlyoutFactory <: IInspectable {
+    func Create(position: Windows_Foundation.Point, coreWindowFlyout: CPointer<CPointer<Unit>>): Int32
+    func CreateWithTitle(position: Windows_Foundation.Point, title: CPointer<Unit>, coreWindowFlyout: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Core.ICoreWindowPopupShowingEventArgs (synthetic:Windows_UI_Core_ICoreWindowPopupShowingEventArgs)
+@When[Windows_UI_Core == "on"]
+@Interface["26155fa2-5ba5-4ea4-a3b4-2dc7d63c8e26", "Windows.UI.Core.ICoreWindowPopupShowingEventArgs"]
+public interface ICoreWindowPopupShowingEventArgs <: IInspectable {
+    func SetDesiredSize(value: Windows_Foundation.Size): Int32
+}
+
+// Windows.UI.Core.ICoreWindowResizeManager (synthetic:Windows_UI_Core_ICoreWindowResizeManager)
+@When[Windows_UI_Core == "on"]
+@Interface["b8f0b925-b350-48b3-a198-5c1a84700243", "Windows.UI.Core.ICoreWindowResizeManager"]
+public interface ICoreWindowResizeManager <: IInspectable {
+    func NotifyLayoutCompleted(): Int32
+}
+
+// Windows.UI.Core.ICoreWindowResizeManagerLayoutCapability (synthetic:Windows_UI_Core_ICoreWindowResizeManagerLayoutCapability)
+@When[Windows_UI_Core == "on"]
+@Interface["bb74f27b-a544-4301-80e6-0ae033ef4536", "Windows.UI.Core.ICoreWindowResizeManagerLayoutCapability"]
+public interface ICoreWindowResizeManagerLayoutCapability <: IInspectable {
+    func SetShouldWaitForLayoutCompletion(value: Bool): Int32
+    func ShouldWaitForLayoutCompletion(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Core.ICoreWindowResizeManagerStatics (synthetic:Windows_UI_Core_ICoreWindowResizeManagerStatics)
+@When[Windows_UI_Core == "on"]
+@Interface["ae4a9045-6d70-49db-8e68-46ffbd17d38d", "Windows.UI.Core.ICoreWindowResizeManagerStatics", "GetForCurrentView.CoreWindowResizeManager=Com"]
+public interface ICoreWindowResizeManagerStatics <: IInspectable {
+    func GetForCurrentView(CoreWindowResizeManager: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Core.ICoreWindowStatic (synthetic:Windows_UI_Core_ICoreWindowStatic)
@@ -2111,6 +3876,13 @@ public interface ICoreWindowWithContext <: IInspectable {
 @Interface["98bb6a24-dc1c-43cb-b4ed-d1c0eb2391f3", "Windows.UI.Core.IIdleDispatchedHandlerArgs"]
 public interface IIdleDispatchedHandlerArgs <: IInspectable {
     func IsDispatcherIdle(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Core.IInitializeWithCoreWindow (synthetic:Windows_UI_Core_IInitializeWithCoreWindow)
+@When[Windows_UI_Core == "on"]
+@Interface["188f20d6-9873-464a-ace5-57e010f465e6", "Windows.UI.Core.IInitializeWithCoreWindow"]
+public interface IInitializeWithCoreWindow <: IInspectable {
+    func Initialize(window: CPointer<Unit>): Int32
 }
 
 // Windows.UI.Core.IInputEnabledEventArgs (synthetic:Windows_UI_Core_IInputEnabledEventArgs)
@@ -2142,6 +3914,29 @@ public interface IPointerEventArgs <: IInspectable {
     func CurrentPoint(value: CPointer<CPointer<Unit>>): Int32
     func KeyModifiers(value: CPointer<UInt32>): Int32
     func GetIntermediatePoints(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Core.ISystemNavigationManager (synthetic:Windows_UI_Core_ISystemNavigationManager)
+@When[Windows_UI_Core == "on"]
+@Interface["93023118-cf50-42a6-9706-69107fa122e1", "Windows.UI.Core.ISystemNavigationManager"]
+public interface ISystemNavigationManager <: IInspectable {
+    func BackRequested(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveBackRequested(token: Int64): Int32
+}
+
+// Windows.UI.Core.ISystemNavigationManager2 (synthetic:Windows_UI_Core_ISystemNavigationManager2)
+@When[Windows_UI_Core == "on"]
+@Interface["8c510401-67be-49ae-9509-671c1e54a389", "Windows.UI.Core.ISystemNavigationManager2"]
+public interface ISystemNavigationManager2 <: IInspectable {
+    func AppViewBackButtonVisibility(value: CPointer<Int32>): Int32
+    func SetAppViewBackButtonVisibility(value: Int32): Int32
+}
+
+// Windows.UI.Core.ISystemNavigationManagerStatics (synthetic:Windows_UI_Core_ISystemNavigationManagerStatics)
+@When[Windows_UI_Core == "on"]
+@Interface["dc52b5ce-bee0-4305-8c54-68228ed683b5", "Windows.UI.Core.ISystemNavigationManagerStatics", "GetForCurrentView.loader=Com"]
+public interface ISystemNavigationManagerStatics <: IInspectable {
+    func GetForCurrentView(loader: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Core.ITouchHitTestingEventArgs (synthetic:Windows_UI_Core_ITouchHitTestingEventArgs)
@@ -2758,6 +4553,122 @@ public class PointerEventArgs <: windows_interface.InterfaceWrapperBase & window
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): PointerEventArgs {
         PointerEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Core.SystemNavigationManager (synthetic:Windows_UI_Core_SystemNavigationManager)
+@When[Windows_UI_Core == "on"]
+public class SystemNavigationManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SystemNavigationManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SystemNavigationManager {
+        SystemNavigationManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SystemNavigationManager {
+        SystemNavigationManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISystemNavigationManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SystemNavigationManager> {
+        let ancestors = [ISystemNavigationManager.iid(), ISystemNavigationManager2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SystemNavigationManager>("SystemNavigationManager", ISystemNavigationManager.iid(), ancestors, { raw => SystemNavigationManager.fromAbiTake(raw) }, { raw => SystemNavigationManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISystemNavigationManager {
+        match (unsafe { query(ISystemNavigationManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISystemNavigationManager(): ISystemNavigationManager {
+        defaultInterface()
+    }
+
+    public func asISystemNavigationManager2(): ISystemNavigationManager2 {
+        match (unsafe { query<ISystemNavigationManager2>(ISystemNavigationManager2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func addBackRequested(handler: Windows_Foundation.EventHandler<BackRequestedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.EventHandler<BackRequestedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BackRequested(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeBackRequested(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveBackRequested(token) }
+        }
+        hr__.check()
+    }
+
+    public static func GetForCurrentView(): SystemNavigationManager {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SystemNavigationManager, ISystemNavigationManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SystemNavigationManager>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SystemNavigationManager.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Core.SystemNavigationManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Core.SystemNavigationManager;{" + ISystemNavigationManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Core.SystemNavigationManager", SystemNavigationManager.signature(), ISystemNavigationManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: SystemNavigationManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SystemNavigationManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SystemNavigationManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SystemNavigationManager {
+        SystemNavigationManager.viewOf(raw)
     }
 }
 

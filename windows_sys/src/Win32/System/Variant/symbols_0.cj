@@ -11,113 +11,183 @@ import windows_sys.Win32.System.Com as Windows_Win32_System_Com
 @When[Windows_Win32_System_Ole == "on"]
 import windows_sys.Win32.System.Ole as Windows_Win32_System_Ole
 
+// Windows.Win32.System.Variant.DRAWPROGRESSFLAGS (synthetic:Windows_Win32_System_Variant_DRAWPROGRESSFLAGS)
+@When[Windows_Win32_System_Variant == "on"]
+public struct DRAWPROGRESSFLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DRAWPROGRESSFLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DRAWPROGRESSFLAGS): DRAWPROGRESSFLAGS {
+        return DRAWPROGRESSFLAGS(value | other.value)
+    }
+    public operator func &(other: DRAWPROGRESSFLAGS): DRAWPROGRESSFLAGS {
+        return DRAWPROGRESSFLAGS(value & other.value)
+    }
+    public operator func ^(other: DRAWPROGRESSFLAGS): DRAWPROGRESSFLAGS {
+        return DRAWPROGRESSFLAGS(value ^ other.value)
+    }
+    public operator func !(): DRAWPROGRESSFLAGS {
+        return DRAWPROGRESSFLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Variant == "on"]
+public const DRAWPROGRESSFLAGS_DPF_NONE = DRAWPROGRESSFLAGS(0)
+@When[Windows_Win32_System_Variant == "on"]
+public const DRAWPROGRESSFLAGS_DPF_MARQUEE = DRAWPROGRESSFLAGS(1)
+@When[Windows_Win32_System_Variant == "on"]
+public const DRAWPROGRESSFLAGS_DPF_MARQUEE_COMPLETE = DRAWPROGRESSFLAGS(2)
+@When[Windows_Win32_System_Variant == "on"]
+public const DRAWPROGRESSFLAGS_DPF_ERROR = DRAWPROGRESSFLAGS(4)
+@When[Windows_Win32_System_Variant == "on"]
+public const DRAWPROGRESSFLAGS_DPF_WARNING = DRAWPROGRESSFLAGS(8)
+@When[Windows_Win32_System_Variant == "on"]
+public const DRAWPROGRESSFLAGS_DPF_STOPPED = DRAWPROGRESSFLAGS(16)
+
+// Windows.Win32.System.Variant.PSTIME_FLAGS (synthetic:Windows_Win32_System_Variant_PSTIME_FLAGS)
+@When[Windows_Win32_System_Variant == "on"]
+public struct PSTIME_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: PSTIME_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: PSTIME_FLAGS): PSTIME_FLAGS {
+        return PSTIME_FLAGS(value | other.value)
+    }
+    public operator func &(other: PSTIME_FLAGS): PSTIME_FLAGS {
+        return PSTIME_FLAGS(value & other.value)
+    }
+    public operator func ^(other: PSTIME_FLAGS): PSTIME_FLAGS {
+        return PSTIME_FLAGS(value ^ other.value)
+    }
+    public operator func !(): PSTIME_FLAGS {
+        return PSTIME_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Variant == "on"]
+public const PSTIME_FLAGS_PSTF_UTC = PSTIME_FLAGS(0)
+@When[Windows_Win32_System_Variant == "on"]
+public const PSTIME_FLAGS_PSTF_LOCAL = PSTIME_FLAGS(1)
+
 // Windows.Win32.System.Variant.VARENUM (synthetic:Windows_Win32_System_Variant_VARENUM)
 @When[Windows_Win32_System_Variant == "on"]
 public type VARENUM = UInt16
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_EMPTY: VARENUM = 0
+public const VARENUM_VT_EMPTY: VARENUM = 0
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_NULL: VARENUM = 1
+public const VARENUM_VT_NULL: VARENUM = 1
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_I2: VARENUM = 2
+public const VARENUM_VT_I2: VARENUM = 2
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_I4: VARENUM = 3
+public const VARENUM_VT_I4: VARENUM = 3
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_R4: VARENUM = 4
+public const VARENUM_VT_R4: VARENUM = 4
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_R8: VARENUM = 5
+public const VARENUM_VT_R8: VARENUM = 5
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_CY: VARENUM = 6
+public const VARENUM_VT_CY: VARENUM = 6
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_DATE: VARENUM = 7
+public const VARENUM_VT_DATE: VARENUM = 7
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_BSTR: VARENUM = 8
+public const VARENUM_VT_BSTR: VARENUM = 8
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_DISPATCH: VARENUM = 9
+public const VARENUM_VT_DISPATCH: VARENUM = 9
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_ERROR: VARENUM = 10
+public const VARENUM_VT_ERROR: VARENUM = 10
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_BOOL: VARENUM = 11
+public const VARENUM_VT_BOOL: VARENUM = 11
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_VARIANT: VARENUM = 12
+public const VARENUM_VT_VARIANT: VARENUM = 12
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_UNKNOWN: VARENUM = 13
+public const VARENUM_VT_UNKNOWN: VARENUM = 13
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_DECIMAL: VARENUM = 14
+public const VARENUM_VT_DECIMAL: VARENUM = 14
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_I1: VARENUM = 16
+public const VARENUM_VT_I1: VARENUM = 16
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_UI1: VARENUM = 17
+public const VARENUM_VT_UI1: VARENUM = 17
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_UI2: VARENUM = 18
+public const VARENUM_VT_UI2: VARENUM = 18
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_UI4: VARENUM = 19
+public const VARENUM_VT_UI4: VARENUM = 19
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_I8: VARENUM = 20
+public const VARENUM_VT_I8: VARENUM = 20
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_UI8: VARENUM = 21
+public const VARENUM_VT_UI8: VARENUM = 21
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_INT: VARENUM = 22
+public const VARENUM_VT_INT: VARENUM = 22
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_UINT: VARENUM = 23
+public const VARENUM_VT_UINT: VARENUM = 23
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_VOID: VARENUM = 24
+public const VARENUM_VT_VOID: VARENUM = 24
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_HRESULT: VARENUM = 25
+public const VARENUM_VT_HRESULT: VARENUM = 25
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_PTR: VARENUM = 26
+public const VARENUM_VT_PTR: VARENUM = 26
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_SAFEARRAY: VARENUM = 27
+public const VARENUM_VT_SAFEARRAY: VARENUM = 27
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_CARRAY: VARENUM = 28
+public const VARENUM_VT_CARRAY: VARENUM = 28
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_USERDEFINED: VARENUM = 29
+public const VARENUM_VT_USERDEFINED: VARENUM = 29
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_LPSTR: VARENUM = 30
+public const VARENUM_VT_LPSTR: VARENUM = 30
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_LPWSTR: VARENUM = 31
+public const VARENUM_VT_LPWSTR: VARENUM = 31
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_RECORD: VARENUM = 36
+public const VARENUM_VT_RECORD: VARENUM = 36
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_INT_PTR: VARENUM = 37
+public const VARENUM_VT_INT_PTR: VARENUM = 37
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_UINT_PTR: VARENUM = 38
+public const VARENUM_VT_UINT_PTR: VARENUM = 38
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_FILETIME: VARENUM = 64
+public const VARENUM_VT_FILETIME: VARENUM = 64
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_BLOB: VARENUM = 65
+public const VARENUM_VT_BLOB: VARENUM = 65
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_STREAM: VARENUM = 66
+public const VARENUM_VT_STREAM: VARENUM = 66
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_STORAGE: VARENUM = 67
+public const VARENUM_VT_STORAGE: VARENUM = 67
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_STREAMED_OBJECT: VARENUM = 68
+public const VARENUM_VT_STREAMED_OBJECT: VARENUM = 68
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_STORED_OBJECT: VARENUM = 69
+public const VARENUM_VT_STORED_OBJECT: VARENUM = 69
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_BLOB_OBJECT: VARENUM = 70
+public const VARENUM_VT_BLOB_OBJECT: VARENUM = 70
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_CF: VARENUM = 71
+public const VARENUM_VT_CF: VARENUM = 71
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_CLSID: VARENUM = 72
+public const VARENUM_VT_CLSID: VARENUM = 72
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_VERSIONED_STREAM: VARENUM = 73
+public const VARENUM_VT_VERSIONED_STREAM: VARENUM = 73
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_BSTR_BLOB: VARENUM = 4095
+public const VARENUM_VT_BSTR_BLOB: VARENUM = 4095
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_VECTOR: VARENUM = 4096
+public const VARENUM_VT_VECTOR: VARENUM = 4096
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_ARRAY: VARENUM = 8192
+public const VARENUM_VT_ARRAY: VARENUM = 8192
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_BYREF: VARENUM = 16384
+public const VARENUM_VT_BYREF: VARENUM = 16384
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_RESERVED: VARENUM = 32768
+public const VARENUM_VT_RESERVED: VARENUM = 32768
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_ILLEGAL: VARENUM = 65535
+public const VARENUM_VT_ILLEGAL: VARENUM = 65535
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_ILLEGALMASKED: VARENUM = 4095
+public const VARENUM_VT_ILLEGALMASKED: VARENUM = 4095
 @When[Windows_Win32_System_Variant == "on"]
-public let VARENUM_VT_TYPEMASK: VARENUM = 4095
+public const VARENUM_VT_TYPEMASK: VARENUM = 4095
 
 // Windows.Win32.System.Variant.VARIANT (synthetic:Windows_Win32_System_Variant_VARIANT)
 @When[Windows_Win32_System_Variant == "on"]
@@ -1150,3 +1220,46 @@ public struct VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Uni
     public var pvRecord: CPointer<Unit> = CPointer<Unit>()
     public var pRecInfo: CPointer<Unit> = CPointer<Unit>()
 }
+
+// Windows.Win32.System.Variant.VAR_CHANGE_FLAGS (synthetic:Windows_Win32_System_Variant_VAR_CHANGE_FLAGS)
+@When[Windows_Win32_System_Variant == "on"]
+public struct VAR_CHANGE_FLAGS {
+    public let value: UInt16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt16) {
+        this.value = value
+    }
+    public func contains(other: VAR_CHANGE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: VAR_CHANGE_FLAGS): VAR_CHANGE_FLAGS {
+        return VAR_CHANGE_FLAGS(value | other.value)
+    }
+    public operator func &(other: VAR_CHANGE_FLAGS): VAR_CHANGE_FLAGS {
+        return VAR_CHANGE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: VAR_CHANGE_FLAGS): VAR_CHANGE_FLAGS {
+        return VAR_CHANGE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): VAR_CHANGE_FLAGS {
+        return VAR_CHANGE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_NOVALUEPROP = VAR_CHANGE_FLAGS(1)
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_ALPHABOOL = VAR_CHANGE_FLAGS(2)
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_NOUSEROVERRIDE = VAR_CHANGE_FLAGS(4)
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_CALENDAR_HIJRI = VAR_CHANGE_FLAGS(8)
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_LOCALBOOL = VAR_CHANGE_FLAGS(16)
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_CALENDAR_THAI = VAR_CHANGE_FLAGS(32)
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_CALENDAR_GREGORIAN = VAR_CHANGE_FLAGS(64)
+@When[Windows_Win32_System_Variant == "on"]
+public const VAR_CHANGE_FLAGS_VARIANT_USE_NLS = VAR_CHANGE_FLAGS(128)

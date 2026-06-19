@@ -20,26 +20,26 @@ import windows_sys.UI.Text as Windows_UI_Text
 @When[Microsoft_UI_Text == "on"]
 public struct CaretType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let CaretType_Normal = CaretType(0)
+public const CaretType_Normal = CaretType(0)
 @When[Microsoft_UI_Text == "on"]
-public let CaretType_Null = CaretType(1)
+public const CaretType_Null = CaretType(1)
 
 // Microsoft.UI.Text.FindOptions (synthetic:Microsoft_UI_Text_FindOptions)
 @When[Microsoft_UI_Text == "on"]
 public struct FindOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: FindOptions): Bool {
@@ -59,49 +59,257 @@ public struct FindOptions {
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let FindOptions_None = FindOptions(0)
+public const FindOptions_None = FindOptions(0)
 @When[Microsoft_UI_Text == "on"]
-public let FindOptions_Word = FindOptions(2)
+public const FindOptions_Word = FindOptions(2)
 @When[Microsoft_UI_Text == "on"]
-public let FindOptions_Case = FindOptions(4)
+public const FindOptions_Case = FindOptions(4)
+
+// Microsoft.UI.Text.FontWeights (synthetic:Microsoft_UI_Text_FontWeights)
+@When[Microsoft_UI_Text == "on"]
+public class FontWeights <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FontWeights> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FontWeights {
+        FontWeights(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FontWeights {
+        FontWeights(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFontWeights.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FontWeights> {
+        let ancestors = [IFontWeights.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FontWeights>("FontWeights", IFontWeights.iid(), ancestors, { raw => FontWeights.fromAbiTake(raw) }, { raw => FontWeights.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFontWeights {
+        match (unsafe { query(IFontWeights.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFontWeights(): IFontWeights {
+        defaultInterface()
+    }
+
+    public static func Black(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Black(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Bold(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Bold(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ExtraBlack(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ExtraBlack(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ExtraBold(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ExtraBold(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ExtraLight(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ExtraLight(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Light(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Light(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Medium(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Medium(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Normal(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Normal(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SemiBold(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SemiBold(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SemiLight(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SemiLight(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Thin(): Windows_UI_Text.FontWeight {
+        var result__ = Windows_UI_Text.FontWeight()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FontWeights, IFontWeightsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Thin(CPointer<Windows_UI_Text.FontWeight>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Text.FontWeights"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Text.FontWeights;{" + IFontWeights.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Text.FontWeights", FontWeights.signature(), IFontWeights.iid())
+    }
+
+    public static func intoWinrtHandle(value: FontWeights): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FontWeights {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FontWeights.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FontWeights {
+        FontWeights.viewOf(raw)
+    }
+}
 
 // Microsoft.UI.Text.FormatEffect (synthetic:Microsoft_UI_Text_FormatEffect)
 @When[Microsoft_UI_Text == "on"]
 public struct FormatEffect {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let FormatEffect_Off = FormatEffect(0)
+public const FormatEffect_Off = FormatEffect(0)
 @When[Microsoft_UI_Text == "on"]
-public let FormatEffect_On = FormatEffect(1)
+public const FormatEffect_On = FormatEffect(1)
 @When[Microsoft_UI_Text == "on"]
-public let FormatEffect_Toggle = FormatEffect(2)
+public const FormatEffect_Toggle = FormatEffect(2)
 @When[Microsoft_UI_Text == "on"]
-public let FormatEffect_Undefined = FormatEffect(3)
+public const FormatEffect_Undefined = FormatEffect(3)
 
 // Microsoft.UI.Text.HorizontalCharacterAlignment (synthetic:Microsoft_UI_Text_HorizontalCharacterAlignment)
 @When[Microsoft_UI_Text == "on"]
 public struct HorizontalCharacterAlignment {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let HorizontalCharacterAlignment_Left = HorizontalCharacterAlignment(0)
+public const HorizontalCharacterAlignment_Left = HorizontalCharacterAlignment(0)
 @When[Microsoft_UI_Text == "on"]
-public let HorizontalCharacterAlignment_Right = HorizontalCharacterAlignment(1)
+public const HorizontalCharacterAlignment_Right = HorizontalCharacterAlignment(1)
 @When[Microsoft_UI_Text == "on"]
-public let HorizontalCharacterAlignment_Center = HorizontalCharacterAlignment(2)
+public const HorizontalCharacterAlignment_Center = HorizontalCharacterAlignment(2)
+
+// Microsoft.UI.Text.IFontWeights (synthetic:Microsoft_UI_Text_IFontWeights)
+@When[Microsoft_UI_Text == "on"]
+@Interface["386cd040-5404-5a8d-8bc7-2ca989f5c065", "Microsoft.UI.Text.IFontWeights"]
+public interface IFontWeights <: IInspectable {
+}
+
+// Microsoft.UI.Text.IFontWeightsStatics (synthetic:Microsoft_UI_Text_IFontWeightsStatics)
+@When[Microsoft_UI_Text == "on"]
+@Interface["cc390df6-76b0-5807-8b9d-e949a4e623ae", "Microsoft.UI.Text.IFontWeightsStatics"]
+public interface IFontWeightsStatics <: IInspectable {
+    func Black(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func Bold(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func ExtraBlack(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func ExtraBold(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func ExtraLight(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func Light(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func Medium(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func Normal(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func SemiBold(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func SemiLight(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+    func Thin(value: CPointer<Windows_UI_Text.FontWeight>): Int32
+}
 
 // Microsoft.UI.Text.ITextCharacterFormat (synthetic:Microsoft_UI_Text_ITextCharacterFormat)
 @When[Microsoft_UI_Text == "on"]
@@ -157,6 +365,20 @@ public interface ITextCharacterFormat <: IInspectable {
     func SetClone(value: CPointer<Unit>): Int32
     func GetClone(result: CPointer<CPointer<Unit>>): Int32
     func IsEqual(format: CPointer<Unit>, result: CPointer<Bool>): Int32
+}
+
+// Microsoft.UI.Text.ITextConstantsStatics (synthetic:Microsoft_UI_Text_ITextConstantsStatics)
+@When[Microsoft_UI_Text == "on"]
+@Interface["cd353b3c-af63-5cfb-918c-0f9c8931a161", "Microsoft.UI.Text.ITextConstantsStatics"]
+public interface ITextConstantsStatics <: IInspectable {
+    func AutoColor(value: CPointer<Windows_UI.Color>): Int32
+    func MinUnitCount(value: CPointer<Int32>): Int32
+    func MaxUnitCount(value: CPointer<Int32>): Int32
+    func UndefinedColor(value: CPointer<Windows_UI.Color>): Int32
+    func UndefinedFloatValue(value: CPointer<Float32>): Int32
+    func UndefinedInt32Value(value: CPointer<Int32>): Int32
+    func UndefinedFontStretch(value: CPointer<Int32>): Int32
+    func UndefinedFontStyle(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Text.ITextDocument (synthetic:Microsoft_UI_Text_ITextDocument)
@@ -339,250 +561,250 @@ public interface ITextSelection <: IInspectable {
 @When[Microsoft_UI_Text == "on"]
 public struct LetterCase {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let LetterCase_Lower = LetterCase(0)
+public const LetterCase_Lower = LetterCase(0)
 @When[Microsoft_UI_Text == "on"]
-public let LetterCase_Upper = LetterCase(1)
+public const LetterCase_Upper = LetterCase(1)
 
 // Microsoft.UI.Text.LineSpacingRule (synthetic:Microsoft_UI_Text_LineSpacingRule)
 @When[Microsoft_UI_Text == "on"]
 public struct LineSpacingRule {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_Undefined = LineSpacingRule(0)
+public const LineSpacingRule_Undefined = LineSpacingRule(0)
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_Single = LineSpacingRule(1)
+public const LineSpacingRule_Single = LineSpacingRule(1)
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_OneAndHalf = LineSpacingRule(2)
+public const LineSpacingRule_OneAndHalf = LineSpacingRule(2)
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_Double = LineSpacingRule(3)
+public const LineSpacingRule_Double = LineSpacingRule(3)
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_AtLeast = LineSpacingRule(4)
+public const LineSpacingRule_AtLeast = LineSpacingRule(4)
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_Exactly = LineSpacingRule(5)
+public const LineSpacingRule_Exactly = LineSpacingRule(5)
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_Multiple = LineSpacingRule(6)
+public const LineSpacingRule_Multiple = LineSpacingRule(6)
 @When[Microsoft_UI_Text == "on"]
-public let LineSpacingRule_Percent = LineSpacingRule(7)
+public const LineSpacingRule_Percent = LineSpacingRule(7)
 
 // Microsoft.UI.Text.LinkType (synthetic:Microsoft_UI_Text_LinkType)
 @When[Microsoft_UI_Text == "on"]
 public struct LinkType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_Undefined = LinkType(0)
+public const LinkType_Undefined = LinkType(0)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_NotALink = LinkType(1)
+public const LinkType_NotALink = LinkType(1)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_ClientLink = LinkType(2)
+public const LinkType_ClientLink = LinkType(2)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_FriendlyLinkName = LinkType(3)
+public const LinkType_FriendlyLinkName = LinkType(3)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_FriendlyLinkAddress = LinkType(4)
+public const LinkType_FriendlyLinkAddress = LinkType(4)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_AutoLink = LinkType(5)
+public const LinkType_AutoLink = LinkType(5)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_AutoLinkEmail = LinkType(6)
+public const LinkType_AutoLinkEmail = LinkType(6)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_AutoLinkPhone = LinkType(7)
+public const LinkType_AutoLinkPhone = LinkType(7)
 @When[Microsoft_UI_Text == "on"]
-public let LinkType_AutoLinkPath = LinkType(8)
+public const LinkType_AutoLinkPath = LinkType(8)
 
 // Microsoft.UI.Text.MarkerAlignment (synthetic:Microsoft_UI_Text_MarkerAlignment)
 @When[Microsoft_UI_Text == "on"]
 public struct MarkerAlignment {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let MarkerAlignment_Undefined = MarkerAlignment(0)
+public const MarkerAlignment_Undefined = MarkerAlignment(0)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerAlignment_Left = MarkerAlignment(1)
+public const MarkerAlignment_Left = MarkerAlignment(1)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerAlignment_Center = MarkerAlignment(2)
+public const MarkerAlignment_Center = MarkerAlignment(2)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerAlignment_Right = MarkerAlignment(3)
+public const MarkerAlignment_Right = MarkerAlignment(3)
 
 // Microsoft.UI.Text.MarkerStyle (synthetic:Microsoft_UI_Text_MarkerStyle)
 @When[Microsoft_UI_Text == "on"]
 public struct MarkerStyle {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let MarkerStyle_Undefined = MarkerStyle(0)
+public const MarkerStyle_Undefined = MarkerStyle(0)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerStyle_Parenthesis = MarkerStyle(1)
+public const MarkerStyle_Parenthesis = MarkerStyle(1)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerStyle_Parentheses = MarkerStyle(2)
+public const MarkerStyle_Parentheses = MarkerStyle(2)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerStyle_Period = MarkerStyle(3)
+public const MarkerStyle_Period = MarkerStyle(3)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerStyle_Plain = MarkerStyle(4)
+public const MarkerStyle_Plain = MarkerStyle(4)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerStyle_Minus = MarkerStyle(5)
+public const MarkerStyle_Minus = MarkerStyle(5)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerStyle_NoNumber = MarkerStyle(6)
+public const MarkerStyle_NoNumber = MarkerStyle(6)
 
 // Microsoft.UI.Text.MarkerType (synthetic:Microsoft_UI_Text_MarkerType)
 @When[Microsoft_UI_Text == "on"]
 public struct MarkerType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_Undefined = MarkerType(0)
+public const MarkerType_Undefined = MarkerType(0)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_None = MarkerType(1)
+public const MarkerType_None = MarkerType(1)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_Bullet = MarkerType(2)
+public const MarkerType_Bullet = MarkerType(2)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_Arabic = MarkerType(3)
+public const MarkerType_Arabic = MarkerType(3)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_LowercaseEnglishLetter = MarkerType(4)
+public const MarkerType_LowercaseEnglishLetter = MarkerType(4)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_UppercaseEnglishLetter = MarkerType(5)
+public const MarkerType_UppercaseEnglishLetter = MarkerType(5)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_LowercaseRoman = MarkerType(6)
+public const MarkerType_LowercaseRoman = MarkerType(6)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_UppercaseRoman = MarkerType(7)
+public const MarkerType_UppercaseRoman = MarkerType(7)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_UnicodeSequence = MarkerType(8)
+public const MarkerType_UnicodeSequence = MarkerType(8)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_CircledNumber = MarkerType(9)
+public const MarkerType_CircledNumber = MarkerType(9)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_BlackCircleWingding = MarkerType(10)
+public const MarkerType_BlackCircleWingding = MarkerType(10)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_WhiteCircleWingding = MarkerType(11)
+public const MarkerType_WhiteCircleWingding = MarkerType(11)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_ArabicWide = MarkerType(12)
+public const MarkerType_ArabicWide = MarkerType(12)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_SimplifiedChinese = MarkerType(13)
+public const MarkerType_SimplifiedChinese = MarkerType(13)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_TraditionalChinese = MarkerType(14)
+public const MarkerType_TraditionalChinese = MarkerType(14)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_JapanSimplifiedChinese = MarkerType(15)
+public const MarkerType_JapanSimplifiedChinese = MarkerType(15)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_JapanKorea = MarkerType(16)
+public const MarkerType_JapanKorea = MarkerType(16)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_ArabicDictionary = MarkerType(17)
+public const MarkerType_ArabicDictionary = MarkerType(17)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_ArabicAbjad = MarkerType(18)
+public const MarkerType_ArabicAbjad = MarkerType(18)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_Hebrew = MarkerType(19)
+public const MarkerType_Hebrew = MarkerType(19)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_ThaiAlphabetic = MarkerType(20)
+public const MarkerType_ThaiAlphabetic = MarkerType(20)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_ThaiNumeric = MarkerType(21)
+public const MarkerType_ThaiNumeric = MarkerType(21)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_DevanagariVowel = MarkerType(22)
+public const MarkerType_DevanagariVowel = MarkerType(22)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_DevanagariConsonant = MarkerType(23)
+public const MarkerType_DevanagariConsonant = MarkerType(23)
 @When[Microsoft_UI_Text == "on"]
-public let MarkerType_DevanagariNumeric = MarkerType(24)
+public const MarkerType_DevanagariNumeric = MarkerType(24)
 
 // Microsoft.UI.Text.ParagraphAlignment (synthetic:Microsoft_UI_Text_ParagraphAlignment)
 @When[Microsoft_UI_Text == "on"]
 public struct ParagraphAlignment {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphAlignment_Undefined = ParagraphAlignment(0)
+public const ParagraphAlignment_Undefined = ParagraphAlignment(0)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphAlignment_Left = ParagraphAlignment(1)
+public const ParagraphAlignment_Left = ParagraphAlignment(1)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphAlignment_Center = ParagraphAlignment(2)
+public const ParagraphAlignment_Center = ParagraphAlignment(2)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphAlignment_Right = ParagraphAlignment(3)
+public const ParagraphAlignment_Right = ParagraphAlignment(3)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphAlignment_Justify = ParagraphAlignment(4)
+public const ParagraphAlignment_Justify = ParagraphAlignment(4)
 
 // Microsoft.UI.Text.ParagraphStyle (synthetic:Microsoft_UI_Text_ParagraphStyle)
 @When[Microsoft_UI_Text == "on"]
 public struct ParagraphStyle {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Undefined = ParagraphStyle(0)
+public const ParagraphStyle_Undefined = ParagraphStyle(0)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_None = ParagraphStyle(1)
+public const ParagraphStyle_None = ParagraphStyle(1)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Normal = ParagraphStyle(2)
+public const ParagraphStyle_Normal = ParagraphStyle(2)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading1 = ParagraphStyle(3)
+public const ParagraphStyle_Heading1 = ParagraphStyle(3)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading2 = ParagraphStyle(4)
+public const ParagraphStyle_Heading2 = ParagraphStyle(4)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading3 = ParagraphStyle(5)
+public const ParagraphStyle_Heading3 = ParagraphStyle(5)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading4 = ParagraphStyle(6)
+public const ParagraphStyle_Heading4 = ParagraphStyle(6)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading5 = ParagraphStyle(7)
+public const ParagraphStyle_Heading5 = ParagraphStyle(7)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading6 = ParagraphStyle(8)
+public const ParagraphStyle_Heading6 = ParagraphStyle(8)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading7 = ParagraphStyle(9)
+public const ParagraphStyle_Heading7 = ParagraphStyle(9)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading8 = ParagraphStyle(10)
+public const ParagraphStyle_Heading8 = ParagraphStyle(10)
 @When[Microsoft_UI_Text == "on"]
-public let ParagraphStyle_Heading9 = ParagraphStyle(11)
+public const ParagraphStyle_Heading9 = ParagraphStyle(11)
 
 // Microsoft.UI.Text.PointOptions (synthetic:Microsoft_UI_Text_PointOptions)
 @When[Microsoft_UI_Text == "on"]
 public struct PointOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: PointOptions): Bool {
@@ -602,59 +824,59 @@ public struct PointOptions {
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_None = PointOptions(0)
+public const PointOptions_None = PointOptions(0)
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_IncludeInset = PointOptions(1)
+public const PointOptions_IncludeInset = PointOptions(1)
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_Start = PointOptions(32)
+public const PointOptions_Start = PointOptions(32)
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_ClientCoordinates = PointOptions(256)
+public const PointOptions_ClientCoordinates = PointOptions(256)
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_AllowOffClient = PointOptions(512)
+public const PointOptions_AllowOffClient = PointOptions(512)
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_Transform = PointOptions(1024)
+public const PointOptions_Transform = PointOptions(1024)
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_NoHorizontalScroll = PointOptions(65536)
+public const PointOptions_NoHorizontalScroll = PointOptions(65536)
 @When[Microsoft_UI_Text == "on"]
-public let PointOptions_NoVerticalScroll = PointOptions(262144)
+public const PointOptions_NoVerticalScroll = PointOptions(262144)
 
 // Microsoft.UI.Text.RangeGravity (synthetic:Microsoft_UI_Text_RangeGravity)
 @When[Microsoft_UI_Text == "on"]
 public struct RangeGravity {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let RangeGravity_UIBehavior = RangeGravity(0)
+public const RangeGravity_UIBehavior = RangeGravity(0)
 @When[Microsoft_UI_Text == "on"]
-public let RangeGravity_Backward = RangeGravity(1)
+public const RangeGravity_Backward = RangeGravity(1)
 @When[Microsoft_UI_Text == "on"]
-public let RangeGravity_Forward = RangeGravity(2)
+public const RangeGravity_Forward = RangeGravity(2)
 @When[Microsoft_UI_Text == "on"]
-public let RangeGravity_Inward = RangeGravity(3)
+public const RangeGravity_Inward = RangeGravity(3)
 @When[Microsoft_UI_Text == "on"]
-public let RangeGravity_Outward = RangeGravity(4)
+public const RangeGravity_Outward = RangeGravity(4)
 
 // Microsoft.UI.Text.RichEditMathMode (synthetic:Microsoft_UI_Text_RichEditMathMode)
 @When[Microsoft_UI_Text == "on"]
 public struct RichEditMathMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let RichEditMathMode_NoMath = RichEditMathMode(0)
+public const RichEditMathMode_NoMath = RichEditMathMode(0)
 @When[Microsoft_UI_Text == "on"]
-public let RichEditMathMode_MathOnly = RichEditMathMode(1)
+public const RichEditMathMode_MathOnly = RichEditMathMode(1)
 
 // Microsoft.UI.Text.RichEditTextDocument (synthetic:Microsoft_UI_Text_RichEditTextDocument)
 @When[Microsoft_UI_Text == "on"]
@@ -1081,14 +1303,680 @@ public class RichEditTextDocument <: windows_interface.InterfaceWrapperBase & wi
     }
 }
 
+// Microsoft.UI.Text.RichEditTextRange (synthetic:Microsoft_UI_Text_RichEditTextRange)
+@When[Microsoft_UI_Text == "on"]
+public class RichEditTextRange <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RichEditTextRange> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RichEditTextRange {
+        RichEditTextRange(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RichEditTextRange {
+        RichEditTextRange(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITextRange.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RichEditTextRange> {
+        let ancestors = [ITextRange.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RichEditTextRange>("RichEditTextRange", ITextRange.iid(), ancestors, { raw => RichEditTextRange.fromAbiTake(raw) }, { raw => RichEditTextRange.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITextRange {
+        match (unsafe { query(ITextRange.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextRange(): ITextRange {
+        defaultInterface()
+    }
+
+    public mut prop Character: UInt16 {
+        get() {
+            var result__ = 0u16
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Character(CPointer<UInt16>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCharacter(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CharacterFormat: ITextCharacterFormat {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CharacterFormat(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ITextCharacterFormat>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ITextCharacterFormat.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ITextCharacterFormat>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCharacterFormat(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop EndPosition: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.EndPosition(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetEndPosition(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FormattedText: ITextRange {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FormattedText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ITextRange>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ITextRange.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ITextRange>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetFormattedText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Gravity: RangeGravity {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Gravity(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return RangeGravity(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetGravity(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Length: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Length(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Link: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Link(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetLink(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ParagraphFormat: ITextParagraphFormat {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ParagraphFormat(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ITextParagraphFormat>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ITextParagraphFormat.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ITextParagraphFormat>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetParagraphFormat(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop StartPosition: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPosition(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetStartPosition(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop StoryLength: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StoryLength(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Text: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Text(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func CanPaste(format: Int32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CanPaste(format, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ChangeCase(value: LetterCase): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ChangeCase(value.value) }
+        }
+        hr__.check()
+    }
+
+    public func Collapse(value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Collapse(value) }
+        }
+        hr__.check()
+    }
+
+    public func Copy(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Copy() }
+        }
+        hr__.check()
+    }
+
+    public func Cut(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Cut() }
+        }
+        hr__.check()
+    }
+
+    public func Delete(unit: TextRangeUnit, count: Int32): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Delete(unit.value, count, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func EndOf(unit: TextRangeUnit, extend_: Bool): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.EndOf(unit.value, extend_, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func Expand(unit: TextRangeUnit): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Expand(unit.value, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func FindText(value: windows_core.HString, scanLength: Int32, options: FindOptions): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FindText(__argBorrow0.asRaw(), scanLength, options.value, CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func GetCharacterUtf32(value: windows_core.OutSlot<UInt32>, offset: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        if (value.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        value.clear()
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetCharacterUtf32(value.borrowMut<UInt32>(), offset) }
+        }
+        hr__.check()
+        let __arg0Value = match (value.takeAbi<UInt32>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        value.write(__arg0Value)
+    }
+
+    public func GetClone(): ITextRange {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetClone(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ITextRange>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ITextRange.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetIndex(unit: TextRangeUnit): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetIndex(unit.value, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func GetPoint(horizontalAlign: HorizontalCharacterAlignment, verticalAlign: VerticalCharacterAlignment, options: PointOptions, point: windows_core.OutSlot<Windows_Foundation.Point>): Unit {
+        var hr__ = windows_core.E_POINTER
+        if (point.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        point.clear()
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetPoint(horizontalAlign.value, verticalAlign.value, options.value, point.borrowMut<Windows_Foundation.Point>()) }
+        }
+        hr__.check()
+        let __arg3Value = match (point.takeAbi<Windows_Foundation.Point>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        point.write(__arg3Value)
+    }
+
+    public func GetRect(options: PointOptions, rect: windows_core.OutSlot<Windows_Foundation.Rect>, hit: windows_core.OutSlot<Int32>): Unit {
+        var hr__ = windows_core.E_POINTER
+        var nullOutSlot__ = false
+        if (rect.isNull()) {
+            nullOutSlot__ = true
+        } else {
+            rect.clear()
+        }
+        if (hit.isNull()) {
+            nullOutSlot__ = true
+        } else {
+            hit.clear()
+        }
+        if (nullOutSlot__) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetRect(options.value, rect.borrowMut<Windows_Foundation.Rect>(), hit.borrowMut<Int32>()) }
+        }
+        hr__.check()
+        let __arg1Value = match (rect.takeAbi<Windows_Foundation.Rect>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        rect.write(__arg1Value)
+        let __arg2Value = match (hit.takeAbi<Int32>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        hit.write(__arg2Value)
+    }
+
+    public func GetText(options: TextGetOptions, value: windows_core.OutSlot<windows_core.HString>): Unit {
+        var hr__ = windows_core.E_POINTER
+        if (value.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        value.clear()
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetText(options.value, value.borrowMut<CPointer<Unit>>()) }
+        }
+        if (hr__.failed()) {
+            match (value.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_core.HString>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (value.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        value.write(windows_core.HString.fromSystemHandleTake(__arg1Value))
+    }
+
+    public func GetTextViaStream(options: TextGetOptions, value: Windows_Storage_Streams.IRandomAccessStream): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetTextViaStream(options.value, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func InRange(range: ITextRange): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ITextRange>(range)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InRange(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func InsertImage(width: Int32, height: Int32, ascent: Int32, verticalAlign: VerticalCharacterAlignment, alternateText: windows_core.HString, value: Windows_Storage_Streams.IRandomAccessStream): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(alternateText)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.InsertImage(width, height, ascent, verticalAlign.value, __argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public func InStory(range: ITextRange): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ITextRange>(range)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InStory(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func IsEqual(range: ITextRange): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ITextRange>(range)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsEqual(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func Move(unit: TextRangeUnit, count: Int32): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Move(unit.value, count, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func MoveEnd(unit: TextRangeUnit, count: Int32): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MoveEnd(unit.value, count, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func MoveStart(unit: TextRangeUnit, count: Int32): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MoveStart(unit.value, count, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func Paste(format: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Paste(format) }
+        }
+        hr__.check()
+    }
+
+    public func ScrollIntoView(value: PointOptions): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ScrollIntoView(value.value) }
+        }
+        hr__.check()
+    }
+
+    public func MatchSelection(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.MatchSelection() }
+        }
+        hr__.check()
+    }
+
+    public func SetIndex(unit: TextRangeUnit, index: Int32, extend_: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetIndex(unit.value, index, extend_) }
+        }
+        hr__.check()
+    }
+
+    public func SetPoint(point: Windows_Foundation.Point, options: PointOptions, extend_: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetPoint(point, options.value, extend_) }
+        }
+        hr__.check()
+    }
+
+    public func SetRange(startPosition: Int32, endPosition: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetRange(startPosition, endPosition) }
+        }
+        hr__.check()
+    }
+
+    public func SetText_1(options: TextSetOptions, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetText_1(options.value, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetTextViaStream(options: TextSetOptions, value: Windows_Storage_Streams.IRandomAccessStream): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTextViaStream(options.value, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StartOf(unit: TextRangeUnit, extend_: Bool): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.StartOf(unit.value, extend_, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Text.RichEditTextRange"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Text.RichEditTextRange;{" + ITextRange.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Text.RichEditTextRange", RichEditTextRange.signature(), ITextRange.iid())
+    }
+
+    public static func intoWinrtHandle(value: RichEditTextRange): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RichEditTextRange {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RichEditTextRange.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RichEditTextRange {
+        RichEditTextRange.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Text.SelectionOptions (synthetic:Microsoft_UI_Text_SelectionOptions)
 @When[Microsoft_UI_Text == "on"]
 public struct SelectionOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: SelectionOptions): Bool {
@@ -1108,83 +1996,83 @@ public struct SelectionOptions {
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let SelectionOptions_StartActive = SelectionOptions(1)
+public const SelectionOptions_StartActive = SelectionOptions(1)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionOptions_AtEndOfLine = SelectionOptions(2)
+public const SelectionOptions_AtEndOfLine = SelectionOptions(2)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionOptions_Overtype = SelectionOptions(4)
+public const SelectionOptions_Overtype = SelectionOptions(4)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionOptions_Active = SelectionOptions(8)
+public const SelectionOptions_Active = SelectionOptions(8)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionOptions_Replace = SelectionOptions(16)
+public const SelectionOptions_Replace = SelectionOptions(16)
 
 // Microsoft.UI.Text.SelectionType (synthetic:Microsoft_UI_Text_SelectionType)
 @When[Microsoft_UI_Text == "on"]
 public struct SelectionType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let SelectionType_None = SelectionType(0)
+public const SelectionType_None = SelectionType(0)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionType_InsertionPoint = SelectionType(1)
+public const SelectionType_InsertionPoint = SelectionType(1)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionType_Normal = SelectionType(2)
+public const SelectionType_Normal = SelectionType(2)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionType_InlineShape = SelectionType(7)
+public const SelectionType_InlineShape = SelectionType(7)
 @When[Microsoft_UI_Text == "on"]
-public let SelectionType_Shape = SelectionType(8)
+public const SelectionType_Shape = SelectionType(8)
 
 // Microsoft.UI.Text.TabAlignment (synthetic:Microsoft_UI_Text_TabAlignment)
 @When[Microsoft_UI_Text == "on"]
 public struct TabAlignment {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let TabAlignment_Left = TabAlignment(0)
+public const TabAlignment_Left = TabAlignment(0)
 @When[Microsoft_UI_Text == "on"]
-public let TabAlignment_Center = TabAlignment(1)
+public const TabAlignment_Center = TabAlignment(1)
 @When[Microsoft_UI_Text == "on"]
-public let TabAlignment_Right = TabAlignment(2)
+public const TabAlignment_Right = TabAlignment(2)
 @When[Microsoft_UI_Text == "on"]
-public let TabAlignment_Decimal = TabAlignment(3)
+public const TabAlignment_Decimal = TabAlignment(3)
 @When[Microsoft_UI_Text == "on"]
-public let TabAlignment_Bar = TabAlignment(4)
+public const TabAlignment_Bar = TabAlignment(4)
 
 // Microsoft.UI.Text.TabLeader (synthetic:Microsoft_UI_Text_TabLeader)
 @When[Microsoft_UI_Text == "on"]
 public struct TabLeader {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let TabLeader_Spaces = TabLeader(0)
+public const TabLeader_Spaces = TabLeader(0)
 @When[Microsoft_UI_Text == "on"]
-public let TabLeader_Dots = TabLeader(1)
+public const TabLeader_Dots = TabLeader(1)
 @When[Microsoft_UI_Text == "on"]
-public let TabLeader_Dashes = TabLeader(2)
+public const TabLeader_Dashes = TabLeader(2)
 @When[Microsoft_UI_Text == "on"]
-public let TabLeader_Lines = TabLeader(3)
+public const TabLeader_Lines = TabLeader(3)
 @When[Microsoft_UI_Text == "on"]
-public let TabLeader_ThickLines = TabLeader(4)
+public const TabLeader_ThickLines = TabLeader(4)
 @When[Microsoft_UI_Text == "on"]
-public let TabLeader_Equals = TabLeader(5)
+public const TabLeader_Equals = TabLeader(5)
 
 // Microsoft.UI.Text.TextApiContract (synthetic:Microsoft_UI_Text_TextApiContract)
 @When[Microsoft_UI_Text == "on"]
@@ -1193,14 +2081,116 @@ public struct TextApiContract {
     public var reserved: Int32 = 0
 }
 
+// Microsoft.UI.Text.TextConstants (synthetic:Microsoft_UI_Text_TextConstants)
+@When[Microsoft_UI_Text == "on"]
+public struct TextConstants <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func AutoColor(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AutoColor(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MinUnitCount(): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinUnitCount(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MaxUnitCount(): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxUnitCount(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func UndefinedColor(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UndefinedColor(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func UndefinedFloatValue(): Float32 {
+        var result__ = 0.0f32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UndefinedFloatValue(CPointer<Float32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func UndefinedInt32Value(): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UndefinedInt32Value(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func UndefinedFontStretch(): Windows_UI_Text.FontStretch {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UndefinedFontStretch(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return Windows_UI_Text.FontStretch(result__)
+    }
+
+    public static func UndefinedFontStyle(): Windows_UI_Text.FontStyle {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TextConstants, ITextConstantsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UndefinedFontStyle(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return Windows_UI_Text.FontStyle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Text.TextConstants"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Text.TextConstants)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Text.TextConstants", TextConstants.signature())
+    }
+}
+
 // Microsoft.UI.Text.TextGetOptions (synthetic:Microsoft_UI_Text_TextGetOptions)
 @When[Microsoft_UI_Text == "on"]
 public struct TextGetOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: TextGetOptions): Bool {
@@ -1220,250 +2210,250 @@ public struct TextGetOptions {
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_None = TextGetOptions(0)
+public const TextGetOptions_None = TextGetOptions(0)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_AdjustCrlf = TextGetOptions(1)
+public const TextGetOptions_AdjustCrlf = TextGetOptions(1)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_UseCrlf = TextGetOptions(2)
+public const TextGetOptions_UseCrlf = TextGetOptions(2)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_UseObjectText = TextGetOptions(4)
+public const TextGetOptions_UseObjectText = TextGetOptions(4)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_AllowFinalEop = TextGetOptions(8)
+public const TextGetOptions_AllowFinalEop = TextGetOptions(8)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_NoHidden = TextGetOptions(32)
+public const TextGetOptions_NoHidden = TextGetOptions(32)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_IncludeNumbering = TextGetOptions(64)
+public const TextGetOptions_IncludeNumbering = TextGetOptions(64)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_FormatRtf = TextGetOptions(8192)
+public const TextGetOptions_FormatRtf = TextGetOptions(8192)
 @When[Microsoft_UI_Text == "on"]
-public let TextGetOptions_UseLf = TextGetOptions(16777216)
+public const TextGetOptions_UseLf = TextGetOptions(16777216)
 
 // Microsoft.UI.Text.TextRangeUnit (synthetic:Microsoft_UI_Text_TextRangeUnit)
 @When[Microsoft_UI_Text == "on"]
 public struct TextRangeUnit {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Character = TextRangeUnit(0)
+public const TextRangeUnit_Character = TextRangeUnit(0)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Word = TextRangeUnit(1)
+public const TextRangeUnit_Word = TextRangeUnit(1)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Sentence = TextRangeUnit(2)
+public const TextRangeUnit_Sentence = TextRangeUnit(2)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Paragraph = TextRangeUnit(3)
+public const TextRangeUnit_Paragraph = TextRangeUnit(3)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Line = TextRangeUnit(4)
+public const TextRangeUnit_Line = TextRangeUnit(4)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Story = TextRangeUnit(5)
+public const TextRangeUnit_Story = TextRangeUnit(5)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Screen = TextRangeUnit(6)
+public const TextRangeUnit_Screen = TextRangeUnit(6)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Section = TextRangeUnit(7)
+public const TextRangeUnit_Section = TextRangeUnit(7)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Window = TextRangeUnit(8)
+public const TextRangeUnit_Window = TextRangeUnit(8)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_CharacterFormat = TextRangeUnit(9)
+public const TextRangeUnit_CharacterFormat = TextRangeUnit(9)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_ParagraphFormat = TextRangeUnit(10)
+public const TextRangeUnit_ParagraphFormat = TextRangeUnit(10)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Object = TextRangeUnit(11)
+public const TextRangeUnit_Object = TextRangeUnit(11)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_HardParagraph = TextRangeUnit(12)
+public const TextRangeUnit_HardParagraph = TextRangeUnit(12)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Cluster = TextRangeUnit(13)
+public const TextRangeUnit_Cluster = TextRangeUnit(13)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Bold = TextRangeUnit(14)
+public const TextRangeUnit_Bold = TextRangeUnit(14)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Italic = TextRangeUnit(15)
+public const TextRangeUnit_Italic = TextRangeUnit(15)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Underline = TextRangeUnit(16)
+public const TextRangeUnit_Underline = TextRangeUnit(16)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Strikethrough = TextRangeUnit(17)
+public const TextRangeUnit_Strikethrough = TextRangeUnit(17)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_ProtectedText = TextRangeUnit(18)
+public const TextRangeUnit_ProtectedText = TextRangeUnit(18)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Link = TextRangeUnit(19)
+public const TextRangeUnit_Link = TextRangeUnit(19)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_SmallCaps = TextRangeUnit(20)
+public const TextRangeUnit_SmallCaps = TextRangeUnit(20)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_AllCaps = TextRangeUnit(21)
+public const TextRangeUnit_AllCaps = TextRangeUnit(21)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Hidden = TextRangeUnit(22)
+public const TextRangeUnit_Hidden = TextRangeUnit(22)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Outline = TextRangeUnit(23)
+public const TextRangeUnit_Outline = TextRangeUnit(23)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Shadow = TextRangeUnit(24)
+public const TextRangeUnit_Shadow = TextRangeUnit(24)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Imprint = TextRangeUnit(25)
+public const TextRangeUnit_Imprint = TextRangeUnit(25)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Disabled = TextRangeUnit(26)
+public const TextRangeUnit_Disabled = TextRangeUnit(26)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Revised = TextRangeUnit(27)
+public const TextRangeUnit_Revised = TextRangeUnit(27)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Subscript = TextRangeUnit(28)
+public const TextRangeUnit_Subscript = TextRangeUnit(28)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_Superscript = TextRangeUnit(29)
+public const TextRangeUnit_Superscript = TextRangeUnit(29)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_FontBound = TextRangeUnit(30)
+public const TextRangeUnit_FontBound = TextRangeUnit(30)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_LinkProtected = TextRangeUnit(31)
+public const TextRangeUnit_LinkProtected = TextRangeUnit(31)
 @When[Microsoft_UI_Text == "on"]
-public let TextRangeUnit_ContentLink = TextRangeUnit(32)
+public const TextRangeUnit_ContentLink = TextRangeUnit(32)
 
 // Microsoft.UI.Text.TextScript (synthetic:Microsoft_UI_Text_TextScript)
 @When[Microsoft_UI_Text == "on"]
 public struct TextScript {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Undefined = TextScript(0)
+public const TextScript_Undefined = TextScript(0)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Ansi = TextScript(1)
+public const TextScript_Ansi = TextScript(1)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_EastEurope = TextScript(2)
+public const TextScript_EastEurope = TextScript(2)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Cyrillic = TextScript(3)
+public const TextScript_Cyrillic = TextScript(3)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Greek = TextScript(4)
+public const TextScript_Greek = TextScript(4)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Turkish = TextScript(5)
+public const TextScript_Turkish = TextScript(5)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Hebrew = TextScript(6)
+public const TextScript_Hebrew = TextScript(6)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Arabic = TextScript(7)
+public const TextScript_Arabic = TextScript(7)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Baltic = TextScript(8)
+public const TextScript_Baltic = TextScript(8)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Vietnamese = TextScript(9)
+public const TextScript_Vietnamese = TextScript(9)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Default = TextScript(10)
+public const TextScript_Default = TextScript(10)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Symbol = TextScript(11)
+public const TextScript_Symbol = TextScript(11)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Thai = TextScript(12)
+public const TextScript_Thai = TextScript(12)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_ShiftJis = TextScript(13)
+public const TextScript_ShiftJis = TextScript(13)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_GB2312 = TextScript(14)
+public const TextScript_GB2312 = TextScript(14)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Hangul = TextScript(15)
+public const TextScript_Hangul = TextScript(15)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Big5 = TextScript(16)
+public const TextScript_Big5 = TextScript(16)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_PC437 = TextScript(17)
+public const TextScript_PC437 = TextScript(17)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Oem = TextScript(18)
+public const TextScript_Oem = TextScript(18)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Mac = TextScript(19)
+public const TextScript_Mac = TextScript(19)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Armenian = TextScript(20)
+public const TextScript_Armenian = TextScript(20)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Syriac = TextScript(21)
+public const TextScript_Syriac = TextScript(21)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Thaana = TextScript(22)
+public const TextScript_Thaana = TextScript(22)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Devanagari = TextScript(23)
+public const TextScript_Devanagari = TextScript(23)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Bengali = TextScript(24)
+public const TextScript_Bengali = TextScript(24)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Gurmukhi = TextScript(25)
+public const TextScript_Gurmukhi = TextScript(25)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Gujarati = TextScript(26)
+public const TextScript_Gujarati = TextScript(26)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Oriya = TextScript(27)
+public const TextScript_Oriya = TextScript(27)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Tamil = TextScript(28)
+public const TextScript_Tamil = TextScript(28)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Telugu = TextScript(29)
+public const TextScript_Telugu = TextScript(29)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Kannada = TextScript(30)
+public const TextScript_Kannada = TextScript(30)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Malayalam = TextScript(31)
+public const TextScript_Malayalam = TextScript(31)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Sinhala = TextScript(32)
+public const TextScript_Sinhala = TextScript(32)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Lao = TextScript(33)
+public const TextScript_Lao = TextScript(33)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Tibetan = TextScript(34)
+public const TextScript_Tibetan = TextScript(34)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Myanmar = TextScript(35)
+public const TextScript_Myanmar = TextScript(35)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Georgian = TextScript(36)
+public const TextScript_Georgian = TextScript(36)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Jamo = TextScript(37)
+public const TextScript_Jamo = TextScript(37)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Ethiopic = TextScript(38)
+public const TextScript_Ethiopic = TextScript(38)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Cherokee = TextScript(39)
+public const TextScript_Cherokee = TextScript(39)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Aboriginal = TextScript(40)
+public const TextScript_Aboriginal = TextScript(40)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Ogham = TextScript(41)
+public const TextScript_Ogham = TextScript(41)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Runic = TextScript(42)
+public const TextScript_Runic = TextScript(42)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Khmer = TextScript(43)
+public const TextScript_Khmer = TextScript(43)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Mongolian = TextScript(44)
+public const TextScript_Mongolian = TextScript(44)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Braille = TextScript(45)
+public const TextScript_Braille = TextScript(45)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Yi = TextScript(46)
+public const TextScript_Yi = TextScript(46)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Limbu = TextScript(47)
+public const TextScript_Limbu = TextScript(47)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_TaiLe = TextScript(48)
+public const TextScript_TaiLe = TextScript(48)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_NewTaiLue = TextScript(49)
+public const TextScript_NewTaiLue = TextScript(49)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_SylotiNagri = TextScript(50)
+public const TextScript_SylotiNagri = TextScript(50)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Kharoshthi = TextScript(51)
+public const TextScript_Kharoshthi = TextScript(51)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Kayahli = TextScript(52)
+public const TextScript_Kayahli = TextScript(52)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_UnicodeSymbol = TextScript(53)
+public const TextScript_UnicodeSymbol = TextScript(53)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Emoji = TextScript(54)
+public const TextScript_Emoji = TextScript(54)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Glagolitic = TextScript(55)
+public const TextScript_Glagolitic = TextScript(55)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Lisu = TextScript(56)
+public const TextScript_Lisu = TextScript(56)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Vai = TextScript(57)
+public const TextScript_Vai = TextScript(57)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_NKo = TextScript(58)
+public const TextScript_NKo = TextScript(58)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Osmanya = TextScript(59)
+public const TextScript_Osmanya = TextScript(59)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_PhagsPa = TextScript(60)
+public const TextScript_PhagsPa = TextScript(60)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Gothic = TextScript(61)
+public const TextScript_Gothic = TextScript(61)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Deseret = TextScript(62)
+public const TextScript_Deseret = TextScript(62)
 @When[Microsoft_UI_Text == "on"]
-public let TextScript_Tifinagh = TextScript(63)
+public const TextScript_Tifinagh = TextScript(63)
 
 // Microsoft.UI.Text.TextSetOptions (synthetic:Microsoft_UI_Text_TextSetOptions)
 @When[Microsoft_UI_Text == "on"]
 public struct TextSetOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: TextSetOptions): Bool {
@@ -1483,86 +2473,86 @@ public struct TextSetOptions {
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let TextSetOptions_None = TextSetOptions(0)
+public const TextSetOptions_None = TextSetOptions(0)
 @When[Microsoft_UI_Text == "on"]
-public let TextSetOptions_UnicodeBidi = TextSetOptions(1)
+public const TextSetOptions_UnicodeBidi = TextSetOptions(1)
 @When[Microsoft_UI_Text == "on"]
-public let TextSetOptions_Unlink = TextSetOptions(8)
+public const TextSetOptions_Unlink = TextSetOptions(8)
 @When[Microsoft_UI_Text == "on"]
-public let TextSetOptions_Unhide = TextSetOptions(16)
+public const TextSetOptions_Unhide = TextSetOptions(16)
 @When[Microsoft_UI_Text == "on"]
-public let TextSetOptions_CheckTextLimit = TextSetOptions(32)
+public const TextSetOptions_CheckTextLimit = TextSetOptions(32)
 @When[Microsoft_UI_Text == "on"]
-public let TextSetOptions_FormatRtf = TextSetOptions(8192)
+public const TextSetOptions_FormatRtf = TextSetOptions(8192)
 @When[Microsoft_UI_Text == "on"]
-public let TextSetOptions_ApplyRtfDocumentDefaults = TextSetOptions(16384)
+public const TextSetOptions_ApplyRtfDocumentDefaults = TextSetOptions(16384)
 
 // Microsoft.UI.Text.UnderlineType (synthetic:Microsoft_UI_Text_UnderlineType)
 @When[Microsoft_UI_Text == "on"]
 public struct UnderlineType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Undefined = UnderlineType(0)
+public const UnderlineType_Undefined = UnderlineType(0)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_None = UnderlineType(1)
+public const UnderlineType_None = UnderlineType(1)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Single = UnderlineType(2)
+public const UnderlineType_Single = UnderlineType(2)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Words = UnderlineType(3)
+public const UnderlineType_Words = UnderlineType(3)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Double = UnderlineType(4)
+public const UnderlineType_Double = UnderlineType(4)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Dotted = UnderlineType(5)
+public const UnderlineType_Dotted = UnderlineType(5)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Dash = UnderlineType(6)
+public const UnderlineType_Dash = UnderlineType(6)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_DashDot = UnderlineType(7)
+public const UnderlineType_DashDot = UnderlineType(7)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_DashDotDot = UnderlineType(8)
+public const UnderlineType_DashDotDot = UnderlineType(8)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Wave = UnderlineType(9)
+public const UnderlineType_Wave = UnderlineType(9)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Thick = UnderlineType(10)
+public const UnderlineType_Thick = UnderlineType(10)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_Thin = UnderlineType(11)
+public const UnderlineType_Thin = UnderlineType(11)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_DoubleWave = UnderlineType(12)
+public const UnderlineType_DoubleWave = UnderlineType(12)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_HeavyWave = UnderlineType(13)
+public const UnderlineType_HeavyWave = UnderlineType(13)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_LongDash = UnderlineType(14)
+public const UnderlineType_LongDash = UnderlineType(14)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_ThickDash = UnderlineType(15)
+public const UnderlineType_ThickDash = UnderlineType(15)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_ThickDashDot = UnderlineType(16)
+public const UnderlineType_ThickDashDot = UnderlineType(16)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_ThickDashDotDot = UnderlineType(17)
+public const UnderlineType_ThickDashDotDot = UnderlineType(17)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_ThickDotted = UnderlineType(18)
+public const UnderlineType_ThickDotted = UnderlineType(18)
 @When[Microsoft_UI_Text == "on"]
-public let UnderlineType_ThickLongDash = UnderlineType(19)
+public const UnderlineType_ThickLongDash = UnderlineType(19)
 
 // Microsoft.UI.Text.VerticalCharacterAlignment (synthetic:Microsoft_UI_Text_VerticalCharacterAlignment)
 @When[Microsoft_UI_Text == "on"]
 public struct VerticalCharacterAlignment {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Text == "on"]
-public let VerticalCharacterAlignment_Top = VerticalCharacterAlignment(0)
+public const VerticalCharacterAlignment_Top = VerticalCharacterAlignment(0)
 @When[Microsoft_UI_Text == "on"]
-public let VerticalCharacterAlignment_Baseline = VerticalCharacterAlignment(1)
+public const VerticalCharacterAlignment_Baseline = VerticalCharacterAlignment(1)
 @When[Microsoft_UI_Text == "on"]
-public let VerticalCharacterAlignment_Bottom = VerticalCharacterAlignment(2)
+public const VerticalCharacterAlignment_Bottom = VerticalCharacterAlignment(2)

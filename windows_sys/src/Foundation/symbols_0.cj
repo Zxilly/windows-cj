@@ -177,6 +177,348 @@ func buildAsyncActionCompletedHandlerBoxVtbl(): AsyncActionCompletedHandlerVtbl 
 }
 
 
+// Windows.Foundation.AsyncActionProgressHandler`1 (synthetic:Windows_Foundation_AsyncActionProgressHandler_1)
+@When[Windows_Foundation == "on"]
+@C
+public struct AsyncActionProgressHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+@When[Windows_Foundation == "on"]
+public open class AsyncActionProgressHandler<TProgress> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<AsyncActionProgressHandler<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncActionProgressHandler<TProgress> {
+        OwnedAsyncActionProgressHandler<TProgress>(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncActionProgressHandler<TProgress> {
+        AsyncActionProgressHandler<TProgress>(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_signature(AsyncActionProgressHandler<TProgress>.signature())
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AsyncActionProgressHandler<TProgress>> {
+        windows_interface.InterfaceDescriptor<AsyncActionProgressHandler<TProgress>>("Windows.Foundation.AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), [windows_interface.IUnknown.iid()], { raw => AsyncActionProgressHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionProgressHandler<TProgress>.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.iid(), windows_interface.IUnknown.descriptorSchema(), "AsyncActionProgressHandlerVtbl", "AsyncActionProgressHandler", "AsyncActionProgressHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("progressInfo", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(AsyncActionProgressHandler<TProgress>.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        var sb = StringBuilder()
+        sb.append("pinterface({6d844858-0cff-4590-ae89-95a5a5c8b4b8}")
+        sb.append(";")
+        sb.append(TProgress.signature())
+        sb.append(")")
+        return sb.toString()
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.AsyncActionProgressHandler", AsyncActionProgressHandler<TProgress>.signature(), AsyncActionProgressHandler<TProgress>.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = AsyncActionProgressHandler<TProgress>.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): AsyncActionProgressHandlerVtbl {
+        readVtbl<AsyncActionProgressHandlerVtbl>(AsyncActionProgressHandlerVtbl())
+    }
+
+    public unsafe func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, asyncInfo, progressInfo)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): AsyncActionProgressHandler<TProgress> {
+        let box = AsyncActionProgressHandlerBox<TProgress>(invoke)
+        let object = windows_core.ComObject<AsyncActionProgressHandlerBox<TProgress>>.new(box, [AsyncActionProgressHandler<TProgress>.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(AsyncActionProgressHandler<TProgress>.descriptor())
+    }
+}
+
+@When[Windows_Foundation == "on"]
+private class OwnedAsyncActionProgressHandler<TProgress> <: AsyncActionProgressHandler<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+@When[Windows_Foundation == "on"]
+public interface AsyncActionProgressHandlerInvokerErased {
+    func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Int32
+}
+
+@When[Windows_Foundation == "on"]
+public interface AsyncActionProgressHandlerInvoker<TProgress> <: AsyncActionProgressHandlerInvokerErased where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(asyncInfo, progressInfo)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+@When[Windows_Foundation == "on"]
+private class AsyncActionProgressHandlerBox<TProgress> <: AsyncActionProgressHandlerInvoker<TProgress> & Resource where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<AsyncActionProgressHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncActionProgressHandlerVtbl>(buildAsyncActionProgressHandlerBoxVtbl<TProgress>()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
+        invoke_(asyncInfo, progressInfo)
+    }
+}
+
+@When[Windows_Foundation == "on"]
+func buildAsyncActionProgressHandlerBoxVtbl<TProgress>(): AsyncActionProgressHandlerVtbl where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    var vtbl = AsyncActionProgressHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<AsyncActionProgressHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(asyncInfo, progressInfo)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Windows.Foundation.AsyncActionWithProgressCompletedHandler`1 (synthetic:Windows_Foundation_AsyncActionWithProgressCompletedHandler_1)
+@When[Windows_Foundation == "on"]
+@C
+public struct AsyncActionWithProgressCompletedHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+@When[Windows_Foundation == "on"]
+public open class AsyncActionWithProgressCompletedHandler<TProgress> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<AsyncActionWithProgressCompletedHandler<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AsyncActionWithProgressCompletedHandler<TProgress> {
+        OwnedAsyncActionWithProgressCompletedHandler<TProgress>(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AsyncActionWithProgressCompletedHandler<TProgress> {
+        AsyncActionWithProgressCompletedHandler<TProgress>(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_signature(AsyncActionWithProgressCompletedHandler<TProgress>.signature())
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>> {
+        windows_interface.InterfaceDescriptor<AsyncActionWithProgressCompletedHandler<TProgress>>("Windows.Foundation.AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), [windows_interface.IUnknown.iid()], { raw => AsyncActionWithProgressCompletedHandler<TProgress>.fromAbiTake(raw) }, { raw => AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.iid(), windows_interface.IUnknown.descriptorSchema(), "AsyncActionWithProgressCompletedHandlerVtbl", "AsyncActionWithProgressCompletedHandler", "AsyncActionWithProgressCompletedHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("asyncInfo", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("asyncStatus", "Int32", "Int32", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(AsyncActionWithProgressCompletedHandler<TProgress>.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        var sb = StringBuilder()
+        sb.append("pinterface({9c029f91-cc84-44fd-ac26-0a6c4e555281}")
+        sb.append(";")
+        sb.append(TProgress.signature())
+        sb.append(")")
+        return sb.toString()
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.AsyncActionWithProgressCompletedHandler", AsyncActionWithProgressCompletedHandler<TProgress>.signature(), AsyncActionWithProgressCompletedHandler<TProgress>.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = AsyncActionWithProgressCompletedHandler<TProgress>.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): AsyncActionWithProgressCompletedHandlerVtbl {
+        readVtbl<AsyncActionWithProgressCompletedHandlerVtbl>(AsyncActionWithProgressCompletedHandlerVtbl())
+    }
+
+    public unsafe func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, asyncInfo, asyncStatus)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, Int32) -> Unit): AsyncActionWithProgressCompletedHandler<TProgress> {
+        let box = AsyncActionWithProgressCompletedHandlerBox<TProgress>(invoke)
+        let object = windows_core.ComObject<AsyncActionWithProgressCompletedHandlerBox<TProgress>>.new(box, [AsyncActionWithProgressCompletedHandler<TProgress>.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(AsyncActionWithProgressCompletedHandler<TProgress>.descriptor())
+    }
+}
+
+@When[Windows_Foundation == "on"]
+private class OwnedAsyncActionWithProgressCompletedHandler<TProgress> <: AsyncActionWithProgressCompletedHandler<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+@When[Windows_Foundation == "on"]
+public interface AsyncActionWithProgressCompletedHandlerInvokerErased {
+    func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32
+}
+
+@When[Windows_Foundation == "on"]
+public interface AsyncActionWithProgressCompletedHandlerInvoker<TProgress> <: AsyncActionWithProgressCompletedHandlerInvokerErased where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32 {
+        try {
+            this.Invoke(asyncInfo, asyncStatus)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+@When[Windows_Foundation == "on"]
+private class AsyncActionWithProgressCompletedHandlerBox<TProgress> <: AsyncActionWithProgressCompletedHandlerInvoker<TProgress> & Resource where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public let invoke_: (CPointer<Unit>, Int32) -> Unit
+    private let vtblHandle: CPointer<AsyncActionWithProgressCompletedHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, Int32) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<AsyncActionWithProgressCompletedHandlerVtbl>(buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Unit {
+        invoke_(asyncInfo, asyncStatus)
+    }
+}
+
+@When[Windows_Foundation == "on"]
+func buildAsyncActionWithProgressCompletedHandlerBoxVtbl<TProgress>(): AsyncActionWithProgressCompletedHandlerVtbl where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    var vtbl = AsyncActionWithProgressCompletedHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, asyncInfo: CPointer<Unit>, asyncStatus: Int32 =>
+        match (unsafe { windows_core.asImplFromRaw<AsyncActionWithProgressCompletedHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(asyncInfo, asyncStatus)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
 // Windows.Foundation.AsyncOperationCompletedHandler`1 (synthetic:Windows_Foundation_AsyncOperationCompletedHandler_1)
 @When[Windows_Foundation == "on"]
 @C
@@ -698,21 +1040,21 @@ func buildAsyncOperationWithProgressCompletedHandlerBoxVtbl<TResult, TProgress>(
 @When[Windows_Foundation == "on"]
 public struct AsyncStatus {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Foundation == "on"]
-public let AsyncStatus_Canceled = AsyncStatus(2)
+public const AsyncStatus_Canceled = AsyncStatus(2)
 @When[Windows_Foundation == "on"]
-public let AsyncStatus_Completed = AsyncStatus(1)
+public const AsyncStatus_Completed = AsyncStatus(1)
 @When[Windows_Foundation == "on"]
-public let AsyncStatus_Error = AsyncStatus(3)
+public const AsyncStatus_Error = AsyncStatus(3)
 @When[Windows_Foundation == "on"]
-public let AsyncStatus_Started = AsyncStatus(0)
+public const AsyncStatus_Started = AsyncStatus(0)
 
 // Windows.Foundation.DateTime (synthetic:Windows_Foundation_DateTime)
 @When[Windows_Foundation == "on"]
@@ -1175,6 +1517,58 @@ public struct FoundationContract {
     public var reserved: Int32 = 0
 }
 
+// Windows.Foundation.GuidHelper (synthetic:Windows_Foundation_GuidHelper)
+@When[Windows_Foundation == "on"]
+public struct GuidHelper <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CreateNewGuid(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GuidHelper, IGuidHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateNewGuid(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func Empty(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GuidHelper, IGuidHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Empty(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func Equals(target: CPointer<Unit>, value: CPointer<Unit>): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GuidHelper, IGuidHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Equals(target, value, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.GuidHelper"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Foundation.GuidHelper)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.GuidHelper", GuidHelper.signature())
+    }
+}
+
 // Windows.Foundation.HResult (synthetic:Windows_Foundation_HResult)
 @When[Windows_Foundation == "on"]
 public type HResult = Int32
@@ -1187,6 +1581,320 @@ public interface IAsyncAction <: IInspectable {
     func Completed(handler: CPointer<CPointer<Unit>>): Int32
     func GetResults(): Int32
 }
+
+// Windows.Foundation.IAsyncActionWithProgress`1 (synthetic:Windows_Foundation_IAsyncActionWithProgress_1)
+@When[Windows_Foundation == "on"]
+type IAsyncActionWithProgressExceptionBase = Exception
+
+@When[Windows_Foundation == "on"]
+@C
+public struct IAsyncActionWithProgressVtbl {
+    public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    public var SetProgress: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var SetCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var GetResults: CFunc<(CPointer<Unit>) -> Int32> = { _ => windows_core.E_NOTIMPL.value }
+
+    public init() {}
+
+    public static func new(offset!: Int64 = 0): IAsyncActionWithProgressVtbl {
+        let _ = offset
+        var vtbl = IAsyncActionWithProgressVtbl()
+        vtbl.base_ = windows_core.buildIInspectableVtbl()
+        vtbl.SetProgress = { instanceRaw, handler =>
+            match (unsafe { windows_core.asImplFromRaw<IAsyncActionWithProgress_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.SetProgress(handler)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: IAsyncActionWithProgressExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
+            }
+        }
+        vtbl.Progress = { instanceRaw, result =>
+            match (unsafe { windows_core.asImplFromRaw<IAsyncActionWithProgress_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Progress(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: IAsyncActionWithProgressExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
+            }
+        }
+        vtbl.SetCompleted = { instanceRaw, handler =>
+            match (unsafe { windows_core.asImplFromRaw<IAsyncActionWithProgress_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.SetCompleted(handler)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: IAsyncActionWithProgressExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
+            }
+        }
+        vtbl.Completed = { instanceRaw, result =>
+            match (unsafe { windows_core.asImplFromRaw<IAsyncActionWithProgress_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Completed(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: IAsyncActionWithProgressExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
+            }
+        }
+        vtbl.GetResults = { instanceRaw =>
+            match (unsafe { windows_core.asImplFromRaw<IAsyncActionWithProgress_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.GetResults()
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: IAsyncActionWithProgressExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
+            }
+        }
+        vtbl
+    }
+}
+
+@When[Windows_Foundation == "on"]
+public interface IAsyncActionWithProgress_ImplErased {
+    func SetProgress(handler: CPointer<Unit>): Int32
+    func Progress(result: CPointer<CPointer<Unit>>): Int32
+    func SetCompleted(handler: CPointer<Unit>): Int32
+    func Completed(result: CPointer<CPointer<Unit>>): Int32
+    func GetResults(): Int32
+    func releaseTProgressArrayOut(data: CPointer<Unit>, length: UInt32): Unit
+}
+
+@When[Windows_Foundation == "on"]
+public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncActionWithProgress_ImplErased where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    func releaseTProgressArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
+        windows_core.winrtReleaseGenericArrayOut<TProgress>(data, length)
+    }
+}
+
+@When[Windows_Foundation == "on"]
+public open class IAsyncActionWithProgress<TProgress> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<IAsyncActionWithProgress<TProgress>> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IAsyncActionWithProgress<TProgress> {
+        OwnedIAsyncActionWithProgress<TProgress>(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IAsyncActionWithProgress<TProgress> {
+        IAsyncActionWithProgress<TProgress>(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_signature(IAsyncActionWithProgress<TProgress>.signature())
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<IAsyncActionWithProgress<TProgress>> {
+        var descriptor = windows_interface.InterfaceDescriptor<IAsyncActionWithProgress<TProgress>>("Windows.Foundation.IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => IAsyncActionWithProgress<TProgress>.fromAbiTake(raw) }, { raw => IAsyncActionWithProgress<TProgress>.viewOf(raw) }, ownMethodCount: 5)
+        descriptor.runtimeTypeContract = Some(IAsyncActionWithProgress<TProgress>.runtimeType())
+        return descriptor
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), windows_interface.IInspectable.descriptorSchema(), "IAsyncActionWithProgressVtbl", "IAsyncActionWithProgress", "IAsyncActionWithProgress_Impl", [windows_interface.InterfaceMethodSchema("SetProgress", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Progress", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncActionProgressHandler<TProgress>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("SetCompleted", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Completed", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<AsyncActionWithProgressCompletedHandler<TProgress>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("GetResults", Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema("", "", "", windows_interface.InterfaceParameterBridgeKind.Value) }), "Int32")])
+        schema.runtimeTypeContract = Some(IAsyncActionWithProgress<TProgress>.runtimeType())
+        return schema
+    }
+
+    public static let VTABLE: IAsyncActionWithProgressVtbl = IAsyncActionWithProgressVtbl.new()
+
+    public static let VTABLE_HANDLE: CPointer<IAsyncActionWithProgressVtbl> = unsafe { windows_interface.allocateNativeValue<IAsyncActionWithProgressVtbl>(VTABLE) }
+
+    public static func vtablePtr(): CPointer<Unit> {
+        CPointer<Unit>(VTABLE_HANDLE)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        var sb = StringBuilder()
+        sb.append("pinterface({1f6db258-e803-48a1-9546-eb7353398884}")
+        sb.append(";")
+        sb.append(TProgress.signature())
+        sb.append(")")
+        return sb.toString()
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.IAsyncActionWithProgress"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.signature(), IAsyncActionWithProgress<TProgress>.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = IAsyncActionWithProgress<TProgress>.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public unsafe func vtbl(): IAsyncActionWithProgressVtbl {
+        readVtbl<IAsyncActionWithProgressVtbl>(IAsyncActionWithProgressVtbl())
+    }
+
+    public unsafe func SetProgress(handler: CPointer<Unit>): windows_core.HRESULT {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return windows_core.E_POINTER
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.SetProgress(liveRaw, handler))
+    }
+
+    public unsafe func Progress(result: CPointer<CPointer<Unit>>): windows_core.HRESULT {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return windows_core.E_POINTER
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Progress(liveRaw, result))
+    }
+
+    public unsafe func SetCompleted(handler: CPointer<Unit>): windows_core.HRESULT {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return windows_core.E_POINTER
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.SetCompleted(liveRaw, handler))
+    }
+
+    public unsafe func Completed(result: CPointer<CPointer<Unit>>): windows_core.HRESULT {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return windows_core.E_POINTER
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Completed(liveRaw, result))
+    }
+
+    public unsafe func GetResults(): windows_core.HRESULT {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return windows_core.E_POINTER
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.GetResults(liveRaw))
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+}
+
+@When[Windows_Foundation == "on"]
+private class OwnedIAsyncActionWithProgress<TProgress> <: IAsyncActionWithProgress<TProgress> where TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
 
 // Windows.Foundation.IAsyncInfo (synthetic:Windows_Foundation_IAsyncInfo)
 @When[Windows_Foundation == "on"]
@@ -1834,11 +2542,34 @@ public interface IDeferralFactory <: IInspectable {
     func Create(handler: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
+// Windows.Foundation.IGetActivationFactory (synthetic:Windows_Foundation_IGetActivationFactory)
+@When[Windows_Foundation == "on"]
+@Interface["4edb8ee2-96dd-49a7-94f7-4607ddab8e3c", "Windows.Foundation.IGetActivationFactory", "GetActivationFactory.factory=Com"]
+public interface IGetActivationFactory <: IInspectable {
+    func GetActivationFactory(activatableClassId: CPointer<Unit>, factory: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Foundation.IGuidHelperStatics (synthetic:Windows_Foundation_IGuidHelperStatics)
+@When[Windows_Foundation == "on"]
+@Interface["59c7966b-ae52-5283-ad7f-a1b9e9678add", "Windows.Foundation.IGuidHelperStatics"]
+public interface IGuidHelperStatics <: IInspectable {
+    func CreateNewGuid(result: CPointer<GUID>): Int32
+    func Empty(value: CPointer<GUID>): Int32
+    func Equals(target: CPointer<Unit>, value: CPointer<Unit>, result: CPointer<Bool>): Int32
+}
+
 // Windows.Foundation.IMemoryBuffer (synthetic:Windows_Foundation_IMemoryBuffer)
 @When[Windows_Foundation == "on"]
 @Interface["fbc4dd2a-245b-11e4-af98-689423260cf8", "Windows.Foundation.IMemoryBuffer", "CreateReference.reference=Com"]
 public interface IMemoryBuffer <: IInspectable {
     func CreateReference(reference: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Foundation.IMemoryBufferFactory (synthetic:Windows_Foundation_IMemoryBufferFactory)
+@When[Windows_Foundation == "on"]
+@Interface["fbc4dd2b-245b-11e4-af98-689423260cf8", "Windows.Foundation.IMemoryBufferFactory", "Create.value=Com"]
+public interface IMemoryBufferFactory <: IInspectable {
+    func Create(capacity: UInt32, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IMemoryBufferReference (synthetic:Windows_Foundation_IMemoryBufferReference)
@@ -1894,6 +2625,289 @@ public interface IPropertyValue <: IInspectable {
     func GetSizeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Size>>): Int32
     func GetRectArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Rect>>): Int32
 }
+
+// Windows.Foundation.IPropertyValueStatics (synthetic:Windows_Foundation_IPropertyValueStatics)
+@When[Windows_Foundation == "on"]
+@Interface["629bdbc8-d932-4ff4-96b9-8d96c5c1e858", "Windows.Foundation.IPropertyValueStatics", "CreateEmpty.propertyValue=Com;CreateUInt8.propertyValue=Com;CreateInt16.propertyValue=Com;CreateUInt16.propertyValue=Com;CreateInt32.propertyValue=Com;CreateUInt32.propertyValue=Com;CreateInt64.propertyValue=Com;CreateUInt64.propertyValue=Com;CreateSingle.propertyValue=Com;CreateDouble.propertyValue=Com;CreateChar16.propertyValue=Com;CreateBoolean.propertyValue=Com;CreateString.propertyValue=Com;CreateInspectable.propertyValue=Com;CreateGuid.propertyValue=Com;CreateDateTime.propertyValue=Com;CreateTimeSpan.propertyValue=Com;CreatePoint.propertyValue=Com;CreateSize.propertyValue=Com;CreateRect.propertyValue=Com;CreateUInt8Array.propertyValue=Com;CreateInt16Array.propertyValue=Com;CreateUInt16Array.propertyValue=Com;CreateInt32Array.propertyValue=Com;CreateUInt32Array.propertyValue=Com;CreateInt64Array.propertyValue=Com;CreateUInt64Array.propertyValue=Com;CreateSingleArray.propertyValue=Com;CreateDoubleArray.propertyValue=Com;CreateChar16Array.propertyValue=Com;CreateBooleanArray.propertyValue=Com;CreateStringArray.propertyValue=Com;CreateInspectableArray.propertyValue=Com;CreateGuidArray.propertyValue=Com;CreateDateTimeArray.propertyValue=Com;CreateTimeSpanArray.propertyValue=Com;CreatePointArray.propertyValue=Com;CreateSizeArray.propertyValue=Com;CreateRectArray.propertyValue=Com"]
+public interface IPropertyValueStatics <: IInspectable {
+    func CreateEmpty(propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt8(value: UInt8, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInt16(value: Int16, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt16(value: UInt16, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInt32(value: Int32, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt32(value: UInt32, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInt64(value: Int64, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt64(value: UInt64, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateSingle(value: Float32, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateDouble(value: Float64, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateChar16(value: UInt16, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateBoolean(value: Bool, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateString(value: CPointer<Unit>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInspectable(value: CPointer<Unit>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateGuid(value: GUID, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateDateTime(value: DateTime, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateTimeSpan(value: TimeSpan, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreatePoint(value: Point, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateSize(value: Size, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateRect(value: Rect, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt8Array(valueSize: UInt32, value: CPointer<UInt8>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInt16Array(valueSize: UInt32, value: CPointer<Int16>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt16Array(valueSize: UInt32, value: CPointer<UInt16>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInt32Array(valueSize: UInt32, value: CPointer<Int32>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt32Array(valueSize: UInt32, value: CPointer<UInt32>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInt64Array(valueSize: UInt32, value: CPointer<Int64>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateUInt64Array(valueSize: UInt32, value: CPointer<UInt64>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateSingleArray(valueSize: UInt32, value: CPointer<Float32>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateDoubleArray(valueSize: UInt32, value: CPointer<Float64>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateChar16Array(valueSize: UInt32, value: CPointer<UInt16>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateBooleanArray(valueSize: UInt32, value: CPointer<Bool>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateStringArray(valueSize: UInt32, value: CPointer<CPointer<Unit>>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateInspectableArray(valueSize: UInt32, value: CPointer<CPointer<Unit>>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateGuidArray(valueSize: UInt32, value: CPointer<GUID>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateDateTimeArray(valueSize: UInt32, value: CPointer<DateTime>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateTimeSpanArray(valueSize: UInt32, value: CPointer<TimeSpan>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreatePointArray(valueSize: UInt32, value: CPointer<Point>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateSizeArray(valueSize: UInt32, value: CPointer<Size>, propertyValue: CPointer<CPointer<Unit>>): Int32
+    func CreateRectArray(valueSize: UInt32, value: CPointer<Rect>, propertyValue: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Foundation.IReferenceArray`1 (synthetic:Windows_Foundation_IReferenceArray_1)
+@When[Windows_Foundation == "on"]
+type IReferenceArrayExceptionBase = Exception
+
+@When[Windows_Foundation == "on"]
+@C
+public struct IReferenceArrayVtbl {
+    public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
+    public var Value: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, resultSize, result =>
+        if (resultSize.isNotNull()) {
+            unsafe { resultSize.write(0u32) }
+        }
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<CPointer<Unit>>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+
+    public init() {}
+
+    public static func new(offset!: Int64 = 0): IReferenceArrayVtbl {
+        let _ = offset
+        var vtbl = IReferenceArrayVtbl()
+        vtbl.base_ = windows_core.buildIInspectableVtbl()
+        vtbl.Value = { instanceRaw, resultSize, result =>
+            match (unsafe { windows_core.asImplFromRaw<IReferenceArray_ImplErased>(instanceRaw) }) {
+                case Some(impl) =>
+                    if (resultSize.isNull() || result.isNull()) {
+                        if (resultSize.isNotNull()) {
+                            unsafe { resultSize.write(0u32) }
+                        }
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (resultSize.isNotNull()) {
+                            unsafe { resultSize.write(0u32) }
+                        }
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Value(resultSize, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    var rawSize__ = 0u32
+                                    if (resultSize.isNotNull()) {
+                                        rawSize__ = unsafe { resultSize.read() }
+                                    }
+                                    let rawArray__ = unsafe { result.read() }
+                                    if (rawArray__.isNotNull()) {
+                                        impl.releaseTArrayOut(CPointer<Unit>(rawArray__), rawSize__)
+                                    }
+                                    unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                                }
+                                if (resultSize.isNotNull()) {
+                                    unsafe { resultSize.write(0u32) }
+                                }
+                                if (resultSize.isNotNull()) {
+                                    unsafe { resultSize.write(0u32) }
+                                }
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                var rawSize__ = 0u32
+                                if (resultSize.isNotNull()) {
+                                    rawSize__ = unsafe { resultSize.read() }
+                                }
+                                let rawArray__ = unsafe { result.read() }
+                                if (rawArray__.isNotNull()) {
+                                    impl.releaseTArrayOut(CPointer<Unit>(rawArray__), rawSize__)
+                                }
+                                unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                            }
+                            if (resultSize.isNotNull()) {
+                                unsafe { resultSize.write(0u32) }
+                            }
+                            if (resultSize.isNotNull()) {
+                                unsafe { resultSize.write(0u32) }
+                            }
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                            }
+                            error.code().value
+                        } catch (_: IReferenceArrayExceptionBase) {
+                            if (result.isNotNull()) {
+                                var rawSize__ = 0u32
+                                if (resultSize.isNotNull()) {
+                                    rawSize__ = unsafe { resultSize.read() }
+                                }
+                                let rawArray__ = unsafe { result.read() }
+                                if (rawArray__.isNotNull()) {
+                                    impl.releaseTArrayOut(CPointer<Unit>(rawArray__), rawSize__)
+                                }
+                                unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                            }
+                            if (resultSize.isNotNull()) {
+                                unsafe { resultSize.write(0u32) }
+                            }
+                            if (resultSize.isNotNull()) {
+                                unsafe { resultSize.write(0u32) }
+                            }
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (resultSize.isNotNull()) {
+                        unsafe { resultSize.write(0u32) }
+                    }
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<CPointer<Unit>>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
+            }
+        }
+        vtbl
+    }
+}
+
+@When[Windows_Foundation == "on"]
+public interface IReferenceArray_ImplErased {
+    func Value(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit
+}
+
+@When[Windows_Foundation == "on"]
+public interface IReferenceArray_Impl<T> <: IReferenceArray_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
+        windows_core.winrtReleaseGenericArrayOut<T>(data, length)
+    }
+}
+
+@When[Windows_Foundation == "on"]
+public open class IReferenceArray<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<IReferenceArray<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IReferenceArray<T> {
+        OwnedIReferenceArray<T>(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IReferenceArray<T> {
+        IReferenceArray<T>(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_signature(IReferenceArray<T>.signature())
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<IReferenceArray<T>> {
+        var descriptor = windows_interface.InterfaceDescriptor<IReferenceArray<T>>("Windows.Foundation.IReferenceArray", IReferenceArray<T>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => IReferenceArray<T>.fromAbiTake(raw) }, { raw => IReferenceArray<T>.viewOf(raw) }, ownMethodCount: 1)
+        descriptor.runtimeTypeContract = Some(IReferenceArray<T>.runtimeType())
+        return descriptor
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IReferenceArray", IReferenceArray<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "IReferenceArrayVtbl", "IReferenceArray", "IReferenceArray_Impl", [windows_interface.InterfaceMethodSchema("Value", [windows_interface.InterfaceParameterSchema("resultSize", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<CPointer<Unit>>>", "CPointer<CPointer<CPointer<Unit>>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(IReferenceArray<T>.runtimeType())
+        return schema
+    }
+
+    public static let VTABLE: IReferenceArrayVtbl = IReferenceArrayVtbl.new()
+
+    public static let VTABLE_HANDLE: CPointer<IReferenceArrayVtbl> = unsafe { windows_interface.allocateNativeValue<IReferenceArrayVtbl>(VTABLE) }
+
+    public static func vtablePtr(): CPointer<Unit> {
+        CPointer<Unit>(VTABLE_HANDLE)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        var sb = StringBuilder()
+        sb.append("pinterface({61c17707-2d65-11e0-9ae8-d48564015472}")
+        sb.append(";")
+        sb.append(T.signature())
+        sb.append(")")
+        return sb.toString()
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.IReferenceArray"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.IReferenceArray", IReferenceArray<T>.signature(), IReferenceArray<T>.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = IReferenceArray<T>.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public unsafe func vtbl(): IReferenceArrayVtbl {
+        readVtbl<IReferenceArrayVtbl>(IReferenceArrayVtbl())
+    }
+
+    public unsafe func Value(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): windows_core.HRESULT {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            return windows_core.E_POINTER
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Value(liveRaw, resultSize, result))
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+}
+
+@When[Windows_Foundation == "on"]
+private class OwnedIReferenceArray<T> <: IReferenceArray<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
 
 // Windows.Foundation.IReference`1 (synthetic:Windows_Foundation_IReference_1)
 @When[Windows_Foundation == "on"]
@@ -2149,6 +3163,116 @@ public interface IWwwFormUrlDecoderRuntimeClassFactory <: IInspectable {
     func CreateWwwFormUrlDecoder(query: CPointer<Unit>, instance: CPointer<CPointer<Unit>>): Int32
 }
 
+// Windows.Foundation.MemoryBuffer (synthetic:Windows_Foundation_MemoryBuffer)
+@When[Windows_Foundation == "on"]
+public class MemoryBuffer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MemoryBuffer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MemoryBuffer {
+        MemoryBuffer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MemoryBuffer {
+        MemoryBuffer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMemoryBuffer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MemoryBuffer> {
+        let ancestors = [IMemoryBuffer.iid(), IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MemoryBuffer>("MemoryBuffer", IMemoryBuffer.iid(), ancestors, { raw => MemoryBuffer.fromAbiTake(raw) }, { raw => MemoryBuffer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMemoryBuffer {
+        match (unsafe { query(IMemoryBuffer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMemoryBuffer(): IMemoryBuffer {
+        defaultInterface()
+    }
+
+    public func asIClosable(): IClosable {
+        match (unsafe { query<IClosable>(IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func CreateReference(): IMemoryBufferReference {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CreateReference(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IMemoryBufferReference>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IMemoryBufferReference.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Create(capacity: UInt32): MemoryBuffer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<MemoryBuffer, IMemoryBufferFactory>().unwrap()) {
+            hr__ = unsafe { factory__.Create(capacity, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MemoryBuffer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return MemoryBuffer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.MemoryBuffer"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Foundation.MemoryBuffer;{" + IMemoryBuffer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.MemoryBuffer", MemoryBuffer.signature(), IMemoryBuffer.iid())
+    }
+
+    public static func intoWinrtHandle(value: MemoryBuffer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MemoryBuffer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MemoryBuffer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MemoryBuffer {
+        MemoryBuffer.viewOf(raw)
+    }
+}
+
 // Windows.Foundation.Point (synthetic:Windows_Foundation_Point)
 @When[Windows_Foundation == "on"]
 @C
@@ -2161,95 +3285,838 @@ public struct Point {
 @When[Windows_Foundation == "on"]
 public struct PropertyType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Foundation == "on"]
-public let PropertyType_Empty = PropertyType(0)
+public const PropertyType_Empty = PropertyType(0)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt8_ = PropertyType(1)
+public const PropertyType_UInt8_ = PropertyType(1)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Int16_ = PropertyType(2)
+public const PropertyType_Int16_ = PropertyType(2)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt16_ = PropertyType(3)
+public const PropertyType_UInt16_ = PropertyType(3)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Int32_ = PropertyType(4)
+public const PropertyType_Int32_ = PropertyType(4)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt32_ = PropertyType(5)
+public const PropertyType_UInt32_ = PropertyType(5)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Int64_ = PropertyType(6)
+public const PropertyType_Int64_ = PropertyType(6)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt64_ = PropertyType(7)
+public const PropertyType_UInt64_ = PropertyType(7)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Single = PropertyType(8)
+public const PropertyType_Single = PropertyType(8)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Double = PropertyType(9)
+public const PropertyType_Double = PropertyType(9)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Char16 = PropertyType(10)
+public const PropertyType_Char16 = PropertyType(10)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Boolean = PropertyType(11)
+public const PropertyType_Boolean = PropertyType(11)
 @When[Windows_Foundation == "on"]
-public let PropertyType_String_ = PropertyType(12)
+public const PropertyType_String_ = PropertyType(12)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Inspectable = PropertyType(13)
+public const PropertyType_Inspectable = PropertyType(13)
 @When[Windows_Foundation == "on"]
-public let PropertyType_DateTime = PropertyType(14)
+public const PropertyType_DateTime = PropertyType(14)
 @When[Windows_Foundation == "on"]
-public let PropertyType_TimeSpan = PropertyType(15)
+public const PropertyType_TimeSpan = PropertyType(15)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Guid = PropertyType(16)
+public const PropertyType_Guid = PropertyType(16)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Point = PropertyType(17)
+public const PropertyType_Point = PropertyType(17)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Size = PropertyType(18)
+public const PropertyType_Size = PropertyType(18)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Rect = PropertyType(19)
+public const PropertyType_Rect = PropertyType(19)
 @When[Windows_Foundation == "on"]
-public let PropertyType_OtherType = PropertyType(20)
+public const PropertyType_OtherType = PropertyType(20)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt8Array = PropertyType(1025)
+public const PropertyType_UInt8Array = PropertyType(1025)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Int16Array = PropertyType(1026)
+public const PropertyType_Int16Array = PropertyType(1026)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt16Array = PropertyType(1027)
+public const PropertyType_UInt16Array = PropertyType(1027)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Int32Array = PropertyType(1028)
+public const PropertyType_Int32Array = PropertyType(1028)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt32Array = PropertyType(1029)
+public const PropertyType_UInt32Array = PropertyType(1029)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Int64Array = PropertyType(1030)
+public const PropertyType_Int64Array = PropertyType(1030)
 @When[Windows_Foundation == "on"]
-public let PropertyType_UInt64Array = PropertyType(1031)
+public const PropertyType_UInt64Array = PropertyType(1031)
 @When[Windows_Foundation == "on"]
-public let PropertyType_SingleArray = PropertyType(1032)
+public const PropertyType_SingleArray = PropertyType(1032)
 @When[Windows_Foundation == "on"]
-public let PropertyType_DoubleArray = PropertyType(1033)
+public const PropertyType_DoubleArray = PropertyType(1033)
 @When[Windows_Foundation == "on"]
-public let PropertyType_Char16Array = PropertyType(1034)
+public const PropertyType_Char16Array = PropertyType(1034)
 @When[Windows_Foundation == "on"]
-public let PropertyType_BooleanArray = PropertyType(1035)
+public const PropertyType_BooleanArray = PropertyType(1035)
 @When[Windows_Foundation == "on"]
-public let PropertyType_StringArray = PropertyType(1036)
+public const PropertyType_StringArray = PropertyType(1036)
 @When[Windows_Foundation == "on"]
-public let PropertyType_InspectableArray = PropertyType(1037)
+public const PropertyType_InspectableArray = PropertyType(1037)
 @When[Windows_Foundation == "on"]
-public let PropertyType_DateTimeArray = PropertyType(1038)
+public const PropertyType_DateTimeArray = PropertyType(1038)
 @When[Windows_Foundation == "on"]
-public let PropertyType_TimeSpanArray = PropertyType(1039)
+public const PropertyType_TimeSpanArray = PropertyType(1039)
 @When[Windows_Foundation == "on"]
-public let PropertyType_GuidArray = PropertyType(1040)
+public const PropertyType_GuidArray = PropertyType(1040)
 @When[Windows_Foundation == "on"]
-public let PropertyType_PointArray = PropertyType(1041)
+public const PropertyType_PointArray = PropertyType(1041)
 @When[Windows_Foundation == "on"]
-public let PropertyType_SizeArray = PropertyType(1042)
+public const PropertyType_SizeArray = PropertyType(1042)
 @When[Windows_Foundation == "on"]
-public let PropertyType_RectArray = PropertyType(1043)
+public const PropertyType_RectArray = PropertyType(1043)
 @When[Windows_Foundation == "on"]
-public let PropertyType_OtherTypeArray = PropertyType(1044)
+public const PropertyType_OtherTypeArray = PropertyType(1044)
+
+// Windows.Foundation.PropertyValue (synthetic:Windows_Foundation_PropertyValue)
+@When[Windows_Foundation == "on"]
+public struct PropertyValue <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CreateEmpty(): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateEmpty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt8(value: UInt8): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateUInt8(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInt16(value: Int16): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInt16(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt16(value: UInt16): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateUInt16(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInt32(value: Int32): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInt32(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt32(value: UInt32): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateUInt32(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInt64(value: Int64): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInt64(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt64(value: UInt64): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateUInt64(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateSingle(value: Float32): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateSingle(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateDouble(value: Float64): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateDouble(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateChar16(value: UInt16): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateChar16(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateBoolean(value: Bool): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateBoolean(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateString(value: windows_core.HString): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateString(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInspectable(value: windows_interface.IInspectable): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInspectable(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateGuid(value: windows_core.GuidValue): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateGuid(value.toRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateDateTime(value: DateTime): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateDateTime(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateTimeSpan(value: TimeSpan): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateTimeSpan(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreatePoint(value: Point): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreatePoint(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateSize(value: Size): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateSize(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateRect(value: Rect): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateRect(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt8Array(value: Array<UInt8>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<UInt8>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<UInt8>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateUInt8Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInt16Array(value: Array<Int16>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Int16>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Int16>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInt16Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt16Array(value: Array<UInt16>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<UInt16>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<UInt16>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateUInt16Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInt32Array(value: Array<Int32>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Int32>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Int32>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInt32Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt32Array(value: Array<UInt32>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<UInt32>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<UInt32>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateUInt32Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInt64Array(value: Array<Int64>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Int64>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Int64>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInt64Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateUInt64Array(value: Array<UInt64>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<UInt64>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<UInt64>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateUInt64Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateSingleArray(value: Array<Float32>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Float32>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Float32>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateSingleArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateDoubleArray(value: Array<Float64>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Float64>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Float64>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateDoubleArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateChar16Array(value: Array<UInt16>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<UInt16>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<UInt16>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateChar16Array(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateBooleanArray(value: Array<Bool>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Bool>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Bool>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateBooleanArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateStringArray(value: Array<windows_core.HString>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<CPointer<Unit>>(value.size, { _ => CPointer<Unit>() })
+        var __arg0Borrows = Array<Option<windows_core.WinrtInputBorrow>>(value.size, { _ => Option<windows_core.WinrtInputBorrow>.None })
+        try {
+            var __arg0Index = 0
+            while (__arg0Index < value.size) {
+                let __arg0Borrow = windows_core.winrtBorrowGenericIn<windows_core.HString>(value[__arg0Index])
+                __arg0Borrows[__arg0Index] = Some(__arg0Borrow)
+                __arg0AbiValues[__arg0Index] = __arg0Borrow.asRaw()
+                __arg0Index += 1
+            }
+            let __arg0AbiArray = windows_core.AbiArray<CPointer<Unit>>.fromSlice(__arg0AbiValues)
+            let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+            try {
+                try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateStringArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            } finally {
+                windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+            }
+        } finally {
+            var __arg0CloseIndex = 0
+            while (__arg0CloseIndex < __arg0Borrows.size) {
+                match (__arg0Borrows[__arg0CloseIndex]) {
+                    case Some(borrow) => borrow.close()
+                    case None => ()
+                }
+                __arg0CloseIndex += 1
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInspectableArray(value: Array<windows_interface.IInspectable>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<CPointer<Unit>>(value.size, { _ => CPointer<Unit>() })
+        var __arg0Borrows = Array<Option<windows_core.WinrtInputBorrow>>(value.size, { _ => Option<windows_core.WinrtInputBorrow>.None })
+        try {
+            var __arg0Index = 0
+            while (__arg0Index < value.size) {
+                let __arg0Borrow = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value[__arg0Index])
+                __arg0Borrows[__arg0Index] = Some(__arg0Borrow)
+                __arg0AbiValues[__arg0Index] = __arg0Borrow.asRaw()
+                __arg0Index += 1
+            }
+            let __arg0AbiArray = windows_core.AbiArray<CPointer<Unit>>.fromSlice(__arg0AbiValues)
+            let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+            try {
+                try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInspectableArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            } finally {
+                windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+            }
+        } finally {
+            var __arg0CloseIndex = 0
+            while (__arg0CloseIndex < __arg0Borrows.size) {
+                match (__arg0Borrows[__arg0CloseIndex]) {
+                    case Some(borrow) => borrow.close()
+                    case None => ()
+                }
+                __arg0CloseIndex += 1
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateGuidArray(value: Array<windows_core.GuidValue>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<GUID>(value.size, { index => value[index].toRaw() })
+        let __arg0AbiArray = windows_core.AbiArray<GUID>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateGuidArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateDateTimeArray(value: Array<DateTime>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<DateTime>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<DateTime>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateDateTimeArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateTimeSpanArray(value: Array<TimeSpan>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<TimeSpan>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<TimeSpan>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateTimeSpanArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreatePointArray(value: Array<Point>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Point>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Point>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreatePointArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateSizeArray(value: Array<Size>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Size>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Size>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateSizeArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateRectArray(value: Array<Rect>): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<Rect>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<Rect>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (factory__ = windows_core.factory<PropertyValue, IPropertyValueStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateRectArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.PropertyValue"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Foundation.PropertyValue)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.PropertyValue", PropertyValue.signature())
+    }
+}
 
 // Windows.Foundation.Rect (synthetic:Windows_Foundation_Rect)
 @When[Windows_Foundation == "on"]
@@ -2989,5 +4856,112 @@ public class WwwFormUrlDecoder <: windows_interface.InterfaceWrapperBase & windo
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): WwwFormUrlDecoder {
         WwwFormUrlDecoder.viewOf(raw)
+    }
+}
+
+// Windows.Foundation.WwwFormUrlDecoderEntry (synthetic:Windows_Foundation_WwwFormUrlDecoderEntry)
+@When[Windows_Foundation == "on"]
+public class WwwFormUrlDecoderEntry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<WwwFormUrlDecoderEntry> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
+        WwwFormUrlDecoderEntry(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
+        WwwFormUrlDecoderEntry(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IWwwFormUrlDecoderEntry.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WwwFormUrlDecoderEntry> {
+        let ancestors = [IWwwFormUrlDecoderEntry.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<WwwFormUrlDecoderEntry>("WwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), ancestors, { raw => WwwFormUrlDecoderEntry.fromAbiTake(raw) }, { raw => WwwFormUrlDecoderEntry.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IWwwFormUrlDecoderEntry {
+        match (unsafe { query(IWwwFormUrlDecoderEntry.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIWwwFormUrlDecoderEntry(): IWwwFormUrlDecoderEntry {
+        defaultInterface()
+    }
+
+    public prop Name: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Name(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Value: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Value(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.WwwFormUrlDecoderEntry"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Foundation.WwwFormUrlDecoderEntry;{" + IWwwFormUrlDecoderEntry.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.WwwFormUrlDecoderEntry", WwwFormUrlDecoderEntry.signature(), IWwwFormUrlDecoderEntry.iid())
+    }
+
+    public static func intoWinrtHandle(value: WwwFormUrlDecoderEntry): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        WwwFormUrlDecoderEntry.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): WwwFormUrlDecoderEntry {
+        WwwFormUrlDecoderEntry.viewOf(raw)
     }
 }

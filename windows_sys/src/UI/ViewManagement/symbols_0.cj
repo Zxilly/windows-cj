@@ -7,8 +7,154 @@ import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+@When[Windows_Devices_Enumeration == "on"]
+import windows_sys.Devices.Enumeration as Windows_Devices_Enumeration
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_UI == "on"]
+import windows_sys.UI as Windows_UI
+@When[Windows_UI_Core == "on"]
+import windows_sys.UI.Core as Windows_UI_Core
+@When[Windows_UI_Popups == "on"]
+import windows_sys.UI.Popups as Windows_UI_Popups
+@When[Windows_UI_WindowManagement == "on"]
+import windows_sys.UI.WindowManagement as Windows_UI_WindowManagement
+
+// Windows.UI.ViewManagement.AccessibilitySettings (synthetic:Windows_UI_ViewManagement_AccessibilitySettings)
+@When[Windows_UI_ViewManagement == "on"]
+public class AccessibilitySettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AccessibilitySettings> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AccessibilitySettings {
+        AccessibilitySettings(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AccessibilitySettings {
+        AccessibilitySettings(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAccessibilitySettings.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AccessibilitySettings> {
+        let ancestors = [IAccessibilitySettings.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AccessibilitySettings>("AccessibilitySettings", IAccessibilitySettings.iid(), ancestors, { raw => AccessibilitySettings.fromAbiTake(raw) }, { raw => AccessibilitySettings.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAccessibilitySettings {
+        match (unsafe { query(IAccessibilitySettings.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAccessibilitySettings(): IAccessibilitySettings {
+        defaultInterface()
+    }
+
+    public prop HighContrast: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HighContrast(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop HighContrastScheme: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HighContrastScheme(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func addHighContrastChanged(handler: Windows_Foundation.TypedEventHandler<AccessibilitySettings, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<AccessibilitySettings, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HighContrastChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeHighContrastChanged(cookie: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveHighContrastChanged(cookie) }
+        }
+        hr__.check()
+    }
+
+    public static func new(): AccessibilitySettings {
+        var created__: Option<AccessibilitySettings> = Option<AccessibilitySettings>.None
+        try (factory__ = windows_core.factory<AccessibilitySettings, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<AccessibilitySettings>(AccessibilitySettings.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce AccessibilitySettings")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.AccessibilitySettings"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.AccessibilitySettings;{" + IAccessibilitySettings.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.AccessibilitySettings", AccessibilitySettings.signature(), IAccessibilitySettings.iid())
+    }
+
+    public static func intoWinrtHandle(value: AccessibilitySettings): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AccessibilitySettings {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AccessibilitySettings.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AccessibilitySettings {
+        AccessibilitySettings.viewOf(raw)
+    }
+}
 
 // Windows.UI.ViewManagement.ActivationViewSwitcher (synthetic:Windows_UI_ViewManagement_ActivationViewSwitcher)
 @When[Windows_UI_ViewManagement == "on"]
@@ -123,6 +269,1401 @@ public class ActivationViewSwitcher <: windows_interface.InterfaceWrapperBase & 
     }
 }
 
+// Windows.UI.ViewManagement.ApplicationView (synthetic:Windows_UI_ViewManagement_ApplicationView)
+@When[Windows_UI_ViewManagement == "on"]
+public class ApplicationView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationView> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationView {
+        ApplicationView(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationView {
+        ApplicationView(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IApplicationView.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationView> {
+        let ancestors = [IApplicationView.iid(), IApplicationView2.iid(), IApplicationView3.iid(), IApplicationView4.iid(), IApplicationView7.iid(), IApplicationView9.iid(), IApplicationViewWithContext.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationView>("ApplicationView", IApplicationView.iid(), ancestors, { raw => ApplicationView.fromAbiTake(raw) }, { raw => ApplicationView.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IApplicationView {
+        match (unsafe { query(IApplicationView.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIApplicationView(): IApplicationView {
+        defaultInterface()
+    }
+
+    public func asIApplicationView2(): IApplicationView2 {
+        match (unsafe { query<IApplicationView2>(IApplicationView2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIApplicationView3(): IApplicationView3 {
+        match (unsafe { query<IApplicationView3>(IApplicationView3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIApplicationView4(): IApplicationView4 {
+        match (unsafe { query<IApplicationView4>(IApplicationView4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIApplicationView7(): IApplicationView7 {
+        match (unsafe { query<IApplicationView7>(IApplicationView7.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIApplicationView9(): IApplicationView9 {
+        match (unsafe { query<IApplicationView9>(IApplicationView9.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIApplicationViewWithContext(): IApplicationViewWithContext {
+        match (unsafe { query<IApplicationViewWithContext>(IApplicationViewWithContext.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop AdjacentToLeftDisplayEdge: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AdjacentToLeftDisplayEdge(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop AdjacentToRightDisplayEdge: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AdjacentToRightDisplayEdge(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Id: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop IsFullScreen: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsFullScreen(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop IsOnLockScreen: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsOnLockScreen(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop IsScreenCaptureEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsScreenCaptureEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsScreenCaptureEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Orientation: ApplicationViewOrientation {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Orientation(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ApplicationViewOrientation(result__)
+        }
+    }
+
+    public mut prop Title: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Title(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTitle(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addConsolidated(handler: Windows_Foundation.TypedEventHandler<ApplicationView, ApplicationViewConsolidatedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ApplicationView, ApplicationViewConsolidatedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Consolidated(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeConsolidated(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveConsolidated(token) }
+        }
+        hr__.check()
+    }
+
+    public static func TryUnsnapToFullscreen(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewFullscreenStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TryUnsnapToFullscreen(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ClearAllPersistedState(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics4>().unwrap()) {
+            hr__ = unsafe { factory__.ClearAllPersistedState() }
+        }
+        hr__.check()
+    }
+
+    public static func ClearPersistedState(key: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics4>().unwrap()) {
+                hr__ = unsafe { factory__.ClearPersistedState(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func Value(): ApplicationViewState {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Value(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return ApplicationViewState(result__)
+    }
+
+    public static func TryUnsnap(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TryUnsnap(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GetForCurrentView(): ApplicationView {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ApplicationView>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ApplicationView.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TerminateAppOnFinalViewClose(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.TerminateAppOnFinalViewClose(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetTerminateAppOnFinalViewClose(value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.SetTerminateAppOnFinalViewClose(value) }
+        }
+        hr__.check()
+    }
+
+    public static func GetApplicationViewIdForWindow(window: Windows_UI_Core.ICoreWindow): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI_Core.ICoreWindow>(window)) {
+            try (factory__ = windows_core.factory<ApplicationView, IApplicationViewInteropStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetApplicationViewIdForWindow(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PreferredLaunchWindowingMode(): ApplicationViewWindowingMode {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.PreferredLaunchWindowingMode(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return ApplicationViewWindowingMode(result__)
+    }
+
+    public static func SetPreferredLaunchWindowingMode(value: ApplicationViewWindowingMode): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.SetPreferredLaunchWindowingMode(value.value) }
+        }
+        hr__.check()
+    }
+
+    public static func PreferredLaunchViewSize(): Windows_Foundation.Size {
+        var result__ = Windows_Foundation.Size()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.PreferredLaunchViewSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetPreferredLaunchViewSize(value: Windows_Foundation.Size): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationView, IApplicationViewStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.SetPreferredLaunchViewSize(value) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ApplicationView"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ApplicationView;{" + IApplicationView.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ApplicationView", ApplicationView.signature(), IApplicationView.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationView): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationView {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationView.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationView {
+        ApplicationView.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.ApplicationViewBoundsMode (synthetic:Windows_UI_ViewManagement_ApplicationViewBoundsMode)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ApplicationViewBoundsMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewBoundsMode_UseVisible = ApplicationViewBoundsMode(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewBoundsMode_UseCoreWindow = ApplicationViewBoundsMode(1)
+
+// Windows.UI.ViewManagement.ApplicationViewConsolidatedEventArgs (synthetic:Windows_UI_ViewManagement_ApplicationViewConsolidatedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+public class ApplicationViewConsolidatedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationViewConsolidatedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationViewConsolidatedEventArgs {
+        ApplicationViewConsolidatedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationViewConsolidatedEventArgs {
+        ApplicationViewConsolidatedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IApplicationViewConsolidatedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationViewConsolidatedEventArgs> {
+        let ancestors = [IApplicationViewConsolidatedEventArgs.iid(), IApplicationViewConsolidatedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationViewConsolidatedEventArgs>("ApplicationViewConsolidatedEventArgs", IApplicationViewConsolidatedEventArgs.iid(), ancestors, { raw => ApplicationViewConsolidatedEventArgs.fromAbiTake(raw) }, { raw => ApplicationViewConsolidatedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IApplicationViewConsolidatedEventArgs {
+        match (unsafe { query(IApplicationViewConsolidatedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIApplicationViewConsolidatedEventArgs(): IApplicationViewConsolidatedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIApplicationViewConsolidatedEventArgs2(): IApplicationViewConsolidatedEventArgs2 {
+        match (unsafe { query<IApplicationViewConsolidatedEventArgs2>(IApplicationViewConsolidatedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop IsUserInitiated: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsUserInitiated(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ApplicationViewConsolidatedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ApplicationViewConsolidatedEventArgs;{" + IApplicationViewConsolidatedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ApplicationViewConsolidatedEventArgs", ApplicationViewConsolidatedEventArgs.signature(), IApplicationViewConsolidatedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationViewConsolidatedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationViewConsolidatedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationViewConsolidatedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationViewConsolidatedEventArgs {
+        ApplicationViewConsolidatedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.ApplicationViewMode (synthetic:Windows_UI_ViewManagement_ApplicationViewMode)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ApplicationViewMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewMode_Default = ApplicationViewMode(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewMode_CompactOverlay = ApplicationViewMode(1)
+
+// Windows.UI.ViewManagement.ApplicationViewOrientation (synthetic:Windows_UI_ViewManagement_ApplicationViewOrientation)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ApplicationViewOrientation {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewOrientation_Landscape = ApplicationViewOrientation(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewOrientation_Portrait = ApplicationViewOrientation(1)
+
+// Windows.UI.ViewManagement.ApplicationViewScaling (synthetic:Windows_UI_ViewManagement_ApplicationViewScaling)
+@When[Windows_UI_ViewManagement == "on"]
+public class ApplicationViewScaling <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationViewScaling> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationViewScaling {
+        ApplicationViewScaling(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationViewScaling {
+        ApplicationViewScaling(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IApplicationViewScaling.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationViewScaling> {
+        let ancestors = [IApplicationViewScaling.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationViewScaling>("ApplicationViewScaling", IApplicationViewScaling.iid(), ancestors, { raw => ApplicationViewScaling.fromAbiTake(raw) }, { raw => ApplicationViewScaling.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IApplicationViewScaling {
+        match (unsafe { query(IApplicationViewScaling.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIApplicationViewScaling(): IApplicationViewScaling {
+        defaultInterface()
+    }
+
+    public static func DisableLayoutScaling(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewScaling, IApplicationViewScalingStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DisableLayoutScaling(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func TrySetDisableLayoutScaling(disableLayoutScaling: Bool): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewScaling, IApplicationViewScalingStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TrySetDisableLayoutScaling(disableLayoutScaling, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ApplicationViewScaling"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ApplicationViewScaling;{" + IApplicationViewScaling.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ApplicationViewScaling", ApplicationViewScaling.signature(), IApplicationViewScaling.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationViewScaling): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationViewScaling {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationViewScaling.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationViewScaling {
+        ApplicationViewScaling.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.ApplicationViewState (synthetic:Windows_UI_ViewManagement_ApplicationViewState)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ApplicationViewState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewState_FullScreenLandscape = ApplicationViewState(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewState_Filled = ApplicationViewState(1)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewState_Snapped = ApplicationViewState(2)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewState_FullScreenPortrait = ApplicationViewState(3)
+
+// Windows.UI.ViewManagement.ApplicationViewSwitcher (synthetic:Windows_UI_ViewManagement_ApplicationViewSwitcher)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ApplicationViewSwitcher <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func TryShowAsViewModeAsync(viewId: Int32, viewMode: ApplicationViewMode): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.TryShowAsViewModeAsync(viewId, viewMode.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TryShowAsViewModeWithPreferencesAsync(viewId: Int32, viewMode: ApplicationViewMode, viewModePreferences: ViewModePreferences): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ViewModePreferences>(viewModePreferences)) {
+            try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics3>().unwrap()) {
+                hr__ = unsafe { factory__.TryShowAsViewModeWithPreferencesAsync(viewId, viewMode.value, __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DisableSystemViewActivationPolicy(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.DisableSystemViewActivationPolicy() }
+        }
+        hr__.check()
+    }
+
+    public static func DisableShowingMainViewOnActivation(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DisableShowingMainViewOnActivation() }
+        }
+        hr__.check()
+    }
+
+    public static func TryShowAsStandaloneAsync(viewId: Int32): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TryShowAsStandaloneAsync(viewId, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TryShowAsStandaloneWithSizePreferenceAsync(viewId: Int32, sizePreference: ViewSizePreference): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TryShowAsStandaloneWithSizePreferenceAsync(viewId, sizePreference.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TryShowAsStandaloneWithAnchorViewAndSizePreferenceAsync(viewId: Int32, sizePreference: ViewSizePreference, anchorViewId: Int32, anchorSizePreference: ViewSizePreference): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TryShowAsStandaloneWithAnchorViewAndSizePreferenceAsync(viewId, sizePreference.value, anchorViewId, anchorSizePreference.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SwitchAsync(viewId: Int32): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SwitchAsync(viewId, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SwitchFromViewAsync(toViewId: Int32, fromViewId: Int32): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SwitchFromViewAsync(toViewId, fromViewId, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SwitchFromViewWithOptionsAsync(toViewId: Int32, fromViewId: Int32, options: ApplicationViewSwitchingOptions): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SwitchFromViewWithOptionsAsync(toViewId, fromViewId, options.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PrepareForCustomAnimatedSwitchAsync(toViewId: Int32, fromViewId: Int32, options: ApplicationViewSwitchingOptions): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewSwitcher, IApplicationViewSwitcherStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PrepareForCustomAnimatedSwitchAsync(toViewId, fromViewId, options.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ApplicationViewSwitcher"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ApplicationViewSwitcher)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ApplicationViewSwitcher", ApplicationViewSwitcher.signature())
+    }
+}
+
+// Windows.UI.ViewManagement.ApplicationViewSwitchingOptions (synthetic:Windows_UI_ViewManagement_ApplicationViewSwitchingOptions)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ApplicationViewSwitchingOptions {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ApplicationViewSwitchingOptions): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ApplicationViewSwitchingOptions): ApplicationViewSwitchingOptions {
+        return ApplicationViewSwitchingOptions(value | other.value)
+    }
+    public operator func &(other: ApplicationViewSwitchingOptions): ApplicationViewSwitchingOptions {
+        return ApplicationViewSwitchingOptions(value & other.value)
+    }
+    public operator func ^(other: ApplicationViewSwitchingOptions): ApplicationViewSwitchingOptions {
+        return ApplicationViewSwitchingOptions(value ^ other.value)
+    }
+    public operator func !(): ApplicationViewSwitchingOptions {
+        return ApplicationViewSwitchingOptions(!value)
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewSwitchingOptions_Default = ApplicationViewSwitchingOptions(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewSwitchingOptions_SkipAnimation = ApplicationViewSwitchingOptions(1)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewSwitchingOptions_ConsolidateViews = ApplicationViewSwitchingOptions(2)
+
+// Windows.UI.ViewManagement.ApplicationViewTitleBar (synthetic:Windows_UI_ViewManagement_ApplicationViewTitleBar)
+@When[Windows_UI_ViewManagement == "on"]
+public class ApplicationViewTitleBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationViewTitleBar> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationViewTitleBar {
+        ApplicationViewTitleBar(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationViewTitleBar {
+        ApplicationViewTitleBar(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IApplicationViewTitleBar.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationViewTitleBar> {
+        let ancestors = [IApplicationViewTitleBar.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationViewTitleBar>("ApplicationViewTitleBar", IApplicationViewTitleBar.iid(), ancestors, { raw => ApplicationViewTitleBar.fromAbiTake(raw) }, { raw => ApplicationViewTitleBar.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IApplicationViewTitleBar {
+        match (unsafe { query(IApplicationViewTitleBar.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIApplicationViewTitleBar(): IApplicationViewTitleBar {
+        defaultInterface()
+    }
+
+    public mut prop BackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBackgroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonBackgroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonForegroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonHoverBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonHoverBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonHoverBackgroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonHoverForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonHoverForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonHoverForegroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonInactiveBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonInactiveBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonInactiveBackgroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonInactiveForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonInactiveForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonInactiveForegroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonPressedBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonPressedBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonPressedBackgroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ButtonPressedForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ButtonPressedForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetButtonPressedForegroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetForegroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InactiveBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InactiveBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetInactiveBackgroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InactiveForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InactiveForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetInactiveForegroundColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ApplicationViewTitleBar"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ApplicationViewTitleBar;{" + IApplicationViewTitleBar.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ApplicationViewTitleBar", ApplicationViewTitleBar.signature(), IApplicationViewTitleBar.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationViewTitleBar): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationViewTitleBar {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationViewTitleBar.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationViewTitleBar {
+        ApplicationViewTitleBar.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.ApplicationViewTransferContext (synthetic:Windows_UI_ViewManagement_ApplicationViewTransferContext)
+@When[Windows_UI_ViewManagement == "on"]
+public class ApplicationViewTransferContext <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ApplicationViewTransferContext> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ApplicationViewTransferContext {
+        ApplicationViewTransferContext(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ApplicationViewTransferContext {
+        ApplicationViewTransferContext(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IApplicationViewTransferContext.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ApplicationViewTransferContext> {
+        let ancestors = [IApplicationViewTransferContext.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ApplicationViewTransferContext>("ApplicationViewTransferContext", IApplicationViewTransferContext.iid(), ancestors, { raw => ApplicationViewTransferContext.fromAbiTake(raw) }, { raw => ApplicationViewTransferContext.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IApplicationViewTransferContext {
+        match (unsafe { query(IApplicationViewTransferContext.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIApplicationViewTransferContext(): IApplicationViewTransferContext {
+        defaultInterface()
+    }
+
+    public mut prop ViewId: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ViewId(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetViewId(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): ApplicationViewTransferContext {
+        var created__: Option<ApplicationViewTransferContext> = Option<ApplicationViewTransferContext>.None
+        try (factory__ = windows_core.factory<ApplicationViewTransferContext, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ApplicationViewTransferContext>(ApplicationViewTransferContext.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ApplicationViewTransferContext")
+        }
+    }
+
+    public static func DataPackageFormatId(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ApplicationViewTransferContext, IApplicationViewTransferContextStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DataPackageFormatId(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ApplicationViewTransferContext"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ApplicationViewTransferContext;{" + IApplicationViewTransferContext.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ApplicationViewTransferContext", ApplicationViewTransferContext.signature(), IApplicationViewTransferContext.iid())
+    }
+
+    public static func intoWinrtHandle(value: ApplicationViewTransferContext): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ApplicationViewTransferContext {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ApplicationViewTransferContext.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ApplicationViewTransferContext {
+        ApplicationViewTransferContext.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.ApplicationViewWindowingMode (synthetic:Windows_UI_ViewManagement_ApplicationViewWindowingMode)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ApplicationViewWindowingMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewWindowingMode_Auto = ApplicationViewWindowingMode(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewWindowingMode_PreferredLaunchViewSize = ApplicationViewWindowingMode(1)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewWindowingMode_FullScreen = ApplicationViewWindowingMode(2)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewWindowingMode_CompactOverlay = ApplicationViewWindowingMode(3)
+@When[Windows_UI_ViewManagement == "on"]
+public const ApplicationViewWindowingMode_Maximized = ApplicationViewWindowingMode(4)
+
+// Windows.UI.ViewManagement.FullScreenSystemOverlayMode (synthetic:Windows_UI_ViewManagement_FullScreenSystemOverlayMode)
+@When[Windows_UI_ViewManagement == "on"]
+public struct FullScreenSystemOverlayMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const FullScreenSystemOverlayMode_Standard = FullScreenSystemOverlayMode(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const FullScreenSystemOverlayMode_Minimal = FullScreenSystemOverlayMode(1)
+
+// Windows.UI.ViewManagement.HandPreference (synthetic:Windows_UI_ViewManagement_HandPreference)
+@When[Windows_UI_ViewManagement == "on"]
+public struct HandPreference {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const HandPreference_LeftHanded = HandPreference(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const HandPreference_RightHanded = HandPreference(1)
+
+// Windows.UI.ViewManagement.IAccessibilitySettings (synthetic:Windows_UI_ViewManagement_IAccessibilitySettings)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["fe0e8147-c4c0-4562-b962-1327b52ad5b9", "Windows.UI.ViewManagement.IAccessibilitySettings", "HighContrastScheme.value=HString"]
+public interface IAccessibilitySettings <: IInspectable {
+    func HighContrast(value: CPointer<Bool>): Int32
+    func HighContrastScheme(value: CPointer<CPointer<Unit>>): Int32
+    func HighContrastChanged(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveHighContrastChanged(cookie: Int64): Int32
+}
+
 // Windows.UI.ViewManagement.IActivationViewSwitcher (synthetic:Windows_UI_ViewManagement_IActivationViewSwitcher)
 @When[Windows_UI_ViewManagement == "on"]
 @Interface["dca71bb6-7350-492b-aac7-c8a13d7224ad", "Windows.UI.ViewManagement.IActivationViewSwitcher", "ShowAsStandaloneAsync.operation=Com;ShowAsStandaloneWithSizePreferenceAsync.operation=Com"]
@@ -132,28 +1673,1753 @@ public interface IActivationViewSwitcher <: IInspectable {
     func IsViewPresentedOnActivationVirtualDesktop(viewId: Int32, value: CPointer<Bool>): Int32
 }
 
-// Windows.UI.ViewManagement.ViewSizePreference (synthetic:Windows_UI_ViewManagement_ViewSizePreference)
+// Windows.UI.ViewManagement.IApplicationView (synthetic:Windows_UI_ViewManagement_IApplicationView)
 @When[Windows_UI_ViewManagement == "on"]
-public struct ViewSizePreference {
+@Interface["d222d519-4361-451e-96c4-60f4f9742db0", "Windows.UI.ViewManagement.IApplicationView", "Title.value=HString"]
+public interface IApplicationView <: IInspectable {
+    func Orientation(value: CPointer<Int32>): Int32
+    func AdjacentToLeftDisplayEdge(value: CPointer<Bool>): Int32
+    func AdjacentToRightDisplayEdge(value: CPointer<Bool>): Int32
+    func IsFullScreen(value: CPointer<Bool>): Int32
+    func IsOnLockScreen(value: CPointer<Bool>): Int32
+    func IsScreenCaptureEnabled(value: CPointer<Bool>): Int32
+    func SetIsScreenCaptureEnabled(value: Bool): Int32
+    func SetTitle(value: CPointer<Unit>): Int32
+    func Title(value: CPointer<CPointer<Unit>>): Int32
+    func Id(value: CPointer<Int32>): Int32
+    func Consolidated(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveConsolidated(token: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationView2 (synthetic:Windows_UI_ViewManagement_IApplicationView2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["e876b196-a545-40dc-b594-450cba68cc00", "Windows.UI.ViewManagement.IApplicationView2"]
+public interface IApplicationView2 <: IInspectable {
+    func SuppressSystemOverlays(value: CPointer<Bool>): Int32
+    func SetSuppressSystemOverlays(value: Bool): Int32
+    func VisibleBounds(value: CPointer<Windows_Foundation.Rect>): Int32
+    func VisibleBoundsChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveVisibleBoundsChanged(token: Int64): Int32
+    func SetDesiredBoundsMode(boundsMode: Int32, success: CPointer<Bool>): Int32
+    func DesiredBoundsMode(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationView3 (synthetic:Windows_UI_ViewManagement_IApplicationView3)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["903c9ce5-793a-4fdf-a2b2-af1ac21e3108", "Windows.UI.ViewManagement.IApplicationView3", "TitleBar.value=Com"]
+public interface IApplicationView3 <: IInspectable {
+    func TitleBar(value: CPointer<CPointer<Unit>>): Int32
+    func FullScreenSystemOverlayMode(value: CPointer<Int32>): Int32
+    func SetFullScreenSystemOverlayMode(value: Int32): Int32
+    func IsFullScreenMode(value: CPointer<Bool>): Int32
+    func TryEnterFullScreenMode(success: CPointer<Bool>): Int32
+    func ExitFullScreenMode(): Int32
+    func ShowStandardSystemOverlays(): Int32
+    func TryResizeView(value: Windows_Foundation.Size, success: CPointer<Bool>): Int32
+    func SetPreferredMinSize(minSize: Windows_Foundation.Size): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationView4 (synthetic:Windows_UI_ViewManagement_IApplicationView4)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["15e5cbec-9e0f-46b5-bc3f-9bf653e74b5e", "Windows.UI.ViewManagement.IApplicationView4", "TryEnterViewModeAsync.operation=Com;TryEnterViewModeWithPreferencesAsync.operation=Com;TryConsolidateAsync.operation=Com"]
+public interface IApplicationView4 <: IInspectable {
+    func ViewMode(value: CPointer<Int32>): Int32
+    func IsViewModeSupported(viewMode: Int32, isViewModeSupported: CPointer<Bool>): Int32
+    func TryEnterViewModeAsync(viewMode: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func TryEnterViewModeWithPreferencesAsync(viewMode: Int32, viewModePreferences: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func TryConsolidateAsync(operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationView7 (synthetic:Windows_UI_ViewManagement_IApplicationView7)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["a0369647-5faf-5aa6-9c38-befbb12a071e", "Windows.UI.ViewManagement.IApplicationView7", "PersistedStateId.value=HString"]
+public interface IApplicationView7 <: IInspectable {
+    func PersistedStateId(value: CPointer<CPointer<Unit>>): Int32
+    func SetPersistedStateId(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationView9 (synthetic:Windows_UI_ViewManagement_IApplicationView9)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["9c6516f9-021a-5f01-93e5-9bdad2647574", "Windows.UI.ViewManagement.IApplicationView9", "WindowingEnvironment.value=Com;GetDisplayRegions.result=Com"]
+public interface IApplicationView9 <: IInspectable {
+    func WindowingEnvironment(value: CPointer<CPointer<Unit>>): Int32
+    func GetDisplayRegions(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewConsolidatedEventArgs (synthetic:Windows_UI_ViewManagement_IApplicationViewConsolidatedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["514449ec-7ea2-4de7-a6a6-7dfbaaebb6fb", "Windows.UI.ViewManagement.IApplicationViewConsolidatedEventArgs"]
+public interface IApplicationViewConsolidatedEventArgs <: IInspectable {
+    func IsUserInitiated(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewConsolidatedEventArgs2 (synthetic:Windows_UI_ViewManagement_IApplicationViewConsolidatedEventArgs2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["1c199ecc-6dc1-40f4-afee-07d9ea296430", "Windows.UI.ViewManagement.IApplicationViewConsolidatedEventArgs2"]
+public interface IApplicationViewConsolidatedEventArgs2 <: IInspectable {
+    func IsAppInitiated(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewFullscreenStatics (synthetic:Windows_UI_ViewManagement_IApplicationViewFullscreenStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["bc792ebd-64fe-4b65-a0c0-901ce2b68636", "Windows.UI.ViewManagement.IApplicationViewFullscreenStatics"]
+public interface IApplicationViewFullscreenStatics <: IInspectable {
+    func TryUnsnapToFullscreen(success: CPointer<Bool>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewInteropStatics (synthetic:Windows_UI_ViewManagement_IApplicationViewInteropStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["c446fb5d-4793-4896-a8e2-be57a8bb0f50", "Windows.UI.ViewManagement.IApplicationViewInteropStatics"]
+public interface IApplicationViewInteropStatics <: IInspectable {
+    func GetApplicationViewIdForWindow(window: CPointer<Unit>, id: CPointer<Int32>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewScaling (synthetic:Windows_UI_ViewManagement_IApplicationViewScaling)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["1d0ddc23-23f3-4b2d-84fe-74bf37b48b66", "Windows.UI.ViewManagement.IApplicationViewScaling"]
+public interface IApplicationViewScaling <: IInspectable {
+}
+
+// Windows.UI.ViewManagement.IApplicationViewScalingStatics (synthetic:Windows_UI_ViewManagement_IApplicationViewScalingStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["b08fecf0-b946-45c8-a5e3-71f5aa78f861", "Windows.UI.ViewManagement.IApplicationViewScalingStatics"]
+public interface IApplicationViewScalingStatics <: IInspectable {
+    func DisableLayoutScaling(value: CPointer<Bool>): Int32
+    func TrySetDisableLayoutScaling(disableLayoutScaling: Bool, success: CPointer<Bool>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewStatics (synthetic:Windows_UI_ViewManagement_IApplicationViewStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["010a6306-c433-44e5-a9f2-bd84d4030a95", "Windows.UI.ViewManagement.IApplicationViewStatics"]
+public interface IApplicationViewStatics <: IInspectable {
+    func Value(value: CPointer<Int32>): Int32
+    func TryUnsnap(success: CPointer<Bool>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewStatics2 (synthetic:Windows_UI_ViewManagement_IApplicationViewStatics2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["af338ae5-cf64-423c-85e5-f3e72448fb23", "Windows.UI.ViewManagement.IApplicationViewStatics2", "GetForCurrentView.current=Com"]
+public interface IApplicationViewStatics2 <: IInspectable {
+    func GetForCurrentView(current: CPointer<CPointer<Unit>>): Int32
+    func TerminateAppOnFinalViewClose(value: CPointer<Bool>): Int32
+    func SetTerminateAppOnFinalViewClose(value: Bool): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewStatics3 (synthetic:Windows_UI_ViewManagement_IApplicationViewStatics3)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["a28d7594-8c41-4e13-9719-5164796fe4c7", "Windows.UI.ViewManagement.IApplicationViewStatics3"]
+public interface IApplicationViewStatics3 <: IInspectable {
+    func PreferredLaunchWindowingMode(value: CPointer<Int32>): Int32
+    func SetPreferredLaunchWindowingMode(value: Int32): Int32
+    func PreferredLaunchViewSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func SetPreferredLaunchViewSize(value: Windows_Foundation.Size): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewStatics4 (synthetic:Windows_UI_ViewManagement_IApplicationViewStatics4)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["08fd8d33-2611-5336-a315-d98e6366c9db", "Windows.UI.ViewManagement.IApplicationViewStatics4"]
+public interface IApplicationViewStatics4 <: IInspectable {
+    func ClearAllPersistedState(): Int32
+    func ClearPersistedState(key: CPointer<Unit>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewSwitcherStatics (synthetic:Windows_UI_ViewManagement_IApplicationViewSwitcherStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["975f2f1e-e656-4c5e-a0a1-717c6ffa7d64", "Windows.UI.ViewManagement.IApplicationViewSwitcherStatics", "TryShowAsStandaloneAsync.operation=Com;TryShowAsStandaloneWithSizePreferenceAsync.operation=Com;TryShowAsStandaloneWithAnchorViewAndSizePreferenceAsync.operation=Com;SwitchAsync.operation=Com;SwitchFromViewAsync.operation=Com;SwitchFromViewWithOptionsAsync.operation=Com;PrepareForCustomAnimatedSwitchAsync.operation=Com"]
+public interface IApplicationViewSwitcherStatics <: IInspectable {
+    func DisableShowingMainViewOnActivation(): Int32
+    func TryShowAsStandaloneAsync(viewId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func TryShowAsStandaloneWithSizePreferenceAsync(viewId: Int32, sizePreference: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func TryShowAsStandaloneWithAnchorViewAndSizePreferenceAsync(viewId: Int32, sizePreference: Int32, anchorViewId: Int32, anchorSizePreference: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func SwitchAsync(viewId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func SwitchFromViewAsync(toViewId: Int32, fromViewId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func SwitchFromViewWithOptionsAsync(toViewId: Int32, fromViewId: Int32, options: UInt32, operation: CPointer<CPointer<Unit>>): Int32
+    func PrepareForCustomAnimatedSwitchAsync(toViewId: Int32, fromViewId: Int32, options: UInt32, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewSwitcherStatics2 (synthetic:Windows_UI_ViewManagement_IApplicationViewSwitcherStatics2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["60e995cd-4fc2-48c4-b8e3-395f2b9f0fc1", "Windows.UI.ViewManagement.IApplicationViewSwitcherStatics2"]
+public interface IApplicationViewSwitcherStatics2 <: IInspectable {
+    func DisableSystemViewActivationPolicy(): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3 (synthetic:Windows_UI_ViewManagement_IApplicationViewSwitcherStatics3)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["92059420-80a7-486d-b21f-c7a4a242a383", "Windows.UI.ViewManagement.IApplicationViewSwitcherStatics3", "TryShowAsViewModeAsync.operation=Com;TryShowAsViewModeWithPreferencesAsync.operation=Com"]
+public interface IApplicationViewSwitcherStatics3 <: IInspectable {
+    func TryShowAsViewModeAsync(viewId: Int32, viewMode: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func TryShowAsViewModeWithPreferencesAsync(viewId: Int32, viewMode: Int32, viewModePreferences: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewTitleBar (synthetic:Windows_UI_ViewManagement_IApplicationViewTitleBar)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["00924ac0-932b-4a6b-9c4b-dc38c82478ce", "Windows.UI.ViewManagement.IApplicationViewTitleBar", "ForegroundColor.value=Com;BackgroundColor.value=Com;ButtonForegroundColor.value=Com;ButtonBackgroundColor.value=Com;ButtonHoverForegroundColor.value=Com;ButtonHoverBackgroundColor.value=Com;ButtonPressedForegroundColor.value=Com;ButtonPressedBackgroundColor.value=Com;InactiveForegroundColor.value=Com;InactiveBackgroundColor.value=Com;ButtonInactiveForegroundColor.value=Com;ButtonInactiveBackgroundColor.value=Com"]
+public interface IApplicationViewTitleBar <: IInspectable {
+    func SetForegroundColor(value: CPointer<Unit>): Int32
+    func ForegroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetBackgroundColor(value: CPointer<Unit>): Int32
+    func BackgroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonForegroundColor(value: CPointer<Unit>): Int32
+    func ButtonForegroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonBackgroundColor(value: CPointer<Unit>): Int32
+    func ButtonBackgroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonHoverForegroundColor(value: CPointer<Unit>): Int32
+    func ButtonHoverForegroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonHoverBackgroundColor(value: CPointer<Unit>): Int32
+    func ButtonHoverBackgroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonPressedForegroundColor(value: CPointer<Unit>): Int32
+    func ButtonPressedForegroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonPressedBackgroundColor(value: CPointer<Unit>): Int32
+    func ButtonPressedBackgroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetInactiveForegroundColor(value: CPointer<Unit>): Int32
+    func InactiveForegroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetInactiveBackgroundColor(value: CPointer<Unit>): Int32
+    func InactiveBackgroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonInactiveForegroundColor(value: CPointer<Unit>): Int32
+    func ButtonInactiveForegroundColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetButtonInactiveBackgroundColor(value: CPointer<Unit>): Int32
+    func ButtonInactiveBackgroundColor(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewTransferContext (synthetic:Windows_UI_ViewManagement_IApplicationViewTransferContext)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["8574bc63-3c17-408e-9408-8a1a9ea81bfa", "Windows.UI.ViewManagement.IApplicationViewTransferContext"]
+public interface IApplicationViewTransferContext <: IInspectable {
+    func ViewId(value: CPointer<Int32>): Int32
+    func SetViewId(value: Int32): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewTransferContextStatics (synthetic:Windows_UI_ViewManagement_IApplicationViewTransferContextStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["15a89d92-dd79-4b0b-bc47-d5f195f14661", "Windows.UI.ViewManagement.IApplicationViewTransferContextStatics", "DataPackageFormatId.value=HString"]
+public interface IApplicationViewTransferContextStatics <: IInspectable {
+    func DataPackageFormatId(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IApplicationViewWithContext (synthetic:Windows_UI_ViewManagement_IApplicationViewWithContext)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["bd55d512-9dc1-44fc-8501-666625df60dc", "Windows.UI.ViewManagement.IApplicationViewWithContext", "UIContext.value=Com"]
+public interface IApplicationViewWithContext <: IInspectable {
+    func UIContext(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IInputPane (synthetic:Windows_UI_ViewManagement_IInputPane)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["640ada70-06f3-4c87-a678-9829c9127c28", "Windows.UI.ViewManagement.IInputPane"]
+public interface IInputPane <: IInspectable {
+    func Showing(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveShowing(token: Int64): Int32
+    func Hiding(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveHiding(token: Int64): Int32
+    func OccludedRect(value: CPointer<Windows_Foundation.Rect>): Int32
+}
+
+// Windows.UI.ViewManagement.IInputPane2 (synthetic:Windows_UI_ViewManagement_IInputPane2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["8a6b3f26-7090-4793-944c-c3f2cde26276", "Windows.UI.ViewManagement.IInputPane2"]
+public interface IInputPane2 <: IInspectable {
+    func TryShow(result: CPointer<Bool>): Int32
+    func TryHide(result: CPointer<Bool>): Int32
+}
+
+// Windows.UI.ViewManagement.IInputPaneControl (synthetic:Windows_UI_ViewManagement_IInputPaneControl)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["088bb24f-962f-489d-aa6e-c6be1a0a6e52", "Windows.UI.ViewManagement.IInputPaneControl"]
+public interface IInputPaneControl <: IInspectable {
+    func Visible(value: CPointer<Bool>): Int32
+    func SetVisible(value: Bool): Int32
+}
+
+// Windows.UI.ViewManagement.IInputPaneStatics (synthetic:Windows_UI_ViewManagement_IInputPaneStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["95f4af3a-ef47-424a-9741-fd2815eba2bd", "Windows.UI.ViewManagement.IInputPaneStatics", "GetForCurrentView.inputPane=Com"]
+public interface IInputPaneStatics <: IInspectable {
+    func GetForCurrentView(inputPane: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IInputPaneStatics2 (synthetic:Windows_UI_ViewManagement_IInputPaneStatics2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["1b63529b-d9ec-4531-8445-71bab9fb828e", "Windows.UI.ViewManagement.IInputPaneStatics2", "GetForUIContext.result=Com"]
+public interface IInputPaneStatics2 <: IInspectable {
+    func GetForUIContext(context: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IInputPaneVisibilityEventArgs (synthetic:Windows_UI_ViewManagement_IInputPaneVisibilityEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["d243e016-d907-4fcc-bb8d-f77baa5028f1", "Windows.UI.ViewManagement.IInputPaneVisibilityEventArgs"]
+public interface IInputPaneVisibilityEventArgs <: IInspectable {
+    func OccludedRect(value: CPointer<Windows_Foundation.Rect>): Int32
+    func SetEnsuredFocusedElementInView(value: Bool): Int32
+    func EnsuredFocusedElementInView(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.ViewManagement.IProjectionManagerStatics (synthetic:Windows_UI_ViewManagement_IProjectionManagerStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["b65f913d-e2f0-4ffd-ba95-34241647e45c", "Windows.UI.ViewManagement.IProjectionManagerStatics", "StartProjectingAsync.operation=Com;SwapDisplaysForViewsAsync.operation=Com;StopProjectingAsync.operation=Com"]
+public interface IProjectionManagerStatics <: IInspectable {
+    func StartProjectingAsync(projectionViewId: Int32, anchorViewId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func SwapDisplaysForViewsAsync(projectionViewId: Int32, anchorViewId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func StopProjectingAsync(projectionViewId: Int32, anchorViewId: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func ProjectionDisplayAvailable(value: CPointer<Bool>): Int32
+    func ProjectionDisplayAvailableChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveProjectionDisplayAvailableChanged(token: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IProjectionManagerStatics2 (synthetic:Windows_UI_ViewManagement_IProjectionManagerStatics2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["f33d2f43-2749-4cde-b977-c0c41e7415d1", "Windows.UI.ViewManagement.IProjectionManagerStatics2", "StartProjectingWithDeviceInfoAsync.operation=Com;RequestStartProjectingAsync.operation=Com;RequestStartProjectingWithPlacementAsync.operation=Com;GetDeviceSelector.selector=HString"]
+public interface IProjectionManagerStatics2 <: IInspectable {
+    func StartProjectingWithDeviceInfoAsync(projectionViewId: Int32, anchorViewId: Int32, displayDeviceInfo: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func RequestStartProjectingAsync(projectionViewId: Int32, anchorViewId: Int32, selection: Windows_Foundation.Rect, operation: CPointer<CPointer<Unit>>): Int32
+    func RequestStartProjectingWithPlacementAsync(projectionViewId: Int32, anchorViewId: Int32, selection: Windows_Foundation.Rect, prefferedPlacement: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func GetDeviceSelector(selector: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IUISettings (synthetic:Windows_UI_ViewManagement_IUISettings)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["85361600-1c63-4627-bcb1-3a89e0bc9c55", "Windows.UI.ViewManagement.IUISettings"]
+public interface IUISettings <: IInspectable {
+    func HandPreference(value: CPointer<Int32>): Int32
+    func CursorSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func ScrollBarSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func ScrollBarArrowSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func ScrollBarThumbBoxSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func MessageDuration(value: CPointer<UInt32>): Int32
+    func AnimationsEnabled(value: CPointer<Bool>): Int32
+    func CaretBrowsingEnabled(value: CPointer<Bool>): Int32
+    func CaretBlinkRate(value: CPointer<UInt32>): Int32
+    func CaretWidth(value: CPointer<UInt32>): Int32
+    func DoubleClickTime(value: CPointer<UInt32>): Int32
+    func MouseHoverTime(value: CPointer<UInt32>): Int32
+    func UIElementColor(desiredElement: Int32, value: CPointer<Windows_UI.Color>): Int32
+}
+
+// Windows.UI.ViewManagement.IUISettings2 (synthetic:Windows_UI_ViewManagement_IUISettings2)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["bad82401-2721-44f9-bb91-2bb228be442f", "Windows.UI.ViewManagement.IUISettings2"]
+public interface IUISettings2 <: IInspectable {
+    func TextScaleFactor(value: CPointer<Float64>): Int32
+    func TextScaleFactorChanged(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveTextScaleFactorChanged(cookie: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IUISettings3 (synthetic:Windows_UI_ViewManagement_IUISettings3)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["03021be4-5254-4781-8194-5168f7d06d7b", "Windows.UI.ViewManagement.IUISettings3"]
+public interface IUISettings3 <: IInspectable {
+    func GetColorValue(desiredColor: Int32, value: CPointer<Windows_UI.Color>): Int32
+    func ColorValuesChanged(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveColorValuesChanged(cookie: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IUISettings4 (synthetic:Windows_UI_ViewManagement_IUISettings4)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["52bb3002-919b-4d6b-9b78-8dd66ff4b93b", "Windows.UI.ViewManagement.IUISettings4"]
+public interface IUISettings4 <: IInspectable {
+    func AdvancedEffectsEnabled(value: CPointer<Bool>): Int32
+    func AdvancedEffectsEnabledChanged(handler: CPointer<Unit>, cookie: CPointer<Int64>): Int32
+    func RemoveAdvancedEffectsEnabledChanged(cookie: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IUISettings5 (synthetic:Windows_UI_ViewManagement_IUISettings5)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["5349d588-0cb5-5f05-bd34-706b3231f0bd", "Windows.UI.ViewManagement.IUISettings5"]
+public interface IUISettings5 <: IInspectable {
+    func AutoHideScrollBars(value: CPointer<Bool>): Int32
+    func AutoHideScrollBarsChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveAutoHideScrollBarsChanged(token: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IUISettings6 (synthetic:Windows_UI_ViewManagement_IUISettings6)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["aef19bd7-fe31-5a04-ada4-469aaec6dfa9", "Windows.UI.ViewManagement.IUISettings6"]
+public interface IUISettings6 <: IInspectable {
+    func AnimationsEnabledChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveAnimationsEnabledChanged(token: Int64): Int32
+    func MessageDurationChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveMessageDurationChanged(token: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IUISettingsAnimationsEnabledChangedEventArgs (synthetic:Windows_UI_ViewManagement_IUISettingsAnimationsEnabledChangedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["0c7b4b3d-2ea1-533e-894d-415bc5243c29", "Windows.UI.ViewManagement.IUISettingsAnimationsEnabledChangedEventArgs"]
+public interface IUISettingsAnimationsEnabledChangedEventArgs <: IInspectable {
+}
+
+// Windows.UI.ViewManagement.IUISettingsAutoHideScrollBarsChangedEventArgs (synthetic:Windows_UI_ViewManagement_IUISettingsAutoHideScrollBarsChangedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["87afd4b2-9146-5f02-8f6b-06d454174c0f", "Windows.UI.ViewManagement.IUISettingsAutoHideScrollBarsChangedEventArgs"]
+public interface IUISettingsAutoHideScrollBarsChangedEventArgs <: IInspectable {
+}
+
+// Windows.UI.ViewManagement.IUISettingsMessageDurationChangedEventArgs (synthetic:Windows_UI_ViewManagement_IUISettingsMessageDurationChangedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["338aad52-4a5d-5b59-8002-d930f608fd6e", "Windows.UI.ViewManagement.IUISettingsMessageDurationChangedEventArgs"]
+public interface IUISettingsMessageDurationChangedEventArgs <: IInspectable {
+}
+
+// Windows.UI.ViewManagement.IUIViewSettings (synthetic:Windows_UI_ViewManagement_IUIViewSettings)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["c63657f6-8850-470d-88f8-455e16ea2c26", "Windows.UI.ViewManagement.IUIViewSettings"]
+public interface IUIViewSettings <: IInspectable {
+    func UserInteractionMode(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode (synthetic:Windows_UI_ViewManagement_IUIViewSettingsPreferredInteractionMode)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["426de261-82ec-5f61-bad4-19b2d0d3cf35", "Windows.UI.ViewManagement.IUIViewSettingsPreferredInteractionMode"]
+public interface IUIViewSettingsPreferredInteractionMode <: IInspectable {
+    func GetPreferredInteractionMode(supportedModesSize: UInt32, supportedModes: CPointer<Int32>, result: CPointer<Int32>): Int32
+    func PreferredInteractionModeChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemovePreferredInteractionModeChanged(token: Int64): Int32
+}
+
+// Windows.UI.ViewManagement.IUIViewSettingsStatics (synthetic:Windows_UI_ViewManagement_IUIViewSettingsStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["595c97a5-f8f6-41cf-b0fb-aacdb81fd5f6", "Windows.UI.ViewManagement.IUIViewSettingsStatics", "GetForCurrentView.result=Com"]
+public interface IUIViewSettingsStatics <: IInspectable {
+    func GetForCurrentView(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.IViewModePreferences (synthetic:Windows_UI_ViewManagement_IViewModePreferences)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["878fcd3a-0b99-42c9-84d0-d3f1d403554b", "Windows.UI.ViewManagement.IViewModePreferences"]
+public interface IViewModePreferences <: IInspectable {
+    func ViewSizePreference(value: CPointer<Int32>): Int32
+    func SetViewSizePreference(value: Int32): Int32
+    func CustomSize(value: CPointer<Windows_Foundation.Size>): Int32
+    func SetCustomSize(value: Windows_Foundation.Size): Int32
+}
+
+// Windows.UI.ViewManagement.IViewModePreferencesStatics (synthetic:Windows_UI_ViewManagement_IViewModePreferencesStatics)
+@When[Windows_UI_ViewManagement == "on"]
+@Interface["69b60a65-5de5-40d8-8306-3833df7a2274", "Windows.UI.ViewManagement.IViewModePreferencesStatics", "CreateDefault.result=Com"]
+public interface IViewModePreferencesStatics <: IInspectable {
+    func CreateDefault(mode: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.ViewManagement.InputPane (synthetic:Windows_UI_ViewManagement_InputPane)
+@When[Windows_UI_ViewManagement == "on"]
+public class InputPane <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<InputPane> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): InputPane {
+        InputPane(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): InputPane {
+        InputPane(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IInputPane.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<InputPane> {
+        let ancestors = [IInputPane.iid(), IInputPane2.iid(), IInputPaneControl.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<InputPane>("InputPane", IInputPane.iid(), ancestors, { raw => InputPane.fromAbiTake(raw) }, { raw => InputPane.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IInputPane {
+        match (unsafe { query(IInputPane.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIInputPane(): IInputPane {
+        defaultInterface()
+    }
+
+    public func asIInputPane2(): IInputPane2 {
+        match (unsafe { query<IInputPane2>(IInputPane2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInputPaneControl(): IInputPaneControl {
+        match (unsafe { query<IInputPaneControl>(IInputPaneControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop OccludedRect: Windows_Foundation.Rect {
+        get() {
+            var result__ = Windows_Foundation.Rect()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OccludedRect(CPointer<Windows_Foundation.Rect>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func addHiding(handler: Windows_Foundation.TypedEventHandler<InputPane, InputPaneVisibilityEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<InputPane, InputPaneVisibilityEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Hiding(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeHiding(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveHiding(token) }
+        }
+        hr__.check()
+    }
+
+    public func addShowing(handler: Windows_Foundation.TypedEventHandler<InputPane, InputPaneVisibilityEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<InputPane, InputPaneVisibilityEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Showing(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeShowing(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveShowing(token) }
+        }
+        hr__.check()
+    }
+
+    public static func GetForUIContext(context: Windows_UI.UIContext): InputPane {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI.UIContext>(context)) {
+            try (factory__ = windows_core.factory<InputPane, IInputPaneStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUIContext(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<InputPane>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return InputPane.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetForCurrentView(): InputPane {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<InputPane, IInputPaneStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<InputPane>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return InputPane.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.InputPane"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.InputPane;{" + IInputPane.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.InputPane", InputPane.signature(), IInputPane.iid())
+    }
+
+    public static func intoWinrtHandle(value: InputPane): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): InputPane {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        InputPane.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): InputPane {
+        InputPane.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.InputPaneVisibilityEventArgs (synthetic:Windows_UI_ViewManagement_InputPaneVisibilityEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+public class InputPaneVisibilityEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<InputPaneVisibilityEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): InputPaneVisibilityEventArgs {
+        InputPaneVisibilityEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): InputPaneVisibilityEventArgs {
+        InputPaneVisibilityEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IInputPaneVisibilityEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<InputPaneVisibilityEventArgs> {
+        let ancestors = [IInputPaneVisibilityEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<InputPaneVisibilityEventArgs>("InputPaneVisibilityEventArgs", IInputPaneVisibilityEventArgs.iid(), ancestors, { raw => InputPaneVisibilityEventArgs.fromAbiTake(raw) }, { raw => InputPaneVisibilityEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IInputPaneVisibilityEventArgs {
+        match (unsafe { query(IInputPaneVisibilityEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIInputPaneVisibilityEventArgs(): IInputPaneVisibilityEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop EnsuredFocusedElementInView: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.EnsuredFocusedElementInView(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetEnsuredFocusedElementInView(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop OccludedRect: Windows_Foundation.Rect {
+        get() {
+            var result__ = Windows_Foundation.Rect()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OccludedRect(CPointer<Windows_Foundation.Rect>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.InputPaneVisibilityEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.InputPaneVisibilityEventArgs;{" + IInputPaneVisibilityEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.InputPaneVisibilityEventArgs", InputPaneVisibilityEventArgs.signature(), IInputPaneVisibilityEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: InputPaneVisibilityEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): InputPaneVisibilityEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        InputPaneVisibilityEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): InputPaneVisibilityEventArgs {
+        InputPaneVisibilityEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.ProjectionManager (synthetic:Windows_UI_ViewManagement_ProjectionManager)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ProjectionManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func StartProjectingWithDeviceInfoAsync(projectionViewId: Int32, anchorViewId: Int32, displayDeviceInfo: Windows_Devices_Enumeration.DeviceInformation): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Devices_Enumeration.DeviceInformation>(displayDeviceInfo)) {
+            try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.StartProjectingWithDeviceInfoAsync(projectionViewId, anchorViewId, __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestStartProjectingAsync(projectionViewId: Int32, anchorViewId: Int32, selection: Windows_Foundation.Rect): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.RequestStartProjectingAsync(projectionViewId, anchorViewId, selection, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestStartProjectingWithPlacementAsync(projectionViewId: Int32, anchorViewId: Int32, selection: Windows_Foundation.Rect, prefferedPlacement: Windows_UI_Popups.Placement): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.RequestStartProjectingWithPlacementAsync(projectionViewId, anchorViewId, selection, prefferedPlacement.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDeviceSelector(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.GetDeviceSelector(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func StartProjectingAsync(projectionViewId: Int32, anchorViewId: Int32): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.StartProjectingAsync(projectionViewId, anchorViewId, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SwapDisplaysForViewsAsync(projectionViewId: Int32, anchorViewId: Int32): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SwapDisplaysForViewsAsync(projectionViewId, anchorViewId, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func StopProjectingAsync(projectionViewId: Int32, anchorViewId: Int32): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.StopProjectingAsync(projectionViewId, anchorViewId, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ProjectionDisplayAvailable(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ProjectionDisplayAvailable(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ProjectionDisplayAvailableChanged(handler: Windows_Foundation.EventHandler<windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.EventHandler<windows_interface.IInspectable>>(handler)) {
+            try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ProjectionDisplayAvailableChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemoveProjectionDisplayAvailableChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ProjectionManager, IProjectionManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemoveProjectionDisplayAvailableChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ProjectionManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ProjectionManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ProjectionManager", ProjectionManager.signature())
+    }
+}
+
+// Windows.UI.ViewManagement.ScreenCaptureDisabledBehavior (synthetic:Windows_UI_ViewManagement_ScreenCaptureDisabledBehavior)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ScreenCaptureDisabledBehavior {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_ViewManagement == "on"]
-public let ViewSizePreference_Default = ViewSizePreference(0)
+public const ScreenCaptureDisabledBehavior_DrawAsBlack = ScreenCaptureDisabledBehavior(0)
 @When[Windows_UI_ViewManagement == "on"]
-public let ViewSizePreference_UseLess = ViewSizePreference(1)
+public const ScreenCaptureDisabledBehavior_ExcludeFromCapture = ScreenCaptureDisabledBehavior(1)
+
+// Windows.UI.ViewManagement.UIColorType (synthetic:Windows_UI_ViewManagement_UIColorType)
 @When[Windows_UI_ViewManagement == "on"]
-public let ViewSizePreference_UseHalf = ViewSizePreference(2)
+public struct UIColorType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
 @When[Windows_UI_ViewManagement == "on"]
-public let ViewSizePreference_UseMore = ViewSizePreference(3)
+public const UIColorType_Background = UIColorType(0)
 @When[Windows_UI_ViewManagement == "on"]
-public let ViewSizePreference_UseMinimum = ViewSizePreference(4)
+public const UIColorType_Foreground = UIColorType(1)
 @When[Windows_UI_ViewManagement == "on"]
-public let ViewSizePreference_UseNone = ViewSizePreference(5)
+public const UIColorType_AccentDark3 = UIColorType(2)
 @When[Windows_UI_ViewManagement == "on"]
-public let ViewSizePreference_Custom = ViewSizePreference(6)
+public const UIColorType_AccentDark2 = UIColorType(3)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIColorType_AccentDark1 = UIColorType(4)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIColorType_Accent = UIColorType(5)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIColorType_AccentLight1 = UIColorType(6)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIColorType_AccentLight2 = UIColorType(7)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIColorType_AccentLight3 = UIColorType(8)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIColorType_Complement = UIColorType(9)
+
+// Windows.UI.ViewManagement.UIElementType (synthetic:Windows_UI_ViewManagement_UIElementType)
+@When[Windows_UI_ViewManagement == "on"]
+public struct UIElementType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_ActiveCaption = UIElementType(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_Background = UIElementType(1)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_ButtonFace = UIElementType(2)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_ButtonText = UIElementType(3)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_CaptionText = UIElementType(4)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_GrayText = UIElementType(5)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_Highlight = UIElementType(6)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_HighlightText = UIElementType(7)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_Hotlight = UIElementType(8)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_InactiveCaption = UIElementType(9)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_InactiveCaptionText = UIElementType(10)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_Window = UIElementType(11)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_WindowText = UIElementType(12)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_AccentColor = UIElementType(1000)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_TextHigh = UIElementType(1001)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_TextMedium = UIElementType(1002)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_TextLow = UIElementType(1003)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_TextContrastWithHigh = UIElementType(1004)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_NonTextHigh = UIElementType(1005)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_NonTextMediumHigh = UIElementType(1006)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_NonTextMedium = UIElementType(1007)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_NonTextMediumLow = UIElementType(1008)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_NonTextLow = UIElementType(1009)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_PageBackground = UIElementType(1010)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_PopupBackground = UIElementType(1011)
+@When[Windows_UI_ViewManagement == "on"]
+public const UIElementType_OverlayOutsidePopup = UIElementType(1012)
+
+// Windows.UI.ViewManagement.UISettings (synthetic:Windows_UI_ViewManagement_UISettings)
+@When[Windows_UI_ViewManagement == "on"]
+public class UISettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UISettings> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UISettings {
+        UISettings(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UISettings {
+        UISettings(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUISettings.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UISettings> {
+        let ancestors = [IUISettings.iid(), IUISettings2.iid(), IUISettings3.iid(), IUISettings4.iid(), IUISettings5.iid(), IUISettings6.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UISettings>("UISettings", IUISettings.iid(), ancestors, { raw => UISettings.fromAbiTake(raw) }, { raw => UISettings.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUISettings {
+        match (unsafe { query(IUISettings.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUISettings(): IUISettings {
+        defaultInterface()
+    }
+
+    public func asIUISettings2(): IUISettings2 {
+        match (unsafe { query<IUISettings2>(IUISettings2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUISettings3(): IUISettings3 {
+        match (unsafe { query<IUISettings3>(IUISettings3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUISettings4(): IUISettings4 {
+        match (unsafe { query<IUISettings4>(IUISettings4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUISettings5(): IUISettings5 {
+        match (unsafe { query<IUISettings5>(IUISettings5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUISettings6(): IUISettings6 {
+        match (unsafe { query<IUISettings6>(IUISettings6.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop AnimationsEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AnimationsEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop CaretBlinkRate: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CaretBlinkRate(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop CaretBrowsingEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CaretBrowsingEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop CaretWidth: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CaretWidth(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop CursorSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CursorSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop DoubleClickTime: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DoubleClickTime(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop HandPreference: HandPreference {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HandPreference(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return HandPreference(result__)
+        }
+    }
+
+    public prop MessageDuration: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MessageDuration(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop MouseHoverTime: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MouseHoverTime(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop ScrollBarArrowSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScrollBarArrowSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop ScrollBarSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScrollBarSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop ScrollBarThumbBoxSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScrollBarThumbBoxSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func UIElementColor(desiredElement: UIElementType): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.UIElementColor(desiredElement.value, CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func new(): UISettings {
+        var created__: Option<UISettings> = Option<UISettings>.None
+        try (factory__ = windows_core.factory<UISettings, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<UISettings>(UISettings.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce UISettings")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.UISettings"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.UISettings;{" + IUISettings.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.UISettings", UISettings.signature(), IUISettings.iid())
+    }
+
+    public static func intoWinrtHandle(value: UISettings): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UISettings {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UISettings.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UISettings {
+        UISettings.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.UISettingsAnimationsEnabledChangedEventArgs (synthetic:Windows_UI_ViewManagement_UISettingsAnimationsEnabledChangedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+public class UISettingsAnimationsEnabledChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UISettingsAnimationsEnabledChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UISettingsAnimationsEnabledChangedEventArgs {
+        UISettingsAnimationsEnabledChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UISettingsAnimationsEnabledChangedEventArgs {
+        UISettingsAnimationsEnabledChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUISettingsAnimationsEnabledChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UISettingsAnimationsEnabledChangedEventArgs> {
+        let ancestors = [IUISettingsAnimationsEnabledChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UISettingsAnimationsEnabledChangedEventArgs>("UISettingsAnimationsEnabledChangedEventArgs", IUISettingsAnimationsEnabledChangedEventArgs.iid(), ancestors, { raw => UISettingsAnimationsEnabledChangedEventArgs.fromAbiTake(raw) }, { raw => UISettingsAnimationsEnabledChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUISettingsAnimationsEnabledChangedEventArgs {
+        match (unsafe { query(IUISettingsAnimationsEnabledChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUISettingsAnimationsEnabledChangedEventArgs(): IUISettingsAnimationsEnabledChangedEventArgs {
+        defaultInterface()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.UISettingsAnimationsEnabledChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.UISettingsAnimationsEnabledChangedEventArgs;{" + IUISettingsAnimationsEnabledChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.UISettingsAnimationsEnabledChangedEventArgs", UISettingsAnimationsEnabledChangedEventArgs.signature(), IUISettingsAnimationsEnabledChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: UISettingsAnimationsEnabledChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UISettingsAnimationsEnabledChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UISettingsAnimationsEnabledChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UISettingsAnimationsEnabledChangedEventArgs {
+        UISettingsAnimationsEnabledChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.UISettingsAutoHideScrollBarsChangedEventArgs (synthetic:Windows_UI_ViewManagement_UISettingsAutoHideScrollBarsChangedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+public class UISettingsAutoHideScrollBarsChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UISettingsAutoHideScrollBarsChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UISettingsAutoHideScrollBarsChangedEventArgs {
+        UISettingsAutoHideScrollBarsChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UISettingsAutoHideScrollBarsChangedEventArgs {
+        UISettingsAutoHideScrollBarsChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUISettingsAutoHideScrollBarsChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UISettingsAutoHideScrollBarsChangedEventArgs> {
+        let ancestors = [IUISettingsAutoHideScrollBarsChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UISettingsAutoHideScrollBarsChangedEventArgs>("UISettingsAutoHideScrollBarsChangedEventArgs", IUISettingsAutoHideScrollBarsChangedEventArgs.iid(), ancestors, { raw => UISettingsAutoHideScrollBarsChangedEventArgs.fromAbiTake(raw) }, { raw => UISettingsAutoHideScrollBarsChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUISettingsAutoHideScrollBarsChangedEventArgs {
+        match (unsafe { query(IUISettingsAutoHideScrollBarsChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUISettingsAutoHideScrollBarsChangedEventArgs(): IUISettingsAutoHideScrollBarsChangedEventArgs {
+        defaultInterface()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.UISettingsAutoHideScrollBarsChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.UISettingsAutoHideScrollBarsChangedEventArgs;{" + IUISettingsAutoHideScrollBarsChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.UISettingsAutoHideScrollBarsChangedEventArgs", UISettingsAutoHideScrollBarsChangedEventArgs.signature(), IUISettingsAutoHideScrollBarsChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: UISettingsAutoHideScrollBarsChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UISettingsAutoHideScrollBarsChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UISettingsAutoHideScrollBarsChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UISettingsAutoHideScrollBarsChangedEventArgs {
+        UISettingsAutoHideScrollBarsChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.UISettingsMessageDurationChangedEventArgs (synthetic:Windows_UI_ViewManagement_UISettingsMessageDurationChangedEventArgs)
+@When[Windows_UI_ViewManagement == "on"]
+public class UISettingsMessageDurationChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UISettingsMessageDurationChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UISettingsMessageDurationChangedEventArgs {
+        UISettingsMessageDurationChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UISettingsMessageDurationChangedEventArgs {
+        UISettingsMessageDurationChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUISettingsMessageDurationChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UISettingsMessageDurationChangedEventArgs> {
+        let ancestors = [IUISettingsMessageDurationChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UISettingsMessageDurationChangedEventArgs>("UISettingsMessageDurationChangedEventArgs", IUISettingsMessageDurationChangedEventArgs.iid(), ancestors, { raw => UISettingsMessageDurationChangedEventArgs.fromAbiTake(raw) }, { raw => UISettingsMessageDurationChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUISettingsMessageDurationChangedEventArgs {
+        match (unsafe { query(IUISettingsMessageDurationChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUISettingsMessageDurationChangedEventArgs(): IUISettingsMessageDurationChangedEventArgs {
+        defaultInterface()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.UISettingsMessageDurationChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.UISettingsMessageDurationChangedEventArgs;{" + IUISettingsMessageDurationChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.UISettingsMessageDurationChangedEventArgs", UISettingsMessageDurationChangedEventArgs.signature(), IUISettingsMessageDurationChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: UISettingsMessageDurationChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UISettingsMessageDurationChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UISettingsMessageDurationChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UISettingsMessageDurationChangedEventArgs {
+        UISettingsMessageDurationChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.UIViewSettings (synthetic:Windows_UI_ViewManagement_UIViewSettings)
+@When[Windows_UI_ViewManagement == "on"]
+public class UIViewSettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UIViewSettings> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UIViewSettings {
+        UIViewSettings(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UIViewSettings {
+        UIViewSettings(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUIViewSettings.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UIViewSettings> {
+        let ancestors = [IUIViewSettings.iid(), IUIViewSettingsPreferredInteractionMode.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UIViewSettings>("UIViewSettings", IUIViewSettings.iid(), ancestors, { raw => UIViewSettings.fromAbiTake(raw) }, { raw => UIViewSettings.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUIViewSettings {
+        match (unsafe { query(IUIViewSettings.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUIViewSettings(): IUIViewSettings {
+        defaultInterface()
+    }
+
+    public func asIUIViewSettingsPreferredInteractionMode(): IUIViewSettingsPreferredInteractionMode {
+        match (unsafe { query<IUIViewSettingsPreferredInteractionMode>(IUIViewSettingsPreferredInteractionMode.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop UserInteractionMode: UserInteractionMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UserInteractionMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return UserInteractionMode(result__)
+        }
+    }
+
+    public static func GetForCurrentView(): UIViewSettings {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UIViewSettings, IUIViewSettingsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<UIViewSettings>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return UIViewSettings.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.UIViewSettings"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.UIViewSettings;{" + IUIViewSettings.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.UIViewSettings", UIViewSettings.signature(), IUIViewSettings.iid())
+    }
+
+    public static func intoWinrtHandle(value: UIViewSettings): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UIViewSettings {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UIViewSettings.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UIViewSettings {
+        UIViewSettings.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.UserInteractionMode (synthetic:Windows_UI_ViewManagement_UserInteractionMode)
+@When[Windows_UI_ViewManagement == "on"]
+public struct UserInteractionMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const UserInteractionMode_Mouse = UserInteractionMode(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const UserInteractionMode_Touch = UserInteractionMode(1)
+
+// Windows.UI.ViewManagement.ViewManagementViewScalingContract (synthetic:Windows_UI_ViewManagement_ViewManagementViewScalingContract)
+@When[Windows_UI_ViewManagement == "on"]
+@C
+public struct ViewManagementViewScalingContract {
+    public var reserved: Int32 = 0
+}
+
+// Windows.UI.ViewManagement.ViewModePreferences (synthetic:Windows_UI_ViewManagement_ViewModePreferences)
+@When[Windows_UI_ViewManagement == "on"]
+public class ViewModePreferences <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ViewModePreferences> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ViewModePreferences {
+        ViewModePreferences(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ViewModePreferences {
+        ViewModePreferences(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IViewModePreferences.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ViewModePreferences> {
+        let ancestors = [IViewModePreferences.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ViewModePreferences>("ViewModePreferences", IViewModePreferences.iid(), ancestors, { raw => ViewModePreferences.fromAbiTake(raw) }, { raw => ViewModePreferences.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IViewModePreferences {
+        match (unsafe { query(IViewModePreferences.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIViewModePreferences(): IViewModePreferences {
+        defaultInterface()
+    }
+
+    public mut prop CustomSize: Windows_Foundation.Size {
+        get() {
+            var result__ = Windows_Foundation.Size()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CustomSize(CPointer<Windows_Foundation.Size>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCustomSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ViewSizePreference: ViewSizePreference {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ViewSizePreference(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ViewSizePreference(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetViewSizePreference(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func CreateDefault(mode: ApplicationViewMode): ViewModePreferences {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ViewModePreferences, IViewModePreferencesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateDefault(mode.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ViewModePreferences>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ViewModePreferences.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.ViewManagement.ViewModePreferences"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.ViewManagement.ViewModePreferences;{" + IViewModePreferences.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.ViewManagement.ViewModePreferences", ViewModePreferences.signature(), IViewModePreferences.iid())
+    }
+
+    public static func intoWinrtHandle(value: ViewModePreferences): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ViewModePreferences {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ViewModePreferences.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ViewModePreferences {
+        ViewModePreferences.viewOf(raw)
+    }
+}
+
+// Windows.UI.ViewManagement.ViewSizePreference (synthetic:Windows_UI_ViewManagement_ViewSizePreference)
+@When[Windows_UI_ViewManagement == "on"]
+public struct ViewSizePreference {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_ViewManagement == "on"]
+public const ViewSizePreference_Default = ViewSizePreference(0)
+@When[Windows_UI_ViewManagement == "on"]
+public const ViewSizePreference_UseLess = ViewSizePreference(1)
+@When[Windows_UI_ViewManagement == "on"]
+public const ViewSizePreference_UseHalf = ViewSizePreference(2)
+@When[Windows_UI_ViewManagement == "on"]
+public const ViewSizePreference_UseMore = ViewSizePreference(3)
+@When[Windows_UI_ViewManagement == "on"]
+public const ViewSizePreference_UseMinimum = ViewSizePreference(4)
+@When[Windows_UI_ViewManagement == "on"]
+public const ViewSizePreference_UseNone = ViewSizePreference(5)
+@When[Windows_UI_ViewManagement == "on"]
+public const ViewSizePreference_Custom = ViewSizePreference(6)

@@ -2,12 +2,3686 @@
 
 package windows_sys.Win32.Graphics.Gdi
 
+import windows_polyfill as windows_polyfill
+
+@When[Windows_Win32_Foundation == "on"]
+import windows_sys.Win32.Foundation as Windows_Win32_Foundation
+
+// Windows.Win32.Graphics.Gdi.ABC (synthetic:Windows_Win32_Graphics_Gdi_ABC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ABC {
+    public var abcA: Int32 = 0i32
+    public var abcB: UInt32 = 0u32
+    public var abcC: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.ABCFLOAT (synthetic:Windows_Win32_Graphics_Gdi_ABCFLOAT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ABCFLOAT {
+    public var abcfA: Float32 = 0.0f32
+    public var abcfB: Float32 = 0.0f32
+    public var abcfC: Float32 = 0.0f32
+}
+
+// Windows.Win32.Graphics.Gdi.ABORTPATH (synthetic:Windows_Win32_Graphics_Gdi_ABORTPATH)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ABORTPATH {
+    public var emr: EMR = EMR()
+}
+
+// Windows.Win32.Graphics.Gdi.ARC_DIRECTION (synthetic:Windows_Win32_Graphics_Gdi_ARC_DIRECTION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct ARC_DIRECTION {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ARC_DIRECTION_AD_COUNTERCLOCKWISE = ARC_DIRECTION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ARC_DIRECTION_AD_CLOCKWISE = ARC_DIRECTION(2)
+
+// Windows.Win32.Graphics.Gdi.AXESLISTA (synthetic:Windows_Win32_Graphics_Gdi_AXESLISTA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct AXESLISTA {
+    public var axlReserved: UInt32 = 0u32
+    public var axlNumAxes: UInt32 = 0u32
+    public var axlAxisInfo: VArray<AXISINFOA, $16> = VArray<AXISINFOA, $16>(repeat: AXISINFOA())
+}
+
+// Windows.Win32.Graphics.Gdi.AXESLISTW (synthetic:Windows_Win32_Graphics_Gdi_AXESLISTW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct AXESLISTW {
+    public var axlReserved: UInt32 = 0u32
+    public var axlNumAxes: UInt32 = 0u32
+    public var axlAxisInfo: VArray<AXISINFOW, $16> = VArray<AXISINFOW, $16>(repeat: AXISINFOW())
+}
+
+// Windows.Win32.Graphics.Gdi.AXISINFOA (synthetic:Windows_Win32_Graphics_Gdi_AXISINFOA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct AXISINFOA {
+    public var axMinValue: Int32 = 0i32
+    public var axMaxValue: Int32 = 0i32
+    public var axAxisName: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.AXISINFOW (synthetic:Windows_Win32_Graphics_Gdi_AXISINFOW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct AXISINFOW {
+    public var axMinValue: Int32 = 0i32
+    public var axMaxValue: Int32 = 0i32
+    public var axAxisName: VArray<UInt16, $16> = VArray<UInt16, $16>(repeat: 0u16)
+}
+
+// Windows.Win32.Graphics.Gdi.BACKGROUND_MODE (synthetic:Windows_Win32_Graphics_Gdi_BACKGROUND_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct BACKGROUND_MODE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BACKGROUND_MODE_OPAQUE = BACKGROUND_MODE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BACKGROUND_MODE_TRANSPARENT = BACKGROUND_MODE(1)
+
+// Windows.Win32.Graphics.Gdi.BITMAP (synthetic:Windows_Win32_Graphics_Gdi_BITMAP)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAP {
+    public var bmType: Int32 = 0i32
+    public var bmWidth: Int32 = 0i32
+    public var bmHeight: Int32 = 0i32
+    public var bmWidthBytes: Int32 = 0i32
+    public var bmPlanes: UInt16 = 0u16
+    public var bmBitsPixel: UInt16 = 0u16
+    public var bmBits: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.BITMAPCOREHEADER (synthetic:Windows_Win32_Graphics_Gdi_BITMAPCOREHEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPCOREHEADER {
+    public var bcSize: UInt32 = 0u32
+    public var bcWidth: UInt16 = 0u16
+    public var bcHeight: UInt16 = 0u16
+    public var bcPlanes: UInt16 = 0u16
+    public var bcBitCount: UInt16 = 0u16
+}
+
+// Windows.Win32.Graphics.Gdi.BITMAPCOREINFO (synthetic:Windows_Win32_Graphics_Gdi_BITMAPCOREINFO)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPCOREINFO {
+    public var bmciHeader: BITMAPCOREHEADER = BITMAPCOREHEADER()
+    public var bmciColors: VArray<RGBTRIPLE, $1> = VArray<RGBTRIPLE, $1>(repeat: RGBTRIPLE())
+}
+
+// Windows.Win32.Graphics.Gdi.BITMAPFILEHEADER (synthetic:Windows_Win32_Graphics_Gdi_BITMAPFILEHEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPFILEHEADER {
+    public var bfType: UInt16 = 0u16
+    public var bfSize: UInt32 = 0u32
+    public var bfReserved1: UInt16 = 0u16
+    public var bfReserved2: UInt16 = 0u16
+    public var bfOffBits: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.BITMAPINFO (synthetic:Windows_Win32_Graphics_Gdi_BITMAPINFO)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPINFO {
+    public var bmiHeader: BITMAPINFOHEADER = BITMAPINFOHEADER()
+    public var bmiColors: VArray<RGBQUAD, $1> = VArray<RGBQUAD, $1>(repeat: RGBQUAD())
+}
+
+// Windows.Win32.Graphics.Gdi.BITMAPINFOHEADER (synthetic:Windows_Win32_Graphics_Gdi_BITMAPINFOHEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPINFOHEADER {
+    public var biSize: UInt32 = 0u32
+    public var biWidth: Int32 = 0i32
+    public var biHeight: Int32 = 0i32
+    public var biPlanes: UInt16 = 0u16
+    public var biBitCount: UInt16 = 0u16
+    public var biCompression: UInt32 = 0u32
+    public var biSizeImage: UInt32 = 0u32
+    public var biXPelsPerMeter: Int32 = 0i32
+    public var biYPelsPerMeter: Int32 = 0i32
+    public var biClrUsed: UInt32 = 0u32
+    public var biClrImportant: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.BITMAPV4HEADER (synthetic:Windows_Win32_Graphics_Gdi_BITMAPV4HEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPV4HEADER {
+    public var bV4Size: UInt32 = 0u32
+    public var bV4Width: Int32 = 0i32
+    public var bV4Height: Int32 = 0i32
+    public var bV4Planes: UInt16 = 0u16
+    public var bV4BitCount: UInt16 = 0u16
+    public var bV4V4Compression: UInt32 = 0u32
+    public var bV4SizeImage: UInt32 = 0u32
+    public var bV4XPelsPerMeter: Int32 = 0i32
+    public var bV4YPelsPerMeter: Int32 = 0i32
+    public var bV4ClrUsed: UInt32 = 0u32
+    public var bV4ClrImportant: UInt32 = 0u32
+    public var bV4RedMask: UInt32 = 0u32
+    public var bV4GreenMask: UInt32 = 0u32
+    public var bV4BlueMask: UInt32 = 0u32
+    public var bV4AlphaMask: UInt32 = 0u32
+    public var bV4CSType: UInt32 = 0u32
+    public var bV4Endpoints: CIEXYZTRIPLE = CIEXYZTRIPLE()
+    public var bV4GammaRed: UInt32 = 0u32
+    public var bV4GammaGreen: UInt32 = 0u32
+    public var bV4GammaBlue: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.BITMAPV5HEADER (synthetic:Windows_Win32_Graphics_Gdi_BITMAPV5HEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BITMAPV5HEADER {
+    public var bV5Size: UInt32 = 0u32
+    public var bV5Width: Int32 = 0i32
+    public var bV5Height: Int32 = 0i32
+    public var bV5Planes: UInt16 = 0u16
+    public var bV5BitCount: UInt16 = 0u16
+    public var bV5Compression: UInt32 = 0u32
+    public var bV5SizeImage: UInt32 = 0u32
+    public var bV5XPelsPerMeter: Int32 = 0i32
+    public var bV5YPelsPerMeter: Int32 = 0i32
+    public var bV5ClrUsed: UInt32 = 0u32
+    public var bV5ClrImportant: UInt32 = 0u32
+    public var bV5RedMask: UInt32 = 0u32
+    public var bV5GreenMask: UInt32 = 0u32
+    public var bV5BlueMask: UInt32 = 0u32
+    public var bV5AlphaMask: UInt32 = 0u32
+    public var bV5CSType: UInt32 = 0u32
+    public var bV5Endpoints: CIEXYZTRIPLE = CIEXYZTRIPLE()
+    public var bV5GammaRed: UInt32 = 0u32
+    public var bV5GammaGreen: UInt32 = 0u32
+    public var bV5GammaBlue: UInt32 = 0u32
+    public var bV5Intent: UInt32 = 0u32
+    public var bV5ProfileData: UInt32 = 0u32
+    public var bV5ProfileSize: UInt32 = 0u32
+    public var bV5Reserved: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.BI_COMPRESSION (synthetic:Windows_Win32_Graphics_Gdi_BI_COMPRESSION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct BI_COMPRESSION {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BI_COMPRESSION_BI_RGB = BI_COMPRESSION(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BI_COMPRESSION_BI_RLE8 = BI_COMPRESSION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BI_COMPRESSION_BI_RLE4 = BI_COMPRESSION(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BI_COMPRESSION_BI_BITFIELDS = BI_COMPRESSION(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BI_COMPRESSION_BI_JPEG = BI_COMPRESSION(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BI_COMPRESSION_BI_PNG = BI_COMPRESSION(5)
+
+// Windows.Win32.Graphics.Gdi.BLENDFUNCTION (synthetic:Windows_Win32_Graphics_Gdi_BLENDFUNCTION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct BLENDFUNCTION {
+    public var BlendOp: UInt8 = 0u8
+    public var BlendFlags: UInt8 = 0u8
+    public var SourceConstantAlpha: UInt8 = 0u8
+    public var AlphaFormat: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.BRUSH_STYLE (synthetic:Windows_Win32_Graphics_Gdi_BRUSH_STYLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct BRUSH_STYLE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_SOLID = BRUSH_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_NULL = BRUSH_STYLE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_HOLLOW = BRUSH_STYLE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_HATCHED = BRUSH_STYLE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_PATTERN = BRUSH_STYLE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_INDEXED = BRUSH_STYLE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_DIBPATTERN = BRUSH_STYLE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_DIBPATTERNPT = BRUSH_STYLE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_PATTERN8X8 = BRUSH_STYLE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_DIBPATTERN8X8 = BRUSH_STYLE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const BRUSH_STYLE_BS_MONOPATTERN = BRUSH_STYLE(9)
+
+// Windows.Win32.Graphics.Gdi.CDS_TYPE (synthetic:Windows_Win32_Graphics_Gdi_CDS_TYPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct CDS_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: CDS_TYPE): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: CDS_TYPE): CDS_TYPE {
+        return CDS_TYPE(value | other.value)
+    }
+    public operator func &(other: CDS_TYPE): CDS_TYPE {
+        return CDS_TYPE(value & other.value)
+    }
+    public operator func ^(other: CDS_TYPE): CDS_TYPE {
+        return CDS_TYPE(value ^ other.value)
+    }
+    public operator func !(): CDS_TYPE {
+        return CDS_TYPE(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_FULLSCREEN = CDS_TYPE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_GLOBAL = CDS_TYPE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_NORESET = CDS_TYPE(268435456)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_RESET = CDS_TYPE(1073741824)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_SET_PRIMARY = CDS_TYPE(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_TEST = CDS_TYPE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_UPDATEREGISTRY = CDS_TYPE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_VIDEOPARAMETERS = CDS_TYPE(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_ENABLE_UNSAFE_MODES = CDS_TYPE(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_DISABLE_UNSAFE_MODES = CDS_TYPE(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CDS_TYPE_CDS_RESET_EX = CDS_TYPE(536870912)
+
+// Windows.Win32.Graphics.Gdi.CFP_ALLOCPROC (synthetic:Windows_Win32_Graphics_Gdi_CFP_ALLOCPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type CFP_ALLOCPROC = CFunc<(CPointer<Unit>) -> CPointer<Unit>>
+
+// Windows.Win32.Graphics.Gdi.CFP_FREEPROC (synthetic:Windows_Win32_Graphics_Gdi_CFP_FREEPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type CFP_FREEPROC = CFunc<(CPointer<Unit>) -> Unit>
+
+// Windows.Win32.Graphics.Gdi.CFP_REALLOCPROC (synthetic:Windows_Win32_Graphics_Gdi_CFP_REALLOCPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type CFP_REALLOCPROC = CFunc<(CPointer<Unit>, CPointer<Unit>) -> CPointer<Unit>>
+
+// Windows.Win32.Graphics.Gdi.CIEXYZ (synthetic:Windows_Win32_Graphics_Gdi_CIEXYZ)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct CIEXYZ {
+    public var ciexyzX: Int32 = 0i32
+    public var ciexyzY: Int32 = 0i32
+    public var ciexyzZ: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.CIEXYZTRIPLE (synthetic:Windows_Win32_Graphics_Gdi_CIEXYZTRIPLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct CIEXYZTRIPLE {
+    public var ciexyzRed: CIEXYZ = CIEXYZ()
+    public var ciexyzGreen: CIEXYZ = CIEXYZ()
+    public var ciexyzBlue: CIEXYZ = CIEXYZ()
+}
+
+// Windows.Win32.Graphics.Gdi.COLORADJUSTMENT (synthetic:Windows_Win32_Graphics_Gdi_COLORADJUSTMENT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct COLORADJUSTMENT {
+    public var caSize: UInt16 = 0u16
+    public var caFlags: UInt16 = 0u16
+    public var caIlluminantIndex: UInt16 = 0u16
+    public var caRedGamma: UInt16 = 0u16
+    public var caGreenGamma: UInt16 = 0u16
+    public var caBlueGamma: UInt16 = 0u16
+    public var caReferenceBlack: UInt16 = 0u16
+    public var caReferenceWhite: UInt16 = 0u16
+    public var caContrast: Int16 = 0i16
+    public var caBrightness: Int16 = 0i16
+    public var caColorfulness: Int16 = 0i16
+    public var caRedGreenTint: Int16 = 0i16
+}
+
+// Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_ENCODING (synthetic:Windows_Win32_Graphics_Gdi_CREATE_FONT_PACKAGE_SUBSET_ENCODING)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct CREATE_FONT_PACKAGE_SUBSET_ENCODING {
+    public let value: Int16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CREATE_FONT_PACKAGE_SUBSET_ENCODING_TTFCFP_STD_MAC_CHAR_SET = CREATE_FONT_PACKAGE_SUBSET_ENCODING(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CREATE_FONT_PACKAGE_SUBSET_ENCODING_TTFCFP_SYMBOL_CHAR_SET = CREATE_FONT_PACKAGE_SUBSET_ENCODING(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CREATE_FONT_PACKAGE_SUBSET_ENCODING_TTFCFP_UNICODE_CHAR_SET = CREATE_FONT_PACKAGE_SUBSET_ENCODING(1)
+
+// Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_PLATFORM (synthetic:Windows_Win32_Graphics_Gdi_CREATE_FONT_PACKAGE_SUBSET_PLATFORM)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct CREATE_FONT_PACKAGE_SUBSET_PLATFORM {
+    public let value: Int16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CREATE_FONT_PACKAGE_SUBSET_PLATFORM_TTFCFP_UNICODE_PLATFORMID = CREATE_FONT_PACKAGE_SUBSET_PLATFORM(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CREATE_FONT_PACKAGE_SUBSET_PLATFORM_TTFCFP_ISO_PLATFORMID = CREATE_FONT_PACKAGE_SUBSET_PLATFORM(2)
+
+// Windows.Win32.Graphics.Gdi.CREATE_POLYGON_RGN_MODE (synthetic:Windows_Win32_Graphics_Gdi_CREATE_POLYGON_RGN_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct CREATE_POLYGON_RGN_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CREATE_POLYGON_RGN_MODE_ALTERNATE = CREATE_POLYGON_RGN_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const CREATE_POLYGON_RGN_MODE_WINDING = CREATE_POLYGON_RGN_MODE(2)
+
+// Windows.Win32.Graphics.Gdi.DC_LAYOUT (synthetic:Windows_Win32_Graphics_Gdi_DC_LAYOUT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DC_LAYOUT {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DC_LAYOUT): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DC_LAYOUT): DC_LAYOUT {
+        return DC_LAYOUT(value | other.value)
+    }
+    public operator func &(other: DC_LAYOUT): DC_LAYOUT {
+        return DC_LAYOUT(value & other.value)
+    }
+    public operator func ^(other: DC_LAYOUT): DC_LAYOUT {
+        return DC_LAYOUT(value ^ other.value)
+    }
+    public operator func !(): DC_LAYOUT {
+        return DC_LAYOUT(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DC_LAYOUT_LAYOUT_BITMAPORIENTATIONPRESERVED = DC_LAYOUT(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DC_LAYOUT_LAYOUT_RTL = DC_LAYOUT(1)
+
+// Windows.Win32.Graphics.Gdi.DESIGNVECTOR (synthetic:Windows_Win32_Graphics_Gdi_DESIGNVECTOR)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DESIGNVECTOR {
+    public var dvReserved: UInt32 = 0u32
+    public var dvNumAxes: UInt32 = 0u32
+    public var dvValues: VArray<Int32, $16> = VArray<Int32, $16>(repeat: 0i32)
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEA (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA {
+    public var dmDeviceName: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+    public var dmSpecVersion: UInt16 = 0u16
+    public var dmDriverVersion: UInt16 = 0u16
+    public var dmSize: UInt16 = 0u16
+    public var dmDriverExtra: UInt16 = 0u16
+    public var dmFields: UInt32 = 0u32
+    public var Anonymous1: DEVMODEA__Anonymous1_e__Union = DEVMODEA__Anonymous1_e__Union()
+    public var dmColor: Int16 = 0i16
+    public var dmDuplex: Int16 = 0i16
+    public var dmYResolution: Int16 = 0i16
+    public var dmTTOption: Int16 = 0i16
+    public var dmCollate: Int16 = 0i16
+    public var dmFormName: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+    public var dmLogPixels: UInt16 = 0u16
+    public var dmBitsPerPel: UInt32 = 0u32
+    public var dmPelsWidth: UInt32 = 0u32
+    public var dmPelsHeight: UInt32 = 0u32
+    public var Anonymous2: DEVMODEA__Anonymous2_e__Union = DEVMODEA__Anonymous2_e__Union()
+    public var dmDisplayFrequency: UInt32 = 0u32
+    public var dmICMMethod: UInt32 = 0u32
+    public var dmICMIntent: UInt32 = 0u32
+    public var dmMediaType: UInt32 = 0u32
+    public var dmDitherType: UInt32 = 0u32
+    public var dmReserved1: UInt32 = 0u32
+    public var dmReserved2: UInt32 = 0u32
+    public var dmPanningWidth: UInt32 = 0u32
+    public var dmPanningHeight: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous1_e__Union (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEA__Anonymous1_e__Union)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA__Anonymous1_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Anonymous1: DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous2: DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous1_e__Union._Anonymous1_e__Struct (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA__Anonymous1_e__Union__Anonymous1_e__Struct {
+    public var dmOrientation: Int16 = 0i16
+    public var dmPaperSize: Int16 = 0i16
+    public var dmPaperLength: Int16 = 0i16
+    public var dmPaperWidth: Int16 = 0i16
+    public var dmScale: Int16 = 0i16
+    public var dmCopies: Int16 = 0i16
+    public var dmDefaultSource: Int16 = 0i16
+    public var dmPrintQuality: Int16 = 0i16
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous1_e__Union._Anonymous2_e__Struct (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA__Anonymous1_e__Union__Anonymous2_e__Struct {
+    public var dmPosition: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var dmDisplayOrientation: UInt32 = 0u32
+    public var dmDisplayFixedOutput: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous2_e__Union (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEA__Anonymous2_e__Union)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEA__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop dmDisplayFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dmNup: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEW (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW {
+    public var dmDeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var dmSpecVersion: UInt16 = 0u16
+    public var dmDriverVersion: UInt16 = 0u16
+    public var dmSize: UInt16 = 0u16
+    public var dmDriverExtra: UInt16 = 0u16
+    public var dmFields: UInt32 = 0u32
+    public var Anonymous1: DEVMODEW__Anonymous1_e__Union = DEVMODEW__Anonymous1_e__Union()
+    public var dmColor: Int16 = 0i16
+    public var dmDuplex: Int16 = 0i16
+    public var dmYResolution: Int16 = 0i16
+    public var dmTTOption: Int16 = 0i16
+    public var dmCollate: Int16 = 0i16
+    public var dmFormName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var dmLogPixels: UInt16 = 0u16
+    public var dmBitsPerPel: UInt32 = 0u32
+    public var dmPelsWidth: UInt32 = 0u32
+    public var dmPelsHeight: UInt32 = 0u32
+    public var Anonymous2: DEVMODEW__Anonymous2_e__Union = DEVMODEW__Anonymous2_e__Union()
+    public var dmDisplayFrequency: UInt32 = 0u32
+    public var dmICMMethod: UInt32 = 0u32
+    public var dmICMIntent: UInt32 = 0u32
+    public var dmMediaType: UInt32 = 0u32
+    public var dmDitherType: UInt32 = 0u32
+    public var dmReserved1: UInt32 = 0u32
+    public var dmReserved2: UInt32 = 0u32
+    public var dmPanningWidth: UInt32 = 0u32
+    public var dmPanningHeight: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous1_e__Union (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEW__Anonymous1_e__Union)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW__Anonymous1_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Anonymous1: DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous2: DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous1_e__Union._Anonymous1_e__Struct (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW__Anonymous1_e__Union__Anonymous1_e__Struct {
+    public var dmOrientation: Int16 = 0i16
+    public var dmPaperSize: Int16 = 0i16
+    public var dmPaperLength: Int16 = 0i16
+    public var dmPaperWidth: Int16 = 0i16
+    public var dmScale: Int16 = 0i16
+    public var dmCopies: Int16 = 0i16
+    public var dmDefaultSource: Int16 = 0i16
+    public var dmPrintQuality: Int16 = 0i16
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous1_e__Union._Anonymous2_e__Struct (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW__Anonymous1_e__Union__Anonymous2_e__Struct {
+    public var dmPosition: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var dmDisplayOrientation: UInt32 = 0u32
+    public var dmDisplayFixedOutput: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous2_e__Union (synthetic:Windows_Win32_Graphics_Gdi_DEVMODEW__Anonymous2_e__Union)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DEVMODEW__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop dmDisplayFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dmNup: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE (synthetic:Windows_Win32_Graphics_Gdi_DEVMODE_COLLATE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DEVMODE_COLLATE {
+    public let value: Int16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_COLLATE_DMCOLLATE_FALSE = DEVMODE_COLLATE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_COLLATE_DMCOLLATE_TRUE = DEVMODE_COLLATE(1)
+
+// Windows.Win32.Graphics.Gdi.DEVMODE_COLOR (synthetic:Windows_Win32_Graphics_Gdi_DEVMODE_COLOR)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DEVMODE_COLOR {
+    public let value: Int16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_COLOR_DMCOLOR_MONOCHROME = DEVMODE_COLOR(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_COLOR_DMCOLOR_COLOR = DEVMODE_COLOR(2)
+
+// Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_FIXED_OUTPUT (synthetic:Windows_Win32_Graphics_Gdi_DEVMODE_DISPLAY_FIXED_OUTPUT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DEVMODE_DISPLAY_FIXED_OUTPUT {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DISPLAY_FIXED_OUTPUT_DMDFO_DEFAULT = DEVMODE_DISPLAY_FIXED_OUTPUT(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DISPLAY_FIXED_OUTPUT_DMDFO_STRETCH = DEVMODE_DISPLAY_FIXED_OUTPUT(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DISPLAY_FIXED_OUTPUT_DMDFO_CENTER = DEVMODE_DISPLAY_FIXED_OUTPUT(2)
+
+// Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION (synthetic:Windows_Win32_Graphics_Gdi_DEVMODE_DISPLAY_ORIENTATION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DEVMODE_DISPLAY_ORIENTATION {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DISPLAY_ORIENTATION_DMDO_DEFAULT = DEVMODE_DISPLAY_ORIENTATION(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DISPLAY_ORIENTATION_DMDO_90 = DEVMODE_DISPLAY_ORIENTATION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DISPLAY_ORIENTATION_DMDO_180 = DEVMODE_DISPLAY_ORIENTATION(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DISPLAY_ORIENTATION_DMDO_270 = DEVMODE_DISPLAY_ORIENTATION(3)
+
+// Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX (synthetic:Windows_Win32_Graphics_Gdi_DEVMODE_DUPLEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DEVMODE_DUPLEX {
+    public let value: Int16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DUPLEX_DMDUP_SIMPLEX = DEVMODE_DUPLEX(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DUPLEX_DMDUP_VERTICAL = DEVMODE_DUPLEX(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_DUPLEX_DMDUP_HORIZONTAL = DEVMODE_DUPLEX(3)
+
+// Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_DEVMODE_FIELD_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DEVMODE_FIELD_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DEVMODE_FIELD_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DEVMODE_FIELD_FLAGS): DEVMODE_FIELD_FLAGS {
+        return DEVMODE_FIELD_FLAGS(value | other.value)
+    }
+    public operator func &(other: DEVMODE_FIELD_FLAGS): DEVMODE_FIELD_FLAGS {
+        return DEVMODE_FIELD_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DEVMODE_FIELD_FLAGS): DEVMODE_FIELD_FLAGS {
+        return DEVMODE_FIELD_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DEVMODE_FIELD_FLAGS {
+        return DEVMODE_FIELD_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_SPECVERSION = DEVMODE_FIELD_FLAGS(1025)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_ORIENTATION = DEVMODE_FIELD_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PAPERSIZE = DEVMODE_FIELD_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PAPERLENGTH = DEVMODE_FIELD_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PAPERWIDTH = DEVMODE_FIELD_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_SCALE = DEVMODE_FIELD_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_POSITION = DEVMODE_FIELD_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_NUP = DEVMODE_FIELD_FLAGS(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_DISPLAYORIENTATION = DEVMODE_FIELD_FLAGS(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_COPIES = DEVMODE_FIELD_FLAGS(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_DEFAULTSOURCE = DEVMODE_FIELD_FLAGS(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PRINTQUALITY = DEVMODE_FIELD_FLAGS(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_COLOR = DEVMODE_FIELD_FLAGS(2048)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_DUPLEX = DEVMODE_FIELD_FLAGS(4096)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_YRESOLUTION = DEVMODE_FIELD_FLAGS(8192)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_TTOPTION = DEVMODE_FIELD_FLAGS(16384)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_COLLATE = DEVMODE_FIELD_FLAGS(32768)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_FORMNAME = DEVMODE_FIELD_FLAGS(65536)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_LOGPIXELS = DEVMODE_FIELD_FLAGS(131072)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_BITSPERPEL = DEVMODE_FIELD_FLAGS(262144)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PELSWIDTH = DEVMODE_FIELD_FLAGS(524288)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PELSHEIGHT = DEVMODE_FIELD_FLAGS(1048576)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_DISPLAYFLAGS = DEVMODE_FIELD_FLAGS(2097152)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_DISPLAYFREQUENCY = DEVMODE_FIELD_FLAGS(4194304)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_ICMMETHOD = DEVMODE_FIELD_FLAGS(8388608)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_ICMINTENT = DEVMODE_FIELD_FLAGS(16777216)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_MEDIATYPE = DEVMODE_FIELD_FLAGS(33554432)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_DITHERTYPE = DEVMODE_FIELD_FLAGS(67108864)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PANNINGWIDTH = DEVMODE_FIELD_FLAGS(134217728)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PANNINGHEIGHT = DEVMODE_FIELD_FLAGS(268435456)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_DISPLAYFIXEDOUTPUT = DEVMODE_FIELD_FLAGS(536870912)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_INTERLACED = DEVMODE_FIELD_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_UPDATE = DEVMODE_FIELD_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_COPY = DEVMODE_FIELD_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_PROMPT = DEVMODE_FIELD_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_MODIFY = DEVMODE_FIELD_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_IN_BUFFER = DEVMODE_FIELD_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_IN_PROMPT = DEVMODE_FIELD_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_OUT_BUFFER = DEVMODE_FIELD_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_FIELD_FLAGS_DM_OUT_DEFAULT = DEVMODE_FIELD_FLAGS(1)
+
+// Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION (synthetic:Windows_Win32_Graphics_Gdi_DEVMODE_TRUETYPE_OPTION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DEVMODE_TRUETYPE_OPTION {
+    public let value: Int16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_TRUETYPE_OPTION_DMTT_BITMAP = DEVMODE_TRUETYPE_OPTION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_TRUETYPE_OPTION_DMTT_DOWNLOAD = DEVMODE_TRUETYPE_OPTION(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_TRUETYPE_OPTION_DMTT_SUBDEV = DEVMODE_TRUETYPE_OPTION(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DEVMODE_TRUETYPE_OPTION_DMTT_DOWNLOAD_OUTLINE = DEVMODE_TRUETYPE_OPTION(4)
+
+// Windows.Win32.Graphics.Gdi.DFCS_STATE (synthetic:Windows_Win32_Graphics_Gdi_DFCS_STATE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DFCS_STATE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DFCS_STATE): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DFCS_STATE): DFCS_STATE {
+        return DFCS_STATE(value | other.value)
+    }
+    public operator func &(other: DFCS_STATE): DFCS_STATE {
+        return DFCS_STATE(value & other.value)
+    }
+    public operator func ^(other: DFCS_STATE): DFCS_STATE {
+        return DFCS_STATE(value ^ other.value)
+    }
+    public operator func !(): DFCS_STATE {
+        return DFCS_STATE(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_CAPTIONCLOSE = DFCS_STATE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_CAPTIONMIN = DFCS_STATE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_CAPTIONMAX = DFCS_STATE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_CAPTIONRESTORE = DFCS_STATE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_CAPTIONHELP = DFCS_STATE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_MENUARROW = DFCS_STATE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_MENUCHECK = DFCS_STATE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_MENUBULLET = DFCS_STATE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_MENUARROWRIGHT = DFCS_STATE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_SCROLLUP = DFCS_STATE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_SCROLLDOWN = DFCS_STATE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_SCROLLLEFT = DFCS_STATE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_SCROLLRIGHT = DFCS_STATE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_SCROLLCOMBOBOX = DFCS_STATE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_SCROLLSIZEGRIP = DFCS_STATE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_SCROLLSIZEGRIPRIGHT = DFCS_STATE(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_BUTTONCHECK = DFCS_STATE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_BUTTONRADIOIMAGE = DFCS_STATE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_BUTTONRADIOMASK = DFCS_STATE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_BUTTONRADIO = DFCS_STATE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_BUTTON3STATE = DFCS_STATE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_BUTTONPUSH = DFCS_STATE(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_INACTIVE = DFCS_STATE(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_PUSHED = DFCS_STATE(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_CHECKED = DFCS_STATE(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_TRANSPARENT = DFCS_STATE(2048)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_HOT = DFCS_STATE(4096)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_ADJUSTRECT = DFCS_STATE(8192)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_FLAT = DFCS_STATE(16384)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFCS_STATE_DFCS_MONO = DFCS_STATE(32768)
+
+// Windows.Win32.Graphics.Gdi.DFC_TYPE (synthetic:Windows_Win32_Graphics_Gdi_DFC_TYPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DFC_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFC_TYPE_DFC_CAPTION = DFC_TYPE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFC_TYPE_DFC_MENU = DFC_TYPE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFC_TYPE_DFC_SCROLL = DFC_TYPE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFC_TYPE_DFC_BUTTON = DFC_TYPE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DFC_TYPE_DFC_POPUPMENU = DFC_TYPE(5)
+
+// Windows.Win32.Graphics.Gdi.DIBSECTION (synthetic:Windows_Win32_Graphics_Gdi_DIBSECTION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DIBSECTION {
+    public var dsBm: BITMAP = BITMAP()
+    public var dsBmih: BITMAPINFOHEADER = BITMAPINFOHEADER()
+    public var dsBitfields: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var dshSection: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var dsOffset: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.DIB_USAGE (synthetic:Windows_Win32_Graphics_Gdi_DIB_USAGE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DIB_USAGE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DIB_USAGE_DIB_RGB_COLORS = DIB_USAGE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DIB_USAGE_DIB_PAL_COLORS = DIB_USAGE(1)
+
+// Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_ADVANCED_COLOR_MODE (synthetic:Windows_Win32_Graphics_Gdi_DISPLAYCONFIG_ADVANCED_COLOR_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DISPLAYCONFIG_ADVANCED_COLOR_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_ADVANCED_COLOR_MODE_DISPLAYCONFIG_ADVANCED_COLOR_MODE_SDR = DISPLAYCONFIG_ADVANCED_COLOR_MODE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_ADVANCED_COLOR_MODE_DISPLAYCONFIG_ADVANCED_COLOR_MODE_WCG = DISPLAYCONFIG_ADVANCED_COLOR_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_ADVANCED_COLOR_MODE_DISPLAYCONFIG_ADVANCED_COLOR_MODE_HDR = DISPLAYCONFIG_ADVANCED_COLOR_MODE(2)
+
+// Windows.Win32.Graphics.Gdi.DISPLAYCONFIG_COLOR_ENCODING (synthetic:Windows_Win32_Graphics_Gdi_DISPLAYCONFIG_COLOR_ENCODING)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DISPLAYCONFIG_COLOR_ENCODING {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_COLOR_ENCODING_DISPLAYCONFIG_COLOR_ENCODING_RGB = DISPLAYCONFIG_COLOR_ENCODING(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_COLOR_ENCODING_DISPLAYCONFIG_COLOR_ENCODING_YCBCR444 = DISPLAYCONFIG_COLOR_ENCODING(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_COLOR_ENCODING_DISPLAYCONFIG_COLOR_ENCODING_YCBCR422 = DISPLAYCONFIG_COLOR_ENCODING(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_COLOR_ENCODING_DISPLAYCONFIG_COLOR_ENCODING_YCBCR420 = DISPLAYCONFIG_COLOR_ENCODING(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAYCONFIG_COLOR_ENCODING_DISPLAYCONFIG_COLOR_ENCODING_INTENSITY = DISPLAYCONFIG_COLOR_ENCODING(4)
+
+// Windows.Win32.Graphics.Gdi.DISPLAY_DEVICEA (synthetic:Windows_Win32_Graphics_Gdi_DISPLAY_DEVICEA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DISPLAY_DEVICEA {
+    public var cb: UInt32 = 0u32
+    public var DeviceName: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0i8)
+    public var DeviceString: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0i8)
+    public var StateFlags: UInt32 = 0u32
+    public var DeviceID: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0i8)
+    public var DeviceKey: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0i8)
+}
+
+// Windows.Win32.Graphics.Gdi.DISPLAY_DEVICEW (synthetic:Windows_Win32_Graphics_Gdi_DISPLAY_DEVICEW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DISPLAY_DEVICEW {
+    public var cb: UInt32 = 0u32
+    public var DeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var DeviceString: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+    public var StateFlags: UInt32 = 0u32
+    public var DeviceID: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+    public var DeviceKey: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+}
+
+// Windows.Win32.Graphics.Gdi.DISPLAY_DEVICE_STATE_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_DISPLAY_DEVICE_STATE_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DISPLAY_DEVICE_STATE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DISPLAY_DEVICE_STATE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DISPLAY_DEVICE_STATE_FLAGS): DISPLAY_DEVICE_STATE_FLAGS {
+        return DISPLAY_DEVICE_STATE_FLAGS(value | other.value)
+    }
+    public operator func &(other: DISPLAY_DEVICE_STATE_FLAGS): DISPLAY_DEVICE_STATE_FLAGS {
+        return DISPLAY_DEVICE_STATE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DISPLAY_DEVICE_STATE_FLAGS): DISPLAY_DEVICE_STATE_FLAGS {
+        return DISPLAY_DEVICE_STATE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DISPLAY_DEVICE_STATE_FLAGS {
+        return DISPLAY_DEVICE_STATE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_ATTACHED_TO_DESKTOP = DISPLAY_DEVICE_STATE_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_MULTI_DRIVER = DISPLAY_DEVICE_STATE_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_PRIMARY_DEVICE = DISPLAY_DEVICE_STATE_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_MIRRORING_DRIVER = DISPLAY_DEVICE_STATE_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_VGA_COMPATIBLE = DISPLAY_DEVICE_STATE_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_REMOVABLE = DISPLAY_DEVICE_STATE_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_ACC_DRIVER = DISPLAY_DEVICE_STATE_FLAGS(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_MODESPRUNED = DISPLAY_DEVICE_STATE_FLAGS(134217728)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_RDPUDD = DISPLAY_DEVICE_STATE_FLAGS(16777216)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_REMOTE = DISPLAY_DEVICE_STATE_FLAGS(67108864)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_DISCONNECT = DISPLAY_DEVICE_STATE_FLAGS(33554432)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_TS_COMPATIBLE = DISPLAY_DEVICE_STATE_FLAGS(2097152)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_UNSAFE_MODES_ON = DISPLAY_DEVICE_STATE_FLAGS(524288)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_ACTIVE = DISPLAY_DEVICE_STATE_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISPLAY_DEVICE_STATE_FLAGS_DISPLAY_DEVICE_ATTACHED = DISPLAY_DEVICE_STATE_FLAGS(2)
+
+// Windows.Win32.Graphics.Gdi.DISP_CHANGE (synthetic:Windows_Win32_Graphics_Gdi_DISP_CHANGE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DISP_CHANGE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_SUCCESSFUL = DISP_CHANGE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_RESTART = DISP_CHANGE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_FAILED = DISP_CHANGE(-1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_BADMODE = DISP_CHANGE(-2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_NOTUPDATED = DISP_CHANGE(-3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_BADFLAGS = DISP_CHANGE(-4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_BADPARAM = DISP_CHANGE(-5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DISP_CHANGE_DISP_CHANGE_BADDUALVIEW = DISP_CHANGE(-6)
+
+// Windows.Win32.Graphics.Gdi.DRAWEDGE_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_DRAWEDGE_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DRAWEDGE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DRAWEDGE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DRAWEDGE_FLAGS): DRAWEDGE_FLAGS {
+        return DRAWEDGE_FLAGS(value | other.value)
+    }
+    public operator func &(other: DRAWEDGE_FLAGS): DRAWEDGE_FLAGS {
+        return DRAWEDGE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DRAWEDGE_FLAGS): DRAWEDGE_FLAGS {
+        return DRAWEDGE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DRAWEDGE_FLAGS {
+        return DRAWEDGE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_RAISEDOUTER = DRAWEDGE_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_SUNKENOUTER = DRAWEDGE_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_RAISEDINNER = DRAWEDGE_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_SUNKENINNER = DRAWEDGE_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_OUTER = DRAWEDGE_FLAGS(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_INNER = DRAWEDGE_FLAGS(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_RAISED = DRAWEDGE_FLAGS(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_BDR_SUNKEN = DRAWEDGE_FLAGS(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_EDGE_RAISED = DRAWEDGE_FLAGS(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_EDGE_SUNKEN = DRAWEDGE_FLAGS(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_EDGE_ETCHED = DRAWEDGE_FLAGS(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWEDGE_FLAGS_EDGE_BUMP = DRAWEDGE_FLAGS(9)
+
+// Windows.Win32.Graphics.Gdi.DRAWSTATEPROC (synthetic:Windows_Win32_Graphics_Gdi_DRAWSTATEPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type DRAWSTATEPROC = CFunc<(HDC, IntNative, UIntNative, Int32, Int32) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.DRAWSTATE_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_DRAWSTATE_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DRAWSTATE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DRAWSTATE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DRAWSTATE_FLAGS): DRAWSTATE_FLAGS {
+        return DRAWSTATE_FLAGS(value | other.value)
+    }
+    public operator func &(other: DRAWSTATE_FLAGS): DRAWSTATE_FLAGS {
+        return DRAWSTATE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DRAWSTATE_FLAGS): DRAWSTATE_FLAGS {
+        return DRAWSTATE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DRAWSTATE_FLAGS {
+        return DRAWSTATE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DST_COMPLEX = DRAWSTATE_FLAGS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DST_TEXT = DRAWSTATE_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DST_PREFIXTEXT = DRAWSTATE_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DST_ICON = DRAWSTATE_FLAGS(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DST_BITMAP = DRAWSTATE_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DSS_NORMAL = DRAWSTATE_FLAGS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DSS_UNION = DRAWSTATE_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DSS_DISABLED = DRAWSTATE_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DSS_MONO = DRAWSTATE_FLAGS(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DSS_HIDEPREFIX = DRAWSTATE_FLAGS(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DSS_PREFIXONLY = DRAWSTATE_FLAGS(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAWSTATE_FLAGS_DSS_RIGHT = DRAWSTATE_FLAGS(32768)
+
+// Windows.Win32.Graphics.Gdi.DRAWTEXTPARAMS (synthetic:Windows_Win32_Graphics_Gdi_DRAWTEXTPARAMS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct DRAWTEXTPARAMS {
+    public var cbSize: UInt32 = 0u32
+    public var iTabLength: Int32 = 0i32
+    public var iLeftMargin: Int32 = 0i32
+    public var iRightMargin: Int32 = 0i32
+    public var uiLengthDrawn: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.DRAW_CAPTION_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_DRAW_CAPTION_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DRAW_CAPTION_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DRAW_CAPTION_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DRAW_CAPTION_FLAGS): DRAW_CAPTION_FLAGS {
+        return DRAW_CAPTION_FLAGS(value | other.value)
+    }
+    public operator func &(other: DRAW_CAPTION_FLAGS): DRAW_CAPTION_FLAGS {
+        return DRAW_CAPTION_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DRAW_CAPTION_FLAGS): DRAW_CAPTION_FLAGS {
+        return DRAW_CAPTION_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DRAW_CAPTION_FLAGS {
+        return DRAW_CAPTION_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_CAPTION_FLAGS_DC_ACTIVE = DRAW_CAPTION_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_CAPTION_FLAGS_DC_BUTTONS = DRAW_CAPTION_FLAGS(4096)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_CAPTION_FLAGS_DC_GRADIENT = DRAW_CAPTION_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_CAPTION_FLAGS_DC_ICON = DRAW_CAPTION_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_CAPTION_FLAGS_DC_INBUTTON = DRAW_CAPTION_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_CAPTION_FLAGS_DC_SMALLCAP = DRAW_CAPTION_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_CAPTION_FLAGS_DC_TEXT = DRAW_CAPTION_FLAGS(8)
+
+// Windows.Win32.Graphics.Gdi.DRAW_EDGE_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_DRAW_EDGE_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DRAW_EDGE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DRAW_EDGE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DRAW_EDGE_FLAGS): DRAW_EDGE_FLAGS {
+        return DRAW_EDGE_FLAGS(value | other.value)
+    }
+    public operator func &(other: DRAW_EDGE_FLAGS): DRAW_EDGE_FLAGS {
+        return DRAW_EDGE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DRAW_EDGE_FLAGS): DRAW_EDGE_FLAGS {
+        return DRAW_EDGE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DRAW_EDGE_FLAGS {
+        return DRAW_EDGE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_ADJUST = DRAW_EDGE_FLAGS(8192)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_BOTTOM = DRAW_EDGE_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_BOTTOMLEFT = DRAW_EDGE_FLAGS(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_BOTTOMRIGHT = DRAW_EDGE_FLAGS(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_DIAGONAL = DRAW_EDGE_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_DIAGONAL_ENDBOTTOMLEFT = DRAW_EDGE_FLAGS(25)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_DIAGONAL_ENDBOTTOMRIGHT = DRAW_EDGE_FLAGS(28)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_DIAGONAL_ENDTOPLEFT = DRAW_EDGE_FLAGS(19)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_DIAGONAL_ENDTOPRIGHT = DRAW_EDGE_FLAGS(22)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_FLAT = DRAW_EDGE_FLAGS(16384)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_LEFT = DRAW_EDGE_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_MIDDLE = DRAW_EDGE_FLAGS(2048)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_MONO = DRAW_EDGE_FLAGS(32768)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_RECT = DRAW_EDGE_FLAGS(15)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_RIGHT = DRAW_EDGE_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_SOFT = DRAW_EDGE_FLAGS(4096)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_TOP = DRAW_EDGE_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_TOPLEFT = DRAW_EDGE_FLAGS(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_EDGE_FLAGS_BF_TOPRIGHT = DRAW_EDGE_FLAGS(6)
+
+// Windows.Win32.Graphics.Gdi.DRAW_TEXT_FORMAT (synthetic:Windows_Win32_Graphics_Gdi_DRAW_TEXT_FORMAT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct DRAW_TEXT_FORMAT {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DRAW_TEXT_FORMAT): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DRAW_TEXT_FORMAT): DRAW_TEXT_FORMAT {
+        return DRAW_TEXT_FORMAT(value | other.value)
+    }
+    public operator func &(other: DRAW_TEXT_FORMAT): DRAW_TEXT_FORMAT {
+        return DRAW_TEXT_FORMAT(value & other.value)
+    }
+    public operator func ^(other: DRAW_TEXT_FORMAT): DRAW_TEXT_FORMAT {
+        return DRAW_TEXT_FORMAT(value ^ other.value)
+    }
+    public operator func !(): DRAW_TEXT_FORMAT {
+        return DRAW_TEXT_FORMAT(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_BOTTOM = DRAW_TEXT_FORMAT(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_CALCRECT = DRAW_TEXT_FORMAT(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_CENTER = DRAW_TEXT_FORMAT(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_EDITCONTROL = DRAW_TEXT_FORMAT(8192)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_END_ELLIPSIS = DRAW_TEXT_FORMAT(32768)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_EXPANDTABS = DRAW_TEXT_FORMAT(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_EXTERNALLEADING = DRAW_TEXT_FORMAT(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_HIDEPREFIX = DRAW_TEXT_FORMAT(1048576)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_INTERNAL = DRAW_TEXT_FORMAT(4096)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_LEFT = DRAW_TEXT_FORMAT(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_MODIFYSTRING = DRAW_TEXT_FORMAT(65536)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_NOCLIP = DRAW_TEXT_FORMAT(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_NOFULLWIDTHCHARBREAK = DRAW_TEXT_FORMAT(524288)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_NOPREFIX = DRAW_TEXT_FORMAT(2048)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_PATH_ELLIPSIS = DRAW_TEXT_FORMAT(16384)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_PREFIXONLY = DRAW_TEXT_FORMAT(2097152)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_RIGHT = DRAW_TEXT_FORMAT(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_RTLREADING = DRAW_TEXT_FORMAT(131072)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_SINGLELINE = DRAW_TEXT_FORMAT(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_TABSTOP = DRAW_TEXT_FORMAT(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_TOP = DRAW_TEXT_FORMAT(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_VCENTER = DRAW_TEXT_FORMAT(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_WORDBREAK = DRAW_TEXT_FORMAT(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const DRAW_TEXT_FORMAT_DT_WORD_ELLIPSIS = DRAW_TEXT_FORMAT(262144)
+
+// Windows.Win32.Graphics.Gdi.EMBEDDED_FONT_PRIV_STATUS (synthetic:Windows_Win32_Graphics_Gdi_EMBEDDED_FONT_PRIV_STATUS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct EMBEDDED_FONT_PRIV_STATUS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EMBEDDED_FONT_PRIV_STATUS_EMBED_PREVIEWPRINT = EMBEDDED_FONT_PRIV_STATUS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EMBEDDED_FONT_PRIV_STATUS_EMBED_EDITABLE = EMBEDDED_FONT_PRIV_STATUS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EMBEDDED_FONT_PRIV_STATUS_EMBED_INSTALLABLE = EMBEDDED_FONT_PRIV_STATUS(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EMBEDDED_FONT_PRIV_STATUS_EMBED_NOEMBEDDING = EMBEDDED_FONT_PRIV_STATUS(4)
+
+// Windows.Win32.Graphics.Gdi.EMBED_FONT_CHARSET (synthetic:Windows_Win32_Graphics_Gdi_EMBED_FONT_CHARSET)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct EMBED_FONT_CHARSET {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EMBED_FONT_CHARSET_CHARSET_UNICODE = EMBED_FONT_CHARSET(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EMBED_FONT_CHARSET_CHARSET_SYMBOL = EMBED_FONT_CHARSET(2)
+
+// Windows.Win32.Graphics.Gdi.EMR (synthetic:Windows_Win32_Graphics_Gdi_EMR)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMR {
+    public var iType: UInt32 = 0u32
+    public var nSize: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRALPHABLEND (synthetic:Windows_Win32_Graphics_Gdi_EMRALPHABLEND)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRALPHABLEND {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0i32
+    public var yDest: Int32 = 0i32
+    public var cxDest: Int32 = 0i32
+    public var cyDest: Int32 = 0i32
+    public var dwRop: UInt32 = 0u32
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+    public var cxSrc: Int32 = 0i32
+    public var cySrc: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRANGLEARC (synthetic:Windows_Win32_Graphics_Gdi_EMRANGLEARC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRANGLEARC {
+    public var emr: EMR = EMR()
+    public var ptlCenter: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var nRadius: UInt32 = 0u32
+    public var eStartAngle: Float32 = 0.0f32
+    public var eSweepAngle: Float32 = 0.0f32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRARC (synthetic:Windows_Win32_Graphics_Gdi_EMRARC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRARC {
+    public var emr: EMR = EMR()
+    public var rclBox: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var ptlStart: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var ptlEnd: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRBITBLT (synthetic:Windows_Win32_Graphics_Gdi_EMRBITBLT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRBITBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0i32
+    public var yDest: Int32 = 0i32
+    public var cxDest: Int32 = 0i32
+    public var cyDest: Int32 = 0i32
+    public var dwRop: UInt32 = 0u32
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRCOLORCORRECTPALETTE (synthetic:Windows_Win32_Graphics_Gdi_EMRCOLORCORRECTPALETTE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCOLORCORRECTPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPalette: UInt32 = 0u32
+    public var nFirstEntry: UInt32 = 0u32
+    public var nPalEntries: UInt32 = 0u32
+    public var nReserved: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRCOLORMATCHTOTARGET (synthetic:Windows_Win32_Graphics_Gdi_EMRCOLORMATCHTOTARGET)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCOLORMATCHTOTARGET {
+    public var emr: EMR = EMR()
+    public var dwAction: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var cbName: UInt32 = 0u32
+    public var cbData: UInt32 = 0u32
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRCREATEBRUSHINDIRECT (synthetic:Windows_Win32_Graphics_Gdi_EMRCREATEBRUSHINDIRECT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEBRUSHINDIRECT {
+    public var emr: EMR = EMR()
+    public var ihBrush: UInt32 = 0u32
+    public var lb: LOGBRUSH32 = LOGBRUSH32()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRCREATEDIBPATTERNBRUSHPT (synthetic:Windows_Win32_Graphics_Gdi_EMRCREATEDIBPATTERNBRUSHPT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEDIBPATTERNBRUSHPT {
+    public var emr: EMR = EMR()
+    public var ihBrush: UInt32 = 0u32
+    public var iUsage: UInt32 = 0u32
+    public var offBmi: UInt32 = 0u32
+    public var cbBmi: UInt32 = 0u32
+    public var offBits: UInt32 = 0u32
+    public var cbBits: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRCREATEMONOBRUSH (synthetic:Windows_Win32_Graphics_Gdi_EMRCREATEMONOBRUSH)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEMONOBRUSH {
+    public var emr: EMR = EMR()
+    public var ihBrush: UInt32 = 0u32
+    public var iUsage: UInt32 = 0u32
+    public var offBmi: UInt32 = 0u32
+    public var cbBmi: UInt32 = 0u32
+    public var offBits: UInt32 = 0u32
+    public var cbBits: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRCREATEPALETTE (synthetic:Windows_Win32_Graphics_Gdi_EMRCREATEPALETTE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0u32
+    public var lgpl: LOGPALETTE = LOGPALETTE()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRCREATEPEN (synthetic:Windows_Win32_Graphics_Gdi_EMRCREATEPEN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRCREATEPEN {
+    public var emr: EMR = EMR()
+    public var ihPen: UInt32 = 0u32
+    public var lopn: LOGPEN = LOGPEN()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRELLIPSE (synthetic:Windows_Win32_Graphics_Gdi_EMRELLIPSE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRELLIPSE {
+    public var emr: EMR = EMR()
+    public var rclBox: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+}
+
+// Windows.Win32.Graphics.Gdi.EMREOF (synthetic:Windows_Win32_Graphics_Gdi_EMREOF)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREOF {
+    public var emr: EMR = EMR()
+    public var nPalEntries: UInt32 = 0u32
+    public var offPalEntries: UInt32 = 0u32
+    public var nSizeLast: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMREXCLUDECLIPRECT (synthetic:Windows_Win32_Graphics_Gdi_EMREXCLUDECLIPRECT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXCLUDECLIPRECT {
+    public var emr: EMR = EMR()
+    public var rclClip: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+}
+
+// Windows.Win32.Graphics.Gdi.EMREXTCREATEFONTINDIRECTW (synthetic:Windows_Win32_Graphics_Gdi_EMREXTCREATEFONTINDIRECTW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTCREATEFONTINDIRECTW {
+    public var emr: EMR = EMR()
+    public var ihFont: UInt32 = 0u32
+    public var elfw: EXTLOGFONTW = EXTLOGFONTW()
+}
+
+// Windows.Win32.Graphics.Gdi.EMREXTCREATEPEN (synthetic:Windows_Win32_Graphics_Gdi_EMREXTCREATEPEN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTCREATEPEN {
+    public var emr: EMR = EMR()
+    public var ihPen: UInt32 = 0u32
+    public var offBmi: UInt32 = 0u32
+    public var cbBmi: UInt32 = 0u32
+    public var offBits: UInt32 = 0u32
+    public var cbBits: UInt32 = 0u32
+    public var elp: EXTLOGPEN32 = EXTLOGPEN32()
+}
+
+// Windows.Win32.Graphics.Gdi.EMREXTESCAPE (synthetic:Windows_Win32_Graphics_Gdi_EMREXTESCAPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTESCAPE {
+    public var emr: EMR = EMR()
+    public var iEscape: Int32 = 0i32
+    public var cbEscData: Int32 = 0i32
+    public var EscData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMREXTFLOODFILL (synthetic:Windows_Win32_Graphics_Gdi_EMREXTFLOODFILL)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTFLOODFILL {
+    public var emr: EMR = EMR()
+    public var ptlStart: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var crColor: UInt32 = 0u32
+    public var iMode: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMREXTSELECTCLIPRGN (synthetic:Windows_Win32_Graphics_Gdi_EMREXTSELECTCLIPRGN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTSELECTCLIPRGN {
+    public var emr: EMR = EMR()
+    public var cbRgnData: UInt32 = 0u32
+    public var iMode: UInt32 = 0u32
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMREXTTEXTOUTA (synthetic:Windows_Win32_Graphics_Gdi_EMREXTTEXTOUTA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMREXTTEXTOUTA {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var iGraphicsMode: UInt32 = 0u32
+    public var exScale: Float32 = 0.0f32
+    public var eyScale: Float32 = 0.0f32
+    public var emrtext: EMRTEXT = EMRTEXT()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRFILLPATH (synthetic:Windows_Win32_Graphics_Gdi_EMRFILLPATH)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRFILLPATH {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRFILLRGN (synthetic:Windows_Win32_Graphics_Gdi_EMRFILLRGN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRFILLRGN {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cbRgnData: UInt32 = 0u32
+    public var ihBrush: UInt32 = 0u32
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRFORMAT (synthetic:Windows_Win32_Graphics_Gdi_EMRFORMAT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRFORMAT {
+    public var dSignature: UInt32 = 0u32
+    public var nVersion: UInt32 = 0u32
+    public var cbData: UInt32 = 0u32
+    public var offData: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRFRAMERGN (synthetic:Windows_Win32_Graphics_Gdi_EMRFRAMERGN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRFRAMERGN {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cbRgnData: UInt32 = 0u32
+    public var ihBrush: UInt32 = 0u32
+    public var szlStroke: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRGDICOMMENT (synthetic:Windows_Win32_Graphics_Gdi_EMRGDICOMMENT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGDICOMMENT {
+    public var emr: EMR = EMR()
+    public var cbData: UInt32 = 0u32
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRGLSBOUNDEDRECORD (synthetic:Windows_Win32_Graphics_Gdi_EMRGLSBOUNDEDRECORD)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGLSBOUNDEDRECORD {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cbData: UInt32 = 0u32
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRGLSRECORD (synthetic:Windows_Win32_Graphics_Gdi_EMRGLSRECORD)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGLSRECORD {
+    public var emr: EMR = EMR()
+    public var cbData: UInt32 = 0u32
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRGRADIENTFILL (synthetic:Windows_Win32_Graphics_Gdi_EMRGRADIENTFILL)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRGRADIENTFILL {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var nVer: UInt32 = 0u32
+    public var nTri: UInt32 = 0u32
+    public var ulMode: UInt32 = 0u32
+    public var Ver: VArray<TRIVERTEX, $1> = VArray<TRIVERTEX, $1>(repeat: TRIVERTEX())
+}
+
+// Windows.Win32.Graphics.Gdi.EMRINVERTRGN (synthetic:Windows_Win32_Graphics_Gdi_EMRINVERTRGN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRINVERTRGN {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cbRgnData: UInt32 = 0u32
+    public var RgnData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRLINETO (synthetic:Windows_Win32_Graphics_Gdi_EMRLINETO)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRLINETO {
+    public var emr: EMR = EMR()
+    public var ptl: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRMASKBLT (synthetic:Windows_Win32_Graphics_Gdi_EMRMASKBLT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRMASKBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0i32
+    public var yDest: Int32 = 0i32
+    public var cxDest: Int32 = 0i32
+    public var cyDest: Int32 = 0i32
+    public var dwRop: UInt32 = 0u32
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+    public var xMask: Int32 = 0i32
+    public var yMask: Int32 = 0i32
+    public var iUsageMask: UInt32 = 0u32
+    public var offBmiMask: UInt32 = 0u32
+    public var cbBmiMask: UInt32 = 0u32
+    public var offBitsMask: UInt32 = 0u32
+    public var cbBitsMask: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRMODIFYWORLDTRANSFORM (synthetic:Windows_Win32_Graphics_Gdi_EMRMODIFYWORLDTRANSFORM)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRMODIFYWORLDTRANSFORM {
+    public var emr: EMR = EMR()
+    public var xform: XFORM = XFORM()
+    public var iMode: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRNAMEDESCAPE (synthetic:Windows_Win32_Graphics_Gdi_EMRNAMEDESCAPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRNAMEDESCAPE {
+    public var emr: EMR = EMR()
+    public var iEscape: Int32 = 0i32
+    public var cbDriver: Int32 = 0i32
+    public var cbEscData: Int32 = 0i32
+    public var EscData: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMROFFSETCLIPRGN (synthetic:Windows_Win32_Graphics_Gdi_EMROFFSETCLIPRGN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMROFFSETCLIPRGN {
+    public var emr: EMR = EMR()
+    public var ptlOffset: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPLGBLT (synthetic:Windows_Win32_Graphics_Gdi_EMRPLGBLT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPLGBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var aptlDest: VArray<Windows_Win32_Foundation.POINTL, $3> = VArray<Windows_Win32_Foundation.POINTL, $3>(repeat: Windows_Win32_Foundation.POINTL())
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var cxSrc: Int32 = 0i32
+    public var cySrc: Int32 = 0i32
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+    public var xMask: Int32 = 0i32
+    public var yMask: Int32 = 0i32
+    public var iUsageMask: UInt32 = 0u32
+    public var offBmiMask: UInt32 = 0u32
+    public var cbBmiMask: UInt32 = 0u32
+    public var offBitsMask: UInt32 = 0u32
+    public var cbBitsMask: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPOLYDRAW (synthetic:Windows_Win32_Graphics_Gdi_EMRPOLYDRAW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYDRAW {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cptl: UInt32 = 0u32
+    public var aptl: VArray<Windows_Win32_Foundation.POINTL, $1> = VArray<Windows_Win32_Foundation.POINTL, $1>(repeat: Windows_Win32_Foundation.POINTL())
+    public var abTypes: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPOLYDRAW16 (synthetic:Windows_Win32_Graphics_Gdi_EMRPOLYDRAW16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYDRAW16 {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cpts: UInt32 = 0u32
+    public var apts: VArray<Windows_Win32_Foundation.POINTS, $1> = VArray<Windows_Win32_Foundation.POINTS, $1>(repeat: Windows_Win32_Foundation.POINTS())
+    public var abTypes: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPOLYLINE (synthetic:Windows_Win32_Graphics_Gdi_EMRPOLYLINE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYLINE {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cptl: UInt32 = 0u32
+    public var aptl: VArray<Windows_Win32_Foundation.POINTL, $1> = VArray<Windows_Win32_Foundation.POINTL, $1>(repeat: Windows_Win32_Foundation.POINTL())
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPOLYLINE16 (synthetic:Windows_Win32_Graphics_Gdi_EMRPOLYLINE16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYLINE16 {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var cpts: UInt32 = 0u32
+    public var apts: VArray<Windows_Win32_Foundation.POINTS, $1> = VArray<Windows_Win32_Foundation.POINTS, $1>(repeat: Windows_Win32_Foundation.POINTS())
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPOLYPOLYLINE (synthetic:Windows_Win32_Graphics_Gdi_EMRPOLYPOLYLINE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYPOLYLINE {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var nPolys: UInt32 = 0u32
+    public var cptl: UInt32 = 0u32
+    public var aPolyCounts: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+    public var aptl: VArray<Windows_Win32_Foundation.POINTL, $1> = VArray<Windows_Win32_Foundation.POINTL, $1>(repeat: Windows_Win32_Foundation.POINTL())
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPOLYPOLYLINE16 (synthetic:Windows_Win32_Graphics_Gdi_EMRPOLYPOLYLINE16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYPOLYLINE16 {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var nPolys: UInt32 = 0u32
+    public var cpts: UInt32 = 0u32
+    public var aPolyCounts: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+    public var apts: VArray<Windows_Win32_Foundation.POINTS, $1> = VArray<Windows_Win32_Foundation.POINTS, $1>(repeat: Windows_Win32_Foundation.POINTS())
+}
+
+// Windows.Win32.Graphics.Gdi.EMRPOLYTEXTOUTA (synthetic:Windows_Win32_Graphics_Gdi_EMRPOLYTEXTOUTA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRPOLYTEXTOUTA {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var iGraphicsMode: UInt32 = 0u32
+    public var exScale: Float32 = 0.0f32
+    public var eyScale: Float32 = 0.0f32
+    public var cStrings: Int32 = 0i32
+    public var aemrtext: VArray<EMRTEXT, $1> = VArray<EMRTEXT, $1>(repeat: EMRTEXT())
+}
+
+// Windows.Win32.Graphics.Gdi.EMRRESIZEPALETTE (synthetic:Windows_Win32_Graphics_Gdi_EMRRESIZEPALETTE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRRESIZEPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0u32
+    public var cEntries: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRRESTOREDC (synthetic:Windows_Win32_Graphics_Gdi_EMRRESTOREDC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRRESTOREDC {
+    public var emr: EMR = EMR()
+    public var iRelative: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRROUNDRECT (synthetic:Windows_Win32_Graphics_Gdi_EMRROUNDRECT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRROUNDRECT {
+    public var emr: EMR = EMR()
+    public var rclBox: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var szlCorner: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSCALEVIEWPORTEXTEX (synthetic:Windows_Win32_Graphics_Gdi_EMRSCALEVIEWPORTEXTEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSCALEVIEWPORTEXTEX {
+    public var emr: EMR = EMR()
+    public var xNum: Int32 = 0i32
+    public var xDenom: Int32 = 0i32
+    public var yNum: Int32 = 0i32
+    public var yDenom: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSELECTCLIPPATH (synthetic:Windows_Win32_Graphics_Gdi_EMRSELECTCLIPPATH)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSELECTCLIPPATH {
+    public var emr: EMR = EMR()
+    public var iMode: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSELECTOBJECT (synthetic:Windows_Win32_Graphics_Gdi_EMRSELECTOBJECT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSELECTOBJECT {
+    public var emr: EMR = EMR()
+    public var ihObject: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSELECTPALETTE (synthetic:Windows_Win32_Graphics_Gdi_EMRSELECTPALETTE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSELECTPALETTE {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETARCDIRECTION (synthetic:Windows_Win32_Graphics_Gdi_EMRSETARCDIRECTION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETARCDIRECTION {
+    public var emr: EMR = EMR()
+    public var iArcDirection: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETCOLORADJUSTMENT (synthetic:Windows_Win32_Graphics_Gdi_EMRSETCOLORADJUSTMENT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETCOLORADJUSTMENT {
+    public var emr: EMR = EMR()
+    public var ColorAdjustment: COLORADJUSTMENT = COLORADJUSTMENT()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETCOLORSPACE (synthetic:Windows_Win32_Graphics_Gdi_EMRSETCOLORSPACE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETCOLORSPACE {
+    public var emr: EMR = EMR()
+    public var ihCS: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETDIBITSTODEVICE (synthetic:Windows_Win32_Graphics_Gdi_EMRSETDIBITSTODEVICE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETDIBITSTODEVICE {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0i32
+    public var yDest: Int32 = 0i32
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var cxSrc: Int32 = 0i32
+    public var cySrc: Int32 = 0i32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var iStartScan: UInt32 = 0u32
+    public var cScans: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETICMPROFILE (synthetic:Windows_Win32_Graphics_Gdi_EMRSETICMPROFILE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETICMPROFILE {
+    public var emr: EMR = EMR()
+    public var dwFlags: UInt32 = 0u32
+    public var cbName: UInt32 = 0u32
+    public var cbData: UInt32 = 0u32
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETMAPPERFLAGS (synthetic:Windows_Win32_Graphics_Gdi_EMRSETMAPPERFLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETMAPPERFLAGS {
+    public var emr: EMR = EMR()
+    public var dwFlags: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETMITERLIMIT (synthetic:Windows_Win32_Graphics_Gdi_EMRSETMITERLIMIT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETMITERLIMIT {
+    public var emr: EMR = EMR()
+    public var eMiterLimit: Float32 = 0.0f32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETPALETTEENTRIES (synthetic:Windows_Win32_Graphics_Gdi_EMRSETPALETTEENTRIES)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETPALETTEENTRIES {
+    public var emr: EMR = EMR()
+    public var ihPal: UInt32 = 0u32
+    public var iStart: UInt32 = 0u32
+    public var cEntries: UInt32 = 0u32
+    public var aPalEntries: VArray<PALETTEENTRY, $1> = VArray<PALETTEENTRY, $1>(repeat: PALETTEENTRY())
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETPIXELV (synthetic:Windows_Win32_Graphics_Gdi_EMRSETPIXELV)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETPIXELV {
+    public var emr: EMR = EMR()
+    public var ptlPixel: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var crColor: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETTEXTCOLOR (synthetic:Windows_Win32_Graphics_Gdi_EMRSETTEXTCOLOR)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETTEXTCOLOR {
+    public var emr: EMR = EMR()
+    public var crColor: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETVIEWPORTEXTEX (synthetic:Windows_Win32_Graphics_Gdi_EMRSETVIEWPORTEXTEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETVIEWPORTEXTEX {
+    public var emr: EMR = EMR()
+    public var szlExtent: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETVIEWPORTORGEX (synthetic:Windows_Win32_Graphics_Gdi_EMRSETVIEWPORTORGEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETVIEWPORTORGEX {
+    public var emr: EMR = EMR()
+    public var ptlOrigin: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSETWORLDTRANSFORM (synthetic:Windows_Win32_Graphics_Gdi_EMRSETWORLDTRANSFORM)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSETWORLDTRANSFORM {
+    public var emr: EMR = EMR()
+    public var xform: XFORM = XFORM()
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSTRETCHBLT (synthetic:Windows_Win32_Graphics_Gdi_EMRSTRETCHBLT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSTRETCHBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0i32
+    public var yDest: Int32 = 0i32
+    public var cxDest: Int32 = 0i32
+    public var cyDest: Int32 = 0i32
+    public var dwRop: UInt32 = 0u32
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+    public var cxSrc: Int32 = 0i32
+    public var cySrc: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRSTRETCHDIBITS (synthetic:Windows_Win32_Graphics_Gdi_EMRSTRETCHDIBITS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRSTRETCHDIBITS {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0i32
+    public var yDest: Int32 = 0i32
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var cxSrc: Int32 = 0i32
+    public var cySrc: Int32 = 0i32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var dwRop: UInt32 = 0u32
+    public var cxDest: Int32 = 0i32
+    public var cyDest: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRTEXT (synthetic:Windows_Win32_Graphics_Gdi_EMRTEXT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRTEXT {
+    public var ptlReference: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var nChars: UInt32 = 0u32
+    public var offString: UInt32 = 0u32
+    public var fOptions: UInt32 = 0u32
+    public var rcl: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var offDx: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.EMRTRANSPARENTBLT (synthetic:Windows_Win32_Graphics_Gdi_EMRTRANSPARENTBLT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EMRTRANSPARENTBLT {
+    public var emr: EMR = EMR()
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var xDest: Int32 = 0i32
+    public var yDest: Int32 = 0i32
+    public var cxDest: Int32 = 0i32
+    public var cyDest: Int32 = 0i32
+    public var dwRop: UInt32 = 0u32
+    public var xSrc: Int32 = 0i32
+    public var ySrc: Int32 = 0i32
+    public var xformSrc: XFORM = XFORM()
+    public var crBkColorSrc: UInt32 = 0u32
+    public var iUsageSrc: UInt32 = 0u32
+    public var offBmiSrc: UInt32 = 0u32
+    public var cbBmiSrc: UInt32 = 0u32
+    public var offBitsSrc: UInt32 = 0u32
+    public var cbBitsSrc: UInt32 = 0u32
+    public var cxSrc: Int32 = 0i32
+    public var cySrc: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.ENHANCED_METAFILE_RECORD_TYPE (synthetic:Windows_Win32_Graphics_Gdi_ENHANCED_METAFILE_RECORD_TYPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct ENHANCED_METAFILE_RECORD_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_HEADER = ENHANCED_METAFILE_RECORD_TYPE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYBEZIER = ENHANCED_METAFILE_RECORD_TYPE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYGON = ENHANCED_METAFILE_RECORD_TYPE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYLINE = ENHANCED_METAFILE_RECORD_TYPE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYBEZIERTO = ENHANCED_METAFILE_RECORD_TYPE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYLINETO = ENHANCED_METAFILE_RECORD_TYPE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYPOLYLINE = ENHANCED_METAFILE_RECORD_TYPE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYPOLYGON = ENHANCED_METAFILE_RECORD_TYPE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETWINDOWEXTEX = ENHANCED_METAFILE_RECORD_TYPE(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETWINDOWORGEX = ENHANCED_METAFILE_RECORD_TYPE(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETVIEWPORTEXTEX = ENHANCED_METAFILE_RECORD_TYPE(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETVIEWPORTORGEX = ENHANCED_METAFILE_RECORD_TYPE(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETBRUSHORGEX = ENHANCED_METAFILE_RECORD_TYPE(13)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EOF = ENHANCED_METAFILE_RECORD_TYPE(14)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETPIXELV = ENHANCED_METAFILE_RECORD_TYPE(15)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETMAPPERFLAGS = ENHANCED_METAFILE_RECORD_TYPE(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETMAPMODE = ENHANCED_METAFILE_RECORD_TYPE(17)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETBKMODE = ENHANCED_METAFILE_RECORD_TYPE(18)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETPOLYFILLMODE = ENHANCED_METAFILE_RECORD_TYPE(19)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETROP2 = ENHANCED_METAFILE_RECORD_TYPE(20)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETSTRETCHBLTMODE = ENHANCED_METAFILE_RECORD_TYPE(21)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETTEXTALIGN = ENHANCED_METAFILE_RECORD_TYPE(22)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETCOLORADJUSTMENT = ENHANCED_METAFILE_RECORD_TYPE(23)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETTEXTCOLOR = ENHANCED_METAFILE_RECORD_TYPE(24)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETBKCOLOR = ENHANCED_METAFILE_RECORD_TYPE(25)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_OFFSETCLIPRGN = ENHANCED_METAFILE_RECORD_TYPE(26)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_MOVETOEX = ENHANCED_METAFILE_RECORD_TYPE(27)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETMETARGN = ENHANCED_METAFILE_RECORD_TYPE(28)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EXCLUDECLIPRECT = ENHANCED_METAFILE_RECORD_TYPE(29)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_INTERSECTCLIPRECT = ENHANCED_METAFILE_RECORD_TYPE(30)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SCALEVIEWPORTEXTEX = ENHANCED_METAFILE_RECORD_TYPE(31)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SCALEWINDOWEXTEX = ENHANCED_METAFILE_RECORD_TYPE(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SAVEDC = ENHANCED_METAFILE_RECORD_TYPE(33)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESTOREDC = ENHANCED_METAFILE_RECORD_TYPE(34)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETWORLDTRANSFORM = ENHANCED_METAFILE_RECORD_TYPE(35)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_MODIFYWORLDTRANSFORM = ENHANCED_METAFILE_RECORD_TYPE(36)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SELECTOBJECT = ENHANCED_METAFILE_RECORD_TYPE(37)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CREATEPEN = ENHANCED_METAFILE_RECORD_TYPE(38)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CREATEBRUSHINDIRECT = ENHANCED_METAFILE_RECORD_TYPE(39)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_DELETEOBJECT = ENHANCED_METAFILE_RECORD_TYPE(40)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ANGLEARC = ENHANCED_METAFILE_RECORD_TYPE(41)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ELLIPSE = ENHANCED_METAFILE_RECORD_TYPE(42)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RECTANGLE = ENHANCED_METAFILE_RECORD_TYPE(43)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ROUNDRECT = ENHANCED_METAFILE_RECORD_TYPE(44)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ARC = ENHANCED_METAFILE_RECORD_TYPE(45)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CHORD = ENHANCED_METAFILE_RECORD_TYPE(46)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_PIE = ENHANCED_METAFILE_RECORD_TYPE(47)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SELECTPALETTE = ENHANCED_METAFILE_RECORD_TYPE(48)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CREATEPALETTE = ENHANCED_METAFILE_RECORD_TYPE(49)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETPALETTEENTRIES = ENHANCED_METAFILE_RECORD_TYPE(50)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESIZEPALETTE = ENHANCED_METAFILE_RECORD_TYPE(51)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_REALIZEPALETTE = ENHANCED_METAFILE_RECORD_TYPE(52)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EXTFLOODFILL = ENHANCED_METAFILE_RECORD_TYPE(53)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_LINETO = ENHANCED_METAFILE_RECORD_TYPE(54)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ARCTO = ENHANCED_METAFILE_RECORD_TYPE(55)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYDRAW = ENHANCED_METAFILE_RECORD_TYPE(56)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETARCDIRECTION = ENHANCED_METAFILE_RECORD_TYPE(57)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETMITERLIMIT = ENHANCED_METAFILE_RECORD_TYPE(58)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_BEGINPATH = ENHANCED_METAFILE_RECORD_TYPE(59)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ENDPATH = ENHANCED_METAFILE_RECORD_TYPE(60)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CLOSEFIGURE = ENHANCED_METAFILE_RECORD_TYPE(61)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_FILLPATH = ENHANCED_METAFILE_RECORD_TYPE(62)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_STROKEANDFILLPATH = ENHANCED_METAFILE_RECORD_TYPE(63)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_STROKEPATH = ENHANCED_METAFILE_RECORD_TYPE(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_FLATTENPATH = ENHANCED_METAFILE_RECORD_TYPE(65)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_WIDENPATH = ENHANCED_METAFILE_RECORD_TYPE(66)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SELECTCLIPPATH = ENHANCED_METAFILE_RECORD_TYPE(67)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ABORTPATH = ENHANCED_METAFILE_RECORD_TYPE(68)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_GDICOMMENT = ENHANCED_METAFILE_RECORD_TYPE(70)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_FILLRGN = ENHANCED_METAFILE_RECORD_TYPE(71)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_FRAMERGN = ENHANCED_METAFILE_RECORD_TYPE(72)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_INVERTRGN = ENHANCED_METAFILE_RECORD_TYPE(73)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_PAINTRGN = ENHANCED_METAFILE_RECORD_TYPE(74)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EXTSELECTCLIPRGN = ENHANCED_METAFILE_RECORD_TYPE(75)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_BITBLT = ENHANCED_METAFILE_RECORD_TYPE(76)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_STRETCHBLT = ENHANCED_METAFILE_RECORD_TYPE(77)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_MASKBLT = ENHANCED_METAFILE_RECORD_TYPE(78)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_PLGBLT = ENHANCED_METAFILE_RECORD_TYPE(79)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETDIBITSTODEVICE = ENHANCED_METAFILE_RECORD_TYPE(80)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_STRETCHDIBITS = ENHANCED_METAFILE_RECORD_TYPE(81)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EXTCREATEFONTINDIRECTW = ENHANCED_METAFILE_RECORD_TYPE(82)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EXTTEXTOUTA = ENHANCED_METAFILE_RECORD_TYPE(83)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EXTTEXTOUTW = ENHANCED_METAFILE_RECORD_TYPE(84)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYBEZIER16 = ENHANCED_METAFILE_RECORD_TYPE(85)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYGON16 = ENHANCED_METAFILE_RECORD_TYPE(86)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYLINE16 = ENHANCED_METAFILE_RECORD_TYPE(87)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYBEZIERTO16 = ENHANCED_METAFILE_RECORD_TYPE(88)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYLINETO16 = ENHANCED_METAFILE_RECORD_TYPE(89)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYPOLYLINE16 = ENHANCED_METAFILE_RECORD_TYPE(90)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYPOLYGON16 = ENHANCED_METAFILE_RECORD_TYPE(91)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYDRAW16 = ENHANCED_METAFILE_RECORD_TYPE(92)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CREATEMONOBRUSH = ENHANCED_METAFILE_RECORD_TYPE(93)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CREATEDIBPATTERNBRUSHPT = ENHANCED_METAFILE_RECORD_TYPE(94)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_EXTCREATEPEN = ENHANCED_METAFILE_RECORD_TYPE(95)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYTEXTOUTA = ENHANCED_METAFILE_RECORD_TYPE(96)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_POLYTEXTOUTW = ENHANCED_METAFILE_RECORD_TYPE(97)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETICMMODE = ENHANCED_METAFILE_RECORD_TYPE(98)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CREATECOLORSPACE = ENHANCED_METAFILE_RECORD_TYPE(99)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETCOLORSPACE = ENHANCED_METAFILE_RECORD_TYPE(100)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_DELETECOLORSPACE = ENHANCED_METAFILE_RECORD_TYPE(101)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_GLSRECORD = ENHANCED_METAFILE_RECORD_TYPE(102)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_GLSBOUNDEDRECORD = ENHANCED_METAFILE_RECORD_TYPE(103)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_PIXELFORMAT = ENHANCED_METAFILE_RECORD_TYPE(104)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_105 = ENHANCED_METAFILE_RECORD_TYPE(105)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_106 = ENHANCED_METAFILE_RECORD_TYPE(106)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_107 = ENHANCED_METAFILE_RECORD_TYPE(107)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_108 = ENHANCED_METAFILE_RECORD_TYPE(108)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_109 = ENHANCED_METAFILE_RECORD_TYPE(109)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_110 = ENHANCED_METAFILE_RECORD_TYPE(110)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_COLORCORRECTPALETTE = ENHANCED_METAFILE_RECORD_TYPE(111)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETICMPROFILEA = ENHANCED_METAFILE_RECORD_TYPE(112)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETICMPROFILEW = ENHANCED_METAFILE_RECORD_TYPE(113)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_ALPHABLEND = ENHANCED_METAFILE_RECORD_TYPE(114)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_SETLAYOUT = ENHANCED_METAFILE_RECORD_TYPE(115)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_TRANSPARENTBLT = ENHANCED_METAFILE_RECORD_TYPE(116)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_117 = ENHANCED_METAFILE_RECORD_TYPE(117)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_GRADIENTFILL = ENHANCED_METAFILE_RECORD_TYPE(118)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_119 = ENHANCED_METAFILE_RECORD_TYPE(119)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_RESERVED_120 = ENHANCED_METAFILE_RECORD_TYPE(120)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_COLORMATCHTOTARGETW = ENHANCED_METAFILE_RECORD_TYPE(121)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_CREATECOLORSPACEW = ENHANCED_METAFILE_RECORD_TYPE(122)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_MIN = ENHANCED_METAFILE_RECORD_TYPE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENHANCED_METAFILE_RECORD_TYPE_EMR_MAX = ENHANCED_METAFILE_RECORD_TYPE(122)
+
+// Windows.Win32.Graphics.Gdi.ENHMETAHEADER (synthetic:Windows_Win32_Graphics_Gdi_ENHMETAHEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENHMETAHEADER {
+    public var iType: UInt32 = 0u32
+    public var nSize: UInt32 = 0u32
+    public var rclBounds: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var rclFrame: Windows_Win32_Foundation.RECTL = Windows_Win32_Foundation.RECTL()
+    public var dSignature: UInt32 = 0u32
+    public var nVersion: UInt32 = 0u32
+    public var nBytes: UInt32 = 0u32
+    public var nRecords: UInt32 = 0u32
+    public var nHandles: UInt16 = 0u16
+    public var sReserved: UInt16 = 0u16
+    public var nDescription: UInt32 = 0u32
+    public var offDescription: UInt32 = 0u32
+    public var nPalEntries: UInt32 = 0u32
+    public var szlDevice: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+    public var szlMillimeters: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+    public var cbPixelFormat: UInt32 = 0u32
+    public var offPixelFormat: UInt32 = 0u32
+    public var bOpenGL: UInt32 = 0u32
+    public var szlMicrometers: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+}
+
+// Windows.Win32.Graphics.Gdi.ENHMETARECORD (synthetic:Windows_Win32_Graphics_Gdi_ENHMETARECORD)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENHMETARECORD {
+    public var iType: UInt32 = 0u32
+    public var nSize: UInt32 = 0u32
+    public var dParm: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+}
+
+// Windows.Win32.Graphics.Gdi.ENHMFENUMPROC (synthetic:Windows_Win32_Graphics_Gdi_ENHMFENUMPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type ENHMFENUMPROC = CFunc<(HDC, CPointer<Unit>, CPointer<Unit>, Int32, IntNative) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.ENUMLOGFONTA (synthetic:Windows_Win32_Graphics_Gdi_ENUMLOGFONTA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTA {
+    public var elfLogFont: LOGFONTA = LOGFONTA()
+    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
+    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXA (synthetic:Windows_Win32_Graphics_Gdi_ENUMLOGFONTEXA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXA {
+    public var elfLogFont: LOGFONTA = LOGFONTA()
+    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
+    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+    public var elfScript: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXDVA (synthetic:Windows_Win32_Graphics_Gdi_ENUMLOGFONTEXDVA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXDVA {
+    public var elfEnumLogfontEx: ENUMLOGFONTEXA = ENUMLOGFONTEXA()
+    public var elfDesignVector: DESIGNVECTOR = DESIGNVECTOR()
+}
+
+// Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXDVW (synthetic:Windows_Win32_Graphics_Gdi_ENUMLOGFONTEXDVW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXDVW {
+    public var elfEnumLogfontEx: ENUMLOGFONTEXW = ENUMLOGFONTEXW()
+    public var elfDesignVector: DESIGNVECTOR = DESIGNVECTOR()
+}
+
+// Windows.Win32.Graphics.Gdi.ENUMLOGFONTEXW (synthetic:Windows_Win32_Graphics_Gdi_ENUMLOGFONTEXW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTEXW {
+    public var elfLogFont: LOGFONTW = LOGFONTW()
+    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0u16)
+    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var elfScript: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+}
+
+// Windows.Win32.Graphics.Gdi.ENUMLOGFONTW (synthetic:Windows_Win32_Graphics_Gdi_ENUMLOGFONTW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct ENUMLOGFONTW {
+    public var elfLogFont: LOGFONTW = LOGFONTW()
+    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0u16)
+    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+}
+
+// Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_ENUM_DISPLAY_SETTINGS_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct ENUM_DISPLAY_SETTINGS_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ENUM_DISPLAY_SETTINGS_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ENUM_DISPLAY_SETTINGS_FLAGS): ENUM_DISPLAY_SETTINGS_FLAGS {
+        return ENUM_DISPLAY_SETTINGS_FLAGS(value | other.value)
+    }
+    public operator func &(other: ENUM_DISPLAY_SETTINGS_FLAGS): ENUM_DISPLAY_SETTINGS_FLAGS {
+        return ENUM_DISPLAY_SETTINGS_FLAGS(value & other.value)
+    }
+    public operator func ^(other: ENUM_DISPLAY_SETTINGS_FLAGS): ENUM_DISPLAY_SETTINGS_FLAGS {
+        return ENUM_DISPLAY_SETTINGS_FLAGS(value ^ other.value)
+    }
+    public operator func !(): ENUM_DISPLAY_SETTINGS_FLAGS {
+        return ENUM_DISPLAY_SETTINGS_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENUM_DISPLAY_SETTINGS_FLAGS_EDS_RAWMODE = ENUM_DISPLAY_SETTINGS_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENUM_DISPLAY_SETTINGS_FLAGS_EDS_ROTATEDMODE = ENUM_DISPLAY_SETTINGS_FLAGS(4)
+
+// Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_MODE (synthetic:Windows_Win32_Graphics_Gdi_ENUM_DISPLAY_SETTINGS_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct ENUM_DISPLAY_SETTINGS_MODE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENUM_DISPLAY_SETTINGS_MODE_ENUM_CURRENT_SETTINGS = ENUM_DISPLAY_SETTINGS_MODE(4294967295)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ENUM_DISPLAY_SETTINGS_MODE_ENUM_REGISTRY_SETTINGS = ENUM_DISPLAY_SETTINGS_MODE(4294967294)
+
+// Windows.Win32.Graphics.Gdi.ETO_OPTIONS (synthetic:Windows_Win32_Graphics_Gdi_ETO_OPTIONS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct ETO_OPTIONS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ETO_OPTIONS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ETO_OPTIONS): ETO_OPTIONS {
+        return ETO_OPTIONS(value | other.value)
+    }
+    public operator func &(other: ETO_OPTIONS): ETO_OPTIONS {
+        return ETO_OPTIONS(value & other.value)
+    }
+    public operator func ^(other: ETO_OPTIONS): ETO_OPTIONS {
+        return ETO_OPTIONS(value ^ other.value)
+    }
+    public operator func !(): ETO_OPTIONS {
+        return ETO_OPTIONS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_OPAQUE = ETO_OPTIONS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_CLIPPED = ETO_OPTIONS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_GLYPH_INDEX = ETO_OPTIONS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_RTLREADING = ETO_OPTIONS(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_NUMERICSLOCAL = ETO_OPTIONS(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_NUMERICSLATIN = ETO_OPTIONS(2048)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_IGNORELANGUAGE = ETO_OPTIONS(4096)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_PDY = ETO_OPTIONS(8192)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ETO_OPTIONS_ETO_REVERSE_INDEX_MAP = ETO_OPTIONS(65536)
+
+// Windows.Win32.Graphics.Gdi.EXTLOGFONTA (synthetic:Windows_Win32_Graphics_Gdi_EXTLOGFONTA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EXTLOGFONTA {
+    public var elfLogFont: LOGFONTA = LOGFONTA()
+    public var elfFullName: VArray<UInt8, $64> = VArray<UInt8, $64>(repeat: 0u8)
+    public var elfStyle: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+    public var elfVersion: UInt32 = 0u32
+    public var elfStyleSize: UInt32 = 0u32
+    public var elfMatch: UInt32 = 0u32
+    public var elfReserved: UInt32 = 0u32
+    public var elfVendorId: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+    public var elfCulture: UInt32 = 0u32
+    public var elfPanose: PANOSE = PANOSE()
+}
+
+// Windows.Win32.Graphics.Gdi.EXTLOGFONTW (synthetic:Windows_Win32_Graphics_Gdi_EXTLOGFONTW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EXTLOGFONTW {
+    public var elfLogFont: LOGFONTW = LOGFONTW()
+    public var elfFullName: VArray<UInt16, $64> = VArray<UInt16, $64>(repeat: 0u16)
+    public var elfStyle: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var elfVersion: UInt32 = 0u32
+    public var elfStyleSize: UInt32 = 0u32
+    public var elfMatch: UInt32 = 0u32
+    public var elfReserved: UInt32 = 0u32
+    public var elfVendorId: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+    public var elfCulture: UInt32 = 0u32
+    public var elfPanose: PANOSE = PANOSE()
+}
+
+// Windows.Win32.Graphics.Gdi.EXTLOGPEN (synthetic:Windows_Win32_Graphics_Gdi_EXTLOGPEN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EXTLOGPEN {
+    public var elpPenStyle: UInt32 = 0u32
+    public var elpWidth: UInt32 = 0u32
+    public var elpBrushStyle: UInt32 = 0u32
+    public var elpColor: UInt32 = 0u32
+    public var elpHatch: CPointer<Unit> = CPointer<Unit>()
+    public var elpNumEntries: UInt32 = 0u32
+    public var elpStyleEntry: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+}
+
+// Windows.Win32.Graphics.Gdi.EXTLOGPEN32 (synthetic:Windows_Win32_Graphics_Gdi_EXTLOGPEN32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct EXTLOGPEN32 {
+    public var elpPenStyle: UInt32 = 0u32
+    public var elpWidth: UInt32 = 0u32
+    public var elpBrushStyle: UInt32 = 0u32
+    public var elpColor: UInt32 = 0u32
+    public var elpHatch: UInt32 = 0u32
+    public var elpNumEntries: UInt32 = 0u32
+    public var elpStyleEntry: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+}
+
+// Windows.Win32.Graphics.Gdi.EXT_FLOOD_FILL_TYPE (synthetic:Windows_Win32_Graphics_Gdi_EXT_FLOOD_FILL_TYPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct EXT_FLOOD_FILL_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EXT_FLOOD_FILL_TYPE_FLOODFILLBORDER = EXT_FLOOD_FILL_TYPE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const EXT_FLOOD_FILL_TYPE_FLOODFILLSURFACE = EXT_FLOOD_FILL_TYPE(1)
+
+// Windows.Win32.Graphics.Gdi.FIXED (synthetic:Windows_Win32_Graphics_Gdi_FIXED)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct FIXED {
+    public var fract: UInt16 = 0u16
+    public var value: Int16 = 0i16
+}
+
+// Windows.Win32.Graphics.Gdi.FONTENUMPROCA (synthetic:Windows_Win32_Graphics_Gdi_FONTENUMPROCA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type FONTENUMPROCA = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, IntNative) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.FONTENUMPROCW (synthetic:Windows_Win32_Graphics_Gdi_FONTENUMPROCW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type FONTENUMPROCW = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, IntNative) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.FONT_CHARSET (synthetic:Windows_Win32_Graphics_Gdi_FONT_CHARSET)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_CHARSET {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_ANSI_CHARSET = FONT_CHARSET(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_DEFAULT_CHARSET = FONT_CHARSET(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_SYMBOL_CHARSET = FONT_CHARSET(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_SHIFTJIS_CHARSET = FONT_CHARSET(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_HANGEUL_CHARSET = FONT_CHARSET(129)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_HANGUL_CHARSET = FONT_CHARSET(129)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_GB2312_CHARSET = FONT_CHARSET(134)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_CHINESEBIG5_CHARSET = FONT_CHARSET(136)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_OEM_CHARSET = FONT_CHARSET(255)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_JOHAB_CHARSET = FONT_CHARSET(130)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_HEBREW_CHARSET = FONT_CHARSET(177)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_ARABIC_CHARSET = FONT_CHARSET(178)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_GREEK_CHARSET = FONT_CHARSET(161)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_TURKISH_CHARSET = FONT_CHARSET(162)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_VIETNAMESE_CHARSET = FONT_CHARSET(163)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_THAI_CHARSET = FONT_CHARSET(222)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_EASTEUROPE_CHARSET = FONT_CHARSET(238)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_RUSSIAN_CHARSET = FONT_CHARSET(204)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_MAC_CHARSET = FONT_CHARSET(77)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CHARSET_BALTIC_CHARSET = FONT_CHARSET(186)
+
+// Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION (synthetic:Windows_Win32_Graphics_Gdi_FONT_CLIP_PRECISION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_CLIP_PRECISION {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+    public func contains(other: FONT_CLIP_PRECISION): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: FONT_CLIP_PRECISION): FONT_CLIP_PRECISION {
+        return FONT_CLIP_PRECISION(value | other.value)
+    }
+    public operator func &(other: FONT_CLIP_PRECISION): FONT_CLIP_PRECISION {
+        return FONT_CLIP_PRECISION(value & other.value)
+    }
+    public operator func ^(other: FONT_CLIP_PRECISION): FONT_CLIP_PRECISION {
+        return FONT_CLIP_PRECISION(value ^ other.value)
+    }
+    public operator func !(): FONT_CLIP_PRECISION {
+        return FONT_CLIP_PRECISION(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_DEFAULT_PRECIS = FONT_CLIP_PRECISION(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_CHARACTER_PRECIS = FONT_CLIP_PRECISION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_STROKE_PRECIS = FONT_CLIP_PRECISION(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_MASK = FONT_CLIP_PRECISION(15)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_LH_ANGLES = FONT_CLIP_PRECISION(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_TT_ALWAYS = FONT_CLIP_PRECISION(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_DFA_DISABLE = FONT_CLIP_PRECISION(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_EMBEDDED = FONT_CLIP_PRECISION(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_CLIP_PRECISION_CLIP_DFA_OVERRIDE = FONT_CLIP_PRECISION(64)
+
+// Windows.Win32.Graphics.Gdi.FONT_FAMILY (synthetic:Windows_Win32_Graphics_Gdi_FONT_FAMILY)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_FAMILY {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_FAMILY_FF_DECORATIVE = FONT_FAMILY(80)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_FAMILY_FF_DONTCARE = FONT_FAMILY(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_FAMILY_FF_MODERN = FONT_FAMILY(48)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_FAMILY_FF_ROMAN = FONT_FAMILY(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_FAMILY_FF_SCRIPT = FONT_FAMILY(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_FAMILY_FF_SWISS = FONT_FAMILY(32)
+
+// Windows.Win32.Graphics.Gdi.FONT_LICENSE_PRIVS (synthetic:Windows_Win32_Graphics_Gdi_FONT_LICENSE_PRIVS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_LICENSE_PRIVS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_LICENSE_PRIVS_LICENSE_PREVIEWPRINT = FONT_LICENSE_PRIVS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_LICENSE_PRIVS_LICENSE_EDITABLE = FONT_LICENSE_PRIVS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_LICENSE_PRIVS_LICENSE_INSTALLABLE = FONT_LICENSE_PRIVS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_LICENSE_PRIVS_LICENSE_NOEMBEDDING = FONT_LICENSE_PRIVS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_LICENSE_PRIVS_LICENSE_DEFAULT = FONT_LICENSE_PRIVS(0)
+
+// Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION (synthetic:Windows_Win32_Graphics_Gdi_FONT_OUTPUT_PRECISION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_OUTPUT_PRECISION {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_DEFAULT_PRECIS = FONT_OUTPUT_PRECISION(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_STRING_PRECIS = FONT_OUTPUT_PRECISION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_CHARACTER_PRECIS = FONT_OUTPUT_PRECISION(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_STROKE_PRECIS = FONT_OUTPUT_PRECISION(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_TT_PRECIS = FONT_OUTPUT_PRECISION(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_DEVICE_PRECIS = FONT_OUTPUT_PRECISION(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_RASTER_PRECIS = FONT_OUTPUT_PRECISION(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_TT_ONLY_PRECIS = FONT_OUTPUT_PRECISION(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_OUTLINE_PRECIS = FONT_OUTPUT_PRECISION(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_SCREEN_OUTLINE_PRECIS = FONT_OUTPUT_PRECISION(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_OUTPUT_PRECISION_OUT_PS_ONLY_PRECIS = FONT_OUTPUT_PRECISION(10)
+
+// Windows.Win32.Graphics.Gdi.FONT_PITCH (synthetic:Windows_Win32_Graphics_Gdi_FONT_PITCH)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_PITCH {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_PITCH_DEFAULT_PITCH = FONT_PITCH(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_PITCH_FIXED_PITCH = FONT_PITCH(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_PITCH_VARIABLE_PITCH = FONT_PITCH(2)
+
+// Windows.Win32.Graphics.Gdi.FONT_QUALITY (synthetic:Windows_Win32_Graphics_Gdi_FONT_QUALITY)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_QUALITY {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_QUALITY_DEFAULT_QUALITY = FONT_QUALITY(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_QUALITY_DRAFT_QUALITY = FONT_QUALITY(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_QUALITY_PROOF_QUALITY = FONT_QUALITY(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_QUALITY_NONANTIALIASED_QUALITY = FONT_QUALITY(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_QUALITY_ANTIALIASED_QUALITY = FONT_QUALITY(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_QUALITY_CLEARTYPE_QUALITY = FONT_QUALITY(5)
+
+// Windows.Win32.Graphics.Gdi.FONT_RESOURCE_CHARACTERISTICS (synthetic:Windows_Win32_Graphics_Gdi_FONT_RESOURCE_CHARACTERISTICS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_RESOURCE_CHARACTERISTICS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_RESOURCE_CHARACTERISTICS_FR_PRIVATE = FONT_RESOURCE_CHARACTERISTICS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_RESOURCE_CHARACTERISTICS_FR_NOT_ENUM = FONT_RESOURCE_CHARACTERISTICS(32)
+
+// Windows.Win32.Graphics.Gdi.FONT_WEIGHT (synthetic:Windows_Win32_Graphics_Gdi_FONT_WEIGHT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct FONT_WEIGHT {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_DONTCARE = FONT_WEIGHT(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_THIN = FONT_WEIGHT(100)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_EXTRALIGHT = FONT_WEIGHT(200)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_LIGHT = FONT_WEIGHT(300)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_NORMAL = FONT_WEIGHT(400)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_MEDIUM = FONT_WEIGHT(500)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_SEMIBOLD = FONT_WEIGHT(600)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_BOLD = FONT_WEIGHT(700)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_EXTRABOLD = FONT_WEIGHT(800)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_HEAVY = FONT_WEIGHT(900)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_ULTRALIGHT = FONT_WEIGHT(200)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_REGULAR = FONT_WEIGHT(400)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_DEMIBOLD = FONT_WEIGHT(600)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_ULTRABOLD = FONT_WEIGHT(800)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const FONT_WEIGHT_FW_BLACK = FONT_WEIGHT(900)
+
+// Windows.Win32.Graphics.Gdi.GCP_RESULTSA (synthetic:Windows_Win32_Graphics_Gdi_GCP_RESULTSA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct GCP_RESULTSA {
+    public var lStructSize: UInt32 = 0u32
+    public var lpOutString: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpOrder: CPointer<Unit> = CPointer<Unit>()
+    public var lpDx: CPointer<Unit> = CPointer<Unit>()
+    public var lpCaretPos: CPointer<Unit> = CPointer<Unit>()
+    public var lpClass: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpGlyphs: CPointer<UInt16> = CPointer<UInt16>()
+    public var nGlyphs: UInt32 = 0u32
+    public var nMaxFit: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.GCP_RESULTSW (synthetic:Windows_Win32_Graphics_Gdi_GCP_RESULTSW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct GCP_RESULTSW {
+    public var lStructSize: UInt32 = 0u32
+    public var lpOutString: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpOrder: CPointer<Unit> = CPointer<Unit>()
+    public var lpDx: CPointer<Unit> = CPointer<Unit>()
+    public var lpCaretPos: CPointer<Unit> = CPointer<Unit>()
+    public var lpClass: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpGlyphs: CPointer<UInt16> = CPointer<UInt16>()
+    public var nGlyphs: UInt32 = 0u32
+    public var nMaxFit: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.GDI_REGION_TYPE (synthetic:Windows_Win32_Graphics_Gdi_GDI_REGION_TYPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GDI_REGION_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GDI_REGION_TYPE_RGN_ERROR = GDI_REGION_TYPE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GDI_REGION_TYPE_NULLREGION = GDI_REGION_TYPE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GDI_REGION_TYPE_SIMPLEREGION = GDI_REGION_TYPE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GDI_REGION_TYPE_COMPLEXREGION = GDI_REGION_TYPE(3)
+
+// Windows.Win32.Graphics.Gdi.GET_CHARACTER_PLACEMENT_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_GET_CHARACTER_PLACEMENT_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GET_CHARACTER_PLACEMENT_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: GET_CHARACTER_PLACEMENT_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: GET_CHARACTER_PLACEMENT_FLAGS): GET_CHARACTER_PLACEMENT_FLAGS {
+        return GET_CHARACTER_PLACEMENT_FLAGS(value | other.value)
+    }
+    public operator func &(other: GET_CHARACTER_PLACEMENT_FLAGS): GET_CHARACTER_PLACEMENT_FLAGS {
+        return GET_CHARACTER_PLACEMENT_FLAGS(value & other.value)
+    }
+    public operator func ^(other: GET_CHARACTER_PLACEMENT_FLAGS): GET_CHARACTER_PLACEMENT_FLAGS {
+        return GET_CHARACTER_PLACEMENT_FLAGS(value ^ other.value)
+    }
+    public operator func !(): GET_CHARACTER_PLACEMENT_FLAGS {
+        return GET_CHARACTER_PLACEMENT_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_CLASSIN = GET_CHARACTER_PLACEMENT_FLAGS(524288)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_DIACRITIC = GET_CHARACTER_PLACEMENT_FLAGS(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_DISPLAYZWG = GET_CHARACTER_PLACEMENT_FLAGS(4194304)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_GLYPHSHAPE = GET_CHARACTER_PLACEMENT_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_JUSTIFY = GET_CHARACTER_PLACEMENT_FLAGS(65536)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_KASHIDA = GET_CHARACTER_PLACEMENT_FLAGS(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_LIGATE = GET_CHARACTER_PLACEMENT_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_MAXEXTENT = GET_CHARACTER_PLACEMENT_FLAGS(1048576)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_NEUTRALOVERRIDE = GET_CHARACTER_PLACEMENT_FLAGS(33554432)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_NUMERICOVERRIDE = GET_CHARACTER_PLACEMENT_FLAGS(16777216)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_NUMERICSLATIN = GET_CHARACTER_PLACEMENT_FLAGS(67108864)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_NUMERICSLOCAL = GET_CHARACTER_PLACEMENT_FLAGS(134217728)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_REORDER = GET_CHARACTER_PLACEMENT_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_SYMSWAPOFF = GET_CHARACTER_PLACEMENT_FLAGS(8388608)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_CHARACTER_PLACEMENT_FLAGS_GCP_USEKERNING = GET_CHARACTER_PLACEMENT_FLAGS(8)
+
+// Windows.Win32.Graphics.Gdi.GET_DCX_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_GET_DCX_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GET_DCX_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: GET_DCX_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: GET_DCX_FLAGS): GET_DCX_FLAGS {
+        return GET_DCX_FLAGS(value | other.value)
+    }
+    public operator func &(other: GET_DCX_FLAGS): GET_DCX_FLAGS {
+        return GET_DCX_FLAGS(value & other.value)
+    }
+    public operator func ^(other: GET_DCX_FLAGS): GET_DCX_FLAGS {
+        return GET_DCX_FLAGS(value ^ other.value)
+    }
+    public operator func !(): GET_DCX_FLAGS {
+        return GET_DCX_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_WINDOW = GET_DCX_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_CACHE = GET_DCX_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_PARENTCLIP = GET_DCX_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_CLIPSIBLINGS = GET_DCX_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_CLIPCHILDREN = GET_DCX_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_NORESETATTRS = GET_DCX_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_LOCKWINDOWUPDATE = GET_DCX_FLAGS(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_EXCLUDERGN = GET_DCX_FLAGS(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_INTERSECTRGN = GET_DCX_FLAGS(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_INTERSECTUPDATE = GET_DCX_FLAGS(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DCX_FLAGS_DCX_VALIDATE = GET_DCX_FLAGS(2097152)
+
+// Windows.Win32.Graphics.Gdi.GET_DEVICE_CAPS_INDEX (synthetic:Windows_Win32_Graphics_Gdi_GET_DEVICE_CAPS_INDEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GET_DEVICE_CAPS_INDEX {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_DRIVERVERSION = GET_DEVICE_CAPS_INDEX(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_TECHNOLOGY = GET_DEVICE_CAPS_INDEX(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_HORZSIZE = GET_DEVICE_CAPS_INDEX(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_VERTSIZE = GET_DEVICE_CAPS_INDEX(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_HORZRES = GET_DEVICE_CAPS_INDEX(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_VERTRES = GET_DEVICE_CAPS_INDEX(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_BITSPIXEL = GET_DEVICE_CAPS_INDEX(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_PLANES = GET_DEVICE_CAPS_INDEX(14)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_NUMBRUSHES = GET_DEVICE_CAPS_INDEX(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_NUMPENS = GET_DEVICE_CAPS_INDEX(18)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_NUMMARKERS = GET_DEVICE_CAPS_INDEX(20)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_NUMFONTS = GET_DEVICE_CAPS_INDEX(22)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_NUMCOLORS = GET_DEVICE_CAPS_INDEX(24)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_PDEVICESIZE = GET_DEVICE_CAPS_INDEX(26)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_CURVECAPS = GET_DEVICE_CAPS_INDEX(28)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_LINECAPS = GET_DEVICE_CAPS_INDEX(30)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_POLYGONALCAPS = GET_DEVICE_CAPS_INDEX(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_TEXTCAPS = GET_DEVICE_CAPS_INDEX(34)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_CLIPCAPS = GET_DEVICE_CAPS_INDEX(36)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_RASTERCAPS = GET_DEVICE_CAPS_INDEX(38)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_ASPECTX = GET_DEVICE_CAPS_INDEX(40)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_ASPECTY = GET_DEVICE_CAPS_INDEX(42)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_ASPECTXY = GET_DEVICE_CAPS_INDEX(44)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_LOGPIXELSX = GET_DEVICE_CAPS_INDEX(88)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_LOGPIXELSY = GET_DEVICE_CAPS_INDEX(90)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_SIZEPALETTE = GET_DEVICE_CAPS_INDEX(104)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_NUMRESERVED = GET_DEVICE_CAPS_INDEX(106)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_COLORRES = GET_DEVICE_CAPS_INDEX(108)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_PHYSICALWIDTH = GET_DEVICE_CAPS_INDEX(110)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_PHYSICALHEIGHT = GET_DEVICE_CAPS_INDEX(111)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_PHYSICALOFFSETX = GET_DEVICE_CAPS_INDEX(112)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_PHYSICALOFFSETY = GET_DEVICE_CAPS_INDEX(113)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_SCALINGFACTORX = GET_DEVICE_CAPS_INDEX(114)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_SCALINGFACTORY = GET_DEVICE_CAPS_INDEX(115)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_VREFRESH = GET_DEVICE_CAPS_INDEX(116)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_DESKTOPVERTRES = GET_DEVICE_CAPS_INDEX(117)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_DESKTOPHORZRES = GET_DEVICE_CAPS_INDEX(118)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_BLTALIGNMENT = GET_DEVICE_CAPS_INDEX(119)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_SHADEBLENDCAPS = GET_DEVICE_CAPS_INDEX(120)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_DEVICE_CAPS_INDEX_COLORMGMTCAPS = GET_DEVICE_CAPS_INDEX(121)
+
+// Windows.Win32.Graphics.Gdi.GET_GLYPH_OUTLINE_FORMAT (synthetic:Windows_Win32_Graphics_Gdi_GET_GLYPH_OUTLINE_FORMAT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GET_GLYPH_OUTLINE_FORMAT {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_BEZIER = GET_GLYPH_OUTLINE_FORMAT(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_BITMAP = GET_GLYPH_OUTLINE_FORMAT(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_GLYPH_INDEX = GET_GLYPH_OUTLINE_FORMAT(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_GRAY2_BITMAP = GET_GLYPH_OUTLINE_FORMAT(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_GRAY4_BITMAP = GET_GLYPH_OUTLINE_FORMAT(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_GRAY8_BITMAP = GET_GLYPH_OUTLINE_FORMAT(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_METRICS = GET_GLYPH_OUTLINE_FORMAT(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_NATIVE = GET_GLYPH_OUTLINE_FORMAT(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_GLYPH_OUTLINE_FORMAT_GGO_UNHINTED = GET_GLYPH_OUTLINE_FORMAT(256)
+
+// Windows.Win32.Graphics.Gdi.GET_STOCK_OBJECT_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_GET_STOCK_OBJECT_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GET_STOCK_OBJECT_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_BLACK_BRUSH = GET_STOCK_OBJECT_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_DKGRAY_BRUSH = GET_STOCK_OBJECT_FLAGS(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_DC_BRUSH = GET_STOCK_OBJECT_FLAGS(18)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_GRAY_BRUSH = GET_STOCK_OBJECT_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_HOLLOW_BRUSH = GET_STOCK_OBJECT_FLAGS(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_LTGRAY_BRUSH = GET_STOCK_OBJECT_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_NULL_BRUSH = GET_STOCK_OBJECT_FLAGS(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_WHITE_BRUSH = GET_STOCK_OBJECT_FLAGS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_BLACK_PEN = GET_STOCK_OBJECT_FLAGS(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_DC_PEN = GET_STOCK_OBJECT_FLAGS(19)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_NULL_PEN = GET_STOCK_OBJECT_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_WHITE_PEN = GET_STOCK_OBJECT_FLAGS(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_ANSI_FIXED_FONT = GET_STOCK_OBJECT_FLAGS(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_ANSI_VAR_FONT = GET_STOCK_OBJECT_FLAGS(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_DEVICE_DEFAULT_FONT = GET_STOCK_OBJECT_FLAGS(14)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_DEFAULT_GUI_FONT = GET_STOCK_OBJECT_FLAGS(17)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_OEM_FIXED_FONT = GET_STOCK_OBJECT_FLAGS(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_SYSTEM_FONT = GET_STOCK_OBJECT_FLAGS(13)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_SYSTEM_FIXED_FONT = GET_STOCK_OBJECT_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GET_STOCK_OBJECT_FLAGS_DEFAULT_PALETTE = GET_STOCK_OBJECT_FLAGS(15)
+
+// Windows.Win32.Graphics.Gdi.GLYPHMETRICS (synthetic:Windows_Win32_Graphics_Gdi_GLYPHMETRICS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct GLYPHMETRICS {
+    public var gmBlackBoxX: UInt32 = 0u32
+    public var gmBlackBoxY: UInt32 = 0u32
+    public var gmptGlyphOrigin: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var gmCellIncX: Int16 = 0i16
+    public var gmCellIncY: Int16 = 0i16
+}
+
+// Windows.Win32.Graphics.Gdi.GLYPHSET (synthetic:Windows_Win32_Graphics_Gdi_GLYPHSET)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct GLYPHSET {
+    public var cbThis: UInt32 = 0u32
+    public var flAccel: UInt32 = 0u32
+    public var cGlyphsSupported: UInt32 = 0u32
+    public var cRanges: UInt32 = 0u32
+    public var ranges: VArray<WCRANGE, $1> = VArray<WCRANGE, $1>(repeat: WCRANGE())
+}
+
+// Windows.Win32.Graphics.Gdi.GOBJENUMPROC (synthetic:Windows_Win32_Graphics_Gdi_GOBJENUMPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type GOBJENUMPROC = CFunc<(CPointer<Unit>, IntNative) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.GRADIENT_FILL (synthetic:Windows_Win32_Graphics_Gdi_GRADIENT_FILL)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GRADIENT_FILL {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GRADIENT_FILL_GRADIENT_FILL_RECT_H = GRADIENT_FILL(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GRADIENT_FILL_GRADIENT_FILL_RECT_V = GRADIENT_FILL(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GRADIENT_FILL_GRADIENT_FILL_TRIANGLE = GRADIENT_FILL(2)
+
+// Windows.Win32.Graphics.Gdi.GRADIENT_RECT (synthetic:Windows_Win32_Graphics_Gdi_GRADIENT_RECT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct GRADIENT_RECT {
+    public var UpperLeft: UInt32 = 0u32
+    public var LowerRight: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.GRADIENT_TRIANGLE (synthetic:Windows_Win32_Graphics_Gdi_GRADIENT_TRIANGLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct GRADIENT_TRIANGLE {
+    public var Vertex1: UInt32 = 0u32
+    public var Vertex2: UInt32 = 0u32
+    public var Vertex3: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.GRAPHICS_MODE (synthetic:Windows_Win32_Graphics_Gdi_GRAPHICS_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct GRAPHICS_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GRAPHICS_MODE_GM_COMPATIBLE = GRAPHICS_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const GRAPHICS_MODE_GM_ADVANCED = GRAPHICS_MODE(2)
+
+// Windows.Win32.Graphics.Gdi.GRAYSTRINGPROC (synthetic:Windows_Win32_Graphics_Gdi_GRAYSTRINGPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type GRAYSTRINGPROC = CFunc<(HDC, IntNative, Int32) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.HANDLETABLE (synthetic:Windows_Win32_Graphics_Gdi_HANDLETABLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HANDLETABLE {
+    public var objectHandle: VArray<HGDIOBJ, $1> = VArray<HGDIOBJ, $1>(repeat: HGDIOBJ())
+}
+
+// Windows.Win32.Graphics.Gdi.HATCH_BRUSH_STYLE (synthetic:Windows_Win32_Graphics_Gdi_HATCH_BRUSH_STYLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct HATCH_BRUSH_STYLE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HATCH_BRUSH_STYLE_HS_BDIAGONAL = HATCH_BRUSH_STYLE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HATCH_BRUSH_STYLE_HS_CROSS = HATCH_BRUSH_STYLE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HATCH_BRUSH_STYLE_HS_DIAGCROSS = HATCH_BRUSH_STYLE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HATCH_BRUSH_STYLE_HS_FDIAGONAL = HATCH_BRUSH_STYLE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HATCH_BRUSH_STYLE_HS_HORIZONTAL = HATCH_BRUSH_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HATCH_BRUSH_STYLE_HS_VERTICAL = HATCH_BRUSH_STYLE(1)
+
 // Windows.Win32.Graphics.Gdi.HBITMAP (synthetic:Windows_Win32_Graphics_Gdi_HBITMAP)
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
 public struct HBITMAP {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
+
+// Windows.Win32.Graphics.Gdi.HBRUSH (synthetic:Windows_Win32_Graphics_Gdi_HBRUSH)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HBRUSH {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HDC (synthetic:Windows_Win32_Graphics_Gdi_HDC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HDC {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HDC_MAP_MODE (synthetic:Windows_Win32_Graphics_Gdi_HDC_MAP_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct HDC_MAP_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_ANISOTROPIC = HDC_MAP_MODE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_HIENGLISH = HDC_MAP_MODE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_HIMETRIC = HDC_MAP_MODE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_ISOTROPIC = HDC_MAP_MODE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_LOENGLISH = HDC_MAP_MODE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_LOMETRIC = HDC_MAP_MODE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_TEXT = HDC_MAP_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const HDC_MAP_MODE_MM_TWIPS = HDC_MAP_MODE(6)
 
 // Windows.Win32.Graphics.Gdi.HENHMETAFILE (synthetic:Windows_Win32_Graphics_Gdi_HENHMETAFILE)
 @When[Windows_Win32_Graphics_Gdi == "on"]
@@ -16,11 +3690,124 @@ public struct HENHMETAFILE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
+// Windows.Win32.Graphics.Gdi.HFONT (synthetic:Windows_Win32_Graphics_Gdi_HFONT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HFONT {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HGDIOBJ (synthetic:Windows_Win32_Graphics_Gdi_HGDIOBJ)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HGDIOBJ {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HMETAFILE (synthetic:Windows_Win32_Graphics_Gdi_HMETAFILE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HMETAFILE {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
 // Windows.Win32.Graphics.Gdi.HMONITOR (synthetic:Windows_Win32_Graphics_Gdi_HMONITOR)
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
 public struct HMONITOR {
     public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HPALETTE (synthetic:Windows_Win32_Graphics_Gdi_HPALETTE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HPALETTE {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HPEN (synthetic:Windows_Win32_Graphics_Gdi_HPEN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HPEN {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HRGN (synthetic:Windows_Win32_Graphics_Gdi_HRGN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct HRGN {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.KERNINGPAIR (synthetic:Windows_Win32_Graphics_Gdi_KERNINGPAIR)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct KERNINGPAIR {
+    public var wFirst: UInt16 = 0u16
+    public var wSecond: UInt16 = 0u16
+    public var iKernAmount: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Gdi.LINEDDAPROC (synthetic:Windows_Win32_Graphics_Gdi_LINEDDAPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type LINEDDAPROC = CFunc<(Int32, Int32, IntNative) -> Unit>
+
+// Windows.Win32.Graphics.Gdi.LOGBRUSH (synthetic:Windows_Win32_Graphics_Gdi_LOGBRUSH)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct LOGBRUSH {
+    public var lbStyle: UInt32 = 0u32
+    public var lbColor: UInt32 = 0u32
+    public var lbHatch: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.LOGBRUSH32 (synthetic:Windows_Win32_Graphics_Gdi_LOGBRUSH32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct LOGBRUSH32 {
+    public var lbStyle: UInt32 = 0u32
+    public var lbColor: UInt32 = 0u32
+    public var lbHatch: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.LOGFONTA (synthetic:Windows_Win32_Graphics_Gdi_LOGFONTA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct LOGFONTA {
+    public var lfHeight: Int32 = 0i32
+    public var lfWidth: Int32 = 0i32
+    public var lfEscapement: Int32 = 0i32
+    public var lfOrientation: Int32 = 0i32
+    public var lfWeight: Int32 = 0i32
+    public var lfItalic: UInt8 = 0u8
+    public var lfUnderline: UInt8 = 0u8
+    public var lfStrikeOut: UInt8 = 0u8
+    public var lfCharSet: UInt8 = 0u8
+    public var lfOutPrecision: UInt8 = 0u8
+    public var lfClipPrecision: UInt8 = 0u8
+    public var lfQuality: UInt8 = 0u8
+    public var lfPitchAndFamily: UInt8 = 0u8
+    public var lfFaceName: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0i8)
+}
+
+// Windows.Win32.Graphics.Gdi.LOGFONTW (synthetic:Windows_Win32_Graphics_Gdi_LOGFONTW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct LOGFONTW {
+    public var lfHeight: Int32 = 0i32
+    public var lfWidth: Int32 = 0i32
+    public var lfEscapement: Int32 = 0i32
+    public var lfOrientation: Int32 = 0i32
+    public var lfWeight: Int32 = 0i32
+    public var lfItalic: UInt8 = 0u8
+    public var lfUnderline: UInt8 = 0u8
+    public var lfStrikeOut: UInt8 = 0u8
+    public var lfCharSet: UInt8 = 0u8
+    public var lfOutPrecision: UInt8 = 0u8
+    public var lfClipPrecision: UInt8 = 0u8
+    public var lfQuality: UInt8 = 0u8
+    public var lfPitchAndFamily: UInt8 = 0u8
+    public var lfFaceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
 }
 
 // Windows.Win32.Graphics.Gdi.LOGPALETTE (synthetic:Windows_Win32_Graphics_Gdi_LOGPALETTE)
@@ -32,6 +3819,313 @@ public struct LOGPALETTE {
     public var palPalEntry: VArray<PALETTEENTRY, $1> = VArray<PALETTEENTRY, $1>(repeat: PALETTEENTRY())
 }
 
+// Windows.Win32.Graphics.Gdi.LOGPEN (synthetic:Windows_Win32_Graphics_Gdi_LOGPEN)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct LOGPEN {
+    public var lopnStyle: UInt32 = 0u32
+    public var lopnWidth: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var lopnColor: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.LPFNDEVCAPS (synthetic:Windows_Win32_Graphics_Gdi_LPFNDEVCAPS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type LPFNDEVCAPS = CFunc<(CPointer<UInt8>, CPointer<UInt8>, UInt32, CPointer<UInt8>, CPointer<Unit>) -> UInt32>
+
+// Windows.Win32.Graphics.Gdi.LPFNDEVMODE (synthetic:Windows_Win32_Graphics_Gdi_LPFNDEVMODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type LPFNDEVMODE = CFunc<(Windows_Win32_Foundation.HWND, Windows_Win32_Foundation.HMODULE, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<UInt8>, UInt32) -> UInt32>
+
+// Windows.Win32.Graphics.Gdi.MAT2 (synthetic:Windows_Win32_Graphics_Gdi_MAT2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct MAT2 {
+    public var eM11: FIXED = FIXED()
+    public var eM12: FIXED = FIXED()
+    public var eM21: FIXED = FIXED()
+    public var eM22: FIXED = FIXED()
+}
+
+// Windows.Win32.Graphics.Gdi.METAHEADER (synthetic:Windows_Win32_Graphics_Gdi_METAHEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct METAHEADER {
+    public var mtType: UInt16 = 0u16
+    public var mtHeaderSize: UInt16 = 0u16
+    public var mtVersion: UInt16 = 0u16
+    public var mtSize: UInt32 = 0u32
+    public var mtNoObjects: UInt16 = 0u16
+    public var mtMaxRecord: UInt32 = 0u32
+    public var mtNoParameters: UInt16 = 0u16
+}
+
+// Windows.Win32.Graphics.Gdi.METARECORD (synthetic:Windows_Win32_Graphics_Gdi_METARECORD)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct METARECORD {
+    public var rdSize: UInt32 = 0u32
+    public var rdFunction: UInt16 = 0u16
+    public var rdParm: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0u16)
+}
+
+// Windows.Win32.Graphics.Gdi.MFENUMPROC (synthetic:Windows_Win32_Graphics_Gdi_MFENUMPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type MFENUMPROC = CFunc<(HDC, CPointer<Unit>, CPointer<Unit>, Int32, IntNative) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.MODIFY_WORLD_TRANSFORM_MODE (synthetic:Windows_Win32_Graphics_Gdi_MODIFY_WORLD_TRANSFORM_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct MODIFY_WORLD_TRANSFORM_MODE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const MODIFY_WORLD_TRANSFORM_MODE_MWT_IDENTITY = MODIFY_WORLD_TRANSFORM_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const MODIFY_WORLD_TRANSFORM_MODE_MWT_LEFTMULTIPLY = MODIFY_WORLD_TRANSFORM_MODE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const MODIFY_WORLD_TRANSFORM_MODE_MWT_RIGHTMULTIPLY = MODIFY_WORLD_TRANSFORM_MODE(3)
+
+// Windows.Win32.Graphics.Gdi.MONITORENUMPROC (synthetic:Windows_Win32_Graphics_Gdi_MONITORENUMPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type MONITORENUMPROC = CFunc<(HMONITOR, HDC, CPointer<Unit>, IntNative) -> Int32>
+
+// Windows.Win32.Graphics.Gdi.MONITORINFO (synthetic:Windows_Win32_Graphics_Gdi_MONITORINFO)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct MONITORINFO {
+    public var cbSize: UInt32 = 0u32
+    public var rcMonitor: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var rcWork: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var dwFlags: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.MONITORINFOEXA (synthetic:Windows_Win32_Graphics_Gdi_MONITORINFOEXA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct MONITORINFOEXA {
+    public var monitorInfo: MONITORINFO = MONITORINFO()
+    public var szDevice: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0i8)
+}
+
+// Windows.Win32.Graphics.Gdi.MONITORINFOEXW (synthetic:Windows_Win32_Graphics_Gdi_MONITORINFOEXW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct MONITORINFOEXW {
+    public var monitorInfo: MONITORINFO = MONITORINFO()
+    public var szDevice: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+}
+
+// Windows.Win32.Graphics.Gdi.MONITOR_FROM_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_MONITOR_FROM_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct MONITOR_FROM_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const MONITOR_FROM_FLAGS_MONITOR_DEFAULTTONEAREST = MONITOR_FROM_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const MONITOR_FROM_FLAGS_MONITOR_DEFAULTTONULL = MONITOR_FROM_FLAGS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const MONITOR_FROM_FLAGS_MONITOR_DEFAULTTOPRIMARY = MONITOR_FROM_FLAGS(1)
+
+// Windows.Win32.Graphics.Gdi.NEWTEXTMETRICA (synthetic:Windows_Win32_Graphics_Gdi_NEWTEXTMETRICA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct NEWTEXTMETRICA {
+    public var tmHeight: Int32 = 0i32
+    public var tmAscent: Int32 = 0i32
+    public var tmDescent: Int32 = 0i32
+    public var tmInternalLeading: Int32 = 0i32
+    public var tmExternalLeading: Int32 = 0i32
+    public var tmAveCharWidth: Int32 = 0i32
+    public var tmMaxCharWidth: Int32 = 0i32
+    public var tmWeight: Int32 = 0i32
+    public var tmOverhang: Int32 = 0i32
+    public var tmDigitizedAspectX: Int32 = 0i32
+    public var tmDigitizedAspectY: Int32 = 0i32
+    public var tmFirstChar: UInt8 = 0u8
+    public var tmLastChar: UInt8 = 0u8
+    public var tmDefaultChar: UInt8 = 0u8
+    public var tmBreakChar: UInt8 = 0u8
+    public var tmItalic: UInt8 = 0u8
+    public var tmUnderlined: UInt8 = 0u8
+    public var tmStruckOut: UInt8 = 0u8
+    public var tmPitchAndFamily: UInt8 = 0u8
+    public var tmCharSet: UInt8 = 0u8
+    public var ntmFlags: UInt32 = 0u32
+    public var ntmSizeEM: UInt32 = 0u32
+    public var ntmCellHeight: UInt32 = 0u32
+    public var ntmAvgWidth: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.NEWTEXTMETRICW (synthetic:Windows_Win32_Graphics_Gdi_NEWTEXTMETRICW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct NEWTEXTMETRICW {
+    public var tmHeight: Int32 = 0i32
+    public var tmAscent: Int32 = 0i32
+    public var tmDescent: Int32 = 0i32
+    public var tmInternalLeading: Int32 = 0i32
+    public var tmExternalLeading: Int32 = 0i32
+    public var tmAveCharWidth: Int32 = 0i32
+    public var tmMaxCharWidth: Int32 = 0i32
+    public var tmWeight: Int32 = 0i32
+    public var tmOverhang: Int32 = 0i32
+    public var tmDigitizedAspectX: Int32 = 0i32
+    public var tmDigitizedAspectY: Int32 = 0i32
+    public var tmFirstChar: UInt16 = 0u16
+    public var tmLastChar: UInt16 = 0u16
+    public var tmDefaultChar: UInt16 = 0u16
+    public var tmBreakChar: UInt16 = 0u16
+    public var tmItalic: UInt8 = 0u8
+    public var tmUnderlined: UInt8 = 0u8
+    public var tmStruckOut: UInt8 = 0u8
+    public var tmPitchAndFamily: UInt8 = 0u8
+    public var tmCharSet: UInt8 = 0u8
+    public var ntmFlags: UInt32 = 0u32
+    public var ntmSizeEM: UInt32 = 0u32
+    public var ntmCellHeight: UInt32 = 0u32
+    public var ntmAvgWidth: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.OBJ_TYPE (synthetic:Windows_Win32_Graphics_Gdi_OBJ_TYPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct OBJ_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_PEN = OBJ_TYPE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_BRUSH = OBJ_TYPE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_DC = OBJ_TYPE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_METADC = OBJ_TYPE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_PAL = OBJ_TYPE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_FONT = OBJ_TYPE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_BITMAP = OBJ_TYPE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_REGION = OBJ_TYPE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_METAFILE = OBJ_TYPE(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_MEMDC = OBJ_TYPE(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_EXTPEN = OBJ_TYPE(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_ENHMETADC = OBJ_TYPE(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_ENHMETAFILE = OBJ_TYPE(13)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const OBJ_TYPE_OBJ_COLORSPACE = OBJ_TYPE(14)
+
+// Windows.Win32.Graphics.Gdi.OUTLINETEXTMETRICA (synthetic:Windows_Win32_Graphics_Gdi_OUTLINETEXTMETRICA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct OUTLINETEXTMETRICA {
+    public var otmSize: UInt32 = 0u32
+    public var otmTextMetrics: TEXTMETRICA = TEXTMETRICA()
+    public var otmFiller: UInt8 = 0u8
+    public var otmPanoseNumber: PANOSE = PANOSE()
+    public var otmfsSelection: UInt32 = 0u32
+    public var otmfsType: UInt32 = 0u32
+    public var otmsCharSlopeRise: Int32 = 0i32
+    public var otmsCharSlopeRun: Int32 = 0i32
+    public var otmItalicAngle: Int32 = 0i32
+    public var otmEMSquare: UInt32 = 0u32
+    public var otmAscent: Int32 = 0i32
+    public var otmDescent: Int32 = 0i32
+    public var otmLineGap: UInt32 = 0u32
+    public var otmsCapEmHeight: UInt32 = 0u32
+    public var otmsXHeight: UInt32 = 0u32
+    public var otmrcFontBox: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var otmMacAscent: Int32 = 0i32
+    public var otmMacDescent: Int32 = 0i32
+    public var otmMacLineGap: UInt32 = 0u32
+    public var otmusMinimumPPEM: UInt32 = 0u32
+    public var otmptSubscriptSize: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmptSubscriptOffset: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmptSuperscriptSize: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmptSuperscriptOffset: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmsStrikeoutSize: UInt32 = 0u32
+    public var otmsStrikeoutPosition: Int32 = 0i32
+    public var otmsUnderscoreSize: Int32 = 0i32
+    public var otmsUnderscorePosition: Int32 = 0i32
+    public var otmpFamilyName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFaceName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpStyleName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFullName: CPointer<UInt8> = CPointer<UInt8>()
+}
+
+// Windows.Win32.Graphics.Gdi.OUTLINETEXTMETRICW (synthetic:Windows_Win32_Graphics_Gdi_OUTLINETEXTMETRICW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct OUTLINETEXTMETRICW {
+    public var otmSize: UInt32 = 0u32
+    public var otmTextMetrics: TEXTMETRICW = TEXTMETRICW()
+    public var otmFiller: UInt8 = 0u8
+    public var otmPanoseNumber: PANOSE = PANOSE()
+    public var otmfsSelection: UInt32 = 0u32
+    public var otmfsType: UInt32 = 0u32
+    public var otmsCharSlopeRise: Int32 = 0i32
+    public var otmsCharSlopeRun: Int32 = 0i32
+    public var otmItalicAngle: Int32 = 0i32
+    public var otmEMSquare: UInt32 = 0u32
+    public var otmAscent: Int32 = 0i32
+    public var otmDescent: Int32 = 0i32
+    public var otmLineGap: UInt32 = 0u32
+    public var otmsCapEmHeight: UInt32 = 0u32
+    public var otmsXHeight: UInt32 = 0u32
+    public var otmrcFontBox: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var otmMacAscent: Int32 = 0i32
+    public var otmMacDescent: Int32 = 0i32
+    public var otmMacLineGap: UInt32 = 0u32
+    public var otmusMinimumPPEM: UInt32 = 0u32
+    public var otmptSubscriptSize: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmptSubscriptOffset: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmptSuperscriptSize: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmptSuperscriptOffset: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var otmsStrikeoutSize: UInt32 = 0u32
+    public var otmsStrikeoutPosition: Int32 = 0i32
+    public var otmsUnderscoreSize: Int32 = 0i32
+    public var otmsUnderscorePosition: Int32 = 0i32
+    public var otmpFamilyName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFaceName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpStyleName: CPointer<UInt8> = CPointer<UInt8>()
+    public var otmpFullName: CPointer<UInt8> = CPointer<UInt8>()
+}
+
+// Windows.Win32.Graphics.Gdi.PAINTSTRUCT (synthetic:Windows_Win32_Graphics_Gdi_PAINTSTRUCT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct PAINTSTRUCT {
+    public var hdc: HDC = HDC()
+    public var fErase: Int32 = 0i32
+    public var rcPaint: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var fRestore: Int32 = 0i32
+    public var fIncUpdate: Int32 = 0i32
+    public var rgbReserved: VArray<UInt8, $32> = VArray<UInt8, $32>(repeat: 0u8)
+}
+
 // Windows.Win32.Graphics.Gdi.PALETTEENTRY (synthetic:Windows_Win32_Graphics_Gdi_PALETTEENTRY)
 @When[Windows_Win32_Graphics_Gdi == "on"]
 @C
@@ -40,4 +4134,1191 @@ public struct PALETTEENTRY {
     public var peGreen: UInt8 = 0u8
     public var peBlue: UInt8 = 0u8
     public var peFlags: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.PANOSE (synthetic:Windows_Win32_Graphics_Gdi_PANOSE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct PANOSE {
+    public var bFamilyType: UInt8 = 0u8
+    public var bSerifStyle: UInt8 = 0u8
+    public var bWeight: UInt8 = 0u8
+    public var bProportion: UInt8 = 0u8
+    public var bContrast: UInt8 = 0u8
+    public var bStrokeVariation: UInt8 = 0u8
+    public var bArmStyle: UInt8 = 0u8
+    public var bLetterform: UInt8 = 0u8
+    public var bMidline: UInt8 = 0u8
+    public var bXHeight: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.PAN_ARM_STYLE (synthetic:Windows_Win32_Graphics_Gdi_PAN_ARM_STYLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_ARM_STYLE {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_ARM_ANY = PAN_ARM_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_ARM_NO_FIT = PAN_ARM_STYLE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_STRAIGHT_ARMS_HORZ = PAN_ARM_STYLE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_STRAIGHT_ARMS_WEDGE = PAN_ARM_STYLE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_STRAIGHT_ARMS_VERT = PAN_ARM_STYLE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_STRAIGHT_ARMS_SINGLE_SERIF = PAN_ARM_STYLE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_STRAIGHT_ARMS_DOUBLE_SERIF = PAN_ARM_STYLE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_BENT_ARMS_HORZ = PAN_ARM_STYLE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_BENT_ARMS_WEDGE = PAN_ARM_STYLE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_BENT_ARMS_VERT = PAN_ARM_STYLE(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_BENT_ARMS_SINGLE_SERIF = PAN_ARM_STYLE(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_ARM_STYLE_PAN_BENT_ARMS_DOUBLE_SERIF = PAN_ARM_STYLE(11)
+
+// Windows.Win32.Graphics.Gdi.PAN_CONTRAST (synthetic:Windows_Win32_Graphics_Gdi_PAN_CONTRAST)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_CONTRAST {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_ANY = PAN_CONTRAST(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_NO_FIT = PAN_CONTRAST(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_INDEX = PAN_CONTRAST(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_NONE = PAN_CONTRAST(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_VERY_LOW = PAN_CONTRAST(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_LOW = PAN_CONTRAST(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_MEDIUM_LOW = PAN_CONTRAST(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_MEDIUM = PAN_CONTRAST(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_MEDIUM_HIGH = PAN_CONTRAST(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_HIGH = PAN_CONTRAST(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_CONTRAST_PAN_CONTRAST_VERY_HIGH = PAN_CONTRAST(9)
+
+// Windows.Win32.Graphics.Gdi.PAN_FAMILY_TYPE (synthetic:Windows_Win32_Graphics_Gdi_PAN_FAMILY_TYPE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_FAMILY_TYPE {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_FAMILY_TYPE_PAN_FAMILY_ANY = PAN_FAMILY_TYPE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_FAMILY_TYPE_PAN_FAMILY_NO_FIT = PAN_FAMILY_TYPE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_FAMILY_TYPE_PAN_FAMILY_TEXT_DISPLAY = PAN_FAMILY_TYPE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_FAMILY_TYPE_PAN_FAMILY_SCRIPT = PAN_FAMILY_TYPE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_FAMILY_TYPE_PAN_FAMILY_DECORATIVE = PAN_FAMILY_TYPE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_FAMILY_TYPE_PAN_FAMILY_PICTORIAL = PAN_FAMILY_TYPE(5)
+
+// Windows.Win32.Graphics.Gdi.PAN_LETT_FORM (synthetic:Windows_Win32_Graphics_Gdi_PAN_LETT_FORM)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_LETT_FORM {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_FORM_ANY = PAN_LETT_FORM(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_FORM_NO_FIT = PAN_LETT_FORM(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_NORMAL_CONTACT = PAN_LETT_FORM(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_NORMAL_WEIGHTED = PAN_LETT_FORM(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_NORMAL_BOXED = PAN_LETT_FORM(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_NORMAL_FLATTENED = PAN_LETT_FORM(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_NORMAL_ROUNDED = PAN_LETT_FORM(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_NORMAL_OFF_CENTER = PAN_LETT_FORM(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_NORMAL_SQUARE = PAN_LETT_FORM(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_OBLIQUE_CONTACT = PAN_LETT_FORM(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_OBLIQUE_WEIGHTED = PAN_LETT_FORM(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_OBLIQUE_BOXED = PAN_LETT_FORM(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_OBLIQUE_FLATTENED = PAN_LETT_FORM(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_OBLIQUE_ROUNDED = PAN_LETT_FORM(13)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_OBLIQUE_OFF_CENTER = PAN_LETT_FORM(14)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_LETT_FORM_PAN_LETT_OBLIQUE_SQUARE = PAN_LETT_FORM(15)
+
+// Windows.Win32.Graphics.Gdi.PAN_MIDLINE (synthetic:Windows_Win32_Graphics_Gdi_PAN_MIDLINE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_MIDLINE {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_ANY = PAN_MIDLINE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_NO_FIT = PAN_MIDLINE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_INDEX = PAN_MIDLINE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_STANDARD_TRIMMED = PAN_MIDLINE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_STANDARD_POINTED = PAN_MIDLINE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_STANDARD_SERIFED = PAN_MIDLINE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_HIGH_TRIMMED = PAN_MIDLINE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_HIGH_POINTED = PAN_MIDLINE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_HIGH_SERIFED = PAN_MIDLINE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_CONSTANT_TRIMMED = PAN_MIDLINE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_CONSTANT_POINTED = PAN_MIDLINE(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_CONSTANT_SERIFED = PAN_MIDLINE(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_LOW_TRIMMED = PAN_MIDLINE(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_LOW_POINTED = PAN_MIDLINE(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_MIDLINE_PAN_MIDLINE_LOW_SERIFED = PAN_MIDLINE(13)
+
+// Windows.Win32.Graphics.Gdi.PAN_PROPORTION (synthetic:Windows_Win32_Graphics_Gdi_PAN_PROPORTION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_PROPORTION {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_ANY = PAN_PROPORTION(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_NO_FIT = PAN_PROPORTION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_OLD_STYLE = PAN_PROPORTION(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_MODERN = PAN_PROPORTION(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_EVEN_WIDTH = PAN_PROPORTION(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_EXPANDED = PAN_PROPORTION(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_CONDENSED = PAN_PROPORTION(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_VERY_EXPANDED = PAN_PROPORTION(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_VERY_CONDENSED = PAN_PROPORTION(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_PROPORTION_PAN_PROP_MONOSPACED = PAN_PROPORTION(9)
+
+// Windows.Win32.Graphics.Gdi.PAN_SERIF_STYLE (synthetic:Windows_Win32_Graphics_Gdi_PAN_SERIF_STYLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_SERIF_STYLE {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_ANY = PAN_SERIF_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_NO_FIT = PAN_SERIF_STYLE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_COVE = PAN_SERIF_STYLE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_OBTUSE_COVE = PAN_SERIF_STYLE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_SQUARE_COVE = PAN_SERIF_STYLE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_OBTUSE_SQUARE_COVE = PAN_SERIF_STYLE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_SQUARE = PAN_SERIF_STYLE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_THIN = PAN_SERIF_STYLE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_BONE = PAN_SERIF_STYLE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_EXAGGERATED = PAN_SERIF_STYLE(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_TRIANGLE = PAN_SERIF_STYLE(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_NORMAL_SANS = PAN_SERIF_STYLE(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_OBTUSE_SANS = PAN_SERIF_STYLE(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_PERP_SANS = PAN_SERIF_STYLE(13)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_FLARED = PAN_SERIF_STYLE(14)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_SERIF_STYLE_PAN_SERIF_ROUNDED = PAN_SERIF_STYLE(15)
+
+// Windows.Win32.Graphics.Gdi.PAN_STROKE_VARIATION (synthetic:Windows_Win32_Graphics_Gdi_PAN_STROKE_VARIATION)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_STROKE_VARIATION {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_ANY = PAN_STROKE_VARIATION(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_NO_FIT = PAN_STROKE_VARIATION(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_GRADUAL_DIAG = PAN_STROKE_VARIATION(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_GRADUAL_TRAN = PAN_STROKE_VARIATION(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_GRADUAL_VERT = PAN_STROKE_VARIATION(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_GRADUAL_HORZ = PAN_STROKE_VARIATION(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_RAPID_VERT = PAN_STROKE_VARIATION(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_RAPID_HORZ = PAN_STROKE_VARIATION(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_STROKE_VARIATION_PAN_STROKE_INSTANT_VERT = PAN_STROKE_VARIATION(8)
+
+// Windows.Win32.Graphics.Gdi.PAN_WEIGHT (synthetic:Windows_Win32_Graphics_Gdi_PAN_WEIGHT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_WEIGHT {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_ANY = PAN_WEIGHT(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_NO_FIT = PAN_WEIGHT(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_INDEX = PAN_WEIGHT(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_VERY_LIGHT = PAN_WEIGHT(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_LIGHT = PAN_WEIGHT(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_THIN = PAN_WEIGHT(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_BOOK = PAN_WEIGHT(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_MEDIUM = PAN_WEIGHT(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_DEMI = PAN_WEIGHT(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_BOLD = PAN_WEIGHT(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_HEAVY = PAN_WEIGHT(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_BLACK = PAN_WEIGHT(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_WEIGHT_PAN_WEIGHT_NORD = PAN_WEIGHT(11)
+
+// Windows.Win32.Graphics.Gdi.PAN_XHEIGHT (synthetic:Windows_Win32_Graphics_Gdi_PAN_XHEIGHT)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PAN_XHEIGHT {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_ANY = PAN_XHEIGHT(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_NO_FIT = PAN_XHEIGHT(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_INDEX = PAN_XHEIGHT(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_CONSTANT_SMALL = PAN_XHEIGHT(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_CONSTANT_STD = PAN_XHEIGHT(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_CONSTANT_LARGE = PAN_XHEIGHT(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_DUCKING_SMALL = PAN_XHEIGHT(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_DUCKING_STD = PAN_XHEIGHT(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PAN_XHEIGHT_PAN_XHEIGHT_DUCKING_LARGE = PAN_XHEIGHT(7)
+
+// Windows.Win32.Graphics.Gdi.PELARRAY (synthetic:Windows_Win32_Graphics_Gdi_PELARRAY)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct PELARRAY {
+    public var paXCount: Int32 = 0i32
+    public var paYCount: Int32 = 0i32
+    public var paXExt: Int32 = 0i32
+    public var paYExt: Int32 = 0i32
+    public var paRGBs: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.PEN_STYLE (synthetic:Windows_Win32_Graphics_Gdi_PEN_STYLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct PEN_STYLE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: PEN_STYLE): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: PEN_STYLE): PEN_STYLE {
+        return PEN_STYLE(value | other.value)
+    }
+    public operator func &(other: PEN_STYLE): PEN_STYLE {
+        return PEN_STYLE(value & other.value)
+    }
+    public operator func ^(other: PEN_STYLE): PEN_STYLE {
+        return PEN_STYLE(value ^ other.value)
+    }
+    public operator func !(): PEN_STYLE {
+        return PEN_STYLE(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_GEOMETRIC = PEN_STYLE(65536)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_COSMETIC = PEN_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_SOLID = PEN_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_DASH = PEN_STYLE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_DOT = PEN_STYLE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_DASHDOT = PEN_STYLE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_DASHDOTDOT = PEN_STYLE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_NULL = PEN_STYLE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_INSIDEFRAME = PEN_STYLE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_USERSTYLE = PEN_STYLE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_ALTERNATE = PEN_STYLE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_STYLE_MASK = PEN_STYLE(15)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_ENDCAP_ROUND = PEN_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_ENDCAP_SQUARE = PEN_STYLE(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_ENDCAP_FLAT = PEN_STYLE(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_ENDCAP_MASK = PEN_STYLE(3840)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_JOIN_ROUND = PEN_STYLE(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_JOIN_BEVEL = PEN_STYLE(4096)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_JOIN_MITER = PEN_STYLE(8192)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_JOIN_MASK = PEN_STYLE(61440)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const PEN_STYLE_PS_TYPE_MASK = PEN_STYLE(983040)
+
+// Windows.Win32.Graphics.Gdi.POINTFX (synthetic:Windows_Win32_Graphics_Gdi_POINTFX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct POINTFX {
+    public var x: FIXED = FIXED()
+    public var y: FIXED = FIXED()
+}
+
+// Windows.Win32.Graphics.Gdi.POLYTEXTA (synthetic:Windows_Win32_Graphics_Gdi_POLYTEXTA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct POLYTEXTA {
+    public var x: Int32 = 0i32
+    public var y: Int32 = 0i32
+    public var n: UInt32 = 0u32
+    public var lpstr: CPointer<UInt8> = CPointer<UInt8>()
+    public var uiFlags: UInt32 = 0u32
+    public var rcl: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var pdx: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.POLYTEXTW (synthetic:Windows_Win32_Graphics_Gdi_POLYTEXTW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct POLYTEXTW {
+    public var x: Int32 = 0i32
+    public var y: Int32 = 0i32
+    public var n: UInt32 = 0u32
+    public var lpstr: CPointer<UInt16> = CPointer<UInt16>()
+    public var uiFlags: UInt32 = 0u32
+    public var rcl: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var pdx: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.R2_MODE (synthetic:Windows_Win32_Graphics_Gdi_R2_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct R2_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_BLACK = R2_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_NOTMERGEPEN = R2_MODE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_MASKNOTPEN = R2_MODE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_NOTCOPYPEN = R2_MODE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_MASKPENNOT = R2_MODE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_NOT = R2_MODE(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_XORPEN = R2_MODE(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_NOTMASKPEN = R2_MODE(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_MASKPEN = R2_MODE(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_NOTXORPEN = R2_MODE(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_NOP = R2_MODE(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_MERGENOTPEN = R2_MODE(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_COPYPEN = R2_MODE(13)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_MERGEPENNOT = R2_MODE(14)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_MERGEPEN = R2_MODE(15)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_WHITE = R2_MODE(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const R2_MODE_R2_LAST = R2_MODE(16)
+
+// Windows.Win32.Graphics.Gdi.RASTERIZER_STATUS (synthetic:Windows_Win32_Graphics_Gdi_RASTERIZER_STATUS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct RASTERIZER_STATUS {
+    public var nSize: Int16 = 0i16
+    public var wFlags: Int16 = 0i16
+    public var nLanguageID: Int16 = 0i16
+}
+
+// Windows.Win32.Graphics.Gdi.READEMBEDPROC (synthetic:Windows_Win32_Graphics_Gdi_READEMBEDPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type READEMBEDPROC = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> UInt32>
+
+// Windows.Win32.Graphics.Gdi.REDRAW_WINDOW_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_REDRAW_WINDOW_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct REDRAW_WINDOW_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: REDRAW_WINDOW_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: REDRAW_WINDOW_FLAGS): REDRAW_WINDOW_FLAGS {
+        return REDRAW_WINDOW_FLAGS(value | other.value)
+    }
+    public operator func &(other: REDRAW_WINDOW_FLAGS): REDRAW_WINDOW_FLAGS {
+        return REDRAW_WINDOW_FLAGS(value & other.value)
+    }
+    public operator func ^(other: REDRAW_WINDOW_FLAGS): REDRAW_WINDOW_FLAGS {
+        return REDRAW_WINDOW_FLAGS(value ^ other.value)
+    }
+    public operator func !(): REDRAW_WINDOW_FLAGS {
+        return REDRAW_WINDOW_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_INVALIDATE = REDRAW_WINDOW_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_INTERNALPAINT = REDRAW_WINDOW_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_ERASE = REDRAW_WINDOW_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_VALIDATE = REDRAW_WINDOW_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_NOINTERNALPAINT = REDRAW_WINDOW_FLAGS(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_NOERASE = REDRAW_WINDOW_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_NOCHILDREN = REDRAW_WINDOW_FLAGS(64)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_ALLCHILDREN = REDRAW_WINDOW_FLAGS(128)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_UPDATENOW = REDRAW_WINDOW_FLAGS(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_ERASENOW = REDRAW_WINDOW_FLAGS(512)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_FRAME = REDRAW_WINDOW_FLAGS(1024)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const REDRAW_WINDOW_FLAGS_RDW_NOFRAME = REDRAW_WINDOW_FLAGS(2048)
+
+// Windows.Win32.Graphics.Gdi.RGBQUAD (synthetic:Windows_Win32_Graphics_Gdi_RGBQUAD)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct RGBQUAD {
+    public var rgbBlue: UInt8 = 0u8
+    public var rgbGreen: UInt8 = 0u8
+    public var rgbRed: UInt8 = 0u8
+    public var rgbReserved: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.RGBTRIPLE (synthetic:Windows_Win32_Graphics_Gdi_RGBTRIPLE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct RGBTRIPLE {
+    public var rgbtBlue: UInt8 = 0u8
+    public var rgbtGreen: UInt8 = 0u8
+    public var rgbtRed: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.RGNDATA (synthetic:Windows_Win32_Graphics_Gdi_RGNDATA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct RGNDATA {
+    public var rdh: RGNDATAHEADER = RGNDATAHEADER()
+    public var Buffer: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0i8)
+}
+
+// Windows.Win32.Graphics.Gdi.RGNDATAHEADER (synthetic:Windows_Win32_Graphics_Gdi_RGNDATAHEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct RGNDATAHEADER {
+    public var dwSize: UInt32 = 0u32
+    public var iType: UInt32 = 0u32
+    public var nCount: UInt32 = 0u32
+    public var nRgnSize: UInt32 = 0u32
+    public var rcBound: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+}
+
+// Windows.Win32.Graphics.Gdi.RGN_COMBINE_MODE (synthetic:Windows_Win32_Graphics_Gdi_RGN_COMBINE_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct RGN_COMBINE_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const RGN_COMBINE_MODE_RGN_AND = RGN_COMBINE_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const RGN_COMBINE_MODE_RGN_OR = RGN_COMBINE_MODE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const RGN_COMBINE_MODE_RGN_XOR = RGN_COMBINE_MODE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const RGN_COMBINE_MODE_RGN_DIFF = RGN_COMBINE_MODE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const RGN_COMBINE_MODE_RGN_COPY = RGN_COMBINE_MODE(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const RGN_COMBINE_MODE_RGN_MIN = RGN_COMBINE_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const RGN_COMBINE_MODE_RGN_MAX = RGN_COMBINE_MODE(5)
+
+// Windows.Win32.Graphics.Gdi.ROP_CODE (synthetic:Windows_Win32_Graphics_Gdi_ROP_CODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct ROP_CODE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ROP_CODE): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ROP_CODE): ROP_CODE {
+        return ROP_CODE(value | other.value)
+    }
+    public operator func &(other: ROP_CODE): ROP_CODE {
+        return ROP_CODE(value & other.value)
+    }
+    public operator func ^(other: ROP_CODE): ROP_CODE {
+        return ROP_CODE(value ^ other.value)
+    }
+    public operator func !(): ROP_CODE {
+        return ROP_CODE(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_BLACKNESS = ROP_CODE(66)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_NOTSRCERASE = ROP_CODE(1114278)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_NOTSRCCOPY = ROP_CODE(3342344)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_SRCERASE = ROP_CODE(4457256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_DSTINVERT = ROP_CODE(5570569)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_PATINVERT = ROP_CODE(5898313)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_SRCINVERT = ROP_CODE(6684742)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_SRCAND = ROP_CODE(8913094)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_MERGEPAINT = ROP_CODE(12255782)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_MERGECOPY = ROP_CODE(12583114)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_SRCCOPY = ROP_CODE(13369376)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_SRCPAINT = ROP_CODE(15597702)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_PATCOPY = ROP_CODE(15728673)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_PATPAINT = ROP_CODE(16452105)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_WHITENESS = ROP_CODE(16711778)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_CAPTUREBLT = ROP_CODE(1073741824)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const ROP_CODE_NOMIRRORBITMAP = ROP_CODE(2147483648)
+
+// Windows.Win32.Graphics.Gdi.SET_BOUNDS_RECT_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_SET_BOUNDS_RECT_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct SET_BOUNDS_RECT_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SET_BOUNDS_RECT_FLAGS_DCB_ACCUMULATE = SET_BOUNDS_RECT_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SET_BOUNDS_RECT_FLAGS_DCB_DISABLE = SET_BOUNDS_RECT_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SET_BOUNDS_RECT_FLAGS_DCB_ENABLE = SET_BOUNDS_RECT_FLAGS(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SET_BOUNDS_RECT_FLAGS_DCB_RESET = SET_BOUNDS_RECT_FLAGS(1)
+
+// Windows.Win32.Graphics.Gdi.STRETCH_BLT_MODE (synthetic:Windows_Win32_Graphics_Gdi_STRETCH_BLT_MODE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct STRETCH_BLT_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_BLACKONWHITE = STRETCH_BLT_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_COLORONCOLOR = STRETCH_BLT_MODE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_HALFTONE = STRETCH_BLT_MODE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_STRETCH_ANDSCANS = STRETCH_BLT_MODE(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_STRETCH_DELETESCANS = STRETCH_BLT_MODE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_STRETCH_HALFTONE = STRETCH_BLT_MODE(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_STRETCH_ORSCANS = STRETCH_BLT_MODE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const STRETCH_BLT_MODE_WHITEONBLACK = STRETCH_BLT_MODE(2)
+
+// Windows.Win32.Graphics.Gdi.SYSTEM_PALETTE_USE (synthetic:Windows_Win32_Graphics_Gdi_SYSTEM_PALETTE_USE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct SYSTEM_PALETTE_USE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYSTEM_PALETTE_USE_SYSPAL_NOSTATIC = SYSTEM_PALETTE_USE(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYSTEM_PALETTE_USE_SYSPAL_NOSTATIC256 = SYSTEM_PALETTE_USE(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYSTEM_PALETTE_USE_SYSPAL_STATIC = SYSTEM_PALETTE_USE(1)
+
+// Windows.Win32.Graphics.Gdi.SYS_COLOR_INDEX (synthetic:Windows_Win32_Graphics_Gdi_SYS_COLOR_INDEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct SYS_COLOR_INDEX {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_SCROLLBAR = SYS_COLOR_INDEX(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_BACKGROUND = SYS_COLOR_INDEX(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_ACTIVECAPTION = SYS_COLOR_INDEX(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_INACTIVECAPTION = SYS_COLOR_INDEX(3)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_MENU = SYS_COLOR_INDEX(4)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_WINDOW = SYS_COLOR_INDEX(5)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_WINDOWFRAME = SYS_COLOR_INDEX(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_MENUTEXT = SYS_COLOR_INDEX(7)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_WINDOWTEXT = SYS_COLOR_INDEX(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_CAPTIONTEXT = SYS_COLOR_INDEX(9)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_ACTIVEBORDER = SYS_COLOR_INDEX(10)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_INACTIVEBORDER = SYS_COLOR_INDEX(11)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_APPWORKSPACE = SYS_COLOR_INDEX(12)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_HIGHLIGHT = SYS_COLOR_INDEX(13)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_HIGHLIGHTTEXT = SYS_COLOR_INDEX(14)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_BTNFACE = SYS_COLOR_INDEX(15)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_BTNSHADOW = SYS_COLOR_INDEX(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_GRAYTEXT = SYS_COLOR_INDEX(17)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_BTNTEXT = SYS_COLOR_INDEX(18)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_INACTIVECAPTIONTEXT = SYS_COLOR_INDEX(19)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_BTNHIGHLIGHT = SYS_COLOR_INDEX(20)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_3DDKSHADOW = SYS_COLOR_INDEX(21)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_3DLIGHT = SYS_COLOR_INDEX(22)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_INFOTEXT = SYS_COLOR_INDEX(23)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_INFOBK = SYS_COLOR_INDEX(24)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_HOTLIGHT = SYS_COLOR_INDEX(26)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_GRADIENTACTIVECAPTION = SYS_COLOR_INDEX(27)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_GRADIENTINACTIVECAPTION = SYS_COLOR_INDEX(28)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_MENUHILIGHT = SYS_COLOR_INDEX(29)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_MENUBAR = SYS_COLOR_INDEX(30)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_DESKTOP = SYS_COLOR_INDEX(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_3DFACE = SYS_COLOR_INDEX(15)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_3DSHADOW = SYS_COLOR_INDEX(16)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_3DHIGHLIGHT = SYS_COLOR_INDEX(20)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_3DHILIGHT = SYS_COLOR_INDEX(20)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const SYS_COLOR_INDEX_COLOR_BTNHILIGHT = SYS_COLOR_INDEX(20)
+
+// Windows.Win32.Graphics.Gdi.TEXTMETRICA (synthetic:Windows_Win32_Graphics_Gdi_TEXTMETRICA)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TEXTMETRICA {
+    public var tmHeight: Int32 = 0i32
+    public var tmAscent: Int32 = 0i32
+    public var tmDescent: Int32 = 0i32
+    public var tmInternalLeading: Int32 = 0i32
+    public var tmExternalLeading: Int32 = 0i32
+    public var tmAveCharWidth: Int32 = 0i32
+    public var tmMaxCharWidth: Int32 = 0i32
+    public var tmWeight: Int32 = 0i32
+    public var tmOverhang: Int32 = 0i32
+    public var tmDigitizedAspectX: Int32 = 0i32
+    public var tmDigitizedAspectY: Int32 = 0i32
+    public var tmFirstChar: UInt8 = 0u8
+    public var tmLastChar: UInt8 = 0u8
+    public var tmDefaultChar: UInt8 = 0u8
+    public var tmBreakChar: UInt8 = 0u8
+    public var tmItalic: UInt8 = 0u8
+    public var tmUnderlined: UInt8 = 0u8
+    public var tmStruckOut: UInt8 = 0u8
+    public var tmPitchAndFamily: UInt8 = 0u8
+    public var tmCharSet: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.TEXTMETRICW (synthetic:Windows_Win32_Graphics_Gdi_TEXTMETRICW)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TEXTMETRICW {
+    public var tmHeight: Int32 = 0i32
+    public var tmAscent: Int32 = 0i32
+    public var tmDescent: Int32 = 0i32
+    public var tmInternalLeading: Int32 = 0i32
+    public var tmExternalLeading: Int32 = 0i32
+    public var tmAveCharWidth: Int32 = 0i32
+    public var tmMaxCharWidth: Int32 = 0i32
+    public var tmWeight: Int32 = 0i32
+    public var tmOverhang: Int32 = 0i32
+    public var tmDigitizedAspectX: Int32 = 0i32
+    public var tmDigitizedAspectY: Int32 = 0i32
+    public var tmFirstChar: UInt16 = 0u16
+    public var tmLastChar: UInt16 = 0u16
+    public var tmDefaultChar: UInt16 = 0u16
+    public var tmBreakChar: UInt16 = 0u16
+    public var tmItalic: UInt8 = 0u8
+    public var tmUnderlined: UInt8 = 0u8
+    public var tmStruckOut: UInt8 = 0u8
+    public var tmPitchAndFamily: UInt8 = 0u8
+    public var tmCharSet: UInt8 = 0u8
+}
+
+// Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS (synthetic:Windows_Win32_Graphics_Gdi_TEXT_ALIGN_OPTIONS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct TEXT_ALIGN_OPTIONS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: TEXT_ALIGN_OPTIONS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: TEXT_ALIGN_OPTIONS): TEXT_ALIGN_OPTIONS {
+        return TEXT_ALIGN_OPTIONS(value | other.value)
+    }
+    public operator func &(other: TEXT_ALIGN_OPTIONS): TEXT_ALIGN_OPTIONS {
+        return TEXT_ALIGN_OPTIONS(value & other.value)
+    }
+    public operator func ^(other: TEXT_ALIGN_OPTIONS): TEXT_ALIGN_OPTIONS {
+        return TEXT_ALIGN_OPTIONS(value ^ other.value)
+    }
+    public operator func !(): TEXT_ALIGN_OPTIONS {
+        return TEXT_ALIGN_OPTIONS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_NOUPDATECP = TEXT_ALIGN_OPTIONS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_UPDATECP = TEXT_ALIGN_OPTIONS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_LEFT = TEXT_ALIGN_OPTIONS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_RIGHT = TEXT_ALIGN_OPTIONS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_CENTER = TEXT_ALIGN_OPTIONS(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_TOP = TEXT_ALIGN_OPTIONS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_BOTTOM = TEXT_ALIGN_OPTIONS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_BASELINE = TEXT_ALIGN_OPTIONS(24)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_RTLREADING = TEXT_ALIGN_OPTIONS(256)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_TA_MASK = TEXT_ALIGN_OPTIONS(287)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_VTA_BASELINE = TEXT_ALIGN_OPTIONS(24)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_VTA_LEFT = TEXT_ALIGN_OPTIONS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_VTA_RIGHT = TEXT_ALIGN_OPTIONS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_VTA_CENTER = TEXT_ALIGN_OPTIONS(6)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_VTA_BOTTOM = TEXT_ALIGN_OPTIONS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TEXT_ALIGN_OPTIONS_VTA_TOP = TEXT_ALIGN_OPTIONS(0)
+
+// Windows.Win32.Graphics.Gdi.TMPF_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_TMPF_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct TMPF_FLAGS {
+    public let value: UInt8
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt8) {
+        this.value = value
+    }
+    public func contains(other: TMPF_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: TMPF_FLAGS): TMPF_FLAGS {
+        return TMPF_FLAGS(value | other.value)
+    }
+    public operator func &(other: TMPF_FLAGS): TMPF_FLAGS {
+        return TMPF_FLAGS(value & other.value)
+    }
+    public operator func ^(other: TMPF_FLAGS): TMPF_FLAGS {
+        return TMPF_FLAGS(value ^ other.value)
+    }
+    public operator func !(): TMPF_FLAGS {
+        return TMPF_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TMPF_FLAGS_TMPF_FIXED_PITCH = TMPF_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TMPF_FLAGS_TMPF_VECTOR = TMPF_FLAGS(2)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TMPF_FLAGS_TMPF_DEVICE = TMPF_FLAGS(8)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TMPF_FLAGS_TMPF_TRUETYPE = TMPF_FLAGS(4)
+
+// Windows.Win32.Graphics.Gdi.TRIVERTEX (synthetic:Windows_Win32_Graphics_Gdi_TRIVERTEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TRIVERTEX {
+    public var x: Int32 = 0i32
+    public var y: Int32 = 0i32
+    public var Red: UInt16 = 0u16
+    public var Green: UInt16 = 0u16
+    public var Blue: UInt16 = 0u16
+    public var Alpha: UInt16 = 0u16
+}
+
+// Windows.Win32.Graphics.Gdi.TTEMBEDINFO (synthetic:Windows_Win32_Graphics_Gdi_TTEMBEDINFO)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TTEMBEDINFO {
+    public var usStructSize: UInt16 = 0u16
+    public var usRootStrSize: UInt16 = 0u16
+    public var pusRootStr: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.TTEMBED_FLAGS (synthetic:Windows_Win32_Graphics_Gdi_TTEMBED_FLAGS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct TTEMBED_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: TTEMBED_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: TTEMBED_FLAGS): TTEMBED_FLAGS {
+        return TTEMBED_FLAGS(value | other.value)
+    }
+    public operator func &(other: TTEMBED_FLAGS): TTEMBED_FLAGS {
+        return TTEMBED_FLAGS(value & other.value)
+    }
+    public operator func ^(other: TTEMBED_FLAGS): TTEMBED_FLAGS {
+        return TTEMBED_FLAGS(value ^ other.value)
+    }
+    public operator func !(): TTEMBED_FLAGS {
+        return TTEMBED_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TTEMBED_FLAGS_TTEMBED_EMBEDEUDC = TTEMBED_FLAGS(32)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TTEMBED_FLAGS_TTEMBED_RAW = TTEMBED_FLAGS(0)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TTEMBED_FLAGS_TTEMBED_SUBSET = TTEMBED_FLAGS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TTEMBED_FLAGS_TTEMBED_TTCOMPRESSED = TTEMBED_FLAGS(4)
+
+// Windows.Win32.Graphics.Gdi.TTLOADINFO (synthetic:Windows_Win32_Graphics_Gdi_TTLOADINFO)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TTLOADINFO {
+    public var usStructSize: UInt16 = 0u16
+    public var usRefStrSize: UInt16 = 0u16
+    public var pusRefStr: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.TTLOAD_EMBEDDED_FONT_STATUS (synthetic:Windows_Win32_Graphics_Gdi_TTLOAD_EMBEDDED_FONT_STATUS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public struct TTLOAD_EMBEDDED_FONT_STATUS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: TTLOAD_EMBEDDED_FONT_STATUS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: TTLOAD_EMBEDDED_FONT_STATUS): TTLOAD_EMBEDDED_FONT_STATUS {
+        return TTLOAD_EMBEDDED_FONT_STATUS(value | other.value)
+    }
+    public operator func &(other: TTLOAD_EMBEDDED_FONT_STATUS): TTLOAD_EMBEDDED_FONT_STATUS {
+        return TTLOAD_EMBEDDED_FONT_STATUS(value & other.value)
+    }
+    public operator func ^(other: TTLOAD_EMBEDDED_FONT_STATUS): TTLOAD_EMBEDDED_FONT_STATUS {
+        return TTLOAD_EMBEDDED_FONT_STATUS(value ^ other.value)
+    }
+    public operator func !(): TTLOAD_EMBEDDED_FONT_STATUS {
+        return TTLOAD_EMBEDDED_FONT_STATUS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TTLOAD_EMBEDDED_FONT_STATUS_TTLOAD_FONT_SUBSETTED = TTLOAD_EMBEDDED_FONT_STATUS(1)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public const TTLOAD_EMBEDDED_FONT_STATUS_TTLOAD_FONT_IN_SYSSTARTUP = TTLOAD_EMBEDDED_FONT_STATUS(2)
+
+// Windows.Win32.Graphics.Gdi.TTPOLYCURVE (synthetic:Windows_Win32_Graphics_Gdi_TTPOLYCURVE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TTPOLYCURVE {
+    public var wType: UInt16 = 0u16
+    public var cpfx: UInt16 = 0u16
+    public var apfx: VArray<POINTFX, $1> = VArray<POINTFX, $1>(repeat: POINTFX())
+}
+
+// Windows.Win32.Graphics.Gdi.TTPOLYGONHEADER (synthetic:Windows_Win32_Graphics_Gdi_TTPOLYGONHEADER)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TTPOLYGONHEADER {
+    public var cb: UInt32 = 0u32
+    public var dwType: UInt32 = 0u32
+    public var pfxStart: POINTFX = POINTFX()
+}
+
+// Windows.Win32.Graphics.Gdi.TTVALIDATIONTESTSPARAMS (synthetic:Windows_Win32_Graphics_Gdi_TTVALIDATIONTESTSPARAMS)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TTVALIDATIONTESTSPARAMS {
+    public var ulStructSize: UInt32 = 0u32
+    public var lTestFromSize: Int32 = 0i32
+    public var lTestToSize: Int32 = 0i32
+    public var ulCharSet: UInt32 = 0u32
+    public var usReserved1: UInt16 = 0u16
+    public var usCharCodeCount: UInt16 = 0u16
+    public var pusCharCodeSet: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.TTVALIDATIONTESTSPARAMSEX (synthetic:Windows_Win32_Graphics_Gdi_TTVALIDATIONTESTSPARAMSEX)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct TTVALIDATIONTESTSPARAMSEX {
+    public var ulStructSize: UInt32 = 0u32
+    public var lTestFromSize: Int32 = 0i32
+    public var lTestToSize: Int32 = 0i32
+    public var ulCharSet: UInt32 = 0u32
+    public var usReserved1: UInt16 = 0u16
+    public var usCharCodeCount: UInt16 = 0u16
+    public var pulCharCodeSet: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.WCRANGE (synthetic:Windows_Win32_Graphics_Gdi_WCRANGE)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct WCRANGE {
+    public var wcLow: UInt16 = 0u16
+    public var cGlyphs: UInt16 = 0u16
+}
+
+// Windows.Win32.Graphics.Gdi.WGLSWAP (synthetic:Windows_Win32_Graphics_Gdi_WGLSWAP)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct WGLSWAP {
+    public var hdc: HDC = HDC()
+    public var uiFlags: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Gdi.WRITEEMBEDPROC (synthetic:Windows_Win32_Graphics_Gdi_WRITEEMBEDPROC)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+public type WRITEEMBEDPROC = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> UInt32>
+
+// Windows.Win32.Graphics.Gdi.XFORM (synthetic:Windows_Win32_Graphics_Gdi_XFORM)
+@When[Windows_Win32_Graphics_Gdi == "on"]
+@C
+public struct XFORM {
+    public var eM11: Float32 = 0.0f32
+    public var eM12: Float32 = 0.0f32
+    public var eM21: Float32 = 0.0f32
+    public var eM22: Float32 = 0.0f32
+    public var eDx: Float32 = 0.0f32
+    public var eDy: Float32 = 0.0f32
 }

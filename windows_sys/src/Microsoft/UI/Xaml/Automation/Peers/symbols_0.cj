@@ -13,6 +13,10 @@ import windows_sys.Microsoft.UI.Xaml as Microsoft_UI_Xaml
 import windows_sys.Microsoft.UI.Xaml.Automation as Microsoft_UI_Xaml_Automation
 @When[Microsoft_UI_Xaml_Automation_Provider == "on"]
 import windows_sys.Microsoft.UI.Xaml.Automation.Provider as Microsoft_UI_Xaml_Automation_Provider
+@When[Microsoft_UI_Xaml_Controls == "on"]
+import windows_sys.Microsoft.UI.Xaml.Controls as Microsoft_UI_Xaml_Controls
+@When[Microsoft_UI_Xaml_Controls_Primitives == "on"]
+import windows_sys.Microsoft.UI.Xaml.Controls.Primitives as Microsoft_UI_Xaml_Controls_Primitives
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
 @When[Windows_Foundation_Collections == "on"]
@@ -22,345 +26,1132 @@ import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AccessibilityView {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AccessibilityView_Raw = AccessibilityView(0)
+public const AccessibilityView_Raw = AccessibilityView(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AccessibilityView_Control = AccessibilityView(1)
+public const AccessibilityView_Control = AccessibilityView(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AccessibilityView_Content = AccessibilityView(2)
+public const AccessibilityView_Content = AccessibilityView(2)
+
+// Microsoft.UI.Xaml.Automation.Peers.AnimatedVisualPlayerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_AnimatedVisualPlayerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class AnimatedVisualPlayerAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AnimatedVisualPlayerAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AnimatedVisualPlayerAutomationPeer {
+        AnimatedVisualPlayerAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AnimatedVisualPlayerAutomationPeer {
+        AnimatedVisualPlayerAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAnimatedVisualPlayerAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AnimatedVisualPlayerAutomationPeer> {
+        let ancestors = [IAnimatedVisualPlayerAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AnimatedVisualPlayerAutomationPeer>("AnimatedVisualPlayerAutomationPeer", IAnimatedVisualPlayerAutomationPeer.iid(), ancestors, { raw => AnimatedVisualPlayerAutomationPeer.fromAbiTake(raw) }, { raw => AnimatedVisualPlayerAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAnimatedVisualPlayerAutomationPeer {
+        match (unsafe { query(IAnimatedVisualPlayerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAnimatedVisualPlayerAutomationPeer(): IAnimatedVisualPlayerAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.AnimatedVisualPlayer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): AnimatedVisualPlayerAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.AnimatedVisualPlayer>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<AnimatedVisualPlayerAutomationPeer, IAnimatedVisualPlayerAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AnimatedVisualPlayerAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return AnimatedVisualPlayerAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.AnimatedVisualPlayerAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.AnimatedVisualPlayerAutomationPeer;{" + IAnimatedVisualPlayerAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.AnimatedVisualPlayerAutomationPeer", AnimatedVisualPlayerAutomationPeer.signature(), IAnimatedVisualPlayerAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: AnimatedVisualPlayerAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AnimatedVisualPlayerAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AnimatedVisualPlayerAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AnimatedVisualPlayerAutomationPeer {
+        AnimatedVisualPlayerAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.AppBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_AppBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class AppBarAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AppBarAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AppBarAutomationPeer {
+        AppBarAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AppBarAutomationPeer {
+        AppBarAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAppBarAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AppBarAutomationPeer> {
+        let ancestors = [IAppBarAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IWindowProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AppBarAutomationPeer>("AppBarAutomationPeer", IAppBarAutomationPeer.iid(), ancestors, { raw => AppBarAutomationPeer.fromAbiTake(raw) }, { raw => AppBarAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAppBarAutomationPeer {
+        match (unsafe { query(IAppBarAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppBarAutomationPeer(): IAppBarAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIWindowProvider(): Microsoft_UI_Xaml_Automation_Provider.IWindowProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IWindowProvider>(Microsoft_UI_Xaml_Automation_Provider.IWindowProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.AppBar, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): AppBarAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.AppBar>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<AppBarAutomationPeer, IAppBarAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AppBarAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return AppBarAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.AppBarAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.AppBarAutomationPeer;{" + IAppBarAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.AppBarAutomationPeer", AppBarAutomationPeer.signature(), IAppBarAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: AppBarAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AppBarAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AppBarAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AppBarAutomationPeer {
+        AppBarAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.AppBarButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_AppBarButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class AppBarButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AppBarButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AppBarButtonAutomationPeer {
+        AppBarButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AppBarButtonAutomationPeer {
+        AppBarButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAppBarButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AppBarButtonAutomationPeer> {
+        let ancestors = [IAppBarButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), IButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AppBarButtonAutomationPeer>("AppBarButtonAutomationPeer", IAppBarButtonAutomationPeer.iid(), ancestors, { raw => AppBarButtonAutomationPeer.fromAbiTake(raw) }, { raw => AppBarButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAppBarButtonAutomationPeer {
+        match (unsafe { query(IAppBarButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppBarButtonAutomationPeer(): IAppBarButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonAutomationPeer(): IButtonAutomationPeer {
+        match (unsafe { query<IButtonAutomationPeer>(IButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.AppBarButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): AppBarButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.AppBarButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<AppBarButtonAutomationPeer, IAppBarButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AppBarButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return AppBarButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.AppBarButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.AppBarButtonAutomationPeer;{" + IAppBarButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.AppBarButtonAutomationPeer", AppBarButtonAutomationPeer.signature(), IAppBarButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: AppBarButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AppBarButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AppBarButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AppBarButtonAutomationPeer {
+        AppBarButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.AppBarToggleButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_AppBarToggleButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class AppBarToggleButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AppBarToggleButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AppBarToggleButtonAutomationPeer {
+        AppBarToggleButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AppBarToggleButtonAutomationPeer {
+        AppBarToggleButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAppBarToggleButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AppBarToggleButtonAutomationPeer> {
+        let ancestors = [IAppBarToggleButtonAutomationPeer.iid(), IToggleButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AppBarToggleButtonAutomationPeer>("AppBarToggleButtonAutomationPeer", IAppBarToggleButtonAutomationPeer.iid(), ancestors, { raw => AppBarToggleButtonAutomationPeer.fromAbiTake(raw) }, { raw => AppBarToggleButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAppBarToggleButtonAutomationPeer {
+        match (unsafe { query(IAppBarToggleButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppBarToggleButtonAutomationPeer(): IAppBarToggleButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIToggleButtonAutomationPeer(): IToggleButtonAutomationPeer {
+        match (unsafe { query<IToggleButtonAutomationPeer>(IToggleButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.AppBarToggleButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): AppBarToggleButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.AppBarToggleButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<AppBarToggleButtonAutomationPeer, IAppBarToggleButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AppBarToggleButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return AppBarToggleButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.AppBarToggleButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.AppBarToggleButtonAutomationPeer;{" + IAppBarToggleButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.AppBarToggleButtonAutomationPeer", AppBarToggleButtonAutomationPeer.signature(), IAppBarToggleButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: AppBarToggleButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AppBarToggleButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AppBarToggleButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AppBarToggleButtonAutomationPeer {
+        AppBarToggleButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.AutoSuggestBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutoSuggestBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class AutoSuggestBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AutoSuggestBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AutoSuggestBoxAutomationPeer {
+        AutoSuggestBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AutoSuggestBoxAutomationPeer {
+        AutoSuggestBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAutoSuggestBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AutoSuggestBoxAutomationPeer> {
+        let ancestors = [IAutoSuggestBoxAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AutoSuggestBoxAutomationPeer>("AutoSuggestBoxAutomationPeer", IAutoSuggestBoxAutomationPeer.iid(), ancestors, { raw => AutoSuggestBoxAutomationPeer.fromAbiTake(raw) }, { raw => AutoSuggestBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAutoSuggestBoxAutomationPeer {
+        match (unsafe { query(IAutoSuggestBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutoSuggestBoxAutomationPeer(): IAutoSuggestBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.AutoSuggestBox): AutoSuggestBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.AutoSuggestBox>(owner)) {
+            try (factory__ = windows_core.factory<AutoSuggestBoxAutomationPeer, IAutoSuggestBoxAutomationPeerFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutoSuggestBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutoSuggestBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.AutoSuggestBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.AutoSuggestBoxAutomationPeer;{" + IAutoSuggestBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.AutoSuggestBoxAutomationPeer", AutoSuggestBoxAutomationPeer.signature(), IAutoSuggestBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: AutoSuggestBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AutoSuggestBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AutoSuggestBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AutoSuggestBoxAutomationPeer {
+        AutoSuggestBoxAutomationPeer.viewOf(raw)
+    }
+}
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationControlType (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationControlType)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationControlType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Button = AutomationControlType(0)
+public const AutomationControlType_Button = AutomationControlType(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Calendar = AutomationControlType(1)
+public const AutomationControlType_Calendar = AutomationControlType(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_CheckBox = AutomationControlType(2)
+public const AutomationControlType_CheckBox = AutomationControlType(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_ComboBox = AutomationControlType(3)
+public const AutomationControlType_ComboBox = AutomationControlType(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Edit = AutomationControlType(4)
+public const AutomationControlType_Edit = AutomationControlType(4)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Hyperlink = AutomationControlType(5)
+public const AutomationControlType_Hyperlink = AutomationControlType(5)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Image = AutomationControlType(6)
+public const AutomationControlType_Image = AutomationControlType(6)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_ListItem = AutomationControlType(7)
+public const AutomationControlType_ListItem = AutomationControlType(7)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_List = AutomationControlType(8)
+public const AutomationControlType_List = AutomationControlType(8)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Menu = AutomationControlType(9)
+public const AutomationControlType_Menu = AutomationControlType(9)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_MenuBar = AutomationControlType(10)
+public const AutomationControlType_MenuBar = AutomationControlType(10)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_MenuItem = AutomationControlType(11)
+public const AutomationControlType_MenuItem = AutomationControlType(11)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_ProgressBar = AutomationControlType(12)
+public const AutomationControlType_ProgressBar = AutomationControlType(12)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_RadioButton = AutomationControlType(13)
+public const AutomationControlType_RadioButton = AutomationControlType(13)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_ScrollBar = AutomationControlType(14)
+public const AutomationControlType_ScrollBar = AutomationControlType(14)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Slider = AutomationControlType(15)
+public const AutomationControlType_Slider = AutomationControlType(15)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Spinner = AutomationControlType(16)
+public const AutomationControlType_Spinner = AutomationControlType(16)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_StatusBar = AutomationControlType(17)
+public const AutomationControlType_StatusBar = AutomationControlType(17)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Tab = AutomationControlType(18)
+public const AutomationControlType_Tab = AutomationControlType(18)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_TabItem = AutomationControlType(19)
+public const AutomationControlType_TabItem = AutomationControlType(19)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Text = AutomationControlType(20)
+public const AutomationControlType_Text = AutomationControlType(20)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_ToolBar = AutomationControlType(21)
+public const AutomationControlType_ToolBar = AutomationControlType(21)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_ToolTip = AutomationControlType(22)
+public const AutomationControlType_ToolTip = AutomationControlType(22)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Tree = AutomationControlType(23)
+public const AutomationControlType_Tree = AutomationControlType(23)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_TreeItem = AutomationControlType(24)
+public const AutomationControlType_TreeItem = AutomationControlType(24)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Custom = AutomationControlType(25)
+public const AutomationControlType_Custom = AutomationControlType(25)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Group = AutomationControlType(26)
+public const AutomationControlType_Group = AutomationControlType(26)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Thumb = AutomationControlType(27)
+public const AutomationControlType_Thumb = AutomationControlType(27)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_DataGrid = AutomationControlType(28)
+public const AutomationControlType_DataGrid = AutomationControlType(28)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_DataItem = AutomationControlType(29)
+public const AutomationControlType_DataItem = AutomationControlType(29)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Document = AutomationControlType(30)
+public const AutomationControlType_Document = AutomationControlType(30)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_SplitButton = AutomationControlType(31)
+public const AutomationControlType_SplitButton = AutomationControlType(31)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Window = AutomationControlType(32)
+public const AutomationControlType_Window = AutomationControlType(32)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Pane = AutomationControlType(33)
+public const AutomationControlType_Pane = AutomationControlType(33)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Header = AutomationControlType(34)
+public const AutomationControlType_Header = AutomationControlType(34)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_HeaderItem = AutomationControlType(35)
+public const AutomationControlType_HeaderItem = AutomationControlType(35)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Table = AutomationControlType(36)
+public const AutomationControlType_Table = AutomationControlType(36)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_TitleBar = AutomationControlType(37)
+public const AutomationControlType_TitleBar = AutomationControlType(37)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_Separator = AutomationControlType(38)
+public const AutomationControlType_Separator = AutomationControlType(38)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_SemanticZoom = AutomationControlType(39)
+public const AutomationControlType_SemanticZoom = AutomationControlType(39)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_AppBar = AutomationControlType(40)
+public const AutomationControlType_AppBar = AutomationControlType(40)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationControlType_FlipView = AutomationControlType(41)
+public const AutomationControlType_FlipView = AutomationControlType(41)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationEvents (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationEvents)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationEvents {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_ToolTipOpened = AutomationEvents(0)
+public const AutomationEvents_ToolTipOpened = AutomationEvents(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_ToolTipClosed = AutomationEvents(1)
+public const AutomationEvents_ToolTipClosed = AutomationEvents(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_MenuOpened = AutomationEvents(2)
+public const AutomationEvents_MenuOpened = AutomationEvents(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_MenuClosed = AutomationEvents(3)
+public const AutomationEvents_MenuClosed = AutomationEvents(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_AutomationFocusChanged = AutomationEvents(4)
+public const AutomationEvents_AutomationFocusChanged = AutomationEvents(4)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_InvokePatternOnInvoked = AutomationEvents(5)
+public const AutomationEvents_InvokePatternOnInvoked = AutomationEvents(5)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_SelectionItemPatternOnElementAddedToSelection = AutomationEvents(6)
+public const AutomationEvents_SelectionItemPatternOnElementAddedToSelection = AutomationEvents(6)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_SelectionItemPatternOnElementRemovedFromSelection = AutomationEvents(7)
+public const AutomationEvents_SelectionItemPatternOnElementRemovedFromSelection = AutomationEvents(7)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_SelectionItemPatternOnElementSelected = AutomationEvents(8)
+public const AutomationEvents_SelectionItemPatternOnElementSelected = AutomationEvents(8)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_SelectionPatternOnInvalidated = AutomationEvents(9)
+public const AutomationEvents_SelectionPatternOnInvalidated = AutomationEvents(9)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_TextPatternOnTextSelectionChanged = AutomationEvents(10)
+public const AutomationEvents_TextPatternOnTextSelectionChanged = AutomationEvents(10)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_TextPatternOnTextChanged = AutomationEvents(11)
+public const AutomationEvents_TextPatternOnTextChanged = AutomationEvents(11)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_AsyncContentLoaded = AutomationEvents(12)
+public const AutomationEvents_AsyncContentLoaded = AutomationEvents(12)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_PropertyChanged = AutomationEvents(13)
+public const AutomationEvents_PropertyChanged = AutomationEvents(13)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_StructureChanged = AutomationEvents(14)
+public const AutomationEvents_StructureChanged = AutomationEvents(14)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_DragStart = AutomationEvents(15)
+public const AutomationEvents_DragStart = AutomationEvents(15)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_DragCancel = AutomationEvents(16)
+public const AutomationEvents_DragCancel = AutomationEvents(16)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_DragComplete = AutomationEvents(17)
+public const AutomationEvents_DragComplete = AutomationEvents(17)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_DragEnter = AutomationEvents(18)
+public const AutomationEvents_DragEnter = AutomationEvents(18)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_DragLeave = AutomationEvents(19)
+public const AutomationEvents_DragLeave = AutomationEvents(19)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_Dropped = AutomationEvents(20)
+public const AutomationEvents_Dropped = AutomationEvents(20)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_LiveRegionChanged = AutomationEvents(21)
+public const AutomationEvents_LiveRegionChanged = AutomationEvents(21)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_InputReachedTarget = AutomationEvents(22)
+public const AutomationEvents_InputReachedTarget = AutomationEvents(22)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_InputReachedOtherElement = AutomationEvents(23)
+public const AutomationEvents_InputReachedOtherElement = AutomationEvents(23)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_InputDiscarded = AutomationEvents(24)
+public const AutomationEvents_InputDiscarded = AutomationEvents(24)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_WindowClosed = AutomationEvents(25)
+public const AutomationEvents_WindowClosed = AutomationEvents(25)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_WindowOpened = AutomationEvents(26)
+public const AutomationEvents_WindowOpened = AutomationEvents(26)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_ConversionTargetChanged = AutomationEvents(27)
+public const AutomationEvents_ConversionTargetChanged = AutomationEvents(27)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_TextEditTextChanged = AutomationEvents(28)
+public const AutomationEvents_TextEditTextChanged = AutomationEvents(28)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationEvents_LayoutInvalidated = AutomationEvents(29)
+public const AutomationEvents_LayoutInvalidated = AutomationEvents(29)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationHeadingLevel {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_None = AutomationHeadingLevel(0)
+public const AutomationHeadingLevel_None = AutomationHeadingLevel(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level1 = AutomationHeadingLevel(1)
+public const AutomationHeadingLevel_Level1 = AutomationHeadingLevel(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level2 = AutomationHeadingLevel(2)
+public const AutomationHeadingLevel_Level2 = AutomationHeadingLevel(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level3 = AutomationHeadingLevel(3)
+public const AutomationHeadingLevel_Level3 = AutomationHeadingLevel(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level4 = AutomationHeadingLevel(4)
+public const AutomationHeadingLevel_Level4 = AutomationHeadingLevel(4)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level5 = AutomationHeadingLevel(5)
+public const AutomationHeadingLevel_Level5 = AutomationHeadingLevel(5)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level6 = AutomationHeadingLevel(6)
+public const AutomationHeadingLevel_Level6 = AutomationHeadingLevel(6)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level7 = AutomationHeadingLevel(7)
+public const AutomationHeadingLevel_Level7 = AutomationHeadingLevel(7)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level8 = AutomationHeadingLevel(8)
+public const AutomationHeadingLevel_Level8 = AutomationHeadingLevel(8)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationHeadingLevel_Level9 = AutomationHeadingLevel(9)
+public const AutomationHeadingLevel_Level9 = AutomationHeadingLevel(9)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationLandmarkType (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationLandmarkType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLandmarkType_None = AutomationLandmarkType(0)
+public const AutomationLandmarkType_None = AutomationLandmarkType(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLandmarkType_Custom = AutomationLandmarkType(1)
+public const AutomationLandmarkType_Custom = AutomationLandmarkType(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLandmarkType_Form = AutomationLandmarkType(2)
+public const AutomationLandmarkType_Form = AutomationLandmarkType(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLandmarkType_Main = AutomationLandmarkType(3)
+public const AutomationLandmarkType_Main = AutomationLandmarkType(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLandmarkType_Navigation = AutomationLandmarkType(4)
+public const AutomationLandmarkType_Navigation = AutomationLandmarkType(4)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLandmarkType_Search = AutomationLandmarkType(5)
+public const AutomationLandmarkType_Search = AutomationLandmarkType(5)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationLiveSetting (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationLiveSetting {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLiveSetting_Off = AutomationLiveSetting(0)
+public const AutomationLiveSetting_Off = AutomationLiveSetting(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLiveSetting_Polite = AutomationLiveSetting(1)
+public const AutomationLiveSetting_Polite = AutomationLiveSetting(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationLiveSetting_Assertive = AutomationLiveSetting(2)
+public const AutomationLiveSetting_Assertive = AutomationLiveSetting(2)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationNavigationDirection (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationNavigationDirection {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNavigationDirection_Parent = AutomationNavigationDirection(0)
+public const AutomationNavigationDirection_Parent = AutomationNavigationDirection(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNavigationDirection_NextSibling = AutomationNavigationDirection(1)
+public const AutomationNavigationDirection_NextSibling = AutomationNavigationDirection(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNavigationDirection_PreviousSibling = AutomationNavigationDirection(2)
+public const AutomationNavigationDirection_PreviousSibling = AutomationNavigationDirection(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNavigationDirection_FirstChild = AutomationNavigationDirection(3)
+public const AutomationNavigationDirection_FirstChild = AutomationNavigationDirection(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNavigationDirection_LastChild = AutomationNavigationDirection(4)
+public const AutomationNavigationDirection_LastChild = AutomationNavigationDirection(4)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationNotificationKind (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationNotificationKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationKind_ItemAdded = AutomationNotificationKind(0)
+public const AutomationNotificationKind_ItemAdded = AutomationNotificationKind(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationKind_ItemRemoved = AutomationNotificationKind(1)
+public const AutomationNotificationKind_ItemRemoved = AutomationNotificationKind(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationKind_ActionCompleted = AutomationNotificationKind(2)
+public const AutomationNotificationKind_ActionCompleted = AutomationNotificationKind(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationKind_ActionAborted = AutomationNotificationKind(3)
+public const AutomationNotificationKind_ActionAborted = AutomationNotificationKind(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationKind_Other = AutomationNotificationKind(4)
+public const AutomationNotificationKind_Other = AutomationNotificationKind(4)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationNotificationProcessing (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationNotificationProcessing {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationProcessing_ImportantAll = AutomationNotificationProcessing(0)
+public const AutomationNotificationProcessing_ImportantAll = AutomationNotificationProcessing(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationProcessing_ImportantMostRecent = AutomationNotificationProcessing(1)
+public const AutomationNotificationProcessing_ImportantMostRecent = AutomationNotificationProcessing(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationProcessing_All = AutomationNotificationProcessing(2)
+public const AutomationNotificationProcessing_All = AutomationNotificationProcessing(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationProcessing_MostRecent = AutomationNotificationProcessing(3)
+public const AutomationNotificationProcessing_MostRecent = AutomationNotificationProcessing(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationNotificationProcessing_CurrentThenMostRecent = AutomationNotificationProcessing(4)
+public const AutomationNotificationProcessing_CurrentThenMostRecent = AutomationNotificationProcessing(4)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationOrientation (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationOrientation {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationOrientation_None = AutomationOrientation(0)
+public const AutomationOrientation_None = AutomationOrientation(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationOrientation_Horizontal = AutomationOrientation(1)
+public const AutomationOrientation_Horizontal = AutomationOrientation(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationOrientation_Vertical = AutomationOrientation(2)
+public const AutomationOrientation_Vertical = AutomationOrientation(2)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationPeer)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
@@ -1335,25 +2126,4405 @@ public class AutomationPeerAnnotation <: windows_interface.InterfaceWrapperBase 
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct AutomationStructureChangeType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationStructureChangeType_ChildAdded = AutomationStructureChangeType(0)
+public const AutomationStructureChangeType_ChildAdded = AutomationStructureChangeType(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationStructureChangeType_ChildRemoved = AutomationStructureChangeType(1)
+public const AutomationStructureChangeType_ChildRemoved = AutomationStructureChangeType(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationStructureChangeType_ChildrenInvalidated = AutomationStructureChangeType(2)
+public const AutomationStructureChangeType_ChildrenInvalidated = AutomationStructureChangeType(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationStructureChangeType_ChildrenBulkAdded = AutomationStructureChangeType(3)
+public const AutomationStructureChangeType_ChildrenBulkAdded = AutomationStructureChangeType(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationStructureChangeType_ChildrenBulkRemoved = AutomationStructureChangeType(4)
+public const AutomationStructureChangeType_ChildrenBulkRemoved = AutomationStructureChangeType(4)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let AutomationStructureChangeType_ChildrenReordered = AutomationStructureChangeType(5)
+public const AutomationStructureChangeType_ChildrenReordered = AutomationStructureChangeType(5)
+
+// Microsoft.UI.Xaml.Automation.Peers.BreadcrumbBarItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_BreadcrumbBarItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class BreadcrumbBarItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BreadcrumbBarItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BreadcrumbBarItemAutomationPeer {
+        BreadcrumbBarItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BreadcrumbBarItemAutomationPeer {
+        BreadcrumbBarItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBreadcrumbBarItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BreadcrumbBarItemAutomationPeer> {
+        let ancestors = [IBreadcrumbBarItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BreadcrumbBarItemAutomationPeer>("BreadcrumbBarItemAutomationPeer", IBreadcrumbBarItemAutomationPeer.iid(), ancestors, { raw => BreadcrumbBarItemAutomationPeer.fromAbiTake(raw) }, { raw => BreadcrumbBarItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBreadcrumbBarItemAutomationPeer {
+        match (unsafe { query(IBreadcrumbBarItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBreadcrumbBarItemAutomationPeer(): IBreadcrumbBarItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.BreadcrumbBarItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): BreadcrumbBarItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.BreadcrumbBarItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<BreadcrumbBarItemAutomationPeer, IBreadcrumbBarItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BreadcrumbBarItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return BreadcrumbBarItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.BreadcrumbBarItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.BreadcrumbBarItemAutomationPeer;{" + IBreadcrumbBarItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.BreadcrumbBarItemAutomationPeer", BreadcrumbBarItemAutomationPeer.signature(), IBreadcrumbBarItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: BreadcrumbBarItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BreadcrumbBarItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BreadcrumbBarItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BreadcrumbBarItemAutomationPeer {
+        BreadcrumbBarItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ButtonAutomationPeer {
+        ButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ButtonAutomationPeer {
+        ButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ButtonAutomationPeer> {
+        let ancestors = [IButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ButtonAutomationPeer>("ButtonAutomationPeer", IButtonAutomationPeer.iid(), ancestors, { raw => ButtonAutomationPeer.fromAbiTake(raw) }, { raw => ButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IButtonAutomationPeer {
+        match (unsafe { query(IButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIButtonAutomationPeer(): IButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.Button, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.Button>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ButtonAutomationPeer, IButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ButtonAutomationPeer;{" + IButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ButtonAutomationPeer", ButtonAutomationPeer.signature(), IButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ButtonAutomationPeer {
+        ButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ButtonBaseAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ButtonBaseAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ButtonBaseAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ButtonBaseAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ButtonBaseAutomationPeer {
+        ButtonBaseAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ButtonBaseAutomationPeer {
+        ButtonBaseAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IButtonBaseAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ButtonBaseAutomationPeer> {
+        let ancestors = [IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ButtonBaseAutomationPeer>("ButtonBaseAutomationPeer", IButtonBaseAutomationPeer.iid(), ancestors, { raw => ButtonBaseAutomationPeer.fromAbiTake(raw) }, { raw => ButtonBaseAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IButtonBaseAutomationPeer {
+        match (unsafe { query(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.ButtonBase, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ButtonBaseAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.ButtonBase>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ButtonBaseAutomationPeer, IButtonBaseAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ButtonBaseAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ButtonBaseAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ButtonBaseAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ButtonBaseAutomationPeer;{" + IButtonBaseAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ButtonBaseAutomationPeer", ButtonBaseAutomationPeer.signature(), IButtonBaseAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ButtonBaseAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ButtonBaseAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ButtonBaseAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ButtonBaseAutomationPeer {
+        ButtonBaseAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.CalendarDatePickerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_CalendarDatePickerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class CalendarDatePickerAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CalendarDatePickerAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CalendarDatePickerAutomationPeer {
+        CalendarDatePickerAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CalendarDatePickerAutomationPeer {
+        CalendarDatePickerAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICalendarDatePickerAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CalendarDatePickerAutomationPeer> {
+        let ancestors = [ICalendarDatePickerAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IValueProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CalendarDatePickerAutomationPeer>("CalendarDatePickerAutomationPeer", ICalendarDatePickerAutomationPeer.iid(), ancestors, { raw => CalendarDatePickerAutomationPeer.fromAbiTake(raw) }, { raw => CalendarDatePickerAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICalendarDatePickerAutomationPeer {
+        match (unsafe { query(ICalendarDatePickerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendarDatePickerAutomationPeer(): ICalendarDatePickerAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.CalendarDatePicker, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): CalendarDatePickerAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.CalendarDatePicker>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<CalendarDatePickerAutomationPeer, ICalendarDatePickerAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CalendarDatePickerAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return CalendarDatePickerAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.CalendarDatePickerAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.CalendarDatePickerAutomationPeer;{" + ICalendarDatePickerAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.CalendarDatePickerAutomationPeer", CalendarDatePickerAutomationPeer.signature(), ICalendarDatePickerAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: CalendarDatePickerAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CalendarDatePickerAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CalendarDatePickerAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CalendarDatePickerAutomationPeer {
+        CalendarDatePickerAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.CheckBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_CheckBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class CheckBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CheckBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CheckBoxAutomationPeer {
+        CheckBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CheckBoxAutomationPeer {
+        CheckBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICheckBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CheckBoxAutomationPeer> {
+        let ancestors = [ICheckBoxAutomationPeer.iid(), IToggleButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CheckBoxAutomationPeer>("CheckBoxAutomationPeer", ICheckBoxAutomationPeer.iid(), ancestors, { raw => CheckBoxAutomationPeer.fromAbiTake(raw) }, { raw => CheckBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICheckBoxAutomationPeer {
+        match (unsafe { query(ICheckBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICheckBoxAutomationPeer(): ICheckBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIToggleButtonAutomationPeer(): IToggleButtonAutomationPeer {
+        match (unsafe { query<IToggleButtonAutomationPeer>(IToggleButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.CheckBox, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): CheckBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.CheckBox>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<CheckBoxAutomationPeer, ICheckBoxAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CheckBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return CheckBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.CheckBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.CheckBoxAutomationPeer;{" + ICheckBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.CheckBoxAutomationPeer", CheckBoxAutomationPeer.signature(), ICheckBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: CheckBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CheckBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CheckBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CheckBoxAutomationPeer {
+        CheckBoxAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ColorPickerSliderAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ColorPickerSliderAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ColorPickerSliderAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ColorPickerSliderAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ColorPickerSliderAutomationPeer {
+        ColorPickerSliderAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ColorPickerSliderAutomationPeer {
+        ColorPickerSliderAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IColorPickerSliderAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ColorPickerSliderAutomationPeer> {
+        let ancestors = [IColorPickerSliderAutomationPeer.iid(), ISliderAutomationPeer.iid(), IRangeBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ColorPickerSliderAutomationPeer>("ColorPickerSliderAutomationPeer", IColorPickerSliderAutomationPeer.iid(), ancestors, { raw => ColorPickerSliderAutomationPeer.fromAbiTake(raw) }, { raw => ColorPickerSliderAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IColorPickerSliderAutomationPeer {
+        match (unsafe { query(IColorPickerSliderAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIColorPickerSliderAutomationPeer(): IColorPickerSliderAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISliderAutomationPeer(): ISliderAutomationPeer {
+        match (unsafe { query<ISliderAutomationPeer>(ISliderAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIRangeBaseAutomationPeer(): IRangeBaseAutomationPeer {
+        match (unsafe { query<IRangeBaseAutomationPeer>(IRangeBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIRangeValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.ColorPickerSlider, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ColorPickerSliderAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.ColorPickerSlider>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ColorPickerSliderAutomationPeer, IColorPickerSliderAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ColorPickerSliderAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ColorPickerSliderAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ColorPickerSliderAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ColorPickerSliderAutomationPeer;{" + IColorPickerSliderAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ColorPickerSliderAutomationPeer", ColorPickerSliderAutomationPeer.signature(), IColorPickerSliderAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ColorPickerSliderAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ColorPickerSliderAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ColorPickerSliderAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ColorPickerSliderAutomationPeer {
+        ColorPickerSliderAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ColorSpectrumAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ColorSpectrumAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ColorSpectrumAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ColorSpectrumAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ColorSpectrumAutomationPeer {
+        ColorSpectrumAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ColorSpectrumAutomationPeer {
+        ColorSpectrumAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IColorSpectrumAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ColorSpectrumAutomationPeer> {
+        let ancestors = [IColorSpectrumAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ColorSpectrumAutomationPeer>("ColorSpectrumAutomationPeer", IColorSpectrumAutomationPeer.iid(), ancestors, { raw => ColorSpectrumAutomationPeer.fromAbiTake(raw) }, { raw => ColorSpectrumAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IColorSpectrumAutomationPeer {
+        match (unsafe { query(IColorSpectrumAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIColorSpectrumAutomationPeer(): IColorSpectrumAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.ColorSpectrum, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ColorSpectrumAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.ColorSpectrum>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ColorSpectrumAutomationPeer, IColorSpectrumAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ColorSpectrumAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ColorSpectrumAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ColorSpectrumAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ColorSpectrumAutomationPeer;{" + IColorSpectrumAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ColorSpectrumAutomationPeer", ColorSpectrumAutomationPeer.signature(), IColorSpectrumAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ColorSpectrumAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ColorSpectrumAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ColorSpectrumAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ColorSpectrumAutomationPeer {
+        ColorSpectrumAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ComboBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ComboBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ComboBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ComboBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ComboBoxAutomationPeer {
+        ComboBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ComboBoxAutomationPeer {
+        ComboBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IComboBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ComboBoxAutomationPeer> {
+        let ancestors = [IComboBoxAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IValueProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IWindowProvider.iid(), ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ComboBoxAutomationPeer>("ComboBoxAutomationPeer", IComboBoxAutomationPeer.iid(), ancestors, { raw => ComboBoxAutomationPeer.fromAbiTake(raw) }, { raw => ComboBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IComboBoxAutomationPeer {
+        match (unsafe { query(IComboBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIComboBoxAutomationPeer(): IComboBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIWindowProvider(): Microsoft_UI_Xaml_Automation_Provider.IWindowProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IWindowProvider>(Microsoft_UI_Xaml_Automation_Provider.IWindowProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        match (unsafe { query<ISelectorAutomationPeer>(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ComboBox, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ComboBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ComboBox>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ComboBoxAutomationPeer, IComboBoxAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ComboBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ComboBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ComboBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ComboBoxAutomationPeer;{" + IComboBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ComboBoxAutomationPeer", ComboBoxAutomationPeer.signature(), IComboBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ComboBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ComboBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ComboBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ComboBoxAutomationPeer {
+        ComboBoxAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ComboBoxItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ComboBoxItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ComboBoxItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ComboBoxItemAutomationPeer {
+        ComboBoxItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ComboBoxItemAutomationPeer {
+        ComboBoxItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IComboBoxItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ComboBoxItemAutomationPeer> {
+        let ancestors = [IComboBoxItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ComboBoxItemAutomationPeer>("ComboBoxItemAutomationPeer", IComboBoxItemAutomationPeer.iid(), ancestors, { raw => ComboBoxItemAutomationPeer.fromAbiTake(raw) }, { raw => ComboBoxItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IComboBoxItemAutomationPeer {
+        match (unsafe { query(IComboBoxItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIComboBoxItemAutomationPeer(): IComboBoxItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ComboBoxItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ComboBoxItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ComboBoxItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ComboBoxItemAutomationPeer, IComboBoxItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ComboBoxItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ComboBoxItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemAutomationPeer;{" + IComboBoxItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemAutomationPeer", ComboBoxItemAutomationPeer.signature(), IComboBoxItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ComboBoxItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ComboBoxItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ComboBoxItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ComboBoxItemAutomationPeer {
+        ComboBoxItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ComboBoxItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ComboBoxItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ComboBoxItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ComboBoxItemDataAutomationPeer {
+        ComboBoxItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ComboBoxItemDataAutomationPeer {
+        ComboBoxItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IComboBoxItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ComboBoxItemDataAutomationPeer> {
+        let ancestors = [IComboBoxItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), ISelectorItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ComboBoxItemDataAutomationPeer>("ComboBoxItemDataAutomationPeer", IComboBoxItemDataAutomationPeer.iid(), ancestors, { raw => ComboBoxItemDataAutomationPeer.fromAbiTake(raw) }, { raw => ComboBoxItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IComboBoxItemDataAutomationPeer {
+        match (unsafe { query(IComboBoxItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIComboBoxItemDataAutomationPeer(): IComboBoxItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorItemAutomationPeer(): ISelectorItemAutomationPeer {
+        match (unsafe { query<ISelectorItemAutomationPeer>(ISelectorItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: ComboBoxAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ComboBoxItemDataAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ComboBoxAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<ComboBoxItemDataAutomationPeer, IComboBoxItemDataAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ComboBoxItemDataAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return ComboBoxItemDataAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemDataAutomationPeer;{" + IComboBoxItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ComboBoxItemDataAutomationPeer", ComboBoxItemDataAutomationPeer.signature(), IComboBoxItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ComboBoxItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ComboBoxItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ComboBoxItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ComboBoxItemDataAutomationPeer {
+        ComboBoxItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.DatePickerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_DatePickerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class DatePickerAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DatePickerAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DatePickerAutomationPeer {
+        DatePickerAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DatePickerAutomationPeer {
+        DatePickerAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDatePickerAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DatePickerAutomationPeer> {
+        let ancestors = [IDatePickerAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DatePickerAutomationPeer>("DatePickerAutomationPeer", IDatePickerAutomationPeer.iid(), ancestors, { raw => DatePickerAutomationPeer.fromAbiTake(raw) }, { raw => DatePickerAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDatePickerAutomationPeer {
+        match (unsafe { query(IDatePickerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDatePickerAutomationPeer(): IDatePickerAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.DatePicker, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): DatePickerAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.DatePicker>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<DatePickerAutomationPeer, IDatePickerAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DatePickerAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return DatePickerAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.DatePickerAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.DatePickerAutomationPeer;{" + IDatePickerAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.DatePickerAutomationPeer", DatePickerAutomationPeer.signature(), IDatePickerAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: DatePickerAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DatePickerAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DatePickerAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DatePickerAutomationPeer {
+        DatePickerAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.DatePickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_DatePickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class DatePickerFlyoutPresenterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DatePickerFlyoutPresenterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DatePickerFlyoutPresenterAutomationPeer {
+        DatePickerFlyoutPresenterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DatePickerFlyoutPresenterAutomationPeer {
+        DatePickerFlyoutPresenterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDatePickerFlyoutPresenterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DatePickerFlyoutPresenterAutomationPeer> {
+        let ancestors = [IDatePickerFlyoutPresenterAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DatePickerFlyoutPresenterAutomationPeer>("DatePickerFlyoutPresenterAutomationPeer", IDatePickerFlyoutPresenterAutomationPeer.iid(), ancestors, { raw => DatePickerFlyoutPresenterAutomationPeer.fromAbiTake(raw) }, { raw => DatePickerFlyoutPresenterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDatePickerFlyoutPresenterAutomationPeer {
+        match (unsafe { query(IDatePickerFlyoutPresenterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDatePickerFlyoutPresenterAutomationPeer(): IDatePickerFlyoutPresenterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.DatePickerFlyoutPresenterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.DatePickerFlyoutPresenterAutomationPeer;{" + IDatePickerFlyoutPresenterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.DatePickerFlyoutPresenterAutomationPeer", DatePickerFlyoutPresenterAutomationPeer.signature(), IDatePickerFlyoutPresenterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: DatePickerFlyoutPresenterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DatePickerFlyoutPresenterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DatePickerFlyoutPresenterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DatePickerFlyoutPresenterAutomationPeer {
+        DatePickerFlyoutPresenterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.DropDownButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_DropDownButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class DropDownButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DropDownButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DropDownButtonAutomationPeer {
+        DropDownButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DropDownButtonAutomationPeer {
+        DropDownButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDropDownButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DropDownButtonAutomationPeer> {
+        let ancestors = [IDropDownButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), IButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DropDownButtonAutomationPeer>("DropDownButtonAutomationPeer", IDropDownButtonAutomationPeer.iid(), ancestors, { raw => DropDownButtonAutomationPeer.fromAbiTake(raw) }, { raw => DropDownButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDropDownButtonAutomationPeer {
+        match (unsafe { query(IDropDownButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDropDownButtonAutomationPeer(): IDropDownButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonAutomationPeer(): IButtonAutomationPeer {
+        match (unsafe { query<IButtonAutomationPeer>(IButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.DropDownButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): DropDownButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.DropDownButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<DropDownButtonAutomationPeer, IDropDownButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DropDownButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return DropDownButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.DropDownButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.DropDownButtonAutomationPeer;{" + IDropDownButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.DropDownButtonAutomationPeer", DropDownButtonAutomationPeer.signature(), IDropDownButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: DropDownButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DropDownButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DropDownButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DropDownButtonAutomationPeer {
+        DropDownButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ExpanderAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ExpanderAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ExpanderAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ExpanderAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ExpanderAutomationPeer {
+        ExpanderAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ExpanderAutomationPeer {
+        ExpanderAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IExpanderAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ExpanderAutomationPeer> {
+        let ancestors = [IExpanderAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ExpanderAutomationPeer>("ExpanderAutomationPeer", IExpanderAutomationPeer.iid(), ancestors, { raw => ExpanderAutomationPeer.fromAbiTake(raw) }, { raw => ExpanderAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IExpanderAutomationPeer {
+        match (unsafe { query(IExpanderAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIExpanderAutomationPeer(): IExpanderAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.Expander, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ExpanderAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.Expander>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ExpanderAutomationPeer, IExpanderAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ExpanderAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ExpanderAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ExpanderAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ExpanderAutomationPeer;{" + IExpanderAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ExpanderAutomationPeer", ExpanderAutomationPeer.signature(), IExpanderAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ExpanderAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ExpanderAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ExpanderAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ExpanderAutomationPeer {
+        ExpanderAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.FlipViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_FlipViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class FlipViewAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FlipViewAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FlipViewAutomationPeer {
+        FlipViewAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FlipViewAutomationPeer {
+        FlipViewAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFlipViewAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FlipViewAutomationPeer> {
+        let ancestors = [IFlipViewAutomationPeer.iid(), ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FlipViewAutomationPeer>("FlipViewAutomationPeer", IFlipViewAutomationPeer.iid(), ancestors, { raw => FlipViewAutomationPeer.fromAbiTake(raw) }, { raw => FlipViewAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFlipViewAutomationPeer {
+        match (unsafe { query(IFlipViewAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFlipViewAutomationPeer(): IFlipViewAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        match (unsafe { query<ISelectorAutomationPeer>(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.FlipView, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): FlipViewAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.FlipView>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<FlipViewAutomationPeer, IFlipViewAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<FlipViewAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return FlipViewAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.FlipViewAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.FlipViewAutomationPeer;{" + IFlipViewAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.FlipViewAutomationPeer", FlipViewAutomationPeer.signature(), IFlipViewAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: FlipViewAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FlipViewAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FlipViewAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FlipViewAutomationPeer {
+        FlipViewAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.FlipViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_FlipViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class FlipViewItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FlipViewItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FlipViewItemAutomationPeer {
+        FlipViewItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FlipViewItemAutomationPeer {
+        FlipViewItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFlipViewItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FlipViewItemAutomationPeer> {
+        let ancestors = [IFlipViewItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FlipViewItemAutomationPeer>("FlipViewItemAutomationPeer", IFlipViewItemAutomationPeer.iid(), ancestors, { raw => FlipViewItemAutomationPeer.fromAbiTake(raw) }, { raw => FlipViewItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFlipViewItemAutomationPeer {
+        match (unsafe { query(IFlipViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFlipViewItemAutomationPeer(): IFlipViewItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.FlipViewItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): FlipViewItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.FlipViewItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<FlipViewItemAutomationPeer, IFlipViewItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<FlipViewItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return FlipViewItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.FlipViewItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.FlipViewItemAutomationPeer;{" + IFlipViewItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.FlipViewItemAutomationPeer", FlipViewItemAutomationPeer.signature(), IFlipViewItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: FlipViewItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FlipViewItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FlipViewItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FlipViewItemAutomationPeer {
+        FlipViewItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.FlipViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_FlipViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class FlipViewItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FlipViewItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FlipViewItemDataAutomationPeer {
+        FlipViewItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FlipViewItemDataAutomationPeer {
+        FlipViewItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFlipViewItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FlipViewItemDataAutomationPeer> {
+        let ancestors = [IFlipViewItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), ISelectorItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FlipViewItemDataAutomationPeer>("FlipViewItemDataAutomationPeer", IFlipViewItemDataAutomationPeer.iid(), ancestors, { raw => FlipViewItemDataAutomationPeer.fromAbiTake(raw) }, { raw => FlipViewItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFlipViewItemDataAutomationPeer {
+        match (unsafe { query(IFlipViewItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFlipViewItemDataAutomationPeer(): IFlipViewItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorItemAutomationPeer(): ISelectorItemAutomationPeer {
+        match (unsafe { query<ISelectorItemAutomationPeer>(ISelectorItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: FlipViewAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): FlipViewItemDataAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<FlipViewAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<FlipViewItemDataAutomationPeer, IFlipViewItemDataAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<FlipViewItemDataAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return FlipViewItemDataAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.FlipViewItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.FlipViewItemDataAutomationPeer;{" + IFlipViewItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.FlipViewItemDataAutomationPeer", FlipViewItemDataAutomationPeer.signature(), IFlipViewItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: FlipViewItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FlipViewItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FlipViewItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FlipViewItemDataAutomationPeer {
+        FlipViewItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.FlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_FlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class FlyoutPresenterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FlyoutPresenterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FlyoutPresenterAutomationPeer {
+        FlyoutPresenterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FlyoutPresenterAutomationPeer {
+        FlyoutPresenterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFlyoutPresenterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FlyoutPresenterAutomationPeer> {
+        let ancestors = [IFlyoutPresenterAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FlyoutPresenterAutomationPeer>("FlyoutPresenterAutomationPeer", IFlyoutPresenterAutomationPeer.iid(), ancestors, { raw => FlyoutPresenterAutomationPeer.fromAbiTake(raw) }, { raw => FlyoutPresenterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFlyoutPresenterAutomationPeer {
+        match (unsafe { query(IFlyoutPresenterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFlyoutPresenterAutomationPeer(): IFlyoutPresenterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.FlyoutPresenter, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): FlyoutPresenterAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.FlyoutPresenter>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<FlyoutPresenterAutomationPeer, IFlyoutPresenterAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<FlyoutPresenterAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return FlyoutPresenterAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.FlyoutPresenterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.FlyoutPresenterAutomationPeer;{" + IFlyoutPresenterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.FlyoutPresenterAutomationPeer", FlyoutPresenterAutomationPeer.signature(), IFlyoutPresenterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: FlyoutPresenterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FlyoutPresenterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FlyoutPresenterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FlyoutPresenterAutomationPeer {
+        FlyoutPresenterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.FrameworkElementAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_FrameworkElementAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class FrameworkElementAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FrameworkElementAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FrameworkElementAutomationPeer {
+        FrameworkElementAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FrameworkElementAutomationPeer {
+        FrameworkElementAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFrameworkElementAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FrameworkElementAutomationPeer> {
+        let ancestors = [IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FrameworkElementAutomationPeer>("FrameworkElementAutomationPeer", IFrameworkElementAutomationPeer.iid(), ancestors, { raw => FrameworkElementAutomationPeer.fromAbiTake(raw) }, { raw => FrameworkElementAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFrameworkElementAutomationPeer {
+        match (unsafe { query(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func Owner(): Microsoft_UI_Xaml.UIElement {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Owner(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.UIElement>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.UIElement.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FromElement(element: Microsoft_UI_Xaml.UIElement): AutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.UIElement>(element)) {
+            try (factory__ = windows_core.factory<FrameworkElementAutomationPeer, IFrameworkElementAutomationPeerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.FromElement(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreatePeerForElement(element: Microsoft_UI_Xaml.UIElement): AutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.UIElement>(element)) {
+            try (factory__ = windows_core.factory<FrameworkElementAutomationPeer, IFrameworkElementAutomationPeerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreatePeerForElement(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml.FrameworkElement, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): FrameworkElementAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.FrameworkElement>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<FrameworkElementAutomationPeer, IFrameworkElementAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<FrameworkElementAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return FrameworkElementAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.FrameworkElementAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.FrameworkElementAutomationPeer;{" + IFrameworkElementAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.FrameworkElementAutomationPeer", FrameworkElementAutomationPeer.signature(), IFrameworkElementAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: FrameworkElementAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FrameworkElementAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FrameworkElementAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FrameworkElementAutomationPeer {
+        FrameworkElementAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.GridViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_GridViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class GridViewAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GridViewAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GridViewAutomationPeer {
+        GridViewAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GridViewAutomationPeer {
+        GridViewAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGridViewAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GridViewAutomationPeer> {
+        let ancestors = [IGridViewAutomationPeer.iid(), IListViewBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.iid(), ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GridViewAutomationPeer>("GridViewAutomationPeer", IGridViewAutomationPeer.iid(), ancestors, { raw => GridViewAutomationPeer.fromAbiTake(raw) }, { raw => GridViewAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGridViewAutomationPeer {
+        match (unsafe { query(IGridViewAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGridViewAutomationPeer(): IGridViewAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIListViewBaseAutomationPeer(): IListViewBaseAutomationPeer {
+        match (unsafe { query<IListViewBaseAutomationPeer>(IListViewBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDropTargetProvider(): Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider>(Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        match (unsafe { query<ISelectorAutomationPeer>(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.GridView, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): GridViewAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.GridView>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<GridViewAutomationPeer, IGridViewAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<GridViewAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return GridViewAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.GridViewAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.GridViewAutomationPeer;{" + IGridViewAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.GridViewAutomationPeer", GridViewAutomationPeer.signature(), IGridViewAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: GridViewAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GridViewAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GridViewAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GridViewAutomationPeer {
+        GridViewAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.GridViewHeaderItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_GridViewHeaderItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class GridViewHeaderItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GridViewHeaderItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GridViewHeaderItemAutomationPeer {
+        GridViewHeaderItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GridViewHeaderItemAutomationPeer {
+        GridViewHeaderItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGridViewHeaderItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GridViewHeaderItemAutomationPeer> {
+        let ancestors = [IGridViewHeaderItemAutomationPeer.iid(), IListViewBaseHeaderItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GridViewHeaderItemAutomationPeer>("GridViewHeaderItemAutomationPeer", IGridViewHeaderItemAutomationPeer.iid(), ancestors, { raw => GridViewHeaderItemAutomationPeer.fromAbiTake(raw) }, { raw => GridViewHeaderItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGridViewHeaderItemAutomationPeer {
+        match (unsafe { query(IGridViewHeaderItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGridViewHeaderItemAutomationPeer(): IGridViewHeaderItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIListViewBaseHeaderItemAutomationPeer(): IListViewBaseHeaderItemAutomationPeer {
+        match (unsafe { query<IListViewBaseHeaderItemAutomationPeer>(IListViewBaseHeaderItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.GridViewHeaderItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): GridViewHeaderItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.GridViewHeaderItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<GridViewHeaderItemAutomationPeer, IGridViewHeaderItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<GridViewHeaderItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return GridViewHeaderItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.GridViewHeaderItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.GridViewHeaderItemAutomationPeer;{" + IGridViewHeaderItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.GridViewHeaderItemAutomationPeer", GridViewHeaderItemAutomationPeer.signature(), IGridViewHeaderItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: GridViewHeaderItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GridViewHeaderItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GridViewHeaderItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GridViewHeaderItemAutomationPeer {
+        GridViewHeaderItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.GridViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_GridViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class GridViewItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GridViewItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GridViewItemAutomationPeer {
+        GridViewItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GridViewItemAutomationPeer {
+        GridViewItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGridViewItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GridViewItemAutomationPeer> {
+        let ancestors = [IGridViewItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GridViewItemAutomationPeer>("GridViewItemAutomationPeer", IGridViewItemAutomationPeer.iid(), ancestors, { raw => GridViewItemAutomationPeer.fromAbiTake(raw) }, { raw => GridViewItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGridViewItemAutomationPeer {
+        match (unsafe { query(IGridViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGridViewItemAutomationPeer(): IGridViewItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.GridViewItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): GridViewItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.GridViewItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<GridViewItemAutomationPeer, IGridViewItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<GridViewItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return GridViewItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.GridViewItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.GridViewItemAutomationPeer;{" + IGridViewItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.GridViewItemAutomationPeer", GridViewItemAutomationPeer.signature(), IGridViewItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: GridViewItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GridViewItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GridViewItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GridViewItemAutomationPeer {
+        GridViewItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.GridViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_GridViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class GridViewItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GridViewItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GridViewItemDataAutomationPeer {
+        GridViewItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GridViewItemDataAutomationPeer {
+        GridViewItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGridViewItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GridViewItemDataAutomationPeer> {
+        let ancestors = [IGridViewItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), ISelectorItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GridViewItemDataAutomationPeer>("GridViewItemDataAutomationPeer", IGridViewItemDataAutomationPeer.iid(), ancestors, { raw => GridViewItemDataAutomationPeer.fromAbiTake(raw) }, { raw => GridViewItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGridViewItemDataAutomationPeer {
+        match (unsafe { query(IGridViewItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGridViewItemDataAutomationPeer(): IGridViewItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorItemAutomationPeer(): ISelectorItemAutomationPeer {
+        match (unsafe { query<ISelectorItemAutomationPeer>(ISelectorItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: GridViewAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): GridViewItemDataAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<GridViewAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<GridViewItemDataAutomationPeer, IGridViewItemDataAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<GridViewItemDataAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return GridViewItemDataAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.GridViewItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.GridViewItemDataAutomationPeer;{" + IGridViewItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.GridViewItemDataAutomationPeer", GridViewItemDataAutomationPeer.signature(), IGridViewItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: GridViewItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GridViewItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GridViewItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GridViewItemDataAutomationPeer {
+        GridViewItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.GroupItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_GroupItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class GroupItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GroupItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GroupItemAutomationPeer {
+        GroupItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GroupItemAutomationPeer {
+        GroupItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGroupItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GroupItemAutomationPeer> {
+        let ancestors = [IGroupItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GroupItemAutomationPeer>("GroupItemAutomationPeer", IGroupItemAutomationPeer.iid(), ancestors, { raw => GroupItemAutomationPeer.fromAbiTake(raw) }, { raw => GroupItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGroupItemAutomationPeer {
+        match (unsafe { query(IGroupItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGroupItemAutomationPeer(): IGroupItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.GroupItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): GroupItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.GroupItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<GroupItemAutomationPeer, IGroupItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<GroupItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return GroupItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.GroupItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.GroupItemAutomationPeer;{" + IGroupItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.GroupItemAutomationPeer", GroupItemAutomationPeer.signature(), IGroupItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: GroupItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GroupItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GroupItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GroupItemAutomationPeer {
+        GroupItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.HubAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_HubAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class HubAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<HubAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): HubAutomationPeer {
+        HubAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): HubAutomationPeer {
+        HubAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IHubAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<HubAutomationPeer> {
+        let ancestors = [IHubAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<HubAutomationPeer>("HubAutomationPeer", IHubAutomationPeer.iid(), ancestors, { raw => HubAutomationPeer.fromAbiTake(raw) }, { raw => HubAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IHubAutomationPeer {
+        match (unsafe { query(IHubAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIHubAutomationPeer(): IHubAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.Hub, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): HubAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.Hub>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<HubAutomationPeer, IHubAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<HubAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return HubAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.HubAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.HubAutomationPeer;{" + IHubAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.HubAutomationPeer", HubAutomationPeer.signature(), IHubAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: HubAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HubAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        HubAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): HubAutomationPeer {
+        HubAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.HubSectionAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_HubSectionAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class HubSectionAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<HubSectionAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): HubSectionAutomationPeer {
+        HubSectionAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): HubSectionAutomationPeer {
+        HubSectionAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IHubSectionAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<HubSectionAutomationPeer> {
+        let ancestors = [IHubSectionAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<HubSectionAutomationPeer>("HubSectionAutomationPeer", IHubSectionAutomationPeer.iid(), ancestors, { raw => HubSectionAutomationPeer.fromAbiTake(raw) }, { raw => HubSectionAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IHubSectionAutomationPeer {
+        match (unsafe { query(IHubSectionAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIHubSectionAutomationPeer(): IHubSectionAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.HubSection, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): HubSectionAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.HubSection>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<HubSectionAutomationPeer, IHubSectionAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<HubSectionAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return HubSectionAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.HubSectionAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.HubSectionAutomationPeer;{" + IHubSectionAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.HubSectionAutomationPeer", HubSectionAutomationPeer.signature(), IHubSectionAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: HubSectionAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HubSectionAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        HubSectionAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): HubSectionAutomationPeer {
+        HubSectionAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.HyperlinkButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_HyperlinkButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class HyperlinkButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<HyperlinkButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): HyperlinkButtonAutomationPeer {
+        HyperlinkButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): HyperlinkButtonAutomationPeer {
+        HyperlinkButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IHyperlinkButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<HyperlinkButtonAutomationPeer> {
+        let ancestors = [IHyperlinkButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<HyperlinkButtonAutomationPeer>("HyperlinkButtonAutomationPeer", IHyperlinkButtonAutomationPeer.iid(), ancestors, { raw => HyperlinkButtonAutomationPeer.fromAbiTake(raw) }, { raw => HyperlinkButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IHyperlinkButtonAutomationPeer {
+        match (unsafe { query(IHyperlinkButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIHyperlinkButtonAutomationPeer(): IHyperlinkButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.HyperlinkButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): HyperlinkButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.HyperlinkButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<HyperlinkButtonAutomationPeer, IHyperlinkButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<HyperlinkButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return HyperlinkButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.HyperlinkButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.HyperlinkButtonAutomationPeer;{" + IHyperlinkButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.HyperlinkButtonAutomationPeer", HyperlinkButtonAutomationPeer.signature(), IHyperlinkButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: HyperlinkButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): HyperlinkButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        HyperlinkButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): HyperlinkButtonAutomationPeer {
+        HyperlinkButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAnimatedVisualPlayerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAnimatedVisualPlayerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f949eeb6-b3ea-58ad-b62b-b7255bcc04df", "Microsoft.UI.Xaml.Automation.Peers.IAnimatedVisualPlayerAutomationPeer"]
+public interface IAnimatedVisualPlayerAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAnimatedVisualPlayerAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAnimatedVisualPlayerAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d2a49198-80bb-51d6-b495-3dc5aab59589", "Microsoft.UI.Xaml.Automation.Peers.IAnimatedVisualPlayerAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IAnimatedVisualPlayerAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAppBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAppBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["883a52e2-1810-5f1a-a9fd-1db0f9c62b02", "Microsoft.UI.Xaml.Automation.Peers.IAppBarAutomationPeer"]
+public interface IAppBarAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAppBarAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAppBarAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["64f68ce4-ad2d-5c18-abc0-d0157cc63088", "Microsoft.UI.Xaml.Automation.Peers.IAppBarAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IAppBarAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAppBarButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAppBarButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["439efdb4-141b-5fff-8723-03e6e69f6b36", "Microsoft.UI.Xaml.Automation.Peers.IAppBarButtonAutomationPeer"]
+public interface IAppBarButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAppBarButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAppBarButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["6f611433-7e50-5e2e-b192-d6a285962c74", "Microsoft.UI.Xaml.Automation.Peers.IAppBarButtonAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IAppBarButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAppBarToggleButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAppBarToggleButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["17d28eb5-4635-5e2d-af01-8dcd23a608c4", "Microsoft.UI.Xaml.Automation.Peers.IAppBarToggleButtonAutomationPeer"]
+public interface IAppBarToggleButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAppBarToggleButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAppBarToggleButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3cb5ef43-ae92-5452-92e9-cd0ccca26891", "Microsoft.UI.Xaml.Automation.Peers.IAppBarToggleButtonAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IAppBarToggleButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAutoSuggestBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutoSuggestBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["695236fc-0021-5936-bdf9-ed5991db0d52", "Microsoft.UI.Xaml.Automation.Peers.IAutoSuggestBoxAutomationPeer"]
+public interface IAutoSuggestBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IAutoSuggestBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutoSuggestBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["c30950c9-b682-56df-9cb2-de6786fb8f90", "Microsoft.UI.Xaml.Automation.Peers.IAutoSuggestBoxAutomationPeerFactory", "CreateInstanceWithOwner.value=Com"]
+public interface IAutoSuggestBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeer)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
@@ -1517,85 +6688,7560 @@ public interface IAutomationPeerStatics <: IInspectable {
     func GenerateRawElementProviderRuntimeId(result: CPointer<RawElementProviderRuntimeId>): Int32
 }
 
+// Microsoft.UI.Xaml.Automation.Peers.IBreadcrumbBarItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IBreadcrumbBarItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["48e81612-7de0-5065-b881-04ebfff90497", "Microsoft.UI.Xaml.Automation.Peers.IBreadcrumbBarItemAutomationPeer"]
+public interface IBreadcrumbBarItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IBreadcrumbBarItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IBreadcrumbBarItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["dfb02146-405f-52ed-a873-0ed4942850be", "Microsoft.UI.Xaml.Automation.Peers.IBreadcrumbBarItemAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IBreadcrumbBarItemAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["a3a2e96b-8a2d-50bf-9b3d-dfbc4653f5a6", "Microsoft.UI.Xaml.Automation.Peers.IButtonAutomationPeer"]
+public interface IButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["1c2f87b7-fbc1-56b0-a654-550d61c423d1", "Microsoft.UI.Xaml.Automation.Peers.IButtonAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IButtonBaseAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IButtonBaseAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7a88a2d8-f8dd-5526-8a40-e2e3888193bf", "Microsoft.UI.Xaml.Automation.Peers.IButtonBaseAutomationPeer"]
+public interface IButtonBaseAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IButtonBaseAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IButtonBaseAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d6e707bb-7299-5f7a-9c03-7fa10f939771", "Microsoft.UI.Xaml.Automation.Peers.IButtonBaseAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IButtonBaseAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ICalendarDatePickerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ICalendarDatePickerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["246d63e3-812f-5f28-8d18-af79409a4f95", "Microsoft.UI.Xaml.Automation.Peers.ICalendarDatePickerAutomationPeer"]
+public interface ICalendarDatePickerAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ICalendarDatePickerAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ICalendarDatePickerAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["6d272c12-68a3-586e-879b-571e606803b4", "Microsoft.UI.Xaml.Automation.Peers.ICalendarDatePickerAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ICalendarDatePickerAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ICheckBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ICheckBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["9b449814-2c1a-5bdc-9524-1df91c06e992", "Microsoft.UI.Xaml.Automation.Peers.ICheckBoxAutomationPeer"]
+public interface ICheckBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ICheckBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ICheckBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0f5b9e3c-6de5-588e-835f-3228be930fea", "Microsoft.UI.Xaml.Automation.Peers.ICheckBoxAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ICheckBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IColorPickerSliderAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IColorPickerSliderAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["793d35d4-4152-50fa-b5f4-f6c045c1339d", "Microsoft.UI.Xaml.Automation.Peers.IColorPickerSliderAutomationPeer"]
+public interface IColorPickerSliderAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IColorPickerSliderAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IColorPickerSliderAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["e5f9093f-5e2c-5148-b5d1-1cda4eb86913", "Microsoft.UI.Xaml.Automation.Peers.IColorPickerSliderAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IColorPickerSliderAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IColorSpectrumAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IColorSpectrumAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["005ac3d1-b031-58ab-918d-030fabaeaf87", "Microsoft.UI.Xaml.Automation.Peers.IColorSpectrumAutomationPeer"]
+public interface IColorSpectrumAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IColorSpectrumAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IColorSpectrumAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["cfccae7e-fe0f-5c9c-9d1a-69e20e0232cf", "Microsoft.UI.Xaml.Automation.Peers.IColorSpectrumAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IColorSpectrumAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IComboBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IComboBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["459d2245-1fd2-5dda-822c-bed13df6776b", "Microsoft.UI.Xaml.Automation.Peers.IComboBoxAutomationPeer"]
+public interface IComboBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IComboBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IComboBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d094829f-2a6f-5b1f-a0ce-0f682cc56c0f", "Microsoft.UI.Xaml.Automation.Peers.IComboBoxAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IComboBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IComboBoxItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3d4195bc-b579-5cda-b56f-1e7399e14122", "Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemAutomationPeer"]
+public interface IComboBoxItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IComboBoxItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["ead9d22d-112b-550e-8cac-760614f979aa", "Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IComboBoxItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IComboBoxItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["65b69b50-cbc3-5ae7-bf9c-2794fe56c6b3", "Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemDataAutomationPeer"]
+public interface IComboBoxItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemDataAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IComboBoxItemDataAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["66778718-8757-56d5-bd3a-f2ff40e83a78", "Microsoft.UI.Xaml.Automation.Peers.IComboBoxItemDataAutomationPeerFactory", "CreateInstanceWithParentAndItem.innerInterface=Com;CreateInstanceWithParentAndItem.value=Com"]
+public interface IComboBoxItemDataAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IDatePickerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IDatePickerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f3d7c3e5-c817-58a5-bb47-d9eb228f3ba0", "Microsoft.UI.Xaml.Automation.Peers.IDatePickerAutomationPeer"]
+public interface IDatePickerAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IDatePickerAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IDatePickerAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["480f7825-b4a7-5c56-9f8a-fed84b9348ae", "Microsoft.UI.Xaml.Automation.Peers.IDatePickerAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IDatePickerAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IDatePickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IDatePickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["600b7162-0529-5fd1-b6e4-41dc37eda513", "Microsoft.UI.Xaml.Automation.Peers.IDatePickerFlyoutPresenterAutomationPeer"]
+public interface IDatePickerFlyoutPresenterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IDropDownButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IDropDownButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7dc37dec-0a0a-5c98-8a6f-9e47dbab2f82", "Microsoft.UI.Xaml.Automation.Peers.IDropDownButtonAutomationPeer"]
+public interface IDropDownButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IDropDownButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IDropDownButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["68c4bffa-1685-5936-b219-517e87fd591f", "Microsoft.UI.Xaml.Automation.Peers.IDropDownButtonAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IDropDownButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IExpanderAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IExpanderAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f7527408-cc89-5b65-bbde-eae6d66dc3e5", "Microsoft.UI.Xaml.Automation.Peers.IExpanderAutomationPeer"]
+public interface IExpanderAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IExpanderAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IExpanderAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2024523b-4a40-5976-aaab-0f05664f7494", "Microsoft.UI.Xaml.Automation.Peers.IExpanderAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IExpanderAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlipViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlipViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["9f2901ea-23cb-5cac-87d4-7fa9c7ffbc60", "Microsoft.UI.Xaml.Automation.Peers.IFlipViewAutomationPeer"]
+public interface IFlipViewAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlipViewAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlipViewAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["e73c7f75-ed47-522a-8a27-45feda1031f0", "Microsoft.UI.Xaml.Automation.Peers.IFlipViewAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IFlipViewAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlipViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3569b1bb-7601-56de-812a-171455d8ad32", "Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemAutomationPeer"]
+public interface IFlipViewItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlipViewItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["aa3b880f-62cb-5878-8f0b-7b3548c65080", "Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IFlipViewItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlipViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3bb31a93-e737-501d-b9a6-a11461c9bcf5", "Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemDataAutomationPeer"]
+public interface IFlipViewItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemDataAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlipViewItemDataAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["6f892ace-4467-587c-953c-c1c13b632e5f", "Microsoft.UI.Xaml.Automation.Peers.IFlipViewItemDataAutomationPeerFactory", "CreateInstanceWithParentAndItem.innerInterface=Com;CreateInstanceWithParentAndItem.value=Com"]
+public interface IFlipViewItemDataAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["e589b818-4a64-58c5-9c0b-5cea0f867e9b", "Microsoft.UI.Xaml.Automation.Peers.IFlyoutPresenterAutomationPeer"]
+public interface IFlyoutPresenterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFlyoutPresenterAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFlyoutPresenterAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["e529e586-7aa3-50a6-b17e-678b54fee127", "Microsoft.UI.Xaml.Automation.Peers.IFlyoutPresenterAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IFlyoutPresenterAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFrameworkElementAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFrameworkElementAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7dab4f24-605c-51cb-87db-3eed1b9fb37b", "Microsoft.UI.Xaml.Automation.Peers.IFrameworkElementAutomationPeer", "Owner.value=Com"]
+public interface IFrameworkElementAutomationPeer <: IInspectable {
+    func Owner(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFrameworkElementAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFrameworkElementAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["1682c3f8-238d-5c7e-a5a5-08cc3c10ac7c", "Microsoft.UI.Xaml.Automation.Peers.IFrameworkElementAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IFrameworkElementAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IFrameworkElementAutomationPeerStatics (synthetic:Microsoft_UI_Xaml_Automation_Peers_IFrameworkElementAutomationPeerStatics)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["081f6fbe-6500-528a-a506-f5a4d41ddf6c", "Microsoft.UI.Xaml.Automation.Peers.IFrameworkElementAutomationPeerStatics", "FromElement.result=Com;CreatePeerForElement.result=Com"]
+public interface IFrameworkElementAutomationPeerStatics <: IInspectable {
+    func FromElement(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreatePeerForElement(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7870992f-3328-53c2-b412-2914438975b4", "Microsoft.UI.Xaml.Automation.Peers.IGridViewAutomationPeer"]
+public interface IGridViewAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["71b829e1-7d57-580b-b1a6-d780ed992248", "Microsoft.UI.Xaml.Automation.Peers.IGridViewAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IGridViewAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewHeaderItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewHeaderItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["c38af4b0-2757-569b-bdc7-a5b7b74ffdba", "Microsoft.UI.Xaml.Automation.Peers.IGridViewHeaderItemAutomationPeer"]
+public interface IGridViewHeaderItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewHeaderItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewHeaderItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["6161999a-e042-5d9b-aa38-9fe1296bfb01", "Microsoft.UI.Xaml.Automation.Peers.IGridViewHeaderItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IGridViewHeaderItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["de249c2e-5419-5798-b625-cd2c05307572", "Microsoft.UI.Xaml.Automation.Peers.IGridViewItemAutomationPeer"]
+public interface IGridViewItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["04735951-0f91-53f5-984b-75bf0ed41540", "Microsoft.UI.Xaml.Automation.Peers.IGridViewItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IGridViewItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0372c2a0-5094-5811-96ba-0dbe77187435", "Microsoft.UI.Xaml.Automation.Peers.IGridViewItemDataAutomationPeer"]
+public interface IGridViewItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGridViewItemDataAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGridViewItemDataAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["44137b3e-c6f3-53ce-915d-fc8e60ccee74", "Microsoft.UI.Xaml.Automation.Peers.IGridViewItemDataAutomationPeerFactory", "CreateInstanceWithParentAndItem.innerInterface=Com;CreateInstanceWithParentAndItem.value=Com"]
+public interface IGridViewItemDataAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGroupItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGroupItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2ff50701-4164-511d-bb23-d21eb88d5eb9", "Microsoft.UI.Xaml.Automation.Peers.IGroupItemAutomationPeer"]
+public interface IGroupItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IGroupItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IGroupItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["cdb10ed9-d1d3-5faa-8772-70014da666b3", "Microsoft.UI.Xaml.Automation.Peers.IGroupItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IGroupItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IHubAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IHubAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["8fa20cb6-42c1-531e-b54f-fcaf33c943a9", "Microsoft.UI.Xaml.Automation.Peers.IHubAutomationPeer"]
+public interface IHubAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IHubAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IHubAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["c1b1f1cf-3926-56c9-b690-530c8bc78806", "Microsoft.UI.Xaml.Automation.Peers.IHubAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IHubAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IHubSectionAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IHubSectionAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["174e94ab-c033-534a-895c-eaaf1dcc4352", "Microsoft.UI.Xaml.Automation.Peers.IHubSectionAutomationPeer"]
+public interface IHubSectionAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IHubSectionAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IHubSectionAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["dc56cf08-2031-56b6-9ad5-7f8d7475d35d", "Microsoft.UI.Xaml.Automation.Peers.IHubSectionAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IHubSectionAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IHyperlinkButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IHyperlinkButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["6a770ab2-02d0-59ba-a28e-3dfba1f10dd8", "Microsoft.UI.Xaml.Automation.Peers.IHyperlinkButtonAutomationPeer"]
+public interface IHyperlinkButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IHyperlinkButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IHyperlinkButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2476e661-abce-5d35-b38b-6cee2c4148f4", "Microsoft.UI.Xaml.Automation.Peers.IHyperlinkButtonAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IHyperlinkButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IImageAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IImageAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["1f6eb184-8765-5455-bd1d-93c251c17f9b", "Microsoft.UI.Xaml.Automation.Peers.IImageAutomationPeer"]
+public interface IImageAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IImageAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IImageAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["1b26001b-49a6-5ff4-b1b1-2d504d2ef133", "Microsoft.UI.Xaml.Automation.Peers.IImageAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IImageAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IInfoBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IInfoBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["aa2c40eb-df80-5050-92c5-5fda5abfdef2", "Microsoft.UI.Xaml.Automation.Peers.IInfoBarAutomationPeer"]
+public interface IInfoBarAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IInfoBarAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IInfoBarAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["5fd3e590-68b9-5c9c-a572-0bc10167ce46", "Microsoft.UI.Xaml.Automation.Peers.IInfoBarAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IInfoBarAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["be8a71bb-3e36-54d2-920e-60722f1c62ff", "Microsoft.UI.Xaml.Automation.Peers.IItemAutomationPeer", "Item.value=Com;ItemsControlAutomationPeer.value=Com"]
+public interface IItemAutomationPeer <: IInspectable {
+    func Item(value: CPointer<CPointer<Unit>>): Int32
+    func ItemsControlAutomationPeer(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["ffe08885-14ac-5859-b031-5f3a4c504e6d", "Microsoft.UI.Xaml.Automation.Peers.IItemAutomationPeerFactory", "CreateInstanceWithParentAndItem.innerInterface=Com;CreateInstanceWithParentAndItem.value=Com"]
+public interface IItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemContainerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemContainerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f915a1fb-754e-58c7-ad2a-b99528701793", "Microsoft.UI.Xaml.Automation.Peers.IItemContainerAutomationPeer"]
+public interface IItemContainerAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemContainerAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemContainerAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["4600cfb3-72e1-5181-95ec-653f30b01c78", "Microsoft.UI.Xaml.Automation.Peers.IItemContainerAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IItemContainerAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemsControlAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemsControlAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0ae7bb7e-1407-5947-985f-9d542f433ab1", "Microsoft.UI.Xaml.Automation.Peers.IItemsControlAutomationPeer", "CreateItemAutomationPeer.result=Com"]
+public interface IItemsControlAutomationPeer <: IInspectable {
+    func CreateItemAutomationPeer(item: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemsControlAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemsControlAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["9de524cc-5e66-51a0-a7e0-a1742d28334b", "Microsoft.UI.Xaml.Automation.Peers.IItemsControlAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IItemsControlAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemsControlAutomationPeerOverrides (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemsControlAutomationPeerOverrides)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d751b35b-236e-5859-a834-52fa369cd3bd", "Microsoft.UI.Xaml.Automation.Peers.IItemsControlAutomationPeerOverrides", "OnCreateItemAutomationPeer.result=Com"]
+public interface IItemsControlAutomationPeerOverrides <: IInspectable {
+    func OnCreateItemAutomationPeer(item: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemsViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemsViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d456ad6d-18d5-51ae-a44e-95671f848184", "Microsoft.UI.Xaml.Automation.Peers.IItemsViewAutomationPeer"]
+public interface IItemsViewAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IItemsViewAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IItemsViewAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["8fd329c7-ea9c-56a3-a79e-bfff5ca74323", "Microsoft.UI.Xaml.Automation.Peers.IItemsViewAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IItemsViewAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2bc1ca3f-3617-53a8-94b9-bec91d573525", "Microsoft.UI.Xaml.Automation.Peers.IListBoxAutomationPeer"]
+public interface IListBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["004aaf6f-a12c-5fa4-a1f7-e3b0fbe45ddd", "Microsoft.UI.Xaml.Automation.Peers.IListBoxAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IListBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListBoxItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListBoxItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["19a8c4b4-e63a-5b2e-8e2f-c834e6a08204", "Microsoft.UI.Xaml.Automation.Peers.IListBoxItemAutomationPeer"]
+public interface IListBoxItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListBoxItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListBoxItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["936e36ef-0fae-58a2-8fb2-313999793263", "Microsoft.UI.Xaml.Automation.Peers.IListBoxItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IListBoxItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListBoxItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListBoxItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2b81660f-46dc-5765-b10a-2269d12eba42", "Microsoft.UI.Xaml.Automation.Peers.IListBoxItemDataAutomationPeer"]
+public interface IListBoxItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListBoxItemDataAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListBoxItemDataAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2ce97068-5280-5bec-8ba5-785c58986dcf", "Microsoft.UI.Xaml.Automation.Peers.IListBoxItemDataAutomationPeerFactory", "CreateInstanceWithParentAndItem.innerInterface=Com;CreateInstanceWithParentAndItem.value=Com"]
+public interface IListBoxItemDataAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListPickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListPickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["16574767-e8ca-551a-a9e9-e5394de33469", "Microsoft.UI.Xaml.Automation.Peers.IListPickerFlyoutPresenterAutomationPeer"]
+public interface IListPickerFlyoutPresenterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["8f2a3373-e305-55f3-923e-d9eee8d1a6ee", "Microsoft.UI.Xaml.Automation.Peers.IListViewAutomationPeer"]
+public interface IListViewAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3c6d8fc2-57ea-584e-9a89-504c65251d0f", "Microsoft.UI.Xaml.Automation.Peers.IListViewAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IListViewAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewBaseAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewBaseAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["ad9a395c-5a96-5331-9636-ee4c53184986", "Microsoft.UI.Xaml.Automation.Peers.IListViewBaseAutomationPeer"]
+public interface IListViewBaseAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewBaseAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewBaseAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["361ed030-7c93-5967-97cb-4a9693e34050", "Microsoft.UI.Xaml.Automation.Peers.IListViewBaseAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IListViewBaseAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewBaseHeaderItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewBaseHeaderItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["623314d2-c7f1-5003-9560-07d420a33a2a", "Microsoft.UI.Xaml.Automation.Peers.IListViewBaseHeaderItemAutomationPeer"]
+public interface IListViewBaseHeaderItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewBaseHeaderItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewBaseHeaderItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["e6041212-904b-5d22-b856-d3ef53d16aa6", "Microsoft.UI.Xaml.Automation.Peers.IListViewBaseHeaderItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IListViewBaseHeaderItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewHeaderItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewHeaderItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0293eaca-f7de-5a0d-9beb-79dc1ac4a7de", "Microsoft.UI.Xaml.Automation.Peers.IListViewHeaderItemAutomationPeer"]
+public interface IListViewHeaderItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewHeaderItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewHeaderItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f7b3480b-bfff-5c1c-b9d5-8eee544aebf8", "Microsoft.UI.Xaml.Automation.Peers.IListViewHeaderItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IListViewHeaderItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["de487f2c-5a61-599e-b9ff-0fd7675d7af3", "Microsoft.UI.Xaml.Automation.Peers.IListViewItemAutomationPeer"]
+public interface IListViewItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d6625ba7-1ae3-58b1-af12-e5cd5afc17ff", "Microsoft.UI.Xaml.Automation.Peers.IListViewItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IListViewItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["88bb28d3-45ed-5415-825f-dd2da536c968", "Microsoft.UI.Xaml.Automation.Peers.IListViewItemDataAutomationPeer"]
+public interface IListViewItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IListViewItemDataAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IListViewItemDataAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["9b22e7ea-6f7a-5c05-8072-5bddf54f9bda", "Microsoft.UI.Xaml.Automation.Peers.IListViewItemDataAutomationPeerFactory", "CreateInstanceWithParentAndItem.innerInterface=Com;CreateInstanceWithParentAndItem.value=Com"]
+public interface IListViewItemDataAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ILoopingSelectorAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ILoopingSelectorAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["00b612f4-8faf-5c0c-92e4-4396e0f7b8d8", "Microsoft.UI.Xaml.Automation.Peers.ILoopingSelectorAutomationPeer"]
+public interface ILoopingSelectorAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ILoopingSelectorItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ILoopingSelectorItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["9c108861-895f-5e92-84c1-ff12072e7ec0", "Microsoft.UI.Xaml.Automation.Peers.ILoopingSelectorItemAutomationPeer"]
+public interface ILoopingSelectorItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ILoopingSelectorItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ILoopingSelectorItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["1f8362eb-a069-5121-a56b-619365b4515c", "Microsoft.UI.Xaml.Automation.Peers.ILoopingSelectorItemDataAutomationPeer"]
+public interface ILoopingSelectorItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMediaPlayerElementAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMediaPlayerElementAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f68b8ca2-4428-5c35-b6a8-1b2ea062c22c", "Microsoft.UI.Xaml.Automation.Peers.IMediaPlayerElementAutomationPeer"]
+public interface IMediaPlayerElementAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMediaPlayerElementAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMediaPlayerElementAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2ae1aa11-7a7c-5580-a7d7-f7597859bdc2", "Microsoft.UI.Xaml.Automation.Peers.IMediaPlayerElementAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IMediaPlayerElementAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMediaTransportControlsAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMediaTransportControlsAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["da850d4e-8715-5ae7-81a9-abd10d17c1ed", "Microsoft.UI.Xaml.Automation.Peers.IMediaTransportControlsAutomationPeer"]
+public interface IMediaTransportControlsAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMediaTransportControlsAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMediaTransportControlsAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["77f281e1-cb51-5360-b74e-6fe4f8ee5028", "Microsoft.UI.Xaml.Automation.Peers.IMediaTransportControlsAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IMediaTransportControlsAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["ae96e710-b9d3-59dd-973e-1bbc86cf0afc", "Microsoft.UI.Xaml.Automation.Peers.IMenuBarAutomationPeer"]
+public interface IMenuBarAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuBarAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuBarAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d3e1ca3f-1702-5bd3-8adb-e6f6cb9e7531", "Microsoft.UI.Xaml.Automation.Peers.IMenuBarAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IMenuBarAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuBarItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuBarItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2da890cd-0aae-53b9-8c12-81003f60ed14", "Microsoft.UI.Xaml.Automation.Peers.IMenuBarItemAutomationPeer"]
+public interface IMenuBarItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuBarItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuBarItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["603b63c4-a626-50e6-9c1a-649699ca7ad6", "Microsoft.UI.Xaml.Automation.Peers.IMenuBarItemAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IMenuBarItemAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuFlyoutItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["fdb57952-2a4f-5ed4-8ada-320def75ea71", "Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutItemAutomationPeer"]
+public interface IMenuFlyoutItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuFlyoutItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["fe125e46-7c1c-5a7c-98e0-c7aa3a00a6cd", "Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IMenuFlyoutItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["74d3ff77-1e92-5f96-99a1-697d74283ba7", "Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutPresenterAutomationPeer"]
+public interface IMenuFlyoutPresenterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutPresenterAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IMenuFlyoutPresenterAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["beadfdfc-1035-5ffd-bae6-03f754b05dcc", "Microsoft.UI.Xaml.Automation.Peers.IMenuFlyoutPresenterAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IMenuFlyoutPresenterAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.INavigationViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_INavigationViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["72013eae-b015-550d-ba8d-a05112b62731", "Microsoft.UI.Xaml.Automation.Peers.INavigationViewAutomationPeer"]
+public interface INavigationViewAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.INavigationViewAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_INavigationViewAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["75075b03-a2f7-5869-b23c-63cbe5acc43a", "Microsoft.UI.Xaml.Automation.Peers.INavigationViewAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface INavigationViewAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.INavigationViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_INavigationViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["c7924c7a-739f-5251-9b86-df6486eb08a7", "Microsoft.UI.Xaml.Automation.Peers.INavigationViewItemAutomationPeer"]
+public interface INavigationViewItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.INavigationViewItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_INavigationViewItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["890516d0-5a62-528b-8873-4f7140b40489", "Microsoft.UI.Xaml.Automation.Peers.INavigationViewItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface INavigationViewItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.INumberBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_INumberBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["235befeb-6c98-5d35-a2e7-001eae342509", "Microsoft.UI.Xaml.Automation.Peers.INumberBoxAutomationPeer"]
+public interface INumberBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.INumberBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_INumberBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["659719ac-4405-58f4-bde2-ef61dfe64c21", "Microsoft.UI.Xaml.Automation.Peers.INumberBoxAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface INumberBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPasswordBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPasswordBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["49b18dba-fa3b-5106-a1e8-1aaa3d24d5e1", "Microsoft.UI.Xaml.Automation.Peers.IPasswordBoxAutomationPeer"]
+public interface IPasswordBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPasswordBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPasswordBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7b0d5cba-c5b3-553e-989a-a10ee04144af", "Microsoft.UI.Xaml.Automation.Peers.IPasswordBoxAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IPasswordBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPersonPictureAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPersonPictureAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2e71779b-aca4-52c2-8a25-bc5f1ee3b0ae", "Microsoft.UI.Xaml.Automation.Peers.IPersonPictureAutomationPeer"]
+public interface IPersonPictureAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPersonPictureAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPersonPictureAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["bd1709e5-1940-56fc-b5c3-85e4570951cc", "Microsoft.UI.Xaml.Automation.Peers.IPersonPictureAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IPersonPictureAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["b29f6d28-154b-5c1d-a5e8-98604bb5cdf6", "Microsoft.UI.Xaml.Automation.Peers.IPickerFlyoutPresenterAutomationPeer"]
+public interface IPickerFlyoutPresenterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPipsPagerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPipsPagerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["93de1bc2-cf84-5b5f-91be-a7c781b2021a", "Microsoft.UI.Xaml.Automation.Peers.IPipsPagerAutomationPeer"]
+public interface IPipsPagerAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPipsPagerAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPipsPagerAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["fb5248ef-e835-5997-bc36-d4e5db4a1b5a", "Microsoft.UI.Xaml.Automation.Peers.IPipsPagerAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IPipsPagerAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPivotAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPivotAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["84225540-a6a3-5e65-a3dc-b31b81ab14c1", "Microsoft.UI.Xaml.Automation.Peers.IPivotAutomationPeer"]
+public interface IPivotAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPivotAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPivotAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["b1dd0229-c14c-5ac0-8331-be24fa2007f0", "Microsoft.UI.Xaml.Automation.Peers.IPivotAutomationPeerFactory", "CreateInstanceWithOwner.value=Com"]
+public interface IPivotAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPivotItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPivotItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["bfe7fb7b-2d88-56e4-b50f-0a40de6f52a1", "Microsoft.UI.Xaml.Automation.Peers.IPivotItemAutomationPeer"]
+public interface IPivotItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPivotItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPivotItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["14966ee7-afaf-5fcc-9346-f0e7192c220a", "Microsoft.UI.Xaml.Automation.Peers.IPivotItemAutomationPeerFactory", "CreateInstanceWithOwner.value=Com"]
+public interface IPivotItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPivotItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPivotItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["6758ebee-b3e0-5feb-aaba-b7f6c59fe49f", "Microsoft.UI.Xaml.Automation.Peers.IPivotItemDataAutomationPeer"]
+public interface IPivotItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IPivotItemDataAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IPivotItemDataAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["26d7a6e9-ce6b-5690-9024-75ce5770b0d6", "Microsoft.UI.Xaml.Automation.Peers.IPivotItemDataAutomationPeerFactory", "CreateInstanceWithParentAndItem.value=Com"]
+public interface IPivotItemDataAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IProgressBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IProgressBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["8565ead9-b877-52c7-a147-6fe1fee767af", "Microsoft.UI.Xaml.Automation.Peers.IProgressBarAutomationPeer"]
+public interface IProgressBarAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IProgressBarAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IProgressBarAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["cea28c0d-c4b3-5d18-aef6-958031395878", "Microsoft.UI.Xaml.Automation.Peers.IProgressBarAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IProgressBarAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IProgressRingAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IProgressRingAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3b6952da-9e44-52b0-91df-39da9dc1d8b0", "Microsoft.UI.Xaml.Automation.Peers.IProgressRingAutomationPeer"]
+public interface IProgressRingAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IProgressRingAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IProgressRingAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["650f375c-3b29-5376-a7f7-c78082b82d13", "Microsoft.UI.Xaml.Automation.Peers.IProgressRingAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IProgressRingAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRadioButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRadioButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["cce147b7-574a-53b6-a5b2-ca2622a79b2c", "Microsoft.UI.Xaml.Automation.Peers.IRadioButtonAutomationPeer"]
+public interface IRadioButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRadioButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRadioButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["ca07c7ee-502a-509e-bc44-682e6828d1f8", "Microsoft.UI.Xaml.Automation.Peers.IRadioButtonAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IRadioButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRadioButtonsAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRadioButtonsAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["fff86275-0cdd-54db-9d88-9c0e5f9bcb4d", "Microsoft.UI.Xaml.Automation.Peers.IRadioButtonsAutomationPeer"]
+public interface IRadioButtonsAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRadioButtonsAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRadioButtonsAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f13521d0-056e-598c-ad23-a7150049d80a", "Microsoft.UI.Xaml.Automation.Peers.IRadioButtonsAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IRadioButtonsAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRangeBaseAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRangeBaseAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["b5d50512-70a9-5b27-82fe-16f6ba67bac5", "Microsoft.UI.Xaml.Automation.Peers.IRangeBaseAutomationPeer"]
+public interface IRangeBaseAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRangeBaseAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRangeBaseAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["8c8f25e9-5194-54a9-b787-ce0293fd6721", "Microsoft.UI.Xaml.Automation.Peers.IRangeBaseAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IRangeBaseAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRatingControlAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRatingControlAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["55493ec4-926b-595a-97a3-a7fa604188a4", "Microsoft.UI.Xaml.Automation.Peers.IRatingControlAutomationPeer"]
+public interface IRatingControlAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRatingControlAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRatingControlAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f87dacb6-e87e-59b3-8a40-331ea7aa747d", "Microsoft.UI.Xaml.Automation.Peers.IRatingControlAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IRatingControlAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRepeatButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRepeatButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["e42a7cc2-ace8-56eb-9967-9b7fd157c37f", "Microsoft.UI.Xaml.Automation.Peers.IRepeatButtonAutomationPeer"]
+public interface IRepeatButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRepeatButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRepeatButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0fad55a4-1c62-595e-a189-bb43a219c699", "Microsoft.UI.Xaml.Automation.Peers.IRepeatButtonAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IRepeatButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRepeaterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRepeaterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["03f2c315-fb55-54b2-9aad-9723aaf5e2cf", "Microsoft.UI.Xaml.Automation.Peers.IRepeaterAutomationPeer"]
+public interface IRepeaterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRepeaterAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRepeaterAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["04526bc7-fa3e-55fe-a314-986e2f196a2f", "Microsoft.UI.Xaml.Automation.Peers.IRepeaterAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IRepeaterAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRichEditBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRichEditBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["193a43f1-129d-57e1-bcf9-ba966bcadacb", "Microsoft.UI.Xaml.Automation.Peers.IRichEditBoxAutomationPeer"]
+public interface IRichEditBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRichEditBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRichEditBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["84f0d84f-54ca-58f2-ac50-d379aab75463", "Microsoft.UI.Xaml.Automation.Peers.IRichEditBoxAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IRichEditBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRichTextBlockAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7080ff80-b3b8-5d3c-89b5-d989d561192f", "Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockAutomationPeer"]
+public interface IRichTextBlockAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRichTextBlockAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f8a4485b-2895-5886-8ff6-497e4f1a6e3d", "Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IRichTextBlockAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockOverflowAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRichTextBlockOverflowAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d0bf83c0-8cfb-5770-b26c-0706e51a9a3b", "Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockOverflowAutomationPeer"]
+public interface IRichTextBlockOverflowAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockOverflowAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IRichTextBlockOverflowAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3e7b3ced-bd1f-5851-97a4-1c318f60d641", "Microsoft.UI.Xaml.Automation.Peers.IRichTextBlockOverflowAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IRichTextBlockOverflowAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IScrollBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IScrollBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["028a26c4-05f7-58b2-a81e-a7ac032f756f", "Microsoft.UI.Xaml.Automation.Peers.IScrollBarAutomationPeer"]
+public interface IScrollBarAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IScrollBarAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IScrollBarAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["fc67a9cc-e914-532a-8717-0b383e2157f3", "Microsoft.UI.Xaml.Automation.Peers.IScrollBarAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IScrollBarAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IScrollPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IScrollPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["995a6964-607f-5d95-bdf9-1870a5e82a0c", "Microsoft.UI.Xaml.Automation.Peers.IScrollPresenterAutomationPeer"]
+public interface IScrollPresenterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IScrollPresenterAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IScrollPresenterAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["47e29168-5e30-5abc-b844-7d89b5c3eec0", "Microsoft.UI.Xaml.Automation.Peers.IScrollPresenterAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IScrollPresenterAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IScrollViewerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IScrollViewerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["25394bad-6ca2-5e04-95fa-95412c1f80ac", "Microsoft.UI.Xaml.Automation.Peers.IScrollViewerAutomationPeer"]
+public interface IScrollViewerAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IScrollViewerAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IScrollViewerAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["3f1578f9-60ec-5f7c-8d11-10c535a75a12", "Microsoft.UI.Xaml.Automation.Peers.IScrollViewerAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IScrollViewerAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISelectorAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISelectorAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["4bac62ba-fb33-5f8b-995e-0dd93431294f", "Microsoft.UI.Xaml.Automation.Peers.ISelectorAutomationPeer"]
+public interface ISelectorAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISelectorAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISelectorAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["d84fe7b9-f5f5-5122-b41c-5575a799d581", "Microsoft.UI.Xaml.Automation.Peers.ISelectorAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ISelectorAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISelectorBarItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISelectorBarItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["cdb1078e-1350-56fb-8728-8537b0f35c20", "Microsoft.UI.Xaml.Automation.Peers.ISelectorBarItemAutomationPeer"]
+public interface ISelectorBarItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISelectorBarItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISelectorBarItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["4aab3752-0ddb-5e2d-a614-0b5f7d4efe9d", "Microsoft.UI.Xaml.Automation.Peers.ISelectorBarItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ISelectorBarItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISelectorItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISelectorItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["70b85e53-e684-5068-91b7-2d84fea8e9d7", "Microsoft.UI.Xaml.Automation.Peers.ISelectorItemAutomationPeer"]
+public interface ISelectorItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISelectorItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISelectorItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2691e85b-dc9c-5ce6-aec9-21c8da9a4ad1", "Microsoft.UI.Xaml.Automation.Peers.ISelectorItemAutomationPeerFactory", "CreateInstanceWithParentAndItem.innerInterface=Com;CreateInstanceWithParentAndItem.value=Com"]
+public interface ISelectorItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithParentAndItem(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISemanticZoomAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISemanticZoomAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7d7fbd09-112f-50fd-9654-0474ce760b5d", "Microsoft.UI.Xaml.Automation.Peers.ISemanticZoomAutomationPeer"]
+public interface ISemanticZoomAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISemanticZoomAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISemanticZoomAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0572c3c2-87df-55d6-8fcc-032330108cd8", "Microsoft.UI.Xaml.Automation.Peers.ISemanticZoomAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ISemanticZoomAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISliderAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISliderAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["c321c95f-c917-5714-9d16-ad706e38926a", "Microsoft.UI.Xaml.Automation.Peers.ISliderAutomationPeer"]
+public interface ISliderAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISliderAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISliderAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["81459943-902a-5fe3-9c75-0f8b11f42658", "Microsoft.UI.Xaml.Automation.Peers.ISliderAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ISliderAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISplitButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISplitButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0182661c-0df3-5c7d-8752-547804c4fa44", "Microsoft.UI.Xaml.Automation.Peers.ISplitButtonAutomationPeer"]
+public interface ISplitButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISplitButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISplitButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["e82ddc93-780e-5000-981e-9be10eedeb1f", "Microsoft.UI.Xaml.Automation.Peers.ISplitButtonAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface ISplitButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISplitMenuFlyoutItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISplitMenuFlyoutItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["4c7668c9-a044-5b14-b239-16bea83aa8de", "Microsoft.UI.Xaml.Automation.Peers.ISplitMenuFlyoutItemAutomationPeer"]
+public interface ISplitMenuFlyoutItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ISplitMenuFlyoutItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ISplitMenuFlyoutItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["04914f22-1358-54fb-99ea-8c08d4b67456", "Microsoft.UI.Xaml.Automation.Peers.ISplitMenuFlyoutItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ISplitMenuFlyoutItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITabViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITabViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["efb3f05b-2a25-5266-a1cb-5a0aa451ca32", "Microsoft.UI.Xaml.Automation.Peers.ITabViewAutomationPeer"]
+public interface ITabViewAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITabViewAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITabViewAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["f8d8c7cb-47cc-5da5-bd1a-e2e1ba0fd24d", "Microsoft.UI.Xaml.Automation.Peers.ITabViewAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface ITabViewAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITabViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITabViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["58afb1c3-a3fd-54a1-be39-328dd8a6f8ec", "Microsoft.UI.Xaml.Automation.Peers.ITabViewItemAutomationPeer"]
+public interface ITabViewItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITabViewItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITabViewItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["00218040-9c0d-5c52-b578-593b809047b3", "Microsoft.UI.Xaml.Automation.Peers.ITabViewItemAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface ITabViewItemAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITeachingTipAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITeachingTipAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["607994ec-a995-5b07-b535-8c913f0bc26c", "Microsoft.UI.Xaml.Automation.Peers.ITeachingTipAutomationPeer"]
+public interface ITeachingTipAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITeachingTipAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITeachingTipAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["71a061c1-3d71-5548-98fd-62167f246085", "Microsoft.UI.Xaml.Automation.Peers.ITeachingTipAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface ITeachingTipAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITextBlockAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITextBlockAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["29521960-2ef2-5d15-bf6a-cf585ef8a571", "Microsoft.UI.Xaml.Automation.Peers.ITextBlockAutomationPeer"]
+public interface ITextBlockAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITextBlockAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITextBlockAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2a04c7bb-6d48-5f8e-9622-54dccdf0a5ca", "Microsoft.UI.Xaml.Automation.Peers.ITextBlockAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ITextBlockAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITextBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITextBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["9e26139a-0618-56fa-9916-8d5edf564735", "Microsoft.UI.Xaml.Automation.Peers.ITextBoxAutomationPeer"]
+public interface ITextBoxAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITextBoxAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITextBoxAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["1e84ac8f-9974-5be1-b6ea-84f309c8b2b8", "Microsoft.UI.Xaml.Automation.Peers.ITextBoxAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ITextBoxAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IThumbAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IThumbAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["b05d6e5b-3586-5157-a497-4f15b87d89eb", "Microsoft.UI.Xaml.Automation.Peers.IThumbAutomationPeer"]
+public interface IThumbAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IThumbAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IThumbAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["311b414a-7cc8-56d9-b581-149c8bf9d76d", "Microsoft.UI.Xaml.Automation.Peers.IThumbAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IThumbAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITimePickerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITimePickerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["6309d3bb-3387-5965-acf5-47bfa9b92ed4", "Microsoft.UI.Xaml.Automation.Peers.ITimePickerAutomationPeer"]
+public interface ITimePickerAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITimePickerAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITimePickerAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7cdf2f82-7453-5d86-8ee3-60daaf345f47", "Microsoft.UI.Xaml.Automation.Peers.ITimePickerAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ITimePickerAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITimePickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITimePickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2438268a-62e8-5d61-95d0-d36f6b42e652", "Microsoft.UI.Xaml.Automation.Peers.ITimePickerFlyoutPresenterAutomationPeer"]
+public interface ITimePickerFlyoutPresenterAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["637d9b99-bcc2-5e26-b43f-ba6c26af72c3", "Microsoft.UI.Xaml.Automation.Peers.IToggleButtonAutomationPeer"]
+public interface IToggleButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["2c272096-21e0-5714-9164-1f6a1e0b2181", "Microsoft.UI.Xaml.Automation.Peers.IToggleButtonAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IToggleButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleMenuFlyoutItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleMenuFlyoutItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["ea4e4c7e-1f12-56c0-a2a5-b59e9c25b06d", "Microsoft.UI.Xaml.Automation.Peers.IToggleMenuFlyoutItemAutomationPeer"]
+public interface IToggleMenuFlyoutItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleMenuFlyoutItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleMenuFlyoutItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["7789f700-d565-5dc7-8bcc-d459a4c08fd6", "Microsoft.UI.Xaml.Automation.Peers.IToggleMenuFlyoutItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IToggleMenuFlyoutItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleSplitButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleSplitButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["21356952-4c74-5273-b82d-e5ce1bbcd369", "Microsoft.UI.Xaml.Automation.Peers.IToggleSplitButtonAutomationPeer"]
+public interface IToggleSplitButtonAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleSplitButtonAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleSplitButtonAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["61c214a5-605b-5e98-b85d-e3121d23edaa", "Microsoft.UI.Xaml.Automation.Peers.IToggleSplitButtonAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IToggleSplitButtonAutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleSwitchAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleSwitchAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["927d6091-5070-574f-9833-0ef89a9cbb4b", "Microsoft.UI.Xaml.Automation.Peers.IToggleSwitchAutomationPeer"]
+public interface IToggleSwitchAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IToggleSwitchAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IToggleSwitchAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["03f5e3e4-4b61-5dcf-afdc-fd23041a0374", "Microsoft.UI.Xaml.Automation.Peers.IToggleSwitchAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface IToggleSwitchAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITreeViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["25b38166-b905-5480-8439-e459a5b77b8c", "Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemAutomationPeer"]
+public interface ITreeViewItemAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITreeViewItemAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["0c993c78-981f-5dcf-93d3-a217ad9acab6", "Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ITreeViewItemAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITreeViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["20f74f77-edfa-5c71-9deb-530dcaf9c11d", "Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemDataAutomationPeer"]
+public interface ITreeViewItemDataAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemDataAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITreeViewItemDataAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["07fc8e59-55a2-58ab-8921-91e57ddf119f", "Microsoft.UI.Xaml.Automation.Peers.ITreeViewItemDataAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ITreeViewItemDataAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(item: CPointer<Unit>, parent: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITreeViewListAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITreeViewListAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["1ebf0f7f-6111-50a5-8398-89c4fdd0dedb", "Microsoft.UI.Xaml.Automation.Peers.ITreeViewListAutomationPeer"]
+public interface ITreeViewListAutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ITreeViewListAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_ITreeViewListAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["51332d86-c414-5e7d-b57b-e479983c9e5d", "Microsoft.UI.Xaml.Automation.Peers.ITreeViewListAutomationPeerFactory", "CreateInstanceWithOwner.innerInterface=Com;CreateInstanceWithOwner.value=Com"]
+public interface ITreeViewListAutomationPeerFactory <: IInspectable {
+    func CreateInstanceWithOwner(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IWebView2AutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IWebView2AutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["8e556eca-b000-5e51-810f-7b7d80c39d56", "Microsoft.UI.Xaml.Automation.Peers.IWebView2AutomationPeer"]
+public interface IWebView2AutomationPeer <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.IWebView2AutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IWebView2AutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+@Interface["68512210-e61e-5b56-a6af-c4fb14677155", "Microsoft.UI.Xaml.Automation.Peers.IWebView2AutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IWebView2AutomationPeerFactory <: IInspectable {
+    func CreateInstance(owner: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ImageAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ImageAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ImageAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ImageAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ImageAutomationPeer {
+        ImageAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ImageAutomationPeer {
+        ImageAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IImageAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ImageAutomationPeer> {
+        let ancestors = [IImageAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ImageAutomationPeer>("ImageAutomationPeer", IImageAutomationPeer.iid(), ancestors, { raw => ImageAutomationPeer.fromAbiTake(raw) }, { raw => ImageAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IImageAutomationPeer {
+        match (unsafe { query(IImageAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIImageAutomationPeer(): IImageAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.Image, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ImageAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.Image>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ImageAutomationPeer, IImageAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ImageAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ImageAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ImageAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ImageAutomationPeer;{" + IImageAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ImageAutomationPeer", ImageAutomationPeer.signature(), IImageAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ImageAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ImageAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ImageAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ImageAutomationPeer {
+        ImageAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.InfoBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_InfoBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class InfoBarAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<InfoBarAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): InfoBarAutomationPeer {
+        InfoBarAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): InfoBarAutomationPeer {
+        InfoBarAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IInfoBarAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<InfoBarAutomationPeer> {
+        let ancestors = [IInfoBarAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<InfoBarAutomationPeer>("InfoBarAutomationPeer", IInfoBarAutomationPeer.iid(), ancestors, { raw => InfoBarAutomationPeer.fromAbiTake(raw) }, { raw => InfoBarAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IInfoBarAutomationPeer {
+        match (unsafe { query(IInfoBarAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIInfoBarAutomationPeer(): IInfoBarAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.InfoBar, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): InfoBarAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.InfoBar>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<InfoBarAutomationPeer, IInfoBarAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<InfoBarAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return InfoBarAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.InfoBarAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.InfoBarAutomationPeer;{" + IInfoBarAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.InfoBarAutomationPeer", InfoBarAutomationPeer.signature(), IInfoBarAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: InfoBarAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): InfoBarAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        InfoBarAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): InfoBarAutomationPeer {
+        InfoBarAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ItemAutomationPeer {
+        ItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ItemAutomationPeer {
+        ItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ItemAutomationPeer> {
+        let ancestors = [IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ItemAutomationPeer>("ItemAutomationPeer", IItemAutomationPeer.iid(), ancestors, { raw => ItemAutomationPeer.fromAbiTake(raw) }, { raw => ItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IItemAutomationPeer {
+        match (unsafe { query(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func Item(): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Item(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func ItemsControlAutomationPeer(): ItemsControlAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ItemsControlAutomationPeer(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ItemsControlAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ItemsControlAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: ItemsControlAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ItemsControlAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<ItemAutomationPeer, IItemAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return ItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ItemAutomationPeer;{" + IItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ItemAutomationPeer", ItemAutomationPeer.signature(), IItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ItemAutomationPeer {
+        ItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ItemContainerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ItemContainerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ItemContainerAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ItemContainerAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ItemContainerAutomationPeer {
+        ItemContainerAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ItemContainerAutomationPeer {
+        ItemContainerAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IItemContainerAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ItemContainerAutomationPeer> {
+        let ancestors = [IItemContainerAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ItemContainerAutomationPeer>("ItemContainerAutomationPeer", IItemContainerAutomationPeer.iid(), ancestors, { raw => ItemContainerAutomationPeer.fromAbiTake(raw) }, { raw => ItemContainerAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IItemContainerAutomationPeer {
+        match (unsafe { query(IItemContainerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIItemContainerAutomationPeer(): IItemContainerAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.ItemContainer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ItemContainerAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ItemContainer>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ItemContainerAutomationPeer, IItemContainerAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ItemContainerAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ItemContainerAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ItemContainerAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ItemContainerAutomationPeer;{" + IItemContainerAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ItemContainerAutomationPeer", ItemContainerAutomationPeer.signature(), IItemContainerAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ItemContainerAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ItemContainerAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ItemContainerAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ItemContainerAutomationPeer {
+        ItemContainerAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ItemsControlAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ItemsControlAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ItemsControlAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ItemsControlAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ItemsControlAutomationPeer {
+        ItemsControlAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ItemsControlAutomationPeer {
+        ItemsControlAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IItemsControlAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ItemsControlAutomationPeer> {
+        let ancestors = [IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ItemsControlAutomationPeer>("ItemsControlAutomationPeer", IItemsControlAutomationPeer.iid(), ancestors, { raw => ItemsControlAutomationPeer.fromAbiTake(raw) }, { raw => ItemsControlAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IItemsControlAutomationPeer {
+        match (unsafe { query(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func CreateItemAutomationPeer(item: windows_interface.IInspectable): ItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateItemAutomationPeer(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ItemsControl, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ItemsControlAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ItemsControl>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ItemsControlAutomationPeer, IItemsControlAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ItemsControlAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ItemsControlAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ItemsControlAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ItemsControlAutomationPeer;{" + IItemsControlAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ItemsControlAutomationPeer", ItemsControlAutomationPeer.signature(), IItemsControlAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ItemsControlAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ItemsControlAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ItemsControlAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ItemsControlAutomationPeer {
+        ItemsControlAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ItemsViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ItemsViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ItemsViewAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ItemsViewAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ItemsViewAutomationPeer {
+        ItemsViewAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ItemsViewAutomationPeer {
+        ItemsViewAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IItemsViewAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ItemsViewAutomationPeer> {
+        let ancestors = [IItemsViewAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ItemsViewAutomationPeer>("ItemsViewAutomationPeer", IItemsViewAutomationPeer.iid(), ancestors, { raw => ItemsViewAutomationPeer.fromAbiTake(raw) }, { raw => ItemsViewAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IItemsViewAutomationPeer {
+        match (unsafe { query(IItemsViewAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIItemsViewAutomationPeer(): IItemsViewAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.ItemsView, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ItemsViewAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ItemsView>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ItemsViewAutomationPeer, IItemsViewAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ItemsViewAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ItemsViewAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ItemsViewAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ItemsViewAutomationPeer;{" + IItemsViewAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ItemsViewAutomationPeer", ItemsViewAutomationPeer.signature(), IItemsViewAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ItemsViewAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ItemsViewAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ItemsViewAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ItemsViewAutomationPeer {
+        ItemsViewAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListBoxAutomationPeer {
+        ListBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListBoxAutomationPeer {
+        ListBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListBoxAutomationPeer> {
+        let ancestors = [IListBoxAutomationPeer.iid(), ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListBoxAutomationPeer>("ListBoxAutomationPeer", IListBoxAutomationPeer.iid(), ancestors, { raw => ListBoxAutomationPeer.fromAbiTake(raw) }, { raw => ListBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListBoxAutomationPeer {
+        match (unsafe { query(IListBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListBoxAutomationPeer(): IListBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        match (unsafe { query<ISelectorAutomationPeer>(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ListBox, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ListBox>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ListBoxAutomationPeer, IListBoxAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ListBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListBoxAutomationPeer;{" + IListBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListBoxAutomationPeer", ListBoxAutomationPeer.signature(), IListBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListBoxAutomationPeer {
+        ListBoxAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListBoxItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListBoxItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListBoxItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListBoxItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListBoxItemAutomationPeer {
+        ListBoxItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListBoxItemAutomationPeer {
+        ListBoxItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListBoxItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListBoxItemAutomationPeer> {
+        let ancestors = [IListBoxItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListBoxItemAutomationPeer>("ListBoxItemAutomationPeer", IListBoxItemAutomationPeer.iid(), ancestors, { raw => ListBoxItemAutomationPeer.fromAbiTake(raw) }, { raw => ListBoxItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListBoxItemAutomationPeer {
+        match (unsafe { query(IListBoxItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListBoxItemAutomationPeer(): IListBoxItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ListBoxItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListBoxItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ListBoxItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ListBoxItemAutomationPeer, IListBoxItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListBoxItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ListBoxItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListBoxItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListBoxItemAutomationPeer;{" + IListBoxItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListBoxItemAutomationPeer", ListBoxItemAutomationPeer.signature(), IListBoxItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListBoxItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListBoxItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListBoxItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListBoxItemAutomationPeer {
+        ListBoxItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListBoxItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListBoxItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListBoxItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListBoxItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListBoxItemDataAutomationPeer {
+        ListBoxItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListBoxItemDataAutomationPeer {
+        ListBoxItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListBoxItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListBoxItemDataAutomationPeer> {
+        let ancestors = [IListBoxItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), ISelectorItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListBoxItemDataAutomationPeer>("ListBoxItemDataAutomationPeer", IListBoxItemDataAutomationPeer.iid(), ancestors, { raw => ListBoxItemDataAutomationPeer.fromAbiTake(raw) }, { raw => ListBoxItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListBoxItemDataAutomationPeer {
+        match (unsafe { query(IListBoxItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListBoxItemDataAutomationPeer(): IListBoxItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorItemAutomationPeer(): ISelectorItemAutomationPeer {
+        match (unsafe { query<ISelectorItemAutomationPeer>(ISelectorItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: ListBoxAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListBoxItemDataAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ListBoxAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<ListBoxItemDataAutomationPeer, IListBoxItemDataAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListBoxItemDataAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return ListBoxItemDataAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListBoxItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListBoxItemDataAutomationPeer;{" + IListBoxItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListBoxItemDataAutomationPeer", ListBoxItemDataAutomationPeer.signature(), IListBoxItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListBoxItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListBoxItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListBoxItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListBoxItemDataAutomationPeer {
+        ListBoxItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListPickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListPickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListPickerFlyoutPresenterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListPickerFlyoutPresenterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListPickerFlyoutPresenterAutomationPeer {
+        ListPickerFlyoutPresenterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListPickerFlyoutPresenterAutomationPeer {
+        ListPickerFlyoutPresenterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListPickerFlyoutPresenterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListPickerFlyoutPresenterAutomationPeer> {
+        let ancestors = [IListPickerFlyoutPresenterAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListPickerFlyoutPresenterAutomationPeer>("ListPickerFlyoutPresenterAutomationPeer", IListPickerFlyoutPresenterAutomationPeer.iid(), ancestors, { raw => ListPickerFlyoutPresenterAutomationPeer.fromAbiTake(raw) }, { raw => ListPickerFlyoutPresenterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListPickerFlyoutPresenterAutomationPeer {
+        match (unsafe { query(IListPickerFlyoutPresenterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListPickerFlyoutPresenterAutomationPeer(): IListPickerFlyoutPresenterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListPickerFlyoutPresenterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListPickerFlyoutPresenterAutomationPeer;{" + IListPickerFlyoutPresenterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListPickerFlyoutPresenterAutomationPeer", ListPickerFlyoutPresenterAutomationPeer.signature(), IListPickerFlyoutPresenterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListPickerFlyoutPresenterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListPickerFlyoutPresenterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListPickerFlyoutPresenterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListPickerFlyoutPresenterAutomationPeer {
+        ListPickerFlyoutPresenterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListViewAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListViewAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListViewAutomationPeer {
+        ListViewAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListViewAutomationPeer {
+        ListViewAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListViewAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListViewAutomationPeer> {
+        let ancestors = [IListViewAutomationPeer.iid(), IListViewBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.iid(), ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListViewAutomationPeer>("ListViewAutomationPeer", IListViewAutomationPeer.iid(), ancestors, { raw => ListViewAutomationPeer.fromAbiTake(raw) }, { raw => ListViewAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListViewAutomationPeer {
+        match (unsafe { query(IListViewAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListViewAutomationPeer(): IListViewAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIListViewBaseAutomationPeer(): IListViewBaseAutomationPeer {
+        match (unsafe { query<IListViewBaseAutomationPeer>(IListViewBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDropTargetProvider(): Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider>(Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        match (unsafe { query<ISelectorAutomationPeer>(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ListView, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListViewAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ListView>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ListViewAutomationPeer, IListViewAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListViewAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ListViewAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListViewAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListViewAutomationPeer;{" + IListViewAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListViewAutomationPeer", ListViewAutomationPeer.signature(), IListViewAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListViewAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListViewAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListViewAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListViewAutomationPeer {
+        ListViewAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListViewBaseAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListViewBaseAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListViewBaseAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListViewBaseAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListViewBaseAutomationPeer {
+        ListViewBaseAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListViewBaseAutomationPeer {
+        ListViewBaseAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListViewBaseAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListViewBaseAutomationPeer> {
+        let ancestors = [IListViewBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.iid(), ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListViewBaseAutomationPeer>("ListViewBaseAutomationPeer", IListViewBaseAutomationPeer.iid(), ancestors, { raw => ListViewBaseAutomationPeer.fromAbiTake(raw) }, { raw => ListViewBaseAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListViewBaseAutomationPeer {
+        match (unsafe { query(IListViewBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListViewBaseAutomationPeer(): IListViewBaseAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIDropTargetProvider(): Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider>(Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        match (unsafe { query<ISelectorAutomationPeer>(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ListViewBase, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListViewBaseAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ListViewBase>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ListViewBaseAutomationPeer, IListViewBaseAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListViewBaseAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ListViewBaseAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListViewBaseAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListViewBaseAutomationPeer;{" + IListViewBaseAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListViewBaseAutomationPeer", ListViewBaseAutomationPeer.signature(), IListViewBaseAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListViewBaseAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListViewBaseAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListViewBaseAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListViewBaseAutomationPeer {
+        ListViewBaseAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListViewBaseHeaderItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListViewBaseHeaderItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListViewBaseHeaderItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListViewBaseHeaderItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListViewBaseHeaderItemAutomationPeer {
+        ListViewBaseHeaderItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListViewBaseHeaderItemAutomationPeer {
+        ListViewBaseHeaderItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListViewBaseHeaderItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListViewBaseHeaderItemAutomationPeer> {
+        let ancestors = [IListViewBaseHeaderItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListViewBaseHeaderItemAutomationPeer>("ListViewBaseHeaderItemAutomationPeer", IListViewBaseHeaderItemAutomationPeer.iid(), ancestors, { raw => ListViewBaseHeaderItemAutomationPeer.fromAbiTake(raw) }, { raw => ListViewBaseHeaderItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListViewBaseHeaderItemAutomationPeer {
+        match (unsafe { query(IListViewBaseHeaderItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListViewBaseHeaderItemAutomationPeer(): IListViewBaseHeaderItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ListViewBaseHeaderItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListViewBaseHeaderItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ListViewBaseHeaderItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ListViewBaseHeaderItemAutomationPeer, IListViewBaseHeaderItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListViewBaseHeaderItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ListViewBaseHeaderItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListViewBaseHeaderItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListViewBaseHeaderItemAutomationPeer;{" + IListViewBaseHeaderItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListViewBaseHeaderItemAutomationPeer", ListViewBaseHeaderItemAutomationPeer.signature(), IListViewBaseHeaderItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListViewBaseHeaderItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListViewBaseHeaderItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListViewBaseHeaderItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListViewBaseHeaderItemAutomationPeer {
+        ListViewBaseHeaderItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListViewHeaderItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListViewHeaderItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListViewHeaderItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListViewHeaderItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListViewHeaderItemAutomationPeer {
+        ListViewHeaderItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListViewHeaderItemAutomationPeer {
+        ListViewHeaderItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListViewHeaderItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListViewHeaderItemAutomationPeer> {
+        let ancestors = [IListViewHeaderItemAutomationPeer.iid(), IListViewBaseHeaderItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListViewHeaderItemAutomationPeer>("ListViewHeaderItemAutomationPeer", IListViewHeaderItemAutomationPeer.iid(), ancestors, { raw => ListViewHeaderItemAutomationPeer.fromAbiTake(raw) }, { raw => ListViewHeaderItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListViewHeaderItemAutomationPeer {
+        match (unsafe { query(IListViewHeaderItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListViewHeaderItemAutomationPeer(): IListViewHeaderItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIListViewBaseHeaderItemAutomationPeer(): IListViewBaseHeaderItemAutomationPeer {
+        match (unsafe { query<IListViewBaseHeaderItemAutomationPeer>(IListViewBaseHeaderItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ListViewHeaderItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListViewHeaderItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ListViewHeaderItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ListViewHeaderItemAutomationPeer, IListViewHeaderItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListViewHeaderItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ListViewHeaderItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListViewHeaderItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListViewHeaderItemAutomationPeer;{" + IListViewHeaderItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListViewHeaderItemAutomationPeer", ListViewHeaderItemAutomationPeer.signature(), IListViewHeaderItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListViewHeaderItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListViewHeaderItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListViewHeaderItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListViewHeaderItemAutomationPeer {
+        ListViewHeaderItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListViewItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListViewItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListViewItemAutomationPeer {
+        ListViewItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListViewItemAutomationPeer {
+        ListViewItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListViewItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListViewItemAutomationPeer> {
+        let ancestors = [IListViewItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListViewItemAutomationPeer>("ListViewItemAutomationPeer", IListViewItemAutomationPeer.iid(), ancestors, { raw => ListViewItemAutomationPeer.fromAbiTake(raw) }, { raw => ListViewItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListViewItemAutomationPeer {
+        match (unsafe { query(IListViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListViewItemAutomationPeer(): IListViewItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ListViewItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListViewItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ListViewItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ListViewItemAutomationPeer, IListViewItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListViewItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ListViewItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListViewItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListViewItemAutomationPeer;{" + IListViewItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListViewItemAutomationPeer", ListViewItemAutomationPeer.signature(), IListViewItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListViewItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListViewItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListViewItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListViewItemAutomationPeer {
+        ListViewItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ListViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ListViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ListViewItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ListViewItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ListViewItemDataAutomationPeer {
+        ListViewItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ListViewItemDataAutomationPeer {
+        ListViewItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IListViewItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ListViewItemDataAutomationPeer> {
+        let ancestors = [IListViewItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), ISelectorItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ListViewItemDataAutomationPeer>("ListViewItemDataAutomationPeer", IListViewItemDataAutomationPeer.iid(), ancestors, { raw => ListViewItemDataAutomationPeer.fromAbiTake(raw) }, { raw => ListViewItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IListViewItemDataAutomationPeer {
+        match (unsafe { query(IListViewItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIListViewItemDataAutomationPeer(): IListViewItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorItemAutomationPeer(): ISelectorItemAutomationPeer {
+        match (unsafe { query<ISelectorItemAutomationPeer>(ISelectorItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: ListViewBaseAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ListViewItemDataAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ListViewBaseAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<ListViewItemDataAutomationPeer, IListViewItemDataAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ListViewItemDataAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return ListViewItemDataAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ListViewItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ListViewItemDataAutomationPeer;{" + IListViewItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ListViewItemDataAutomationPeer", ListViewItemDataAutomationPeer.signature(), IListViewItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ListViewItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ListViewItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ListViewItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ListViewItemDataAutomationPeer {
+        ListViewItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_LoopingSelectorAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class LoopingSelectorAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<LoopingSelectorAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): LoopingSelectorAutomationPeer {
+        LoopingSelectorAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoopingSelectorAutomationPeer {
+        LoopingSelectorAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ILoopingSelectorAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<LoopingSelectorAutomationPeer> {
+        let ancestors = [ILoopingSelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<LoopingSelectorAutomationPeer>("LoopingSelectorAutomationPeer", ILoopingSelectorAutomationPeer.iid(), ancestors, { raw => LoopingSelectorAutomationPeer.fromAbiTake(raw) }, { raw => LoopingSelectorAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ILoopingSelectorAutomationPeer {
+        match (unsafe { query(ILoopingSelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asILoopingSelectorAutomationPeer(): ILoopingSelectorAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIScrollProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorAutomationPeer;{" + ILoopingSelectorAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorAutomationPeer", LoopingSelectorAutomationPeer.signature(), ILoopingSelectorAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: LoopingSelectorAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): LoopingSelectorAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        LoopingSelectorAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): LoopingSelectorAutomationPeer {
+        LoopingSelectorAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_LoopingSelectorItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class LoopingSelectorItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<LoopingSelectorItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): LoopingSelectorItemAutomationPeer {
+        LoopingSelectorItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoopingSelectorItemAutomationPeer {
+        LoopingSelectorItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ILoopingSelectorItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<LoopingSelectorItemAutomationPeer> {
+        let ancestors = [ILoopingSelectorItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<LoopingSelectorItemAutomationPeer>("LoopingSelectorItemAutomationPeer", ILoopingSelectorItemAutomationPeer.iid(), ancestors, { raw => LoopingSelectorItemAutomationPeer.fromAbiTake(raw) }, { raw => LoopingSelectorItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ILoopingSelectorItemAutomationPeer {
+        match (unsafe { query(ILoopingSelectorItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asILoopingSelectorItemAutomationPeer(): ILoopingSelectorItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemAutomationPeer;{" + ILoopingSelectorItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemAutomationPeer", LoopingSelectorItemAutomationPeer.signature(), ILoopingSelectorItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: LoopingSelectorItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): LoopingSelectorItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        LoopingSelectorItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): LoopingSelectorItemAutomationPeer {
+        LoopingSelectorItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_LoopingSelectorItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class LoopingSelectorItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<LoopingSelectorItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): LoopingSelectorItemDataAutomationPeer {
+        LoopingSelectorItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): LoopingSelectorItemDataAutomationPeer {
+        LoopingSelectorItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ILoopingSelectorItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<LoopingSelectorItemDataAutomationPeer> {
+        let ancestors = [ILoopingSelectorItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<LoopingSelectorItemDataAutomationPeer>("LoopingSelectorItemDataAutomationPeer", ILoopingSelectorItemDataAutomationPeer.iid(), ancestors, { raw => LoopingSelectorItemDataAutomationPeer.fromAbiTake(raw) }, { raw => LoopingSelectorItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ILoopingSelectorItemDataAutomationPeer {
+        match (unsafe { query(ILoopingSelectorItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asILoopingSelectorItemDataAutomationPeer(): ILoopingSelectorItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemDataAutomationPeer;{" + ILoopingSelectorItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.LoopingSelectorItemDataAutomationPeer", LoopingSelectorItemDataAutomationPeer.signature(), ILoopingSelectorItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: LoopingSelectorItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): LoopingSelectorItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        LoopingSelectorItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): LoopingSelectorItemDataAutomationPeer {
+        LoopingSelectorItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.MediaPlayerElementAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_MediaPlayerElementAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class MediaPlayerElementAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MediaPlayerElementAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MediaPlayerElementAutomationPeer {
+        MediaPlayerElementAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MediaPlayerElementAutomationPeer {
+        MediaPlayerElementAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMediaPlayerElementAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MediaPlayerElementAutomationPeer> {
+        let ancestors = [IMediaPlayerElementAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MediaPlayerElementAutomationPeer>("MediaPlayerElementAutomationPeer", IMediaPlayerElementAutomationPeer.iid(), ancestors, { raw => MediaPlayerElementAutomationPeer.fromAbiTake(raw) }, { raw => MediaPlayerElementAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMediaPlayerElementAutomationPeer {
+        match (unsafe { query(IMediaPlayerElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMediaPlayerElementAutomationPeer(): IMediaPlayerElementAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.MediaPlayerElement, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): MediaPlayerElementAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.MediaPlayerElement>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<MediaPlayerElementAutomationPeer, IMediaPlayerElementAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MediaPlayerElementAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return MediaPlayerElementAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.MediaPlayerElementAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.MediaPlayerElementAutomationPeer;{" + IMediaPlayerElementAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.MediaPlayerElementAutomationPeer", MediaPlayerElementAutomationPeer.signature(), IMediaPlayerElementAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: MediaPlayerElementAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MediaPlayerElementAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MediaPlayerElementAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MediaPlayerElementAutomationPeer {
+        MediaPlayerElementAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.MediaTransportControlsAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_MediaTransportControlsAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class MediaTransportControlsAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MediaTransportControlsAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MediaTransportControlsAutomationPeer {
+        MediaTransportControlsAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MediaTransportControlsAutomationPeer {
+        MediaTransportControlsAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMediaTransportControlsAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MediaTransportControlsAutomationPeer> {
+        let ancestors = [IMediaTransportControlsAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MediaTransportControlsAutomationPeer>("MediaTransportControlsAutomationPeer", IMediaTransportControlsAutomationPeer.iid(), ancestors, { raw => MediaTransportControlsAutomationPeer.fromAbiTake(raw) }, { raw => MediaTransportControlsAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMediaTransportControlsAutomationPeer {
+        match (unsafe { query(IMediaTransportControlsAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMediaTransportControlsAutomationPeer(): IMediaTransportControlsAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.MediaTransportControls, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): MediaTransportControlsAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.MediaTransportControls>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<MediaTransportControlsAutomationPeer, IMediaTransportControlsAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MediaTransportControlsAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return MediaTransportControlsAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.MediaTransportControlsAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.MediaTransportControlsAutomationPeer;{" + IMediaTransportControlsAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.MediaTransportControlsAutomationPeer", MediaTransportControlsAutomationPeer.signature(), IMediaTransportControlsAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: MediaTransportControlsAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MediaTransportControlsAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MediaTransportControlsAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MediaTransportControlsAutomationPeer {
+        MediaTransportControlsAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.MenuBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_MenuBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class MenuBarAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MenuBarAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MenuBarAutomationPeer {
+        MenuBarAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MenuBarAutomationPeer {
+        MenuBarAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMenuBarAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MenuBarAutomationPeer> {
+        let ancestors = [IMenuBarAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MenuBarAutomationPeer>("MenuBarAutomationPeer", IMenuBarAutomationPeer.iid(), ancestors, { raw => MenuBarAutomationPeer.fromAbiTake(raw) }, { raw => MenuBarAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMenuBarAutomationPeer {
+        match (unsafe { query(IMenuBarAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMenuBarAutomationPeer(): IMenuBarAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.MenuBar, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): MenuBarAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.MenuBar>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<MenuBarAutomationPeer, IMenuBarAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MenuBarAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return MenuBarAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.MenuBarAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.MenuBarAutomationPeer;{" + IMenuBarAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.MenuBarAutomationPeer", MenuBarAutomationPeer.signature(), IMenuBarAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: MenuBarAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MenuBarAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MenuBarAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MenuBarAutomationPeer {
+        MenuBarAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.MenuBarItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_MenuBarItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class MenuBarItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MenuBarItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MenuBarItemAutomationPeer {
+        MenuBarItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MenuBarItemAutomationPeer {
+        MenuBarItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMenuBarItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MenuBarItemAutomationPeer> {
+        let ancestors = [IMenuBarItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MenuBarItemAutomationPeer>("MenuBarItemAutomationPeer", IMenuBarItemAutomationPeer.iid(), ancestors, { raw => MenuBarItemAutomationPeer.fromAbiTake(raw) }, { raw => MenuBarItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMenuBarItemAutomationPeer {
+        match (unsafe { query(IMenuBarItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMenuBarItemAutomationPeer(): IMenuBarItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.MenuBarItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): MenuBarItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.MenuBarItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<MenuBarItemAutomationPeer, IMenuBarItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MenuBarItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return MenuBarItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.MenuBarItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.MenuBarItemAutomationPeer;{" + IMenuBarItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.MenuBarItemAutomationPeer", MenuBarItemAutomationPeer.signature(), IMenuBarItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: MenuBarItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MenuBarItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MenuBarItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MenuBarItemAutomationPeer {
+        MenuBarItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_MenuFlyoutItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class MenuFlyoutItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MenuFlyoutItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MenuFlyoutItemAutomationPeer {
+        MenuFlyoutItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MenuFlyoutItemAutomationPeer {
+        MenuFlyoutItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMenuFlyoutItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MenuFlyoutItemAutomationPeer> {
+        let ancestors = [IMenuFlyoutItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MenuFlyoutItemAutomationPeer>("MenuFlyoutItemAutomationPeer", IMenuFlyoutItemAutomationPeer.iid(), ancestors, { raw => MenuFlyoutItemAutomationPeer.fromAbiTake(raw) }, { raw => MenuFlyoutItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMenuFlyoutItemAutomationPeer {
+        match (unsafe { query(IMenuFlyoutItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMenuFlyoutItemAutomationPeer(): IMenuFlyoutItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.MenuFlyoutItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): MenuFlyoutItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.MenuFlyoutItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<MenuFlyoutItemAutomationPeer, IMenuFlyoutItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MenuFlyoutItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return MenuFlyoutItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutItemAutomationPeer;{" + IMenuFlyoutItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutItemAutomationPeer", MenuFlyoutItemAutomationPeer.signature(), IMenuFlyoutItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: MenuFlyoutItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MenuFlyoutItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MenuFlyoutItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MenuFlyoutItemAutomationPeer {
+        MenuFlyoutItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_MenuFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class MenuFlyoutPresenterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MenuFlyoutPresenterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MenuFlyoutPresenterAutomationPeer {
+        MenuFlyoutPresenterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MenuFlyoutPresenterAutomationPeer {
+        MenuFlyoutPresenterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMenuFlyoutPresenterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MenuFlyoutPresenterAutomationPeer> {
+        let ancestors = [IMenuFlyoutPresenterAutomationPeer.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MenuFlyoutPresenterAutomationPeer>("MenuFlyoutPresenterAutomationPeer", IMenuFlyoutPresenterAutomationPeer.iid(), ancestors, { raw => MenuFlyoutPresenterAutomationPeer.fromAbiTake(raw) }, { raw => MenuFlyoutPresenterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMenuFlyoutPresenterAutomationPeer {
+        match (unsafe { query(IMenuFlyoutPresenterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMenuFlyoutPresenterAutomationPeer(): IMenuFlyoutPresenterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.MenuFlyoutPresenter, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): MenuFlyoutPresenterAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.MenuFlyoutPresenter>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<MenuFlyoutPresenterAutomationPeer, IMenuFlyoutPresenterAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MenuFlyoutPresenterAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return MenuFlyoutPresenterAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutPresenterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutPresenterAutomationPeer;{" + IMenuFlyoutPresenterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.MenuFlyoutPresenterAutomationPeer", MenuFlyoutPresenterAutomationPeer.signature(), IMenuFlyoutPresenterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: MenuFlyoutPresenterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MenuFlyoutPresenterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MenuFlyoutPresenterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MenuFlyoutPresenterAutomationPeer {
+        MenuFlyoutPresenterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.NavigationViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_NavigationViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class NavigationViewAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NavigationViewAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NavigationViewAutomationPeer {
+        NavigationViewAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NavigationViewAutomationPeer {
+        NavigationViewAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INavigationViewAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NavigationViewAutomationPeer> {
+        let ancestors = [INavigationViewAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NavigationViewAutomationPeer>("NavigationViewAutomationPeer", INavigationViewAutomationPeer.iid(), ancestors, { raw => NavigationViewAutomationPeer.fromAbiTake(raw) }, { raw => NavigationViewAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INavigationViewAutomationPeer {
+        match (unsafe { query(INavigationViewAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINavigationViewAutomationPeer(): INavigationViewAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.NavigationView, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): NavigationViewAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.NavigationView>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<NavigationViewAutomationPeer, INavigationViewAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NavigationViewAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return NavigationViewAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.NavigationViewAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.NavigationViewAutomationPeer;{" + INavigationViewAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.NavigationViewAutomationPeer", NavigationViewAutomationPeer.signature(), INavigationViewAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: NavigationViewAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NavigationViewAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NavigationViewAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NavigationViewAutomationPeer {
+        NavigationViewAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.NavigationViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_NavigationViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class NavigationViewItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NavigationViewItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NavigationViewItemAutomationPeer {
+        NavigationViewItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NavigationViewItemAutomationPeer {
+        NavigationViewItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INavigationViewItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NavigationViewItemAutomationPeer> {
+        let ancestors = [INavigationViewItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NavigationViewItemAutomationPeer>("NavigationViewItemAutomationPeer", INavigationViewItemAutomationPeer.iid(), ancestors, { raw => NavigationViewItemAutomationPeer.fromAbiTake(raw) }, { raw => NavigationViewItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INavigationViewItemAutomationPeer {
+        match (unsafe { query(INavigationViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINavigationViewItemAutomationPeer(): INavigationViewItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.NavigationViewItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): NavigationViewItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.NavigationViewItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<NavigationViewItemAutomationPeer, INavigationViewItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NavigationViewItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return NavigationViewItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.NavigationViewItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.NavigationViewItemAutomationPeer;{" + INavigationViewItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.NavigationViewItemAutomationPeer", NavigationViewItemAutomationPeer.signature(), INavigationViewItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: NavigationViewItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NavigationViewItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NavigationViewItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NavigationViewItemAutomationPeer {
+        NavigationViewItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.NumberBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_NumberBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class NumberBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NumberBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NumberBoxAutomationPeer {
+        NumberBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NumberBoxAutomationPeer {
+        NumberBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INumberBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NumberBoxAutomationPeer> {
+        let ancestors = [INumberBoxAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NumberBoxAutomationPeer>("NumberBoxAutomationPeer", INumberBoxAutomationPeer.iid(), ancestors, { raw => NumberBoxAutomationPeer.fromAbiTake(raw) }, { raw => NumberBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INumberBoxAutomationPeer {
+        match (unsafe { query(INumberBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINumberBoxAutomationPeer(): INumberBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.NumberBox, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): NumberBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.NumberBox>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<NumberBoxAutomationPeer, INumberBoxAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NumberBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return NumberBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.NumberBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.NumberBoxAutomationPeer;{" + INumberBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.NumberBoxAutomationPeer", NumberBoxAutomationPeer.signature(), INumberBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: NumberBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NumberBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NumberBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NumberBoxAutomationPeer {
+        NumberBoxAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.PasswordBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_PasswordBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class PasswordBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PasswordBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PasswordBoxAutomationPeer {
+        PasswordBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PasswordBoxAutomationPeer {
+        PasswordBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPasswordBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PasswordBoxAutomationPeer> {
+        let ancestors = [IPasswordBoxAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PasswordBoxAutomationPeer>("PasswordBoxAutomationPeer", IPasswordBoxAutomationPeer.iid(), ancestors, { raw => PasswordBoxAutomationPeer.fromAbiTake(raw) }, { raw => PasswordBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPasswordBoxAutomationPeer {
+        match (unsafe { query(IPasswordBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPasswordBoxAutomationPeer(): IPasswordBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.PasswordBox, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): PasswordBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.PasswordBox>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<PasswordBoxAutomationPeer, IPasswordBoxAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PasswordBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return PasswordBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.PasswordBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.PasswordBoxAutomationPeer;{" + IPasswordBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.PasswordBoxAutomationPeer", PasswordBoxAutomationPeer.signature(), IPasswordBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PasswordBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PasswordBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PasswordBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PasswordBoxAutomationPeer {
+        PasswordBoxAutomationPeer.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Xaml.Automation.Peers.PatternInterface (synthetic:Microsoft_UI_Xaml_Automation_Peers_PatternInterface)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct PatternInterface {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Invoke = PatternInterface(0)
+public const PatternInterface_Invoke = PatternInterface(0)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Selection = PatternInterface(1)
+public const PatternInterface_Selection = PatternInterface(1)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Value = PatternInterface(2)
+public const PatternInterface_Value = PatternInterface(2)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_RangeValue = PatternInterface(3)
+public const PatternInterface_RangeValue = PatternInterface(3)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Scroll = PatternInterface(4)
+public const PatternInterface_Scroll = PatternInterface(4)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_ScrollItem = PatternInterface(5)
+public const PatternInterface_ScrollItem = PatternInterface(5)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_ExpandCollapse = PatternInterface(6)
+public const PatternInterface_ExpandCollapse = PatternInterface(6)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Grid = PatternInterface(7)
+public const PatternInterface_Grid = PatternInterface(7)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_GridItem = PatternInterface(8)
+public const PatternInterface_GridItem = PatternInterface(8)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_MultipleView = PatternInterface(9)
+public const PatternInterface_MultipleView = PatternInterface(9)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Window = PatternInterface(10)
+public const PatternInterface_Window = PatternInterface(10)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_SelectionItem = PatternInterface(11)
+public const PatternInterface_SelectionItem = PatternInterface(11)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Dock = PatternInterface(12)
+public const PatternInterface_Dock = PatternInterface(12)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Table = PatternInterface(13)
+public const PatternInterface_Table = PatternInterface(13)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_TableItem = PatternInterface(14)
+public const PatternInterface_TableItem = PatternInterface(14)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Toggle = PatternInterface(15)
+public const PatternInterface_Toggle = PatternInterface(15)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Transform = PatternInterface(16)
+public const PatternInterface_Transform = PatternInterface(16)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Text = PatternInterface(17)
+public const PatternInterface_Text = PatternInterface(17)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_ItemContainer = PatternInterface(18)
+public const PatternInterface_ItemContainer = PatternInterface(18)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_VirtualizedItem = PatternInterface(19)
+public const PatternInterface_VirtualizedItem = PatternInterface(19)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Text2 = PatternInterface(20)
+public const PatternInterface_Text2 = PatternInterface(20)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_TextChild = PatternInterface(21)
+public const PatternInterface_TextChild = PatternInterface(21)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_TextRange = PatternInterface(22)
+public const PatternInterface_TextRange = PatternInterface(22)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Annotation = PatternInterface(23)
+public const PatternInterface_Annotation = PatternInterface(23)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Drag = PatternInterface(24)
+public const PatternInterface_Drag = PatternInterface(24)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_DropTarget = PatternInterface(25)
+public const PatternInterface_DropTarget = PatternInterface(25)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_ObjectModel = PatternInterface(26)
+public const PatternInterface_ObjectModel = PatternInterface(26)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Spreadsheet = PatternInterface(27)
+public const PatternInterface_Spreadsheet = PatternInterface(27)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_SpreadsheetItem = PatternInterface(28)
+public const PatternInterface_SpreadsheetItem = PatternInterface(28)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Styles = PatternInterface(29)
+public const PatternInterface_Styles = PatternInterface(29)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_Transform2 = PatternInterface(30)
+public const PatternInterface_Transform2 = PatternInterface(30)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_SynchronizedInput = PatternInterface(31)
+public const PatternInterface_SynchronizedInput = PatternInterface(31)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_TextEdit = PatternInterface(32)
+public const PatternInterface_TextEdit = PatternInterface(32)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
-public let PatternInterface_CustomNavigation = PatternInterface(33)
+public const PatternInterface_CustomNavigation = PatternInterface(33)
+
+// Microsoft.UI.Xaml.Automation.Peers.PersonPictureAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_PersonPictureAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class PersonPictureAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PersonPictureAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PersonPictureAutomationPeer {
+        PersonPictureAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PersonPictureAutomationPeer {
+        PersonPictureAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPersonPictureAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PersonPictureAutomationPeer> {
+        let ancestors = [IPersonPictureAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PersonPictureAutomationPeer>("PersonPictureAutomationPeer", IPersonPictureAutomationPeer.iid(), ancestors, { raw => PersonPictureAutomationPeer.fromAbiTake(raw) }, { raw => PersonPictureAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPersonPictureAutomationPeer {
+        match (unsafe { query(IPersonPictureAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPersonPictureAutomationPeer(): IPersonPictureAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.PersonPicture, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): PersonPictureAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.PersonPicture>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<PersonPictureAutomationPeer, IPersonPictureAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PersonPictureAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return PersonPictureAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.PersonPictureAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.PersonPictureAutomationPeer;{" + IPersonPictureAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.PersonPictureAutomationPeer", PersonPictureAutomationPeer.signature(), IPersonPictureAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PersonPictureAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PersonPictureAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PersonPictureAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PersonPictureAutomationPeer {
+        PersonPictureAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.PickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_PickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class PickerFlyoutPresenterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PickerFlyoutPresenterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PickerFlyoutPresenterAutomationPeer {
+        PickerFlyoutPresenterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PickerFlyoutPresenterAutomationPeer {
+        PickerFlyoutPresenterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPickerFlyoutPresenterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PickerFlyoutPresenterAutomationPeer> {
+        let ancestors = [IPickerFlyoutPresenterAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PickerFlyoutPresenterAutomationPeer>("PickerFlyoutPresenterAutomationPeer", IPickerFlyoutPresenterAutomationPeer.iid(), ancestors, { raw => PickerFlyoutPresenterAutomationPeer.fromAbiTake(raw) }, { raw => PickerFlyoutPresenterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPickerFlyoutPresenterAutomationPeer {
+        match (unsafe { query(IPickerFlyoutPresenterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPickerFlyoutPresenterAutomationPeer(): IPickerFlyoutPresenterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.PickerFlyoutPresenterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.PickerFlyoutPresenterAutomationPeer;{" + IPickerFlyoutPresenterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.PickerFlyoutPresenterAutomationPeer", PickerFlyoutPresenterAutomationPeer.signature(), IPickerFlyoutPresenterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PickerFlyoutPresenterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PickerFlyoutPresenterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PickerFlyoutPresenterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PickerFlyoutPresenterAutomationPeer {
+        PickerFlyoutPresenterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.PipsPagerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_PipsPagerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class PipsPagerAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PipsPagerAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PipsPagerAutomationPeer {
+        PipsPagerAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PipsPagerAutomationPeer {
+        PipsPagerAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPipsPagerAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PipsPagerAutomationPeer> {
+        let ancestors = [IPipsPagerAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PipsPagerAutomationPeer>("PipsPagerAutomationPeer", IPipsPagerAutomationPeer.iid(), ancestors, { raw => PipsPagerAutomationPeer.fromAbiTake(raw) }, { raw => PipsPagerAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPipsPagerAutomationPeer {
+        match (unsafe { query(IPipsPagerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPipsPagerAutomationPeer(): IPipsPagerAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.PipsPager, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): PipsPagerAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.PipsPager>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<PipsPagerAutomationPeer, IPipsPagerAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PipsPagerAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return PipsPagerAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.PipsPagerAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.PipsPagerAutomationPeer;{" + IPipsPagerAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.PipsPagerAutomationPeer", PipsPagerAutomationPeer.signature(), IPipsPagerAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PipsPagerAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PipsPagerAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PipsPagerAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PipsPagerAutomationPeer {
+        PipsPagerAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.PivotAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_PivotAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class PivotAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PivotAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PivotAutomationPeer {
+        PivotAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PivotAutomationPeer {
+        PivotAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPivotAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PivotAutomationPeer> {
+        let ancestors = [IPivotAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PivotAutomationPeer>("PivotAutomationPeer", IPivotAutomationPeer.iid(), ancestors, { raw => PivotAutomationPeer.fromAbiTake(raw) }, { raw => PivotAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPivotAutomationPeer {
+        match (unsafe { query(IPivotAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPivotAutomationPeer(): IPivotAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIScrollProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.Pivot): PivotAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.Pivot>(owner)) {
+            try (factory__ = windows_core.factory<PivotAutomationPeer, IPivotAutomationPeerFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PivotAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PivotAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.PivotAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.PivotAutomationPeer;{" + IPivotAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.PivotAutomationPeer", PivotAutomationPeer.signature(), IPivotAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PivotAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PivotAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PivotAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PivotAutomationPeer {
+        PivotAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.PivotItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_PivotItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class PivotItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PivotItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PivotItemAutomationPeer {
+        PivotItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PivotItemAutomationPeer {
+        PivotItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPivotItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PivotItemAutomationPeer> {
+        let ancestors = [IPivotItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PivotItemAutomationPeer>("PivotItemAutomationPeer", IPivotItemAutomationPeer.iid(), ancestors, { raw => PivotItemAutomationPeer.fromAbiTake(raw) }, { raw => PivotItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPivotItemAutomationPeer {
+        match (unsafe { query(IPivotItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPivotItemAutomationPeer(): IPivotItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.PivotItem): PivotItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.PivotItem>(owner)) {
+            try (factory__ = windows_core.factory<PivotItemAutomationPeer, IPivotItemAutomationPeerFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PivotItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PivotItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.PivotItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.PivotItemAutomationPeer;{" + IPivotItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.PivotItemAutomationPeer", PivotItemAutomationPeer.signature(), IPivotItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PivotItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PivotItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PivotItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PivotItemAutomationPeer {
+        PivotItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.PivotItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_PivotItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class PivotItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PivotItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PivotItemDataAutomationPeer {
+        PivotItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PivotItemDataAutomationPeer {
+        PivotItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPivotItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PivotItemDataAutomationPeer> {
+        let ancestors = [IPivotItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IItemAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PivotItemDataAutomationPeer>("PivotItemDataAutomationPeer", IPivotItemDataAutomationPeer.iid(), ancestors, { raw => PivotItemDataAutomationPeer.fromAbiTake(raw) }, { raw => PivotItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPivotItemDataAutomationPeer {
+        match (unsafe { query(IPivotItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPivotItemDataAutomationPeer(): IPivotItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: PivotAutomationPeer): PivotItemDataAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<PivotAutomationPeer>(parent)) {
+                try (factory__ = windows_core.factory<PivotItemDataAutomationPeer, IPivotItemDataAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PivotItemDataAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PivotItemDataAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.PivotItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.PivotItemDataAutomationPeer;{" + IPivotItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.PivotItemDataAutomationPeer", PivotItemDataAutomationPeer.signature(), IPivotItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: PivotItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PivotItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PivotItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PivotItemDataAutomationPeer {
+        PivotItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ProgressBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ProgressBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ProgressBarAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProgressBarAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProgressBarAutomationPeer {
+        ProgressBarAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProgressBarAutomationPeer {
+        ProgressBarAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProgressBarAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProgressBarAutomationPeer> {
+        let ancestors = [IProgressBarAutomationPeer.iid(), IRangeBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProgressBarAutomationPeer>("ProgressBarAutomationPeer", IProgressBarAutomationPeer.iid(), ancestors, { raw => ProgressBarAutomationPeer.fromAbiTake(raw) }, { raw => ProgressBarAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProgressBarAutomationPeer {
+        match (unsafe { query(IProgressBarAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProgressBarAutomationPeer(): IProgressBarAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIRangeBaseAutomationPeer(): IRangeBaseAutomationPeer {
+        match (unsafe { query<IRangeBaseAutomationPeer>(IRangeBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIRangeValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.ProgressBar, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ProgressBarAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ProgressBar>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ProgressBarAutomationPeer, IProgressBarAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ProgressBarAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ProgressBarAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ProgressBarAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ProgressBarAutomationPeer;{" + IProgressBarAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ProgressBarAutomationPeer", ProgressBarAutomationPeer.signature(), IProgressBarAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProgressBarAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProgressBarAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProgressBarAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProgressBarAutomationPeer {
+        ProgressBarAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ProgressRingAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ProgressRingAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ProgressRingAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProgressRingAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProgressRingAutomationPeer {
+        ProgressRingAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProgressRingAutomationPeer {
+        ProgressRingAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProgressRingAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProgressRingAutomationPeer> {
+        let ancestors = [IProgressRingAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProgressRingAutomationPeer>("ProgressRingAutomationPeer", IProgressRingAutomationPeer.iid(), ancestors, { raw => ProgressRingAutomationPeer.fromAbiTake(raw) }, { raw => ProgressRingAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProgressRingAutomationPeer {
+        match (unsafe { query(IProgressRingAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProgressRingAutomationPeer(): IProgressRingAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIRangeValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.ProgressRing, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ProgressRingAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ProgressRing>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ProgressRingAutomationPeer, IProgressRingAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ProgressRingAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ProgressRingAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ProgressRingAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ProgressRingAutomationPeer;{" + IProgressRingAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ProgressRingAutomationPeer", ProgressRingAutomationPeer.signature(), IProgressRingAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProgressRingAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProgressRingAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProgressRingAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProgressRingAutomationPeer {
+        ProgressRingAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RadioButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RadioButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RadioButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadioButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadioButtonAutomationPeer {
+        RadioButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadioButtonAutomationPeer {
+        RadioButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadioButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadioButtonAutomationPeer> {
+        let ancestors = [IRadioButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IToggleButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadioButtonAutomationPeer>("RadioButtonAutomationPeer", IRadioButtonAutomationPeer.iid(), ancestors, { raw => RadioButtonAutomationPeer.fromAbiTake(raw) }, { raw => RadioButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadioButtonAutomationPeer {
+        match (unsafe { query(IRadioButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadioButtonAutomationPeer(): IRadioButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleButtonAutomationPeer(): IToggleButtonAutomationPeer {
+        match (unsafe { query<IToggleButtonAutomationPeer>(IToggleButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.RadioButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RadioButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.RadioButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RadioButtonAutomationPeer, IRadioButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadioButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RadioButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RadioButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RadioButtonAutomationPeer;{" + IRadioButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RadioButtonAutomationPeer", RadioButtonAutomationPeer.signature(), IRadioButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadioButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadioButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadioButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadioButtonAutomationPeer {
+        RadioButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RadioButtonsAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RadioButtonsAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RadioButtonsAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RadioButtonsAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RadioButtonsAutomationPeer {
+        RadioButtonsAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RadioButtonsAutomationPeer {
+        RadioButtonsAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRadioButtonsAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RadioButtonsAutomationPeer> {
+        let ancestors = [IRadioButtonsAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RadioButtonsAutomationPeer>("RadioButtonsAutomationPeer", IRadioButtonsAutomationPeer.iid(), ancestors, { raw => RadioButtonsAutomationPeer.fromAbiTake(raw) }, { raw => RadioButtonsAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRadioButtonsAutomationPeer {
+        match (unsafe { query(IRadioButtonsAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRadioButtonsAutomationPeer(): IRadioButtonsAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.RadioButtons, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RadioButtonsAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.RadioButtons>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RadioButtonsAutomationPeer, IRadioButtonsAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RadioButtonsAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RadioButtonsAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RadioButtonsAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RadioButtonsAutomationPeer;{" + IRadioButtonsAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RadioButtonsAutomationPeer", RadioButtonsAutomationPeer.signature(), IRadioButtonsAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RadioButtonsAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RadioButtonsAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RadioButtonsAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RadioButtonsAutomationPeer {
+        RadioButtonsAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RangeBaseAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RangeBaseAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RangeBaseAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RangeBaseAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RangeBaseAutomationPeer {
+        RangeBaseAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RangeBaseAutomationPeer {
+        RangeBaseAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRangeBaseAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RangeBaseAutomationPeer> {
+        let ancestors = [IRangeBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RangeBaseAutomationPeer>("RangeBaseAutomationPeer", IRangeBaseAutomationPeer.iid(), ancestors, { raw => RangeBaseAutomationPeer.fromAbiTake(raw) }, { raw => RangeBaseAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRangeBaseAutomationPeer {
+        match (unsafe { query(IRangeBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRangeBaseAutomationPeer(): IRangeBaseAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIRangeValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.RangeBase, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RangeBaseAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.RangeBase>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RangeBaseAutomationPeer, IRangeBaseAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RangeBaseAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RangeBaseAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RangeBaseAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RangeBaseAutomationPeer;{" + IRangeBaseAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RangeBaseAutomationPeer", RangeBaseAutomationPeer.signature(), IRangeBaseAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RangeBaseAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RangeBaseAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RangeBaseAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RangeBaseAutomationPeer {
+        RangeBaseAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RatingControlAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RatingControlAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RatingControlAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RatingControlAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RatingControlAutomationPeer {
+        RatingControlAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RatingControlAutomationPeer {
+        RatingControlAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRatingControlAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RatingControlAutomationPeer> {
+        let ancestors = [IRatingControlAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RatingControlAutomationPeer>("RatingControlAutomationPeer", IRatingControlAutomationPeer.iid(), ancestors, { raw => RatingControlAutomationPeer.fromAbiTake(raw) }, { raw => RatingControlAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRatingControlAutomationPeer {
+        match (unsafe { query(IRatingControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRatingControlAutomationPeer(): IRatingControlAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.RatingControl, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RatingControlAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.RatingControl>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RatingControlAutomationPeer, IRatingControlAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RatingControlAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RatingControlAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RatingControlAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RatingControlAutomationPeer;{" + IRatingControlAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RatingControlAutomationPeer", RatingControlAutomationPeer.signature(), IRatingControlAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RatingControlAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RatingControlAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RatingControlAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RatingControlAutomationPeer {
+        RatingControlAutomationPeer.viewOf(raw)
+    }
+}
 
 // Microsoft.UI.Xaml.Automation.Peers.RawElementProviderRuntimeId (synthetic:Microsoft_UI_Xaml_Automation_Peers_RawElementProviderRuntimeId)
 @When[Microsoft_UI_Xaml_Automation_Peers == "on"]
@@ -1603,4 +14249,4778 @@ public let PatternInterface_CustomNavigation = PatternInterface(33)
 public struct RawElementProviderRuntimeId {
     public var Part1: UInt32 = 0u32
     public var Part2: UInt32 = 0u32
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RepeatButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RepeatButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RepeatButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RepeatButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RepeatButtonAutomationPeer {
+        RepeatButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RepeatButtonAutomationPeer {
+        RepeatButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRepeatButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RepeatButtonAutomationPeer> {
+        let ancestors = [IRepeatButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RepeatButtonAutomationPeer>("RepeatButtonAutomationPeer", IRepeatButtonAutomationPeer.iid(), ancestors, { raw => RepeatButtonAutomationPeer.fromAbiTake(raw) }, { raw => RepeatButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRepeatButtonAutomationPeer {
+        match (unsafe { query(IRepeatButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRepeatButtonAutomationPeer(): IRepeatButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.RepeatButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RepeatButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.RepeatButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RepeatButtonAutomationPeer, IRepeatButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RepeatButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RepeatButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RepeatButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RepeatButtonAutomationPeer;{" + IRepeatButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RepeatButtonAutomationPeer", RepeatButtonAutomationPeer.signature(), IRepeatButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RepeatButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RepeatButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RepeatButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RepeatButtonAutomationPeer {
+        RepeatButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RepeaterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RepeaterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RepeaterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RepeaterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RepeaterAutomationPeer {
+        RepeaterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RepeaterAutomationPeer {
+        RepeaterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRepeaterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RepeaterAutomationPeer> {
+        let ancestors = [IRepeaterAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RepeaterAutomationPeer>("RepeaterAutomationPeer", IRepeaterAutomationPeer.iid(), ancestors, { raw => RepeaterAutomationPeer.fromAbiTake(raw) }, { raw => RepeaterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRepeaterAutomationPeer {
+        match (unsafe { query(IRepeaterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRepeaterAutomationPeer(): IRepeaterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.ItemsRepeater, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RepeaterAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ItemsRepeater>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RepeaterAutomationPeer, IRepeaterAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RepeaterAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RepeaterAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RepeaterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RepeaterAutomationPeer;{" + IRepeaterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RepeaterAutomationPeer", RepeaterAutomationPeer.signature(), IRepeaterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RepeaterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RepeaterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RepeaterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RepeaterAutomationPeer {
+        RepeaterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RichEditBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RichEditBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RichEditBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RichEditBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RichEditBoxAutomationPeer {
+        RichEditBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RichEditBoxAutomationPeer {
+        RichEditBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRichEditBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RichEditBoxAutomationPeer> {
+        let ancestors = [IRichEditBoxAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RichEditBoxAutomationPeer>("RichEditBoxAutomationPeer", IRichEditBoxAutomationPeer.iid(), ancestors, { raw => RichEditBoxAutomationPeer.fromAbiTake(raw) }, { raw => RichEditBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRichEditBoxAutomationPeer {
+        match (unsafe { query(IRichEditBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRichEditBoxAutomationPeer(): IRichEditBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.RichEditBox, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RichEditBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.RichEditBox>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RichEditBoxAutomationPeer, IRichEditBoxAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RichEditBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RichEditBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RichEditBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RichEditBoxAutomationPeer;{" + IRichEditBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RichEditBoxAutomationPeer", RichEditBoxAutomationPeer.signature(), IRichEditBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RichEditBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RichEditBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RichEditBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RichEditBoxAutomationPeer {
+        RichEditBoxAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RichTextBlockAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RichTextBlockAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RichTextBlockAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RichTextBlockAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RichTextBlockAutomationPeer {
+        RichTextBlockAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RichTextBlockAutomationPeer {
+        RichTextBlockAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRichTextBlockAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RichTextBlockAutomationPeer> {
+        let ancestors = [IRichTextBlockAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RichTextBlockAutomationPeer>("RichTextBlockAutomationPeer", IRichTextBlockAutomationPeer.iid(), ancestors, { raw => RichTextBlockAutomationPeer.fromAbiTake(raw) }, { raw => RichTextBlockAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRichTextBlockAutomationPeer {
+        match (unsafe { query(IRichTextBlockAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRichTextBlockAutomationPeer(): IRichTextBlockAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.RichTextBlock, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RichTextBlockAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.RichTextBlock>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RichTextBlockAutomationPeer, IRichTextBlockAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RichTextBlockAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RichTextBlockAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RichTextBlockAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RichTextBlockAutomationPeer;{" + IRichTextBlockAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RichTextBlockAutomationPeer", RichTextBlockAutomationPeer.signature(), IRichTextBlockAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RichTextBlockAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RichTextBlockAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RichTextBlockAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RichTextBlockAutomationPeer {
+        RichTextBlockAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.RichTextBlockOverflowAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_RichTextBlockOverflowAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class RichTextBlockOverflowAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RichTextBlockOverflowAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RichTextBlockOverflowAutomationPeer {
+        RichTextBlockOverflowAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RichTextBlockOverflowAutomationPeer {
+        RichTextBlockOverflowAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRichTextBlockOverflowAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RichTextBlockOverflowAutomationPeer> {
+        let ancestors = [IRichTextBlockOverflowAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RichTextBlockOverflowAutomationPeer>("RichTextBlockOverflowAutomationPeer", IRichTextBlockOverflowAutomationPeer.iid(), ancestors, { raw => RichTextBlockOverflowAutomationPeer.fromAbiTake(raw) }, { raw => RichTextBlockOverflowAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRichTextBlockOverflowAutomationPeer {
+        match (unsafe { query(IRichTextBlockOverflowAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRichTextBlockOverflowAutomationPeer(): IRichTextBlockOverflowAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.RichTextBlockOverflow, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RichTextBlockOverflowAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.RichTextBlockOverflow>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<RichTextBlockOverflowAutomationPeer, IRichTextBlockOverflowAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<RichTextBlockOverflowAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return RichTextBlockOverflowAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.RichTextBlockOverflowAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.RichTextBlockOverflowAutomationPeer;{" + IRichTextBlockOverflowAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.RichTextBlockOverflowAutomationPeer", RichTextBlockOverflowAutomationPeer.signature(), IRichTextBlockOverflowAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: RichTextBlockOverflowAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RichTextBlockOverflowAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RichTextBlockOverflowAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RichTextBlockOverflowAutomationPeer {
+        RichTextBlockOverflowAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ScrollBarAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ScrollBarAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ScrollBarAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ScrollBarAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ScrollBarAutomationPeer {
+        ScrollBarAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ScrollBarAutomationPeer {
+        ScrollBarAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IScrollBarAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ScrollBarAutomationPeer> {
+        let ancestors = [IScrollBarAutomationPeer.iid(), IRangeBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ScrollBarAutomationPeer>("ScrollBarAutomationPeer", IScrollBarAutomationPeer.iid(), ancestors, { raw => ScrollBarAutomationPeer.fromAbiTake(raw) }, { raw => ScrollBarAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IScrollBarAutomationPeer {
+        match (unsafe { query(IScrollBarAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIScrollBarAutomationPeer(): IScrollBarAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIRangeBaseAutomationPeer(): IRangeBaseAutomationPeer {
+        match (unsafe { query<IRangeBaseAutomationPeer>(IRangeBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIRangeValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.ScrollBar, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ScrollBarAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.ScrollBar>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ScrollBarAutomationPeer, IScrollBarAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ScrollBarAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ScrollBarAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ScrollBarAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ScrollBarAutomationPeer;{" + IScrollBarAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ScrollBarAutomationPeer", ScrollBarAutomationPeer.signature(), IScrollBarAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ScrollBarAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ScrollBarAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ScrollBarAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ScrollBarAutomationPeer {
+        ScrollBarAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ScrollPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ScrollPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ScrollPresenterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ScrollPresenterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ScrollPresenterAutomationPeer {
+        ScrollPresenterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ScrollPresenterAutomationPeer {
+        ScrollPresenterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IScrollPresenterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ScrollPresenterAutomationPeer> {
+        let ancestors = [IScrollPresenterAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ScrollPresenterAutomationPeer>("ScrollPresenterAutomationPeer", IScrollPresenterAutomationPeer.iid(), ancestors, { raw => ScrollPresenterAutomationPeer.fromAbiTake(raw) }, { raw => ScrollPresenterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IScrollPresenterAutomationPeer {
+        match (unsafe { query(IScrollPresenterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIScrollPresenterAutomationPeer(): IScrollPresenterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls_Primitives.ScrollPresenter, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ScrollPresenterAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.ScrollPresenter>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ScrollPresenterAutomationPeer, IScrollPresenterAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ScrollPresenterAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ScrollPresenterAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ScrollPresenterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ScrollPresenterAutomationPeer;{" + IScrollPresenterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ScrollPresenterAutomationPeer", ScrollPresenterAutomationPeer.signature(), IScrollPresenterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ScrollPresenterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ScrollPresenterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ScrollPresenterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ScrollPresenterAutomationPeer {
+        ScrollPresenterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ScrollViewerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ScrollViewerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ScrollViewerAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ScrollViewerAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ScrollViewerAutomationPeer {
+        ScrollViewerAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ScrollViewerAutomationPeer {
+        ScrollViewerAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IScrollViewerAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ScrollViewerAutomationPeer> {
+        let ancestors = [IScrollViewerAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IScrollProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ScrollViewerAutomationPeer>("ScrollViewerAutomationPeer", IScrollViewerAutomationPeer.iid(), ancestors, { raw => ScrollViewerAutomationPeer.fromAbiTake(raw) }, { raw => ScrollViewerAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IScrollViewerAutomationPeer {
+        match (unsafe { query(IScrollViewerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIScrollViewerAutomationPeer(): IScrollViewerAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIScrollProvider(): Microsoft_UI_Xaml_Automation_Provider.IScrollProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IScrollProvider>(Microsoft_UI_Xaml_Automation_Provider.IScrollProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ScrollViewer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ScrollViewerAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ScrollViewer>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ScrollViewerAutomationPeer, IScrollViewerAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ScrollViewerAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ScrollViewerAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ScrollViewerAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ScrollViewerAutomationPeer;{" + IScrollViewerAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ScrollViewerAutomationPeer", ScrollViewerAutomationPeer.signature(), IScrollViewerAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ScrollViewerAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ScrollViewerAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ScrollViewerAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ScrollViewerAutomationPeer {
+        ScrollViewerAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.SelectorAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_SelectorAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class SelectorAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SelectorAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectorAutomationPeer {
+        SelectorAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectorAutomationPeer {
+        SelectorAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISelectorAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectorAutomationPeer> {
+        let ancestors = [ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SelectorAutomationPeer>("SelectorAutomationPeer", ISelectorAutomationPeer.iid(), ancestors, { raw => SelectorAutomationPeer.fromAbiTake(raw) }, { raw => SelectorAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISelectorAutomationPeer {
+        match (unsafe { query(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.Selector, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SelectorAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.Selector>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<SelectorAutomationPeer, ISelectorAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SelectorAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return SelectorAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.SelectorAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.SelectorAutomationPeer;{" + ISelectorAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.SelectorAutomationPeer", SelectorAutomationPeer.signature(), ISelectorAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: SelectorAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SelectorAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SelectorAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SelectorAutomationPeer {
+        SelectorAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.SelectorBarItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_SelectorBarItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class SelectorBarItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SelectorBarItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectorBarItemAutomationPeer {
+        SelectorBarItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectorBarItemAutomationPeer {
+        SelectorBarItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISelectorBarItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectorBarItemAutomationPeer> {
+        let ancestors = [ISelectorBarItemAutomationPeer.iid(), IItemContainerAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SelectorBarItemAutomationPeer>("SelectorBarItemAutomationPeer", ISelectorBarItemAutomationPeer.iid(), ancestors, { raw => SelectorBarItemAutomationPeer.fromAbiTake(raw) }, { raw => SelectorBarItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISelectorBarItemAutomationPeer {
+        match (unsafe { query(ISelectorBarItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISelectorBarItemAutomationPeer(): ISelectorBarItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIItemContainerAutomationPeer(): IItemContainerAutomationPeer {
+        match (unsafe { query<IItemContainerAutomationPeer>(IItemContainerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.SelectorBarItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SelectorBarItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.SelectorBarItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<SelectorBarItemAutomationPeer, ISelectorBarItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SelectorBarItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return SelectorBarItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.SelectorBarItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.SelectorBarItemAutomationPeer;{" + ISelectorBarItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.SelectorBarItemAutomationPeer", SelectorBarItemAutomationPeer.signature(), ISelectorBarItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: SelectorBarItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SelectorBarItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SelectorBarItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SelectorBarItemAutomationPeer {
+        SelectorBarItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.SelectorItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_SelectorItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class SelectorItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SelectorItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectorItemAutomationPeer {
+        SelectorItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectorItemAutomationPeer {
+        SelectorItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISelectorItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectorItemAutomationPeer> {
+        let ancestors = [ISelectorItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.iid(), IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SelectorItemAutomationPeer>("SelectorItemAutomationPeer", ISelectorItemAutomationPeer.iid(), ancestors, { raw => SelectorItemAutomationPeer.fromAbiTake(raw) }, { raw => SelectorItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISelectorItemAutomationPeer {
+        match (unsafe { query(ISelectorItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISelectorItemAutomationPeer(): ISelectorItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asISelectionItemProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithParentAndItem(item: windows_interface.IInspectable, parent: SelectorAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SelectorItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<SelectorAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<SelectorItemAutomationPeer, ISelectorItemAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithParentAndItem(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SelectorItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return SelectorItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.SelectorItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.SelectorItemAutomationPeer;{" + ISelectorItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.SelectorItemAutomationPeer", SelectorItemAutomationPeer.signature(), ISelectorItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: SelectorItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SelectorItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SelectorItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SelectorItemAutomationPeer {
+        SelectorItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.SemanticZoomAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_SemanticZoomAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class SemanticZoomAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SemanticZoomAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SemanticZoomAutomationPeer {
+        SemanticZoomAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SemanticZoomAutomationPeer {
+        SemanticZoomAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISemanticZoomAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SemanticZoomAutomationPeer> {
+        let ancestors = [ISemanticZoomAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SemanticZoomAutomationPeer>("SemanticZoomAutomationPeer", ISemanticZoomAutomationPeer.iid(), ancestors, { raw => SemanticZoomAutomationPeer.fromAbiTake(raw) }, { raw => SemanticZoomAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISemanticZoomAutomationPeer {
+        match (unsafe { query(ISemanticZoomAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISemanticZoomAutomationPeer(): ISemanticZoomAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.SemanticZoom, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SemanticZoomAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.SemanticZoom>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<SemanticZoomAutomationPeer, ISemanticZoomAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SemanticZoomAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return SemanticZoomAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.SemanticZoomAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.SemanticZoomAutomationPeer;{" + ISemanticZoomAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.SemanticZoomAutomationPeer", SemanticZoomAutomationPeer.signature(), ISemanticZoomAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: SemanticZoomAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SemanticZoomAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SemanticZoomAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SemanticZoomAutomationPeer {
+        SemanticZoomAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.SliderAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_SliderAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class SliderAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SliderAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SliderAutomationPeer {
+        SliderAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SliderAutomationPeer {
+        SliderAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISliderAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SliderAutomationPeer> {
+        let ancestors = [ISliderAutomationPeer.iid(), IRangeBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SliderAutomationPeer>("SliderAutomationPeer", ISliderAutomationPeer.iid(), ancestors, { raw => SliderAutomationPeer.fromAbiTake(raw) }, { raw => SliderAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISliderAutomationPeer {
+        match (unsafe { query(ISliderAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISliderAutomationPeer(): ISliderAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIRangeBaseAutomationPeer(): IRangeBaseAutomationPeer {
+        match (unsafe { query<IRangeBaseAutomationPeer>(IRangeBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIRangeValueProvider(): Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider>(Microsoft_UI_Xaml_Automation_Provider.IRangeValueProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.Slider, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SliderAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.Slider>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<SliderAutomationPeer, ISliderAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SliderAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return SliderAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.SliderAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.SliderAutomationPeer;{" + ISliderAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.SliderAutomationPeer", SliderAutomationPeer.signature(), ISliderAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: SliderAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SliderAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SliderAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SliderAutomationPeer {
+        SliderAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.SplitButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_SplitButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class SplitButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SplitButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SplitButtonAutomationPeer {
+        SplitButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SplitButtonAutomationPeer {
+        SplitButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISplitButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SplitButtonAutomationPeer> {
+        let ancestors = [ISplitButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SplitButtonAutomationPeer>("SplitButtonAutomationPeer", ISplitButtonAutomationPeer.iid(), ancestors, { raw => SplitButtonAutomationPeer.fromAbiTake(raw) }, { raw => SplitButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISplitButtonAutomationPeer {
+        match (unsafe { query(ISplitButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISplitButtonAutomationPeer(): ISplitButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.SplitButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SplitButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.SplitButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<SplitButtonAutomationPeer, ISplitButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SplitButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return SplitButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.SplitButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.SplitButtonAutomationPeer;{" + ISplitButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.SplitButtonAutomationPeer", SplitButtonAutomationPeer.signature(), ISplitButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: SplitButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SplitButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SplitButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SplitButtonAutomationPeer {
+        SplitButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.SplitMenuFlyoutItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_SplitMenuFlyoutItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class SplitMenuFlyoutItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SplitMenuFlyoutItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SplitMenuFlyoutItemAutomationPeer {
+        SplitMenuFlyoutItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SplitMenuFlyoutItemAutomationPeer {
+        SplitMenuFlyoutItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISplitMenuFlyoutItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SplitMenuFlyoutItemAutomationPeer> {
+        let ancestors = [ISplitMenuFlyoutItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SplitMenuFlyoutItemAutomationPeer>("SplitMenuFlyoutItemAutomationPeer", ISplitMenuFlyoutItemAutomationPeer.iid(), ancestors, { raw => SplitMenuFlyoutItemAutomationPeer.fromAbiTake(raw) }, { raw => SplitMenuFlyoutItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISplitMenuFlyoutItemAutomationPeer {
+        match (unsafe { query(ISplitMenuFlyoutItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISplitMenuFlyoutItemAutomationPeer(): ISplitMenuFlyoutItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIInvokeProvider(): Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider>(Microsoft_UI_Xaml_Automation_Provider.IInvokeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.SplitMenuFlyoutItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SplitMenuFlyoutItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.SplitMenuFlyoutItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<SplitMenuFlyoutItemAutomationPeer, ISplitMenuFlyoutItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SplitMenuFlyoutItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return SplitMenuFlyoutItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.SplitMenuFlyoutItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.SplitMenuFlyoutItemAutomationPeer;{" + ISplitMenuFlyoutItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.SplitMenuFlyoutItemAutomationPeer", SplitMenuFlyoutItemAutomationPeer.signature(), ISplitMenuFlyoutItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: SplitMenuFlyoutItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SplitMenuFlyoutItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SplitMenuFlyoutItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SplitMenuFlyoutItemAutomationPeer {
+        SplitMenuFlyoutItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TabViewAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TabViewAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TabViewAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TabViewAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TabViewAutomationPeer {
+        TabViewAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TabViewAutomationPeer {
+        TabViewAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITabViewAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TabViewAutomationPeer> {
+        let ancestors = [ITabViewAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TabViewAutomationPeer>("TabViewAutomationPeer", ITabViewAutomationPeer.iid(), ancestors, { raw => TabViewAutomationPeer.fromAbiTake(raw) }, { raw => TabViewAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITabViewAutomationPeer {
+        match (unsafe { query(ITabViewAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITabViewAutomationPeer(): ITabViewAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.TabView, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TabViewAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TabView>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TabViewAutomationPeer, ITabViewAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TabViewAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TabViewAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TabViewAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TabViewAutomationPeer;{" + ITabViewAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TabViewAutomationPeer", TabViewAutomationPeer.signature(), ITabViewAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TabViewAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TabViewAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TabViewAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TabViewAutomationPeer {
+        TabViewAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TabViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TabViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TabViewItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TabViewItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TabViewItemAutomationPeer {
+        TabViewItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TabViewItemAutomationPeer {
+        TabViewItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITabViewItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TabViewItemAutomationPeer> {
+        let ancestors = [ITabViewItemAutomationPeer.iid(), IListViewItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TabViewItemAutomationPeer>("TabViewItemAutomationPeer", ITabViewItemAutomationPeer.iid(), ancestors, { raw => TabViewItemAutomationPeer.fromAbiTake(raw) }, { raw => TabViewItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITabViewItemAutomationPeer {
+        match (unsafe { query(ITabViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITabViewItemAutomationPeer(): ITabViewItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIListViewItemAutomationPeer(): IListViewItemAutomationPeer {
+        match (unsafe { query<IListViewItemAutomationPeer>(IListViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.TabViewItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TabViewItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TabViewItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TabViewItemAutomationPeer, ITabViewItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TabViewItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TabViewItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TabViewItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TabViewItemAutomationPeer;{" + ITabViewItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TabViewItemAutomationPeer", TabViewItemAutomationPeer.signature(), ITabViewItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TabViewItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TabViewItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TabViewItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TabViewItemAutomationPeer {
+        TabViewItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TeachingTipAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TeachingTipAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TeachingTipAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TeachingTipAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TeachingTipAutomationPeer {
+        TeachingTipAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TeachingTipAutomationPeer {
+        TeachingTipAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITeachingTipAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TeachingTipAutomationPeer> {
+        let ancestors = [ITeachingTipAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TeachingTipAutomationPeer>("TeachingTipAutomationPeer", ITeachingTipAutomationPeer.iid(), ancestors, { raw => TeachingTipAutomationPeer.fromAbiTake(raw) }, { raw => TeachingTipAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITeachingTipAutomationPeer {
+        match (unsafe { query(ITeachingTipAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITeachingTipAutomationPeer(): ITeachingTipAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.TeachingTip, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TeachingTipAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TeachingTip>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TeachingTipAutomationPeer, ITeachingTipAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TeachingTipAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TeachingTipAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TeachingTipAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TeachingTipAutomationPeer;{" + ITeachingTipAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TeachingTipAutomationPeer", TeachingTipAutomationPeer.signature(), ITeachingTipAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TeachingTipAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TeachingTipAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TeachingTipAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TeachingTipAutomationPeer {
+        TeachingTipAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TextBlockAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TextBlockAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TextBlockAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TextBlockAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TextBlockAutomationPeer {
+        TextBlockAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TextBlockAutomationPeer {
+        TextBlockAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITextBlockAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TextBlockAutomationPeer> {
+        let ancestors = [ITextBlockAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TextBlockAutomationPeer>("TextBlockAutomationPeer", ITextBlockAutomationPeer.iid(), ancestors, { raw => TextBlockAutomationPeer.fromAbiTake(raw) }, { raw => TextBlockAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITextBlockAutomationPeer {
+        match (unsafe { query(ITextBlockAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextBlockAutomationPeer(): ITextBlockAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.TextBlock, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TextBlockAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TextBlock>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TextBlockAutomationPeer, ITextBlockAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TextBlockAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TextBlockAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TextBlockAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TextBlockAutomationPeer;{" + ITextBlockAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TextBlockAutomationPeer", TextBlockAutomationPeer.signature(), ITextBlockAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TextBlockAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TextBlockAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TextBlockAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TextBlockAutomationPeer {
+        TextBlockAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TextBoxAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TextBoxAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TextBoxAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TextBoxAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TextBoxAutomationPeer {
+        TextBoxAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TextBoxAutomationPeer {
+        TextBoxAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITextBoxAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TextBoxAutomationPeer> {
+        let ancestors = [ITextBoxAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TextBoxAutomationPeer>("TextBoxAutomationPeer", ITextBoxAutomationPeer.iid(), ancestors, { raw => TextBoxAutomationPeer.fromAbiTake(raw) }, { raw => TextBoxAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITextBoxAutomationPeer {
+        match (unsafe { query(ITextBoxAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextBoxAutomationPeer(): ITextBoxAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.TextBox, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TextBoxAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TextBox>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TextBoxAutomationPeer, ITextBoxAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TextBoxAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TextBoxAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TextBoxAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TextBoxAutomationPeer;{" + ITextBoxAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TextBoxAutomationPeer", TextBoxAutomationPeer.signature(), ITextBoxAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TextBoxAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TextBoxAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TextBoxAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TextBoxAutomationPeer {
+        TextBoxAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ThumbAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ThumbAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ThumbAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ThumbAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ThumbAutomationPeer {
+        ThumbAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ThumbAutomationPeer {
+        ThumbAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IThumbAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ThumbAutomationPeer> {
+        let ancestors = [IThumbAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ThumbAutomationPeer>("ThumbAutomationPeer", IThumbAutomationPeer.iid(), ancestors, { raw => ThumbAutomationPeer.fromAbiTake(raw) }, { raw => ThumbAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IThumbAutomationPeer {
+        match (unsafe { query(IThumbAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIThumbAutomationPeer(): IThumbAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.Thumb, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ThumbAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.Thumb>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ThumbAutomationPeer, IThumbAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ThumbAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ThumbAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ThumbAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ThumbAutomationPeer;{" + IThumbAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ThumbAutomationPeer", ThumbAutomationPeer.signature(), IThumbAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ThumbAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ThumbAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ThumbAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ThumbAutomationPeer {
+        ThumbAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TimePickerAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TimePickerAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TimePickerAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TimePickerAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TimePickerAutomationPeer {
+        TimePickerAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TimePickerAutomationPeer {
+        TimePickerAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITimePickerAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TimePickerAutomationPeer> {
+        let ancestors = [ITimePickerAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TimePickerAutomationPeer>("TimePickerAutomationPeer", ITimePickerAutomationPeer.iid(), ancestors, { raw => TimePickerAutomationPeer.fromAbiTake(raw) }, { raw => TimePickerAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITimePickerAutomationPeer {
+        match (unsafe { query(ITimePickerAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITimePickerAutomationPeer(): ITimePickerAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.TimePicker, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TimePickerAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TimePicker>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TimePickerAutomationPeer, ITimePickerAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TimePickerAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TimePickerAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TimePickerAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TimePickerAutomationPeer;{" + ITimePickerAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TimePickerAutomationPeer", TimePickerAutomationPeer.signature(), ITimePickerAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TimePickerAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TimePickerAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TimePickerAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TimePickerAutomationPeer {
+        TimePickerAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TimePickerFlyoutPresenterAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TimePickerFlyoutPresenterAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TimePickerFlyoutPresenterAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TimePickerFlyoutPresenterAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TimePickerFlyoutPresenterAutomationPeer {
+        TimePickerFlyoutPresenterAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TimePickerFlyoutPresenterAutomationPeer {
+        TimePickerFlyoutPresenterAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITimePickerFlyoutPresenterAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TimePickerFlyoutPresenterAutomationPeer> {
+        let ancestors = [ITimePickerFlyoutPresenterAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TimePickerFlyoutPresenterAutomationPeer>("TimePickerFlyoutPresenterAutomationPeer", ITimePickerFlyoutPresenterAutomationPeer.iid(), ancestors, { raw => TimePickerFlyoutPresenterAutomationPeer.fromAbiTake(raw) }, { raw => TimePickerFlyoutPresenterAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITimePickerFlyoutPresenterAutomationPeer {
+        match (unsafe { query(ITimePickerFlyoutPresenterAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITimePickerFlyoutPresenterAutomationPeer(): ITimePickerFlyoutPresenterAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TimePickerFlyoutPresenterAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TimePickerFlyoutPresenterAutomationPeer;{" + ITimePickerFlyoutPresenterAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TimePickerFlyoutPresenterAutomationPeer", TimePickerFlyoutPresenterAutomationPeer.signature(), ITimePickerFlyoutPresenterAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TimePickerFlyoutPresenterAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TimePickerFlyoutPresenterAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TimePickerFlyoutPresenterAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TimePickerFlyoutPresenterAutomationPeer {
+        TimePickerFlyoutPresenterAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ToggleButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ToggleButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ToggleButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToggleButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToggleButtonAutomationPeer {
+        ToggleButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToggleButtonAutomationPeer {
+        ToggleButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToggleButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToggleButtonAutomationPeer> {
+        let ancestors = [IToggleButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IButtonBaseAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToggleButtonAutomationPeer>("ToggleButtonAutomationPeer", IToggleButtonAutomationPeer.iid(), ancestors, { raw => ToggleButtonAutomationPeer.fromAbiTake(raw) }, { raw => ToggleButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToggleButtonAutomationPeer {
+        match (unsafe { query(IToggleButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToggleButtonAutomationPeer(): IToggleButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBaseAutomationPeer(): IButtonBaseAutomationPeer {
+        match (unsafe { query<IButtonBaseAutomationPeer>(IButtonBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls_Primitives.ToggleButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ToggleButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives.ToggleButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ToggleButtonAutomationPeer, IToggleButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToggleButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ToggleButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ToggleButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ToggleButtonAutomationPeer;{" + IToggleButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ToggleButtonAutomationPeer", ToggleButtonAutomationPeer.signature(), IToggleButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToggleButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToggleButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToggleButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToggleButtonAutomationPeer {
+        ToggleButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ToggleMenuFlyoutItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ToggleMenuFlyoutItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ToggleMenuFlyoutItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToggleMenuFlyoutItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToggleMenuFlyoutItemAutomationPeer {
+        ToggleMenuFlyoutItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToggleMenuFlyoutItemAutomationPeer {
+        ToggleMenuFlyoutItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToggleMenuFlyoutItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToggleMenuFlyoutItemAutomationPeer> {
+        let ancestors = [IToggleMenuFlyoutItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToggleMenuFlyoutItemAutomationPeer>("ToggleMenuFlyoutItemAutomationPeer", IToggleMenuFlyoutItemAutomationPeer.iid(), ancestors, { raw => ToggleMenuFlyoutItemAutomationPeer.fromAbiTake(raw) }, { raw => ToggleMenuFlyoutItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToggleMenuFlyoutItemAutomationPeer {
+        match (unsafe { query(IToggleMenuFlyoutItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToggleMenuFlyoutItemAutomationPeer(): IToggleMenuFlyoutItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ToggleMenuFlyoutItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ToggleMenuFlyoutItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ToggleMenuFlyoutItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ToggleMenuFlyoutItemAutomationPeer, IToggleMenuFlyoutItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToggleMenuFlyoutItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ToggleMenuFlyoutItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ToggleMenuFlyoutItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ToggleMenuFlyoutItemAutomationPeer;{" + IToggleMenuFlyoutItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ToggleMenuFlyoutItemAutomationPeer", ToggleMenuFlyoutItemAutomationPeer.signature(), IToggleMenuFlyoutItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToggleMenuFlyoutItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToggleMenuFlyoutItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToggleMenuFlyoutItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToggleMenuFlyoutItemAutomationPeer {
+        ToggleMenuFlyoutItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ToggleSplitButtonAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ToggleSplitButtonAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ToggleSplitButtonAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToggleSplitButtonAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToggleSplitButtonAutomationPeer {
+        ToggleSplitButtonAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToggleSplitButtonAutomationPeer {
+        ToggleSplitButtonAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToggleSplitButtonAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToggleSplitButtonAutomationPeer> {
+        let ancestors = [IToggleSplitButtonAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToggleSplitButtonAutomationPeer>("ToggleSplitButtonAutomationPeer", IToggleSplitButtonAutomationPeer.iid(), ancestors, { raw => ToggleSplitButtonAutomationPeer.fromAbiTake(raw) }, { raw => ToggleSplitButtonAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToggleSplitButtonAutomationPeer {
+        match (unsafe { query(IToggleSplitButtonAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToggleSplitButtonAutomationPeer(): IToggleSplitButtonAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.ToggleSplitButton, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ToggleSplitButtonAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ToggleSplitButton>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ToggleSplitButtonAutomationPeer, IToggleSplitButtonAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToggleSplitButtonAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ToggleSplitButtonAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ToggleSplitButtonAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ToggleSplitButtonAutomationPeer;{" + IToggleSplitButtonAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ToggleSplitButtonAutomationPeer", ToggleSplitButtonAutomationPeer.signature(), IToggleSplitButtonAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToggleSplitButtonAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToggleSplitButtonAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToggleSplitButtonAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToggleSplitButtonAutomationPeer {
+        ToggleSplitButtonAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.ToggleSwitchAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_ToggleSwitchAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class ToggleSwitchAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToggleSwitchAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToggleSwitchAutomationPeer {
+        ToggleSwitchAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToggleSwitchAutomationPeer {
+        ToggleSwitchAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToggleSwitchAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToggleSwitchAutomationPeer> {
+        let ancestors = [IToggleSwitchAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToggleSwitchAutomationPeer>("ToggleSwitchAutomationPeer", IToggleSwitchAutomationPeer.iid(), ancestors, { raw => ToggleSwitchAutomationPeer.fromAbiTake(raw) }, { raw => ToggleSwitchAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToggleSwitchAutomationPeer {
+        match (unsafe { query(IToggleSwitchAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToggleSwitchAutomationPeer(): IToggleSwitchAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIToggleProvider(): Microsoft_UI_Xaml_Automation_Provider.IToggleProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IToggleProvider>(Microsoft_UI_Xaml_Automation_Provider.IToggleProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.ToggleSwitch, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ToggleSwitchAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.ToggleSwitch>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<ToggleSwitchAutomationPeer, IToggleSwitchAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToggleSwitchAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return ToggleSwitchAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.ToggleSwitchAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.ToggleSwitchAutomationPeer;{" + IToggleSwitchAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.ToggleSwitchAutomationPeer", ToggleSwitchAutomationPeer.signature(), IToggleSwitchAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToggleSwitchAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToggleSwitchAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToggleSwitchAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToggleSwitchAutomationPeer {
+        ToggleSwitchAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TreeViewItemAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TreeViewItemAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TreeViewItemAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TreeViewItemAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TreeViewItemAutomationPeer {
+        TreeViewItemAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TreeViewItemAutomationPeer {
+        TreeViewItemAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITreeViewItemAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TreeViewItemAutomationPeer> {
+        let ancestors = [ITreeViewItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), IListViewItemAutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TreeViewItemAutomationPeer>("TreeViewItemAutomationPeer", ITreeViewItemAutomationPeer.iid(), ancestors, { raw => TreeViewItemAutomationPeer.fromAbiTake(raw) }, { raw => TreeViewItemAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITreeViewItemAutomationPeer {
+        match (unsafe { query(ITreeViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITreeViewItemAutomationPeer(): ITreeViewItemAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIListViewItemAutomationPeer(): IListViewItemAutomationPeer {
+        match (unsafe { query<IListViewItemAutomationPeer>(IListViewItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.TreeViewItem, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TreeViewItemAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TreeViewItem>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TreeViewItemAutomationPeer, ITreeViewItemAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TreeViewItemAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TreeViewItemAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TreeViewItemAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TreeViewItemAutomationPeer;{" + ITreeViewItemAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TreeViewItemAutomationPeer", TreeViewItemAutomationPeer.signature(), ITreeViewItemAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TreeViewItemAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TreeViewItemAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TreeViewItemAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TreeViewItemAutomationPeer {
+        TreeViewItemAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TreeViewItemDataAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TreeViewItemDataAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TreeViewItemDataAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TreeViewItemDataAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TreeViewItemDataAutomationPeer {
+        TreeViewItemDataAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TreeViewItemDataAutomationPeer {
+        TreeViewItemDataAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITreeViewItemDataAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TreeViewItemDataAutomationPeer> {
+        let ancestors = [ITreeViewItemDataAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.iid(), IItemAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TreeViewItemDataAutomationPeer>("TreeViewItemDataAutomationPeer", ITreeViewItemDataAutomationPeer.iid(), ancestors, { raw => TreeViewItemDataAutomationPeer.fromAbiTake(raw) }, { raw => TreeViewItemDataAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITreeViewItemDataAutomationPeer {
+        match (unsafe { query(ITreeViewItemDataAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITreeViewItemDataAutomationPeer(): ITreeViewItemDataAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIExpandCollapseProvider(): Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider>(Microsoft_UI_Xaml_Automation_Provider.IExpandCollapseProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemAutomationPeer(): IItemAutomationPeer {
+        match (unsafe { query<IItemAutomationPeer>(IItemAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVirtualizedItemProvider(): Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider>(Microsoft_UI_Xaml_Automation_Provider.IVirtualizedItemProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(item: windows_interface.IInspectable, parent: TreeViewListAutomationPeer, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TreeViewItemDataAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<TreeViewListAutomationPeer>(parent)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<TreeViewItemDataAutomationPeer, ITreeViewItemDataAutomationPeerFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TreeViewItemDataAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return TreeViewItemDataAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TreeViewItemDataAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TreeViewItemDataAutomationPeer;{" + ITreeViewItemDataAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TreeViewItemDataAutomationPeer", TreeViewItemDataAutomationPeer.signature(), ITreeViewItemDataAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TreeViewItemDataAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TreeViewItemDataAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TreeViewItemDataAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TreeViewItemDataAutomationPeer {
+        TreeViewItemDataAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.TreeViewListAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_TreeViewListAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class TreeViewListAutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TreeViewListAutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TreeViewListAutomationPeer {
+        TreeViewListAutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TreeViewListAutomationPeer {
+        TreeViewListAutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITreeViewListAutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TreeViewListAutomationPeer> {
+        let ancestors = [ITreeViewListAutomationPeer.iid(), IListViewAutomationPeer.iid(), IListViewBaseAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.iid(), ISelectorAutomationPeer.iid(), Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.iid(), IItemsControlAutomationPeer.iid(), IItemsControlAutomationPeerOverrides.iid(), Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TreeViewListAutomationPeer>("TreeViewListAutomationPeer", ITreeViewListAutomationPeer.iid(), ancestors, { raw => TreeViewListAutomationPeer.fromAbiTake(raw) }, { raw => TreeViewListAutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITreeViewListAutomationPeer {
+        match (unsafe { query(ITreeViewListAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITreeViewListAutomationPeer(): ITreeViewListAutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIListViewAutomationPeer(): IListViewAutomationPeer {
+        match (unsafe { query<IListViewAutomationPeer>(IListViewAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIListViewBaseAutomationPeer(): IListViewBaseAutomationPeer {
+        match (unsafe { query<IListViewBaseAutomationPeer>(IListViewBaseAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDropTargetProvider(): Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider>(Microsoft_UI_Xaml_Automation_Provider.IDropTargetProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectorAutomationPeer(): ISelectorAutomationPeer {
+        match (unsafe { query<ISelectorAutomationPeer>(ISelectorAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISelectionProvider(): Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider>(Microsoft_UI_Xaml_Automation_Provider.ISelectionProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeer(): IItemsControlAutomationPeer {
+        match (unsafe { query<IItemsControlAutomationPeer>(IItemsControlAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlAutomationPeerOverrides(): IItemsControlAutomationPeerOverrides {
+        match (unsafe { query<IItemsControlAutomationPeerOverrides>(IItemsControlAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerProvider(): Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider {
+        match (unsafe { query<Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider>(Microsoft_UI_Xaml_Automation_Provider.IItemContainerProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithOwner(owner: Microsoft_UI_Xaml_Controls.TreeViewList, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): TreeViewListAutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.TreeViewList>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<TreeViewListAutomationPeer, ITreeViewListAutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithOwner(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TreeViewListAutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return TreeViewListAutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.TreeViewListAutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.TreeViewListAutomationPeer;{" + ITreeViewListAutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.TreeViewListAutomationPeer", TreeViewListAutomationPeer.signature(), ITreeViewListAutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: TreeViewListAutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TreeViewListAutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TreeViewListAutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TreeViewListAutomationPeer {
+        TreeViewListAutomationPeer.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.Peers.WebView2AutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_WebView2AutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+public class WebView2AutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<WebView2AutomationPeer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WebView2AutomationPeer {
+        WebView2AutomationPeer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WebView2AutomationPeer {
+        WebView2AutomationPeer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IWebView2AutomationPeer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WebView2AutomationPeer> {
+        let ancestors = [IWebView2AutomationPeer.iid(), IFrameworkElementAutomationPeer.iid(), IAutomationPeer.iid(), IAutomationPeerProtected.iid(), IAutomationPeerOverrides.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<WebView2AutomationPeer>("WebView2AutomationPeer", IWebView2AutomationPeer.iid(), ancestors, { raw => WebView2AutomationPeer.fromAbiTake(raw) }, { raw => WebView2AutomationPeer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IWebView2AutomationPeer {
+        match (unsafe { query(IWebView2AutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIWebView2AutomationPeer(): IWebView2AutomationPeer {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElementAutomationPeer(): IFrameworkElementAutomationPeer {
+        match (unsafe { query<IFrameworkElementAutomationPeer>(IFrameworkElementAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeer(): IAutomationPeer {
+        match (unsafe { query<IAutomationPeer>(IAutomationPeer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerProtected(): IAutomationPeerProtected {
+        match (unsafe { query<IAutomationPeerProtected>(IAutomationPeerProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAutomationPeerOverrides(): IAutomationPeerOverrides {
+        match (unsafe { query<IAutomationPeerOverrides>(IAutomationPeerOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(owner: Microsoft_UI_Xaml_Controls.WebView2, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): WebView2AutomationPeer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls.WebView2>(owner)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<WebView2AutomationPeer, IWebView2AutomationPeerFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<WebView2AutomationPeer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return WebView2AutomationPeer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.Peers.WebView2AutomationPeer"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.Peers.WebView2AutomationPeer;{" + IWebView2AutomationPeer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.Peers.WebView2AutomationPeer", WebView2AutomationPeer.signature(), IWebView2AutomationPeer.iid())
+    }
+
+    public static func intoWinrtHandle(value: WebView2AutomationPeer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): WebView2AutomationPeer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        WebView2AutomationPeer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): WebView2AutomationPeer {
+        WebView2AutomationPeer.viewOf(raw)
+    }
 }

@@ -207,6 +207,64 @@ public interface ILineStatics <: IInspectable {
     func Y2Property(value: CPointer<CPointer<Unit>>): Int32
 }
 
+// Microsoft.UI.Xaml.Shapes.IPath (synthetic:Microsoft_UI_Xaml_Shapes_IPath)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+@Interface["757d1cd8-0ec0-55c5-b400-66657e493e78", "Microsoft.UI.Xaml.Shapes.IPath", "Data.value=Com"]
+public interface IPath <: IInspectable {
+    func Data(value: CPointer<CPointer<Unit>>): Int32
+    func SetData(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Shapes.IPathFactory (synthetic:Microsoft_UI_Xaml_Shapes_IPathFactory)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+@Interface["5e82e4c9-7502-5b1f-b940-c3346a71362a", "Microsoft.UI.Xaml.Shapes.IPathFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IPathFactory <: IInspectable {
+    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Shapes.IPathStatics (synthetic:Microsoft_UI_Xaml_Shapes_IPathStatics)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+@Interface["2146d36f-721c-5b54-af7d-60f3adc4fbca", "Microsoft.UI.Xaml.Shapes.IPathStatics", "DataProperty.value=Com"]
+public interface IPathStatics <: IInspectable {
+    func DataProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Shapes.IPolygon (synthetic:Microsoft_UI_Xaml_Shapes_IPolygon)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+@Interface["fa126347-d1d4-54dd-b1a4-c35019397944", "Microsoft.UI.Xaml.Shapes.IPolygon", "Points.value=Com"]
+public interface IPolygon <: IInspectable {
+    func FillRule(value: CPointer<Int32>): Int32
+    func SetFillRule(value: Int32): Int32
+    func Points(value: CPointer<CPointer<Unit>>): Int32
+    func SetPoints(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Shapes.IPolygonStatics (synthetic:Microsoft_UI_Xaml_Shapes_IPolygonStatics)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+@Interface["85ddbada-9e37-5971-a9aa-dce31f9cf67a", "Microsoft.UI.Xaml.Shapes.IPolygonStatics", "FillRuleProperty.value=Com;PointsProperty.value=Com"]
+public interface IPolygonStatics <: IInspectable {
+    func FillRuleProperty(value: CPointer<CPointer<Unit>>): Int32
+    func PointsProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Shapes.IPolyline (synthetic:Microsoft_UI_Xaml_Shapes_IPolyline)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+@Interface["c7f0bec6-184c-5d96-8102-04dd211e100c", "Microsoft.UI.Xaml.Shapes.IPolyline", "Points.value=Com"]
+public interface IPolyline <: IInspectable {
+    func FillRule(value: CPointer<Int32>): Int32
+    func SetFillRule(value: Int32): Int32
+    func Points(value: CPointer<CPointer<Unit>>): Int32
+    func SetPoints(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Shapes.IPolylineStatics (synthetic:Microsoft_UI_Xaml_Shapes_IPolylineStatics)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+@Interface["48840fe7-d735-5080-9c6d-2862665cdda0", "Microsoft.UI.Xaml.Shapes.IPolylineStatics", "FillRuleProperty.value=Com;PointsProperty.value=Com"]
+public interface IPolylineStatics <: IInspectable {
+    func FillRuleProperty(value: CPointer<CPointer<Unit>>): Int32
+    func PointsProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
 // Microsoft.UI.Xaml.Shapes.IRectangle (synthetic:Microsoft_UI_Xaml_Shapes_IRectangle)
 @When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["bf7d30b9-152c-556e-9f10-d0b7eba4e52f", "Microsoft.UI.Xaml.Shapes.IRectangle"]
@@ -571,6 +629,701 @@ public class Line <: windows_interface.InterfaceWrapperBase & windows_interface.
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): Line {
         Line.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Shapes.Path (synthetic:Microsoft_UI_Xaml_Shapes_Path)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+public class Path <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Path> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Path {
+        Path(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Path {
+        Path(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPath.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Path> {
+        let ancestors = [IPath.iid(), IShape.iid(), Microsoft_UI_Xaml.IFrameworkElement.iid(), Microsoft_UI_Xaml.IFrameworkElementProtected.iid(), Microsoft_UI_Xaml.IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml.IUIElement.iid(), Microsoft_UI_Xaml.IUIElementProtected.iid(), Microsoft_UI_Xaml.IUIElementOverrides.iid(), Microsoft_UI_Composition.IAnimationObject.iid(), Microsoft_UI_Composition.IVisualElement.iid(), Microsoft_UI_Composition.IVisualElement2.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Path>("Path", IPath.iid(), ancestors, { raw => Path.fromAbiTake(raw) }, { raw => Path.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPath {
+        match (unsafe { query(IPath.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPath(): IPath {
+        defaultInterface()
+    }
+
+    public func asIShape(): IShape {
+        match (unsafe { query<IShape>(IShape.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml.IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElement>(Microsoft_UI_Xaml.IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml.IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElementProtected>(Microsoft_UI_Xaml.IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml.IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElementOverrides>(Microsoft_UI_Xaml.IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml.IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElement>(Microsoft_UI_Xaml.IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml.IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElementProtected>(Microsoft_UI_Xaml.IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml.IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElementOverrides>(Microsoft_UI_Xaml.IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition.IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition.IAnimationObject>(Microsoft_UI_Composition.IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition.IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition.IVisualElement>(Microsoft_UI_Composition.IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition.IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition.IVisualElement2>(Microsoft_UI_Composition.IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Data: Microsoft_UI_Xaml_Media.Geometry {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Data(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media.Geometry>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media.Geometry.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media.Geometry>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetData(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func DataProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Path, IPathStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DataProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Path {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Path, IPathFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Path>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Path.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Shapes.Path"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Shapes.Path;{" + IPath.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Shapes.Path", Path.signature(), IPath.iid())
+    }
+
+    public static func intoWinrtHandle(value: Path): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Path {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Path.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Path {
+        Path.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Shapes.Polygon (synthetic:Microsoft_UI_Xaml_Shapes_Polygon)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+public class Polygon <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Polygon> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Polygon {
+        Polygon(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Polygon {
+        Polygon(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPolygon.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Polygon> {
+        let ancestors = [IPolygon.iid(), IShape.iid(), Microsoft_UI_Xaml.IFrameworkElement.iid(), Microsoft_UI_Xaml.IFrameworkElementProtected.iid(), Microsoft_UI_Xaml.IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml.IUIElement.iid(), Microsoft_UI_Xaml.IUIElementProtected.iid(), Microsoft_UI_Xaml.IUIElementOverrides.iid(), Microsoft_UI_Composition.IAnimationObject.iid(), Microsoft_UI_Composition.IVisualElement.iid(), Microsoft_UI_Composition.IVisualElement2.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Polygon>("Polygon", IPolygon.iid(), ancestors, { raw => Polygon.fromAbiTake(raw) }, { raw => Polygon.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPolygon {
+        match (unsafe { query(IPolygon.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPolygon(): IPolygon {
+        defaultInterface()
+    }
+
+    public func asIShape(): IShape {
+        match (unsafe { query<IShape>(IShape.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml.IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElement>(Microsoft_UI_Xaml.IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml.IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElementProtected>(Microsoft_UI_Xaml.IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml.IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElementOverrides>(Microsoft_UI_Xaml.IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml.IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElement>(Microsoft_UI_Xaml.IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml.IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElementProtected>(Microsoft_UI_Xaml.IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml.IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElementOverrides>(Microsoft_UI_Xaml.IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition.IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition.IAnimationObject>(Microsoft_UI_Composition.IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition.IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition.IVisualElement>(Microsoft_UI_Composition.IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition.IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition.IVisualElement2>(Microsoft_UI_Composition.IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop FillRule: Microsoft_UI_Xaml_Media.FillRule {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FillRule(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media.FillRule(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFillRule(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Points: Microsoft_UI_Xaml_Media.PointCollection {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Points(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media.PointCollection>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media.PointCollection.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media.PointCollection>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetPoints(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): Polygon {
+        var created__: Option<Polygon> = Option<Polygon>.None
+        try (factory__ = windows_core.factory<Polygon, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Polygon>(Polygon.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce Polygon")
+        }
+    }
+
+    public static func FillRuleProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Polygon, IPolygonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FillRuleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PointsProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Polygon, IPolygonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PointsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Shapes.Polygon"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Shapes.Polygon;{" + IPolygon.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Shapes.Polygon", Polygon.signature(), IPolygon.iid())
+    }
+
+    public static func intoWinrtHandle(value: Polygon): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Polygon {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Polygon.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Polygon {
+        Polygon.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Shapes.Polyline (synthetic:Microsoft_UI_Xaml_Shapes_Polyline)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
+public class Polyline <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Polyline> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Polyline {
+        Polyline(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Polyline {
+        Polyline(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPolyline.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Polyline> {
+        let ancestors = [IPolyline.iid(), IShape.iid(), Microsoft_UI_Xaml.IFrameworkElement.iid(), Microsoft_UI_Xaml.IFrameworkElementProtected.iid(), Microsoft_UI_Xaml.IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml.IUIElement.iid(), Microsoft_UI_Xaml.IUIElementProtected.iid(), Microsoft_UI_Xaml.IUIElementOverrides.iid(), Microsoft_UI_Composition.IAnimationObject.iid(), Microsoft_UI_Composition.IVisualElement.iid(), Microsoft_UI_Composition.IVisualElement2.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Polyline>("Polyline", IPolyline.iid(), ancestors, { raw => Polyline.fromAbiTake(raw) }, { raw => Polyline.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPolyline {
+        match (unsafe { query(IPolyline.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPolyline(): IPolyline {
+        defaultInterface()
+    }
+
+    public func asIShape(): IShape {
+        match (unsafe { query<IShape>(IShape.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml.IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElement>(Microsoft_UI_Xaml.IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml.IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElementProtected>(Microsoft_UI_Xaml.IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml.IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml.IFrameworkElementOverrides>(Microsoft_UI_Xaml.IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml.IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElement>(Microsoft_UI_Xaml.IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml.IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElementProtected>(Microsoft_UI_Xaml.IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml.IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml.IUIElementOverrides>(Microsoft_UI_Xaml.IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition.IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition.IAnimationObject>(Microsoft_UI_Composition.IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition.IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition.IVisualElement>(Microsoft_UI_Composition.IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition.IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition.IVisualElement2>(Microsoft_UI_Composition.IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop FillRule: Microsoft_UI_Xaml_Media.FillRule {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FillRule(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media.FillRule(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFillRule(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Points: Microsoft_UI_Xaml_Media.PointCollection {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Points(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media.PointCollection>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media.PointCollection.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media.PointCollection>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetPoints(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): Polyline {
+        var created__: Option<Polyline> = Option<Polyline>.None
+        try (factory__ = windows_core.factory<Polyline, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Polyline>(Polyline.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce Polyline")
+        }
+    }
+
+    public static func FillRuleProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Polyline, IPolylineStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FillRuleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PointsProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Polyline, IPolylineStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PointsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Shapes.Polyline"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Shapes.Polyline;{" + IPolyline.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Shapes.Polyline", Polyline.signature(), IPolyline.iid())
+    }
+
+    public static func intoWinrtHandle(value: Polyline): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Polyline {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Polyline.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Polyline {
+        Polyline.viewOf(raw)
     }
 }
 

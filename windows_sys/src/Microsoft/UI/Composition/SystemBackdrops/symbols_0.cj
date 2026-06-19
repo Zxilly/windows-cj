@@ -9,10 +9,316 @@ import windows_interface.macros.Interface
 
 @When[Microsoft_Foundation == "on"]
 import windows_sys.Microsoft.Foundation as Microsoft_Foundation
+@When[Microsoft_UI == "on"]
+import windows_sys.Microsoft.UI as Microsoft_UI
+@When[Microsoft_UI_Composition == "on"]
+import windows_sys.Microsoft.UI.Composition as Microsoft_UI_Composition
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
 @When[Windows_UI == "on"]
 import windows_sys.UI as Windows_UI
+@When[Windows_UI_Composition == "on"]
+import windows_sys.UI.Composition as Windows_UI_Composition
+@When[Windows_UI_Core == "on"]
+import windows_sys.UI.Core as Windows_UI_Core
+
+// Microsoft.UI.Composition.SystemBackdrops.DesktopAcrylicController (synthetic:Microsoft_UI_Composition_SystemBackdrops_DesktopAcrylicController)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public class DesktopAcrylicController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopAcrylicController> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DesktopAcrylicController {
+        DesktopAcrylicController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DesktopAcrylicController {
+        DesktopAcrylicController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDesktopAcrylicController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DesktopAcrylicController> {
+        let ancestors = [IDesktopAcrylicController.iid(), IDesktopAcrylicController2.iid(), IDesktopAcrylicController3.iid(), ISystemBackdropController.iid(), Windows_Foundation.IClosable.iid(), ISystemBackdropControllerWithTargets.iid(), Microsoft_UI.IClosableNotifier.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DesktopAcrylicController>("DesktopAcrylicController", IDesktopAcrylicController.iid(), ancestors, { raw => DesktopAcrylicController.fromAbiTake(raw) }, { raw => DesktopAcrylicController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDesktopAcrylicController {
+        match (unsafe { query(IDesktopAcrylicController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDesktopAcrylicController(): IDesktopAcrylicController {
+        defaultInterface()
+    }
+
+    public func asIDesktopAcrylicController2(): IDesktopAcrylicController2 {
+        match (unsafe { query<IDesktopAcrylicController2>(IDesktopAcrylicController2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDesktopAcrylicController3(): IDesktopAcrylicController3 {
+        match (unsafe { query<IDesktopAcrylicController3>(IDesktopAcrylicController3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISystemBackdropController(): ISystemBackdropController {
+        match (unsafe { query<ISystemBackdropController>(ISystemBackdropController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISystemBackdropControllerWithTargets(): ISystemBackdropControllerWithTargets {
+        match (unsafe { query<ISystemBackdropControllerWithTargets>(ISystemBackdropControllerWithTargets.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosableNotifier(): Microsoft_UI.IClosableNotifier {
+        match (unsafe { query<Microsoft_UI.IClosableNotifier>(Microsoft_UI.IClosableNotifier.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop FallbackColor: Windows_UI.Color {
+        get() {
+            var result__ = Windows_UI.Color()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FallbackColor(CPointer<Windows_UI.Color>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFallbackColor(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LuminosityOpacity: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LuminosityOpacity(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLuminosityOpacity(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TintColor: Windows_UI.Color {
+        get() {
+            var result__ = Windows_UI.Color()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TintColor(CPointer<Windows_UI.Color>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTintColor(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TintOpacity: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TintOpacity(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTintOpacity(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): DesktopAcrylicController {
+        var created__: Option<DesktopAcrylicController> = Option<DesktopAcrylicController>.None
+        try (factory__ = windows_core.factory<DesktopAcrylicController, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<DesktopAcrylicController>(DesktopAcrylicController.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce DesktopAcrylicController")
+        }
+    }
+
+    public static func IsSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DesktopAcrylicController, IDesktopAcrylicControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Composition.SystemBackdrops.DesktopAcrylicController"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Composition.SystemBackdrops.DesktopAcrylicController;{" + IDesktopAcrylicController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Composition.SystemBackdrops.DesktopAcrylicController", DesktopAcrylicController.signature(), IDesktopAcrylicController.iid())
+    }
+
+    public static func intoWinrtHandle(value: DesktopAcrylicController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DesktopAcrylicController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DesktopAcrylicController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DesktopAcrylicController {
+        DesktopAcrylicController.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.DesktopAcrylicKind (synthetic:Microsoft_UI_Composition_SystemBackdrops_DesktopAcrylicKind)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public struct DesktopAcrylicKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const DesktopAcrylicKind_Default = DesktopAcrylicKind(0)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const DesktopAcrylicKind_Base = DesktopAcrylicKind(1)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const DesktopAcrylicKind_Thin = DesktopAcrylicKind(2)
+
+// Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicController (synthetic:Microsoft_UI_Composition_SystemBackdrops_IDesktopAcrylicController)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["7c20a6af-8eb3-5f08-bdfc-6d35e35dfe45", "Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicController"]
+public interface IDesktopAcrylicController <: IInspectable {
+    func FallbackColor(value: CPointer<Windows_UI.Color>): Int32
+    func SetFallbackColor(value: Windows_UI.Color): Int32
+    func LuminosityOpacity(value: CPointer<Float32>): Int32
+    func SetLuminosityOpacity(value: Float32): Int32
+    func TintColor(value: CPointer<Windows_UI.Color>): Int32
+    func SetTintColor(value: Windows_UI.Color): Int32
+    func TintOpacity(value: CPointer<Float32>): Int32
+    func SetTintOpacity(value: Float32): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicController2 (synthetic:Microsoft_UI_Composition_SystemBackdrops_IDesktopAcrylicController2)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["88e0a368-dfc7-5971-a50b-40df5aa5f5c2", "Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicController2"]
+public interface IDesktopAcrylicController2 <: IInspectable {
+    func ResetProperties(): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicController3 (synthetic:Microsoft_UI_Composition_SystemBackdrops_IDesktopAcrylicController3)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["30d917e6-02d3-59ca-b440-bf9d2e7cc140", "Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicController3"]
+public interface IDesktopAcrylicController3 <: IInspectable {
+    func Kind(value: CPointer<Int32>): Int32
+    func SetKind(value: Int32): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicControllerStatics (synthetic:Microsoft_UI_Composition_SystemBackdrops_IDesktopAcrylicControllerStatics)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["a9e8f790-79ef-5416-9b67-6bcfe867c8b7", "Microsoft.UI.Composition.SystemBackdrops.IDesktopAcrylicControllerStatics"]
+public interface IDesktopAcrylicControllerStatics <: IInspectable {
+    func IsSupported(result: CPointer<Bool>): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.IMicaController (synthetic:Microsoft_UI_Composition_SystemBackdrops_IMicaController)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["2de996a9-0a2a-5889-a89c-1f84060a8cab", "Microsoft.UI.Composition.SystemBackdrops.IMicaController"]
+public interface IMicaController <: IInspectable {
+    func FallbackColor(value: CPointer<Windows_UI.Color>): Int32
+    func SetFallbackColor(value: Windows_UI.Color): Int32
+    func LuminosityOpacity(value: CPointer<Float32>): Int32
+    func SetLuminosityOpacity(value: Float32): Int32
+    func TintColor(value: CPointer<Windows_UI.Color>): Int32
+    func SetTintColor(value: Windows_UI.Color): Int32
+    func TintOpacity(value: CPointer<Float32>): Int32
+    func SetTintOpacity(value: Float32): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.IMicaController2 (synthetic:Microsoft_UI_Composition_SystemBackdrops_IMicaController2)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["f1ed4a52-d9ca-506e-9586-caaefd3aa971", "Microsoft.UI.Composition.SystemBackdrops.IMicaController2"]
+public interface IMicaController2 <: IInspectable {
+    func Kind(value: CPointer<Int32>): Int32
+    func SetKind(value: Int32): Int32
+    func ResetProperties(): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.IMicaControllerStatics (synthetic:Microsoft_UI_Composition_SystemBackdrops_IMicaControllerStatics)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["7d85d834-d514-5250-b7c4-0b7850d1efdc", "Microsoft.UI.Composition.SystemBackdrops.IMicaControllerStatics"]
+public interface IMicaControllerStatics <: IInspectable {
+    func IsSupported(result: CPointer<Bool>): Int32
+}
 
 // Microsoft.UI.Composition.SystemBackdrops.ISystemBackdropConfiguration (synthetic:Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfiguration)
 @When[Microsoft_UI_Composition_SystemBackdrops == "on"]
@@ -27,6 +333,250 @@ public interface ISystemBackdropConfiguration <: IInspectable {
     func Theme(value: CPointer<Int32>): Int32
     func SetTheme(value: Int32): Int32
 }
+
+// Microsoft.UI.Composition.SystemBackdrops.ISystemBackdropController (synthetic:Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropController)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["5632d76c-0b74-5b52-aa33-80262068aeb2", "Microsoft.UI.Composition.SystemBackdrops.ISystemBackdropController"]
+public interface ISystemBackdropController <: IInspectable {
+    func SetTargetWithWindowId(windowId: Microsoft_UI.WindowId, desktopWindowTarget: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func SetTargetWithCoreWindow(coreWindow: CPointer<Unit>, compositionTarget: CPointer<Unit>, result: CPointer<Bool>): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.ISystemBackdropControllerWithTargets (synthetic:Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropControllerWithTargets)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+@Interface["9c56fe7c-98eb-5f89-ad97-dad57fc30c8c", "Microsoft.UI.Composition.SystemBackdrops.ISystemBackdropControllerWithTargets"]
+public interface ISystemBackdropControllerWithTargets <: IInspectable {
+    func State(value: CPointer<Int32>): Int32
+    func AddSystemBackdropTarget(systemBackdropTarget: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func RemoveAllSystemBackdropTargets(): Int32
+    func RemoveSystemBackdropTarget(systemBackdropTarget: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func SetSystemBackdropConfiguration(configuration: CPointer<Unit>): Int32
+    func StateChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveStateChanged(token: Int64): Int32
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.MicaController (synthetic:Microsoft_UI_Composition_SystemBackdrops_MicaController)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public class MicaController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MicaController> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MicaController {
+        MicaController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MicaController {
+        MicaController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMicaController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MicaController> {
+        let ancestors = [IMicaController.iid(), IMicaController2.iid(), ISystemBackdropController.iid(), Windows_Foundation.IClosable.iid(), ISystemBackdropControllerWithTargets.iid(), Microsoft_UI.IClosableNotifier.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MicaController>("MicaController", IMicaController.iid(), ancestors, { raw => MicaController.fromAbiTake(raw) }, { raw => MicaController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMicaController {
+        match (unsafe { query(IMicaController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMicaController(): IMicaController {
+        defaultInterface()
+    }
+
+    public func asIMicaController2(): IMicaController2 {
+        match (unsafe { query<IMicaController2>(IMicaController2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISystemBackdropController(): ISystemBackdropController {
+        match (unsafe { query<ISystemBackdropController>(ISystemBackdropController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISystemBackdropControllerWithTargets(): ISystemBackdropControllerWithTargets {
+        match (unsafe { query<ISystemBackdropControllerWithTargets>(ISystemBackdropControllerWithTargets.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosableNotifier(): Microsoft_UI.IClosableNotifier {
+        match (unsafe { query<Microsoft_UI.IClosableNotifier>(Microsoft_UI.IClosableNotifier.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop FallbackColor: Windows_UI.Color {
+        get() {
+            var result__ = Windows_UI.Color()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FallbackColor(CPointer<Windows_UI.Color>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFallbackColor(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LuminosityOpacity: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LuminosityOpacity(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLuminosityOpacity(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TintColor: Windows_UI.Color {
+        get() {
+            var result__ = Windows_UI.Color()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TintColor(CPointer<Windows_UI.Color>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTintColor(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TintOpacity: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TintOpacity(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTintOpacity(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): MicaController {
+        var created__: Option<MicaController> = Option<MicaController>.None
+        try (factory__ = windows_core.factory<MicaController, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<MicaController>(MicaController.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce MicaController")
+        }
+    }
+
+    public static func IsSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<MicaController, IMicaControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Composition.SystemBackdrops.MicaController"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Composition.SystemBackdrops.MicaController;{" + IMicaController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Composition.SystemBackdrops.MicaController", MicaController.signature(), IMicaController.iid())
+    }
+
+    public static func intoWinrtHandle(value: MicaController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MicaController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MicaController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MicaController {
+        MicaController.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Composition.SystemBackdrops.MicaKind (synthetic:Microsoft_UI_Composition_SystemBackdrops_MicaKind)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public struct MicaKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const MicaKind_Base = MicaKind(0)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const MicaKind_BaseAlt = MicaKind(1)
 
 // Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration (synthetic:Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration)
 @When[Microsoft_UI_Composition_SystemBackdrops == "on"]
@@ -71,7 +621,7 @@ public class SystemBackdropConfiguration <: windows_interface.InterfaceWrapperBa
         defaultInterface()
     }
 
-    public mut prop HighContrastBackgroundColor: windows_interface.IInspectable {
+    public mut prop HighContrastBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -79,15 +629,15 @@ public class SystemBackdropConfiguration <: windows_interface.InterfaceWrapperBa
                 hr__ = unsafe { interface__.HighContrastBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetHighContrastBackgroundColor(__argBorrow0.asRaw()) }
                 }
@@ -196,20 +746,38 @@ public class SystemBackdropConfiguration <: windows_interface.InterfaceWrapperBa
     }
 }
 
-// Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme (synthetic:Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme)
+// Microsoft.UI.Composition.SystemBackdrops.SystemBackdropState (synthetic:Microsoft_UI_Composition_SystemBackdrops_SystemBackdropState)
 @When[Microsoft_UI_Composition_SystemBackdrops == "on"]
-public struct SystemBackdropTheme {
+public struct SystemBackdropState {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Composition_SystemBackdrops == "on"]
-public let SystemBackdropTheme_Default = SystemBackdropTheme(0)
+public const SystemBackdropState_Active = SystemBackdropState(0)
 @When[Microsoft_UI_Composition_SystemBackdrops == "on"]
-public let SystemBackdropTheme_Light = SystemBackdropTheme(1)
+public const SystemBackdropState_Fallback = SystemBackdropState(1)
 @When[Microsoft_UI_Composition_SystemBackdrops == "on"]
-public let SystemBackdropTheme_Dark = SystemBackdropTheme(2)
+public const SystemBackdropState_HighContrast = SystemBackdropState(2)
+
+// Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme (synthetic:Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public struct SystemBackdropTheme {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const SystemBackdropTheme_Default = SystemBackdropTheme(0)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const SystemBackdropTheme_Light = SystemBackdropTheme(1)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
+public const SystemBackdropTheme_Dark = SystemBackdropTheme(2)

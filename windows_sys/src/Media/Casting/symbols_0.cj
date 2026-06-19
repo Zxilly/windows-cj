@@ -7,8 +7,1041 @@ import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+@When[Windows_Devices_Enumeration == "on"]
+import windows_sys.Devices.Enumeration as Windows_Devices_Enumeration
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_Storage_Streams == "on"]
+import windows_sys.Storage.Streams as Windows_Storage_Streams
+@When[Windows_UI_Popups == "on"]
+import windows_sys.UI.Popups as Windows_UI_Popups
+
+// Windows.Media.Casting.CastingConnection (synthetic:Windows_Media_Casting_CastingConnection)
+@When[Windows_Media_Casting == "on"]
+public class CastingConnection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CastingConnection> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CastingConnection {
+        CastingConnection(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CastingConnection {
+        CastingConnection(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICastingConnection.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CastingConnection> {
+        let ancestors = [ICastingConnection.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CastingConnection>("CastingConnection", ICastingConnection.iid(), ancestors, { raw => CastingConnection.fromAbiTake(raw) }, { raw => CastingConnection.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICastingConnection {
+        match (unsafe { query(ICastingConnection.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICastingConnection(): ICastingConnection {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Device: CastingDevice {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Device(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CastingDevice>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CastingDevice.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop Source: CastingSource {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Source(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CastingSource>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CastingSource.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<CastingSource>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSource(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop State: CastingConnectionState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.State(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return CastingConnectionState(result__)
+        }
+    }
+
+    public func addErrorOccurred(handler: Windows_Foundation.TypedEventHandler<CastingConnection, CastingConnectionErrorOccurredEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CastingConnection, CastingConnectionErrorOccurredEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ErrorOccurred(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeErrorOccurred(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveErrorOccurred(token) }
+        }
+        hr__.check()
+    }
+
+    public func addStateChanged(handler: Windows_Foundation.TypedEventHandler<CastingConnection, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CastingConnection, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StateChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeStateChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveStateChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func RequestStartCastingAsync(value: CastingSource): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<CastingSource>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RequestStartCastingAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DisconnectAsync(): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DisconnectAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Media.Casting.CastingConnection"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Media.Casting.CastingConnection;{" + ICastingConnection.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Media.Casting.CastingConnection", CastingConnection.signature(), ICastingConnection.iid())
+    }
+
+    public static func intoWinrtHandle(value: CastingConnection): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CastingConnection {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CastingConnection.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CastingConnection {
+        CastingConnection.viewOf(raw)
+    }
+}
+
+// Windows.Media.Casting.CastingConnectionErrorOccurredEventArgs (synthetic:Windows_Media_Casting_CastingConnectionErrorOccurredEventArgs)
+@When[Windows_Media_Casting == "on"]
+public class CastingConnectionErrorOccurredEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CastingConnectionErrorOccurredEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CastingConnectionErrorOccurredEventArgs {
+        CastingConnectionErrorOccurredEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CastingConnectionErrorOccurredEventArgs {
+        CastingConnectionErrorOccurredEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICastingConnectionErrorOccurredEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CastingConnectionErrorOccurredEventArgs> {
+        let ancestors = [ICastingConnectionErrorOccurredEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CastingConnectionErrorOccurredEventArgs>("CastingConnectionErrorOccurredEventArgs", ICastingConnectionErrorOccurredEventArgs.iid(), ancestors, { raw => CastingConnectionErrorOccurredEventArgs.fromAbiTake(raw) }, { raw => CastingConnectionErrorOccurredEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICastingConnectionErrorOccurredEventArgs {
+        match (unsafe { query(ICastingConnectionErrorOccurredEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICastingConnectionErrorOccurredEventArgs(): ICastingConnectionErrorOccurredEventArgs {
+        defaultInterface()
+    }
+
+    public prop ErrorStatus: CastingConnectionErrorStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ErrorStatus(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return CastingConnectionErrorStatus(result__)
+        }
+    }
+
+    public prop Message: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Message(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Media.Casting.CastingConnectionErrorOccurredEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Media.Casting.CastingConnectionErrorOccurredEventArgs;{" + ICastingConnectionErrorOccurredEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Media.Casting.CastingConnectionErrorOccurredEventArgs", CastingConnectionErrorOccurredEventArgs.signature(), ICastingConnectionErrorOccurredEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: CastingConnectionErrorOccurredEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CastingConnectionErrorOccurredEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CastingConnectionErrorOccurredEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CastingConnectionErrorOccurredEventArgs {
+        CastingConnectionErrorOccurredEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.Media.Casting.CastingConnectionErrorStatus (synthetic:Windows_Media_Casting_CastingConnectionErrorStatus)
+@When[Windows_Media_Casting == "on"]
+public struct CastingConnectionErrorStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionErrorStatus_Succeeded = CastingConnectionErrorStatus(0)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionErrorStatus_DeviceDidNotRespond = CastingConnectionErrorStatus(1)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionErrorStatus_DeviceError = CastingConnectionErrorStatus(2)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionErrorStatus_DeviceLocked = CastingConnectionErrorStatus(3)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionErrorStatus_ProtectedPlaybackFailed = CastingConnectionErrorStatus(4)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionErrorStatus_InvalidCastingSource = CastingConnectionErrorStatus(5)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionErrorStatus_Unknown = CastingConnectionErrorStatus(6)
+
+// Windows.Media.Casting.CastingConnectionState (synthetic:Windows_Media_Casting_CastingConnectionState)
+@When[Windows_Media_Casting == "on"]
+public struct CastingConnectionState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionState_Disconnected = CastingConnectionState(0)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionState_Connected = CastingConnectionState(1)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionState_Rendering = CastingConnectionState(2)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionState_Disconnecting = CastingConnectionState(3)
+@When[Windows_Media_Casting == "on"]
+public const CastingConnectionState_Connecting = CastingConnectionState(4)
+
+// Windows.Media.Casting.CastingDevice (synthetic:Windows_Media_Casting_CastingDevice)
+@When[Windows_Media_Casting == "on"]
+public class CastingDevice <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CastingDevice> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CastingDevice {
+        CastingDevice(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CastingDevice {
+        CastingDevice(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICastingDevice.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CastingDevice> {
+        let ancestors = [ICastingDevice.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CastingDevice>("CastingDevice", ICastingDevice.iid(), ancestors, { raw => CastingDevice.fromAbiTake(raw) }, { raw => CastingDevice.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICastingDevice {
+        match (unsafe { query(ICastingDevice.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICastingDevice(): ICastingDevice {
+        defaultInterface()
+    }
+
+    public prop FriendlyName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FriendlyName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Icon: Windows_Storage_Streams.IRandomAccessStreamWithContentType {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Storage_Streams.IRandomAccessStreamWithContentType>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Storage_Streams.IRandomAccessStreamWithContentType.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Id: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func GetSupportedCastingPlaybackTypesAsync(): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetSupportedCastingPlaybackTypesAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateCastingConnection(): CastingConnection {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CreateCastingConnection(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CastingConnection>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CastingConnection.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDeviceSelector(type_: CastingPlaybackTypes): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CastingDevice, ICastingDeviceStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetDeviceSelector(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func GetDeviceSelectorFromCastingSourceAsync(castingSource: CastingSource): Windows_Foundation.IAsyncOperation<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<CastingSource>(castingSource)) {
+            try (factory__ = windows_core.factory<CastingDevice, ICastingDeviceStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetDeviceSelectorFromCastingSourceAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FromIdAsync(value: windows_core.HString): Windows_Foundation.IAsyncOperation<CastingDevice> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (factory__ = windows_core.factory<CastingDevice, ICastingDeviceStatics>().unwrap()) {
+                hr__ = unsafe { factory__.FromIdAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<CastingDevice>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<CastingDevice>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DeviceInfoSupportsCastingAsync(device: Windows_Devices_Enumeration.DeviceInformation): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Devices_Enumeration.DeviceInformation>(device)) {
+            try (factory__ = windows_core.factory<CastingDevice, ICastingDeviceStatics>().unwrap()) {
+                hr__ = unsafe { factory__.DeviceInfoSupportsCastingAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Media.Casting.CastingDevice"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Media.Casting.CastingDevice;{" + ICastingDevice.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Media.Casting.CastingDevice", CastingDevice.signature(), ICastingDevice.iid())
+    }
+
+    public static func intoWinrtHandle(value: CastingDevice): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CastingDevice {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CastingDevice.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CastingDevice {
+        CastingDevice.viewOf(raw)
+    }
+}
+
+// Windows.Media.Casting.CastingDevicePicker (synthetic:Windows_Media_Casting_CastingDevicePicker)
+@When[Windows_Media_Casting == "on"]
+public class CastingDevicePicker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CastingDevicePicker> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CastingDevicePicker {
+        CastingDevicePicker(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CastingDevicePicker {
+        CastingDevicePicker(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICastingDevicePicker.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CastingDevicePicker> {
+        let ancestors = [ICastingDevicePicker.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CastingDevicePicker>("CastingDevicePicker", ICastingDevicePicker.iid(), ancestors, { raw => CastingDevicePicker.fromAbiTake(raw) }, { raw => CastingDevicePicker.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICastingDevicePicker {
+        match (unsafe { query(ICastingDevicePicker.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICastingDevicePicker(): ICastingDevicePicker {
+        defaultInterface()
+    }
+
+    public prop Appearance: Windows_Devices_Enumeration.DevicePickerAppearance {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Appearance(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Devices_Enumeration.DevicePickerAppearance>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Devices_Enumeration.DevicePickerAppearance.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Filter: CastingDevicePickerFilter {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Filter(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CastingDevicePickerFilter>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CastingDevicePickerFilter.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func addCastingDevicePickerDismissed(handler: Windows_Foundation.TypedEventHandler<CastingDevicePicker, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CastingDevicePicker, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CastingDevicePickerDismissed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeCastingDevicePickerDismissed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveCastingDevicePickerDismissed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addCastingDeviceSelected(handler: Windows_Foundation.TypedEventHandler<CastingDevicePicker, CastingDeviceSelectedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<CastingDevicePicker, CastingDeviceSelectedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CastingDeviceSelected(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeCastingDeviceSelected(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveCastingDeviceSelected(token) }
+        }
+        hr__.check()
+    }
+
+    public func Show(selection: Windows_Foundation.Rect): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Show(selection) }
+        }
+        hr__.check()
+    }
+
+    public func ShowWithPlacement(selection: Windows_Foundation.Rect, preferredPlacement: Windows_UI_Popups.Placement): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ShowWithPlacement(selection, preferredPlacement.value) }
+        }
+        hr__.check()
+    }
+
+    public func Hide(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Hide() }
+        }
+        hr__.check()
+    }
+
+    public static func new(): CastingDevicePicker {
+        var created__: Option<CastingDevicePicker> = Option<CastingDevicePicker>.None
+        try (factory__ = windows_core.factory<CastingDevicePicker, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<CastingDevicePicker>(CastingDevicePicker.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce CastingDevicePicker")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Media.Casting.CastingDevicePicker"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Media.Casting.CastingDevicePicker;{" + ICastingDevicePicker.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Media.Casting.CastingDevicePicker", CastingDevicePicker.signature(), ICastingDevicePicker.iid())
+    }
+
+    public static func intoWinrtHandle(value: CastingDevicePicker): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CastingDevicePicker {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CastingDevicePicker.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CastingDevicePicker {
+        CastingDevicePicker.viewOf(raw)
+    }
+}
+
+// Windows.Media.Casting.CastingDevicePickerFilter (synthetic:Windows_Media_Casting_CastingDevicePickerFilter)
+@When[Windows_Media_Casting == "on"]
+public class CastingDevicePickerFilter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CastingDevicePickerFilter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CastingDevicePickerFilter {
+        CastingDevicePickerFilter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CastingDevicePickerFilter {
+        CastingDevicePickerFilter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICastingDevicePickerFilter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CastingDevicePickerFilter> {
+        let ancestors = [ICastingDevicePickerFilter.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CastingDevicePickerFilter>("CastingDevicePickerFilter", ICastingDevicePickerFilter.iid(), ancestors, { raw => CastingDevicePickerFilter.fromAbiTake(raw) }, { raw => CastingDevicePickerFilter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICastingDevicePickerFilter {
+        match (unsafe { query(ICastingDevicePickerFilter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICastingDevicePickerFilter(): ICastingDevicePickerFilter {
+        defaultInterface()
+    }
+
+    public prop SupportedCastingSources: Windows_Foundation_Collections.IVector<CastingSource> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SupportedCastingSources(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<CastingSource>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<CastingSource>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop SupportsAudio: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SupportsAudio(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSupportsAudio(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SupportsPictures: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SupportsPictures(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSupportsPictures(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SupportsVideo: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SupportsVideo(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSupportsVideo(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Media.Casting.CastingDevicePickerFilter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Media.Casting.CastingDevicePickerFilter;{" + ICastingDevicePickerFilter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Media.Casting.CastingDevicePickerFilter", CastingDevicePickerFilter.signature(), ICastingDevicePickerFilter.iid())
+    }
+
+    public static func intoWinrtHandle(value: CastingDevicePickerFilter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CastingDevicePickerFilter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CastingDevicePickerFilter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CastingDevicePickerFilter {
+        CastingDevicePickerFilter.viewOf(raw)
+    }
+}
+
+// Windows.Media.Casting.CastingDeviceSelectedEventArgs (synthetic:Windows_Media_Casting_CastingDeviceSelectedEventArgs)
+@When[Windows_Media_Casting == "on"]
+public class CastingDeviceSelectedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CastingDeviceSelectedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CastingDeviceSelectedEventArgs {
+        CastingDeviceSelectedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CastingDeviceSelectedEventArgs {
+        CastingDeviceSelectedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICastingDeviceSelectedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CastingDeviceSelectedEventArgs> {
+        let ancestors = [ICastingDeviceSelectedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CastingDeviceSelectedEventArgs>("CastingDeviceSelectedEventArgs", ICastingDeviceSelectedEventArgs.iid(), ancestors, { raw => CastingDeviceSelectedEventArgs.fromAbiTake(raw) }, { raw => CastingDeviceSelectedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICastingDeviceSelectedEventArgs {
+        match (unsafe { query(ICastingDeviceSelectedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICastingDeviceSelectedEventArgs(): ICastingDeviceSelectedEventArgs {
+        defaultInterface()
+    }
+
+    public prop SelectedCastingDevice: CastingDevice {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedCastingDevice(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<CastingDevice>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return CastingDevice.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Media.Casting.CastingDeviceSelectedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Media.Casting.CastingDeviceSelectedEventArgs;{" + ICastingDeviceSelectedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Media.Casting.CastingDeviceSelectedEventArgs", CastingDeviceSelectedEventArgs.signature(), ICastingDeviceSelectedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: CastingDeviceSelectedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CastingDeviceSelectedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CastingDeviceSelectedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CastingDeviceSelectedEventArgs {
+        CastingDeviceSelectedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.Media.Casting.CastingPlaybackTypes (synthetic:Windows_Media_Casting_CastingPlaybackTypes)
+@When[Windows_Media_Casting == "on"]
+public struct CastingPlaybackTypes {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: CastingPlaybackTypes): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: CastingPlaybackTypes): CastingPlaybackTypes {
+        return CastingPlaybackTypes(value | other.value)
+    }
+    public operator func &(other: CastingPlaybackTypes): CastingPlaybackTypes {
+        return CastingPlaybackTypes(value & other.value)
+    }
+    public operator func ^(other: CastingPlaybackTypes): CastingPlaybackTypes {
+        return CastingPlaybackTypes(value ^ other.value)
+    }
+    public operator func !(): CastingPlaybackTypes {
+        return CastingPlaybackTypes(!value)
+    }
+}
+@When[Windows_Media_Casting == "on"]
+public const CastingPlaybackTypes_None = CastingPlaybackTypes(0)
+@When[Windows_Media_Casting == "on"]
+public const CastingPlaybackTypes_Audio = CastingPlaybackTypes(1)
+@When[Windows_Media_Casting == "on"]
+public const CastingPlaybackTypes_Video = CastingPlaybackTypes(2)
+@When[Windows_Media_Casting == "on"]
+public const CastingPlaybackTypes_Picture = CastingPlaybackTypes(4)
 
 // Windows.Media.Casting.CastingSource (synthetic:Windows_Media_Casting_CastingSource)
 @When[Windows_Media_Casting == "on"]
@@ -108,6 +1141,86 @@ public class CastingSource <: windows_interface.InterfaceWrapperBase & windows_i
     public static func viewWinrtHandle(raw: CPointer<Unit>): CastingSource {
         CastingSource.viewOf(raw)
     }
+}
+
+// Windows.Media.Casting.ICastingConnection (synthetic:Windows_Media_Casting_ICastingConnection)
+@When[Windows_Media_Casting == "on"]
+@Interface["cd951653-c2f1-4498-8b78-5fb4cd3640dd", "Windows.Media.Casting.ICastingConnection", "Device.value=Com;Source.value=Com;RequestStartCastingAsync.operation=Com;DisconnectAsync.operation=Com"]
+public interface ICastingConnection <: IInspectable {
+    func State(value: CPointer<Int32>): Int32
+    func Device(value: CPointer<CPointer<Unit>>): Int32
+    func Source(value: CPointer<CPointer<Unit>>): Int32
+    func SetSource(value: CPointer<Unit>): Int32
+    func StateChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveStateChanged(token: Int64): Int32
+    func ErrorOccurred(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveErrorOccurred(token: Int64): Int32
+    func RequestStartCastingAsync(value: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func DisconnectAsync(operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Media.Casting.ICastingConnectionErrorOccurredEventArgs (synthetic:Windows_Media_Casting_ICastingConnectionErrorOccurredEventArgs)
+@When[Windows_Media_Casting == "on"]
+@Interface["a7fb3c69-8719-4f00-81fb-961863c79a32", "Windows.Media.Casting.ICastingConnectionErrorOccurredEventArgs", "Message.value=HString"]
+public interface ICastingConnectionErrorOccurredEventArgs <: IInspectable {
+    func ErrorStatus(value: CPointer<Int32>): Int32
+    func Message(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Media.Casting.ICastingDevice (synthetic:Windows_Media_Casting_ICastingDevice)
+@When[Windows_Media_Casting == "on"]
+@Interface["de721c83-4a43-4ad1-a6d2-2492a796c3f2", "Windows.Media.Casting.ICastingDevice", "Id.value=HString;FriendlyName.value=HString;Icon.value=Com;GetSupportedCastingPlaybackTypesAsync.operation=Com;CreateCastingConnection.value=Com"]
+public interface ICastingDevice <: IInspectable {
+    func Id(value: CPointer<CPointer<Unit>>): Int32
+    func FriendlyName(value: CPointer<CPointer<Unit>>): Int32
+    func Icon(value: CPointer<CPointer<Unit>>): Int32
+    func GetSupportedCastingPlaybackTypesAsync(operation: CPointer<CPointer<Unit>>): Int32
+    func CreateCastingConnection(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Media.Casting.ICastingDevicePicker (synthetic:Windows_Media_Casting_ICastingDevicePicker)
+@When[Windows_Media_Casting == "on"]
+@Interface["dcd39924-0591-49be-aacb-4b82ee756a95", "Windows.Media.Casting.ICastingDevicePicker", "Filter.value=Com;Appearance.value=Com"]
+public interface ICastingDevicePicker <: IInspectable {
+    func Filter(value: CPointer<CPointer<Unit>>): Int32
+    func Appearance(value: CPointer<CPointer<Unit>>): Int32
+    func CastingDeviceSelected(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveCastingDeviceSelected(token: Int64): Int32
+    func CastingDevicePickerDismissed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveCastingDevicePickerDismissed(token: Int64): Int32
+    func Show(selection: Windows_Foundation.Rect): Int32
+    func ShowWithPlacement(selection: Windows_Foundation.Rect, preferredPlacement: Int32): Int32
+    func Hide(): Int32
+}
+
+// Windows.Media.Casting.ICastingDevicePickerFilter (synthetic:Windows_Media_Casting_ICastingDevicePickerFilter)
+@When[Windows_Media_Casting == "on"]
+@Interface["be8c619c-b563-4354-ae33-9fdaad8c6291", "Windows.Media.Casting.ICastingDevicePickerFilter", "SupportedCastingSources.value=Com"]
+public interface ICastingDevicePickerFilter <: IInspectable {
+    func SupportsAudio(value: CPointer<Bool>): Int32
+    func SetSupportsAudio(value: Bool): Int32
+    func SupportsVideo(value: CPointer<Bool>): Int32
+    func SetSupportsVideo(value: Bool): Int32
+    func SupportsPictures(value: CPointer<Bool>): Int32
+    func SetSupportsPictures(value: Bool): Int32
+    func SupportedCastingSources(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Media.Casting.ICastingDeviceSelectedEventArgs (synthetic:Windows_Media_Casting_ICastingDeviceSelectedEventArgs)
+@When[Windows_Media_Casting == "on"]
+@Interface["dc439e86-dd57-4d0d-9400-af45e4fb3663", "Windows.Media.Casting.ICastingDeviceSelectedEventArgs", "SelectedCastingDevice.value=Com"]
+public interface ICastingDeviceSelectedEventArgs <: IInspectable {
+    func SelectedCastingDevice(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Media.Casting.ICastingDeviceStatics (synthetic:Windows_Media_Casting_ICastingDeviceStatics)
+@When[Windows_Media_Casting == "on"]
+@Interface["e7d958d7-4d13-4237-a365-4c4f6a4cfd2f", "Windows.Media.Casting.ICastingDeviceStatics", "GetDeviceSelector.value=HString;GetDeviceSelectorFromCastingSourceAsync.operation=Com;FromIdAsync.operation=Com;DeviceInfoSupportsCastingAsync.operation=Com"]
+public interface ICastingDeviceStatics <: IInspectable {
+    func GetDeviceSelector(type_: UInt32, value: CPointer<CPointer<Unit>>): Int32
+    func GetDeviceSelectorFromCastingSourceAsync(castingSource: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func FromIdAsync(value: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func DeviceInfoSupportsCastingAsync(device: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Media.Casting.ICastingSource (synthetic:Windows_Media_Casting_ICastingSource)

@@ -9,6 +9,455 @@ import windows_interface.macros.Interface
 
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+
+// Windows.Globalization.NumberFormatting.CurrencyFormatter (synthetic:Windows_Globalization_NumberFormatting_CurrencyFormatter)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public class CurrencyFormatter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CurrencyFormatter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CurrencyFormatter {
+        CurrencyFormatter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CurrencyFormatter {
+        CurrencyFormatter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICurrencyFormatter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CurrencyFormatter> {
+        let ancestors = [ICurrencyFormatter.iid(), INumberFormatterOptions.iid(), INumberFormatter.iid(), INumberFormatter2.iid(), INumberParser.iid(), ICurrencyFormatter2.iid(), ISignificantDigitsOption.iid(), INumberRounderOption.iid(), ISignedZeroOption.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CurrencyFormatter>("CurrencyFormatter", ICurrencyFormatter.iid(), ancestors, { raw => CurrencyFormatter.fromAbiTake(raw) }, { raw => CurrencyFormatter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICurrencyFormatter {
+        match (unsafe { query(ICurrencyFormatter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICurrencyFormatter(): ICurrencyFormatter {
+        defaultInterface()
+    }
+
+    public func asINumberFormatterOptions(): INumberFormatterOptions {
+        match (unsafe { query<INumberFormatterOptions>(INumberFormatterOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberFormatter(): INumberFormatter {
+        match (unsafe { query<INumberFormatter>(INumberFormatter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberFormatter2(): INumberFormatter2 {
+        match (unsafe { query<INumberFormatter2>(INumberFormatter2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberParser(): INumberParser {
+        match (unsafe { query<INumberParser>(INumberParser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICurrencyFormatter2(): ICurrencyFormatter2 {
+        match (unsafe { query<ICurrencyFormatter2>(ICurrencyFormatter2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignificantDigitsOption(): ISignificantDigitsOption {
+        match (unsafe { query<ISignificantDigitsOption>(ISignificantDigitsOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberRounderOption(): INumberRounderOption {
+        match (unsafe { query<INumberRounderOption>(INumberRounderOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignedZeroOption(): ISignedZeroOption {
+        match (unsafe { query<ISignedZeroOption>(ISignedZeroOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Currency: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Currency(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCurrency(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func CreateCurrencyFormatterCode(currencyCode: windows_core.HString): CurrencyFormatter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(currencyCode)) {
+            try (factory__ = windows_core.factory<CurrencyFormatter, ICurrencyFormatterFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateCurrencyFormatterCode(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CurrencyFormatter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CurrencyFormatter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateCurrencyFormatterCodeContext(currencyCode: windows_core.HString, languages: Windows_Foundation_Collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): CurrencyFormatter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(currencyCode)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(geographicRegion)) {
+                    try (factory__ = windows_core.factory<CurrencyFormatter, ICurrencyFormatterFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateCurrencyFormatterCodeContext(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CurrencyFormatter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CurrencyFormatter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumberFormatting.CurrencyFormatter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumberFormatting.CurrencyFormatter;{" + ICurrencyFormatter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumberFormatting.CurrencyFormatter", CurrencyFormatter.signature(), ICurrencyFormatter.iid())
+    }
+
+    public static func intoWinrtHandle(value: CurrencyFormatter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CurrencyFormatter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CurrencyFormatter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CurrencyFormatter {
+        CurrencyFormatter.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.NumberFormatting.CurrencyFormatterMode (synthetic:Windows_Globalization_NumberFormatting_CurrencyFormatterMode)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public struct CurrencyFormatterMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const CurrencyFormatterMode_UseSymbol = CurrencyFormatterMode(0)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const CurrencyFormatterMode_UseCurrencyCode = CurrencyFormatterMode(1)
+
+// Windows.Globalization.NumberFormatting.DecimalFormatter (synthetic:Windows_Globalization_NumberFormatting_DecimalFormatter)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public class DecimalFormatter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DecimalFormatter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DecimalFormatter {
+        DecimalFormatter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DecimalFormatter {
+        DecimalFormatter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INumberFormatter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DecimalFormatter> {
+        let ancestors = [INumberFormatter.iid(), INumberFormatterOptions.iid(), INumberFormatter2.iid(), INumberParser.iid(), ISignificantDigitsOption.iid(), INumberRounderOption.iid(), ISignedZeroOption.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DecimalFormatter>("DecimalFormatter", INumberFormatter.iid(), ancestors, { raw => DecimalFormatter.fromAbiTake(raw) }, { raw => DecimalFormatter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INumberFormatter {
+        match (unsafe { query(INumberFormatter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINumberFormatter(): INumberFormatter {
+        defaultInterface()
+    }
+
+    public func asINumberFormatterOptions(): INumberFormatterOptions {
+        match (unsafe { query<INumberFormatterOptions>(INumberFormatterOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberFormatter2(): INumberFormatter2 {
+        match (unsafe { query<INumberFormatter2>(INumberFormatter2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberParser(): INumberParser {
+        match (unsafe { query<INumberParser>(INumberParser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignificantDigitsOption(): ISignificantDigitsOption {
+        match (unsafe { query<ISignificantDigitsOption>(ISignificantDigitsOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberRounderOption(): INumberRounderOption {
+        match (unsafe { query<INumberRounderOption>(INumberRounderOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignedZeroOption(): ISignedZeroOption {
+        match (unsafe { query<ISignedZeroOption>(ISignedZeroOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func FormatInt(value: Int64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatInt(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func FormatUInt(value: UInt64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatUInt(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func FormatDouble(value: Float64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatDouble(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func new(): DecimalFormatter {
+        var created__: Option<DecimalFormatter> = Option<DecimalFormatter>.None
+        try (factory__ = windows_core.factory<DecimalFormatter, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<DecimalFormatter>(DecimalFormatter.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce DecimalFormatter")
+        }
+    }
+
+    public static func CreateDecimalFormatter(languages: Windows_Foundation_Collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): DecimalFormatter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(geographicRegion)) {
+                try (factory__ = windows_core.factory<DecimalFormatter, IDecimalFormatterFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateDecimalFormatter(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DecimalFormatter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DecimalFormatter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumberFormatting.DecimalFormatter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumberFormatting.DecimalFormatter;{" + INumberFormatter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumberFormatting.DecimalFormatter", DecimalFormatter.signature(), INumberFormatter.iid())
+    }
+
+    public static func intoWinrtHandle(value: DecimalFormatter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DecimalFormatter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DecimalFormatter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DecimalFormatter {
+        DecimalFormatter.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.NumberFormatting.ICurrencyFormatter (synthetic:Windows_Globalization_NumberFormatting_ICurrencyFormatter)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["11730ca5-4b00-41b2-b332-73b12a497d54", "Windows.Globalization.NumberFormatting.ICurrencyFormatter", "Currency.value=HString"]
+public interface ICurrencyFormatter <: IInspectable {
+    func Currency(value: CPointer<CPointer<Unit>>): Int32
+    func SetCurrency(value: CPointer<Unit>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.ICurrencyFormatter2 (synthetic:Windows_Globalization_NumberFormatting_ICurrencyFormatter2)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["072c2f1d-e7ba-4197-920e-247c92f7dea6", "Windows.Globalization.NumberFormatting.ICurrencyFormatter2"]
+public interface ICurrencyFormatter2 <: IInspectable {
+    func Mode(value: CPointer<Int32>): Int32
+    func SetMode(value: Int32): Int32
+    func ApplyRoundingForCurrency(roundingAlgorithm: Int32): Int32
+}
+
+// Windows.Globalization.NumberFormatting.ICurrencyFormatterFactory (synthetic:Windows_Globalization_NumberFormatting_ICurrencyFormatterFactory)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["86c7537e-b938-4aa2-84b0-2c33dc5b1450", "Windows.Globalization.NumberFormatting.ICurrencyFormatterFactory", "CreateCurrencyFormatterCode.result=Com;CreateCurrencyFormatterCodeContext.result=Com"]
+public interface ICurrencyFormatterFactory <: IInspectable {
+    func CreateCurrencyFormatterCode(currencyCode: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateCurrencyFormatterCodeContext(currencyCode: CPointer<Unit>, languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.IDecimalFormatterFactory (synthetic:Windows_Globalization_NumberFormatting_IDecimalFormatterFactory)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["0d018c9a-e393-46b8-b830-7a69c8f89fbb", "Windows.Globalization.NumberFormatting.IDecimalFormatterFactory", "CreateDecimalFormatter.result=Com"]
+public interface IDecimalFormatterFactory <: IInspectable {
+    func CreateDecimalFormatter(languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.IIncrementNumberRounder (synthetic:Windows_Globalization_NumberFormatting_IIncrementNumberRounder)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["70a64ff8-66ab-4155-9da1-739e46764543", "Windows.Globalization.NumberFormatting.IIncrementNumberRounder"]
+public interface IIncrementNumberRounder <: IInspectable {
+    func RoundingAlgorithm(value: CPointer<Int32>): Int32
+    func SetRoundingAlgorithm(value: Int32): Int32
+    func Increment(value: CPointer<Float64>): Int32
+    func SetIncrement(value: Float64): Int32
+}
+
+// Windows.Globalization.NumberFormatting.INumberFormatter (synthetic:Windows_Globalization_NumberFormatting_INumberFormatter)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["a5007c49-7676-4db7-8631-1b6ff265caa9", "Windows.Globalization.NumberFormatting.INumberFormatter", "FormatInt.result=HString;FormatUInt.result=HString;FormatDouble.result=HString"]
+public interface INumberFormatter <: IInspectable {
+    func FormatInt(value: Int64, result: CPointer<CPointer<Unit>>): Int32
+    func FormatUInt(value: UInt64, result: CPointer<CPointer<Unit>>): Int32
+    func FormatDouble(value: Float64, result: CPointer<CPointer<Unit>>): Int32
+}
 
 // Windows.Globalization.NumberFormatting.INumberFormatter2 (synthetic:Windows_Globalization_NumberFormatting_INumberFormatter2)
 @When[Windows_Globalization_NumberFormatting == "on"]
@@ -17,4 +466,1002 @@ public interface INumberFormatter2 <: IInspectable {
     func FormatInt(value: Int64, result: CPointer<CPointer<Unit>>): Int32
     func FormatUInt(value: UInt64, result: CPointer<CPointer<Unit>>): Int32
     func FormatDouble(value: Float64, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.INumberFormatterOptions (synthetic:Windows_Globalization_NumberFormatting_INumberFormatterOptions)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["80332d21-aee1-4a39-baa2-07ed8c96daf6", "Windows.Globalization.NumberFormatting.INumberFormatterOptions", "Languages.value=Com;GeographicRegion.value=HString;NumeralSystem.value=HString;ResolvedLanguage.value=HString;ResolvedGeographicRegion.value=HString"]
+public interface INumberFormatterOptions <: IInspectable {
+    func Languages(value: CPointer<CPointer<Unit>>): Int32
+    func GeographicRegion(value: CPointer<CPointer<Unit>>): Int32
+    func IntegerDigits(value: CPointer<Int32>): Int32
+    func SetIntegerDigits(value: Int32): Int32
+    func FractionDigits(value: CPointer<Int32>): Int32
+    func SetFractionDigits(value: Int32): Int32
+    func IsGrouped(value: CPointer<Bool>): Int32
+    func SetIsGrouped(value: Bool): Int32
+    func IsDecimalPointAlwaysDisplayed(value: CPointer<Bool>): Int32
+    func SetIsDecimalPointAlwaysDisplayed(value: Bool): Int32
+    func NumeralSystem(value: CPointer<CPointer<Unit>>): Int32
+    func SetNumeralSystem(value: CPointer<Unit>): Int32
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func ResolvedGeographicRegion(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.INumberParser (synthetic:Windows_Globalization_NumberFormatting_INumberParser)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["e6659412-4a13-4a53-83a1-392fbe4cff9f", "Windows.Globalization.NumberFormatting.INumberParser", "ParseInt.result=Com;ParseUInt.result=Com;ParseDouble.result=Com"]
+public interface INumberParser <: IInspectable {
+    func ParseInt(text: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func ParseUInt(text: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func ParseDouble(text: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.INumberRounder (synthetic:Windows_Globalization_NumberFormatting_INumberRounder)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["5473c375-38ed-4631-b80c-ef34fc48b7f5", "Windows.Globalization.NumberFormatting.INumberRounder"]
+public interface INumberRounder <: IInspectable {
+    func RoundInt32(value: Int32, result: CPointer<Int32>): Int32
+    func RoundUInt32(value: UInt32, result: CPointer<UInt32>): Int32
+    func RoundInt64(value: Int64, result: CPointer<Int64>): Int32
+    func RoundUInt64(value: UInt64, result: CPointer<UInt64>): Int32
+    func RoundSingle(value: Float32, result: CPointer<Float32>): Int32
+    func RoundDouble(value: Float64, result: CPointer<Float64>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.INumberRounderOption (synthetic:Windows_Globalization_NumberFormatting_INumberRounderOption)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["3b088433-646f-4efe-8d48-66eb2e49e736", "Windows.Globalization.NumberFormatting.INumberRounderOption", "NumberRounder.value=Com"]
+public interface INumberRounderOption <: IInspectable {
+    func NumberRounder(value: CPointer<CPointer<Unit>>): Int32
+    func SetNumberRounder(value: CPointer<Unit>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.INumeralSystemTranslator (synthetic:Windows_Globalization_NumberFormatting_INumeralSystemTranslator)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["28f5bc2c-8c23-4234-ad2e-fa5a3a426e9b", "Windows.Globalization.NumberFormatting.INumeralSystemTranslator", "Languages.value=Com;ResolvedLanguage.value=HString;NumeralSystem.value=HString;TranslateNumerals.result=HString"]
+public interface INumeralSystemTranslator <: IInspectable {
+    func Languages(value: CPointer<CPointer<Unit>>): Int32
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func NumeralSystem(value: CPointer<CPointer<Unit>>): Int32
+    func SetNumeralSystem(value: CPointer<Unit>): Int32
+    func TranslateNumerals(value: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.INumeralSystemTranslatorFactory (synthetic:Windows_Globalization_NumberFormatting_INumeralSystemTranslatorFactory)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["9630c8da-36ef-4d88-a85c-6f0d98d620a6", "Windows.Globalization.NumberFormatting.INumeralSystemTranslatorFactory", "Create.result=Com"]
+public interface INumeralSystemTranslatorFactory <: IInspectable {
+    func Create(languages: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.IPercentFormatterFactory (synthetic:Windows_Globalization_NumberFormatting_IPercentFormatterFactory)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["b7828aef-fed4-4018-a6e2-e09961e03765", "Windows.Globalization.NumberFormatting.IPercentFormatterFactory", "CreatePercentFormatter.result=Com"]
+public interface IPercentFormatterFactory <: IInspectable {
+    func CreatePercentFormatter(languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.IPermilleFormatterFactory (synthetic:Windows_Globalization_NumberFormatting_IPermilleFormatterFactory)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["2b37b4ac-e638-4ed5-a998-62f6b06a49ae", "Windows.Globalization.NumberFormatting.IPermilleFormatterFactory", "CreatePermilleFormatter.result=Com"]
+public interface IPermilleFormatterFactory <: IInspectable {
+    func CreatePermilleFormatter(languages: CPointer<Unit>, geographicRegion: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Globalization.NumberFormatting.ISignedZeroOption (synthetic:Windows_Globalization_NumberFormatting_ISignedZeroOption)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["fd1cdd31-0a3c-49c4-a642-96a1564f4f30", "Windows.Globalization.NumberFormatting.ISignedZeroOption"]
+public interface ISignedZeroOption <: IInspectable {
+    func IsZeroSigned(value: CPointer<Bool>): Int32
+    func SetIsZeroSigned(value: Bool): Int32
+}
+
+// Windows.Globalization.NumberFormatting.ISignificantDigitsNumberRounder (synthetic:Windows_Globalization_NumberFormatting_ISignificantDigitsNumberRounder)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["f5941bca-6646-4913-8c76-1b191ff94dfd", "Windows.Globalization.NumberFormatting.ISignificantDigitsNumberRounder"]
+public interface ISignificantDigitsNumberRounder <: IInspectable {
+    func RoundingAlgorithm(value: CPointer<Int32>): Int32
+    func SetRoundingAlgorithm(value: Int32): Int32
+    func SignificantDigits(value: CPointer<UInt32>): Int32
+    func SetSignificantDigits(value: UInt32): Int32
+}
+
+// Windows.Globalization.NumberFormatting.ISignificantDigitsOption (synthetic:Windows_Globalization_NumberFormatting_ISignificantDigitsOption)
+@When[Windows_Globalization_NumberFormatting == "on"]
+@Interface["1d4dfcdd-2d43-4ee8-bbf1-c1b26a711a58", "Windows.Globalization.NumberFormatting.ISignificantDigitsOption"]
+public interface ISignificantDigitsOption <: IInspectable {
+    func SignificantDigits(value: CPointer<Int32>): Int32
+    func SetSignificantDigits(value: Int32): Int32
+}
+
+// Windows.Globalization.NumberFormatting.IncrementNumberRounder (synthetic:Windows_Globalization_NumberFormatting_IncrementNumberRounder)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public class IncrementNumberRounder <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<IncrementNumberRounder> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): IncrementNumberRounder {
+        IncrementNumberRounder(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): IncrementNumberRounder {
+        IncrementNumberRounder(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INumberRounder.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<IncrementNumberRounder> {
+        let ancestors = [INumberRounder.iid(), IIncrementNumberRounder.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<IncrementNumberRounder>("IncrementNumberRounder", INumberRounder.iid(), ancestors, { raw => IncrementNumberRounder.fromAbiTake(raw) }, { raw => IncrementNumberRounder.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INumberRounder {
+        match (unsafe { query(INumberRounder.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINumberRounder(): INumberRounder {
+        defaultInterface()
+    }
+
+    public func asIIncrementNumberRounder(): IIncrementNumberRounder {
+        match (unsafe { query<IIncrementNumberRounder>(IIncrementNumberRounder.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func RoundInt32(value: Int32): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundInt32(value, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundUInt32(value: UInt32): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundUInt32(value, CPointer<UInt32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundInt64(value: Int64): Int64 {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundInt64(value, CPointer<Int64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundUInt64(value: UInt64): UInt64 {
+        var result__ = 0u64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundUInt64(value, CPointer<UInt64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundSingle(value: Float32): Float32 {
+        var result__ = 0.0f32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundSingle(value, CPointer<Float32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundDouble(value: Float64): Float64 {
+        var result__ = 0.0f64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundDouble(value, CPointer<Float64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func new(): IncrementNumberRounder {
+        var created__: Option<IncrementNumberRounder> = Option<IncrementNumberRounder>.None
+        try (factory__ = windows_core.factory<IncrementNumberRounder, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<IncrementNumberRounder>(IncrementNumberRounder.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce IncrementNumberRounder")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumberFormatting.IncrementNumberRounder"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumberFormatting.IncrementNumberRounder;{" + INumberRounder.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumberFormatting.IncrementNumberRounder", IncrementNumberRounder.signature(), INumberRounder.iid())
+    }
+
+    public static func intoWinrtHandle(value: IncrementNumberRounder): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IncrementNumberRounder {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IncrementNumberRounder.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IncrementNumberRounder {
+        IncrementNumberRounder.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.NumberFormatting.NumeralSystemTranslator (synthetic:Windows_Globalization_NumberFormatting_NumeralSystemTranslator)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public class NumeralSystemTranslator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NumeralSystemTranslator> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NumeralSystemTranslator {
+        NumeralSystemTranslator(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NumeralSystemTranslator {
+        NumeralSystemTranslator(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INumeralSystemTranslator.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NumeralSystemTranslator> {
+        let ancestors = [INumeralSystemTranslator.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NumeralSystemTranslator>("NumeralSystemTranslator", INumeralSystemTranslator.iid(), ancestors, { raw => NumeralSystemTranslator.fromAbiTake(raw) }, { raw => NumeralSystemTranslator.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INumeralSystemTranslator {
+        match (unsafe { query(INumeralSystemTranslator.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINumeralSystemTranslator(): INumeralSystemTranslator {
+        defaultInterface()
+    }
+
+    public prop Languages: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Languages(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop NumeralSystem: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumeralSystem(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetNumeralSystem(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop ResolvedLanguage: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResolvedLanguage(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func TranslateNumerals(value: windows_core.HString): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TranslateNumerals(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func new(): NumeralSystemTranslator {
+        var created__: Option<NumeralSystemTranslator> = Option<NumeralSystemTranslator>.None
+        try (factory__ = windows_core.factory<NumeralSystemTranslator, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<NumeralSystemTranslator>(NumeralSystemTranslator.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce NumeralSystemTranslator")
+        }
+    }
+
+    public static func Create(languages: Windows_Foundation_Collections.IIterable<windows_core.HString>): NumeralSystemTranslator {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+            try (factory__ = windows_core.factory<NumeralSystemTranslator, INumeralSystemTranslatorFactory>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NumeralSystemTranslator>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return NumeralSystemTranslator.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumberFormatting.NumeralSystemTranslator"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumberFormatting.NumeralSystemTranslator;{" + INumeralSystemTranslator.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumberFormatting.NumeralSystemTranslator", NumeralSystemTranslator.signature(), INumeralSystemTranslator.iid())
+    }
+
+    public static func intoWinrtHandle(value: NumeralSystemTranslator): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NumeralSystemTranslator {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NumeralSystemTranslator.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NumeralSystemTranslator {
+        NumeralSystemTranslator.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.NumberFormatting.PercentFormatter (synthetic:Windows_Globalization_NumberFormatting_PercentFormatter)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public class PercentFormatter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PercentFormatter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PercentFormatter {
+        PercentFormatter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PercentFormatter {
+        PercentFormatter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INumberFormatter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PercentFormatter> {
+        let ancestors = [INumberFormatter.iid(), INumberFormatterOptions.iid(), INumberFormatter2.iid(), INumberParser.iid(), ISignificantDigitsOption.iid(), INumberRounderOption.iid(), ISignedZeroOption.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PercentFormatter>("PercentFormatter", INumberFormatter.iid(), ancestors, { raw => PercentFormatter.fromAbiTake(raw) }, { raw => PercentFormatter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INumberFormatter {
+        match (unsafe { query(INumberFormatter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINumberFormatter(): INumberFormatter {
+        defaultInterface()
+    }
+
+    public func asINumberFormatterOptions(): INumberFormatterOptions {
+        match (unsafe { query<INumberFormatterOptions>(INumberFormatterOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberFormatter2(): INumberFormatter2 {
+        match (unsafe { query<INumberFormatter2>(INumberFormatter2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberParser(): INumberParser {
+        match (unsafe { query<INumberParser>(INumberParser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignificantDigitsOption(): ISignificantDigitsOption {
+        match (unsafe { query<ISignificantDigitsOption>(ISignificantDigitsOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberRounderOption(): INumberRounderOption {
+        match (unsafe { query<INumberRounderOption>(INumberRounderOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignedZeroOption(): ISignedZeroOption {
+        match (unsafe { query<ISignedZeroOption>(ISignedZeroOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func FormatInt(value: Int64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatInt(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func FormatUInt(value: UInt64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatUInt(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func FormatDouble(value: Float64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatDouble(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func new(): PercentFormatter {
+        var created__: Option<PercentFormatter> = Option<PercentFormatter>.None
+        try (factory__ = windows_core.factory<PercentFormatter, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<PercentFormatter>(PercentFormatter.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce PercentFormatter")
+        }
+    }
+
+    public static func CreatePercentFormatter(languages: Windows_Foundation_Collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): PercentFormatter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(geographicRegion)) {
+                try (factory__ = windows_core.factory<PercentFormatter, IPercentFormatterFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreatePercentFormatter(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PercentFormatter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PercentFormatter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumberFormatting.PercentFormatter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumberFormatting.PercentFormatter;{" + INumberFormatter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumberFormatting.PercentFormatter", PercentFormatter.signature(), INumberFormatter.iid())
+    }
+
+    public static func intoWinrtHandle(value: PercentFormatter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PercentFormatter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PercentFormatter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PercentFormatter {
+        PercentFormatter.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.NumberFormatting.PermilleFormatter (synthetic:Windows_Globalization_NumberFormatting_PermilleFormatter)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public class PermilleFormatter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PermilleFormatter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PermilleFormatter {
+        PermilleFormatter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PermilleFormatter {
+        PermilleFormatter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INumberFormatter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PermilleFormatter> {
+        let ancestors = [INumberFormatter.iid(), INumberFormatterOptions.iid(), INumberFormatter2.iid(), INumberParser.iid(), ISignificantDigitsOption.iid(), INumberRounderOption.iid(), ISignedZeroOption.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PermilleFormatter>("PermilleFormatter", INumberFormatter.iid(), ancestors, { raw => PermilleFormatter.fromAbiTake(raw) }, { raw => PermilleFormatter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INumberFormatter {
+        match (unsafe { query(INumberFormatter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINumberFormatter(): INumberFormatter {
+        defaultInterface()
+    }
+
+    public func asINumberFormatterOptions(): INumberFormatterOptions {
+        match (unsafe { query<INumberFormatterOptions>(INumberFormatterOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberFormatter2(): INumberFormatter2 {
+        match (unsafe { query<INumberFormatter2>(INumberFormatter2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberParser(): INumberParser {
+        match (unsafe { query<INumberParser>(INumberParser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignificantDigitsOption(): ISignificantDigitsOption {
+        match (unsafe { query<ISignificantDigitsOption>(ISignificantDigitsOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINumberRounderOption(): INumberRounderOption {
+        match (unsafe { query<INumberRounderOption>(INumberRounderOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asISignedZeroOption(): ISignedZeroOption {
+        match (unsafe { query<ISignedZeroOption>(ISignedZeroOption.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func FormatInt(value: Int64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatInt(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func FormatUInt(value: UInt64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatUInt(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func FormatDouble(value: Float64): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FormatDouble(value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func new(): PermilleFormatter {
+        var created__: Option<PermilleFormatter> = Option<PermilleFormatter>.None
+        try (factory__ = windows_core.factory<PermilleFormatter, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<PermilleFormatter>(PermilleFormatter.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce PermilleFormatter")
+        }
+    }
+
+    public static func CreatePermilleFormatter(languages: Windows_Foundation_Collections.IIterable<windows_core.HString>, geographicRegion: windows_core.HString): PermilleFormatter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(languages)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(geographicRegion)) {
+                try (factory__ = windows_core.factory<PermilleFormatter, IPermilleFormatterFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreatePermilleFormatter(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PermilleFormatter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PermilleFormatter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumberFormatting.PermilleFormatter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumberFormatting.PermilleFormatter;{" + INumberFormatter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumberFormatting.PermilleFormatter", PermilleFormatter.signature(), INumberFormatter.iid())
+    }
+
+    public static func intoWinrtHandle(value: PermilleFormatter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PermilleFormatter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PermilleFormatter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PermilleFormatter {
+        PermilleFormatter.viewOf(raw)
+    }
+}
+
+// Windows.Globalization.NumberFormatting.RoundingAlgorithm (synthetic:Windows_Globalization_NumberFormatting_RoundingAlgorithm)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public struct RoundingAlgorithm {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_None = RoundingAlgorithm(0)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundDown = RoundingAlgorithm(1)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundUp = RoundingAlgorithm(2)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundTowardsZero = RoundingAlgorithm(3)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundAwayFromZero = RoundingAlgorithm(4)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundHalfDown = RoundingAlgorithm(5)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundHalfUp = RoundingAlgorithm(6)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundHalfTowardsZero = RoundingAlgorithm(7)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundHalfAwayFromZero = RoundingAlgorithm(8)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundHalfToEven = RoundingAlgorithm(9)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public const RoundingAlgorithm_RoundHalfToOdd = RoundingAlgorithm(10)
+
+// Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder (synthetic:Windows_Globalization_NumberFormatting_SignificantDigitsNumberRounder)
+@When[Windows_Globalization_NumberFormatting == "on"]
+public class SignificantDigitsNumberRounder <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SignificantDigitsNumberRounder> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SignificantDigitsNumberRounder {
+        SignificantDigitsNumberRounder(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SignificantDigitsNumberRounder {
+        SignificantDigitsNumberRounder(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INumberRounder.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SignificantDigitsNumberRounder> {
+        let ancestors = [INumberRounder.iid(), ISignificantDigitsNumberRounder.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SignificantDigitsNumberRounder>("SignificantDigitsNumberRounder", INumberRounder.iid(), ancestors, { raw => SignificantDigitsNumberRounder.fromAbiTake(raw) }, { raw => SignificantDigitsNumberRounder.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INumberRounder {
+        match (unsafe { query(INumberRounder.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINumberRounder(): INumberRounder {
+        defaultInterface()
+    }
+
+    public func asISignificantDigitsNumberRounder(): ISignificantDigitsNumberRounder {
+        match (unsafe { query<ISignificantDigitsNumberRounder>(ISignificantDigitsNumberRounder.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func RoundInt32(value: Int32): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundInt32(value, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundUInt32(value: UInt32): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundUInt32(value, CPointer<UInt32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundInt64(value: Int64): Int64 {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundInt64(value, CPointer<Int64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundUInt64(value: UInt64): UInt64 {
+        var result__ = 0u64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundUInt64(value, CPointer<UInt64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundSingle(value: Float32): Float32 {
+        var result__ = 0.0f32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundSingle(value, CPointer<Float32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RoundDouble(value: Float64): Float64 {
+        var result__ = 0.0f64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RoundDouble(value, CPointer<Float64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func new(): SignificantDigitsNumberRounder {
+        var created__: Option<SignificantDigitsNumberRounder> = Option<SignificantDigitsNumberRounder>.None
+        try (factory__ = windows_core.factory<SignificantDigitsNumberRounder, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<SignificantDigitsNumberRounder>(SignificantDigitsNumberRounder.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce SignificantDigitsNumberRounder")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder;{" + INumberRounder.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Globalization.NumberFormatting.SignificantDigitsNumberRounder", SignificantDigitsNumberRounder.signature(), INumberRounder.iid())
+    }
+
+    public static func intoWinrtHandle(value: SignificantDigitsNumberRounder): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SignificantDigitsNumberRounder {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SignificantDigitsNumberRounder.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SignificantDigitsNumberRounder {
+        SignificantDigitsNumberRounder.viewOf(raw)
+    }
 }

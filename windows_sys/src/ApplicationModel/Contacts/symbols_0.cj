@@ -7,12 +7,172 @@ import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+@When[Windows_Data_Text == "on"]
+import windows_sys.Data.Text as Windows_Data_Text
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
 @When[Windows_Foundation_Collections == "on"]
 import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 @When[Windows_Storage_Streams == "on"]
 import windows_sys.Storage.Streams as Windows_Storage_Streams
+@When[Windows_System == "on"]
+import windows_sys.System as Windows_System
+@When[Windows_UI == "on"]
+import windows_sys.UI as Windows_UI
+@When[Windows_UI_Popups == "on"]
+import windows_sys.UI.Popups as Windows_UI_Popups
+@When[Windows_UI_ViewManagement == "on"]
+import windows_sys.UI.ViewManagement as Windows_UI_ViewManagement
+
+// Windows.ApplicationModel.Contacts.AggregateContactManager (synthetic:Windows_ApplicationModel_Contacts_AggregateContactManager)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class AggregateContactManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AggregateContactManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AggregateContactManager {
+        AggregateContactManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AggregateContactManager {
+        AggregateContactManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAggregateContactManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AggregateContactManager> {
+        let ancestors = [IAggregateContactManager.iid(), IAggregateContactManager2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AggregateContactManager>("AggregateContactManager", IAggregateContactManager.iid(), ancestors, { raw => AggregateContactManager.fromAbiTake(raw) }, { raw => AggregateContactManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAggregateContactManager {
+        match (unsafe { query(IAggregateContactManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAggregateContactManager(): IAggregateContactManager {
+        defaultInterface()
+    }
+
+    public func asIAggregateContactManager2(): IAggregateContactManager2 {
+        match (unsafe { query<IAggregateContactManager2>(IAggregateContactManager2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func FindRawContactsAsync(contact: Contact): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FindRawContactsAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func TryLinkContactsAsync(primaryContact: Contact, secondaryContact: Contact): Windows_Foundation.IAsyncOperation<Contact> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(primaryContact)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Contact>(secondaryContact)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.TryLinkContactsAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Contact>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Contact>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func UnlinkRawContactAsync(contact: Contact): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UnlinkRawContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func TrySetPreferredSourceForPictureAsync(aggregateContact: Contact, rawContact: Contact): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(aggregateContact)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Contact>(rawContact)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.TrySetPreferredSourceForPictureAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.AggregateContactManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.AggregateContactManager;{" + IAggregateContactManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.AggregateContactManager", AggregateContactManager.signature(), IAggregateContactManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: AggregateContactManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AggregateContactManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AggregateContactManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AggregateContactManager {
+        AggregateContactManager.viewOf(raw)
+    }
+}
 
 // Windows.ApplicationModel.Contacts.Contact (synthetic:Windows_ApplicationModel_Contacts_Contact)
 @When[Windows_ApplicationModel_Contacts == "on"]
@@ -446,19 +606,1621 @@ public class ContactAddress <: windows_interface.InterfaceWrapperBase & windows_
 @When[Windows_ApplicationModel_Contacts == "on"]
 public struct ContactAddressKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactAddressKind_Home = ContactAddressKind(0)
+public const ContactAddressKind_Home = ContactAddressKind(0)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactAddressKind_Work = ContactAddressKind(1)
+public const ContactAddressKind_Work = ContactAddressKind(1)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactAddressKind_Other = ContactAddressKind(2)
+public const ContactAddressKind_Other = ContactAddressKind(2)
+
+// Windows.ApplicationModel.Contacts.ContactAnnotation (synthetic:Windows_ApplicationModel_Contacts_ContactAnnotation)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactAnnotation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactAnnotation> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactAnnotation {
+        ContactAnnotation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactAnnotation {
+        ContactAnnotation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactAnnotation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactAnnotation> {
+        let ancestors = [IContactAnnotation.iid(), IContactAnnotation2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactAnnotation>("ContactAnnotation", IContactAnnotation.iid(), ancestors, { raw => ContactAnnotation.fromAbiTake(raw) }, { raw => ContactAnnotation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactAnnotation {
+        match (unsafe { query(IContactAnnotation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactAnnotation(): IContactAnnotation {
+        defaultInterface()
+    }
+
+    public func asIContactAnnotation2(): IContactAnnotation2 {
+        match (unsafe { query<IContactAnnotation2>(IContactAnnotation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop AnnotationListId: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AnnotationListId(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public mut prop ContactId: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ContactId(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetContactId(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Id: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop IsDisabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsDisabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop ProviderProperties: Windows_Foundation_Collections.ValueSet {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProviderProperties(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.ValueSet>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.ValueSet.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop RemoteId: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RemoteId(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetRemoteId(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SupportedOperations: ContactAnnotationOperations {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SupportedOperations(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactAnnotationOperations(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSupportedOperations(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): ContactAnnotation {
+        var created__: Option<ContactAnnotation> = Option<ContactAnnotation>.None
+        try (factory__ = windows_core.factory<ContactAnnotation, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ContactAnnotation>(ContactAnnotation.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ContactAnnotation")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactAnnotation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactAnnotation;{" + IContactAnnotation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactAnnotation", ContactAnnotation.signature(), IContactAnnotation.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactAnnotation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactAnnotation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactAnnotation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactAnnotation {
+        ContactAnnotation.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactAnnotationList (synthetic:Windows_ApplicationModel_Contacts_ContactAnnotationList)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactAnnotationList <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactAnnotationList> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactAnnotationList {
+        ContactAnnotationList(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactAnnotationList {
+        ContactAnnotationList(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactAnnotationList.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactAnnotationList> {
+        let ancestors = [IContactAnnotationList.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactAnnotationList>("ContactAnnotationList", IContactAnnotationList.iid(), ancestors, { raw => ContactAnnotationList.fromAbiTake(raw) }, { raw => ContactAnnotationList.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactAnnotationList {
+        match (unsafe { query(IContactAnnotationList.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactAnnotationList(): IContactAnnotationList {
+        defaultInterface()
+    }
+
+    public prop Id: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop ProviderPackageFamilyName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProviderPackageFamilyName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop UserDataAccountId: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UserDataAccountId(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func DeleteAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DeleteAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func TrySaveAnnotationAsync(annotation: ContactAnnotation): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ContactAnnotation>(annotation)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TrySaveAnnotationAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetAnnotationAsync(annotationId: windows_core.HString): Windows_Foundation.IAsyncOperation<ContactAnnotation> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(annotationId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetAnnotationAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactAnnotation>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactAnnotation>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindAnnotationsByRemoteIdAsync(remoteId: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(remoteId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FindAnnotationsByRemoteIdAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindAnnotationsAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FindAnnotationsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DeleteAnnotationAsync(annotation: ContactAnnotation): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ContactAnnotation>(annotation)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeleteAnnotationAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactAnnotationList"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactAnnotationList;{" + IContactAnnotationList.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactAnnotationList", ContactAnnotationList.signature(), IContactAnnotationList.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactAnnotationList): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactAnnotationList {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactAnnotationList.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactAnnotationList {
+        ContactAnnotationList.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactAnnotationOperations (synthetic:Windows_ApplicationModel_Contacts_ContactAnnotationOperations)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactAnnotationOperations {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ContactAnnotationOperations): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ContactAnnotationOperations): ContactAnnotationOperations {
+        return ContactAnnotationOperations(value | other.value)
+    }
+    public operator func &(other: ContactAnnotationOperations): ContactAnnotationOperations {
+        return ContactAnnotationOperations(value & other.value)
+    }
+    public operator func ^(other: ContactAnnotationOperations): ContactAnnotationOperations {
+        return ContactAnnotationOperations(value ^ other.value)
+    }
+    public operator func !(): ContactAnnotationOperations {
+        return ContactAnnotationOperations(!value)
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_None = ContactAnnotationOperations(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_ContactProfile = ContactAnnotationOperations(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_Message = ContactAnnotationOperations(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_AudioCall = ContactAnnotationOperations(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_VideoCall = ContactAnnotationOperations(8)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_SocialFeeds = ContactAnnotationOperations(16)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_Share = ContactAnnotationOperations(32)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationOperations_Activity = ContactAnnotationOperations(64)
+
+// Windows.ApplicationModel.Contacts.ContactAnnotationStore (synthetic:Windows_ApplicationModel_Contacts_ContactAnnotationStore)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactAnnotationStore <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactAnnotationStore> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactAnnotationStore {
+        ContactAnnotationStore(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactAnnotationStore {
+        ContactAnnotationStore(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactAnnotationStore.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactAnnotationStore> {
+        let ancestors = [IContactAnnotationStore.iid(), IContactAnnotationStore2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactAnnotationStore>("ContactAnnotationStore", IContactAnnotationStore.iid(), ancestors, { raw => ContactAnnotationStore.fromAbiTake(raw) }, { raw => ContactAnnotationStore.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactAnnotationStore {
+        match (unsafe { query(IContactAnnotationStore.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactAnnotationStore(): IContactAnnotationStore {
+        defaultInterface()
+    }
+
+    public func asIContactAnnotationStore2(): IContactAnnotationStore2 {
+        match (unsafe { query<IContactAnnotationStore2>(IContactAnnotationStore2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func FindContactIdsByEmailAsync(emailAddress: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(emailAddress)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FindContactIdsByEmailAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindContactIdsByPhoneNumberAsync(phoneNumber: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(phoneNumber)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FindContactIdsByPhoneNumberAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindAnnotationsForContactAsync(contact: Contact): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FindAnnotationsForContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotation>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DisableAnnotationAsync(annotation: ContactAnnotation): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ContactAnnotation>(annotation)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisableAnnotationAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateAnnotationListAsync(): Windows_Foundation.IAsyncOperation<ContactAnnotationList> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CreateAnnotationListAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactAnnotationList>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactAnnotationList>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateAnnotationListInAccountAsync(userDataAccountId: windows_core.HString): Windows_Foundation.IAsyncOperation<ContactAnnotationList> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(userDataAccountId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateAnnotationListInAccountAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactAnnotationList>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactAnnotationList>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetAnnotationListAsync(annotationListId: windows_core.HString): Windows_Foundation.IAsyncOperation<ContactAnnotationList> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(annotationListId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetAnnotationListAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactAnnotationList>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactAnnotationList>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindAnnotationListsAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotationList>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FindAnnotationListsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotationList>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactAnnotationList>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactAnnotationStore"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactAnnotationStore;{" + IContactAnnotationStore.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactAnnotationStore", ContactAnnotationStore.signature(), IContactAnnotationStore.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactAnnotationStore): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactAnnotationStore {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactAnnotationStore.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactAnnotationStore {
+        ContactAnnotationStore.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactAnnotationStoreAccessType (synthetic:Windows_ApplicationModel_Contacts_ContactAnnotationStoreAccessType)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactAnnotationStoreAccessType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationStoreAccessType_AppAnnotationsReadWrite = ContactAnnotationStoreAccessType(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactAnnotationStoreAccessType_AllAnnotationsReadWrite = ContactAnnotationStoreAccessType(1)
+
+// Windows.ApplicationModel.Contacts.ContactBatch (synthetic:Windows_ApplicationModel_Contacts_ContactBatch)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactBatch <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactBatch> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactBatch {
+        ContactBatch(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactBatch {
+        ContactBatch(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactBatch.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactBatch> {
+        let ancestors = [IContactBatch.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactBatch>("ContactBatch", IContactBatch.iid(), ancestors, { raw => ContactBatch.fromAbiTake(raw) }, { raw => ContactBatch.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactBatch {
+        match (unsafe { query(IContactBatch.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactBatch(): IContactBatch {
+        defaultInterface()
+    }
+
+    public prop Contacts: Windows_Foundation_Collections.IVectorView<Contact> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contacts(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<Contact>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<Contact>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Status: ContactBatchStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Status(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactBatchStatus(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactBatch"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactBatch;{" + IContactBatch.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactBatch", ContactBatch.signature(), IContactBatch.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactBatch): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactBatch {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactBatch.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactBatch {
+        ContactBatch.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactBatchStatus (synthetic:Windows_ApplicationModel_Contacts_ContactBatchStatus)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactBatchStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactBatchStatus_Success = ContactBatchStatus(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactBatchStatus_ServerSearchSyncManagerError = ContactBatchStatus(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactBatchStatus_ServerSearchUnknownError = ContactBatchStatus(2)
+
+// Windows.ApplicationModel.Contacts.ContactCardDelayedDataLoader (synthetic:Windows_ApplicationModel_Contacts_ContactCardDelayedDataLoader)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactCardDelayedDataLoader <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactCardDelayedDataLoader> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactCardDelayedDataLoader {
+        ContactCardDelayedDataLoader(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactCardDelayedDataLoader {
+        ContactCardDelayedDataLoader(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactCardDelayedDataLoader.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactCardDelayedDataLoader> {
+        let ancestors = [IContactCardDelayedDataLoader.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactCardDelayedDataLoader>("ContactCardDelayedDataLoader", IContactCardDelayedDataLoader.iid(), ancestors, { raw => ContactCardDelayedDataLoader.fromAbiTake(raw) }, { raw => ContactCardDelayedDataLoader.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactCardDelayedDataLoader {
+        match (unsafe { query(IContactCardDelayedDataLoader.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactCardDelayedDataLoader(): IContactCardDelayedDataLoader {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func SetData(contact: Contact): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetData(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactCardDelayedDataLoader"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactCardDelayedDataLoader;{" + IContactCardDelayedDataLoader.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactCardDelayedDataLoader", ContactCardDelayedDataLoader.signature(), IContactCardDelayedDataLoader.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactCardDelayedDataLoader): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactCardDelayedDataLoader {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactCardDelayedDataLoader.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactCardDelayedDataLoader {
+        ContactCardDelayedDataLoader.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactCardHeaderKind (synthetic:Windows_ApplicationModel_Contacts_ContactCardHeaderKind)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactCardHeaderKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardHeaderKind_Default = ContactCardHeaderKind(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardHeaderKind_Basic = ContactCardHeaderKind(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardHeaderKind_Enterprise = ContactCardHeaderKind(2)
+
+// Windows.ApplicationModel.Contacts.ContactCardOptions (synthetic:Windows_ApplicationModel_Contacts_ContactCardOptions)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactCardOptions <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactCardOptions> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactCardOptions {
+        ContactCardOptions(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactCardOptions {
+        ContactCardOptions(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactCardOptions.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactCardOptions> {
+        let ancestors = [IContactCardOptions.iid(), IContactCardOptions2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactCardOptions>("ContactCardOptions", IContactCardOptions.iid(), ancestors, { raw => ContactCardOptions.fromAbiTake(raw) }, { raw => ContactCardOptions.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactCardOptions {
+        match (unsafe { query(IContactCardOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactCardOptions(): IContactCardOptions {
+        defaultInterface()
+    }
+
+    public func asIContactCardOptions2(): IContactCardOptions2 {
+        match (unsafe { query<IContactCardOptions2>(IContactCardOptions2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop HeaderKind: ContactCardHeaderKind {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HeaderKind(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactCardHeaderKind(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHeaderKind(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InitialTabKind: ContactCardTabKind {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InitialTabKind(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactCardTabKind(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInitialTabKind(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): ContactCardOptions {
+        var created__: Option<ContactCardOptions> = Option<ContactCardOptions>.None
+        try (factory__ = windows_core.factory<ContactCardOptions, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ContactCardOptions>(ContactCardOptions.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ContactCardOptions")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactCardOptions"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactCardOptions;{" + IContactCardOptions.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactCardOptions", ContactCardOptions.signature(), IContactCardOptions.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactCardOptions): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactCardOptions {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactCardOptions.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactCardOptions {
+        ContactCardOptions.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactCardTabKind (synthetic:Windows_ApplicationModel_Contacts_ContactCardTabKind)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactCardTabKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardTabKind_Default = ContactCardTabKind(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardTabKind_Email = ContactCardTabKind(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardTabKind_Messaging = ContactCardTabKind(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardTabKind_Phone = ContactCardTabKind(3)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardTabKind_Video = ContactCardTabKind(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactCardTabKind_OrganizationalHierarchy = ContactCardTabKind(5)
+
+// Windows.ApplicationModel.Contacts.ContactChange (synthetic:Windows_ApplicationModel_Contacts_ContactChange)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactChange <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactChange> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactChange {
+        ContactChange(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactChange {
+        ContactChange(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactChange.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactChange> {
+        let ancestors = [IContactChange.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactChange>("ContactChange", IContactChange.iid(), ancestors, { raw => ContactChange.fromAbiTake(raw) }, { raw => ContactChange.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactChange {
+        match (unsafe { query(IContactChange.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactChange(): IContactChange {
+        defaultInterface()
+    }
+
+    public prop ChangeType: ContactChangeType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChangeType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactChangeType(result__)
+        }
+    }
+
+    public prop Contact: Contact {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Contact(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Contact>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Contact.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactChange"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactChange;{" + IContactChange.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactChange", ContactChange.signature(), IContactChange.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactChange): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactChange {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactChange.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactChange {
+        ContactChange.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactChangeReader (synthetic:Windows_ApplicationModel_Contacts_ContactChangeReader)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactChangeReader <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactChangeReader> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactChangeReader {
+        ContactChangeReader(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactChangeReader {
+        ContactChangeReader(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactChangeReader.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactChangeReader> {
+        let ancestors = [IContactChangeReader.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactChangeReader>("ContactChangeReader", IContactChangeReader.iid(), ancestors, { raw => ContactChangeReader.fromAbiTake(raw) }, { raw => ContactChangeReader.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactChangeReader {
+        match (unsafe { query(IContactChangeReader.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactChangeReader(): IContactChangeReader {
+        defaultInterface()
+    }
+
+    public func AcceptChanges(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.AcceptChanges() }
+        }
+        hr__.check()
+    }
+
+    public func AcceptChangesThrough(lastChangeToAccept: ContactChange): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ContactChange>(lastChangeToAccept)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AcceptChangesThrough(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func ReadBatchAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactChange>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadBatchAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactChange>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactChange>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactChangeReader"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactChangeReader;{" + IContactChangeReader.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactChangeReader", ContactChangeReader.signature(), IContactChangeReader.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactChangeReader): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactChangeReader {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactChangeReader.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactChangeReader {
+        ContactChangeReader.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactChangeTracker (synthetic:Windows_ApplicationModel_Contacts_ContactChangeTracker)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactChangeTracker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactChangeTracker> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactChangeTracker {
+        ContactChangeTracker(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactChangeTracker {
+        ContactChangeTracker(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactChangeTracker.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactChangeTracker> {
+        let ancestors = [IContactChangeTracker.iid(), IContactChangeTracker2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactChangeTracker>("ContactChangeTracker", IContactChangeTracker.iid(), ancestors, { raw => ContactChangeTracker.fromAbiTake(raw) }, { raw => ContactChangeTracker.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactChangeTracker {
+        match (unsafe { query(IContactChangeTracker.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactChangeTracker(): IContactChangeTracker {
+        defaultInterface()
+    }
+
+    public func asIContactChangeTracker2(): IContactChangeTracker2 {
+        match (unsafe { query<IContactChangeTracker2>(IContactChangeTracker2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func Enable(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Enable() }
+        }
+        hr__.check()
+    }
+
+    public func GetChangeReader(): ContactChangeReader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetChangeReader(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactChangeReader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactChangeReader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Reset(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Reset() }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactChangeTracker"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactChangeTracker;{" + IContactChangeTracker.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactChangeTracker", ContactChangeTracker.signature(), IContactChangeTracker.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactChangeTracker): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactChangeTracker {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactChangeTracker.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactChangeTracker {
+        ContactChangeTracker.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactChangeType (synthetic:Windows_ApplicationModel_Contacts_ContactChangeType)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactChangeType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactChangeType_Created = ContactChangeType(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactChangeType_Modified = ContactChangeType(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactChangeType_Deleted = ContactChangeType(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactChangeType_ChangeTrackingLost = ContactChangeType(3)
+
+// Windows.ApplicationModel.Contacts.ContactChangedDeferral (synthetic:Windows_ApplicationModel_Contacts_ContactChangedDeferral)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactChangedDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactChangedDeferral> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactChangedDeferral {
+        ContactChangedDeferral(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactChangedDeferral {
+        ContactChangedDeferral(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactChangedDeferral.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactChangedDeferral> {
+        let ancestors = [IContactChangedDeferral.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactChangedDeferral>("ContactChangedDeferral", IContactChangedDeferral.iid(), ancestors, { raw => ContactChangedDeferral.fromAbiTake(raw) }, { raw => ContactChangedDeferral.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactChangedDeferral {
+        match (unsafe { query(IContactChangedDeferral.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactChangedDeferral(): IContactChangedDeferral {
+        defaultInterface()
+    }
+
+    public func Complete(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Complete() }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactChangedDeferral"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactChangedDeferral;{" + IContactChangedDeferral.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactChangedDeferral", ContactChangedDeferral.signature(), IContactChangedDeferral.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactChangedDeferral): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactChangedDeferral {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactChangedDeferral.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactChangedDeferral {
+        ContactChangedDeferral.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactChangedEventArgs (synthetic:Windows_ApplicationModel_Contacts_ContactChangedEventArgs)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactChangedEventArgs {
+        ContactChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactChangedEventArgs {
+        ContactChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactChangedEventArgs> {
+        let ancestors = [IContactChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactChangedEventArgs>("ContactChangedEventArgs", IContactChangedEventArgs.iid(), ancestors, { raw => ContactChangedEventArgs.fromAbiTake(raw) }, { raw => ContactChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactChangedEventArgs {
+        match (unsafe { query(IContactChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactChangedEventArgs(): IContactChangedEventArgs {
+        defaultInterface()
+    }
+
+    public func GetDeferral(): ContactChangedDeferral {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDeferral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactChangedDeferral>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactChangedDeferral.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactChangedEventArgs;{" + IContactChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactChangedEventArgs", ContactChangedEventArgs.signature(), IContactChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactChangedEventArgs {
+        ContactChangedEventArgs.viewOf(raw)
+    }
+}
 
 // Windows.ApplicationModel.Contacts.ContactConnectedServiceAccount (synthetic:Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount)
 @When[Windows_ApplicationModel_Contacts == "on"]
@@ -805,19 +2567,19 @@ public class ContactDate <: windows_interface.InterfaceWrapperBase & windows_int
 @When[Windows_ApplicationModel_Contacts == "on"]
 public struct ContactDateKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactDateKind_Birthday = ContactDateKind(0)
+public const ContactDateKind_Birthday = ContactDateKind(0)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactDateKind_Anniversary = ContactDateKind(1)
+public const ContactDateKind_Anniversary = ContactDateKind(1)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactDateKind_Other = ContactDateKind(2)
+public const ContactDateKind_Other = ContactDateKind(2)
 
 // Windows.ApplicationModel.Contacts.ContactEmail (synthetic:Windows_ApplicationModel_Contacts_ContactEmail)
 @When[Windows_ApplicationModel_Contacts == "on"]
@@ -978,77 +2740,884 @@ public class ContactEmail <: windows_interface.InterfaceWrapperBase & windows_in
 @When[Windows_ApplicationModel_Contacts == "on"]
 public struct ContactEmailKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactEmailKind_Personal = ContactEmailKind(0)
+public const ContactEmailKind_Personal = ContactEmailKind(0)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactEmailKind_Work = ContactEmailKind(1)
+public const ContactEmailKind_Work = ContactEmailKind(1)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactEmailKind_Other = ContactEmailKind(2)
+public const ContactEmailKind_Other = ContactEmailKind(2)
+
+// Windows.ApplicationModel.Contacts.ContactField (synthetic:Windows_ApplicationModel_Contacts_ContactField)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactField <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactField> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactField {
+        ContactField(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactField {
+        ContactField(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactField.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactField> {
+        let ancestors = [IContactField.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactField>("ContactField", IContactField.iid(), ancestors, { raw => ContactField.fromAbiTake(raw) }, { raw => ContactField.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactField {
+        match (unsafe { query(IContactField.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactField(): IContactField {
+        defaultInterface()
+    }
+
+    public prop Category: ContactFieldCategory {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Category(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactFieldCategory(result__)
+        }
+    }
+
+    public prop Name: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Name(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Type: ContactFieldType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Type(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactFieldType(result__)
+        }
+    }
+
+    public prop Value: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Value(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func CreateField_Default(value: windows_core.HString, type_: ContactFieldType): ContactField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (factory__ = windows_core.factory<ContactField, IContactFieldFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateField_Default(__argBorrow0.asRaw(), type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateField_Category(value: windows_core.HString, type_: ContactFieldType, category: ContactFieldCategory): ContactField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (factory__ = windows_core.factory<ContactField, IContactFieldFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateField_Category(__argBorrow0.asRaw(), type_.value, category.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateField_Custom(name: windows_core.HString, value: windows_core.HString, type_: ContactFieldType, category: ContactFieldCategory): ContactField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<ContactField, IContactFieldFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateField_Custom(__argBorrow0.asRaw(), __argBorrow1.asRaw(), type_.value, category.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactField"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactField;{" + IContactField.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactField", ContactField.signature(), IContactField.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactField): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactField {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactField.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactField {
+        ContactField.viewOf(raw)
+    }
+}
 
 // Windows.ApplicationModel.Contacts.ContactFieldCategory (synthetic:Windows_ApplicationModel_Contacts_ContactFieldCategory)
 @When[Windows_ApplicationModel_Contacts == "on"]
 public struct ContactFieldCategory {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldCategory_None = ContactFieldCategory(0)
+public const ContactFieldCategory_None = ContactFieldCategory(0)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldCategory_Home = ContactFieldCategory(1)
+public const ContactFieldCategory_Home = ContactFieldCategory(1)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldCategory_Work = ContactFieldCategory(2)
+public const ContactFieldCategory_Work = ContactFieldCategory(2)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldCategory_Mobile = ContactFieldCategory(3)
+public const ContactFieldCategory_Mobile = ContactFieldCategory(3)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldCategory_Other = ContactFieldCategory(4)
+public const ContactFieldCategory_Other = ContactFieldCategory(4)
+
+// Windows.ApplicationModel.Contacts.ContactFieldFactory (synthetic:Windows_ApplicationModel_Contacts_ContactFieldFactory)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactFieldFactory <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactFieldFactory> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactFieldFactory {
+        ContactFieldFactory(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactFieldFactory {
+        ContactFieldFactory(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactFieldFactory.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactFieldFactory> {
+        let ancestors = [IContactFieldFactory.iid(), IContactLocationFieldFactory.iid(), IContactInstantMessageFieldFactory.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactFieldFactory>("ContactFieldFactory", IContactFieldFactory.iid(), ancestors, { raw => ContactFieldFactory.fromAbiTake(raw) }, { raw => ContactFieldFactory.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactFieldFactory {
+        match (unsafe { query(IContactFieldFactory.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactFieldFactory(): IContactFieldFactory {
+        defaultInterface()
+    }
+
+    public func asIContactLocationFieldFactory(): IContactLocationFieldFactory {
+        match (unsafe { query<IContactLocationFieldFactory>(IContactLocationFieldFactory.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContactInstantMessageFieldFactory(): IContactInstantMessageFieldFactory {
+        match (unsafe { query<IContactInstantMessageFieldFactory>(IContactInstantMessageFieldFactory.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func CreateField_Default(value: windows_core.HString, type_: ContactFieldType): ContactField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateField_Default(__argBorrow0.asRaw(), type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateField_Category(value: windows_core.HString, type_: ContactFieldType, category: ContactFieldCategory): ContactField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateField_Category(__argBorrow0.asRaw(), type_.value, category.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateField_Custom(name: windows_core.HString, value: windows_core.HString, type_: ContactFieldType, category: ContactFieldCategory): ContactField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.CreateField_Custom(__argBorrow0.asRaw(), __argBorrow1.asRaw(), type_.value, category.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func new(): ContactFieldFactory {
+        var created__: Option<ContactFieldFactory> = Option<ContactFieldFactory>.None
+        try (factory__ = windows_core.factory<ContactFieldFactory, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ContactFieldFactory>(ContactFieldFactory.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ContactFieldFactory")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactFieldFactory"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactFieldFactory;{" + IContactFieldFactory.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactFieldFactory", ContactFieldFactory.signature(), IContactFieldFactory.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactFieldFactory): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactFieldFactory {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactFieldFactory.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactFieldFactory {
+        ContactFieldFactory.viewOf(raw)
+    }
+}
 
 // Windows.ApplicationModel.Contacts.ContactFieldType (synthetic:Windows_ApplicationModel_Contacts_ContactFieldType)
 @When[Windows_ApplicationModel_Contacts == "on"]
 public struct ContactFieldType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_Email = ContactFieldType(0)
+public const ContactFieldType_Email = ContactFieldType(0)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_PhoneNumber = ContactFieldType(1)
+public const ContactFieldType_PhoneNumber = ContactFieldType(1)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_Location = ContactFieldType(2)
+public const ContactFieldType_Location = ContactFieldType(2)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_InstantMessage = ContactFieldType(3)
+public const ContactFieldType_InstantMessage = ContactFieldType(3)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_Custom = ContactFieldType(4)
+public const ContactFieldType_Custom = ContactFieldType(4)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_ConnectedServiceAccount = ContactFieldType(5)
+public const ContactFieldType_ConnectedServiceAccount = ContactFieldType(5)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_ImportantDate = ContactFieldType(6)
+public const ContactFieldType_ImportantDate = ContactFieldType(6)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_Address = ContactFieldType(7)
+public const ContactFieldType_Address = ContactFieldType(7)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_SignificantOther = ContactFieldType(8)
+public const ContactFieldType_SignificantOther = ContactFieldType(8)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_Notes = ContactFieldType(9)
+public const ContactFieldType_Notes = ContactFieldType(9)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_Website = ContactFieldType(10)
+public const ContactFieldType_Website = ContactFieldType(10)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactFieldType_JobInfo = ContactFieldType(11)
+public const ContactFieldType_JobInfo = ContactFieldType(11)
+
+// Windows.ApplicationModel.Contacts.ContactGroup (synthetic:Windows_ApplicationModel_Contacts_ContactGroup)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactGroup <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactGroup> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactGroup {
+        ContactGroup(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactGroup {
+        ContactGroup(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactGroup.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactGroup> {
+        let ancestors = [IContactGroup.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactGroup>("ContactGroup", IContactGroup.iid(), ancestors, { raw => ContactGroup.fromAbiTake(raw) }, { raw => ContactGroup.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactGroup {
+        match (unsafe { query(IContactGroup.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactGroup(): IContactGroup {
+        defaultInterface()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactGroup"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactGroup;{" + IContactGroup.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactGroup", ContactGroup.signature(), IContactGroup.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactGroup): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactGroup {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactGroup.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactGroup {
+        ContactGroup.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactInformation (synthetic:Windows_ApplicationModel_Contacts_ContactInformation)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactInformation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactInformation> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactInformation {
+        ContactInformation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactInformation {
+        ContactInformation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactInformation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactInformation> {
+        let ancestors = [IContactInformation.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactInformation>("ContactInformation", IContactInformation.iid(), ancestors, { raw => ContactInformation.fromAbiTake(raw) }, { raw => ContactInformation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactInformation {
+        match (unsafe { query(IContactInformation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactInformation(): IContactInformation {
+        defaultInterface()
+    }
+
+    public prop CustomFields: Windows_Foundation_Collections.IVectorView<ContactField> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CustomFields(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ContactField>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<ContactField>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Emails: Windows_Foundation_Collections.IVectorView<ContactField> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Emails(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ContactField>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<ContactField>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop InstantMessages: Windows_Foundation_Collections.IVectorView<ContactInstantMessageField> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InstantMessages(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ContactInstantMessageField>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<ContactInstantMessageField>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Locations: Windows_Foundation_Collections.IVectorView<ContactLocationField> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Locations(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ContactLocationField>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<ContactLocationField>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Name: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Name(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PhoneNumbers: Windows_Foundation_Collections.IVectorView<ContactField> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ContactField>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<ContactField>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func GetThumbnailAsync(): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IRandomAccessStreamWithContentType> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetThumbnailAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IRandomAccessStreamWithContentType>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IRandomAccessStreamWithContentType>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func QueryCustomFields(customName: windows_core.HString): Windows_Foundation_Collections.IVectorView<ContactField> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(customName)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.QueryCustomFields(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ContactField>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<ContactField>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactInformation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactInformation;{" + IContactInformation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactInformation", ContactInformation.signature(), IContactInformation.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactInformation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactInformation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactInformation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactInformation {
+        ContactInformation.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactInstantMessageField (synthetic:Windows_ApplicationModel_Contacts_ContactInstantMessageField)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactInstantMessageField <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactInstantMessageField> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactInstantMessageField {
+        ContactInstantMessageField(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactInstantMessageField {
+        ContactInstantMessageField(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactInstantMessageField.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactInstantMessageField> {
+        let ancestors = [IContactInstantMessageField.iid(), IContactField.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactInstantMessageField>("ContactInstantMessageField", IContactInstantMessageField.iid(), ancestors, { raw => ContactInstantMessageField.fromAbiTake(raw) }, { raw => ContactInstantMessageField.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactInstantMessageField {
+        match (unsafe { query(IContactInstantMessageField.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactInstantMessageField(): IContactInstantMessageField {
+        defaultInterface()
+    }
+
+    public func asIContactField(): IContactField {
+        match (unsafe { query<IContactField>(IContactField.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop DisplayText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop LaunchUri: Windows_Foundation.Uri {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LaunchUri(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.Uri>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.Uri.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Service: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Service(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop UserName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UserName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func CreateInstantMessage_Default(userName: windows_core.HString): ContactInstantMessageField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(userName)) {
+            try (factory__ = windows_core.factory<ContactInstantMessageField, IContactInstantMessageFieldFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstantMessage_Default(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactInstantMessageField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactInstantMessageField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstantMessage_Category(userName: windows_core.HString, category: ContactFieldCategory): ContactInstantMessageField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(userName)) {
+            try (factory__ = windows_core.factory<ContactInstantMessageField, IContactInstantMessageFieldFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstantMessage_Category(__argBorrow0.asRaw(), category.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactInstantMessageField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactInstantMessageField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstantMessage_All(userName: windows_core.HString, category: ContactFieldCategory, service: windows_core.HString, displayText: windows_core.HString, verb: Windows_Foundation.Uri): ContactInstantMessageField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(userName)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(service)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(displayText)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(verb)) {
+                        try (factory__ = windows_core.factory<ContactInstantMessageField, IContactInstantMessageFieldFactory>().unwrap()) {
+                            hr__ = unsafe { factory__.CreateInstantMessage_All(__argBorrow0.asRaw(), category.value, __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactInstantMessageField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactInstantMessageField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactInstantMessageField"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactInstantMessageField;{" + IContactInstantMessageField.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactInstantMessageField", ContactInstantMessageField.signature(), IContactInstantMessageField.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactInstantMessageField): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactInstantMessageField {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactInstantMessageField.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactInstantMessageField {
+        ContactInstantMessageField.viewOf(raw)
+    }
+}
 
 // Windows.ApplicationModel.Contacts.ContactJobInfo (synthetic:Windows_ApplicationModel_Contacts_ContactJobInfo)
 @When[Windows_ApplicationModel_Contacts == "on"]
@@ -1336,6 +3905,2841 @@ public class ContactJobInfo <: windows_interface.InterfaceWrapperBase & windows_
     }
 }
 
+// Windows.ApplicationModel.Contacts.ContactLaunchActionVerbs (synthetic:Windows_ApplicationModel_Contacts_ContactLaunchActionVerbs)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactLaunchActionVerbs <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Call(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactLaunchActionVerbs, IContactLaunchActionVerbsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Call(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Message(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactLaunchActionVerbs, IContactLaunchActionVerbsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Message(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Map(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactLaunchActionVerbs, IContactLaunchActionVerbsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Map(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Post(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactLaunchActionVerbs, IContactLaunchActionVerbsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Post(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func VideoCall(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactLaunchActionVerbs, IContactLaunchActionVerbsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VideoCall(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactLaunchActionVerbs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactLaunchActionVerbs)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactLaunchActionVerbs", ContactLaunchActionVerbs.signature())
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactList (synthetic:Windows_ApplicationModel_Contacts_ContactList)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactList <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactList> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactList {
+        ContactList(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactList {
+        ContactList(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactList.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactList> {
+        let ancestors = [IContactList.iid(), IContactList2.iid(), IContactList3.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactList>("ContactList", IContactList.iid(), ancestors, { raw => ContactList.fromAbiTake(raw) }, { raw => ContactList.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactList {
+        match (unsafe { query(IContactList.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactList(): IContactList {
+        defaultInterface()
+    }
+
+    public func asIContactList2(): IContactList2 {
+        match (unsafe { query<IContactList2>(IContactList2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContactList3(): IContactList3 {
+        match (unsafe { query<IContactList3>(IContactList3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop ChangeTracker: ContactChangeTracker {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChangeTracker(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContactChangeTracker>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContactChangeTracker.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop DisplayName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDisplayName(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Id: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public mut prop IsHidden: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsHidden(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsHidden(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OtherAppReadAccess: ContactListOtherAppReadAccess {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OtherAppReadAccess(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactListOtherAppReadAccess(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetOtherAppReadAccess(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OtherAppWriteAccess: ContactListOtherAppWriteAccess {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OtherAppWriteAccess(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactListOtherAppWriteAccess(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetOtherAppWriteAccess(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop SourceDisplayName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SourceDisplayName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop SupportsServerSearch: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SupportsServerSearch(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop SyncManager: ContactListSyncManager {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SyncManager(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContactListSyncManager>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContactListSyncManager.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop UserDataAccountId: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UserDataAccountId(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func addContactChanged(value: Windows_Foundation.TypedEventHandler<ContactList, ContactChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ContactList, ContactChangedEventArgs>>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ContactChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeContactChanged(value: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveContactChanged(value) }
+        }
+        hr__.check()
+    }
+
+    public func SaveAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SaveAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DeleteAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DeleteAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetContactFromRemoteIdAsync(remoteId: windows_core.HString): Windows_Foundation.IAsyncOperation<Contact> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(remoteId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetContactFromRemoteIdAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Contact>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Contact>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetMeContactAsync(): Windows_Foundation.IAsyncOperation<Contact> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetMeContactAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Contact>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Contact>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetContactReader(): ContactReader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetContactReader(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactReader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactReader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetContactReaderWithOptions(options: ContactQueryOptions): ContactReader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ContactQueryOptions>(options)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetContactReaderWithOptions(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactReader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactReader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func SaveContactAsync(contact: Contact): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SaveContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DeleteContactAsync(contact: Contact): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeleteContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetContactAsync(contactId: windows_core.HString): Windows_Foundation.IAsyncOperation<Contact> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contactId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Contact>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Contact>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactList"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactList;{" + IContactList.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactList", ContactList.signature(), IContactList.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactList): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactList {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactList.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactList {
+        ContactList.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactListLimitedWriteOperations (synthetic:Windows_ApplicationModel_Contacts_ContactListLimitedWriteOperations)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactListLimitedWriteOperations <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactListLimitedWriteOperations> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactListLimitedWriteOperations {
+        ContactListLimitedWriteOperations(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactListLimitedWriteOperations {
+        ContactListLimitedWriteOperations(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactListLimitedWriteOperations.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactListLimitedWriteOperations> {
+        let ancestors = [IContactListLimitedWriteOperations.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactListLimitedWriteOperations>("ContactListLimitedWriteOperations", IContactListLimitedWriteOperations.iid(), ancestors, { raw => ContactListLimitedWriteOperations.fromAbiTake(raw) }, { raw => ContactListLimitedWriteOperations.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactListLimitedWriteOperations {
+        match (unsafe { query(IContactListLimitedWriteOperations.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactListLimitedWriteOperations(): IContactListLimitedWriteOperations {
+        defaultInterface()
+    }
+
+    public func TryCreateOrUpdateContactAsync(contact: Contact): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TryCreateOrUpdateContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func TryDeleteContactAsync(contactId: windows_core.HString): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contactId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TryDeleteContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactListLimitedWriteOperations"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactListLimitedWriteOperations;{" + IContactListLimitedWriteOperations.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactListLimitedWriteOperations", ContactListLimitedWriteOperations.signature(), IContactListLimitedWriteOperations.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactListLimitedWriteOperations): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactListLimitedWriteOperations {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactListLimitedWriteOperations.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactListLimitedWriteOperations {
+        ContactListLimitedWriteOperations.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactListOtherAppReadAccess (synthetic:Windows_ApplicationModel_Contacts_ContactListOtherAppReadAccess)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactListOtherAppReadAccess {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListOtherAppReadAccess_SystemOnly = ContactListOtherAppReadAccess(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListOtherAppReadAccess_Limited = ContactListOtherAppReadAccess(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListOtherAppReadAccess_Full = ContactListOtherAppReadAccess(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListOtherAppReadAccess_None = ContactListOtherAppReadAccess(3)
+
+// Windows.ApplicationModel.Contacts.ContactListOtherAppWriteAccess (synthetic:Windows_ApplicationModel_Contacts_ContactListOtherAppWriteAccess)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactListOtherAppWriteAccess {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListOtherAppWriteAccess_None = ContactListOtherAppWriteAccess(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListOtherAppWriteAccess_SystemOnly = ContactListOtherAppWriteAccess(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListOtherAppWriteAccess_Limited = ContactListOtherAppWriteAccess(2)
+
+// Windows.ApplicationModel.Contacts.ContactListSyncConstraints (synthetic:Windows_ApplicationModel_Contacts_ContactListSyncConstraints)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactListSyncConstraints <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactListSyncConstraints> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactListSyncConstraints {
+        ContactListSyncConstraints(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactListSyncConstraints {
+        ContactListSyncConstraints(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactListSyncConstraints.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactListSyncConstraints> {
+        let ancestors = [IContactListSyncConstraints.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactListSyncConstraints>("ContactListSyncConstraints", IContactListSyncConstraints.iid(), ancestors, { raw => ContactListSyncConstraints.fromAbiTake(raw) }, { raw => ContactListSyncConstraints.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactListSyncConstraints {
+        match (unsafe { query(IContactListSyncConstraints.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactListSyncConstraints(): IContactListSyncConstraints {
+        defaultInterface()
+    }
+
+    public mut prop CanSyncDescriptions: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanSyncDescriptions(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCanSyncDescriptions(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxAnniversaryDates: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxAnniversaryDates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxAnniversaryDates(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxAssistantPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxAssistantPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxAssistantPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxBirthdayDates: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxBirthdayDates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxBirthdayDates(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxBusinessFaxPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxBusinessFaxPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxBusinessFaxPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxChildRelationships: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxChildRelationships(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxChildRelationships(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxCompanyPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxCompanyPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxCompanyPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxHomeAddresses: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxHomeAddresses(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxHomeAddresses(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxHomeFaxPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxHomeFaxPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxHomeFaxPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxHomePhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxHomePhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxHomePhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxJobInfo: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxJobInfo(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxJobInfo(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxMobilePhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxMobilePhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxMobilePhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxOtherAddresses: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxOtherAddresses(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxOtherAddresses(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxOtherDates: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxOtherDates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxOtherDates(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxOtherEmailAddresses: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxOtherEmailAddresses(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxOtherEmailAddresses(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxOtherPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxOtherPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxOtherPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxOtherRelationships: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxOtherRelationships(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxOtherRelationships(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxPagerPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxPagerPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxPagerPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxParentRelationships: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxParentRelationships(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxParentRelationships(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxPartnerRelationships: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxPartnerRelationships(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxPartnerRelationships(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxPersonalEmailAddresses: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxPersonalEmailAddresses(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxPersonalEmailAddresses(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxRadioPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxRadioPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxRadioPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxSiblingRelationships: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxSiblingRelationships(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxSiblingRelationships(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxSpouseRelationships: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxSpouseRelationships(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxSpouseRelationships(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxWebsites: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxWebsites(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxWebsites(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxWorkAddresses: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxWorkAddresses(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxWorkAddresses(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxWorkEmailAddresses: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxWorkEmailAddresses(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxWorkEmailAddresses(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxWorkPhoneNumbers: Windows_Foundation.IReference<Int32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxWorkPhoneNumbers(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<Int32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<Int32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<Int32>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMaxWorkPhoneNumbers(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactListSyncConstraints"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactListSyncConstraints;{" + IContactListSyncConstraints.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactListSyncConstraints", ContactListSyncConstraints.signature(), IContactListSyncConstraints.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactListSyncConstraints): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactListSyncConstraints {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactListSyncConstraints.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactListSyncConstraints {
+        ContactListSyncConstraints.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactListSyncManager (synthetic:Windows_ApplicationModel_Contacts_ContactListSyncManager)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactListSyncManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactListSyncManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactListSyncManager {
+        ContactListSyncManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactListSyncManager {
+        ContactListSyncManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactListSyncManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactListSyncManager> {
+        let ancestors = [IContactListSyncManager.iid(), IContactListSyncManager2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactListSyncManager>("ContactListSyncManager", IContactListSyncManager.iid(), ancestors, { raw => ContactListSyncManager.fromAbiTake(raw) }, { raw => ContactListSyncManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactListSyncManager {
+        match (unsafe { query(IContactListSyncManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactListSyncManager(): IContactListSyncManager {
+        defaultInterface()
+    }
+
+    public func asIContactListSyncManager2(): IContactListSyncManager2 {
+        match (unsafe { query<IContactListSyncManager2>(IContactListSyncManager2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop LastAttemptedSyncTime: Windows_Foundation.DateTime {
+        get() {
+            var result__ = Windows_Foundation.DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastAttemptedSyncTime(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop LastSuccessfulSyncTime: Windows_Foundation.DateTime {
+        get() {
+            var result__ = Windows_Foundation.DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LastSuccessfulSyncTime(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Status: ContactListSyncStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Status(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactListSyncStatus(result__)
+        }
+    }
+
+    public func addSyncStatusChanged(handler: Windows_Foundation.TypedEventHandler<ContactListSyncManager, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ContactListSyncManager, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SyncStatusChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeSyncStatusChanged(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveSyncStatusChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func SyncAsync(): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SyncAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactListSyncManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactListSyncManager;{" + IContactListSyncManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactListSyncManager", ContactListSyncManager.signature(), IContactListSyncManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactListSyncManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactListSyncManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactListSyncManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactListSyncManager {
+        ContactListSyncManager.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactListSyncStatus (synthetic:Windows_ApplicationModel_Contacts_ContactListSyncStatus)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactListSyncStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListSyncStatus_Idle = ContactListSyncStatus(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListSyncStatus_Syncing = ContactListSyncStatus(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListSyncStatus_UpToDate = ContactListSyncStatus(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListSyncStatus_AuthenticationError = ContactListSyncStatus(3)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListSyncStatus_PolicyError = ContactListSyncStatus(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListSyncStatus_UnknownError = ContactListSyncStatus(5)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactListSyncStatus_ManualAccountRemovalRequired = ContactListSyncStatus(6)
+
+// Windows.ApplicationModel.Contacts.ContactLocationField (synthetic:Windows_ApplicationModel_Contacts_ContactLocationField)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactLocationField <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactLocationField> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactLocationField {
+        ContactLocationField(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactLocationField {
+        ContactLocationField(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactLocationField.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactLocationField> {
+        let ancestors = [IContactLocationField.iid(), IContactField.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactLocationField>("ContactLocationField", IContactLocationField.iid(), ancestors, { raw => ContactLocationField.fromAbiTake(raw) }, { raw => ContactLocationField.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactLocationField {
+        match (unsafe { query(IContactLocationField.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactLocationField(): IContactLocationField {
+        defaultInterface()
+    }
+
+    public func asIContactField(): IContactField {
+        match (unsafe { query<IContactField>(IContactField.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop City: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.City(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Country: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Country(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop PostalCode: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PostalCode(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Region: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Region(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Street: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Street(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop UnstructuredAddress: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UnstructuredAddress(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func CreateLocation_Default(unstructuredAddress: windows_core.HString): ContactLocationField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(unstructuredAddress)) {
+            try (factory__ = windows_core.factory<ContactLocationField, IContactLocationFieldFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateLocation_Default(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactLocationField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactLocationField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateLocation_Category(unstructuredAddress: windows_core.HString, category: ContactFieldCategory): ContactLocationField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(unstructuredAddress)) {
+            try (factory__ = windows_core.factory<ContactLocationField, IContactLocationFieldFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateLocation_Category(__argBorrow0.asRaw(), category.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactLocationField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactLocationField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateLocation_All(unstructuredAddress: windows_core.HString, category: ContactFieldCategory, street: windows_core.HString, city: windows_core.HString, region: windows_core.HString, country: windows_core.HString, postalCode: windows_core.HString): ContactLocationField {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(unstructuredAddress)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(street)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(city)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<windows_core.HString>(region)) {
+                        try (__argBorrow4 = windows_core.winrtBorrowGenericIn<windows_core.HString>(country)) {
+                            try (__argBorrow5 = windows_core.winrtBorrowGenericIn<windows_core.HString>(postalCode)) {
+                                try (factory__ = windows_core.factory<ContactLocationField, IContactLocationFieldFactory>().unwrap()) {
+                                    hr__ = unsafe { factory__.CreateLocation_All(__argBorrow0.asRaw(), category.value, __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), __argBorrow4.asRaw(), __argBorrow5.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactLocationField>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactLocationField.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactLocationField"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactLocationField;{" + IContactLocationField.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactLocationField", ContactLocationField.signature(), IContactLocationField.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactLocationField): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactLocationField {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactLocationField.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactLocationField {
+        ContactLocationField.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactManager (synthetic:Windows_ApplicationModel_Contacts_ContactManager)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func RequestStoreAsync(): Windows_Foundation.IAsyncOperation<ContactStore> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.RequestStoreAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactStore>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactStore>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ShowContactCard(contact: Contact, selection: Windows_Foundation.Rect): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ShowContactCard(__argBorrow0.asRaw(), selection) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ShowContactCardWithPlacement(contact: Contact, selection: Windows_Foundation.Rect, preferredPlacement: Windows_UI_Popups.Placement): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ShowContactCardWithPlacement(__argBorrow0.asRaw(), selection, preferredPlacement.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ShowDelayLoadedContactCard(contact: Contact, selection: Windows_Foundation.Rect, preferredPlacement: Windows_UI_Popups.Placement): ContactCardDelayedDataLoader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ShowDelayLoadedContactCard(__argBorrow0.asRaw(), selection, preferredPlacement.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactCardDelayedDataLoader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactCardDelayedDataLoader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsShowFullContactCardSupportedAsync(): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics5>().unwrap()) {
+            hr__ = unsafe { factory__.IsShowFullContactCardSupportedAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IncludeMiddleNameInSystemDisplayAndSort(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics5>().unwrap()) {
+            hr__ = unsafe { factory__.IncludeMiddleNameInSystemDisplayAndSort(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetIncludeMiddleNameInSystemDisplayAndSort(value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics5>().unwrap()) {
+            hr__ = unsafe { factory__.SetIncludeMiddleNameInSystemDisplayAndSort(value) }
+        }
+        hr__.check()
+    }
+
+    public static func ConvertContactToVCardAsync(contact: Contact): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+                hr__ = unsafe { factory__.ConvertContactToVCardAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ConvertContactToVCardAsyncWithMaxBytes(contact: Contact, maxBytes: UInt32): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+                hr__ = unsafe { factory__.ConvertContactToVCardAsyncWithMaxBytes(__argBorrow0.asRaw(), maxBytes, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ConvertVCardToContactAsync(vCard: Windows_Storage_Streams.IRandomAccessStreamReference): Windows_Foundation.IAsyncOperation<Contact> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStreamReference>(vCard)) {
+            try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+                hr__ = unsafe { factory__.ConvertVCardToContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Contact>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Contact>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestStoreAsyncWithAccessType(accessType: ContactStoreAccessType): Windows_Foundation.IAsyncOperation<ContactStore> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.RequestStoreAsyncWithAccessType(accessType.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactStore>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactStore>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RequestAnnotationStoreAsync(accessType: ContactAnnotationStoreAccessType): Windows_Foundation.IAsyncOperation<ContactAnnotationStore> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.RequestAnnotationStoreAsync(accessType.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactAnnotationStore>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactAnnotationStore>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsShowContactCardSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.IsShowContactCardSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ShowContactCardWithOptions(contact: Contact, selection: Windows_Foundation.Rect, preferredPlacement: Windows_UI_Popups.Placement, contactCardOptions: ContactCardOptions): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ContactCardOptions>(contactCardOptions)) {
+                try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+                    hr__ = unsafe { factory__.ShowContactCardWithOptions(__argBorrow0.asRaw(), selection, preferredPlacement.value, __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func IsShowDelayLoadedContactCardSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.IsShowDelayLoadedContactCardSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ShowDelayLoadedContactCardWithOptions(contact: Contact, selection: Windows_Foundation.Rect, preferredPlacement: Windows_UI_Popups.Placement, contactCardOptions: ContactCardOptions): ContactCardDelayedDataLoader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<ContactCardOptions>(contactCardOptions)) {
+                try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+                    hr__ = unsafe { factory__.ShowDelayLoadedContactCardWithOptions(__argBorrow0.asRaw(), selection, preferredPlacement.value, __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactCardDelayedDataLoader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactCardDelayedDataLoader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ShowFullContactCard(contact: Contact, fullContactCardOptions: FullContactCardOptions): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<FullContactCardOptions>(fullContactCardOptions)) {
+                try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+                    hr__ = unsafe { factory__.ShowFullContactCard(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SystemDisplayNameOrder(): ContactNameOrder {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.SystemDisplayNameOrder(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return ContactNameOrder(result__)
+    }
+
+    public static func SetSystemDisplayNameOrder(value: ContactNameOrder): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.SetSystemDisplayNameOrder(value.value) }
+        }
+        hr__.check()
+    }
+
+    public static func SystemSortOrder(): ContactNameOrder {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.SystemSortOrder(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return ContactNameOrder(result__)
+    }
+
+    public static func SetSystemSortOrder(value: ContactNameOrder): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics3>().unwrap()) {
+            hr__ = unsafe { factory__.SetSystemSortOrder(value.value) }
+        }
+        hr__.check()
+    }
+
+    public static func GetForUser(user: Windows_System.User): ContactManagerForUser {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<ContactManager, IContactManagerStatics4>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactManagerForUser>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactManagerForUser.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactManager", ContactManager.signature())
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactManagerForUser (synthetic:Windows_ApplicationModel_Contacts_ContactManagerForUser)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactManagerForUser <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactManagerForUser> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactManagerForUser {
+        ContactManagerForUser(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactManagerForUser {
+        ContactManagerForUser(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactManagerForUser.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactManagerForUser> {
+        let ancestors = [IContactManagerForUser.iid(), IContactManagerForUser2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactManagerForUser>("ContactManagerForUser", IContactManagerForUser.iid(), ancestors, { raw => ContactManagerForUser.fromAbiTake(raw) }, { raw => ContactManagerForUser.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactManagerForUser {
+        match (unsafe { query(IContactManagerForUser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactManagerForUser(): IContactManagerForUser {
+        defaultInterface()
+    }
+
+    public func asIContactManagerForUser2(): IContactManagerForUser2 {
+        match (unsafe { query<IContactManagerForUser2>(IContactManagerForUser2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop SystemDisplayNameOrder: ContactNameOrder {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemDisplayNameOrder(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactNameOrder(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSystemDisplayNameOrder(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SystemSortOrder: ContactNameOrder {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemSortOrder(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactNameOrder(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSystemSortOrder(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop User: Windows_System.User {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_System.User>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_System.User.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func ConvertContactToVCardAsync(contact: Contact): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ConvertContactToVCardAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func ConvertContactToVCardAsyncWithMaxBytes(contact: Contact, maxBytes: UInt32): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ConvertContactToVCardAsyncWithMaxBytes(__argBorrow0.asRaw(), maxBytes, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.RandomAccessStreamReference>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func ConvertVCardToContactAsync(vCard: Windows_Storage_Streams.IRandomAccessStreamReference): Windows_Foundation.IAsyncOperation<Contact> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStreamReference>(vCard)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ConvertVCardToContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Contact>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Contact>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RequestStoreAsync(accessType: ContactStoreAccessType): Windows_Foundation.IAsyncOperation<ContactStore> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RequestStoreAsync(accessType.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactStore>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactStore>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RequestAnnotationStoreAsync(accessType: ContactAnnotationStoreAccessType): Windows_Foundation.IAsyncOperation<ContactAnnotationStore> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RequestAnnotationStoreAsync(accessType.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactAnnotationStore>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactAnnotationStore>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactManagerForUser"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactManagerForUser;{" + IContactManagerForUser.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactManagerForUser", ContactManagerForUser.signature(), IContactManagerForUser.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactManagerForUser): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactManagerForUser {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactManagerForUser.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactManagerForUser {
+        ContactManagerForUser.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactMatchReason (synthetic:Windows_ApplicationModel_Contacts_ContactMatchReason)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactMatchReason <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactMatchReason> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactMatchReason {
+        ContactMatchReason(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactMatchReason {
+        ContactMatchReason(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactMatchReason.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactMatchReason> {
+        let ancestors = [IContactMatchReason.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactMatchReason>("ContactMatchReason", IContactMatchReason.iid(), ancestors, { raw => ContactMatchReason.fromAbiTake(raw) }, { raw => ContactMatchReason.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactMatchReason {
+        match (unsafe { query(IContactMatchReason.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactMatchReason(): IContactMatchReason {
+        defaultInterface()
+    }
+
+    public prop Field: ContactMatchReasonKind {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Field(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactMatchReasonKind(result__)
+        }
+    }
+
+    public prop Segments: Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Segments(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Text: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Text(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactMatchReason"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactMatchReason;{" + IContactMatchReason.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactMatchReason", ContactMatchReason.signature(), IContactMatchReason.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactMatchReason): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactMatchReason {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactMatchReason.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactMatchReason {
+        ContactMatchReason.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactMatchReasonKind (synthetic:Windows_ApplicationModel_Contacts_ContactMatchReasonKind)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactMatchReasonKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactMatchReasonKind_Name = ContactMatchReasonKind(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactMatchReasonKind_EmailAddress = ContactMatchReasonKind(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactMatchReasonKind_PhoneNumber = ContactMatchReasonKind(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactMatchReasonKind_JobInfo = ContactMatchReasonKind(3)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactMatchReasonKind_YomiName = ContactMatchReasonKind(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactMatchReasonKind_Other = ContactMatchReasonKind(5)
+
+// Windows.ApplicationModel.Contacts.ContactNameOrder (synthetic:Windows_ApplicationModel_Contacts_ContactNameOrder)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactNameOrder {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactNameOrder_FirstNameLastName = ContactNameOrder(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactNameOrder_LastNameFirstName = ContactNameOrder(1)
+
+// Windows.ApplicationModel.Contacts.ContactPanel (synthetic:Windows_ApplicationModel_Contacts_ContactPanel)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactPanel <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactPanel> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactPanel {
+        ContactPanel(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactPanel {
+        ContactPanel(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactPanel.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactPanel> {
+        let ancestors = [IContactPanel.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactPanel>("ContactPanel", IContactPanel.iid(), ancestors, { raw => ContactPanel.fromAbiTake(raw) }, { raw => ContactPanel.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactPanel {
+        match (unsafe { query(IContactPanel.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactPanel(): IContactPanel {
+        defaultInterface()
+    }
+
+    public mut prop HeaderColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HeaderColor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetHeaderColor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addClosing(handler: Windows_Foundation.TypedEventHandler<ContactPanel, ContactPanelClosingEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ContactPanel, ContactPanelClosingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Closing(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeClosing(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveClosing(token) }
+        }
+        hr__.check()
+    }
+
+    public func addLaunchFullAppRequested(handler: Windows_Foundation.TypedEventHandler<ContactPanel, ContactPanelLaunchFullAppRequestedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ContactPanel, ContactPanelLaunchFullAppRequestedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LaunchFullAppRequested(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeLaunchFullAppRequested(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveLaunchFullAppRequested(token) }
+        }
+        hr__.check()
+    }
+
+    public func ClosePanel(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ClosePanel() }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactPanel"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactPanel;{" + IContactPanel.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactPanel", ContactPanel.signature(), IContactPanel.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactPanel): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactPanel {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactPanel.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactPanel {
+        ContactPanel.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactPanelClosingEventArgs (synthetic:Windows_ApplicationModel_Contacts_ContactPanelClosingEventArgs)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactPanelClosingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactPanelClosingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactPanelClosingEventArgs {
+        ContactPanelClosingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactPanelClosingEventArgs {
+        ContactPanelClosingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactPanelClosingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactPanelClosingEventArgs> {
+        let ancestors = [IContactPanelClosingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactPanelClosingEventArgs>("ContactPanelClosingEventArgs", IContactPanelClosingEventArgs.iid(), ancestors, { raw => ContactPanelClosingEventArgs.fromAbiTake(raw) }, { raw => ContactPanelClosingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactPanelClosingEventArgs {
+        match (unsafe { query(IContactPanelClosingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactPanelClosingEventArgs(): IContactPanelClosingEventArgs {
+        defaultInterface()
+    }
+
+    public func GetDeferral(): Windows_Foundation.Deferral {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDeferral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.Deferral>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.Deferral.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactPanelClosingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactPanelClosingEventArgs;{" + IContactPanelClosingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactPanelClosingEventArgs", ContactPanelClosingEventArgs.signature(), IContactPanelClosingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactPanelClosingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactPanelClosingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactPanelClosingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactPanelClosingEventArgs {
+        ContactPanelClosingEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactPanelLaunchFullAppRequestedEventArgs (synthetic:Windows_ApplicationModel_Contacts_ContactPanelLaunchFullAppRequestedEventArgs)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactPanelLaunchFullAppRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactPanelLaunchFullAppRequestedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactPanelLaunchFullAppRequestedEventArgs {
+        ContactPanelLaunchFullAppRequestedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactPanelLaunchFullAppRequestedEventArgs {
+        ContactPanelLaunchFullAppRequestedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactPanelLaunchFullAppRequestedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactPanelLaunchFullAppRequestedEventArgs> {
+        let ancestors = [IContactPanelLaunchFullAppRequestedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactPanelLaunchFullAppRequestedEventArgs>("ContactPanelLaunchFullAppRequestedEventArgs", IContactPanelLaunchFullAppRequestedEventArgs.iid(), ancestors, { raw => ContactPanelLaunchFullAppRequestedEventArgs.fromAbiTake(raw) }, { raw => ContactPanelLaunchFullAppRequestedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactPanelLaunchFullAppRequestedEventArgs {
+        match (unsafe { query(IContactPanelLaunchFullAppRequestedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactPanelLaunchFullAppRequestedEventArgs(): IContactPanelLaunchFullAppRequestedEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactPanelLaunchFullAppRequestedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactPanelLaunchFullAppRequestedEventArgs;{" + IContactPanelLaunchFullAppRequestedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactPanelLaunchFullAppRequestedEventArgs", ContactPanelLaunchFullAppRequestedEventArgs.signature(), IContactPanelLaunchFullAppRequestedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactPanelLaunchFullAppRequestedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactPanelLaunchFullAppRequestedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactPanelLaunchFullAppRequestedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactPanelLaunchFullAppRequestedEventArgs {
+        ContactPanelLaunchFullAppRequestedEventArgs.viewOf(raw)
+    }
+}
+
 // Windows.ApplicationModel.Contacts.ContactPhone (synthetic:Windows_ApplicationModel_Contacts_ContactPhone)
 @When[Windows_ApplicationModel_Contacts == "on"]
 public class ContactPhone <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactPhone> {
@@ -1495,57 +6899,845 @@ public class ContactPhone <: windows_interface.InterfaceWrapperBase & windows_in
 @When[Windows_ApplicationModel_Contacts == "on"]
 public struct ContactPhoneKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Home = ContactPhoneKind(0)
+public const ContactPhoneKind_Home = ContactPhoneKind(0)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Mobile = ContactPhoneKind(1)
+public const ContactPhoneKind_Mobile = ContactPhoneKind(1)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Work = ContactPhoneKind(2)
+public const ContactPhoneKind_Work = ContactPhoneKind(2)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Other = ContactPhoneKind(3)
+public const ContactPhoneKind_Other = ContactPhoneKind(3)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Pager = ContactPhoneKind(4)
+public const ContactPhoneKind_Pager = ContactPhoneKind(4)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_BusinessFax = ContactPhoneKind(5)
+public const ContactPhoneKind_BusinessFax = ContactPhoneKind(5)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_HomeFax = ContactPhoneKind(6)
+public const ContactPhoneKind_HomeFax = ContactPhoneKind(6)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Company = ContactPhoneKind(7)
+public const ContactPhoneKind_Company = ContactPhoneKind(7)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Assistant = ContactPhoneKind(8)
+public const ContactPhoneKind_Assistant = ContactPhoneKind(8)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactPhoneKind_Radio = ContactPhoneKind(9)
+public const ContactPhoneKind_Radio = ContactPhoneKind(9)
+
+// Windows.ApplicationModel.Contacts.ContactPicker (synthetic:Windows_ApplicationModel_Contacts_ContactPicker)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactPicker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactPicker> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactPicker {
+        ContactPicker(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactPicker {
+        ContactPicker(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactPicker.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactPicker> {
+        let ancestors = [IContactPicker.iid(), IContactPicker2.iid(), IContactPicker3.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactPicker>("ContactPicker", IContactPicker.iid(), ancestors, { raw => ContactPicker.fromAbiTake(raw) }, { raw => ContactPicker.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactPicker {
+        match (unsafe { query(IContactPicker.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactPicker(): IContactPicker {
+        defaultInterface()
+    }
+
+    public func asIContactPicker2(): IContactPicker2 {
+        match (unsafe { query<IContactPicker2>(IContactPicker2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContactPicker3(): IContactPicker3 {
+        match (unsafe { query<IContactPicker3>(IContactPicker3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop CommitButtonText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CommitButtonText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCommitButtonText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop DesiredFields: Windows_Foundation_Collections.IVector<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DesiredFields(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop SelectionMode: ContactSelectionMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectionMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactSelectionMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSelectionMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func PickSingleContactAsync(): Windows_Foundation.IAsyncOperation<ContactInformation> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.PickSingleContactAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactInformation>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactInformation>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func PickMultipleContactsAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactInformation>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.PickMultipleContactsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactInformation>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ContactInformation>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func new(): ContactPicker {
+        var created__: Option<ContactPicker> = Option<ContactPicker>.None
+        try (factory__ = windows_core.factory<ContactPicker, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ContactPicker>(ContactPicker.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ContactPicker")
+        }
+    }
+
+    public static func CreateForUser(user: Windows_System.User): ContactPicker {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<ContactPicker, IContactPickerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactPicker>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactPicker.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsSupportedAsync(): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ContactPicker, IContactPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupportedAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactPicker"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactPicker;{" + IContactPicker.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactPicker", ContactPicker.signature(), IContactPicker.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactPicker): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactPicker {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactPicker.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactPicker {
+        ContactPicker.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactQueryDesiredFields (synthetic:Windows_ApplicationModel_Contacts_ContactQueryDesiredFields)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactQueryDesiredFields {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ContactQueryDesiredFields): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ContactQueryDesiredFields): ContactQueryDesiredFields {
+        return ContactQueryDesiredFields(value | other.value)
+    }
+    public operator func &(other: ContactQueryDesiredFields): ContactQueryDesiredFields {
+        return ContactQueryDesiredFields(value & other.value)
+    }
+    public operator func ^(other: ContactQueryDesiredFields): ContactQueryDesiredFields {
+        return ContactQueryDesiredFields(value ^ other.value)
+    }
+    public operator func !(): ContactQueryDesiredFields {
+        return ContactQueryDesiredFields(!value)
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQueryDesiredFields_None = ContactQueryDesiredFields(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQueryDesiredFields_PhoneNumber = ContactQueryDesiredFields(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQueryDesiredFields_EmailAddress = ContactQueryDesiredFields(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQueryDesiredFields_PostalAddress = ContactQueryDesiredFields(4)
+
+// Windows.ApplicationModel.Contacts.ContactQueryOptions (synthetic:Windows_ApplicationModel_Contacts_ContactQueryOptions)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactQueryOptions <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactQueryOptions> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactQueryOptions {
+        ContactQueryOptions(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactQueryOptions {
+        ContactQueryOptions(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactQueryOptions.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactQueryOptions> {
+        let ancestors = [IContactQueryOptions.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactQueryOptions>("ContactQueryOptions", IContactQueryOptions.iid(), ancestors, { raw => ContactQueryOptions.fromAbiTake(raw) }, { raw => ContactQueryOptions.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactQueryOptions {
+        match (unsafe { query(IContactQueryOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactQueryOptions(): IContactQueryOptions {
+        defaultInterface()
+    }
+
+    public prop AnnotationListIds: Windows_Foundation_Collections.IVector<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AnnotationListIds(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop ContactListIds: Windows_Foundation_Collections.IVector<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ContactListIds(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop DesiredFields: ContactQueryDesiredFields {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DesiredFields(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactQueryDesiredFields(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDesiredFields(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DesiredOperations: ContactAnnotationOperations {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DesiredOperations(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactAnnotationOperations(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDesiredOperations(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IncludeContactsFromHiddenLists: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IncludeContactsFromHiddenLists(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIncludeContactsFromHiddenLists(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop TextSearch: ContactQueryTextSearch {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TextSearch(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ContactQueryTextSearch>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ContactQueryTextSearch.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func new(): ContactQueryOptions {
+        var created__: Option<ContactQueryOptions> = Option<ContactQueryOptions>.None
+        try (factory__ = windows_core.factory<ContactQueryOptions, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ContactQueryOptions>(ContactQueryOptions.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ContactQueryOptions")
+        }
+    }
+
+    public static func CreateWithText(text: windows_core.HString): ContactQueryOptions {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (factory__ = windows_core.factory<ContactQueryOptions, IContactQueryOptionsFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithText(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactQueryOptions>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactQueryOptions.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateWithTextAndFields(text: windows_core.HString, fields: ContactQuerySearchFields): ContactQueryOptions {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (factory__ = windows_core.factory<ContactQueryOptions, IContactQueryOptionsFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithTextAndFields(__argBorrow0.asRaw(), fields.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ContactQueryOptions>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ContactQueryOptions.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactQueryOptions"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactQueryOptions;{" + IContactQueryOptions.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactQueryOptions", ContactQueryOptions.signature(), IContactQueryOptions.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactQueryOptions): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactQueryOptions {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactQueryOptions.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactQueryOptions {
+        ContactQueryOptions.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactQuerySearchFields (synthetic:Windows_ApplicationModel_Contacts_ContactQuerySearchFields)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactQuerySearchFields {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ContactQuerySearchFields): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ContactQuerySearchFields): ContactQuerySearchFields {
+        return ContactQuerySearchFields(value | other.value)
+    }
+    public operator func &(other: ContactQuerySearchFields): ContactQuerySearchFields {
+        return ContactQuerySearchFields(value & other.value)
+    }
+    public operator func ^(other: ContactQuerySearchFields): ContactQuerySearchFields {
+        return ContactQuerySearchFields(value ^ other.value)
+    }
+    public operator func !(): ContactQuerySearchFields {
+        return ContactQuerySearchFields(!value)
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQuerySearchFields_None = ContactQuerySearchFields(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQuerySearchFields_Name = ContactQuerySearchFields(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQuerySearchFields_Email = ContactQuerySearchFields(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQuerySearchFields_Phone = ContactQuerySearchFields(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQuerySearchFields_All = ContactQuerySearchFields(4294967295)
+
+// Windows.ApplicationModel.Contacts.ContactQuerySearchScope (synthetic:Windows_ApplicationModel_Contacts_ContactQuerySearchScope)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactQuerySearchScope {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQuerySearchScope_Local = ContactQuerySearchScope(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactQuerySearchScope_Server = ContactQuerySearchScope(1)
+
+// Windows.ApplicationModel.Contacts.ContactQueryTextSearch (synthetic:Windows_ApplicationModel_Contacts_ContactQueryTextSearch)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactQueryTextSearch <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactQueryTextSearch> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactQueryTextSearch {
+        ContactQueryTextSearch(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactQueryTextSearch {
+        ContactQueryTextSearch(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactQueryTextSearch.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactQueryTextSearch> {
+        let ancestors = [IContactQueryTextSearch.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactQueryTextSearch>("ContactQueryTextSearch", IContactQueryTextSearch.iid(), ancestors, { raw => ContactQueryTextSearch.fromAbiTake(raw) }, { raw => ContactQueryTextSearch.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactQueryTextSearch {
+        match (unsafe { query(IContactQueryTextSearch.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactQueryTextSearch(): IContactQueryTextSearch {
+        defaultInterface()
+    }
+
+    public mut prop Fields: ContactQuerySearchFields {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Fields(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactQuerySearchFields(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFields(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SearchScope: ContactQuerySearchScope {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SearchScope(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ContactQuerySearchScope(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSearchScope(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Text: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Text(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactQueryTextSearch"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactQueryTextSearch;{" + IContactQueryTextSearch.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactQueryTextSearch", ContactQueryTextSearch.signature(), IContactQueryTextSearch.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactQueryTextSearch): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactQueryTextSearch {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactQueryTextSearch.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactQueryTextSearch {
+        ContactQueryTextSearch.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactReader (synthetic:Windows_ApplicationModel_Contacts_ContactReader)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactReader <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactReader> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactReader {
+        ContactReader(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactReader {
+        ContactReader(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactReader.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactReader> {
+        let ancestors = [IContactReader.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactReader>("ContactReader", IContactReader.iid(), ancestors, { raw => ContactReader.fromAbiTake(raw) }, { raw => ContactReader.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactReader {
+        match (unsafe { query(IContactReader.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactReader(): IContactReader {
+        defaultInterface()
+    }
+
+    public func ReadBatchAsync(): Windows_Foundation.IAsyncOperation<ContactBatch> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadBatchAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ContactBatch>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ContactBatch>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetMatchingPropertiesWithMatchReason(contact: Contact): Windows_Foundation_Collections.IVectorView<ContactMatchReason> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetMatchingPropertiesWithMatchReason(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ContactMatchReason>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<ContactMatchReason>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactReader"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactReader;{" + IContactReader.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactReader", ContactReader.signature(), IContactReader.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactReader): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactReader {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactReader.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactReader {
+        ContactReader.viewOf(raw)
+    }
+}
 
 // Windows.ApplicationModel.Contacts.ContactRelationship (synthetic:Windows_ApplicationModel_Contacts_ContactRelationship)
 @When[Windows_ApplicationModel_Contacts == "on"]
 public struct ContactRelationship {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactRelationship_Other = ContactRelationship(0)
+public const ContactRelationship_Other = ContactRelationship(0)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactRelationship_Spouse = ContactRelationship(1)
+public const ContactRelationship_Spouse = ContactRelationship(1)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactRelationship_Partner = ContactRelationship(2)
+public const ContactRelationship_Partner = ContactRelationship(2)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactRelationship_Sibling = ContactRelationship(3)
+public const ContactRelationship_Sibling = ContactRelationship(3)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactRelationship_Parent = ContactRelationship(4)
+public const ContactRelationship_Parent = ContactRelationship(4)
 @When[Windows_ApplicationModel_Contacts == "on"]
-public let ContactRelationship_Child = ContactRelationship(5)
+public const ContactRelationship_Child = ContactRelationship(5)
+
+// Windows.ApplicationModel.Contacts.ContactSelectionMode (synthetic:Windows_ApplicationModel_Contacts_ContactSelectionMode)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactSelectionMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactSelectionMode_Contacts = ContactSelectionMode(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactSelectionMode_Fields = ContactSelectionMode(1)
 
 // Windows.ApplicationModel.Contacts.ContactSignificantOther (synthetic:Windows_ApplicationModel_Contacts_ContactSignificantOther)
 @When[Windows_ApplicationModel_Contacts == "on"]
@@ -1687,6 +7879,234 @@ public class ContactSignificantOther <: windows_interface.InterfaceWrapperBase &
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): ContactSignificantOther {
         ContactSignificantOther.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactStore (synthetic:Windows_ApplicationModel_Contacts_ContactStore)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactStore <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactStore> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactStore {
+        ContactStore(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactStore {
+        ContactStore(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactStore.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactStore> {
+        let ancestors = [IContactStore.iid(), IContactStore2.iid(), IContactStore3.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactStore>("ContactStore", IContactStore.iid(), ancestors, { raw => ContactStore.fromAbiTake(raw) }, { raw => ContactStore.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactStore {
+        match (unsafe { query(IContactStore.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactStore(): IContactStore {
+        defaultInterface()
+    }
+
+    public func asIContactStore2(): IContactStore2 {
+        match (unsafe { query<IContactStore2>(IContactStore2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContactStore3(): IContactStore3 {
+        match (unsafe { query<IContactStore3>(IContactStore3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func FindContactsAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FindContactsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindContactsWithSearchTextAsync(searchText: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(searchText)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FindContactsWithSearchTextAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Contact>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetContactAsync(contactId: windows_core.HString): Windows_Foundation.IAsyncOperation<Contact> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(contactId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetContactAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Contact>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Contact>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactStore"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactStore;{" + IContactStore.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactStore", ContactStore.signature(), IContactStore.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactStore): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactStore {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactStore.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactStore {
+        ContactStore.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.ContactStoreAccessType (synthetic:Windows_ApplicationModel_Contacts_ContactStoreAccessType)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct ContactStoreAccessType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactStoreAccessType_AppContactsReadWrite = ContactStoreAccessType(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactStoreAccessType_AllContactsReadOnly = ContactStoreAccessType(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const ContactStoreAccessType_AllContactsReadWrite = ContactStoreAccessType(2)
+
+// Windows.ApplicationModel.Contacts.ContactStoreNotificationTriggerDetails (synthetic:Windows_ApplicationModel_Contacts_ContactStoreNotificationTriggerDetails)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class ContactStoreNotificationTriggerDetails <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ContactStoreNotificationTriggerDetails> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ContactStoreNotificationTriggerDetails {
+        ContactStoreNotificationTriggerDetails(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ContactStoreNotificationTriggerDetails {
+        ContactStoreNotificationTriggerDetails(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IContactStoreNotificationTriggerDetails.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ContactStoreNotificationTriggerDetails> {
+        let ancestors = [IContactStoreNotificationTriggerDetails.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ContactStoreNotificationTriggerDetails>("ContactStoreNotificationTriggerDetails", IContactStoreNotificationTriggerDetails.iid(), ancestors, { raw => ContactStoreNotificationTriggerDetails.fromAbiTake(raw) }, { raw => ContactStoreNotificationTriggerDetails.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IContactStoreNotificationTriggerDetails {
+        match (unsafe { query(IContactStoreNotificationTriggerDetails.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIContactStoreNotificationTriggerDetails(): IContactStoreNotificationTriggerDetails {
+        defaultInterface()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.ContactStoreNotificationTriggerDetails"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.ContactStoreNotificationTriggerDetails;{" + IContactStoreNotificationTriggerDetails.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.ContactStoreNotificationTriggerDetails", ContactStoreNotificationTriggerDetails.signature(), IContactStoreNotificationTriggerDetails.iid())
+    }
+
+    public static func intoWinrtHandle(value: ContactStoreNotificationTriggerDetails): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContactStoreNotificationTriggerDetails {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContactStoreNotificationTriggerDetails.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContactStoreNotificationTriggerDetails {
+        ContactStoreNotificationTriggerDetails.viewOf(raw)
     }
 }
 
@@ -1833,6 +8253,128 @@ public class ContactWebsite <: windows_interface.InterfaceWrapperBase & windows_
     }
 }
 
+// Windows.ApplicationModel.Contacts.FullContactCardOptions (synthetic:Windows_ApplicationModel_Contacts_FullContactCardOptions)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class FullContactCardOptions <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FullContactCardOptions> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FullContactCardOptions {
+        FullContactCardOptions(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FullContactCardOptions {
+        FullContactCardOptions(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFullContactCardOptions.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FullContactCardOptions> {
+        let ancestors = [IFullContactCardOptions.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FullContactCardOptions>("FullContactCardOptions", IFullContactCardOptions.iid(), ancestors, { raw => FullContactCardOptions.fromAbiTake(raw) }, { raw => FullContactCardOptions.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFullContactCardOptions {
+        match (unsafe { query(IFullContactCardOptions.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFullContactCardOptions(): IFullContactCardOptions {
+        defaultInterface()
+    }
+
+    public mut prop DesiredRemainingView: Windows_UI_ViewManagement.ViewSizePreference {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DesiredRemainingView(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_ViewManagement.ViewSizePreference(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDesiredRemainingView(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): FullContactCardOptions {
+        var created__: Option<FullContactCardOptions> = Option<FullContactCardOptions>.None
+        try (factory__ = windows_core.factory<FullContactCardOptions, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<FullContactCardOptions>(FullContactCardOptions.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce FullContactCardOptions")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.FullContactCardOptions"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.FullContactCardOptions;{" + IFullContactCardOptions.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.FullContactCardOptions", FullContactCardOptions.signature(), IFullContactCardOptions.iid())
+    }
+
+    public static func intoWinrtHandle(value: FullContactCardOptions): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FullContactCardOptions {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FullContactCardOptions.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FullContactCardOptions {
+        FullContactCardOptions.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.IAggregateContactManager (synthetic:Windows_ApplicationModel_Contacts_IAggregateContactManager)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["0379d5dd-db5a-4fd3-b54e-4df17917a212", "Windows.ApplicationModel.Contacts.IAggregateContactManager", "FindRawContactsAsync.value=Com;TryLinkContactsAsync.contact=Com;UnlinkRawContactAsync.value=Com;TrySetPreferredSourceForPictureAsync.value=Com"]
+public interface IAggregateContactManager <: IInspectable {
+    func FindRawContactsAsync(contact: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func TryLinkContactsAsync(primaryContact: CPointer<Unit>, secondaryContact: CPointer<Unit>, contact: CPointer<CPointer<Unit>>): Int32
+    func UnlinkRawContactAsync(contact: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func TrySetPreferredSourceForPictureAsync(aggregateContact: CPointer<Unit>, rawContact: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IAggregateContactManager2 (synthetic:Windows_ApplicationModel_Contacts_IAggregateContactManager2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["5e8cc2d8-a9cd-4430-9c4b-01348db2ca50", "Windows.ApplicationModel.Contacts.IAggregateContactManager2", "SetRemoteIdentificationInformationAsync.result=Com"]
+public interface IAggregateContactManager2 <: IInspectable {
+    func SetRemoteIdentificationInformationAsync(contactListId: CPointer<Unit>, remoteSourceId: CPointer<Unit>, accountId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.ApplicationModel.Contacts.IContact (synthetic:Windows_ApplicationModel_Contacts_IContact)
 @When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["ec0072f3-2118-4049-9ebc-17f0ab692b64", "Windows.ApplicationModel.Contacts.IContact", "Name.value=HString;Thumbnail.value=Com;Fields.value=Com"]
@@ -1913,6 +8455,145 @@ public interface IContactAddress <: IInspectable {
     func SetDescription(value: CPointer<Unit>): Int32
 }
 
+// Windows.ApplicationModel.Contacts.IContactAnnotation (synthetic:Windows_ApplicationModel_Contacts_IContactAnnotation)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["821fc2ef-7d41-44a2-84c3-60a281dd7b86", "Windows.ApplicationModel.Contacts.IContactAnnotation", "Id.value=HString;AnnotationListId.value=HString;ContactId.value=HString;RemoteId.value=HString;ProviderProperties.value=Com"]
+public interface IContactAnnotation <: IInspectable {
+    func Id(value: CPointer<CPointer<Unit>>): Int32
+    func AnnotationListId(value: CPointer<CPointer<Unit>>): Int32
+    func ContactId(value: CPointer<CPointer<Unit>>): Int32
+    func SetContactId(value: CPointer<Unit>): Int32
+    func RemoteId(value: CPointer<CPointer<Unit>>): Int32
+    func SetRemoteId(value: CPointer<Unit>): Int32
+    func SupportedOperations(value: CPointer<UInt32>): Int32
+    func SetSupportedOperations(value: UInt32): Int32
+    func IsDisabled(value: CPointer<Bool>): Int32
+    func ProviderProperties(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactAnnotation2 (synthetic:Windows_ApplicationModel_Contacts_IContactAnnotation2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["b691ecf3-4ab7-4a1f-9941-0c9cf3171b75", "Windows.ApplicationModel.Contacts.IContactAnnotation2", "ContactListId.value=HString"]
+public interface IContactAnnotation2 <: IInspectable {
+    func ContactListId(value: CPointer<CPointer<Unit>>): Int32
+    func SetContactListId(value: CPointer<Unit>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactAnnotationList (synthetic:Windows_ApplicationModel_Contacts_IContactAnnotationList)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["92a486aa-5c88-45b9-aad0-461888e68d8a", "Windows.ApplicationModel.Contacts.IContactAnnotationList", "Id.value=HString;ProviderPackageFamilyName.value=HString;UserDataAccountId.value=HString;DeleteAsync.value=Com;TrySaveAnnotationAsync.ppResult=Com;GetAnnotationAsync.annotation=Com;FindAnnotationsByRemoteIdAsync.annotations=Com;FindAnnotationsAsync.annotations=Com;DeleteAnnotationAsync.value=Com"]
+public interface IContactAnnotationList <: IInspectable {
+    func Id(value: CPointer<CPointer<Unit>>): Int32
+    func ProviderPackageFamilyName(value: CPointer<CPointer<Unit>>): Int32
+    func UserDataAccountId(value: CPointer<CPointer<Unit>>): Int32
+    func DeleteAsync(value: CPointer<CPointer<Unit>>): Int32
+    func TrySaveAnnotationAsync(annotation: CPointer<Unit>, ppResult: CPointer<CPointer<Unit>>): Int32
+    func GetAnnotationAsync(annotationId: CPointer<Unit>, annotation: CPointer<CPointer<Unit>>): Int32
+    func FindAnnotationsByRemoteIdAsync(remoteId: CPointer<Unit>, annotations: CPointer<CPointer<Unit>>): Int32
+    func FindAnnotationsAsync(annotations: CPointer<CPointer<Unit>>): Int32
+    func DeleteAnnotationAsync(annotation: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactAnnotationStore (synthetic:Windows_ApplicationModel_Contacts_IContactAnnotationStore)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["23acf4aa-7a77-457d-8203-987f4b31af09", "Windows.ApplicationModel.Contacts.IContactAnnotationStore", "FindContactIdsByEmailAsync.contactIds=Com;FindContactIdsByPhoneNumberAsync.contactIds=Com;FindAnnotationsForContactAsync.annotations=Com;DisableAnnotationAsync.value=Com;CreateAnnotationListAsync.value=Com;CreateAnnotationListInAccountAsync.value=Com;GetAnnotationListAsync.value=Com;FindAnnotationListsAsync.lists=Com"]
+public interface IContactAnnotationStore <: IInspectable {
+    func FindContactIdsByEmailAsync(emailAddress: CPointer<Unit>, contactIds: CPointer<CPointer<Unit>>): Int32
+    func FindContactIdsByPhoneNumberAsync(phoneNumber: CPointer<Unit>, contactIds: CPointer<CPointer<Unit>>): Int32
+    func FindAnnotationsForContactAsync(contact: CPointer<Unit>, annotations: CPointer<CPointer<Unit>>): Int32
+    func DisableAnnotationAsync(annotation: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func CreateAnnotationListAsync(value: CPointer<CPointer<Unit>>): Int32
+    func CreateAnnotationListInAccountAsync(userDataAccountId: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func GetAnnotationListAsync(annotationListId: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func FindAnnotationListsAsync(lists: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactAnnotationStore2 (synthetic:Windows_ApplicationModel_Contacts_IContactAnnotationStore2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["7ede23fd-61e7-4967-8ec5-bdf280a24063", "Windows.ApplicationModel.Contacts.IContactAnnotationStore2", "FindAnnotationsForContactListAsync.annotations=Com"]
+public interface IContactAnnotationStore2 <: IInspectable {
+    func FindAnnotationsForContactListAsync(contactListId: CPointer<Unit>, annotations: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactBatch (synthetic:Windows_ApplicationModel_Contacts_IContactBatch)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["35d1972d-bfce-46bb-93f8-a5b06ec5e201", "Windows.ApplicationModel.Contacts.IContactBatch", "Contacts.value=Com"]
+public interface IContactBatch <: IInspectable {
+    func Contacts(value: CPointer<CPointer<Unit>>): Int32
+    func Status(value: CPointer<Int32>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactCardDelayedDataLoader (synthetic:Windows_ApplicationModel_Contacts_IContactCardDelayedDataLoader)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["b60af902-1546-434d-869c-6e3520760ef3", "Windows.ApplicationModel.Contacts.IContactCardDelayedDataLoader"]
+public interface IContactCardDelayedDataLoader <: IInspectable {
+    func SetData(contact: CPointer<Unit>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactCardOptions (synthetic:Windows_ApplicationModel_Contacts_IContactCardOptions)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["8c0a4f7e-6ab6-4f3f-be72-817236eeea5b", "Windows.ApplicationModel.Contacts.IContactCardOptions"]
+public interface IContactCardOptions <: IInspectable {
+    func HeaderKind(value: CPointer<Int32>): Int32
+    func SetHeaderKind(value: Int32): Int32
+    func InitialTabKind(value: CPointer<Int32>): Int32
+    func SetInitialTabKind(value: Int32): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactCardOptions2 (synthetic:Windows_ApplicationModel_Contacts_IContactCardOptions2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["8f271ba0-d74b-4cc6-9f53-1b0eb5d1273c", "Windows.ApplicationModel.Contacts.IContactCardOptions2", "ServerSearchContactListIds.value=Com"]
+public interface IContactCardOptions2 <: IInspectable {
+    func ServerSearchContactListIds(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactChange (synthetic:Windows_ApplicationModel_Contacts_IContactChange)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["951d4b10-6a59-4720-a4e1-363d98c135d5", "Windows.ApplicationModel.Contacts.IContactChange", "Contact.value=Com"]
+public interface IContactChange <: IInspectable {
+    func ChangeType(value: CPointer<Int32>): Int32
+    func Contact(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactChangeReader (synthetic:Windows_ApplicationModel_Contacts_IContactChangeReader)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["217319fa-2d0c-42e0-a9da-3ecd56a78a47", "Windows.ApplicationModel.Contacts.IContactChangeReader", "ReadBatchAsync.value=Com"]
+public interface IContactChangeReader <: IInspectable {
+    func AcceptChanges(): Int32
+    func AcceptChangesThrough(lastChangeToAccept: CPointer<Unit>): Int32
+    func ReadBatchAsync(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactChangeTracker (synthetic:Windows_ApplicationModel_Contacts_IContactChangeTracker)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["6e992952-309b-404d-9712-b37bd30278aa", "Windows.ApplicationModel.Contacts.IContactChangeTracker", "GetChangeReader.value=Com"]
+public interface IContactChangeTracker <: IInspectable {
+    func Enable(): Int32
+    func GetChangeReader(value: CPointer<CPointer<Unit>>): Int32
+    func Reset(): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactChangeTracker2 (synthetic:Windows_ApplicationModel_Contacts_IContactChangeTracker2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["7f8ad0fc-9321-4d18-9c09-d708c63fcd31", "Windows.ApplicationModel.Contacts.IContactChangeTracker2"]
+public interface IContactChangeTracker2 <: IInspectable {
+    func IsTracking(value: CPointer<Bool>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactChangedDeferral (synthetic:Windows_ApplicationModel_Contacts_IContactChangedDeferral)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["c5143ae8-1b03-46f8-b694-a523e83cfcb6", "Windows.ApplicationModel.Contacts.IContactChangedDeferral"]
+public interface IContactChangedDeferral <: IInspectable {
+    func Complete(): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactChangedEventArgs (synthetic:Windows_ApplicationModel_Contacts_IContactChangedEventArgs)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["525e7fd1-73f3-4b7d-a918-580be4366121", "Windows.ApplicationModel.Contacts.IContactChangedEventArgs", "GetDeferral.value=Com"]
+public interface IContactChangedEventArgs <: IInspectable {
+    func GetDeferral(value: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.ApplicationModel.Contacts.IContactConnectedServiceAccount (synthetic:Windows_ApplicationModel_Contacts_IContactConnectedServiceAccount)
 @When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["f6f83553-aa27-4731-8e4a-3dec5ce9eec9", "Windows.ApplicationModel.Contacts.IContactConnectedServiceAccount", "Id.value=HString;ServiceName.value=HString"]
@@ -1961,6 +8642,54 @@ public interface IContactField <: IInspectable {
     func Value(value: CPointer<CPointer<Unit>>): Int32
 }
 
+// Windows.ApplicationModel.Contacts.IContactFieldFactory (synthetic:Windows_ApplicationModel_Contacts_IContactFieldFactory)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["85e2913f-0e4a-4a3e-8994-406ae7ed646e", "Windows.ApplicationModel.Contacts.IContactFieldFactory", "CreateField_Default.field=Com;CreateField_Category.field=Com;CreateField_Custom.field=Com"]
+public interface IContactFieldFactory <: IInspectable {
+    func CreateField_Default(value: CPointer<Unit>, type_: Int32, field: CPointer<CPointer<Unit>>): Int32
+    func CreateField_Category(value: CPointer<Unit>, type_: Int32, category: Int32, field: CPointer<CPointer<Unit>>): Int32
+    func CreateField_Custom(name: CPointer<Unit>, value: CPointer<Unit>, type_: Int32, category: Int32, field: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactGroup (synthetic:Windows_ApplicationModel_Contacts_IContactGroup)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["59bdeb01-9e9a-475d-bfe5-a37b806d852c", "Windows.ApplicationModel.Contacts.IContactGroup"]
+public interface IContactGroup <: IInspectable {
+}
+
+// Windows.ApplicationModel.Contacts.IContactInformation (synthetic:Windows_ApplicationModel_Contacts_IContactInformation)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["275eb6d4-6a2e-4278-a914-e460d5f088f6", "Windows.ApplicationModel.Contacts.IContactInformation", "Name.value=HString;GetThumbnailAsync.operation=Com;Emails.value=Com;PhoneNumbers.value=Com;Locations.value=Com;InstantMessages.value=Com;CustomFields.value=Com;QueryCustomFields.value=Com"]
+public interface IContactInformation <: IInspectable {
+    func Name(value: CPointer<CPointer<Unit>>): Int32
+    func GetThumbnailAsync(operation: CPointer<CPointer<Unit>>): Int32
+    func Emails(value: CPointer<CPointer<Unit>>): Int32
+    func PhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func Locations(value: CPointer<CPointer<Unit>>): Int32
+    func InstantMessages(value: CPointer<CPointer<Unit>>): Int32
+    func CustomFields(value: CPointer<CPointer<Unit>>): Int32
+    func QueryCustomFields(customName: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactInstantMessageField (synthetic:Windows_ApplicationModel_Contacts_IContactInstantMessageField)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["cce33b37-0d85-41fa-b43d-da599c3eb009", "Windows.ApplicationModel.Contacts.IContactInstantMessageField", "UserName.value=HString;Service.value=HString;DisplayText.value=HString;LaunchUri.value=Com"]
+public interface IContactInstantMessageField <: IInspectable {
+    func UserName(value: CPointer<CPointer<Unit>>): Int32
+    func Service(value: CPointer<CPointer<Unit>>): Int32
+    func DisplayText(value: CPointer<CPointer<Unit>>): Int32
+    func LaunchUri(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactInstantMessageFieldFactory (synthetic:Windows_ApplicationModel_Contacts_IContactInstantMessageFieldFactory)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["ba0b6794-91a3-4bb2-b1b9-69a5dff0ba09", "Windows.ApplicationModel.Contacts.IContactInstantMessageFieldFactory", "CreateInstantMessage_Default.field=Com;CreateInstantMessage_Category.field=Com;CreateInstantMessage_All.field=Com"]
+public interface IContactInstantMessageFieldFactory <: IInspectable {
+    func CreateInstantMessage_Default(userName: CPointer<Unit>, field: CPointer<CPointer<Unit>>): Int32
+    func CreateInstantMessage_Category(userName: CPointer<Unit>, category: Int32, field: CPointer<CPointer<Unit>>): Int32
+    func CreateInstantMessage_All(userName: CPointer<Unit>, category: Int32, service: CPointer<Unit>, displayText: CPointer<Unit>, verb: CPointer<Unit>, field: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.ApplicationModel.Contacts.IContactJobInfo (synthetic:Windows_ApplicationModel_Contacts_IContactJobInfo)
 @When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["6d117b4c-ce50-4b43-9e69-b18258ea5315", "Windows.ApplicationModel.Contacts.IContactJobInfo", "CompanyName.value=HString;CompanyYomiName.value=HString;Department.value=HString;Title.value=HString;Manager.value=HString;Office.value=HString;CompanyAddress.value=HString;Description.value=HString"]
@@ -1981,6 +8710,261 @@ public interface IContactJobInfo <: IInspectable {
     func SetCompanyAddress(value: CPointer<Unit>): Int32
     func Description(value: CPointer<CPointer<Unit>>): Int32
     func SetDescription(value: CPointer<Unit>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactLaunchActionVerbsStatics (synthetic:Windows_ApplicationModel_Contacts_IContactLaunchActionVerbsStatics)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["fb1232d6-ee73-46e7-8761-11cd0157728f", "Windows.ApplicationModel.Contacts.IContactLaunchActionVerbsStatics", "Call.value=HString;Message.value=HString;Map.value=HString;Post.value=HString;VideoCall.value=HString"]
+public interface IContactLaunchActionVerbsStatics <: IInspectable {
+    func Call(value: CPointer<CPointer<Unit>>): Int32
+    func Message(value: CPointer<CPointer<Unit>>): Int32
+    func Map(value: CPointer<CPointer<Unit>>): Int32
+    func Post(value: CPointer<CPointer<Unit>>): Int32
+    func VideoCall(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactList (synthetic:Windows_ApplicationModel_Contacts_IContactList)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["16ddec75-392c-4845-9dfb-51a3e7ef3e42", "Windows.ApplicationModel.Contacts.IContactList", "Id.value=HString;DisplayName.value=HString;SourceDisplayName.value=HString;ChangeTracker.value=Com;SyncManager.value=Com;UserDataAccountId.value=HString;SaveAsync.returnValue=Com;DeleteAsync.returnValue=Com;GetContactFromRemoteIdAsync.contact=Com;GetMeContactAsync.meContact=Com;GetContactReader.value=Com;GetContactReaderWithOptions.value=Com;SaveContactAsync.value=Com;DeleteContactAsync.value=Com;GetContactAsync.contacts=Com"]
+public interface IContactList <: IInspectable {
+    func Id(value: CPointer<CPointer<Unit>>): Int32
+    func DisplayName(value: CPointer<CPointer<Unit>>): Int32
+    func SetDisplayName(value: CPointer<Unit>): Int32
+    func SourceDisplayName(value: CPointer<CPointer<Unit>>): Int32
+    func IsHidden(value: CPointer<Bool>): Int32
+    func SetIsHidden(value: Bool): Int32
+    func OtherAppReadAccess(value: CPointer<Int32>): Int32
+    func SetOtherAppReadAccess(value: Int32): Int32
+    func OtherAppWriteAccess(value: CPointer<Int32>): Int32
+    func SetOtherAppWriteAccess(value: Int32): Int32
+    func ChangeTracker(value: CPointer<CPointer<Unit>>): Int32
+    func SyncManager(value: CPointer<CPointer<Unit>>): Int32
+    func SupportsServerSearch(value: CPointer<Bool>): Int32
+    func UserDataAccountId(value: CPointer<CPointer<Unit>>): Int32
+    func ContactChanged(value: CPointer<Unit>, returnValue: CPointer<Int64>): Int32
+    func RemoveContactChanged(value: Int64): Int32
+    func SaveAsync(returnValue: CPointer<CPointer<Unit>>): Int32
+    func DeleteAsync(returnValue: CPointer<CPointer<Unit>>): Int32
+    func GetContactFromRemoteIdAsync(remoteId: CPointer<Unit>, contact: CPointer<CPointer<Unit>>): Int32
+    func GetMeContactAsync(meContact: CPointer<CPointer<Unit>>): Int32
+    func GetContactReader(value: CPointer<CPointer<Unit>>): Int32
+    func GetContactReaderWithOptions(options: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func SaveContactAsync(contact: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func DeleteContactAsync(contact: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func GetContactAsync(contactId: CPointer<Unit>, contacts: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactList2 (synthetic:Windows_ApplicationModel_Contacts_IContactList2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["cb3943b4-4550-4dcb-9229-40ff91fb0203", "Windows.ApplicationModel.Contacts.IContactList2", "RegisterSyncManagerAsync.result=Com;SyncConstraints.value=Com"]
+public interface IContactList2 <: IInspectable {
+    func RegisterSyncManagerAsync(result: CPointer<CPointer<Unit>>): Int32
+    func SetSupportsServerSearch(value: Bool): Int32
+    func SyncConstraints(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactList3 (synthetic:Windows_ApplicationModel_Contacts_IContactList3)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["1578ee57-26fc-41e8-a850-5aa32514aca9", "Windows.ApplicationModel.Contacts.IContactList3", "LimitedWriteOperations.value=Com;GetChangeTracker.result=Com"]
+public interface IContactList3 <: IInspectable {
+    func LimitedWriteOperations(value: CPointer<CPointer<Unit>>): Int32
+    func GetChangeTracker(identity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactListLimitedWriteOperations (synthetic:Windows_ApplicationModel_Contacts_IContactListLimitedWriteOperations)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["e19813da-4a0b-44b8-9a1f-a0f3d218175f", "Windows.ApplicationModel.Contacts.IContactListLimitedWriteOperations", "TryCreateOrUpdateContactAsync.operation=Com;TryDeleteContactAsync.operation=Com"]
+public interface IContactListLimitedWriteOperations <: IInspectable {
+    func TryCreateOrUpdateContactAsync(contact: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func TryDeleteContactAsync(contactId: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactListSyncConstraints (synthetic:Windows_ApplicationModel_Contacts_IContactListSyncConstraints)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["b2b0bf01-3062-4e2e-969d-018d1987f314", "Windows.ApplicationModel.Contacts.IContactListSyncConstraints", "MaxHomePhoneNumbers.value=Com;MaxMobilePhoneNumbers.value=Com;MaxWorkPhoneNumbers.value=Com;MaxOtherPhoneNumbers.value=Com;MaxPagerPhoneNumbers.value=Com;MaxBusinessFaxPhoneNumbers.value=Com;MaxHomeFaxPhoneNumbers.value=Com;MaxCompanyPhoneNumbers.value=Com;MaxAssistantPhoneNumbers.value=Com;MaxRadioPhoneNumbers.value=Com;MaxPersonalEmailAddresses.value=Com;MaxWorkEmailAddresses.value=Com;MaxOtherEmailAddresses.value=Com;MaxHomeAddresses.value=Com;MaxWorkAddresses.value=Com;MaxOtherAddresses.value=Com;MaxBirthdayDates.value=Com;MaxAnniversaryDates.value=Com;MaxOtherDates.value=Com;MaxOtherRelationships.value=Com;MaxSpouseRelationships.value=Com;MaxPartnerRelationships.value=Com;MaxSiblingRelationships.value=Com;MaxParentRelationships.value=Com;MaxChildRelationships.value=Com;MaxJobInfo.value=Com;MaxWebsites.value=Com"]
+public interface IContactListSyncConstraints <: IInspectable {
+    func CanSyncDescriptions(value: CPointer<Bool>): Int32
+    func SetCanSyncDescriptions(value: Bool): Int32
+    func MaxHomePhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxHomePhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxMobilePhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxMobilePhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxWorkPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxWorkPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxOtherPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxOtherPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxPagerPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxPagerPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxBusinessFaxPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxBusinessFaxPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxHomeFaxPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxHomeFaxPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxCompanyPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxCompanyPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxAssistantPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxAssistantPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxRadioPhoneNumbers(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxRadioPhoneNumbers(value: CPointer<Unit>): Int32
+    func MaxPersonalEmailAddresses(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxPersonalEmailAddresses(value: CPointer<Unit>): Int32
+    func MaxWorkEmailAddresses(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxWorkEmailAddresses(value: CPointer<Unit>): Int32
+    func MaxOtherEmailAddresses(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxOtherEmailAddresses(value: CPointer<Unit>): Int32
+    func MaxHomeAddresses(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxHomeAddresses(value: CPointer<Unit>): Int32
+    func MaxWorkAddresses(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxWorkAddresses(value: CPointer<Unit>): Int32
+    func MaxOtherAddresses(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxOtherAddresses(value: CPointer<Unit>): Int32
+    func MaxBirthdayDates(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxBirthdayDates(value: CPointer<Unit>): Int32
+    func MaxAnniversaryDates(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxAnniversaryDates(value: CPointer<Unit>): Int32
+    func MaxOtherDates(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxOtherDates(value: CPointer<Unit>): Int32
+    func MaxOtherRelationships(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxOtherRelationships(value: CPointer<Unit>): Int32
+    func MaxSpouseRelationships(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxSpouseRelationships(value: CPointer<Unit>): Int32
+    func MaxPartnerRelationships(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxPartnerRelationships(value: CPointer<Unit>): Int32
+    func MaxSiblingRelationships(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxSiblingRelationships(value: CPointer<Unit>): Int32
+    func MaxParentRelationships(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxParentRelationships(value: CPointer<Unit>): Int32
+    func MaxChildRelationships(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxChildRelationships(value: CPointer<Unit>): Int32
+    func MaxJobInfo(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxJobInfo(value: CPointer<Unit>): Int32
+    func MaxWebsites(value: CPointer<CPointer<Unit>>): Int32
+    func SetMaxWebsites(value: CPointer<Unit>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactListSyncManager (synthetic:Windows_ApplicationModel_Contacts_IContactListSyncManager)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["146e83be-7925-4acc-9de5-21ddd06f8674", "Windows.ApplicationModel.Contacts.IContactListSyncManager", "SyncAsync.result=Com"]
+public interface IContactListSyncManager <: IInspectable {
+    func Status(value: CPointer<Int32>): Int32
+    func LastSuccessfulSyncTime(value: CPointer<Windows_Foundation.DateTime>): Int32
+    func LastAttemptedSyncTime(value: CPointer<Windows_Foundation.DateTime>): Int32
+    func SyncAsync(result: CPointer<CPointer<Unit>>): Int32
+    func SyncStatusChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveSyncStatusChanged(token: Int64): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactListSyncManager2 (synthetic:Windows_ApplicationModel_Contacts_IContactListSyncManager2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["a9591247-bb55-4e23-8128-370134a85d0d", "Windows.ApplicationModel.Contacts.IContactListSyncManager2"]
+public interface IContactListSyncManager2 <: IInspectable {
+    func SetStatus(value: Int32): Int32
+    func SetLastSuccessfulSyncTime(value: Windows_Foundation.DateTime): Int32
+    func SetLastAttemptedSyncTime(value: Windows_Foundation.DateTime): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactLocationField (synthetic:Windows_ApplicationModel_Contacts_IContactLocationField)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["9ec00f82-ab6e-4b36-89e3-b23bc0a1dacc", "Windows.ApplicationModel.Contacts.IContactLocationField", "UnstructuredAddress.value=HString;Street.value=HString;City.value=HString;Region.value=HString;Country.value=HString;PostalCode.value=HString"]
+public interface IContactLocationField <: IInspectable {
+    func UnstructuredAddress(value: CPointer<CPointer<Unit>>): Int32
+    func Street(value: CPointer<CPointer<Unit>>): Int32
+    func City(value: CPointer<CPointer<Unit>>): Int32
+    func Region(value: CPointer<CPointer<Unit>>): Int32
+    func Country(value: CPointer<CPointer<Unit>>): Int32
+    func PostalCode(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactLocationFieldFactory (synthetic:Windows_ApplicationModel_Contacts_IContactLocationFieldFactory)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["f79932d7-2fdf-43fe-8f18-41897390bcfe", "Windows.ApplicationModel.Contacts.IContactLocationFieldFactory", "CreateLocation_Default.field=Com;CreateLocation_Category.field=Com;CreateLocation_All.field=Com"]
+public interface IContactLocationFieldFactory <: IInspectable {
+    func CreateLocation_Default(unstructuredAddress: CPointer<Unit>, field: CPointer<CPointer<Unit>>): Int32
+    func CreateLocation_Category(unstructuredAddress: CPointer<Unit>, category: Int32, field: CPointer<CPointer<Unit>>): Int32
+    func CreateLocation_All(unstructuredAddress: CPointer<Unit>, category: Int32, street: CPointer<Unit>, city: CPointer<Unit>, region: CPointer<Unit>, country: CPointer<Unit>, postalCode: CPointer<Unit>, field: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactManagerForUser (synthetic:Windows_ApplicationModel_Contacts_IContactManagerForUser)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["b74bba57-1076-4bef-aef3-54686d18387d", "Windows.ApplicationModel.Contacts.IContactManagerForUser", "ConvertContactToVCardAsync.result=Com;ConvertContactToVCardAsyncWithMaxBytes.result=Com;ConvertVCardToContactAsync.result=Com;RequestStoreAsync.result=Com;RequestAnnotationStoreAsync.result=Com;User.value=Com"]
+public interface IContactManagerForUser <: IInspectable {
+    func ConvertContactToVCardAsync(contact: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func ConvertContactToVCardAsyncWithMaxBytes(contact: CPointer<Unit>, maxBytes: UInt32, result: CPointer<CPointer<Unit>>): Int32
+    func ConvertVCardToContactAsync(vCard: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RequestStoreAsync(accessType: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func RequestAnnotationStoreAsync(accessType: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func SystemDisplayNameOrder(value: CPointer<Int32>): Int32
+    func SetSystemDisplayNameOrder(value: Int32): Int32
+    func SystemSortOrder(value: CPointer<Int32>): Int32
+    func SetSystemSortOrder(value: Int32): Int32
+    func User(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactManagerForUser2 (synthetic:Windows_ApplicationModel_Contacts_IContactManagerForUser2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["4d469c2e-3b75-4a73-bb30-736645472256", "Windows.ApplicationModel.Contacts.IContactManagerForUser2"]
+public interface IContactManagerForUser2 <: IInspectable {
+    func ShowFullContactCard(contact: CPointer<Unit>, fullContactCardOptions: CPointer<Unit>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactManagerStatics (synthetic:Windows_ApplicationModel_Contacts_IContactManagerStatics)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["81f21ac0-f661-4708-ba4f-d386bd0d622e", "Windows.ApplicationModel.Contacts.IContactManagerStatics", "ShowDelayLoadedContactCard.dataLoader=Com"]
+public interface IContactManagerStatics <: IInspectable {
+    func ShowContactCard(contact: CPointer<Unit>, selection: Windows_Foundation.Rect): Int32
+    func ShowContactCardWithPlacement(contact: CPointer<Unit>, selection: Windows_Foundation.Rect, preferredPlacement: Int32): Int32
+    func ShowDelayLoadedContactCard(contact: CPointer<Unit>, selection: Windows_Foundation.Rect, preferredPlacement: Int32, dataLoader: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactManagerStatics2 (synthetic:Windows_ApplicationModel_Contacts_IContactManagerStatics2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["a178e620-47d8-48cc-963c-9592b6e510c6", "Windows.ApplicationModel.Contacts.IContactManagerStatics2", "RequestStoreAsync.store=Com"]
+public interface IContactManagerStatics2 <: IInspectable {
+    func RequestStoreAsync(store: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactManagerStatics3 (synthetic:Windows_ApplicationModel_Contacts_IContactManagerStatics3)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["c4cc3d42-7586-492a-930b-7bc138fc2139", "Windows.ApplicationModel.Contacts.IContactManagerStatics3", "ConvertContactToVCardAsync.vCard=Com;ConvertContactToVCardAsyncWithMaxBytes.vCard=Com;ConvertVCardToContactAsync.contact=Com;RequestStoreAsyncWithAccessType.store=Com;RequestAnnotationStoreAsync.store=Com;ShowDelayLoadedContactCardWithOptions.dataLoader=Com"]
+public interface IContactManagerStatics3 <: IInspectable {
+    func ConvertContactToVCardAsync(contact: CPointer<Unit>, vCard: CPointer<CPointer<Unit>>): Int32
+    func ConvertContactToVCardAsyncWithMaxBytes(contact: CPointer<Unit>, maxBytes: UInt32, vCard: CPointer<CPointer<Unit>>): Int32
+    func ConvertVCardToContactAsync(vCard: CPointer<Unit>, contact: CPointer<CPointer<Unit>>): Int32
+    func RequestStoreAsyncWithAccessType(accessType: Int32, store: CPointer<CPointer<Unit>>): Int32
+    func RequestAnnotationStoreAsync(accessType: Int32, store: CPointer<CPointer<Unit>>): Int32
+    func IsShowContactCardSupported(result: CPointer<Bool>): Int32
+    func ShowContactCardWithOptions(contact: CPointer<Unit>, selection: Windows_Foundation.Rect, preferredPlacement: Int32, contactCardOptions: CPointer<Unit>): Int32
+    func IsShowDelayLoadedContactCardSupported(result: CPointer<Bool>): Int32
+    func ShowDelayLoadedContactCardWithOptions(contact: CPointer<Unit>, selection: Windows_Foundation.Rect, preferredPlacement: Int32, contactCardOptions: CPointer<Unit>, dataLoader: CPointer<CPointer<Unit>>): Int32
+    func ShowFullContactCard(contact: CPointer<Unit>, fullContactCardOptions: CPointer<Unit>): Int32
+    func SystemDisplayNameOrder(value: CPointer<Int32>): Int32
+    func SetSystemDisplayNameOrder(value: Int32): Int32
+    func SystemSortOrder(value: CPointer<Int32>): Int32
+    func SetSystemSortOrder(value: Int32): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactManagerStatics4 (synthetic:Windows_ApplicationModel_Contacts_IContactManagerStatics4)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["24982272-347b-46dc-8d95-51bd41e15aaf", "Windows.ApplicationModel.Contacts.IContactManagerStatics4", "GetForUser.result=Com"]
+public interface IContactManagerStatics4 <: IInspectable {
+    func GetForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactManagerStatics5 (synthetic:Windows_ApplicationModel_Contacts_IContactManagerStatics5)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["f7591a87-acb7-4fad-90f2-a8ab64cdbba4", "Windows.ApplicationModel.Contacts.IContactManagerStatics5", "IsShowFullContactCardSupportedAsync.result=Com"]
+public interface IContactManagerStatics5 <: IInspectable {
+    func IsShowFullContactCardSupportedAsync(result: CPointer<CPointer<Unit>>): Int32
+    func IncludeMiddleNameInSystemDisplayAndSort(value: CPointer<Bool>): Int32
+    func SetIncludeMiddleNameInSystemDisplayAndSort(value: Bool): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactMatchReason (synthetic:Windows_ApplicationModel_Contacts_IContactMatchReason)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["bc922504-e7d8-413e-95f4-b75c54c74077", "Windows.ApplicationModel.Contacts.IContactMatchReason", "Segments.value=Com;Text.value=HString"]
+public interface IContactMatchReason <: IInspectable {
+    func Field(value: CPointer<Int32>): Int32
+    func Segments(value: CPointer<CPointer<Unit>>): Int32
+    func Text(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Contacts.IContactName (synthetic:Windows_ApplicationModel_Contacts_IContactName)
@@ -2005,6 +8989,34 @@ public interface IContactName <: IInspectable {
     func YomiDisplayName(value: CPointer<CPointer<Unit>>): Int32
 }
 
+// Windows.ApplicationModel.Contacts.IContactPanel (synthetic:Windows_ApplicationModel_Contacts_IContactPanel)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["41bf1265-d2ee-4b97-a80a-7d8d64cca6f5", "Windows.ApplicationModel.Contacts.IContactPanel", "HeaderColor.value=Com"]
+public interface IContactPanel <: IInspectable {
+    func ClosePanel(): Int32
+    func HeaderColor(value: CPointer<CPointer<Unit>>): Int32
+    func SetHeaderColor(value: CPointer<Unit>): Int32
+    func LaunchFullAppRequested(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveLaunchFullAppRequested(token: Int64): Int32
+    func Closing(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveClosing(token: Int64): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactPanelClosingEventArgs (synthetic:Windows_ApplicationModel_Contacts_IContactPanelClosingEventArgs)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["222174d3-cf4b-46d7-b739-6edc16110bfb", "Windows.ApplicationModel.Contacts.IContactPanelClosingEventArgs", "GetDeferral.deferral=Com"]
+public interface IContactPanelClosingEventArgs <: IInspectable {
+    func GetDeferral(deferral: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactPanelLaunchFullAppRequestedEventArgs (synthetic:Windows_ApplicationModel_Contacts_IContactPanelLaunchFullAppRequestedEventArgs)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["88d61c0e-23b4-4be8-8afc-072c25a4190d", "Windows.ApplicationModel.Contacts.IContactPanelLaunchFullAppRequestedEventArgs"]
+public interface IContactPanelLaunchFullAppRequestedEventArgs <: IInspectable {
+    func Handled(value: CPointer<Bool>): Int32
+    func SetHandled(value: Bool): Int32
+}
+
 // Windows.ApplicationModel.Contacts.IContactPhone (synthetic:Windows_ApplicationModel_Contacts_IContactPhone)
 @When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["467dab65-2712-4f52-b783-9ea8111c63cd", "Windows.ApplicationModel.Contacts.IContactPhone", "Number.value=HString;Description.value=HString"]
@@ -2015,6 +9027,86 @@ public interface IContactPhone <: IInspectable {
     func SetKind(value: Int32): Int32
     func Description(value: CPointer<CPointer<Unit>>): Int32
     func SetDescription(value: CPointer<Unit>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactPicker (synthetic:Windows_ApplicationModel_Contacts_IContactPicker)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["0e09fd91-42f8-4055-90a0-896f96738936", "Windows.ApplicationModel.Contacts.IContactPicker", "CommitButtonText.value=HString;DesiredFields.value=Com;PickSingleContactAsync.result=Com;PickMultipleContactsAsync.result=Com"]
+public interface IContactPicker <: IInspectable {
+    func CommitButtonText(value: CPointer<CPointer<Unit>>): Int32
+    func SetCommitButtonText(value: CPointer<Unit>): Int32
+    func SelectionMode(value: CPointer<Int32>): Int32
+    func SetSelectionMode(value: Int32): Int32
+    func DesiredFields(value: CPointer<CPointer<Unit>>): Int32
+    func PickSingleContactAsync(result: CPointer<CPointer<Unit>>): Int32
+    func PickMultipleContactsAsync(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactPicker2 (synthetic:Windows_ApplicationModel_Contacts_IContactPicker2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["b35011cf-5cef-4d24-aa0c-340c5208725d", "Windows.ApplicationModel.Contacts.IContactPicker2", "DesiredFieldsWithContactFieldType.value=Com;PickContactAsync.result=Com;PickContactsAsync.result=Com"]
+public interface IContactPicker2 <: IInspectable {
+    func DesiredFieldsWithContactFieldType(value: CPointer<CPointer<Unit>>): Int32
+    func PickContactAsync(result: CPointer<CPointer<Unit>>): Int32
+    func PickContactsAsync(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactPicker3 (synthetic:Windows_ApplicationModel_Contacts_IContactPicker3)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["0e723315-b243-4bed-8516-22b1a7ac0ace", "Windows.ApplicationModel.Contacts.IContactPicker3", "User.value=Com"]
+public interface IContactPicker3 <: IInspectable {
+    func User(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactPickerStatics (synthetic:Windows_ApplicationModel_Contacts_IContactPickerStatics)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["7488c029-6a53-4258-a3e9-62dff6784b6c", "Windows.ApplicationModel.Contacts.IContactPickerStatics", "CreateForUser.result=Com;IsSupportedAsync.result=Com"]
+public interface IContactPickerStatics <: IInspectable {
+    func CreateForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func IsSupportedAsync(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactQueryOptions (synthetic:Windows_ApplicationModel_Contacts_IContactQueryOptions)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["4408cc9e-7d7c-42f0-8ac7-f50733ecdbc1", "Windows.ApplicationModel.Contacts.IContactQueryOptions", "TextSearch.value=Com;ContactListIds.value=Com;AnnotationListIds.value=Com"]
+public interface IContactQueryOptions <: IInspectable {
+    func TextSearch(value: CPointer<CPointer<Unit>>): Int32
+    func ContactListIds(value: CPointer<CPointer<Unit>>): Int32
+    func IncludeContactsFromHiddenLists(value: CPointer<Bool>): Int32
+    func SetIncludeContactsFromHiddenLists(value: Bool): Int32
+    func DesiredFields(value: CPointer<UInt32>): Int32
+    func SetDesiredFields(value: UInt32): Int32
+    func DesiredOperations(value: CPointer<UInt32>): Int32
+    func SetDesiredOperations(value: UInt32): Int32
+    func AnnotationListIds(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactQueryOptionsFactory (synthetic:Windows_ApplicationModel_Contacts_IContactQueryOptionsFactory)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["543fba47-8ce7-46cb-9dac-9aa42a1bc8e2", "Windows.ApplicationModel.Contacts.IContactQueryOptionsFactory", "CreateWithText.result=Com;CreateWithTextAndFields.result=Com"]
+public interface IContactQueryOptionsFactory <: IInspectable {
+    func CreateWithText(text: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateWithTextAndFields(text: CPointer<Unit>, fields: UInt32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactQueryTextSearch (synthetic:Windows_ApplicationModel_Contacts_IContactQueryTextSearch)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["f7e3f9cb-a957-439b-a0b7-1c02a1963ff0", "Windows.ApplicationModel.Contacts.IContactQueryTextSearch", "Text.value=HString"]
+public interface IContactQueryTextSearch <: IInspectable {
+    func Fields(value: CPointer<UInt32>): Int32
+    func SetFields(value: UInt32): Int32
+    func Text(value: CPointer<CPointer<Unit>>): Int32
+    func SetText(value: CPointer<Unit>): Int32
+    func SearchScope(value: CPointer<Int32>): Int32
+    func SetSearchScope(value: Int32): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactReader (synthetic:Windows_ApplicationModel_Contacts_IContactReader)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["d397e42e-1488-42f2-bf64-253f4884bfed", "Windows.ApplicationModel.Contacts.IContactReader", "ReadBatchAsync.value=Com;GetMatchingPropertiesWithMatchReason.ppRetVal=Com"]
+public interface IContactReader <: IInspectable {
+    func ReadBatchAsync(value: CPointer<CPointer<Unit>>): Int32
+    func GetMatchingPropertiesWithMatchReason(contact: CPointer<Unit>, ppRetVal: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Contacts.IContactSignificantOther (synthetic:Windows_ApplicationModel_Contacts_IContactSignificantOther)
@@ -2035,6 +9127,45 @@ public interface IContactSignificantOther2 <: IInspectable {
     func SetRelationship(value: Int32): Int32
 }
 
+// Windows.ApplicationModel.Contacts.IContactStore (synthetic:Windows_ApplicationModel_Contacts_IContactStore)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["2c220b10-3a6c-4293-b9bc-fe987f6e0d52", "Windows.ApplicationModel.Contacts.IContactStore", "FindContactsAsync.contacts=Com;FindContactsWithSearchTextAsync.contacts=Com;GetContactAsync.contacts=Com"]
+public interface IContactStore <: IInspectable {
+    func FindContactsAsync(contacts: CPointer<CPointer<Unit>>): Int32
+    func FindContactsWithSearchTextAsync(searchText: CPointer<Unit>, contacts: CPointer<CPointer<Unit>>): Int32
+    func GetContactAsync(contactId: CPointer<Unit>, contacts: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactStore2 (synthetic:Windows_ApplicationModel_Contacts_IContactStore2)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["18ce1c22-ebd5-4bfb-b690-5f4f27c4f0e8", "Windows.ApplicationModel.Contacts.IContactStore2", "ChangeTracker.value=Com;AggregateContactManager.value=Com;FindContactListsAsync.value=Com;GetContactListAsync.value=Com;CreateContactListAsync.value=Com;GetMeContactAsync.meContact=Com;GetContactReader.value=Com;GetContactReaderWithOptions.value=Com;CreateContactListInAccountAsync.value=Com"]
+public interface IContactStore2 <: IInspectable {
+    func ChangeTracker(value: CPointer<CPointer<Unit>>): Int32
+    func ContactChanged(value: CPointer<Unit>, returnValue: CPointer<Int64>): Int32
+    func RemoveContactChanged(value: Int64): Int32
+    func AggregateContactManager(value: CPointer<CPointer<Unit>>): Int32
+    func FindContactListsAsync(value: CPointer<CPointer<Unit>>): Int32
+    func GetContactListAsync(contactListId: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func CreateContactListAsync(displayName: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func GetMeContactAsync(meContact: CPointer<CPointer<Unit>>): Int32
+    func GetContactReader(value: CPointer<CPointer<Unit>>): Int32
+    func GetContactReaderWithOptions(options: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func CreateContactListInAccountAsync(displayName: CPointer<Unit>, userDataAccountId: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactStore3 (synthetic:Windows_ApplicationModel_Contacts_IContactStore3)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["cb882c6c-004e-4050-87f0-840407ee6818", "Windows.ApplicationModel.Contacts.IContactStore3", "GetChangeTracker.result=Com"]
+public interface IContactStore3 <: IInspectable {
+    func GetChangeTracker(identity: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IContactStoreNotificationTriggerDetails (synthetic:Windows_ApplicationModel_Contacts_IContactStoreNotificationTriggerDetails)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["abb298d6-878a-4f8b-a9ce-46bb7d1c84ce", "Windows.ApplicationModel.Contacts.IContactStoreNotificationTriggerDetails"]
+public interface IContactStoreNotificationTriggerDetails <: IInspectable {
+}
+
 // Windows.ApplicationModel.Contacts.IContactWebsite (synthetic:Windows_ApplicationModel_Contacts_IContactWebsite)
 @When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["9f130176-dc1b-4055-ad66-652f39d990e8", "Windows.ApplicationModel.Contacts.IContactWebsite", "Uri.value=Com;Description.value=HString"]
@@ -2052,3 +9183,489 @@ public interface IContactWebsite2 <: IInspectable {
     func RawValue(value: CPointer<CPointer<Unit>>): Int32
     func SetRawValue(value: CPointer<Unit>): Int32
 }
+
+// Windows.ApplicationModel.Contacts.IFullContactCardOptions (synthetic:Windows_ApplicationModel_Contacts_IFullContactCardOptions)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["8744436c-5cf9-4683-bdca-a1fdebf8dbce", "Windows.ApplicationModel.Contacts.IFullContactCardOptions"]
+public interface IFullContactCardOptions <: IInspectable {
+    func DesiredRemainingView(value: CPointer<Int32>): Int32
+    func SetDesiredRemainingView(value: Int32): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IKnownContactFieldStatics (synthetic:Windows_ApplicationModel_Contacts_IKnownContactFieldStatics)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["2e0e1b12-d627-4fca-bad4-1faf168c7d14", "Windows.ApplicationModel.Contacts.IKnownContactFieldStatics", "Email.value=HString;PhoneNumber.value=HString;Location.value=HString;InstantMessage.value=HString;ConvertTypeToName.name=HString"]
+public interface IKnownContactFieldStatics <: IInspectable {
+    func Email(value: CPointer<CPointer<Unit>>): Int32
+    func PhoneNumber(value: CPointer<CPointer<Unit>>): Int32
+    func Location(value: CPointer<CPointer<Unit>>): Int32
+    func InstantMessage(value: CPointer<CPointer<Unit>>): Int32
+    func ConvertNameToType(name: CPointer<Unit>, type_: CPointer<Int32>): Int32
+    func ConvertTypeToName(type_: Int32, name: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IPinnedContactIdsQueryResult (synthetic:Windows_ApplicationModel_Contacts_IPinnedContactIdsQueryResult)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["7d9b2552-1579-4ddc-871f-a30a3aea9ba1", "Windows.ApplicationModel.Contacts.IPinnedContactIdsQueryResult", "ContactIds.value=Com"]
+public interface IPinnedContactIdsQueryResult <: IInspectable {
+    func ContactIds(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IPinnedContactManager (synthetic:Windows_ApplicationModel_Contacts_IPinnedContactManager)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["fcbc740c-e1d6-45c3-b8b6-a35604e167a0", "Windows.ApplicationModel.Contacts.IPinnedContactManager", "User.user=Com;RequestPinContactAsync.operation=Com;RequestPinContactsAsync.operation=Com;RequestUnpinContactAsync.operation=Com;GetPinnedContactIdsAsync.operation=Com"]
+public interface IPinnedContactManager <: IInspectable {
+    func User(user: CPointer<CPointer<Unit>>): Int32
+    func IsPinSurfaceSupported(surface: Int32, result: CPointer<Bool>): Int32
+    func IsContactPinned(contact: CPointer<Unit>, surface: Int32, result: CPointer<Bool>): Int32
+    func RequestPinContactAsync(contact: CPointer<Unit>, surface: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func RequestPinContactsAsync(contacts: CPointer<Unit>, surface: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func RequestUnpinContactAsync(contact: CPointer<Unit>, surface: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func SignalContactActivity(contact: CPointer<Unit>): Int32
+    func GetPinnedContactIdsAsync(operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.IPinnedContactManagerStatics (synthetic:Windows_ApplicationModel_Contacts_IPinnedContactManagerStatics)
+@When[Windows_ApplicationModel_Contacts == "on"]
+@Interface["f65ccc7e-fdf9-486a-ace9-bc311d0ae7f0", "Windows.ApplicationModel.Contacts.IPinnedContactManagerStatics", "GetDefault.result=Com;GetForUser.result=Com"]
+public interface IPinnedContactManagerStatics <: IInspectable {
+    func GetDefault(result: CPointer<CPointer<Unit>>): Int32
+    func GetForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func IsSupported(result: CPointer<Bool>): Int32
+}
+
+// Windows.ApplicationModel.Contacts.KnownContactField (synthetic:Windows_ApplicationModel_Contacts_KnownContactField)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct KnownContactField <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Email(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownContactField, IKnownContactFieldStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Email(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func PhoneNumber(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownContactField, IKnownContactFieldStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PhoneNumber(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Location(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownContactField, IKnownContactFieldStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Location(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func InstantMessage(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownContactField, IKnownContactFieldStatics>().unwrap()) {
+            hr__ = unsafe { factory__.InstantMessage(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func ConvertNameToType(name: windows_core.HString): ContactFieldType {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name)) {
+            try (factory__ = windows_core.factory<KnownContactField, IKnownContactFieldStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ConvertNameToType(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return ContactFieldType(result__)
+    }
+
+    public static func ConvertTypeToName(type_: ContactFieldType): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownContactField, IKnownContactFieldStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ConvertTypeToName(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.KnownContactField"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.KnownContactField)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.KnownContactField", KnownContactField.signature())
+    }
+}
+
+// Windows.ApplicationModel.Contacts.PinnedContactIdsQueryResult (synthetic:Windows_ApplicationModel_Contacts_PinnedContactIdsQueryResult)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class PinnedContactIdsQueryResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PinnedContactIdsQueryResult> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PinnedContactIdsQueryResult {
+        PinnedContactIdsQueryResult(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PinnedContactIdsQueryResult {
+        PinnedContactIdsQueryResult(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPinnedContactIdsQueryResult.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PinnedContactIdsQueryResult> {
+        let ancestors = [IPinnedContactIdsQueryResult.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PinnedContactIdsQueryResult>("PinnedContactIdsQueryResult", IPinnedContactIdsQueryResult.iid(), ancestors, { raw => PinnedContactIdsQueryResult.fromAbiTake(raw) }, { raw => PinnedContactIdsQueryResult.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPinnedContactIdsQueryResult {
+        match (unsafe { query(IPinnedContactIdsQueryResult.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPinnedContactIdsQueryResult(): IPinnedContactIdsQueryResult {
+        defaultInterface()
+    }
+
+    public prop ContactIds: Windows_Foundation_Collections.IVector<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ContactIds(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.PinnedContactIdsQueryResult"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.PinnedContactIdsQueryResult;{" + IPinnedContactIdsQueryResult.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.PinnedContactIdsQueryResult", PinnedContactIdsQueryResult.signature(), IPinnedContactIdsQueryResult.iid())
+    }
+
+    public static func intoWinrtHandle(value: PinnedContactIdsQueryResult): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PinnedContactIdsQueryResult {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PinnedContactIdsQueryResult.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PinnedContactIdsQueryResult {
+        PinnedContactIdsQueryResult.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.PinnedContactManager (synthetic:Windows_ApplicationModel_Contacts_PinnedContactManager)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public class PinnedContactManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PinnedContactManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PinnedContactManager {
+        PinnedContactManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PinnedContactManager {
+        PinnedContactManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPinnedContactManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PinnedContactManager> {
+        let ancestors = [IPinnedContactManager.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PinnedContactManager>("PinnedContactManager", IPinnedContactManager.iid(), ancestors, { raw => PinnedContactManager.fromAbiTake(raw) }, { raw => PinnedContactManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPinnedContactManager {
+        match (unsafe { query(IPinnedContactManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPinnedContactManager(): IPinnedContactManager {
+        defaultInterface()
+    }
+
+    public prop User: Windows_System.User {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_System.User>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_System.User.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func IsPinSurfaceSupported(surface: PinnedContactSurface): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.IsPinSurfaceSupported(surface.value, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func IsContactPinned(contact: Contact, surface: PinnedContactSurface): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsContactPinned(__argBorrow0.asRaw(), surface.value, CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func RequestPinContactAsync(contact: Contact, surface: PinnedContactSurface): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RequestPinContactAsync(__argBorrow0.asRaw(), surface.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RequestPinContactsAsync(contacts: Windows_Foundation_Collections.IIterable<Contact>, surface: PinnedContactSurface): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Contact>>(contacts)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RequestPinContactsAsync(__argBorrow0.asRaw(), surface.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RequestUnpinContactAsync(contact: Contact, surface: PinnedContactSurface): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RequestUnpinContactAsync(__argBorrow0.asRaw(), surface.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func SignalContactActivity(contact: Contact): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Contact>(contact)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SignalContactActivity(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func GetPinnedContactIdsAsync(): Windows_Foundation.IAsyncOperation<PinnedContactIdsQueryResult> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetPinnedContactIdsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<PinnedContactIdsQueryResult>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<PinnedContactIdsQueryResult>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDefault(): PinnedContactManager {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PinnedContactManager, IPinnedContactManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetDefault(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PinnedContactManager>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PinnedContactManager.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetForUser(user: Windows_System.User): PinnedContactManager {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<PinnedContactManager, IPinnedContactManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<PinnedContactManager>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return PinnedContactManager.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsSupported(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PinnedContactManager, IPinnedContactManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupported(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.ApplicationModel.Contacts.PinnedContactManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.ApplicationModel.Contacts.PinnedContactManager;{" + IPinnedContactManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.ApplicationModel.Contacts.PinnedContactManager", PinnedContactManager.signature(), IPinnedContactManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: PinnedContactManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PinnedContactManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PinnedContactManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PinnedContactManager {
+        PinnedContactManager.viewOf(raw)
+    }
+}
+
+// Windows.ApplicationModel.Contacts.PinnedContactSurface (synthetic:Windows_ApplicationModel_Contacts_PinnedContactSurface)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public struct PinnedContactSurface {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const PinnedContactSurface_StartMenu = PinnedContactSurface(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
+public const PinnedContactSurface_Taskbar = PinnedContactSurface(1)

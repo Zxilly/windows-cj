@@ -3,16 +3,472 @@
 package windows_sys.Microsoft.UI.Xaml.Hosting
 
 import windows_core as windows_core
+import windows_interface.GUID
 import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+@When[Microsoft_UI == "on"]
+import windows_sys.Microsoft.UI as Microsoft_UI
 @When[Microsoft_UI_Composition == "on"]
 import windows_sys.Microsoft.UI.Composition as Microsoft_UI_Composition
+@When[Microsoft_UI_Content == "on"]
+import windows_sys.Microsoft.UI.Content as Microsoft_UI_Content
 @When[Microsoft_UI_Xaml == "on"]
 import windows_sys.Microsoft.UI.Xaml as Microsoft_UI_Xaml
 @When[Microsoft_UI_Xaml_Controls == "on"]
 import windows_sys.Microsoft.UI.Xaml.Controls as Microsoft_UI_Xaml_Controls
+@When[Microsoft_UI_Xaml_Media == "on"]
+import windows_sys.Microsoft.UI.Xaml.Media as Microsoft_UI_Xaml_Media
+@When[Windows_Foundation == "on"]
+import windows_sys.Foundation as Windows_Foundation
+
+// Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSource (synthetic:Microsoft_UI_Xaml_Hosting_DesktopWindowXamlSource)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public class DesktopWindowXamlSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopWindowXamlSource> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DesktopWindowXamlSource {
+        DesktopWindowXamlSource(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DesktopWindowXamlSource {
+        DesktopWindowXamlSource(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDesktopWindowXamlSource.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DesktopWindowXamlSource> {
+        let ancestors = [IDesktopWindowXamlSource.iid(), IDesktopWindowXamlSource2.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DesktopWindowXamlSource>("DesktopWindowXamlSource", IDesktopWindowXamlSource.iid(), ancestors, { raw => DesktopWindowXamlSource.fromAbiTake(raw) }, { raw => DesktopWindowXamlSource.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDesktopWindowXamlSource {
+        match (unsafe { query(IDesktopWindowXamlSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDesktopWindowXamlSource(): IDesktopWindowXamlSource {
+        defaultInterface()
+    }
+
+    public func asIDesktopWindowXamlSource2(): IDesktopWindowXamlSource2 {
+        match (unsafe { query<IDesktopWindowXamlSource2>(IDesktopWindowXamlSource2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Content: Microsoft_UI_Xaml.UIElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.UIElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml.UIElement.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.UIElement>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetContent(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop HasFocus: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HasFocus(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop SiteBridge: Microsoft_UI_Content.DesktopChildSiteBridge {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SiteBridge(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Content.DesktopChildSiteBridge>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Content.DesktopChildSiteBridge.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop SystemBackdrop: Microsoft_UI_Xaml_Media.SystemBackdrop {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SystemBackdrop(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media.SystemBackdrop>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media.SystemBackdrop.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media.SystemBackdrop>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSystemBackdrop(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addGotFocus(handler: Windows_Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceGotFocusEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceGotFocusEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GotFocus(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeGotFocus(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveGotFocus(token) }
+        }
+        hr__.check()
+    }
+
+    public func addTakeFocusRequested(handler: Windows_Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceTakeFocusRequestedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<DesktopWindowXamlSource, DesktopWindowXamlSourceTakeFocusRequestedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TakeFocusRequested(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeTakeFocusRequested(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveTakeFocusRequested(token) }
+        }
+        hr__.check()
+    }
+
+    public func NavigateFocus(request: XamlSourceFocusNavigationRequest): XamlSourceFocusNavigationResult {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<XamlSourceFocusNavigationRequest>(request)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NavigateFocus(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<XamlSourceFocusNavigationResult>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return XamlSourceFocusNavigationResult.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Initialize(parentWindowId: Microsoft_UI.WindowId): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Initialize(parentWindowId) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): DesktopWindowXamlSource {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<DesktopWindowXamlSource, IDesktopWindowXamlSourceFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DesktopWindowXamlSource>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return DesktopWindowXamlSource.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSource"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSource;{" + IDesktopWindowXamlSource.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSource", DesktopWindowXamlSource.signature(), IDesktopWindowXamlSource.iid())
+    }
+
+    public static func intoWinrtHandle(value: DesktopWindowXamlSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DesktopWindowXamlSource {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DesktopWindowXamlSource.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DesktopWindowXamlSource {
+        DesktopWindowXamlSource.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceGotFocusEventArgs (synthetic:Microsoft_UI_Xaml_Hosting_DesktopWindowXamlSourceGotFocusEventArgs)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public class DesktopWindowXamlSourceGotFocusEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopWindowXamlSourceGotFocusEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DesktopWindowXamlSourceGotFocusEventArgs {
+        DesktopWindowXamlSourceGotFocusEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DesktopWindowXamlSourceGotFocusEventArgs {
+        DesktopWindowXamlSourceGotFocusEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDesktopWindowXamlSourceGotFocusEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DesktopWindowXamlSourceGotFocusEventArgs> {
+        let ancestors = [IDesktopWindowXamlSourceGotFocusEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DesktopWindowXamlSourceGotFocusEventArgs>("DesktopWindowXamlSourceGotFocusEventArgs", IDesktopWindowXamlSourceGotFocusEventArgs.iid(), ancestors, { raw => DesktopWindowXamlSourceGotFocusEventArgs.fromAbiTake(raw) }, { raw => DesktopWindowXamlSourceGotFocusEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDesktopWindowXamlSourceGotFocusEventArgs {
+        match (unsafe { query(IDesktopWindowXamlSourceGotFocusEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDesktopWindowXamlSourceGotFocusEventArgs(): IDesktopWindowXamlSourceGotFocusEventArgs {
+        defaultInterface()
+    }
+
+    public prop Request: XamlSourceFocusNavigationRequest {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Request(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<XamlSourceFocusNavigationRequest>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return XamlSourceFocusNavigationRequest.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceGotFocusEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceGotFocusEventArgs;{" + IDesktopWindowXamlSourceGotFocusEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceGotFocusEventArgs", DesktopWindowXamlSourceGotFocusEventArgs.signature(), IDesktopWindowXamlSourceGotFocusEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: DesktopWindowXamlSourceGotFocusEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DesktopWindowXamlSourceGotFocusEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DesktopWindowXamlSourceGotFocusEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DesktopWindowXamlSourceGotFocusEventArgs {
+        DesktopWindowXamlSourceGotFocusEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Hosting_DesktopWindowXamlSourceTakeFocusRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public class DesktopWindowXamlSourceTakeFocusRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DesktopWindowXamlSourceTakeFocusRequestedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DesktopWindowXamlSourceTakeFocusRequestedEventArgs {
+        DesktopWindowXamlSourceTakeFocusRequestedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DesktopWindowXamlSourceTakeFocusRequestedEventArgs {
+        DesktopWindowXamlSourceTakeFocusRequestedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDesktopWindowXamlSourceTakeFocusRequestedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DesktopWindowXamlSourceTakeFocusRequestedEventArgs> {
+        let ancestors = [IDesktopWindowXamlSourceTakeFocusRequestedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DesktopWindowXamlSourceTakeFocusRequestedEventArgs>("DesktopWindowXamlSourceTakeFocusRequestedEventArgs", IDesktopWindowXamlSourceTakeFocusRequestedEventArgs.iid(), ancestors, { raw => DesktopWindowXamlSourceTakeFocusRequestedEventArgs.fromAbiTake(raw) }, { raw => DesktopWindowXamlSourceTakeFocusRequestedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDesktopWindowXamlSourceTakeFocusRequestedEventArgs {
+        match (unsafe { query(IDesktopWindowXamlSourceTakeFocusRequestedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDesktopWindowXamlSourceTakeFocusRequestedEventArgs(): IDesktopWindowXamlSourceTakeFocusRequestedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Request: XamlSourceFocusNavigationRequest {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Request(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<XamlSourceFocusNavigationRequest>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return XamlSourceFocusNavigationRequest.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs;{" + IDesktopWindowXamlSourceTakeFocusRequestedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs", DesktopWindowXamlSourceTakeFocusRequestedEventArgs.signature(), IDesktopWindowXamlSourceTakeFocusRequestedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: DesktopWindowXamlSourceTakeFocusRequestedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DesktopWindowXamlSourceTakeFocusRequestedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DesktopWindowXamlSourceTakeFocusRequestedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DesktopWindowXamlSourceTakeFocusRequestedEventArgs {
+        DesktopWindowXamlSourceTakeFocusRequestedEventArgs.viewOf(raw)
+    }
+}
 
 // Microsoft.UI.Xaml.Hosting.ElementCompositionPreview (synthetic:Microsoft_UI_Xaml_Hosting_ElementCompositionPreview)
 @When[Microsoft_UI_Xaml_Hosting == "on"]
@@ -199,6 +655,53 @@ public class ElementCompositionPreview <: windows_interface.InterfaceWrapperBase
     }
 }
 
+// Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSource (synthetic:Microsoft_UI_Xaml_Hosting_IDesktopWindowXamlSource)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["553af92c-1381-51d6-bee0-f34beb042ea8", "Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSource", "Content.value=Com;SystemBackdrop.value=Com;SiteBridge.value=Com;NavigateFocus.result=Com"]
+public interface IDesktopWindowXamlSource <: IInspectable {
+    func Content(value: CPointer<CPointer<Unit>>): Int32
+    func SetContent(value: CPointer<Unit>): Int32
+    func HasFocus(value: CPointer<Bool>): Int32
+    func SystemBackdrop(value: CPointer<CPointer<Unit>>): Int32
+    func SetSystemBackdrop(value: CPointer<Unit>): Int32
+    func SiteBridge(value: CPointer<CPointer<Unit>>): Int32
+    func TakeFocusRequested(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveTakeFocusRequested(token: Int64): Int32
+    func GotFocus(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveGotFocus(token: Int64): Int32
+    func NavigateFocus(request: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func Initialize(parentWindowId: Microsoft_UI.WindowId): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSource2 (synthetic:Microsoft_UI_Xaml_Hosting_IDesktopWindowXamlSource2)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["fb02b9f1-8588-5bd3-8951-4664a675d872", "Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSource2"]
+public interface IDesktopWindowXamlSource2 <: IInspectable {
+    func ShouldConstrainPopupsToWorkArea(value: CPointer<Bool>): Int32
+    func SetShouldConstrainPopupsToWorkArea(value: Bool): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSourceFactory (synthetic:Microsoft_UI_Xaml_Hosting_IDesktopWindowXamlSourceFactory)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["7d2db617-14e7-5d49-aeec-ae10887e595d", "Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSourceFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IDesktopWindowXamlSourceFactory <: IInspectable {
+    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSourceGotFocusEventArgs (synthetic:Microsoft_UI_Xaml_Hosting_IDesktopWindowXamlSourceGotFocusEventArgs)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["cc63d863-2071-5f6b-aef9-c0ba35f3b8df", "Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSourceGotFocusEventArgs", "Request.value=Com"]
+public interface IDesktopWindowXamlSourceGotFocusEventArgs <: IInspectable {
+    func Request(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSourceTakeFocusRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Hosting_IDesktopWindowXamlSourceTakeFocusRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["4f5a0e2c-4ddc-5c03-939f-6f3bda560363", "Microsoft.UI.Xaml.Hosting.IDesktopWindowXamlSourceTakeFocusRequestedEventArgs", "Request.value=Com"]
+public interface IDesktopWindowXamlSourceTakeFocusRequestedEventArgs <: IInspectable {
+    func Request(value: CPointer<CPointer<Unit>>): Int32
+}
+
 // Microsoft.UI.Xaml.Hosting.IElementCompositionPreview (synthetic:Microsoft_UI_Xaml_Hosting_IElementCompositionPreview)
 @When[Microsoft_UI_Xaml_Hosting == "on"]
 @Interface["c8ad1ef4-a93f-5a25-85bd-7c498d9856d3", "Microsoft.UI.Xaml.Hosting.IElementCompositionPreview"]
@@ -217,4 +720,559 @@ public interface IElementCompositionPreviewStatics <: IInspectable {
     func SetImplicitHideAnimation(element: CPointer<Unit>, animation: CPointer<Unit>): Int32
     func SetIsTranslationEnabled(element: CPointer<Unit>, value: Bool): Int32
     func GetPointerPositionPropertySet(targetElement: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IWindowsXamlManager (synthetic:Microsoft_UI_Xaml_Hosting_IWindowsXamlManager)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["85a2e562-7e8f-5333-a104-a3e672a2ffee", "Microsoft.UI.Xaml.Hosting.IWindowsXamlManager"]
+public interface IWindowsXamlManager <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Hosting.IWindowsXamlManager2 (synthetic:Microsoft_UI_Xaml_Hosting_IWindowsXamlManager2)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["bd67cff5-b887-56da-b0a2-dad10a6520e9", "Microsoft.UI.Xaml.Hosting.IWindowsXamlManager2"]
+public interface IWindowsXamlManager2 <: IInspectable {
+    func XamlShutdownCompletedOnThread(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveXamlShutdownCompletedOnThread(token: Int64): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IWindowsXamlManagerStatics (synthetic:Microsoft_UI_Xaml_Hosting_IWindowsXamlManagerStatics)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["56cb591d-de97-539f-881d-8ccdc44fa6c4", "Microsoft.UI.Xaml.Hosting.IWindowsXamlManagerStatics", "InitializeForCurrentThread.result=Com"]
+public interface IWindowsXamlManagerStatics <: IInspectable {
+    func InitializeForCurrentThread(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IWindowsXamlManagerStatics2 (synthetic:Microsoft_UI_Xaml_Hosting_IWindowsXamlManagerStatics2)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["1062430e-0898-5240-ba52-89d9225e7e58", "Microsoft.UI.Xaml.Hosting.IWindowsXamlManagerStatics2", "GetForCurrentThread.result=Com"]
+public interface IWindowsXamlManagerStatics2 <: IInspectable {
+    func GetForCurrentThread(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IXamlShutdownCompletedOnThreadEventArgs (synthetic:Microsoft_UI_Xaml_Hosting_IXamlShutdownCompletedOnThreadEventArgs)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["accd20e5-3576-5262-a3dd-990657681f1f", "Microsoft.UI.Xaml.Hosting.IXamlShutdownCompletedOnThreadEventArgs", "GetDispatcherQueueDeferral.result=Com"]
+public interface IXamlShutdownCompletedOnThreadEventArgs <: IInspectable {
+    func GetDispatcherQueueDeferral(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequest (synthetic:Microsoft_UI_Xaml_Hosting_IXamlSourceFocusNavigationRequest)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["c883ea8b-4ce2-58be-b547-66dedf620312", "Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequest"]
+public interface IXamlSourceFocusNavigationRequest <: IInspectable {
+    func Reason(value: CPointer<Int32>): Int32
+    func HintRect(value: CPointer<Windows_Foundation.Rect>): Int32
+    func CorrelationId(value: CPointer<GUID>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequestFactory (synthetic:Microsoft_UI_Xaml_Hosting_IXamlSourceFocusNavigationRequestFactory)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["7a5124dd-2876-5ed8-b564-5867731d7f1e", "Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationRequestFactory", "CreateInstance.value=Com;CreateInstanceWithHintRect.value=Com;CreateInstanceWithHintRectAndCorrelationId.value=Com"]
+public interface IXamlSourceFocusNavigationRequestFactory <: IInspectable {
+    func CreateInstance(reason: Int32, value: CPointer<CPointer<Unit>>): Int32
+    func CreateInstanceWithHintRect(reason: Int32, hintRect: Windows_Foundation.Rect, value: CPointer<CPointer<Unit>>): Int32
+    func CreateInstanceWithHintRectAndCorrelationId(reason: Int32, hintRect: Windows_Foundation.Rect, correlationId: GUID, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationResult (synthetic:Microsoft_UI_Xaml_Hosting_IXamlSourceFocusNavigationResult)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["d6bf378e-2aac-5e5b-ac8a-6c5d9a4c1cb8", "Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationResult"]
+public interface IXamlSourceFocusNavigationResult <: IInspectable {
+    func WasFocusMoved(value: CPointer<Bool>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationResultFactory (synthetic:Microsoft_UI_Xaml_Hosting_IXamlSourceFocusNavigationResultFactory)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+@Interface["f533f53b-5c00-5c88-9a41-3888cb86e495", "Microsoft.UI.Xaml.Hosting.IXamlSourceFocusNavigationResultFactory", "CreateInstance.value=Com"]
+public interface IXamlSourceFocusNavigationResultFactory <: IInspectable {
+    func CreateInstance(focusMoved: Bool, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Hosting.WindowsXamlManager (synthetic:Microsoft_UI_Xaml_Hosting_WindowsXamlManager)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public class WindowsXamlManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<WindowsXamlManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WindowsXamlManager {
+        WindowsXamlManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WindowsXamlManager {
+        WindowsXamlManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IWindowsXamlManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WindowsXamlManager> {
+        let ancestors = [IWindowsXamlManager.iid(), IWindowsXamlManager2.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<WindowsXamlManager>("WindowsXamlManager", IWindowsXamlManager.iid(), ancestors, { raw => WindowsXamlManager.fromAbiTake(raw) }, { raw => WindowsXamlManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IWindowsXamlManager {
+        match (unsafe { query(IWindowsXamlManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIWindowsXamlManager(): IWindowsXamlManager {
+        defaultInterface()
+    }
+
+    public func asIWindowsXamlManager2(): IWindowsXamlManager2 {
+        match (unsafe { query<IWindowsXamlManager2>(IWindowsXamlManager2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func GetForCurrentThread(): WindowsXamlManager {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowsXamlManager, IWindowsXamlManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.GetForCurrentThread(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<WindowsXamlManager>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return WindowsXamlManager.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func InitializeForCurrentThread(): WindowsXamlManager {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowsXamlManager, IWindowsXamlManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.InitializeForCurrentThread(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<WindowsXamlManager>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return WindowsXamlManager.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Hosting.WindowsXamlManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Hosting.WindowsXamlManager;{" + IWindowsXamlManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Hosting.WindowsXamlManager", WindowsXamlManager.signature(), IWindowsXamlManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: WindowsXamlManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): WindowsXamlManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        WindowsXamlManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): WindowsXamlManager {
+        WindowsXamlManager.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Hosting.XamlShutdownCompletedOnThreadEventArgs (synthetic:Microsoft_UI_Xaml_Hosting_XamlShutdownCompletedOnThreadEventArgs)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public class XamlShutdownCompletedOnThreadEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<XamlShutdownCompletedOnThreadEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): XamlShutdownCompletedOnThreadEventArgs {
+        XamlShutdownCompletedOnThreadEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): XamlShutdownCompletedOnThreadEventArgs {
+        XamlShutdownCompletedOnThreadEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IXamlShutdownCompletedOnThreadEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<XamlShutdownCompletedOnThreadEventArgs> {
+        let ancestors = [IXamlShutdownCompletedOnThreadEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<XamlShutdownCompletedOnThreadEventArgs>("XamlShutdownCompletedOnThreadEventArgs", IXamlShutdownCompletedOnThreadEventArgs.iid(), ancestors, { raw => XamlShutdownCompletedOnThreadEventArgs.fromAbiTake(raw) }, { raw => XamlShutdownCompletedOnThreadEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IXamlShutdownCompletedOnThreadEventArgs {
+        match (unsafe { query(IXamlShutdownCompletedOnThreadEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIXamlShutdownCompletedOnThreadEventArgs(): IXamlShutdownCompletedOnThreadEventArgs {
+        defaultInterface()
+    }
+
+    public func GetDispatcherQueueDeferral(): Windows_Foundation.Deferral {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDispatcherQueueDeferral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.Deferral>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.Deferral.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Hosting.XamlShutdownCompletedOnThreadEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Hosting.XamlShutdownCompletedOnThreadEventArgs;{" + IXamlShutdownCompletedOnThreadEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Hosting.XamlShutdownCompletedOnThreadEventArgs", XamlShutdownCompletedOnThreadEventArgs.signature(), IXamlShutdownCompletedOnThreadEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: XamlShutdownCompletedOnThreadEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): XamlShutdownCompletedOnThreadEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        XamlShutdownCompletedOnThreadEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): XamlShutdownCompletedOnThreadEventArgs {
+        XamlShutdownCompletedOnThreadEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationReason (synthetic:Microsoft_UI_Xaml_Hosting_XamlSourceFocusNavigationReason)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public struct XamlSourceFocusNavigationReason {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_Programmatic = XamlSourceFocusNavigationReason(0)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_Restore = XamlSourceFocusNavigationReason(1)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_First = XamlSourceFocusNavigationReason(3)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_Last = XamlSourceFocusNavigationReason(4)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_Left = XamlSourceFocusNavigationReason(7)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_Up = XamlSourceFocusNavigationReason(8)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_Right = XamlSourceFocusNavigationReason(9)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public const XamlSourceFocusNavigationReason_Down = XamlSourceFocusNavigationReason(10)
+
+// Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest (synthetic:Microsoft_UI_Xaml_Hosting_XamlSourceFocusNavigationRequest)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public class XamlSourceFocusNavigationRequest <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<XamlSourceFocusNavigationRequest> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): XamlSourceFocusNavigationRequest {
+        XamlSourceFocusNavigationRequest(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): XamlSourceFocusNavigationRequest {
+        XamlSourceFocusNavigationRequest(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IXamlSourceFocusNavigationRequest.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<XamlSourceFocusNavigationRequest> {
+        let ancestors = [IXamlSourceFocusNavigationRequest.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<XamlSourceFocusNavigationRequest>("XamlSourceFocusNavigationRequest", IXamlSourceFocusNavigationRequest.iid(), ancestors, { raw => XamlSourceFocusNavigationRequest.fromAbiTake(raw) }, { raw => XamlSourceFocusNavigationRequest.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IXamlSourceFocusNavigationRequest {
+        match (unsafe { query(IXamlSourceFocusNavigationRequest.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIXamlSourceFocusNavigationRequest(): IXamlSourceFocusNavigationRequest {
+        defaultInterface()
+    }
+
+    public prop CorrelationId: windows_core.GuidValue {
+        get() {
+            var result__ = GUID()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CorrelationId(CPointer<GUID>(inout result__)) }
+            }
+            hr__.check()
+            return windows_core.GuidValue.fromRaw(result__)
+        }
+    }
+
+    public prop HintRect: Windows_Foundation.Rect {
+        get() {
+            var result__ = Windows_Foundation.Rect()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HintRect(CPointer<Windows_Foundation.Rect>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Reason: XamlSourceFocusNavigationReason {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Reason(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return XamlSourceFocusNavigationReason(result__)
+        }
+    }
+
+    public static func CreateInstance(reason: XamlSourceFocusNavigationReason): XamlSourceFocusNavigationRequest {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<XamlSourceFocusNavigationRequest, IXamlSourceFocusNavigationRequestFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstance(reason.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<XamlSourceFocusNavigationRequest>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return XamlSourceFocusNavigationRequest.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithHintRect(reason: XamlSourceFocusNavigationReason, hintRect: Windows_Foundation.Rect): XamlSourceFocusNavigationRequest {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<XamlSourceFocusNavigationRequest, IXamlSourceFocusNavigationRequestFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstanceWithHintRect(reason.value, hintRect, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<XamlSourceFocusNavigationRequest>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return XamlSourceFocusNavigationRequest.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithHintRectAndCorrelationId(reason: XamlSourceFocusNavigationReason, hintRect: Windows_Foundation.Rect, correlationId: windows_core.GuidValue): XamlSourceFocusNavigationRequest {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<XamlSourceFocusNavigationRequest, IXamlSourceFocusNavigationRequestFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstanceWithHintRectAndCorrelationId(reason.value, hintRect, correlationId.toRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<XamlSourceFocusNavigationRequest>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return XamlSourceFocusNavigationRequest.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest;{" + IXamlSourceFocusNavigationRequest.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest", XamlSourceFocusNavigationRequest.signature(), IXamlSourceFocusNavigationRequest.iid())
+    }
+
+    public static func intoWinrtHandle(value: XamlSourceFocusNavigationRequest): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): XamlSourceFocusNavigationRequest {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        XamlSourceFocusNavigationRequest.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): XamlSourceFocusNavigationRequest {
+        XamlSourceFocusNavigationRequest.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationResult (synthetic:Microsoft_UI_Xaml_Hosting_XamlSourceFocusNavigationResult)
+@When[Microsoft_UI_Xaml_Hosting == "on"]
+public class XamlSourceFocusNavigationResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<XamlSourceFocusNavigationResult> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): XamlSourceFocusNavigationResult {
+        XamlSourceFocusNavigationResult(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): XamlSourceFocusNavigationResult {
+        XamlSourceFocusNavigationResult(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IXamlSourceFocusNavigationResult.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<XamlSourceFocusNavigationResult> {
+        let ancestors = [IXamlSourceFocusNavigationResult.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<XamlSourceFocusNavigationResult>("XamlSourceFocusNavigationResult", IXamlSourceFocusNavigationResult.iid(), ancestors, { raw => XamlSourceFocusNavigationResult.fromAbiTake(raw) }, { raw => XamlSourceFocusNavigationResult.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IXamlSourceFocusNavigationResult {
+        match (unsafe { query(IXamlSourceFocusNavigationResult.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIXamlSourceFocusNavigationResult(): IXamlSourceFocusNavigationResult {
+        defaultInterface()
+    }
+
+    public prop WasFocusMoved: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WasFocusMoved(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func CreateInstance(focusMoved: Bool): XamlSourceFocusNavigationResult {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<XamlSourceFocusNavigationResult, IXamlSourceFocusNavigationResultFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstance(focusMoved, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<XamlSourceFocusNavigationResult>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return XamlSourceFocusNavigationResult.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationResult"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationResult;{" + IXamlSourceFocusNavigationResult.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Hosting.XamlSourceFocusNavigationResult", XamlSourceFocusNavigationResult.signature(), IXamlSourceFocusNavigationResult.iid())
+    }
+
+    public static func intoWinrtHandle(value: XamlSourceFocusNavigationResult): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): XamlSourceFocusNavigationResult {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        XamlSourceFocusNavigationResult.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): XamlSourceFocusNavigationResult {
+        XamlSourceFocusNavigationResult.viewOf(raw)
+    }
 }

@@ -809,21 +809,21 @@ public class AppWindowPresenter <: windows_interface.InterfaceWrapperBase & wind
 @When[Microsoft_UI_Windowing == "on"]
 public struct AppWindowPresenterKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Windowing == "on"]
-public let AppWindowPresenterKind_Default = AppWindowPresenterKind(0)
+public const AppWindowPresenterKind_Default = AppWindowPresenterKind(0)
 @When[Microsoft_UI_Windowing == "on"]
-public let AppWindowPresenterKind_CompactOverlay = AppWindowPresenterKind(1)
+public const AppWindowPresenterKind_CompactOverlay = AppWindowPresenterKind(1)
 @When[Microsoft_UI_Windowing == "on"]
-public let AppWindowPresenterKind_FullScreen = AppWindowPresenterKind(2)
+public const AppWindowPresenterKind_FullScreen = AppWindowPresenterKind(2)
 @When[Microsoft_UI_Windowing == "on"]
-public let AppWindowPresenterKind_Overlapped = AppWindowPresenterKind(3)
+public const AppWindowPresenterKind_Overlapped = AppWindowPresenterKind(3)
 
 // Microsoft.UI.Windowing.AppWindowTitleBar (synthetic:Microsoft_UI_Windowing_AppWindowTitleBar)
 @When[Microsoft_UI_Windowing == "on"]
@@ -882,7 +882,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop BackgroundColor: windows_interface.IInspectable {
+    public mut prop BackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -890,15 +890,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.BackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetBackgroundColor(__argBorrow0.asRaw()) }
                 }
@@ -907,7 +907,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonBackgroundColor: windows_interface.IInspectable {
+    public mut prop ButtonBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -915,15 +915,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonBackgroundColor(__argBorrow0.asRaw()) }
                 }
@@ -932,7 +932,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonForegroundColor: windows_interface.IInspectable {
+    public mut prop ButtonForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -940,15 +940,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonForegroundColor(__argBorrow0.asRaw()) }
                 }
@@ -957,7 +957,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonHoverBackgroundColor: windows_interface.IInspectable {
+    public mut prop ButtonHoverBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -965,15 +965,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonHoverBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonHoverBackgroundColor(__argBorrow0.asRaw()) }
                 }
@@ -982,7 +982,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonHoverForegroundColor: windows_interface.IInspectable {
+    public mut prop ButtonHoverForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -990,15 +990,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonHoverForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonHoverForegroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1007,7 +1007,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonInactiveBackgroundColor: windows_interface.IInspectable {
+    public mut prop ButtonInactiveBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1015,15 +1015,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonInactiveBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonInactiveBackgroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1032,7 +1032,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonInactiveForegroundColor: windows_interface.IInspectable {
+    public mut prop ButtonInactiveForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1040,15 +1040,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonInactiveForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonInactiveForegroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1057,7 +1057,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonPressedBackgroundColor: windows_interface.IInspectable {
+    public mut prop ButtonPressedBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1065,15 +1065,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonPressedBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonPressedBackgroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1082,7 +1082,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ButtonPressedForegroundColor: windows_interface.IInspectable {
+    public mut prop ButtonPressedForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1090,15 +1090,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ButtonPressedForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetButtonPressedForegroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1126,7 +1126,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop ForegroundColor: windows_interface.IInspectable {
+    public mut prop ForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1134,15 +1134,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.ForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetForegroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1182,7 +1182,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop InactiveBackgroundColor: windows_interface.IInspectable {
+    public mut prop InactiveBackgroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1190,15 +1190,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.InactiveBackgroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetInactiveBackgroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1207,7 +1207,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop InactiveForegroundColor: windows_interface.IInspectable {
+    public mut prop InactiveForegroundColor: Windows_Foundation.IReference<windows_interface.IInspectable> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1215,15 +1215,15 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.InactiveForegroundColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetInactiveForegroundColor(__argBorrow0.asRaw()) }
                 }
@@ -1320,6 +1320,139 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         AppWindowTitleBar.viewOf(raw)
     }
 }
+
+// Microsoft.UI.Windowing.CompactOverlayPresenter (synthetic:Microsoft_UI_Windowing_CompactOverlayPresenter)
+@When[Microsoft_UI_Windowing == "on"]
+public class CompactOverlayPresenter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompactOverlayPresenter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompactOverlayPresenter {
+        CompactOverlayPresenter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompactOverlayPresenter {
+        CompactOverlayPresenter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompactOverlayPresenter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompactOverlayPresenter> {
+        let ancestors = [ICompactOverlayPresenter.iid(), IAppWindowPresenter.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompactOverlayPresenter>("CompactOverlayPresenter", ICompactOverlayPresenter.iid(), ancestors, { raw => CompactOverlayPresenter.fromAbiTake(raw) }, { raw => CompactOverlayPresenter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompactOverlayPresenter {
+        match (unsafe { query(ICompactOverlayPresenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompactOverlayPresenter(): ICompactOverlayPresenter {
+        defaultInterface()
+    }
+
+    public func asIAppWindowPresenter(): IAppWindowPresenter {
+        match (unsafe { query<IAppWindowPresenter>(IAppWindowPresenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop InitialSize: CompactOverlaySize {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InitialSize(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return CompactOverlaySize(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInitialSize(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func Create(): CompactOverlayPresenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompactOverlayPresenter, ICompactOverlayPresenterStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Create(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<CompactOverlayPresenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return CompactOverlayPresenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Windowing.CompactOverlayPresenter"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Windowing.CompactOverlayPresenter;{" + ICompactOverlayPresenter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Windowing.CompactOverlayPresenter", CompactOverlayPresenter.signature(), ICompactOverlayPresenter.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompactOverlayPresenter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompactOverlayPresenter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompactOverlayPresenter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompactOverlayPresenter {
+        CompactOverlayPresenter.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Windowing.CompactOverlaySize (synthetic:Microsoft_UI_Windowing_CompactOverlaySize)
+@When[Microsoft_UI_Windowing == "on"]
+public struct CompactOverlaySize {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Windowing == "on"]
+public const CompactOverlaySize_Small = CompactOverlaySize(0)
+@When[Microsoft_UI_Windowing == "on"]
+public const CompactOverlaySize_Medium = CompactOverlaySize(1)
+@When[Microsoft_UI_Windowing == "on"]
+public const CompactOverlaySize_Large = CompactOverlaySize(2)
 
 // Microsoft.UI.Windowing.DisplayArea (synthetic:Microsoft_UI_Windowing_DisplayArea)
 @When[Microsoft_UI_Windowing == "on"]
@@ -1546,19 +1679,19 @@ public class DisplayArea <: windows_interface.InterfaceWrapperBase & windows_int
 @When[Microsoft_UI_Windowing == "on"]
 public struct DisplayAreaFallback {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaFallback_None = DisplayAreaFallback(0)
+public const DisplayAreaFallback_None = DisplayAreaFallback(0)
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaFallback_Primary = DisplayAreaFallback(1)
+public const DisplayAreaFallback_Primary = DisplayAreaFallback(1)
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaFallback_Nearest = DisplayAreaFallback(2)
+public const DisplayAreaFallback_Nearest = DisplayAreaFallback(2)
 
 // Microsoft.UI.Windowing.DisplayAreaWatcher (synthetic:Microsoft_UI_Windowing_DisplayAreaWatcher)
 @When[Microsoft_UI_Windowing == "on"]
@@ -1767,25 +1900,121 @@ public class DisplayAreaWatcher <: windows_interface.InterfaceWrapperBase & wind
 @When[Microsoft_UI_Windowing == "on"]
 public struct DisplayAreaWatcherStatus {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaWatcherStatus_Created = DisplayAreaWatcherStatus(0)
+public const DisplayAreaWatcherStatus_Created = DisplayAreaWatcherStatus(0)
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaWatcherStatus_Started = DisplayAreaWatcherStatus(1)
+public const DisplayAreaWatcherStatus_Started = DisplayAreaWatcherStatus(1)
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaWatcherStatus_EnumerationCompleted = DisplayAreaWatcherStatus(2)
+public const DisplayAreaWatcherStatus_EnumerationCompleted = DisplayAreaWatcherStatus(2)
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaWatcherStatus_Stopping = DisplayAreaWatcherStatus(3)
+public const DisplayAreaWatcherStatus_Stopping = DisplayAreaWatcherStatus(3)
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaWatcherStatus_Stopped = DisplayAreaWatcherStatus(4)
+public const DisplayAreaWatcherStatus_Stopped = DisplayAreaWatcherStatus(4)
 @When[Microsoft_UI_Windowing == "on"]
-public let DisplayAreaWatcherStatus_Aborted = DisplayAreaWatcherStatus(5)
+public const DisplayAreaWatcherStatus_Aborted = DisplayAreaWatcherStatus(5)
+
+// Microsoft.UI.Windowing.FullScreenPresenter (synthetic:Microsoft_UI_Windowing_FullScreenPresenter)
+@When[Microsoft_UI_Windowing == "on"]
+public class FullScreenPresenter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FullScreenPresenter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FullScreenPresenter {
+        FullScreenPresenter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FullScreenPresenter {
+        FullScreenPresenter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IFullScreenPresenter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FullScreenPresenter> {
+        let ancestors = [IFullScreenPresenter.iid(), IAppWindowPresenter.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FullScreenPresenter>("FullScreenPresenter", IFullScreenPresenter.iid(), ancestors, { raw => FullScreenPresenter.fromAbiTake(raw) }, { raw => FullScreenPresenter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IFullScreenPresenter {
+        match (unsafe { query(IFullScreenPresenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIFullScreenPresenter(): IFullScreenPresenter {
+        defaultInterface()
+    }
+
+    public func asIAppWindowPresenter(): IAppWindowPresenter {
+        match (unsafe { query<IAppWindowPresenter>(IAppWindowPresenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func Create(): FullScreenPresenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<FullScreenPresenter, IFullScreenPresenterStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Create(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<FullScreenPresenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return FullScreenPresenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Windowing.FullScreenPresenter"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Windowing.FullScreenPresenter;{" + IFullScreenPresenter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Windowing.FullScreenPresenter", FullScreenPresenter.signature(), IFullScreenPresenter.iid())
+    }
+
+    public static func intoWinrtHandle(value: FullScreenPresenter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FullScreenPresenter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FullScreenPresenter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FullScreenPresenter {
+        FullScreenPresenter.viewOf(raw)
+    }
+}
 
 // Microsoft.UI.Windowing.IAppWindow (synthetic:Microsoft_UI_Windowing_IAppWindow)
 @When[Microsoft_UI_Windowing == "on"]
@@ -1972,6 +2201,21 @@ public interface IAppWindowTitleBarStatics <: IInspectable {
     func IsCustomizationSupported(result: CPointer<Bool>): Int32
 }
 
+// Microsoft.UI.Windowing.ICompactOverlayPresenter (synthetic:Microsoft_UI_Windowing_ICompactOverlayPresenter)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["efeb0812-6fc7-5b7d-bd92-cc8f9a6454c9", "Microsoft.UI.Windowing.ICompactOverlayPresenter"]
+public interface ICompactOverlayPresenter <: IInspectable {
+    func InitialSize(value: CPointer<Int32>): Int32
+    func SetInitialSize(value: Int32): Int32
+}
+
+// Microsoft.UI.Windowing.ICompactOverlayPresenterStatics (synthetic:Microsoft_UI_Windowing_ICompactOverlayPresenterStatics)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["eab93186-4f6a-52f9-8c03-da57a1522f6e", "Microsoft.UI.Windowing.ICompactOverlayPresenterStatics", "Create.result=Com"]
+public interface ICompactOverlayPresenterStatics <: IInspectable {
+    func Create(result: CPointer<CPointer<Unit>>): Int32
+}
+
 // Microsoft.UI.Windowing.IDisplayArea (synthetic:Microsoft_UI_Windowing_IDisplayArea)
 @When[Microsoft_UI_Windowing == "on"]
 @Interface["5c7e0537-b621-5579-bcae-a84aa8746167", "Microsoft.UI.Windowing.IDisplayArea"]
@@ -2020,56 +2264,474 @@ public interface IDisplayAreaWatcher <: IInspectable {
     func RemoveUpdated(token: Int64): Int32
 }
 
+// Microsoft.UI.Windowing.IFullScreenPresenter (synthetic:Microsoft_UI_Windowing_IFullScreenPresenter)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["fa9141fd-b8dd-5da1-8b2b-7cdadb76f593", "Microsoft.UI.Windowing.IFullScreenPresenter"]
+public interface IFullScreenPresenter <: IInspectable {
+}
+
+// Microsoft.UI.Windowing.IFullScreenPresenterStatics (synthetic:Microsoft_UI_Windowing_IFullScreenPresenterStatics)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["2ec0d2c1-e086-55bb-a3b2-44942e231c67", "Microsoft.UI.Windowing.IFullScreenPresenterStatics", "Create.result=Com"]
+public interface IFullScreenPresenterStatics <: IInspectable {
+    func Create(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Windowing.IOverlappedPresenter (synthetic:Microsoft_UI_Windowing_IOverlappedPresenter)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["21693970-4f4c-5172-9e9d-682a2d174884", "Microsoft.UI.Windowing.IOverlappedPresenter"]
+public interface IOverlappedPresenter <: IInspectable {
+    func HasBorder(value: CPointer<Bool>): Int32
+    func HasTitleBar(value: CPointer<Bool>): Int32
+    func IsAlwaysOnTop(value: CPointer<Bool>): Int32
+    func SetIsAlwaysOnTop(value: Bool): Int32
+    func IsMaximizable(value: CPointer<Bool>): Int32
+    func SetIsMaximizable(value: Bool): Int32
+    func IsMinimizable(value: CPointer<Bool>): Int32
+    func SetIsMinimizable(value: Bool): Int32
+    func IsModal(value: CPointer<Bool>): Int32
+    func SetIsModal(value: Bool): Int32
+    func IsResizable(value: CPointer<Bool>): Int32
+    func SetIsResizable(value: Bool): Int32
+    func State(value: CPointer<Int32>): Int32
+    func Maximize(): Int32
+    func Minimize(): Int32
+    func Restore(): Int32
+    func SetBorderAndTitleBar(hasBorder: Bool, hasTitleBar: Bool): Int32
+}
+
+// Microsoft.UI.Windowing.IOverlappedPresenter2 (synthetic:Microsoft_UI_Windowing_IOverlappedPresenter2)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["5c6ccd93-4244-5cd2-b355-ed5ea34df730", "Microsoft.UI.Windowing.IOverlappedPresenter2"]
+public interface IOverlappedPresenter2 <: IInspectable {
+    func MinimizeWithActivation(activateWindow: Bool): Int32
+    func RestoreWithActivation(activateWindow: Bool): Int32
+}
+
+// Microsoft.UI.Windowing.IOverlappedPresenter3 (synthetic:Microsoft_UI_Windowing_IOverlappedPresenter3)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["55d26138-4c38-57e7-a0c1-d467b774db8c", "Microsoft.UI.Windowing.IOverlappedPresenter3", "PreferredMinimumHeight.value=Com;PreferredMinimumWidth.value=Com;PreferredMaximumWidth.value=Com;PreferredMaximumHeight.value=Com"]
+public interface IOverlappedPresenter3 <: IInspectable {
+    func PreferredMinimumHeight(value: CPointer<CPointer<Unit>>): Int32
+    func SetPreferredMinimumHeight(value: CPointer<Unit>): Int32
+    func PreferredMinimumWidth(value: CPointer<CPointer<Unit>>): Int32
+    func SetPreferredMinimumWidth(value: CPointer<Unit>): Int32
+    func PreferredMaximumWidth(value: CPointer<CPointer<Unit>>): Int32
+    func SetPreferredMaximumWidth(value: CPointer<Unit>): Int32
+    func PreferredMaximumHeight(value: CPointer<CPointer<Unit>>): Int32
+    func SetPreferredMaximumHeight(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Windowing.IOverlappedPresenterStatics (synthetic:Microsoft_UI_Windowing_IOverlappedPresenterStatics)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["997225e4-7b00-5aee-a4be-d4068d1999e2", "Microsoft.UI.Windowing.IOverlappedPresenterStatics", "Create.result=Com;CreateForContextMenu.result=Com;CreateForDialog.result=Com;CreateForToolWindow.result=Com"]
+public interface IOverlappedPresenterStatics <: IInspectable {
+    func Create(result: CPointer<CPointer<Unit>>): Int32
+    func CreateForContextMenu(result: CPointer<CPointer<Unit>>): Int32
+    func CreateForDialog(result: CPointer<CPointer<Unit>>): Int32
+    func CreateForToolWindow(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Windowing.IOverlappedPresenterStatics2 (synthetic:Microsoft_UI_Windowing_IOverlappedPresenterStatics2)
+@When[Microsoft_UI_Windowing == "on"]
+@Interface["ed5c4f92-32f4-5d15-80d0-b2a5efa04d39", "Microsoft.UI.Windowing.IOverlappedPresenterStatics2"]
+public interface IOverlappedPresenterStatics2 <: IInspectable {
+    func RequestedStartupState(value: CPointer<Int32>): Int32
+}
+
 // Microsoft.UI.Windowing.IconShowOptions (synthetic:Microsoft_UI_Windowing_IconShowOptions)
 @When[Microsoft_UI_Windowing == "on"]
 public struct IconShowOptions {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Windowing == "on"]
-public let IconShowOptions_ShowIconAndSystemMenu = IconShowOptions(0)
+public const IconShowOptions_ShowIconAndSystemMenu = IconShowOptions(0)
 @When[Microsoft_UI_Windowing == "on"]
-public let IconShowOptions_HideIconAndSystemMenu = IconShowOptions(1)
+public const IconShowOptions_HideIconAndSystemMenu = IconShowOptions(1)
+
+// Microsoft.UI.Windowing.OverlappedPresenter (synthetic:Microsoft_UI_Windowing_OverlappedPresenter)
+@When[Microsoft_UI_Windowing == "on"]
+public class OverlappedPresenter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<OverlappedPresenter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): OverlappedPresenter {
+        OverlappedPresenter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): OverlappedPresenter {
+        OverlappedPresenter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IOverlappedPresenter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<OverlappedPresenter> {
+        let ancestors = [IOverlappedPresenter.iid(), IOverlappedPresenter2.iid(), IOverlappedPresenter3.iid(), IAppWindowPresenter.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<OverlappedPresenter>("OverlappedPresenter", IOverlappedPresenter.iid(), ancestors, { raw => OverlappedPresenter.fromAbiTake(raw) }, { raw => OverlappedPresenter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IOverlappedPresenter {
+        match (unsafe { query(IOverlappedPresenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIOverlappedPresenter(): IOverlappedPresenter {
+        defaultInterface()
+    }
+
+    public func asIOverlappedPresenter2(): IOverlappedPresenter2 {
+        match (unsafe { query<IOverlappedPresenter2>(IOverlappedPresenter2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIOverlappedPresenter3(): IOverlappedPresenter3 {
+        match (unsafe { query<IOverlappedPresenter3>(IOverlappedPresenter3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAppWindowPresenter(): IAppWindowPresenter {
+        match (unsafe { query<IAppWindowPresenter>(IAppWindowPresenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop HasBorder: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HasBorder(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop HasTitleBar: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HasTitleBar(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop IsAlwaysOnTop: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsAlwaysOnTop(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsAlwaysOnTop(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsMaximizable: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsMaximizable(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsMaximizable(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsMinimizable: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsMinimizable(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsMinimizable(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsModal: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsModal(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsModal(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsResizable: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsResizable(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsResizable(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop State: OverlappedPresenterState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.State(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return OverlappedPresenterState(result__)
+        }
+    }
+
+    public func Maximize(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Maximize() }
+        }
+        hr__.check()
+    }
+
+    public func Minimize(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Minimize() }
+        }
+        hr__.check()
+    }
+
+    public func Restore(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Restore() }
+        }
+        hr__.check()
+    }
+
+    public func SetBorderAndTitleBar(hasBorder: Bool, hasTitleBar: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetBorderAndTitleBar(hasBorder, hasTitleBar) }
+        }
+        hr__.check()
+    }
+
+    public static func RequestedStartupState(): OverlappedPresenterState {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<OverlappedPresenter, IOverlappedPresenterStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.RequestedStartupState(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return OverlappedPresenterState(result__)
+    }
+
+    public static func Create(): OverlappedPresenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<OverlappedPresenter, IOverlappedPresenterStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Create(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<OverlappedPresenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return OverlappedPresenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateForContextMenu(): OverlappedPresenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<OverlappedPresenter, IOverlappedPresenterStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateForContextMenu(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<OverlappedPresenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return OverlappedPresenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateForDialog(): OverlappedPresenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<OverlappedPresenter, IOverlappedPresenterStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateForDialog(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<OverlappedPresenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return OverlappedPresenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateForToolWindow(): OverlappedPresenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<OverlappedPresenter, IOverlappedPresenterStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateForToolWindow(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<OverlappedPresenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return OverlappedPresenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Windowing.OverlappedPresenter"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Windowing.OverlappedPresenter;{" + IOverlappedPresenter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Windowing.OverlappedPresenter", OverlappedPresenter.signature(), IOverlappedPresenter.iid())
+    }
+
+    public static func intoWinrtHandle(value: OverlappedPresenter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): OverlappedPresenter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        OverlappedPresenter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): OverlappedPresenter {
+        OverlappedPresenter.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Windowing.OverlappedPresenterState (synthetic:Microsoft_UI_Windowing_OverlappedPresenterState)
+@When[Microsoft_UI_Windowing == "on"]
+public struct OverlappedPresenterState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Windowing == "on"]
+public const OverlappedPresenterState_Maximized = OverlappedPresenterState(0)
+@When[Microsoft_UI_Windowing == "on"]
+public const OverlappedPresenterState_Minimized = OverlappedPresenterState(1)
+@When[Microsoft_UI_Windowing == "on"]
+public const OverlappedPresenterState_Restored = OverlappedPresenterState(2)
 
 // Microsoft.UI.Windowing.TitleBarHeightOption (synthetic:Microsoft_UI_Windowing_TitleBarHeightOption)
 @When[Microsoft_UI_Windowing == "on"]
 public struct TitleBarHeightOption {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Windowing == "on"]
-public let TitleBarHeightOption_Standard = TitleBarHeightOption(0)
+public const TitleBarHeightOption_Standard = TitleBarHeightOption(0)
 @When[Microsoft_UI_Windowing == "on"]
-public let TitleBarHeightOption_Tall = TitleBarHeightOption(1)
+public const TitleBarHeightOption_Tall = TitleBarHeightOption(1)
 @When[Microsoft_UI_Windowing == "on"]
-public let TitleBarHeightOption_Collapsed = TitleBarHeightOption(2)
+public const TitleBarHeightOption_Collapsed = TitleBarHeightOption(2)
 
 // Microsoft.UI.Windowing.TitleBarTheme (synthetic:Microsoft_UI_Windowing_TitleBarTheme)
 @When[Microsoft_UI_Windowing == "on"]
 public struct TitleBarTheme {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Windowing == "on"]
-public let TitleBarTheme_Legacy = TitleBarTheme(0)
+public const TitleBarTheme_Legacy = TitleBarTheme(0)
 @When[Microsoft_UI_Windowing == "on"]
-public let TitleBarTheme_UseDefaultAppMode = TitleBarTheme(1)
+public const TitleBarTheme_UseDefaultAppMode = TitleBarTheme(1)
 @When[Microsoft_UI_Windowing == "on"]
-public let TitleBarTheme_Light = TitleBarTheme(2)
+public const TitleBarTheme_Light = TitleBarTheme(2)
 @When[Microsoft_UI_Windowing == "on"]
-public let TitleBarTheme_Dark = TitleBarTheme(3)
+public const TitleBarTheme_Dark = TitleBarTheme(3)

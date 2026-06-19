@@ -20,8 +20,8 @@ import windows_sys.Win32.System.Registry.HKEY
 
 @When[Windows_Win32_System_Services == "on"]
 public func SetServiceBits(hServiceStatus: SERVICE_STATUS_HANDLE, dwServiceBits: UInt32, bSetBitsOn: Bool, bUpdateImmediately: Bool): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, Int32, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetServiceBits"))
-    return unsafe { proc(hServiceStatus.Value, dwServiceBits, if (bSetBitsOn) { 1 } else { 0 }, if (bUpdateImmediately) { 1 } else { 0 }) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, Int32, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetServiceBits"))
+    return unsafe { proc__(hServiceStatus.Value, dwServiceBits, if (bSetBitsOn) { 1 } else { 0 }, if (bUpdateImmediately) { 1 } else { 0 }) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -34,8 +34,8 @@ public func SetServiceBitsChecked(hServiceStatus: SERVICE_STATUS_HANDLE, dwServi
 
 @When[Windows_Win32_System_Services == "on"]
 public func ChangeServiceConfigA(hService: SC_HANDLE, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: windows_strings.PSTR, lpLoadOrderGroup: windows_strings.PSTR, lpdwTagId: CPointer<UInt32>, lpDependencies: windows_strings.PSTR, lpServiceStartName: windows_strings.PSTR, lpPassword: windows_strings.PSTR, lpDisplayName: windows_strings.PSTR): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfigA"))
-    return unsafe { proc(hService.Value, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr(), lpDisplayName.asPtr()) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfigA"))
+    return unsafe { proc__(hService.Value, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr(), lpDisplayName.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -48,8 +48,8 @@ public func ChangeServiceConfigAChecked(hService: SC_HANDLE, dwServiceType: UInt
 
 @When[Windows_Win32_System_Services == "on"]
 public func ChangeServiceConfigW(hService: SC_HANDLE, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: windows_strings.PWSTR, lpLoadOrderGroup: windows_strings.PWSTR, lpdwTagId: CPointer<UInt32>, lpDependencies: windows_strings.PWSTR, lpServiceStartName: windows_strings.PWSTR, lpPassword: windows_strings.PWSTR, lpDisplayName: windows_strings.PWSTR): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfigW"))
-    return unsafe { proc(hService.Value, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr(), lpDisplayName.asPtr()) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfigW"))
+    return unsafe { proc__(hService.Value, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr(), lpDisplayName.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -62,8 +62,8 @@ public func ChangeServiceConfigWChecked(hService: SC_HANDLE, dwServiceType: UInt
 
 @When[Windows_Win32_System_Services == "on"]
 public func ChangeServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: UInt32, lpInfo: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfig2A"))
-    return unsafe { proc(hService.Value, dwInfoLevel, lpInfo) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfig2A"))
+    return unsafe { proc__(hService.Value, dwInfoLevel, lpInfo) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -76,8 +76,8 @@ public func ChangeServiceConfig2AChecked(hService: SC_HANDLE, dwInfoLevel: UInt3
 
 @When[Windows_Win32_System_Services == "on"]
 public func ChangeServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: UInt32, lpInfo: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfig2W"))
-    return unsafe { proc(hService.Value, dwInfoLevel, lpInfo) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ChangeServiceConfig2W"))
+    return unsafe { proc__(hService.Value, dwInfoLevel, lpInfo) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -90,8 +90,8 @@ public func ChangeServiceConfig2WChecked(hService: SC_HANDLE, dwInfoLevel: UInt3
 
 @When[Windows_Win32_System_Services == "on"]
 public func CloseServiceHandle(hSCObject: SC_HANDLE): Bool {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CloseServiceHandle"))
-    return unsafe { proc(hSCObject.Value) } != 0
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CloseServiceHandle"))
+    return unsafe { proc__(hSCObject.Value) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -104,8 +104,8 @@ public func CloseServiceHandleChecked(hSCObject: SC_HANDLE): windows_core.Result
 
 @When[Windows_Win32_System_Services == "on"]
 public func ControlService(hService: SC_HANDLE, dwControl: UInt32, lpServiceStatus: CPointer<SERVICE_STATUS>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<SERVICE_STATUS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ControlService"))
-    return unsafe { proc(hService.Value, dwControl, lpServiceStatus) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<SERVICE_STATUS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ControlService"))
+    return unsafe { proc__(hService.Value, dwControl, lpServiceStatus) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -118,9 +118,9 @@ public func ControlServiceChecked(hService: SC_HANDLE, dwControl: UInt32, lpServ
 
 @When[Windows_Win32_System_Services == "on"]
 public func CreateServiceA(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PSTR, lpDisplayName: windows_strings.PSTR, dwDesiredAccess: UInt32, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: windows_strings.PSTR, lpLoadOrderGroup: windows_strings.PSTR, lpdwTagId: CPointer<UInt32>, lpDependencies: windows_strings.PSTR, lpServiceStartName: windows_strings.PSTR, lpPassword: windows_strings.PSTR): SC_HANDLE {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, UInt32, UInt32, UInt32, UInt32, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "CreateServiceA"))
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, UInt32, UInt32, UInt32, UInt32, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "CreateServiceA"))
     var result = SC_HANDLE()
-    result.Value = unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr()) }
+    result.Value = unsafe { proc__(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr()) }
     result
 }
 
@@ -135,9 +135,9 @@ public func CreateServiceAChecked(hSCManager: SC_HANDLE, lpServiceName: windows_
 
 @When[Windows_Win32_System_Services == "on"]
 public func CreateServiceW(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PWSTR, lpDisplayName: windows_strings.PWSTR, dwDesiredAccess: UInt32, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: windows_strings.PWSTR, lpLoadOrderGroup: windows_strings.PWSTR, lpdwTagId: CPointer<UInt32>, lpDependencies: windows_strings.PWSTR, lpServiceStartName: windows_strings.PWSTR, lpPassword: windows_strings.PWSTR): SC_HANDLE {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "CreateServiceW"))
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "CreateServiceW"))
     var result = SC_HANDLE()
-    result.Value = unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr()) }
+    result.Value = unsafe { proc__(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr()) }
     result
 }
 
@@ -152,8 +152,8 @@ public func CreateServiceWChecked(hSCManager: SC_HANDLE, lpServiceName: windows_
 
 @When[Windows_Win32_System_Services == "on"]
 public func DeleteService(hService: SC_HANDLE): Bool {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "DeleteService"))
-    return unsafe { proc(hService.Value) } != 0
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "DeleteService"))
+    return unsafe { proc__(hService.Value) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -166,8 +166,8 @@ public func DeleteServiceChecked(hService: SC_HANDLE): windows_core.Result<Unit>
 
 @When[Windows_Win32_System_Services == "on"]
 public func EnumDependentServicesA(hService: SC_HANDLE, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<ENUM_SERVICE_STATUSA>, UInt32, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumDependentServicesA"))
-    return unsafe { proc(hService.Value, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<ENUM_SERVICE_STATUSA>, UInt32, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumDependentServicesA"))
+    return unsafe { proc__(hService.Value, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -180,8 +180,8 @@ public func EnumDependentServicesAChecked(hService: SC_HANDLE, dwServiceState: U
 
 @When[Windows_Win32_System_Services == "on"]
 public func EnumDependentServicesW(hService: SC_HANDLE, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<ENUM_SERVICE_STATUSW>, UInt32, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumDependentServicesW"))
-    return unsafe { proc(hService.Value, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<ENUM_SERVICE_STATUSW>, UInt32, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumDependentServicesW"))
+    return unsafe { proc__(hService.Value, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -194,8 +194,8 @@ public func EnumDependentServicesWChecked(hService: SC_HANDLE, dwServiceState: U
 
 @When[Windows_Win32_System_Services == "on"]
 public func EnumServicesStatusA(hSCManager: SC_HANDLE, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<ENUM_SERVICE_STATUSA>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusA"))
-    return unsafe { proc(hSCManager.Value, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<ENUM_SERVICE_STATUSA>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusA"))
+    return unsafe { proc__(hSCManager.Value, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -208,8 +208,8 @@ public func EnumServicesStatusAChecked(hSCManager: SC_HANDLE, dwServiceType: UIn
 
 @When[Windows_Win32_System_Services == "on"]
 public func EnumServicesStatusW(hSCManager: SC_HANDLE, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<ENUM_SERVICE_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<ENUM_SERVICE_STATUSW>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusW"))
-    return unsafe { proc(hSCManager.Value, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<ENUM_SERVICE_STATUSW>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusW"))
+    return unsafe { proc__(hSCManager.Value, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -222,8 +222,8 @@ public func EnumServicesStatusWChecked(hSCManager: SC_HANDLE, dwServiceType: UIn
 
 @When[Windows_Win32_System_Services == "on"]
 public func EnumServicesStatusExA(hSCManager: SC_HANDLE, InfoLevel: Int32, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: windows_strings.PSTR): Bool {
-    let proc = CFunc<(CPointer<Unit>, Int32, UInt32, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusExA"))
-    return unsafe { proc(hSCManager.Value, InfoLevel, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName.asPtr()) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, Int32, UInt32, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusExA"))
+    return unsafe { proc__(hSCManager.Value, InfoLevel, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -236,8 +236,8 @@ public func EnumServicesStatusExAChecked(hSCManager: SC_HANDLE, InfoLevel: Int32
 
 @When[Windows_Win32_System_Services == "on"]
 public func EnumServicesStatusExW(hSCManager: SC_HANDLE, InfoLevel: Int32, dwServiceType: UInt32, dwServiceState: UInt32, lpServices: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>, lpServicesReturned: CPointer<UInt32>, lpResumeHandle: CPointer<UInt32>, pszGroupName: windows_strings.PWSTR): Bool {
-    let proc = CFunc<(CPointer<Unit>, Int32, UInt32, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusExW"))
-    return unsafe { proc(hSCManager.Value, InfoLevel, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName.asPtr()) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, Int32, UInt32, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EnumServicesStatusExW"))
+    return unsafe { proc__(hSCManager.Value, InfoLevel, dwServiceType, dwServiceState, lpServices, cbBufSize, pcbBytesNeeded, lpServicesReturned, lpResumeHandle, pszGroupName.asPtr()) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -250,8 +250,8 @@ public func EnumServicesStatusExWChecked(hSCManager: SC_HANDLE, InfoLevel: Int32
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetServiceKeyNameA(hSCManager: SC_HANDLE, lpDisplayName: windows_strings.PSTR, lpServiceName: windows_strings.PSTR, lpcchBuffer: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceKeyNameA"))
-    return unsafe { proc(hSCManager.Value, lpDisplayName.asPtr(), lpServiceName.asPtr(), lpcchBuffer) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceKeyNameA"))
+    return unsafe { proc__(hSCManager.Value, lpDisplayName.asPtr(), lpServiceName.asPtr(), lpcchBuffer) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -264,8 +264,8 @@ public func GetServiceKeyNameAChecked(hSCManager: SC_HANDLE, lpDisplayName: wind
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetServiceKeyNameW(hSCManager: SC_HANDLE, lpDisplayName: windows_strings.PWSTR, lpServiceName: windows_strings.PWSTR, lpcchBuffer: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceKeyNameW"))
-    return unsafe { proc(hSCManager.Value, lpDisplayName.asPtr(), lpServiceName.asPtr(), lpcchBuffer) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceKeyNameW"))
+    return unsafe { proc__(hSCManager.Value, lpDisplayName.asPtr(), lpServiceName.asPtr(), lpcchBuffer) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -278,8 +278,8 @@ public func GetServiceKeyNameWChecked(hSCManager: SC_HANDLE, lpDisplayName: wind
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetServiceDisplayNameA(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PSTR, lpDisplayName: windows_strings.PSTR, lpcchBuffer: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceDisplayNameA"))
-    return unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), lpcchBuffer) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceDisplayNameA"))
+    return unsafe { proc__(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), lpcchBuffer) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -292,8 +292,8 @@ public func GetServiceDisplayNameAChecked(hSCManager: SC_HANDLE, lpServiceName: 
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetServiceDisplayNameW(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PWSTR, lpDisplayName: windows_strings.PWSTR, lpcchBuffer: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceDisplayNameW"))
-    return unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), lpcchBuffer) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetServiceDisplayNameW"))
+    return unsafe { proc__(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), lpcchBuffer) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -306,8 +306,8 @@ public func GetServiceDisplayNameWChecked(hSCManager: SC_HANDLE, lpServiceName: 
 
 @When[Windows_Win32_System_Services == "on"]
 public func LockServiceDatabase(hSCManager: SC_HANDLE): CPointer<Unit> {
-    let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "LockServiceDatabase"))
-    return unsafe { proc(hSCManager.Value) }
+    let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "LockServiceDatabase"))
+    return unsafe { proc__(hSCManager.Value) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -321,8 +321,8 @@ public func LockServiceDatabaseChecked(hSCManager: SC_HANDLE): windows_core.Resu
 
 @When[Windows_Win32_System_Services == "on"]
 public func NotifyBootConfigStatus(BootAcceptable: Bool): Bool {
-    let proc = CFunc<(Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "NotifyBootConfigStatus"))
-    return unsafe { proc(if (BootAcceptable) { 1 } else { 0 }) } != 0
+    let proc__ = CFunc<(Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "NotifyBootConfigStatus"))
+    return unsafe { proc__(if (BootAcceptable) { 1 } else { 0 }) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -335,9 +335,9 @@ public func NotifyBootConfigStatusChecked(BootAcceptable: Bool): windows_core.Re
 
 @When[Windows_Win32_System_Services == "on"]
 public func OpenSCManagerA(lpMachineName: windows_strings.PSTR, lpDatabaseName: windows_strings.PSTR, dwDesiredAccess: UInt32): SC_HANDLE {
-    let proc = CFunc<(CPointer<UInt8>, CPointer<UInt8>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenSCManagerA"))
+    let proc__ = CFunc<(CPointer<UInt8>, CPointer<UInt8>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenSCManagerA"))
     var result = SC_HANDLE()
-    result.Value = unsafe { proc(lpMachineName.asPtr(), lpDatabaseName.asPtr(), dwDesiredAccess) }
+    result.Value = unsafe { proc__(lpMachineName.asPtr(), lpDatabaseName.asPtr(), dwDesiredAccess) }
     result
 }
 
@@ -352,9 +352,9 @@ public func OpenSCManagerAChecked(lpMachineName: windows_strings.PSTR, lpDatabas
 
 @When[Windows_Win32_System_Services == "on"]
 public func OpenSCManagerW(lpMachineName: windows_strings.PWSTR, lpDatabaseName: windows_strings.PWSTR, dwDesiredAccess: UInt32): SC_HANDLE {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenSCManagerW"))
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenSCManagerW"))
     var result = SC_HANDLE()
-    result.Value = unsafe { proc(lpMachineName.asPtr(), lpDatabaseName.asPtr(), dwDesiredAccess) }
+    result.Value = unsafe { proc__(lpMachineName.asPtr(), lpDatabaseName.asPtr(), dwDesiredAccess) }
     result
 }
 
@@ -369,9 +369,9 @@ public func OpenSCManagerWChecked(lpMachineName: windows_strings.PWSTR, lpDataba
 
 @When[Windows_Win32_System_Services == "on"]
 public func OpenServiceA(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PSTR, dwDesiredAccess: UInt32): SC_HANDLE {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenServiceA"))
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt8>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenServiceA"))
     var result = SC_HANDLE()
-    result.Value = unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), dwDesiredAccess) }
+    result.Value = unsafe { proc__(hSCManager.Value, lpServiceName.asPtr(), dwDesiredAccess) }
     result
 }
 
@@ -386,9 +386,9 @@ public func OpenServiceAChecked(hSCManager: SC_HANDLE, lpServiceName: windows_st
 
 @When[Windows_Win32_System_Services == "on"]
 public func OpenServiceW(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PWSTR, dwDesiredAccess: UInt32): SC_HANDLE {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenServiceW"))
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenServiceW"))
     var result = SC_HANDLE()
-    result.Value = unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), dwDesiredAccess) }
+    result.Value = unsafe { proc__(hSCManager.Value, lpServiceName.asPtr(), dwDesiredAccess) }
     result
 }
 
@@ -403,8 +403,8 @@ public func OpenServiceWChecked(hSCManager: SC_HANDLE, lpServiceName: windows_st
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceConfigA(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_CONFIGA>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfigA"))
-    return unsafe { proc(hService.Value, lpServiceConfig, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_CONFIGA>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfigA"))
+    return unsafe { proc__(hService.Value, lpServiceConfig, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -417,8 +417,8 @@ public func QueryServiceConfigAChecked(hService: SC_HANDLE, lpServiceConfig: CPo
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceConfigW(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_CONFIGW>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfigW"))
-    return unsafe { proc(hService.Value, lpServiceConfig, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_CONFIGW>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfigW"))
+    return unsafe { proc__(hService.Value, lpServiceConfig, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -431,8 +431,8 @@ public func QueryServiceConfigWChecked(hService: SC_HANDLE, lpServiceConfig: CPo
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceConfig2A(hService: SC_HANDLE, dwInfoLevel: UInt32, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfig2A"))
-    return unsafe { proc(hService.Value, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfig2A"))
+    return unsafe { proc__(hService.Value, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -445,8 +445,8 @@ public func QueryServiceConfig2AChecked(hService: SC_HANDLE, dwInfoLevel: UInt32
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceConfig2W(hService: SC_HANDLE, dwInfoLevel: UInt32, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfig2W"))
-    return unsafe { proc(hService.Value, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceConfig2W"))
+    return unsafe { proc__(hService.Value, dwInfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -459,8 +459,8 @@ public func QueryServiceConfig2WChecked(hService: SC_HANDLE, dwInfoLevel: UInt32
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceLockStatusA(hSCManager: SC_HANDLE, lpLockStatus: CPointer<QUERY_SERVICE_LOCK_STATUSA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_LOCK_STATUSA>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceLockStatusA"))
-    return unsafe { proc(hSCManager.Value, lpLockStatus, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_LOCK_STATUSA>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceLockStatusA"))
+    return unsafe { proc__(hSCManager.Value, lpLockStatus, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -473,8 +473,8 @@ public func QueryServiceLockStatusAChecked(hSCManager: SC_HANDLE, lpLockStatus: 
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceLockStatusW(hSCManager: SC_HANDLE, lpLockStatus: CPointer<QUERY_SERVICE_LOCK_STATUSW>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_LOCK_STATUSW>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceLockStatusW"))
-    return unsafe { proc(hSCManager.Value, lpLockStatus, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<QUERY_SERVICE_LOCK_STATUSW>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceLockStatusW"))
+    return unsafe { proc__(hSCManager.Value, lpLockStatus, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -487,8 +487,8 @@ public func QueryServiceLockStatusWChecked(hSCManager: SC_HANDLE, lpLockStatus: 
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: PSECURITY_DESCRIPTOR, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceObjectSecurity"))
-    return unsafe { proc(hService.Value, dwSecurityInformation, lpSecurityDescriptor.Value, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceObjectSecurity"))
+    return unsafe { proc__(hService.Value, dwSecurityInformation, lpSecurityDescriptor.Value, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -501,8 +501,8 @@ public func QueryServiceObjectSecurityChecked(hService: SC_HANDLE, dwSecurityInf
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceStatus(hService: SC_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUS>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<SERVICE_STATUS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceStatus"))
-    return unsafe { proc(hService.Value, lpServiceStatus) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<SERVICE_STATUS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceStatus"))
+    return unsafe { proc__(hService.Value, lpServiceStatus) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -515,8 +515,8 @@ public func QueryServiceStatusChecked(hService: SC_HANDLE, lpServiceStatus: CPoi
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceStatusEx(hService: SC_HANDLE, InfoLevel: Int32, lpBuffer: CPointer<UInt8>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
-    let proc = CFunc<(CPointer<Unit>, Int32, CPointer<UInt8>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceStatusEx"))
-    return unsafe { proc(hService.Value, InfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, Int32, CPointer<UInt8>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceStatusEx"))
+    return unsafe { proc__(hService.Value, InfoLevel, lpBuffer, cbBufSize, pcbBytesNeeded) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -529,9 +529,9 @@ public func QueryServiceStatusExChecked(hService: SC_HANDLE, InfoLevel: Int32, l
 
 @When[Windows_Win32_System_Services == "on"]
 public func RegisterServiceCtrlHandlerA(lpServiceName: windows_strings.PSTR, lpHandlerProc: CFunc<(UInt32) -> Unit>): SERVICE_STATUS_HANDLE {
-    let proc = CFunc<(CPointer<UInt8>, CFunc<(UInt32) -> Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerA"))
+    let proc__ = CFunc<(CPointer<UInt8>, CFunc<(UInt32) -> Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerA"))
     var result = SERVICE_STATUS_HANDLE()
-    result.Value = unsafe { proc(lpServiceName.asPtr(), lpHandlerProc) }
+    result.Value = unsafe { proc__(lpServiceName.asPtr(), lpHandlerProc) }
     result
 }
 
@@ -546,9 +546,9 @@ public func RegisterServiceCtrlHandlerAChecked(lpServiceName: windows_strings.PS
 
 @When[Windows_Win32_System_Services == "on"]
 public func RegisterServiceCtrlHandlerW(lpServiceName: windows_strings.PWSTR, lpHandlerProc: CFunc<(UInt32) -> Unit>): SERVICE_STATUS_HANDLE {
-    let proc = CFunc<(CPointer<UInt16>, CFunc<(UInt32) -> Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerW"))
+    let proc__ = CFunc<(CPointer<UInt16>, CFunc<(UInt32) -> Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerW"))
     var result = SERVICE_STATUS_HANDLE()
-    result.Value = unsafe { proc(lpServiceName.asPtr(), lpHandlerProc) }
+    result.Value = unsafe { proc__(lpServiceName.asPtr(), lpHandlerProc) }
     result
 }
 
@@ -563,9 +563,9 @@ public func RegisterServiceCtrlHandlerWChecked(lpServiceName: windows_strings.PW
 
 @When[Windows_Win32_System_Services == "on"]
 public func RegisterServiceCtrlHandlerExA(lpServiceName: windows_strings.PSTR, lpHandlerProc: CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE {
-    let proc = CFunc<(CPointer<UInt8>, CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerExA"))
+    let proc__ = CFunc<(CPointer<UInt8>, CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerExA"))
     var result = SERVICE_STATUS_HANDLE()
-    result.Value = unsafe { proc(lpServiceName.asPtr(), lpHandlerProc, lpContext) }
+    result.Value = unsafe { proc__(lpServiceName.asPtr(), lpHandlerProc, lpContext) }
     result
 }
 
@@ -580,9 +580,9 @@ public func RegisterServiceCtrlHandlerExAChecked(lpServiceName: windows_strings.
 
 @When[Windows_Win32_System_Services == "on"]
 public func RegisterServiceCtrlHandlerExW(lpServiceName: windows_strings.PWSTR, lpHandlerProc: CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE {
-    let proc = CFunc<(CPointer<UInt16>, CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerExW"))
+    let proc__ = CFunc<(CPointer<UInt16>, CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerExW"))
     var result = SERVICE_STATUS_HANDLE()
-    result.Value = unsafe { proc(lpServiceName.asPtr(), lpHandlerProc, lpContext) }
+    result.Value = unsafe { proc__(lpServiceName.asPtr(), lpHandlerProc, lpContext) }
     result
 }
 
@@ -597,8 +597,8 @@ public func RegisterServiceCtrlHandlerExWChecked(lpServiceName: windows_strings.
 
 @When[Windows_Win32_System_Services == "on"]
 public func SetServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: PSECURITY_DESCRIPTOR): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetServiceObjectSecurity"))
-    return unsafe { proc(hService.Value, dwSecurityInformation, lpSecurityDescriptor.Value) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetServiceObjectSecurity"))
+    return unsafe { proc__(hService.Value, dwSecurityInformation, lpSecurityDescriptor.Value) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -611,8 +611,8 @@ public func SetServiceObjectSecurityChecked(hService: SC_HANDLE, dwSecurityInfor
 
 @When[Windows_Win32_System_Services == "on"]
 public func SetServiceStatus(hServiceStatus: SERVICE_STATUS_HANDLE, lpServiceStatus: CPointer<SERVICE_STATUS>): Bool {
-    let proc = CFunc<(CPointer<Unit>, CPointer<SERVICE_STATUS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetServiceStatus"))
-    return unsafe { proc(hServiceStatus.Value, lpServiceStatus) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<SERVICE_STATUS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetServiceStatus"))
+    return unsafe { proc__(hServiceStatus.Value, lpServiceStatus) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -625,8 +625,8 @@ public func SetServiceStatusChecked(hServiceStatus: SERVICE_STATUS_HANDLE, lpSer
 
 @When[Windows_Win32_System_Services == "on"]
 public func StartServiceCtrlDispatcherA(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYA>): Bool {
-    let proc = CFunc<(CPointer<SERVICE_TABLE_ENTRYA>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceCtrlDispatcherA"))
-    return unsafe { proc(lpServiceStartTable) } != 0
+    let proc__ = CFunc<(CPointer<SERVICE_TABLE_ENTRYA>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceCtrlDispatcherA"))
+    return unsafe { proc__(lpServiceStartTable) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -639,8 +639,8 @@ public func StartServiceCtrlDispatcherAChecked(lpServiceStartTable: CPointer<SER
 
 @When[Windows_Win32_System_Services == "on"]
 public func StartServiceCtrlDispatcherW(lpServiceStartTable: CPointer<SERVICE_TABLE_ENTRYW>): Bool {
-    let proc = CFunc<(CPointer<SERVICE_TABLE_ENTRYW>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceCtrlDispatcherW"))
-    return unsafe { proc(lpServiceStartTable) } != 0
+    let proc__ = CFunc<(CPointer<SERVICE_TABLE_ENTRYW>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceCtrlDispatcherW"))
+    return unsafe { proc__(lpServiceStartTable) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -653,8 +653,8 @@ public func StartServiceCtrlDispatcherWChecked(lpServiceStartTable: CPointer<SER
 
 @When[Windows_Win32_System_Services == "on"]
 public func StartServiceA(hService: SC_HANDLE, dwNumServiceArgs: UInt32, lpServiceArgVectors: CPointer<CPointer<UInt8>>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt8>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceA"))
-    return unsafe { proc(hService.Value, dwNumServiceArgs, lpServiceArgVectors) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt8>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceA"))
+    return unsafe { proc__(hService.Value, dwNumServiceArgs, lpServiceArgVectors) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -667,8 +667,8 @@ public func StartServiceAChecked(hService: SC_HANDLE, dwNumServiceArgs: UInt32, 
 
 @When[Windows_Win32_System_Services == "on"]
 public func StartServiceW(hService: SC_HANDLE, dwNumServiceArgs: UInt32, lpServiceArgVectors: CPointer<CPointer<UInt16>>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceW"))
-    return unsafe { proc(hService.Value, dwNumServiceArgs, lpServiceArgVectors) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "StartServiceW"))
+    return unsafe { proc__(hService.Value, dwNumServiceArgs, lpServiceArgVectors) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -681,8 +681,8 @@ public func StartServiceWChecked(hService: SC_HANDLE, dwNumServiceArgs: UInt32, 
 
 @When[Windows_Win32_System_Services == "on"]
 public func UnlockServiceDatabase(ScLock: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "UnlockServiceDatabase"))
-    return unsafe { proc(ScLock) } != 0
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "UnlockServiceDatabase"))
+    return unsafe { proc__(ScLock) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -695,20 +695,20 @@ public func UnlockServiceDatabaseChecked(ScLock: CPointer<Unit>): windows_core.R
 
 @When[Windows_Win32_System_Services == "on"]
 public func NotifyServiceStatusChangeA(hService: SC_HANDLE, dwNotifyMask: UInt32, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2A>): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<SERVICE_NOTIFY_2A>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "NotifyServiceStatusChangeA"))
-    return unsafe { proc(hService.Value, dwNotifyMask, pNotifyBuffer) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<SERVICE_NOTIFY_2A>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "NotifyServiceStatusChangeA"))
+    return unsafe { proc__(hService.Value, dwNotifyMask, pNotifyBuffer) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func NotifyServiceStatusChangeW(hService: SC_HANDLE, dwNotifyMask: UInt32, pNotifyBuffer: CPointer<SERVICE_NOTIFY_2W>): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<SERVICE_NOTIFY_2W>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "NotifyServiceStatusChangeW"))
-    return unsafe { proc(hService.Value, dwNotifyMask, pNotifyBuffer) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<SERVICE_NOTIFY_2W>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "NotifyServiceStatusChangeW"))
+    return unsafe { proc__(hService.Value, dwNotifyMask, pNotifyBuffer) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func ControlServiceExA(hService: SC_HANDLE, dwControl: UInt32, dwInfoLevel: UInt32, pControlParams: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ControlServiceExA"))
-    return unsafe { proc(hService.Value, dwControl, dwInfoLevel, pControlParams) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ControlServiceExA"))
+    return unsafe { proc__(hService.Value, dwControl, dwInfoLevel, pControlParams) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -721,8 +721,8 @@ public func ControlServiceExAChecked(hService: SC_HANDLE, dwControl: UInt32, dwI
 
 @When[Windows_Win32_System_Services == "on"]
 public func ControlServiceExW(hService: SC_HANDLE, dwControl: UInt32, dwInfoLevel: UInt32, pControlParams: CPointer<Unit>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ControlServiceExW"))
-    return unsafe { proc(hService.Value, dwControl, dwInfoLevel, pControlParams) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ControlServiceExW"))
+    return unsafe { proc__(hService.Value, dwControl, dwInfoLevel, pControlParams) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -735,8 +735,8 @@ public func ControlServiceExWChecked(hService: SC_HANDLE, dwControl: UInt32, dwI
 
 @When[Windows_Win32_System_Services == "on"]
 public func QueryServiceDynamicInformation(hServiceStatus: SERVICE_STATUS_HANDLE, dwInfoLevel: UInt32, ppDynamicInfo: CPointer<CPointer<Unit>>): Bool {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceDynamicInformation"))
-    return unsafe { proc(hServiceStatus.Value, dwInfoLevel, ppDynamicInfo) } != 0
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "QueryServiceDynamicInformation"))
+    return unsafe { proc__(hServiceStatus.Value, dwInfoLevel, ppDynamicInfo) } != 0
 }
 
 @When[Windows_Win32_System_Services == "on"]
@@ -749,42 +749,42 @@ public func QueryServiceDynamicInformationChecked(hServiceStatus: SERVICE_STATUS
 
 @When[Windows_Win32_System_Services == "on"]
 public func SubscribeServiceChangeNotifications(hService: SC_HANDLE, eEventType: Int32, pCallback: CFunc<(UInt32, CPointer<Unit>) -> Unit>, pCallbackContext: CPointer<Unit>, pSubscription: CPointer<PSC_NOTIFICATION_REGISTRATION>): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, Int32, CFunc<(UInt32, CPointer<Unit>) -> Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> UInt32>(windows_libloading.resolveProc("SecHost.dll", "SubscribeServiceChangeNotifications"))
-    return unsafe { proc(hService.Value, eEventType, pCallback, pCallbackContext, CPointer<CPointer<Unit>>(pSubscription)) }
+    let proc__ = CFunc<(CPointer<Unit>, Int32, CFunc<(UInt32, CPointer<Unit>) -> Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> UInt32>(windows_libloading.resolveProc("SecHost.dll", "SubscribeServiceChangeNotifications"))
+    return unsafe { proc__(hService.Value, eEventType, pCallback, pCallbackContext, CPointer<CPointer<Unit>>(pSubscription)) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func UnsubscribeServiceChangeNotifications(pSubscription: PSC_NOTIFICATION_REGISTRATION): Unit {
-    let proc = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("SecHost.dll", "UnsubscribeServiceChangeNotifications"))
-    unsafe { proc(pSubscription.Value) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("SecHost.dll", "UnsubscribeServiceChangeNotifications"))
+    unsafe { proc__(pSubscription.Value) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func WaitServiceState(hService: SC_HANDLE, dwNotify: UInt32, dwTimeout: UInt32, hCancelEvent: HANDLE): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "WaitServiceState"))
-    return unsafe { proc(hService.Value, dwNotify, dwTimeout, hCancelEvent.Value) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "WaitServiceState"))
+    return unsafe { proc__(hService.Value, dwNotify, dwTimeout, hCancelEvent.Value) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetServiceRegistryStateKey(ServiceStatusHandle: SERVICE_STATUS_HANDLE, StateType: Int32, AccessMask: UInt32, ServiceStateKey: CPointer<HKEY>): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<CPointer<Unit>>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-3.dll", "GetServiceRegistryStateKey"))
-    return unsafe { proc(ServiceStatusHandle.Value, StateType, AccessMask, CPointer<CPointer<Unit>>(ServiceStateKey)) }
+    let proc__ = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<CPointer<Unit>>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-3.dll", "GetServiceRegistryStateKey"))
+    return unsafe { proc__(ServiceStatusHandle.Value, StateType, AccessMask, CPointer<CPointer<Unit>>(ServiceStateKey)) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetServiceDirectory(hServiceStatus: SERVICE_STATUS_HANDLE, eDirectoryType: Int32, lpPathBuffer: windows_strings.PWSTR, cchPathBufferLength: UInt32, lpcchRequiredBufferLength: CPointer<UInt32>): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-4.dll", "GetServiceDirectory"))
-    return unsafe { proc(hServiceStatus.Value, eDirectoryType, lpPathBuffer.asPtr(), cchPathBufferLength, lpcchRequiredBufferLength) }
+    let proc__ = CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-4.dll", "GetServiceDirectory"))
+    return unsafe { proc__(hServiceStatus.Value, eDirectoryType, lpPathBuffer.asPtr(), cchPathBufferLength, lpcchRequiredBufferLength) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetSharedServiceRegistryStateKey(ServiceHandle: SC_HANDLE, StateType: Int32, AccessMask: UInt32, ServiceStateKey: CPointer<HKEY>): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<CPointer<Unit>>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-5.dll", "GetSharedServiceRegistryStateKey"))
-    return unsafe { proc(ServiceHandle.Value, StateType, AccessMask, CPointer<CPointer<Unit>>(ServiceStateKey)) }
+    let proc__ = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<CPointer<Unit>>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-5.dll", "GetSharedServiceRegistryStateKey"))
+    return unsafe { proc__(ServiceHandle.Value, StateType, AccessMask, CPointer<CPointer<Unit>>(ServiceStateKey)) }
 }
 
 @When[Windows_Win32_System_Services == "on"]
 public func GetSharedServiceDirectory(ServiceHandle: SC_HANDLE, DirectoryType: Int32, PathBuffer: windows_strings.PWSTR, PathBufferLength: UInt32, RequiredBufferLength: CPointer<UInt32>): UInt32 {
-    let proc = CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-5.dll", "GetSharedServiceDirectory"))
-    return unsafe { proc(ServiceHandle.Value, DirectoryType, PathBuffer.asPtr(), PathBufferLength, RequiredBufferLength) }
+    let proc__ = CFunc<(CPointer<Unit>, Int32, CPointer<UInt16>, UInt32, CPointer<UInt32>) -> UInt32>(windows_libloading.resolveProc("api-ms-win-service-core-l1-1-5.dll", "GetSharedServiceDirectory"))
+    return unsafe { proc__(ServiceHandle.Value, DirectoryType, PathBuffer.asPtr(), PathBufferLength, RequiredBufferLength) }
 }

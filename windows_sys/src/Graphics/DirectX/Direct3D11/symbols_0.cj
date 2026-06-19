@@ -12,6 +12,53 @@ import windows_sys.Foundation as Windows_Foundation
 @When[Windows_Graphics_DirectX == "on"]
 import windows_sys.Graphics.DirectX as Windows_Graphics_DirectX
 
+// Windows.Graphics.DirectX.Direct3D11.Direct3DBindings (synthetic:Windows_Graphics_DirectX_Direct3D11_Direct3DBindings)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public struct Direct3DBindings {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Direct3DBindings): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Direct3DBindings): Direct3DBindings {
+        return Direct3DBindings(value | other.value)
+    }
+    public operator func &(other: Direct3DBindings): Direct3DBindings {
+        return Direct3DBindings(value & other.value)
+    }
+    public operator func ^(other: Direct3DBindings): Direct3DBindings {
+        return Direct3DBindings(value ^ other.value)
+    }
+    public operator func !(): Direct3DBindings {
+        return Direct3DBindings(!value)
+    }
+}
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_VertexBuffer = Direct3DBindings(1)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_IndexBuffer = Direct3DBindings(2)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_ConstantBuffer = Direct3DBindings(4)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_ShaderResource = Direct3DBindings(8)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_StreamOutput = Direct3DBindings(16)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_RenderTarget = Direct3DBindings(32)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_DepthStencil = Direct3DBindings(64)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_UnorderedAccess = Direct3DBindings(128)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_Decoder = Direct3DBindings(512)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DBindings_VideoEncoder = Direct3DBindings(1024)
+
 // Windows.Graphics.DirectX.Direct3D11.Direct3DMultisampleDescription (synthetic:Windows_Graphics_DirectX_Direct3D11_Direct3DMultisampleDescription)
 @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 @C
@@ -28,6 +75,33 @@ public struct Direct3DSurfaceDescription {
     public var Height: Int32 = 0i32
     public var Format: Int32 = 0i32
     public var MultisampleDescription: Direct3DMultisampleDescription = Direct3DMultisampleDescription()
+}
+
+// Windows.Graphics.DirectX.Direct3D11.Direct3DUsage (synthetic:Windows_Graphics_DirectX_Direct3D11_Direct3DUsage)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public struct Direct3DUsage {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DUsage_Default = Direct3DUsage(0)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DUsage_Immutable = Direct3DUsage(1)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DUsage_Dynamic = Direct3DUsage(2)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+public const Direct3DUsage_Staging = Direct3DUsage(3)
+
+// Windows.Graphics.DirectX.Direct3D11.IDirect3DDevice (synthetic:Windows_Graphics_DirectX_Direct3D11_IDirect3DDevice)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
+@Interface["a37624ab-8d5f-4650-9d3e-9eae3d9bc670", "Windows.Graphics.DirectX.Direct3D11.IDirect3DDevice"]
+public interface IDirect3DDevice <: IInspectable {
+    func Trim(): Int32
 }
 
 // Windows.Graphics.DirectX.Direct3D11.IDirect3DSurface (synthetic:Windows_Graphics_DirectX_Direct3D11_IDirect3DSurface)

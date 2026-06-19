@@ -14,63 +14,254 @@ import windows_sys.Microsoft.UI.Xaml.Automation.Peers as Microsoft_UI_Xaml_Autom
 @When[Windows_Foundation_Collections == "on"]
 import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 
+// Microsoft.UI.Xaml.Automation.AnnotationPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_AnnotationPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class AnnotationPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AnnotationPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AnnotationPatternIdentifiers {
+        AnnotationPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AnnotationPatternIdentifiers {
+        AnnotationPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAnnotationPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AnnotationPatternIdentifiers> {
+        let ancestors = [IAnnotationPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AnnotationPatternIdentifiers>("AnnotationPatternIdentifiers", IAnnotationPatternIdentifiers.iid(), ancestors, { raw => AnnotationPatternIdentifiers.fromAbiTake(raw) }, { raw => AnnotationPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAnnotationPatternIdentifiers {
+        match (unsafe { query(IAnnotationPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAnnotationPatternIdentifiers(): IAnnotationPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func AnnotationTypeIdProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AnnotationPatternIdentifiers, IAnnotationPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AnnotationTypeIdProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AnnotationTypeNameProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AnnotationPatternIdentifiers, IAnnotationPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AnnotationTypeNameProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AuthorProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AnnotationPatternIdentifiers, IAnnotationPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AuthorProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DateTimeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AnnotationPatternIdentifiers, IAnnotationPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DateTimeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TargetProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AnnotationPatternIdentifiers, IAnnotationPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TargetProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.AnnotationPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.AnnotationPatternIdentifiers;{" + IAnnotationPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.AnnotationPatternIdentifiers", AnnotationPatternIdentifiers.signature(), IAnnotationPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: AnnotationPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AnnotationPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AnnotationPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AnnotationPatternIdentifiers {
+        AnnotationPatternIdentifiers.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Xaml.Automation.AnnotationType (synthetic:Microsoft_UI_Xaml_Automation_AnnotationType)
 @When[Microsoft_UI_Xaml_Automation == "on"]
 public struct AnnotationType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Unknown = AnnotationType(60000)
+public const AnnotationType_Unknown = AnnotationType(60000)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_SpellingError = AnnotationType(60001)
+public const AnnotationType_SpellingError = AnnotationType(60001)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_GrammarError = AnnotationType(60002)
+public const AnnotationType_GrammarError = AnnotationType(60002)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Comment = AnnotationType(60003)
+public const AnnotationType_Comment = AnnotationType(60003)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_FormulaError = AnnotationType(60004)
+public const AnnotationType_FormulaError = AnnotationType(60004)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_TrackChanges = AnnotationType(60005)
+public const AnnotationType_TrackChanges = AnnotationType(60005)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Header = AnnotationType(60006)
+public const AnnotationType_Header = AnnotationType(60006)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Footer = AnnotationType(60007)
+public const AnnotationType_Footer = AnnotationType(60007)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Highlighted = AnnotationType(60008)
+public const AnnotationType_Highlighted = AnnotationType(60008)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Endnote = AnnotationType(60009)
+public const AnnotationType_Endnote = AnnotationType(60009)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Footnote = AnnotationType(60010)
+public const AnnotationType_Footnote = AnnotationType(60010)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_InsertionChange = AnnotationType(60011)
+public const AnnotationType_InsertionChange = AnnotationType(60011)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_DeletionChange = AnnotationType(60012)
+public const AnnotationType_DeletionChange = AnnotationType(60012)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_MoveChange = AnnotationType(60013)
+public const AnnotationType_MoveChange = AnnotationType(60013)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_FormatChange = AnnotationType(60014)
+public const AnnotationType_FormatChange = AnnotationType(60014)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_UnsyncedChange = AnnotationType(60015)
+public const AnnotationType_UnsyncedChange = AnnotationType(60015)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_EditingLockedChange = AnnotationType(60016)
+public const AnnotationType_EditingLockedChange = AnnotationType(60016)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_ExternalChange = AnnotationType(60017)
+public const AnnotationType_ExternalChange = AnnotationType(60017)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_ConflictingChange = AnnotationType(60018)
+public const AnnotationType_ConflictingChange = AnnotationType(60018)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_Author = AnnotationType(60019)
+public const AnnotationType_Author = AnnotationType(60019)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_AdvancedProofingIssue = AnnotationType(60020)
+public const AnnotationType_AdvancedProofingIssue = AnnotationType(60020)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_DataValidationError = AnnotationType(60021)
+public const AnnotationType_DataValidationError = AnnotationType(60021)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AnnotationType_CircularReferenceError = AnnotationType(60022)
+public const AnnotationType_CircularReferenceError = AnnotationType(60022)
+
+// Microsoft.UI.Xaml.Automation.AutomationActiveEnd (synthetic:Microsoft_UI_Xaml_Automation_AutomationActiveEnd)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationActiveEnd {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationActiveEnd_None = AutomationActiveEnd(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationActiveEnd_Start = AutomationActiveEnd(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationActiveEnd_End = AutomationActiveEnd(2)
+
+// Microsoft.UI.Xaml.Automation.AutomationAnimationStyle (synthetic:Microsoft_UI_Xaml_Automation_AutomationAnimationStyle)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationAnimationStyle {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_None = AutomationAnimationStyle(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_LasVegasLights = AutomationAnimationStyle(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_BlinkingBackground = AutomationAnimationStyle(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_SparkleText = AutomationAnimationStyle(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_MarchingBlackAnts = AutomationAnimationStyle(4)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_MarchingRedAnts = AutomationAnimationStyle(5)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_Shimmer = AutomationAnimationStyle(6)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationAnimationStyle_Other = AutomationAnimationStyle(7)
 
 // Microsoft.UI.Xaml.Automation.AutomationAnnotation (synthetic:Microsoft_UI_Xaml_Automation_AutomationAnnotation)
 @When[Microsoft_UI_Xaml_Automation == "on"]
@@ -266,6 +457,729 @@ public class AutomationAnnotation <: windows_interface.InterfaceWrapperBase & wi
         AutomationAnnotation.viewOf(raw)
     }
 }
+
+// Microsoft.UI.Xaml.Automation.AutomationBulletStyle (synthetic:Microsoft_UI_Xaml_Automation_AutomationBulletStyle)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationBulletStyle {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationBulletStyle_None = AutomationBulletStyle(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationBulletStyle_HollowRoundBullet = AutomationBulletStyle(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationBulletStyle_FilledRoundBullet = AutomationBulletStyle(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationBulletStyle_HollowSquareBullet = AutomationBulletStyle(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationBulletStyle_FilledSquareBullet = AutomationBulletStyle(4)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationBulletStyle_DashBullet = AutomationBulletStyle(5)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationBulletStyle_Other = AutomationBulletStyle(6)
+
+// Microsoft.UI.Xaml.Automation.AutomationCaretBidiMode (synthetic:Microsoft_UI_Xaml_Automation_AutomationCaretBidiMode)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationCaretBidiMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationCaretBidiMode_LTR = AutomationCaretBidiMode(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationCaretBidiMode_RTL = AutomationCaretBidiMode(1)
+
+// Microsoft.UI.Xaml.Automation.AutomationCaretPosition (synthetic:Microsoft_UI_Xaml_Automation_AutomationCaretPosition)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationCaretPosition {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationCaretPosition_Unknown = AutomationCaretPosition(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationCaretPosition_EndOfLine = AutomationCaretPosition(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationCaretPosition_BeginningOfLine = AutomationCaretPosition(2)
+
+// Microsoft.UI.Xaml.Automation.AutomationElementIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_AutomationElementIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class AutomationElementIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AutomationElementIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AutomationElementIdentifiers {
+        AutomationElementIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AutomationElementIdentifiers {
+        AutomationElementIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAutomationElementIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AutomationElementIdentifiers> {
+        let ancestors = [IAutomationElementIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AutomationElementIdentifiers>("AutomationElementIdentifiers", IAutomationElementIdentifiers.iid(), ancestors, { raw => AutomationElementIdentifiers.fromAbiTake(raw) }, { raw => AutomationElementIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAutomationElementIdentifiers {
+        match (unsafe { query(IAutomationElementIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutomationElementIdentifiers(): IAutomationElementIdentifiers {
+        defaultInterface()
+    }
+
+    public static func AcceleratorKeyProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AcceleratorKeyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AccessKeyProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AccessKeyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AutomationIdProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AutomationIdProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func BoundingRectangleProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BoundingRectangleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ClassNameProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ClassNameProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ClickablePointProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ClickablePointProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ControlTypeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ControlTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HasKeyboardFocusProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HasKeyboardFocusProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HelpTextProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HelpTextProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsContentElementProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsContentElementProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsControlElementProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsControlElementProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsEnabledProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsKeyboardFocusableProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsKeyboardFocusableProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsOffscreenProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsOffscreenProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsPasswordProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsPasswordProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsRequiredForFormProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsRequiredForFormProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ItemStatusProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ItemStatusProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ItemTypeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ItemTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LabeledByProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LabeledByProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LocalizedControlTypeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LocalizedControlTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func NameProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NameProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OrientationProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OrientationProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LiveSettingProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LiveSettingProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ControlledPeersProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ControlledPeersProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PositionInSetProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PositionInSetProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SizeOfSetProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SizeOfSetProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LevelProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LevelProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AnnotationsProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AnnotationsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LandmarkTypeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LandmarkTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LocalizedLandmarkTypeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LocalizedLandmarkTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsPeripheralProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsPeripheralProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsDataValidForFormProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsDataValidForFormProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FullDescriptionProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FullDescriptionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DescribedByProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DescribedByProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FlowsToProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FlowsToProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FlowsFromProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FlowsFromProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CultureProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CultureProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HeadingLevelProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeadingLevelProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsDialogProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<AutomationElementIdentifiers, IAutomationElementIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsDialogProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.AutomationElementIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.AutomationElementIdentifiers;{" + IAutomationElementIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.AutomationElementIdentifiers", AutomationElementIdentifiers.signature(), IAutomationElementIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: AutomationElementIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AutomationElementIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AutomationElementIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AutomationElementIdentifiers {
+        AutomationElementIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.AutomationFlowDirections (synthetic:Microsoft_UI_Xaml_Automation_AutomationFlowDirections)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationFlowDirections {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationFlowDirections_Default = AutomationFlowDirections(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationFlowDirections_RightToLeft = AutomationFlowDirections(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationFlowDirections_BottomToTop = AutomationFlowDirections(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationFlowDirections_Vertical = AutomationFlowDirections(3)
+
+// Microsoft.UI.Xaml.Automation.AutomationOutlineStyles (synthetic:Microsoft_UI_Xaml_Automation_AutomationOutlineStyles)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationOutlineStyles {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationOutlineStyles_None = AutomationOutlineStyles(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationOutlineStyles_Outline = AutomationOutlineStyles(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationOutlineStyles_Shadow = AutomationOutlineStyles(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationOutlineStyles_Engraved = AutomationOutlineStyles(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationOutlineStyles_Embossed = AutomationOutlineStyles(4)
 
 // Microsoft.UI.Xaml.Automation.AutomationProperties (synthetic:Microsoft_UI_Xaml_Automation_AutomationProperties)
 @When[Microsoft_UI_Xaml_Automation == "on"]
@@ -1497,25 +2411,838 @@ public class AutomationProperty <: windows_interface.InterfaceWrapperBase & wind
     }
 }
 
-// Microsoft.UI.Xaml.Automation.AutomationTextEditChangeType (synthetic:Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType)
+// Microsoft.UI.Xaml.Automation.AutomationStyleId (synthetic:Microsoft_UI_Xaml_Automation_AutomationStyleId)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public struct AutomationTextEditChangeType {
+public struct AutomationStyleId {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AutomationTextEditChangeType_None = AutomationTextEditChangeType(0)
+public const AutomationStyleId_Heading1 = AutomationStyleId(70001)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AutomationTextEditChangeType_AutoCorrect = AutomationTextEditChangeType(1)
+public const AutomationStyleId_Heading2 = AutomationStyleId(70002)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AutomationTextEditChangeType_Composition = AutomationTextEditChangeType(2)
+public const AutomationStyleId_Heading3 = AutomationStyleId(70003)
 @When[Microsoft_UI_Xaml_Automation == "on"]
-public let AutomationTextEditChangeType_CompositionFinalized = AutomationTextEditChangeType(3)
+public const AutomationStyleId_Heading4 = AutomationStyleId(70004)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Heading5 = AutomationStyleId(70005)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Heading6 = AutomationStyleId(70006)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Heading7 = AutomationStyleId(70007)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Heading8 = AutomationStyleId(70008)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Heading9 = AutomationStyleId(70009)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Title = AutomationStyleId(70010)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Subtitle = AutomationStyleId(70011)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Normal = AutomationStyleId(70012)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Emphasis = AutomationStyleId(70013)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_Quote = AutomationStyleId(70014)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationStyleId_BulletedList = AutomationStyleId(70015)
+
+// Microsoft.UI.Xaml.Automation.AutomationTextDecorationLineStyle (synthetic:Microsoft_UI_Xaml_Automation_AutomationTextDecorationLineStyle)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationTextDecorationLineStyle {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_None = AutomationTextDecorationLineStyle(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_Single = AutomationTextDecorationLineStyle(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_WordsOnly = AutomationTextDecorationLineStyle(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_Double = AutomationTextDecorationLineStyle(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_Dot = AutomationTextDecorationLineStyle(4)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_Dash = AutomationTextDecorationLineStyle(5)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_DashDot = AutomationTextDecorationLineStyle(6)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_DashDotDot = AutomationTextDecorationLineStyle(7)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_Wavy = AutomationTextDecorationLineStyle(8)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_ThickSingle = AutomationTextDecorationLineStyle(9)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_DoubleWavy = AutomationTextDecorationLineStyle(10)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_ThickWavy = AutomationTextDecorationLineStyle(11)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_LongDash = AutomationTextDecorationLineStyle(12)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_ThickDash = AutomationTextDecorationLineStyle(13)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_ThickDashDot = AutomationTextDecorationLineStyle(14)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_ThickDashDotDot = AutomationTextDecorationLineStyle(15)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_ThickDot = AutomationTextDecorationLineStyle(16)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_ThickLongDash = AutomationTextDecorationLineStyle(17)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextDecorationLineStyle_Other = AutomationTextDecorationLineStyle(18)
+
+// Microsoft.UI.Xaml.Automation.AutomationTextEditChangeType (synthetic:Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct AutomationTextEditChangeType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextEditChangeType_None = AutomationTextEditChangeType(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextEditChangeType_AutoCorrect = AutomationTextEditChangeType(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextEditChangeType_Composition = AutomationTextEditChangeType(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const AutomationTextEditChangeType_CompositionFinalized = AutomationTextEditChangeType(3)
+
+// Microsoft.UI.Xaml.Automation.DockPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_DockPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class DockPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DockPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DockPatternIdentifiers {
+        DockPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DockPatternIdentifiers {
+        DockPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDockPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DockPatternIdentifiers> {
+        let ancestors = [IDockPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DockPatternIdentifiers>("DockPatternIdentifiers", IDockPatternIdentifiers.iid(), ancestors, { raw => DockPatternIdentifiers.fromAbiTake(raw) }, { raw => DockPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDockPatternIdentifiers {
+        match (unsafe { query(IDockPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDockPatternIdentifiers(): IDockPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func DockPositionProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DockPatternIdentifiers, IDockPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DockPositionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.DockPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.DockPatternIdentifiers;{" + IDockPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.DockPatternIdentifiers", DockPatternIdentifiers.signature(), IDockPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: DockPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DockPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DockPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DockPatternIdentifiers {
+        DockPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.DockPosition (synthetic:Microsoft_UI_Xaml_Automation_DockPosition)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct DockPosition {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const DockPosition_Top = DockPosition(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const DockPosition_Left = DockPosition(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const DockPosition_Bottom = DockPosition(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const DockPosition_Right = DockPosition(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const DockPosition_Fill = DockPosition(4)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const DockPosition_None = DockPosition(5)
+
+// Microsoft.UI.Xaml.Automation.DragPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_DragPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class DragPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DragPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DragPatternIdentifiers {
+        DragPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DragPatternIdentifiers {
+        DragPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDragPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DragPatternIdentifiers> {
+        let ancestors = [IDragPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DragPatternIdentifiers>("DragPatternIdentifiers", IDragPatternIdentifiers.iid(), ancestors, { raw => DragPatternIdentifiers.fromAbiTake(raw) }, { raw => DragPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDragPatternIdentifiers {
+        match (unsafe { query(IDragPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDragPatternIdentifiers(): IDragPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func DropEffectProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DragPatternIdentifiers, IDragPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DropEffectProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DropEffectsProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DragPatternIdentifiers, IDragPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DropEffectsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GrabbedItemsProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DragPatternIdentifiers, IDragPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GrabbedItemsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsGrabbedProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DragPatternIdentifiers, IDragPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsGrabbedProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.DragPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.DragPatternIdentifiers;{" + IDragPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.DragPatternIdentifiers", DragPatternIdentifiers.signature(), IDragPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: DragPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DragPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DragPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DragPatternIdentifiers {
+        DragPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.DropTargetPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_DropTargetPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class DropTargetPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DropTargetPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DropTargetPatternIdentifiers {
+        DropTargetPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DropTargetPatternIdentifiers {
+        DropTargetPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDropTargetPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DropTargetPatternIdentifiers> {
+        let ancestors = [IDropTargetPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DropTargetPatternIdentifiers>("DropTargetPatternIdentifiers", IDropTargetPatternIdentifiers.iid(), ancestors, { raw => DropTargetPatternIdentifiers.fromAbiTake(raw) }, { raw => DropTargetPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDropTargetPatternIdentifiers {
+        match (unsafe { query(IDropTargetPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDropTargetPatternIdentifiers(): IDropTargetPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func DropTargetEffectProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DropTargetPatternIdentifiers, IDropTargetPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DropTargetEffectProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DropTargetEffectsProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<DropTargetPatternIdentifiers, IDropTargetPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DropTargetEffectsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.DropTargetPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.DropTargetPatternIdentifiers;{" + IDropTargetPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.DropTargetPatternIdentifiers", DropTargetPatternIdentifiers.signature(), IDropTargetPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: DropTargetPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DropTargetPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DropTargetPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DropTargetPatternIdentifiers {
+        DropTargetPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.ExpandCollapsePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ExpandCollapsePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class ExpandCollapsePatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ExpandCollapsePatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ExpandCollapsePatternIdentifiers {
+        ExpandCollapsePatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ExpandCollapsePatternIdentifiers {
+        ExpandCollapsePatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IExpandCollapsePatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ExpandCollapsePatternIdentifiers> {
+        let ancestors = [IExpandCollapsePatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ExpandCollapsePatternIdentifiers>("ExpandCollapsePatternIdentifiers", IExpandCollapsePatternIdentifiers.iid(), ancestors, { raw => ExpandCollapsePatternIdentifiers.fromAbiTake(raw) }, { raw => ExpandCollapsePatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IExpandCollapsePatternIdentifiers {
+        match (unsafe { query(IExpandCollapsePatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIExpandCollapsePatternIdentifiers(): IExpandCollapsePatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func ExpandCollapseStateProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ExpandCollapsePatternIdentifiers, IExpandCollapsePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ExpandCollapseStateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.ExpandCollapsePatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.ExpandCollapsePatternIdentifiers;{" + IExpandCollapsePatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.ExpandCollapsePatternIdentifiers", ExpandCollapsePatternIdentifiers.signature(), IExpandCollapsePatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: ExpandCollapsePatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ExpandCollapsePatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ExpandCollapsePatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ExpandCollapsePatternIdentifiers {
+        ExpandCollapsePatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.ExpandCollapseState (synthetic:Microsoft_UI_Xaml_Automation_ExpandCollapseState)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct ExpandCollapseState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ExpandCollapseState_Collapsed = ExpandCollapseState(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ExpandCollapseState_Expanded = ExpandCollapseState(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ExpandCollapseState_PartiallyExpanded = ExpandCollapseState(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ExpandCollapseState_LeafNode = ExpandCollapseState(3)
+
+// Microsoft.UI.Xaml.Automation.GridItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_GridItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class GridItemPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GridItemPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GridItemPatternIdentifiers {
+        GridItemPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GridItemPatternIdentifiers {
+        GridItemPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGridItemPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GridItemPatternIdentifiers> {
+        let ancestors = [IGridItemPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GridItemPatternIdentifiers>("GridItemPatternIdentifiers", IGridItemPatternIdentifiers.iid(), ancestors, { raw => GridItemPatternIdentifiers.fromAbiTake(raw) }, { raw => GridItemPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGridItemPatternIdentifiers {
+        match (unsafe { query(IGridItemPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGridItemPatternIdentifiers(): IGridItemPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func ColumnProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GridItemPatternIdentifiers, IGridItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColumnProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ColumnSpanProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GridItemPatternIdentifiers, IGridItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColumnSpanProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ContainingGridProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GridItemPatternIdentifiers, IGridItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ContainingGridProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RowProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GridItemPatternIdentifiers, IGridItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RowProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RowSpanProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GridItemPatternIdentifiers, IGridItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RowSpanProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.GridItemPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.GridItemPatternIdentifiers;{" + IGridItemPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.GridItemPatternIdentifiers", GridItemPatternIdentifiers.signature(), IGridItemPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: GridItemPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GridItemPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GridItemPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GridItemPatternIdentifiers {
+        GridItemPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.GridPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_GridPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class GridPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<GridPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): GridPatternIdentifiers {
+        GridPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): GridPatternIdentifiers {
+        GridPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IGridPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<GridPatternIdentifiers> {
+        let ancestors = [IGridPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<GridPatternIdentifiers>("GridPatternIdentifiers", IGridPatternIdentifiers.iid(), ancestors, { raw => GridPatternIdentifiers.fromAbiTake(raw) }, { raw => GridPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IGridPatternIdentifiers {
+        match (unsafe { query(IGridPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIGridPatternIdentifiers(): IGridPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func ColumnCountProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GridPatternIdentifiers, IGridPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColumnCountProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RowCountProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<GridPatternIdentifiers, IGridPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RowCountProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.GridPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.GridPatternIdentifiers;{" + IGridPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.GridPatternIdentifiers", GridPatternIdentifiers.signature(), IGridPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: GridPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): GridPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        GridPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): GridPatternIdentifiers {
+        GridPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.IAnnotationPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IAnnotationPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["92d76915-0cd3-59cd-8ae0-c9004628ba1e", "Microsoft.UI.Xaml.Automation.IAnnotationPatternIdentifiers"]
+public interface IAnnotationPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IAnnotationPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IAnnotationPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["20a136e2-4a47-5de5-9e1e-ecfc6d92f52a", "Microsoft.UI.Xaml.Automation.IAnnotationPatternIdentifiersStatics", "AnnotationTypeIdProperty.value=Com;AnnotationTypeNameProperty.value=Com;AuthorProperty.value=Com;DateTimeProperty.value=Com;TargetProperty.value=Com"]
+public interface IAnnotationPatternIdentifiersStatics <: IInspectable {
+    func AnnotationTypeIdProperty(value: CPointer<CPointer<Unit>>): Int32
+    func AnnotationTypeNameProperty(value: CPointer<CPointer<Unit>>): Int32
+    func AuthorProperty(value: CPointer<CPointer<Unit>>): Int32
+    func DateTimeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func TargetProperty(value: CPointer<CPointer<Unit>>): Int32
+}
 
 // Microsoft.UI.Xaml.Automation.IAutomationAnnotation (synthetic:Microsoft_UI_Xaml_Automation_IAutomationAnnotation)
 @When[Microsoft_UI_Xaml_Automation == "on"]
@@ -1541,6 +3268,57 @@ public interface IAutomationAnnotationFactory <: IInspectable {
 public interface IAutomationAnnotationStatics <: IInspectable {
     func TypeProperty(value: CPointer<CPointer<Unit>>): Int32
     func ElementProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IAutomationElementIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IAutomationElementIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["2fb51a33-b0cf-5a4c-9ed3-267eca7aeefc", "Microsoft.UI.Xaml.Automation.IAutomationElementIdentifiers"]
+public interface IAutomationElementIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IAutomationElementIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IAutomationElementIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["72af6b8c-3e12-5e7a-a2ec-26dc193f9df9", "Microsoft.UI.Xaml.Automation.IAutomationElementIdentifiersStatics", "AcceleratorKeyProperty.value=Com;AccessKeyProperty.value=Com;AutomationIdProperty.value=Com;BoundingRectangleProperty.value=Com;ClassNameProperty.value=Com;ClickablePointProperty.value=Com;ControlTypeProperty.value=Com;HasKeyboardFocusProperty.value=Com;HelpTextProperty.value=Com;IsContentElementProperty.value=Com;IsControlElementProperty.value=Com;IsEnabledProperty.value=Com;IsKeyboardFocusableProperty.value=Com;IsOffscreenProperty.value=Com;IsPasswordProperty.value=Com;IsRequiredForFormProperty.value=Com;ItemStatusProperty.value=Com;ItemTypeProperty.value=Com;LabeledByProperty.value=Com;LocalizedControlTypeProperty.value=Com;NameProperty.value=Com;OrientationProperty.value=Com;LiveSettingProperty.value=Com;ControlledPeersProperty.value=Com;PositionInSetProperty.value=Com;SizeOfSetProperty.value=Com;LevelProperty.value=Com;AnnotationsProperty.value=Com;LandmarkTypeProperty.value=Com;LocalizedLandmarkTypeProperty.value=Com;IsPeripheralProperty.value=Com;IsDataValidForFormProperty.value=Com;FullDescriptionProperty.value=Com;DescribedByProperty.value=Com;FlowsToProperty.value=Com;FlowsFromProperty.value=Com;CultureProperty.value=Com;HeadingLevelProperty.value=Com;IsDialogProperty.value=Com"]
+public interface IAutomationElementIdentifiersStatics <: IInspectable {
+    func AcceleratorKeyProperty(value: CPointer<CPointer<Unit>>): Int32
+    func AccessKeyProperty(value: CPointer<CPointer<Unit>>): Int32
+    func AutomationIdProperty(value: CPointer<CPointer<Unit>>): Int32
+    func BoundingRectangleProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ClassNameProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ClickablePointProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ControlTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func HasKeyboardFocusProperty(value: CPointer<CPointer<Unit>>): Int32
+    func HelpTextProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsContentElementProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsControlElementProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsKeyboardFocusableProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsOffscreenProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsPasswordProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsRequiredForFormProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ItemStatusProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ItemTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func LabeledByProperty(value: CPointer<CPointer<Unit>>): Int32
+    func LocalizedControlTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func NameProperty(value: CPointer<CPointer<Unit>>): Int32
+    func OrientationProperty(value: CPointer<CPointer<Unit>>): Int32
+    func LiveSettingProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ControlledPeersProperty(value: CPointer<CPointer<Unit>>): Int32
+    func PositionInSetProperty(value: CPointer<CPointer<Unit>>): Int32
+    func SizeOfSetProperty(value: CPointer<CPointer<Unit>>): Int32
+    func LevelProperty(value: CPointer<CPointer<Unit>>): Int32
+    func AnnotationsProperty(value: CPointer<CPointer<Unit>>): Int32
+    func LandmarkTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func LocalizedLandmarkTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsPeripheralProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsDataValidForFormProperty(value: CPointer<CPointer<Unit>>): Int32
+    func FullDescriptionProperty(value: CPointer<CPointer<Unit>>): Int32
+    func DescribedByProperty(value: CPointer<CPointer<Unit>>): Int32
+    func FlowsToProperty(value: CPointer<CPointer<Unit>>): Int32
+    func FlowsFromProperty(value: CPointer<CPointer<Unit>>): Int32
+    func CultureProperty(value: CPointer<CPointer<Unit>>): Int32
+    func HeadingLevelProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsDialogProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Automation.IAutomationProperties (synthetic:Microsoft_UI_Xaml_Automation_IAutomationProperties)
@@ -1648,3 +3426,2201 @@ public interface IAutomationPropertiesStatics2 <: IInspectable {
 @Interface["5ca6b2c8-ff86-5a41-aa18-6948fae592cf", "Microsoft.UI.Xaml.Automation.IAutomationProperty"]
 public interface IAutomationProperty <: IInspectable {
 }
+
+// Microsoft.UI.Xaml.Automation.IDockPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IDockPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["75574f99-d145-547e-972b-7d879f93c03e", "Microsoft.UI.Xaml.Automation.IDockPatternIdentifiers"]
+public interface IDockPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IDockPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IDockPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["02d5a72c-f49d-53a9-b9fb-af2719d16ccf", "Microsoft.UI.Xaml.Automation.IDockPatternIdentifiersStatics", "DockPositionProperty.value=Com"]
+public interface IDockPatternIdentifiersStatics <: IInspectable {
+    func DockPositionProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IDragPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IDragPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["aa2fdfd5-fb45-5d2b-8d92-a8e7b07061c2", "Microsoft.UI.Xaml.Automation.IDragPatternIdentifiers"]
+public interface IDragPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IDragPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IDragPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["482eee70-0bfc-5552-9e7d-8dffc526b2f7", "Microsoft.UI.Xaml.Automation.IDragPatternIdentifiersStatics", "DropEffectProperty.value=Com;DropEffectsProperty.value=Com;GrabbedItemsProperty.value=Com;IsGrabbedProperty.value=Com"]
+public interface IDragPatternIdentifiersStatics <: IInspectable {
+    func DropEffectProperty(value: CPointer<CPointer<Unit>>): Int32
+    func DropEffectsProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GrabbedItemsProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsGrabbedProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IDropTargetPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IDropTargetPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["133e8ff3-1ddd-5cbb-b908-1484d7c04da7", "Microsoft.UI.Xaml.Automation.IDropTargetPatternIdentifiers"]
+public interface IDropTargetPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IDropTargetPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IDropTargetPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["6da6f0bd-b942-5283-be35-501ae87f88c7", "Microsoft.UI.Xaml.Automation.IDropTargetPatternIdentifiersStatics", "DropTargetEffectProperty.value=Com;DropTargetEffectsProperty.value=Com"]
+public interface IDropTargetPatternIdentifiersStatics <: IInspectable {
+    func DropTargetEffectProperty(value: CPointer<CPointer<Unit>>): Int32
+    func DropTargetEffectsProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IExpandCollapsePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IExpandCollapsePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["cec15d9f-8630-569a-86a0-524bbea618ff", "Microsoft.UI.Xaml.Automation.IExpandCollapsePatternIdentifiers"]
+public interface IExpandCollapsePatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IExpandCollapsePatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IExpandCollapsePatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["283101f4-c40c-55bf-a23b-d62b73b6aa35", "Microsoft.UI.Xaml.Automation.IExpandCollapsePatternIdentifiersStatics", "ExpandCollapseStateProperty.value=Com"]
+public interface IExpandCollapsePatternIdentifiersStatics <: IInspectable {
+    func ExpandCollapseStateProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IGridItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IGridItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["93609087-1114-557d-b17b-f801e41cebbb", "Microsoft.UI.Xaml.Automation.IGridItemPatternIdentifiers"]
+public interface IGridItemPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IGridItemPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IGridItemPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["8072bc18-87d0-5a02-a0a1-f9aec968c0e7", "Microsoft.UI.Xaml.Automation.IGridItemPatternIdentifiersStatics", "ColumnProperty.value=Com;ColumnSpanProperty.value=Com;ContainingGridProperty.value=Com;RowProperty.value=Com;RowSpanProperty.value=Com"]
+public interface IGridItemPatternIdentifiersStatics <: IInspectable {
+    func ColumnProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ColumnSpanProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ContainingGridProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RowProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RowSpanProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IGridPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IGridPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["e5e1e250-c37c-54a2-8c61-1d9ccd3bb39c", "Microsoft.UI.Xaml.Automation.IGridPatternIdentifiers"]
+public interface IGridPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IGridPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IGridPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["e861604c-101f-5a6d-a308-3714f510f744", "Microsoft.UI.Xaml.Automation.IGridPatternIdentifiersStatics", "ColumnCountProperty.value=Com;RowCountProperty.value=Com"]
+public interface IGridPatternIdentifiersStatics <: IInspectable {
+    func ColumnCountProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RowCountProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IMultipleViewPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IMultipleViewPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["70e4c847-2b82-5ecf-b808-e9d453c1fe53", "Microsoft.UI.Xaml.Automation.IMultipleViewPatternIdentifiers"]
+public interface IMultipleViewPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IMultipleViewPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IMultipleViewPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["ac71daef-d094-5c90-94af-1fa474ab45fe", "Microsoft.UI.Xaml.Automation.IMultipleViewPatternIdentifiersStatics", "CurrentViewProperty.value=Com;SupportedViewsProperty.value=Com"]
+public interface IMultipleViewPatternIdentifiersStatics <: IInspectable {
+    func CurrentViewProperty(value: CPointer<CPointer<Unit>>): Int32
+    func SupportedViewsProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IRangeValuePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IRangeValuePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["c114db37-6a75-5ef1-a542-d3b13f92cbfe", "Microsoft.UI.Xaml.Automation.IRangeValuePatternIdentifiers"]
+public interface IRangeValuePatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IRangeValuePatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IRangeValuePatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["0aaa9ad7-f9b8-52a1-bc96-2a97fe389ed0", "Microsoft.UI.Xaml.Automation.IRangeValuePatternIdentifiersStatics", "IsReadOnlyProperty.value=Com;LargeChangeProperty.value=Com;MaximumProperty.value=Com;MinimumProperty.value=Com;SmallChangeProperty.value=Com;ValueProperty.value=Com"]
+public interface IRangeValuePatternIdentifiersStatics <: IInspectable {
+    func IsReadOnlyProperty(value: CPointer<CPointer<Unit>>): Int32
+    func LargeChangeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func MaximumProperty(value: CPointer<CPointer<Unit>>): Int32
+    func MinimumProperty(value: CPointer<CPointer<Unit>>): Int32
+    func SmallChangeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ValueProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IScrollPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IScrollPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["04f1a4b8-edc7-55f2-96df-a9c7e809372e", "Microsoft.UI.Xaml.Automation.IScrollPatternIdentifiers"]
+public interface IScrollPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IScrollPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IScrollPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["0f94f2f0-e0d2-5a24-b415-8d1506ce47aa", "Microsoft.UI.Xaml.Automation.IScrollPatternIdentifiersStatics", "HorizontallyScrollableProperty.value=Com;HorizontalScrollPercentProperty.value=Com;HorizontalViewSizeProperty.value=Com;VerticallyScrollableProperty.value=Com;VerticalScrollPercentProperty.value=Com;VerticalViewSizeProperty.value=Com"]
+public interface IScrollPatternIdentifiersStatics <: IInspectable {
+    func HorizontallyScrollableProperty(value: CPointer<CPointer<Unit>>): Int32
+    func HorizontalScrollPercentProperty(value: CPointer<CPointer<Unit>>): Int32
+    func HorizontalViewSizeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func NoScroll(value: CPointer<Float64>): Int32
+    func VerticallyScrollableProperty(value: CPointer<CPointer<Unit>>): Int32
+    func VerticalScrollPercentProperty(value: CPointer<CPointer<Unit>>): Int32
+    func VerticalViewSizeProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ISelectionItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ISelectionItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["ce3a549d-a2cb-594d-a2a4-44778c09cca5", "Microsoft.UI.Xaml.Automation.ISelectionItemPatternIdentifiers"]
+public interface ISelectionItemPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ISelectionItemPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ISelectionItemPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["2b8ead7c-4e03-5b84-9e34-8b7384cbd862", "Microsoft.UI.Xaml.Automation.ISelectionItemPatternIdentifiersStatics", "IsSelectedProperty.value=Com;SelectionContainerProperty.value=Com"]
+public interface ISelectionItemPatternIdentifiersStatics <: IInspectable {
+    func IsSelectedProperty(value: CPointer<CPointer<Unit>>): Int32
+    func SelectionContainerProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ISelectionPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ISelectionPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["401743d2-1fba-5d05-b89f-631676453237", "Microsoft.UI.Xaml.Automation.ISelectionPatternIdentifiers"]
+public interface ISelectionPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ISelectionPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ISelectionPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["f3ed111b-b20a-5e5e-a232-07f607fd5c07", "Microsoft.UI.Xaml.Automation.ISelectionPatternIdentifiersStatics", "CanSelectMultipleProperty.value=Com;IsSelectionRequiredProperty.value=Com;SelectionProperty.value=Com"]
+public interface ISelectionPatternIdentifiersStatics <: IInspectable {
+    func CanSelectMultipleProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsSelectionRequiredProperty(value: CPointer<CPointer<Unit>>): Int32
+    func SelectionProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ISpreadsheetItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ISpreadsheetItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["dca2ec46-8564-5c9c-ba90-2c08455f697b", "Microsoft.UI.Xaml.Automation.ISpreadsheetItemPatternIdentifiers"]
+public interface ISpreadsheetItemPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ISpreadsheetItemPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ISpreadsheetItemPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["7eb10f80-8d3a-59ad-a2b9-05d8cecf18db", "Microsoft.UI.Xaml.Automation.ISpreadsheetItemPatternIdentifiersStatics", "FormulaProperty.value=Com"]
+public interface ISpreadsheetItemPatternIdentifiersStatics <: IInspectable {
+    func FormulaProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IStylesPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IStylesPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["13aeca5e-b496-5df5-aea5-330e1f0490eb", "Microsoft.UI.Xaml.Automation.IStylesPatternIdentifiers"]
+public interface IStylesPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IStylesPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IStylesPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["b232287a-bc4c-581e-a33c-3d6aee10d04b", "Microsoft.UI.Xaml.Automation.IStylesPatternIdentifiersStatics", "ExtendedPropertiesProperty.value=Com;FillColorProperty.value=Com;FillPatternColorProperty.value=Com;FillPatternStyleProperty.value=Com;ShapeProperty.value=Com;StyleIdProperty.value=Com;StyleNameProperty.value=Com"]
+public interface IStylesPatternIdentifiersStatics <: IInspectable {
+    func ExtendedPropertiesProperty(value: CPointer<CPointer<Unit>>): Int32
+    func FillColorProperty(value: CPointer<CPointer<Unit>>): Int32
+    func FillPatternColorProperty(value: CPointer<CPointer<Unit>>): Int32
+    func FillPatternStyleProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ShapeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func StyleIdProperty(value: CPointer<CPointer<Unit>>): Int32
+    func StyleNameProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ITableItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ITableItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["b4de5d03-a5b4-5ca1-8715-16c8c6a10fcc", "Microsoft.UI.Xaml.Automation.ITableItemPatternIdentifiers"]
+public interface ITableItemPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ITableItemPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ITableItemPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["81d24bd7-66fb-53ef-9b32-d00f9c240a14", "Microsoft.UI.Xaml.Automation.ITableItemPatternIdentifiersStatics", "ColumnHeaderItemsProperty.value=Com;RowHeaderItemsProperty.value=Com"]
+public interface ITableItemPatternIdentifiersStatics <: IInspectable {
+    func ColumnHeaderItemsProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RowHeaderItemsProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ITablePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ITablePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["3d7f9c0b-ff8f-50fa-bc01-2cc3c2e06e2c", "Microsoft.UI.Xaml.Automation.ITablePatternIdentifiers"]
+public interface ITablePatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ITablePatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ITablePatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["3660935e-bcbb-5848-8e9a-264854f7a19a", "Microsoft.UI.Xaml.Automation.ITablePatternIdentifiersStatics", "ColumnHeadersProperty.value=Com;RowHeadersProperty.value=Com;RowOrColumnMajorProperty.value=Com"]
+public interface ITablePatternIdentifiersStatics <: IInspectable {
+    func ColumnHeadersProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RowHeadersProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RowOrColumnMajorProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ITogglePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ITogglePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["a0d2df4c-ba59-51d9-9c01-034d7941c280", "Microsoft.UI.Xaml.Automation.ITogglePatternIdentifiers"]
+public interface ITogglePatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ITogglePatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ITogglePatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["862920b5-dcb3-5691-a456-c2f15c476dfb", "Microsoft.UI.Xaml.Automation.ITogglePatternIdentifiersStatics", "ToggleStateProperty.value=Com"]
+public interface ITogglePatternIdentifiersStatics <: IInspectable {
+    func ToggleStateProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ITransformPattern2Identifiers (synthetic:Microsoft_UI_Xaml_Automation_ITransformPattern2Identifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["6ef7595c-db8c-51b0-878b-34b7ef12f4da", "Microsoft.UI.Xaml.Automation.ITransformPattern2Identifiers"]
+public interface ITransformPattern2Identifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ITransformPattern2IdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ITransformPattern2IdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["d9876ff5-89ed-5333-8111-ad25a28bee8b", "Microsoft.UI.Xaml.Automation.ITransformPattern2IdentifiersStatics", "CanZoomProperty.value=Com;ZoomLevelProperty.value=Com;MaxZoomProperty.value=Com;MinZoomProperty.value=Com"]
+public interface ITransformPattern2IdentifiersStatics <: IInspectable {
+    func CanZoomProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ZoomLevelProperty(value: CPointer<CPointer<Unit>>): Int32
+    func MaxZoomProperty(value: CPointer<CPointer<Unit>>): Int32
+    func MinZoomProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.ITransformPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ITransformPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["2348187b-c50f-5a0e-bc05-305ac71b3b6b", "Microsoft.UI.Xaml.Automation.ITransformPatternIdentifiers"]
+public interface ITransformPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.ITransformPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_ITransformPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["cb7d84e4-5429-5188-8aa0-5f96558a8790", "Microsoft.UI.Xaml.Automation.ITransformPatternIdentifiersStatics", "CanMoveProperty.value=Com;CanResizeProperty.value=Com;CanRotateProperty.value=Com"]
+public interface ITransformPatternIdentifiersStatics <: IInspectable {
+    func CanMoveProperty(value: CPointer<CPointer<Unit>>): Int32
+    func CanResizeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func CanRotateProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IValuePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IValuePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["fb493395-fb97-59d5-9323-4651ce964b55", "Microsoft.UI.Xaml.Automation.IValuePatternIdentifiers"]
+public interface IValuePatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IValuePatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IValuePatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["2019faf5-ce64-59a7-bc13-0677c3146724", "Microsoft.UI.Xaml.Automation.IValuePatternIdentifiersStatics", "IsReadOnlyProperty.value=Com;ValueProperty.value=Com"]
+public interface IValuePatternIdentifiersStatics <: IInspectable {
+    func IsReadOnlyProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ValueProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IWindowPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_IWindowPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["bec579e1-91be-5d8f-aaca-6ad8839872d2", "Microsoft.UI.Xaml.Automation.IWindowPatternIdentifiers"]
+public interface IWindowPatternIdentifiers <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IWindowPatternIdentifiersStatics (synthetic:Microsoft_UI_Xaml_Automation_IWindowPatternIdentifiersStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+@Interface["06762744-d3d7-5441-b879-373681d47f64", "Microsoft.UI.Xaml.Automation.IWindowPatternIdentifiersStatics", "CanMaximizeProperty.value=Com;CanMinimizeProperty.value=Com;IsModalProperty.value=Com;IsTopmostProperty.value=Com;WindowInteractionStateProperty.value=Com;WindowVisualStateProperty.value=Com"]
+public interface IWindowPatternIdentifiersStatics <: IInspectable {
+    func CanMaximizeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func CanMinimizeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsModalProperty(value: CPointer<CPointer<Unit>>): Int32
+    func IsTopmostProperty(value: CPointer<CPointer<Unit>>): Int32
+    func WindowInteractionStateProperty(value: CPointer<CPointer<Unit>>): Int32
+    func WindowVisualStateProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.MultipleViewPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_MultipleViewPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class MultipleViewPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MultipleViewPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MultipleViewPatternIdentifiers {
+        MultipleViewPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MultipleViewPatternIdentifiers {
+        MultipleViewPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMultipleViewPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MultipleViewPatternIdentifiers> {
+        let ancestors = [IMultipleViewPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MultipleViewPatternIdentifiers>("MultipleViewPatternIdentifiers", IMultipleViewPatternIdentifiers.iid(), ancestors, { raw => MultipleViewPatternIdentifiers.fromAbiTake(raw) }, { raw => MultipleViewPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMultipleViewPatternIdentifiers {
+        match (unsafe { query(IMultipleViewPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMultipleViewPatternIdentifiers(): IMultipleViewPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func CurrentViewProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<MultipleViewPatternIdentifiers, IMultipleViewPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CurrentViewProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SupportedViewsProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<MultipleViewPatternIdentifiers, IMultipleViewPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SupportedViewsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.MultipleViewPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.MultipleViewPatternIdentifiers;{" + IMultipleViewPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.MultipleViewPatternIdentifiers", MultipleViewPatternIdentifiers.signature(), IMultipleViewPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: MultipleViewPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MultipleViewPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MultipleViewPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MultipleViewPatternIdentifiers {
+        MultipleViewPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.RangeValuePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_RangeValuePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class RangeValuePatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RangeValuePatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RangeValuePatternIdentifiers {
+        RangeValuePatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RangeValuePatternIdentifiers {
+        RangeValuePatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRangeValuePatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RangeValuePatternIdentifiers> {
+        let ancestors = [IRangeValuePatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RangeValuePatternIdentifiers>("RangeValuePatternIdentifiers", IRangeValuePatternIdentifiers.iid(), ancestors, { raw => RangeValuePatternIdentifiers.fromAbiTake(raw) }, { raw => RangeValuePatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRangeValuePatternIdentifiers {
+        match (unsafe { query(IRangeValuePatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRangeValuePatternIdentifiers(): IRangeValuePatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func IsReadOnlyProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RangeValuePatternIdentifiers, IRangeValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsReadOnlyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LargeChangeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RangeValuePatternIdentifiers, IRangeValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LargeChangeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MaximumProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RangeValuePatternIdentifiers, IRangeValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaximumProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MinimumProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RangeValuePatternIdentifiers, IRangeValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinimumProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SmallChangeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RangeValuePatternIdentifiers, IRangeValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SmallChangeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ValueProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RangeValuePatternIdentifiers, IRangeValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ValueProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.RangeValuePatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.RangeValuePatternIdentifiers;{" + IRangeValuePatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.RangeValuePatternIdentifiers", RangeValuePatternIdentifiers.signature(), IRangeValuePatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: RangeValuePatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RangeValuePatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RangeValuePatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RangeValuePatternIdentifiers {
+        RangeValuePatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.RowOrColumnMajor (synthetic:Microsoft_UI_Xaml_Automation_RowOrColumnMajor)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct RowOrColumnMajor {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const RowOrColumnMajor_RowMajor = RowOrColumnMajor(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const RowOrColumnMajor_ColumnMajor = RowOrColumnMajor(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const RowOrColumnMajor_Indeterminate = RowOrColumnMajor(2)
+
+// Microsoft.UI.Xaml.Automation.ScrollAmount (synthetic:Microsoft_UI_Xaml_Automation_ScrollAmount)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct ScrollAmount {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ScrollAmount_LargeDecrement = ScrollAmount(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ScrollAmount_SmallDecrement = ScrollAmount(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ScrollAmount_NoAmount = ScrollAmount(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ScrollAmount_LargeIncrement = ScrollAmount(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ScrollAmount_SmallIncrement = ScrollAmount(4)
+
+// Microsoft.UI.Xaml.Automation.ScrollPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ScrollPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class ScrollPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ScrollPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ScrollPatternIdentifiers {
+        ScrollPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ScrollPatternIdentifiers {
+        ScrollPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IScrollPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ScrollPatternIdentifiers> {
+        let ancestors = [IScrollPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ScrollPatternIdentifiers>("ScrollPatternIdentifiers", IScrollPatternIdentifiers.iid(), ancestors, { raw => ScrollPatternIdentifiers.fromAbiTake(raw) }, { raw => ScrollPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IScrollPatternIdentifiers {
+        match (unsafe { query(IScrollPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIScrollPatternIdentifiers(): IScrollPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func HorizontallyScrollableProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ScrollPatternIdentifiers, IScrollPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HorizontallyScrollableProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HorizontalScrollPercentProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ScrollPatternIdentifiers, IScrollPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HorizontalScrollPercentProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HorizontalViewSizeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ScrollPatternIdentifiers, IScrollPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HorizontalViewSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func NoScroll(): Float64 {
+        var result__ = 0.0f64
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ScrollPatternIdentifiers, IScrollPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NoScroll(CPointer<Float64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func VerticallyScrollableProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ScrollPatternIdentifiers, IScrollPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VerticallyScrollableProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func VerticalScrollPercentProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ScrollPatternIdentifiers, IScrollPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VerticalScrollPercentProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func VerticalViewSizeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ScrollPatternIdentifiers, IScrollPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VerticalViewSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.ScrollPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.ScrollPatternIdentifiers;{" + IScrollPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.ScrollPatternIdentifiers", ScrollPatternIdentifiers.signature(), IScrollPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: ScrollPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ScrollPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ScrollPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ScrollPatternIdentifiers {
+        ScrollPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.SelectionItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_SelectionItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class SelectionItemPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SelectionItemPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectionItemPatternIdentifiers {
+        SelectionItemPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectionItemPatternIdentifiers {
+        SelectionItemPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISelectionItemPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectionItemPatternIdentifiers> {
+        let ancestors = [ISelectionItemPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SelectionItemPatternIdentifiers>("SelectionItemPatternIdentifiers", ISelectionItemPatternIdentifiers.iid(), ancestors, { raw => SelectionItemPatternIdentifiers.fromAbiTake(raw) }, { raw => SelectionItemPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISelectionItemPatternIdentifiers {
+        match (unsafe { query(ISelectionItemPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISelectionItemPatternIdentifiers(): ISelectionItemPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func IsSelectedProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SelectionItemPatternIdentifiers, ISelectionItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSelectedProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectionContainerProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SelectionItemPatternIdentifiers, ISelectionItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectionContainerProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.SelectionItemPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.SelectionItemPatternIdentifiers;{" + ISelectionItemPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.SelectionItemPatternIdentifiers", SelectionItemPatternIdentifiers.signature(), ISelectionItemPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: SelectionItemPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SelectionItemPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SelectionItemPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SelectionItemPatternIdentifiers {
+        SelectionItemPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.SelectionPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_SelectionPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class SelectionPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SelectionPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectionPatternIdentifiers {
+        SelectionPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectionPatternIdentifiers {
+        SelectionPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISelectionPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectionPatternIdentifiers> {
+        let ancestors = [ISelectionPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SelectionPatternIdentifiers>("SelectionPatternIdentifiers", ISelectionPatternIdentifiers.iid(), ancestors, { raw => SelectionPatternIdentifiers.fromAbiTake(raw) }, { raw => SelectionPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISelectionPatternIdentifiers {
+        match (unsafe { query(ISelectionPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISelectionPatternIdentifiers(): ISelectionPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func CanSelectMultipleProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SelectionPatternIdentifiers, ISelectionPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CanSelectMultipleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsSelectionRequiredProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SelectionPatternIdentifiers, ISelectionPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSelectionRequiredProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectionProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SelectionPatternIdentifiers, ISelectionPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.SelectionPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.SelectionPatternIdentifiers;{" + ISelectionPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.SelectionPatternIdentifiers", SelectionPatternIdentifiers.signature(), ISelectionPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: SelectionPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SelectionPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SelectionPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SelectionPatternIdentifiers {
+        SelectionPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.SpreadsheetItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_SpreadsheetItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class SpreadsheetItemPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SpreadsheetItemPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SpreadsheetItemPatternIdentifiers {
+        SpreadsheetItemPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SpreadsheetItemPatternIdentifiers {
+        SpreadsheetItemPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISpreadsheetItemPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SpreadsheetItemPatternIdentifiers> {
+        let ancestors = [ISpreadsheetItemPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SpreadsheetItemPatternIdentifiers>("SpreadsheetItemPatternIdentifiers", ISpreadsheetItemPatternIdentifiers.iid(), ancestors, { raw => SpreadsheetItemPatternIdentifiers.fromAbiTake(raw) }, { raw => SpreadsheetItemPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISpreadsheetItemPatternIdentifiers {
+        match (unsafe { query(ISpreadsheetItemPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISpreadsheetItemPatternIdentifiers(): ISpreadsheetItemPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func FormulaProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SpreadsheetItemPatternIdentifiers, ISpreadsheetItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FormulaProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.SpreadsheetItemPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.SpreadsheetItemPatternIdentifiers;{" + ISpreadsheetItemPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.SpreadsheetItemPatternIdentifiers", SpreadsheetItemPatternIdentifiers.signature(), ISpreadsheetItemPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: SpreadsheetItemPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SpreadsheetItemPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SpreadsheetItemPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SpreadsheetItemPatternIdentifiers {
+        SpreadsheetItemPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.StylesPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_StylesPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class StylesPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<StylesPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): StylesPatternIdentifiers {
+        StylesPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StylesPatternIdentifiers {
+        StylesPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IStylesPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<StylesPatternIdentifiers> {
+        let ancestors = [IStylesPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<StylesPatternIdentifiers>("StylesPatternIdentifiers", IStylesPatternIdentifiers.iid(), ancestors, { raw => StylesPatternIdentifiers.fromAbiTake(raw) }, { raw => StylesPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IStylesPatternIdentifiers {
+        match (unsafe { query(IStylesPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIStylesPatternIdentifiers(): IStylesPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func ExtendedPropertiesProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StylesPatternIdentifiers, IStylesPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ExtendedPropertiesProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FillColorProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StylesPatternIdentifiers, IStylesPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FillColorProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FillPatternColorProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StylesPatternIdentifiers, IStylesPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FillPatternColorProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FillPatternStyleProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StylesPatternIdentifiers, IStylesPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FillPatternStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ShapeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StylesPatternIdentifiers, IStylesPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ShapeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func StyleIdProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StylesPatternIdentifiers, IStylesPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.StyleIdProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func StyleNameProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<StylesPatternIdentifiers, IStylesPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.StyleNameProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.StylesPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.StylesPatternIdentifiers;{" + IStylesPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.StylesPatternIdentifiers", StylesPatternIdentifiers.signature(), IStylesPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: StylesPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): StylesPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        StylesPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): StylesPatternIdentifiers {
+        StylesPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.SupportedTextSelection (synthetic:Microsoft_UI_Xaml_Automation_SupportedTextSelection)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct SupportedTextSelection {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SupportedTextSelection_None = SupportedTextSelection(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SupportedTextSelection_Single = SupportedTextSelection(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SupportedTextSelection_Multiple = SupportedTextSelection(2)
+
+// Microsoft.UI.Xaml.Automation.SynchronizedInputType (synthetic:Microsoft_UI_Xaml_Automation_SynchronizedInputType)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct SynchronizedInputType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SynchronizedInputType_KeyUp = SynchronizedInputType(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SynchronizedInputType_KeyDown = SynchronizedInputType(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SynchronizedInputType_LeftMouseUp = SynchronizedInputType(4)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SynchronizedInputType_LeftMouseDown = SynchronizedInputType(8)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SynchronizedInputType_RightMouseUp = SynchronizedInputType(16)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const SynchronizedInputType_RightMouseDown = SynchronizedInputType(32)
+
+// Microsoft.UI.Xaml.Automation.TableItemPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_TableItemPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class TableItemPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TableItemPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TableItemPatternIdentifiers {
+        TableItemPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TableItemPatternIdentifiers {
+        TableItemPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITableItemPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TableItemPatternIdentifiers> {
+        let ancestors = [ITableItemPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TableItemPatternIdentifiers>("TableItemPatternIdentifiers", ITableItemPatternIdentifiers.iid(), ancestors, { raw => TableItemPatternIdentifiers.fromAbiTake(raw) }, { raw => TableItemPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITableItemPatternIdentifiers {
+        match (unsafe { query(ITableItemPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITableItemPatternIdentifiers(): ITableItemPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func ColumnHeaderItemsProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TableItemPatternIdentifiers, ITableItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColumnHeaderItemsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RowHeaderItemsProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TableItemPatternIdentifiers, ITableItemPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RowHeaderItemsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.TableItemPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.TableItemPatternIdentifiers;{" + ITableItemPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.TableItemPatternIdentifiers", TableItemPatternIdentifiers.signature(), ITableItemPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: TableItemPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TableItemPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TableItemPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TableItemPatternIdentifiers {
+        TableItemPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.TablePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_TablePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class TablePatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TablePatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TablePatternIdentifiers {
+        TablePatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TablePatternIdentifiers {
+        TablePatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITablePatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TablePatternIdentifiers> {
+        let ancestors = [ITablePatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TablePatternIdentifiers>("TablePatternIdentifiers", ITablePatternIdentifiers.iid(), ancestors, { raw => TablePatternIdentifiers.fromAbiTake(raw) }, { raw => TablePatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITablePatternIdentifiers {
+        match (unsafe { query(ITablePatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITablePatternIdentifiers(): ITablePatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func ColumnHeadersProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TablePatternIdentifiers, ITablePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColumnHeadersProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RowHeadersProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TablePatternIdentifiers, ITablePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RowHeadersProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RowOrColumnMajorProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TablePatternIdentifiers, ITablePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RowOrColumnMajorProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.TablePatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.TablePatternIdentifiers;{" + ITablePatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.TablePatternIdentifiers", TablePatternIdentifiers.signature(), ITablePatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: TablePatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TablePatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TablePatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TablePatternIdentifiers {
+        TablePatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.TogglePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_TogglePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class TogglePatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TogglePatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TogglePatternIdentifiers {
+        TogglePatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TogglePatternIdentifiers {
+        TogglePatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITogglePatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TogglePatternIdentifiers> {
+        let ancestors = [ITogglePatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TogglePatternIdentifiers>("TogglePatternIdentifiers", ITogglePatternIdentifiers.iid(), ancestors, { raw => TogglePatternIdentifiers.fromAbiTake(raw) }, { raw => TogglePatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITogglePatternIdentifiers {
+        match (unsafe { query(ITogglePatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITogglePatternIdentifiers(): ITogglePatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func ToggleStateProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TogglePatternIdentifiers, ITogglePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ToggleStateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.TogglePatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.TogglePatternIdentifiers;{" + ITogglePatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.TogglePatternIdentifiers", TogglePatternIdentifiers.signature(), ITogglePatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: TogglePatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TogglePatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TogglePatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TogglePatternIdentifiers {
+        TogglePatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.ToggleState (synthetic:Microsoft_UI_Xaml_Automation_ToggleState)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct ToggleState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ToggleState_Off = ToggleState(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ToggleState_On = ToggleState(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ToggleState_Indeterminate = ToggleState(2)
+
+// Microsoft.UI.Xaml.Automation.TransformPattern2Identifiers (synthetic:Microsoft_UI_Xaml_Automation_TransformPattern2Identifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class TransformPattern2Identifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TransformPattern2Identifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TransformPattern2Identifiers {
+        TransformPattern2Identifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TransformPattern2Identifiers {
+        TransformPattern2Identifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITransformPattern2Identifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TransformPattern2Identifiers> {
+        let ancestors = [ITransformPattern2Identifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TransformPattern2Identifiers>("TransformPattern2Identifiers", ITransformPattern2Identifiers.iid(), ancestors, { raw => TransformPattern2Identifiers.fromAbiTake(raw) }, { raw => TransformPattern2Identifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITransformPattern2Identifiers {
+        match (unsafe { query(ITransformPattern2Identifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITransformPattern2Identifiers(): ITransformPattern2Identifiers {
+        defaultInterface()
+    }
+
+    public static func CanZoomProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TransformPattern2Identifiers, ITransformPattern2IdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CanZoomProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ZoomLevelProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TransformPattern2Identifiers, ITransformPattern2IdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ZoomLevelProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MaxZoomProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TransformPattern2Identifiers, ITransformPattern2IdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxZoomProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MinZoomProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TransformPattern2Identifiers, ITransformPattern2IdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinZoomProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.TransformPattern2Identifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.TransformPattern2Identifiers;{" + ITransformPattern2Identifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.TransformPattern2Identifiers", TransformPattern2Identifiers.signature(), ITransformPattern2Identifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: TransformPattern2Identifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TransformPattern2Identifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TransformPattern2Identifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TransformPattern2Identifiers {
+        TransformPattern2Identifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.TransformPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_TransformPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class TransformPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TransformPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TransformPatternIdentifiers {
+        TransformPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TransformPatternIdentifiers {
+        TransformPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITransformPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TransformPatternIdentifiers> {
+        let ancestors = [ITransformPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TransformPatternIdentifiers>("TransformPatternIdentifiers", ITransformPatternIdentifiers.iid(), ancestors, { raw => TransformPatternIdentifiers.fromAbiTake(raw) }, { raw => TransformPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITransformPatternIdentifiers {
+        match (unsafe { query(ITransformPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITransformPatternIdentifiers(): ITransformPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func CanMoveProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TransformPatternIdentifiers, ITransformPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CanMoveProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CanResizeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TransformPatternIdentifiers, ITransformPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CanResizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CanRotateProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TransformPatternIdentifiers, ITransformPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CanRotateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.TransformPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.TransformPatternIdentifiers;{" + ITransformPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.TransformPatternIdentifiers", TransformPatternIdentifiers.signature(), ITransformPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: TransformPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TransformPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TransformPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TransformPatternIdentifiers {
+        TransformPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.ValuePatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_ValuePatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class ValuePatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ValuePatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ValuePatternIdentifiers {
+        ValuePatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ValuePatternIdentifiers {
+        ValuePatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IValuePatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ValuePatternIdentifiers> {
+        let ancestors = [IValuePatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ValuePatternIdentifiers>("ValuePatternIdentifiers", IValuePatternIdentifiers.iid(), ancestors, { raw => ValuePatternIdentifiers.fromAbiTake(raw) }, { raw => ValuePatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IValuePatternIdentifiers {
+        match (unsafe { query(IValuePatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIValuePatternIdentifiers(): IValuePatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func IsReadOnlyProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ValuePatternIdentifiers, IValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsReadOnlyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ValueProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ValuePatternIdentifiers, IValuePatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ValueProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.ValuePatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.ValuePatternIdentifiers;{" + IValuePatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.ValuePatternIdentifiers", ValuePatternIdentifiers.signature(), IValuePatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: ValuePatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ValuePatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ValuePatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ValuePatternIdentifiers {
+        ValuePatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.WindowInteractionState (synthetic:Microsoft_UI_Xaml_Automation_WindowInteractionState)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct WindowInteractionState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowInteractionState_Running = WindowInteractionState(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowInteractionState_Closing = WindowInteractionState(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowInteractionState_ReadyForUserInteraction = WindowInteractionState(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowInteractionState_BlockedByModalWindow = WindowInteractionState(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowInteractionState_NotResponding = WindowInteractionState(4)
+
+// Microsoft.UI.Xaml.Automation.WindowPatternIdentifiers (synthetic:Microsoft_UI_Xaml_Automation_WindowPatternIdentifiers)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public class WindowPatternIdentifiers <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<WindowPatternIdentifiers> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WindowPatternIdentifiers {
+        WindowPatternIdentifiers(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WindowPatternIdentifiers {
+        WindowPatternIdentifiers(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IWindowPatternIdentifiers.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WindowPatternIdentifiers> {
+        let ancestors = [IWindowPatternIdentifiers.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<WindowPatternIdentifiers>("WindowPatternIdentifiers", IWindowPatternIdentifiers.iid(), ancestors, { raw => WindowPatternIdentifiers.fromAbiTake(raw) }, { raw => WindowPatternIdentifiers.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IWindowPatternIdentifiers {
+        match (unsafe { query(IWindowPatternIdentifiers.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIWindowPatternIdentifiers(): IWindowPatternIdentifiers {
+        defaultInterface()
+    }
+
+    public static func CanMaximizeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowPatternIdentifiers, IWindowPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CanMaximizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CanMinimizeProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowPatternIdentifiers, IWindowPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CanMinimizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsModalProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowPatternIdentifiers, IWindowPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsModalProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsTopmostProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowPatternIdentifiers, IWindowPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsTopmostProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WindowInteractionStateProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowPatternIdentifiers, IWindowPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.WindowInteractionStateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func WindowVisualStateProperty(): AutomationProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WindowPatternIdentifiers, IWindowPatternIdentifiersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.WindowVisualStateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<AutomationProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return AutomationProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.WindowPatternIdentifiers"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.WindowPatternIdentifiers;{" + IWindowPatternIdentifiers.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.WindowPatternIdentifiers", WindowPatternIdentifiers.signature(), IWindowPatternIdentifiers.iid())
+    }
+
+    public static func intoWinrtHandle(value: WindowPatternIdentifiers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): WindowPatternIdentifiers {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        WindowPatternIdentifiers.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): WindowPatternIdentifiers {
+        WindowPatternIdentifiers.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.WindowVisualState (synthetic:Microsoft_UI_Xaml_Automation_WindowVisualState)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct WindowVisualState {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowVisualState_Normal = WindowVisualState(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowVisualState_Maximized = WindowVisualState(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const WindowVisualState_Minimized = WindowVisualState(2)
+
+// Microsoft.UI.Xaml.Automation.ZoomUnit (synthetic:Microsoft_UI_Xaml_Automation_ZoomUnit)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public struct ZoomUnit {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ZoomUnit_NoAmount = ZoomUnit(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ZoomUnit_LargeDecrement = ZoomUnit(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ZoomUnit_SmallDecrement = ZoomUnit(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ZoomUnit_LargeIncrement = ZoomUnit(3)
+@When[Microsoft_UI_Xaml_Automation == "on"]
+public const ZoomUnit_SmallIncrement = ZoomUnit(4)

@@ -7,14 +7,2953 @@ import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+@When[Windows_ApplicationModel == "on"]
+import windows_sys.ApplicationModel as Windows_ApplicationModel
+@When[Windows_Data_Xml_Dom == "on"]
+import windows_sys.Data.Xml.Dom as Windows_Data_Xml_Dom
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_System == "on"]
+import windows_sys.System as Windows_System
+
+// Windows.UI.Notifications.AdaptiveNotificationContentKind (synthetic:Windows_UI_Notifications_AdaptiveNotificationContentKind)
+@When[Windows_UI_Notifications == "on"]
+public struct AdaptiveNotificationContentKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const AdaptiveNotificationContentKind_Text = AdaptiveNotificationContentKind(0)
+
+// Windows.UI.Notifications.AdaptiveNotificationText (synthetic:Windows_UI_Notifications_AdaptiveNotificationText)
+@When[Windows_UI_Notifications == "on"]
+public class AdaptiveNotificationText <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AdaptiveNotificationText> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AdaptiveNotificationText {
+        AdaptiveNotificationText(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AdaptiveNotificationText {
+        AdaptiveNotificationText(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAdaptiveNotificationText.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AdaptiveNotificationText> {
+        let ancestors = [IAdaptiveNotificationText.iid(), IAdaptiveNotificationContent.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AdaptiveNotificationText>("AdaptiveNotificationText", IAdaptiveNotificationText.iid(), ancestors, { raw => AdaptiveNotificationText.fromAbiTake(raw) }, { raw => AdaptiveNotificationText.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAdaptiveNotificationText {
+        match (unsafe { query(IAdaptiveNotificationText.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAdaptiveNotificationText(): IAdaptiveNotificationText {
+        defaultInterface()
+    }
+
+    public func asIAdaptiveNotificationContent(): IAdaptiveNotificationContent {
+        match (unsafe { query<IAdaptiveNotificationContent>(IAdaptiveNotificationContent.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Language: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Language(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetLanguage(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Text: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Text(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): AdaptiveNotificationText {
+        var created__: Option<AdaptiveNotificationText> = Option<AdaptiveNotificationText>.None
+        try (factory__ = windows_core.factory<AdaptiveNotificationText, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<AdaptiveNotificationText>(AdaptiveNotificationText.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce AdaptiveNotificationText")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.AdaptiveNotificationText"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.AdaptiveNotificationText;{" + IAdaptiveNotificationText.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.AdaptiveNotificationText", AdaptiveNotificationText.signature(), IAdaptiveNotificationText.iid())
+    }
+
+    public static func intoWinrtHandle(value: AdaptiveNotificationText): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AdaptiveNotificationText {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AdaptiveNotificationText.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AdaptiveNotificationText {
+        AdaptiveNotificationText.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.BadgeNotification (synthetic:Windows_UI_Notifications_BadgeNotification)
+@When[Windows_UI_Notifications == "on"]
+public class BadgeNotification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BadgeNotification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BadgeNotification {
+        BadgeNotification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BadgeNotification {
+        BadgeNotification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBadgeNotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BadgeNotification> {
+        let ancestors = [IBadgeNotification.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BadgeNotification>("BadgeNotification", IBadgeNotification.iid(), ancestors, { raw => BadgeNotification.fromAbiTake(raw) }, { raw => BadgeNotification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBadgeNotification {
+        match (unsafe { query(IBadgeNotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBadgeNotification(): IBadgeNotification {
+        defaultInterface()
+    }
+
+    public prop Content: Windows_Data_Xml_Dom.XmlDocument {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop ExpirationTime: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ExpirationTime(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetExpirationTime(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func CreateBadgeNotification(content: Windows_Data_Xml_Dom.XmlDocument): BadgeNotification {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Data_Xml_Dom.XmlDocument>(content)) {
+            try (factory__ = windows_core.factory<BadgeNotification, IBadgeNotificationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateBadgeNotification(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeNotification>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeNotification.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.BadgeNotification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.BadgeNotification;{" + IBadgeNotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.BadgeNotification", BadgeNotification.signature(), IBadgeNotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: BadgeNotification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BadgeNotification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BadgeNotification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BadgeNotification {
+        BadgeNotification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.BadgeTemplateType (synthetic:Windows_UI_Notifications_BadgeTemplateType)
+@When[Windows_UI_Notifications == "on"]
+public struct BadgeTemplateType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const BadgeTemplateType_BadgeGlyph = BadgeTemplateType(0)
+@When[Windows_UI_Notifications == "on"]
+public const BadgeTemplateType_BadgeNumber = BadgeTemplateType(1)
+
+// Windows.UI.Notifications.BadgeUpdateManager (synthetic:Windows_UI_Notifications_BadgeUpdateManager)
+@When[Windows_UI_Notifications == "on"]
+public struct BadgeUpdateManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CreateBadgeUpdaterForApplication(): BadgeUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BadgeUpdateManager, IBadgeUpdateManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateBadgeUpdaterForApplication(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateBadgeUpdaterForApplicationWithId(applicationId: windows_core.HString): BadgeUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (factory__ = windows_core.factory<BadgeUpdateManager, IBadgeUpdateManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateBadgeUpdaterForApplicationWithId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateBadgeUpdaterForSecondaryTile(tileId: windows_core.HString): BadgeUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tileId)) {
+            try (factory__ = windows_core.factory<BadgeUpdateManager, IBadgeUpdateManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateBadgeUpdaterForSecondaryTile(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetTemplateContent(type_: BadgeTemplateType): Windows_Data_Xml_Dom.XmlDocument {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BadgeUpdateManager, IBadgeUpdateManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetTemplateContent(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetForUser(user: Windows_System.User): BadgeUpdateManagerForUser {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<BadgeUpdateManager, IBadgeUpdateManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeUpdateManagerForUser>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeUpdateManagerForUser.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.BadgeUpdateManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.BadgeUpdateManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.BadgeUpdateManager", BadgeUpdateManager.signature())
+    }
+}
+
+// Windows.UI.Notifications.BadgeUpdateManagerForUser (synthetic:Windows_UI_Notifications_BadgeUpdateManagerForUser)
+@When[Windows_UI_Notifications == "on"]
+public class BadgeUpdateManagerForUser <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BadgeUpdateManagerForUser> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BadgeUpdateManagerForUser {
+        BadgeUpdateManagerForUser(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BadgeUpdateManagerForUser {
+        BadgeUpdateManagerForUser(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBadgeUpdateManagerForUser.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BadgeUpdateManagerForUser> {
+        let ancestors = [IBadgeUpdateManagerForUser.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BadgeUpdateManagerForUser>("BadgeUpdateManagerForUser", IBadgeUpdateManagerForUser.iid(), ancestors, { raw => BadgeUpdateManagerForUser.fromAbiTake(raw) }, { raw => BadgeUpdateManagerForUser.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBadgeUpdateManagerForUser {
+        match (unsafe { query(IBadgeUpdateManagerForUser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBadgeUpdateManagerForUser(): IBadgeUpdateManagerForUser {
+        defaultInterface()
+    }
+
+    public prop User: Windows_System.User {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_System.User>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_System.User.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func CreateBadgeUpdaterForApplication(): BadgeUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CreateBadgeUpdaterForApplication(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateBadgeUpdaterForApplicationWithId(applicationId: windows_core.HString): BadgeUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateBadgeUpdaterForApplicationWithId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateBadgeUpdaterForSecondaryTile(tileId: windows_core.HString): BadgeUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tileId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateBadgeUpdaterForSecondaryTile(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BadgeUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BadgeUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.BadgeUpdateManagerForUser"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.BadgeUpdateManagerForUser;{" + IBadgeUpdateManagerForUser.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.BadgeUpdateManagerForUser", BadgeUpdateManagerForUser.signature(), IBadgeUpdateManagerForUser.iid())
+    }
+
+    public static func intoWinrtHandle(value: BadgeUpdateManagerForUser): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BadgeUpdateManagerForUser {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BadgeUpdateManagerForUser.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BadgeUpdateManagerForUser {
+        BadgeUpdateManagerForUser.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.BadgeUpdater (synthetic:Windows_UI_Notifications_BadgeUpdater)
+@When[Windows_UI_Notifications == "on"]
+public class BadgeUpdater <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BadgeUpdater> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BadgeUpdater {
+        BadgeUpdater(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BadgeUpdater {
+        BadgeUpdater(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBadgeUpdater.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BadgeUpdater> {
+        let ancestors = [IBadgeUpdater.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BadgeUpdater>("BadgeUpdater", IBadgeUpdater.iid(), ancestors, { raw => BadgeUpdater.fromAbiTake(raw) }, { raw => BadgeUpdater.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBadgeUpdater {
+        match (unsafe { query(IBadgeUpdater.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBadgeUpdater(): IBadgeUpdater {
+        defaultInterface()
+    }
+
+    public func Update(notification: BadgeNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<BadgeNotification>(notification)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Update(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Clear(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Clear() }
+        }
+        hr__.check()
+    }
+
+    public func StartPeriodicUpdate(badgeContent: Windows_Foundation.Uri, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(badgeContent)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdate(__argBorrow0.asRaw(), requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StartPeriodicUpdateAtTime(badgeContent: Windows_Foundation.Uri, startTime: Windows_Foundation.DateTime, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(badgeContent)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdateAtTime(__argBorrow0.asRaw(), startTime, requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StopPeriodicUpdate(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.StopPeriodicUpdate() }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.BadgeUpdater"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.BadgeUpdater;{" + IBadgeUpdater.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.BadgeUpdater", BadgeUpdater.signature(), IBadgeUpdater.iid())
+    }
+
+    public static func intoWinrtHandle(value: BadgeUpdater): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BadgeUpdater {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BadgeUpdater.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BadgeUpdater {
+        BadgeUpdater.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.IAdaptiveNotificationContent (synthetic:Windows_UI_Notifications_IAdaptiveNotificationContent)
+@When[Windows_UI_Notifications == "on"]
+@Interface["eb0dbe66-7448-448d-9db8-d78acd2abba9", "Windows.UI.Notifications.IAdaptiveNotificationContent", "Hints.value=Com"]
+public interface IAdaptiveNotificationContent <: IInspectable {
+    func Kind(value: CPointer<Int32>): Int32
+    func Hints(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IAdaptiveNotificationText (synthetic:Windows_UI_Notifications_IAdaptiveNotificationText)
+@When[Windows_UI_Notifications == "on"]
+@Interface["46d4a3be-609a-4326-a40b-bfde872034a3", "Windows.UI.Notifications.IAdaptiveNotificationText", "Text.value=HString;Language.value=HString"]
+public interface IAdaptiveNotificationText <: IInspectable {
+    func Text(value: CPointer<CPointer<Unit>>): Int32
+    func SetText(value: CPointer<Unit>): Int32
+    func Language(value: CPointer<CPointer<Unit>>): Int32
+    func SetLanguage(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Notifications.IBadgeNotification (synthetic:Windows_UI_Notifications_IBadgeNotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["075cb4ca-d08a-4e2f-9233-7e289c1f7722", "Windows.UI.Notifications.IBadgeNotification", "Content.value=Com;ExpirationTime.value=Com"]
+public interface IBadgeNotification <: IInspectable {
+    func Content(value: CPointer<CPointer<Unit>>): Int32
+    func SetExpirationTime(value: CPointer<Unit>): Int32
+    func ExpirationTime(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IBadgeNotificationFactory (synthetic:Windows_UI_Notifications_IBadgeNotificationFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["edf255ce-0618-4d59-948a-5a61040c52f9", "Windows.UI.Notifications.IBadgeNotificationFactory", "CreateBadgeNotification.value=Com"]
+public interface IBadgeNotificationFactory <: IInspectable {
+    func CreateBadgeNotification(content: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IBadgeUpdateManagerForUser (synthetic:Windows_UI_Notifications_IBadgeUpdateManagerForUser)
+@When[Windows_UI_Notifications == "on"]
+@Interface["996b21bc-0386-44e5-ba8d-0c1077a62e92", "Windows.UI.Notifications.IBadgeUpdateManagerForUser", "CreateBadgeUpdaterForApplication.result=Com;CreateBadgeUpdaterForApplicationWithId.result=Com;CreateBadgeUpdaterForSecondaryTile.result=Com;User.value=Com"]
+public interface IBadgeUpdateManagerForUser <: IInspectable {
+    func CreateBadgeUpdaterForApplication(result: CPointer<CPointer<Unit>>): Int32
+    func CreateBadgeUpdaterForApplicationWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateBadgeUpdaterForSecondaryTile(tileId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func User(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IBadgeUpdateManagerStatics (synthetic:Windows_UI_Notifications_IBadgeUpdateManagerStatics)
+@When[Windows_UI_Notifications == "on"]
+@Interface["33400faa-6dd5-4105-aebc-9b50fca492da", "Windows.UI.Notifications.IBadgeUpdateManagerStatics", "CreateBadgeUpdaterForApplication.result=Com;CreateBadgeUpdaterForApplicationWithId.result=Com;CreateBadgeUpdaterForSecondaryTile.result=Com;GetTemplateContent.result=Com"]
+public interface IBadgeUpdateManagerStatics <: IInspectable {
+    func CreateBadgeUpdaterForApplication(result: CPointer<CPointer<Unit>>): Int32
+    func CreateBadgeUpdaterForApplicationWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateBadgeUpdaterForSecondaryTile(tileId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetTemplateContent(type_: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IBadgeUpdateManagerStatics2 (synthetic:Windows_UI_Notifications_IBadgeUpdateManagerStatics2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["979a35ce-f940-48bf-94e8-ca244d400b41", "Windows.UI.Notifications.IBadgeUpdateManagerStatics2", "GetForUser.result=Com"]
+public interface IBadgeUpdateManagerStatics2 <: IInspectable {
+    func GetForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IBadgeUpdater (synthetic:Windows_UI_Notifications_IBadgeUpdater)
+@When[Windows_UI_Notifications == "on"]
+@Interface["b5fa1fd4-7562-4f6c-bfa3-1b6ed2e57f2f", "Windows.UI.Notifications.IBadgeUpdater"]
+public interface IBadgeUpdater <: IInspectable {
+    func Update(notification: CPointer<Unit>): Int32
+    func Clear(): Int32
+    func StartPeriodicUpdate(badgeContent: CPointer<Unit>, requestedInterval: Int32): Int32
+    func StartPeriodicUpdateAtTime(badgeContent: CPointer<Unit>, startTime: Windows_Foundation.DateTime, requestedInterval: Int32): Int32
+    func StopPeriodicUpdate(): Int32
+}
+
+// Windows.UI.Notifications.IKnownAdaptiveNotificationHintsStatics (synthetic:Windows_UI_Notifications_IKnownAdaptiveNotificationHintsStatics)
+@When[Windows_UI_Notifications == "on"]
+@Interface["06206598-d496-497d-8692-4f7d7c2770df", "Windows.UI.Notifications.IKnownAdaptiveNotificationHintsStatics", "Style.value=HString;Wrap.value=HString;MaxLines.value=HString;MinLines.value=HString;TextStacking.value=HString;Align.value=HString"]
+public interface IKnownAdaptiveNotificationHintsStatics <: IInspectable {
+    func Style(value: CPointer<CPointer<Unit>>): Int32
+    func Wrap(value: CPointer<CPointer<Unit>>): Int32
+    func MaxLines(value: CPointer<CPointer<Unit>>): Int32
+    func MinLines(value: CPointer<CPointer<Unit>>): Int32
+    func TextStacking(value: CPointer<CPointer<Unit>>): Int32
+    func Align(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IKnownAdaptiveNotificationTextStylesStatics (synthetic:Windows_UI_Notifications_IKnownAdaptiveNotificationTextStylesStatics)
+@When[Windows_UI_Notifications == "on"]
+@Interface["202192d7-8996-45aa-8ba1-d461d72c2a1b", "Windows.UI.Notifications.IKnownAdaptiveNotificationTextStylesStatics", "Caption.value=HString;Body.value=HString;Base.value=HString;Subtitle.value=HString;Title.value=HString;Subheader.value=HString;Header.value=HString;TitleNumeral.value=HString;SubheaderNumeral.value=HString;HeaderNumeral.value=HString;CaptionSubtle.value=HString;BodySubtle.value=HString;BaseSubtle.value=HString;SubtitleSubtle.value=HString;TitleSubtle.value=HString;SubheaderSubtle.value=HString;SubheaderNumeralSubtle.value=HString;HeaderSubtle.value=HString;HeaderNumeralSubtle.value=HString"]
+public interface IKnownAdaptiveNotificationTextStylesStatics <: IInspectable {
+    func Caption(value: CPointer<CPointer<Unit>>): Int32
+    func Body(value: CPointer<CPointer<Unit>>): Int32
+    func Base(value: CPointer<CPointer<Unit>>): Int32
+    func Subtitle(value: CPointer<CPointer<Unit>>): Int32
+    func Title(value: CPointer<CPointer<Unit>>): Int32
+    func Subheader(value: CPointer<CPointer<Unit>>): Int32
+    func Header(value: CPointer<CPointer<Unit>>): Int32
+    func TitleNumeral(value: CPointer<CPointer<Unit>>): Int32
+    func SubheaderNumeral(value: CPointer<CPointer<Unit>>): Int32
+    func HeaderNumeral(value: CPointer<CPointer<Unit>>): Int32
+    func CaptionSubtle(value: CPointer<CPointer<Unit>>): Int32
+    func BodySubtle(value: CPointer<CPointer<Unit>>): Int32
+    func BaseSubtle(value: CPointer<CPointer<Unit>>): Int32
+    func SubtitleSubtle(value: CPointer<CPointer<Unit>>): Int32
+    func TitleSubtle(value: CPointer<CPointer<Unit>>): Int32
+    func SubheaderSubtle(value: CPointer<CPointer<Unit>>): Int32
+    func SubheaderNumeralSubtle(value: CPointer<CPointer<Unit>>): Int32
+    func HeaderSubtle(value: CPointer<CPointer<Unit>>): Int32
+    func HeaderNumeralSubtle(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IKnownNotificationBindingsStatics (synthetic:Windows_UI_Notifications_IKnownNotificationBindingsStatics)
+@When[Windows_UI_Notifications == "on"]
+@Interface["79427bae-a8b7-4d58-89ea-76a7b7bccded", "Windows.UI.Notifications.IKnownNotificationBindingsStatics", "ToastGeneric.value=HString"]
+public interface IKnownNotificationBindingsStatics <: IInspectable {
+    func ToastGeneric(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.INotification (synthetic:Windows_UI_Notifications_INotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["108037fe-eb76-4f82-97bc-da07530a2e20", "Windows.UI.Notifications.INotification", "ExpirationTime.value=Com;Visual.value=Com"]
+public interface INotification <: IInspectable {
+    func ExpirationTime(value: CPointer<CPointer<Unit>>): Int32
+    func SetExpirationTime(value: CPointer<Unit>): Int32
+    func Visual(value: CPointer<CPointer<Unit>>): Int32
+    func SetVisual(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Notifications.INotificationBinding (synthetic:Windows_UI_Notifications_INotificationBinding)
+@When[Windows_UI_Notifications == "on"]
+@Interface["f29e4b85-0370-4ad3-b4ea-da9e35e7eabf", "Windows.UI.Notifications.INotificationBinding", "Template.value=HString;Language.value=HString;Hints.value=Com;GetTextElements.result=Com"]
+public interface INotificationBinding <: IInspectable {
+    func Template(value: CPointer<CPointer<Unit>>): Int32
+    func SetTemplate(value: CPointer<Unit>): Int32
+    func Language(value: CPointer<CPointer<Unit>>): Int32
+    func SetLanguage(value: CPointer<Unit>): Int32
+    func Hints(value: CPointer<CPointer<Unit>>): Int32
+    func GetTextElements(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.INotificationData (synthetic:Windows_UI_Notifications_INotificationData)
+@When[Windows_UI_Notifications == "on"]
+@Interface["9ffd2312-9d6a-4aaf-b6ac-ff17f0c1f280", "Windows.UI.Notifications.INotificationData", "Values.value=Com"]
+public interface INotificationData <: IInspectable {
+    func Values(value: CPointer<CPointer<Unit>>): Int32
+    func SequenceNumber(value: CPointer<UInt32>): Int32
+    func SetSequenceNumber(value: UInt32): Int32
+}
+
+// Windows.UI.Notifications.INotificationDataFactory (synthetic:Windows_UI_Notifications_INotificationDataFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["23c1e33a-1c10-46fb-8040-dec384621cf8", "Windows.UI.Notifications.INotificationDataFactory", "CreateNotificationDataWithValuesAndSequenceNumber.value=Com;CreateNotificationDataWithValues.value=Com"]
+public interface INotificationDataFactory <: IInspectable {
+    func CreateNotificationDataWithValuesAndSequenceNumber(initialValues: CPointer<Unit>, sequenceNumber: UInt32, value: CPointer<CPointer<Unit>>): Int32
+    func CreateNotificationDataWithValues(initialValues: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.INotificationVisual (synthetic:Windows_UI_Notifications_INotificationVisual)
+@When[Windows_UI_Notifications == "on"]
+@Interface["68835b8e-aa56-4e11-86d3-5f9a6957bc5b", "Windows.UI.Notifications.INotificationVisual", "Language.value=HString;Bindings.value=Com;GetBinding.result=Com"]
+public interface INotificationVisual <: IInspectable {
+    func Language(value: CPointer<CPointer<Unit>>): Int32
+    func SetLanguage(value: CPointer<Unit>): Int32
+    func Bindings(value: CPointer<CPointer<Unit>>): Int32
+    func GetBinding(templateName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledTileNotification (synthetic:Windows_UI_Notifications_IScheduledTileNotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["0abca6d5-99dc-4c78-a11c-c9e7f86d7ef7", "Windows.UI.Notifications.IScheduledTileNotification", "Content.value=Com;ExpirationTime.value=Com;Tag.value=HString;Id.value=HString"]
+public interface IScheduledTileNotification <: IInspectable {
+    func Content(value: CPointer<CPointer<Unit>>): Int32
+    func DeliveryTime(value: CPointer<Windows_Foundation.DateTime>): Int32
+    func SetExpirationTime(value: CPointer<Unit>): Int32
+    func ExpirationTime(value: CPointer<CPointer<Unit>>): Int32
+    func SetTag(value: CPointer<Unit>): Int32
+    func Tag(value: CPointer<CPointer<Unit>>): Int32
+    func SetId(value: CPointer<Unit>): Int32
+    func Id(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledTileNotificationFactory (synthetic:Windows_UI_Notifications_IScheduledTileNotificationFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["3383138a-98c0-4c3b-bbd6-4a633c7cfc29", "Windows.UI.Notifications.IScheduledTileNotificationFactory", "CreateScheduledTileNotification.value=Com"]
+public interface IScheduledTileNotificationFactory <: IInspectable {
+    func CreateScheduledTileNotification(content: CPointer<Unit>, deliveryTime: Windows_Foundation.DateTime, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledToastNotification (synthetic:Windows_UI_Notifications_IScheduledToastNotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["79f577f8-0de7-48cd-9740-9b370490c838", "Windows.UI.Notifications.IScheduledToastNotification", "Content.value=Com;SnoozeInterval.value=Com;Id.value=HString"]
+public interface IScheduledToastNotification <: IInspectable {
+    func Content(value: CPointer<CPointer<Unit>>): Int32
+    func DeliveryTime(value: CPointer<Windows_Foundation.DateTime>): Int32
+    func SnoozeInterval(value: CPointer<CPointer<Unit>>): Int32
+    func MaximumSnoozeCount(value: CPointer<UInt32>): Int32
+    func SetId(value: CPointer<Unit>): Int32
+    func Id(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledToastNotification2 (synthetic:Windows_UI_Notifications_IScheduledToastNotification2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["a66ea09c-31b4-43b0-b5dd-7a40e85363b1", "Windows.UI.Notifications.IScheduledToastNotification2", "Tag.value=HString;Group.value=HString"]
+public interface IScheduledToastNotification2 <: IInspectable {
+    func SetTag(value: CPointer<Unit>): Int32
+    func Tag(value: CPointer<CPointer<Unit>>): Int32
+    func SetGroup(value: CPointer<Unit>): Int32
+    func Group(value: CPointer<CPointer<Unit>>): Int32
+    func SetSuppressPopup(value: Bool): Int32
+    func SuppressPopup(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledToastNotification3 (synthetic:Windows_UI_Notifications_IScheduledToastNotification3)
+@When[Windows_UI_Notifications == "on"]
+@Interface["98429e8b-bd32-4a3b-9d15-22aea49462a1", "Windows.UI.Notifications.IScheduledToastNotification3", "RemoteId.value=HString"]
+public interface IScheduledToastNotification3 <: IInspectable {
+    func NotificationMirroring(value: CPointer<Int32>): Int32
+    func SetNotificationMirroring(value: Int32): Int32
+    func RemoteId(value: CPointer<CPointer<Unit>>): Int32
+    func SetRemoteId(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledToastNotification4 (synthetic:Windows_UI_Notifications_IScheduledToastNotification4)
+@When[Windows_UI_Notifications == "on"]
+@Interface["1d4761fd-bdef-4e4a-96be-0101369b58d2", "Windows.UI.Notifications.IScheduledToastNotification4", "ExpirationTime.value=Com"]
+public interface IScheduledToastNotification4 <: IInspectable {
+    func ExpirationTime(value: CPointer<CPointer<Unit>>): Int32
+    func SetExpirationTime(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledToastNotificationFactory (synthetic:Windows_UI_Notifications_IScheduledToastNotificationFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["e7bed191-0bb9-4189-8394-31761b476fd7", "Windows.UI.Notifications.IScheduledToastNotificationFactory", "CreateScheduledToastNotification.value=Com;CreateScheduledToastNotificationRecurring.value=Com"]
+public interface IScheduledToastNotificationFactory <: IInspectable {
+    func CreateScheduledToastNotification(content: CPointer<Unit>, deliveryTime: Windows_Foundation.DateTime, value: CPointer<CPointer<Unit>>): Int32
+    func CreateScheduledToastNotificationRecurring(content: CPointer<Unit>, deliveryTime: Windows_Foundation.DateTime, snoozeInterval: Windows_Foundation.TimeSpan, maximumSnoozeCount: UInt32, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IScheduledToastNotificationShowingEventArgs (synthetic:Windows_UI_Notifications_IScheduledToastNotificationShowingEventArgs)
+@When[Windows_UI_Notifications == "on"]
+@Interface["6173f6b4-412a-5e2c-a6ed-a0209aef9a09", "Windows.UI.Notifications.IScheduledToastNotificationShowingEventArgs", "ScheduledToastNotification.value=Com;GetDeferral.result=Com"]
+public interface IScheduledToastNotificationShowingEventArgs <: IInspectable {
+    func Cancel(value: CPointer<Bool>): Int32
+    func SetCancel(value: Bool): Int32
+    func ScheduledToastNotification(value: CPointer<CPointer<Unit>>): Int32
+    func GetDeferral(result: CPointer<CPointer<Unit>>): Int32
+}
 
 // Windows.UI.Notifications.IShownTileNotification (synthetic:Windows_UI_Notifications_IShownTileNotification)
 @When[Windows_UI_Notifications == "on"]
 @Interface["342d8988-5af2-481a-a6a3-f2fdc78de88e", "Windows.UI.Notifications.IShownTileNotification", "Arguments.value=HString"]
 public interface IShownTileNotification <: IInspectable {
     func Arguments(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileFlyoutNotification (synthetic:Windows_UI_Notifications_ITileFlyoutNotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["9a53b261-c70c-42be-b2f3-f42aa97d34e5", "Windows.UI.Notifications.ITileFlyoutNotification", "Content.value=Com;ExpirationTime.value=Com"]
+public interface ITileFlyoutNotification <: IInspectable {
+    func Content(value: CPointer<CPointer<Unit>>): Int32
+    func SetExpirationTime(value: CPointer<Unit>): Int32
+    func ExpirationTime(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileFlyoutNotificationFactory (synthetic:Windows_UI_Notifications_ITileFlyoutNotificationFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["ef556ff5-5226-4f2b-b278-88a35dfe569f", "Windows.UI.Notifications.ITileFlyoutNotificationFactory", "CreateTileFlyoutNotification.value=Com"]
+public interface ITileFlyoutNotificationFactory <: IInspectable {
+    func CreateTileFlyoutNotification(content: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileFlyoutUpdateManagerStatics (synthetic:Windows_UI_Notifications_ITileFlyoutUpdateManagerStatics)
+@When[Windows_UI_Notifications == "on"]
+@Interface["04363b0b-1ac0-4b99-88e7-ada83e953d48", "Windows.UI.Notifications.ITileFlyoutUpdateManagerStatics", "CreateTileFlyoutUpdaterForApplication.result=Com;CreateTileFlyoutUpdaterForApplicationWithId.result=Com;CreateTileFlyoutUpdaterForSecondaryTile.result=Com;GetTemplateContent.result=Com"]
+public interface ITileFlyoutUpdateManagerStatics <: IInspectable {
+    func CreateTileFlyoutUpdaterForApplication(result: CPointer<CPointer<Unit>>): Int32
+    func CreateTileFlyoutUpdaterForApplicationWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateTileFlyoutUpdaterForSecondaryTile(tileId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetTemplateContent(type_: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileFlyoutUpdater (synthetic:Windows_UI_Notifications_ITileFlyoutUpdater)
+@When[Windows_UI_Notifications == "on"]
+@Interface["8d40c76a-c465-4052-a740-5c2654c1a089", "Windows.UI.Notifications.ITileFlyoutUpdater"]
+public interface ITileFlyoutUpdater <: IInspectable {
+    func Update(notification: CPointer<Unit>): Int32
+    func Clear(): Int32
+    func StartPeriodicUpdate(tileFlyoutContent: CPointer<Unit>, requestedInterval: Int32): Int32
+    func StartPeriodicUpdateAtTime(tileFlyoutContent: CPointer<Unit>, startTime: Windows_Foundation.DateTime, requestedInterval: Int32): Int32
+    func StopPeriodicUpdate(): Int32
+    func Setting(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Notifications.ITileNotification (synthetic:Windows_UI_Notifications_ITileNotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["ebaec8fa-50ec-4c18-b4d0-3af02e5540ab", "Windows.UI.Notifications.ITileNotification", "Content.value=Com;ExpirationTime.value=Com;Tag.value=HString"]
+public interface ITileNotification <: IInspectable {
+    func Content(value: CPointer<CPointer<Unit>>): Int32
+    func SetExpirationTime(value: CPointer<Unit>): Int32
+    func ExpirationTime(value: CPointer<CPointer<Unit>>): Int32
+    func SetTag(value: CPointer<Unit>): Int32
+    func Tag(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileNotificationFactory (synthetic:Windows_UI_Notifications_ITileNotificationFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["c6abdd6e-4928-46c8-bdbf-81a047dea0d4", "Windows.UI.Notifications.ITileNotificationFactory", "CreateTileNotification.value=Com"]
+public interface ITileNotificationFactory <: IInspectable {
+    func CreateTileNotification(content: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileUpdateManagerForUser (synthetic:Windows_UI_Notifications_ITileUpdateManagerForUser)
+@When[Windows_UI_Notifications == "on"]
+@Interface["55141348-2ee2-4e2d-9cc1-216a20decc9f", "Windows.UI.Notifications.ITileUpdateManagerForUser", "CreateTileUpdaterForApplication.result=Com;CreateTileUpdaterForApplicationWithId.result=Com;CreateTileUpdaterForSecondaryTile.result=Com;User.value=Com"]
+public interface ITileUpdateManagerForUser <: IInspectable {
+    func CreateTileUpdaterForApplication(result: CPointer<CPointer<Unit>>): Int32
+    func CreateTileUpdaterForApplicationWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateTileUpdaterForSecondaryTile(tileId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func User(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileUpdateManagerStatics (synthetic:Windows_UI_Notifications_ITileUpdateManagerStatics)
+@When[Windows_UI_Notifications == "on"]
+@Interface["da159e5d-3ea9-4986-8d84-b09d5e12276d", "Windows.UI.Notifications.ITileUpdateManagerStatics", "CreateTileUpdaterForApplication.result=Com;CreateTileUpdaterForApplicationWithId.result=Com;CreateTileUpdaterForSecondaryTile.result=Com;GetTemplateContent.result=Com"]
+public interface ITileUpdateManagerStatics <: IInspectable {
+    func CreateTileUpdaterForApplication(result: CPointer<CPointer<Unit>>): Int32
+    func CreateTileUpdaterForApplicationWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateTileUpdaterForSecondaryTile(tileId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetTemplateContent(type_: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileUpdateManagerStatics2 (synthetic:Windows_UI_Notifications_ITileUpdateManagerStatics2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["731c1ddc-8e14-4b7c-a34b-9d22de76c84d", "Windows.UI.Notifications.ITileUpdateManagerStatics2", "GetForUser.result=Com"]
+public interface ITileUpdateManagerStatics2 <: IInspectable {
+    func GetForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.ITileUpdater (synthetic:Windows_UI_Notifications_ITileUpdater)
+@When[Windows_UI_Notifications == "on"]
+@Interface["0942a48b-1d91-44ec-9243-c1e821c29a20", "Windows.UI.Notifications.ITileUpdater", "GetScheduledTileNotifications.result=Com"]
+public interface ITileUpdater <: IInspectable {
+    func Update(notification: CPointer<Unit>): Int32
+    func Clear(): Int32
+    func EnableNotificationQueue(enable: Bool): Int32
+    func Setting(value: CPointer<Int32>): Int32
+    func AddToSchedule(scheduledTile: CPointer<Unit>): Int32
+    func RemoveFromSchedule(scheduledTile: CPointer<Unit>): Int32
+    func GetScheduledTileNotifications(result: CPointer<CPointer<Unit>>): Int32
+    func StartPeriodicUpdate(tileContent: CPointer<Unit>, requestedInterval: Int32): Int32
+    func StartPeriodicUpdateAtTime(tileContent: CPointer<Unit>, startTime: Windows_Foundation.DateTime, requestedInterval: Int32): Int32
+    func StopPeriodicUpdate(): Int32
+    func StartPeriodicUpdateBatch(tileContents: CPointer<Unit>, requestedInterval: Int32): Int32
+    func StartPeriodicUpdateBatchAtTime(tileContents: CPointer<Unit>, startTime: Windows_Foundation.DateTime, requestedInterval: Int32): Int32
+}
+
+// Windows.UI.Notifications.ITileUpdater2 (synthetic:Windows_UI_Notifications_ITileUpdater2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["a2266e12-15ee-43ed-83f5-65b352bb1a84", "Windows.UI.Notifications.ITileUpdater2"]
+public interface ITileUpdater2 <: IInspectable {
+    func EnableNotificationQueueForSquare150x150(enable: Bool): Int32
+    func EnableNotificationQueueForWide310x150(enable: Bool): Int32
+    func EnableNotificationQueueForSquare310x310(enable: Bool): Int32
+}
+
+// Windows.UI.Notifications.IToastActivatedEventArgs (synthetic:Windows_UI_Notifications_IToastActivatedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+@Interface["e3bf92f3-c197-436f-8265-0625824f8dac", "Windows.UI.Notifications.IToastActivatedEventArgs", "Arguments.value=HString"]
+public interface IToastActivatedEventArgs <: IInspectable {
+    func Arguments(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastActivatedEventArgs2 (synthetic:Windows_UI_Notifications_IToastActivatedEventArgs2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["ab7da512-cc61-568e-81be-304ac31038fa", "Windows.UI.Notifications.IToastActivatedEventArgs2", "UserInput.value=Com"]
+public interface IToastActivatedEventArgs2 <: IInspectable {
+    func UserInput(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastCollection (synthetic:Windows_UI_Notifications_IToastCollection)
+@When[Windows_UI_Notifications == "on"]
+@Interface["0a8bc3b0-e0be-4858-bc2a-89dfe0b32863", "Windows.UI.Notifications.IToastCollection", "Id.value=HString;DisplayName.value=HString;LaunchArgs.value=HString;Icon.value=Com"]
+public interface IToastCollection <: IInspectable {
+    func Id(value: CPointer<CPointer<Unit>>): Int32
+    func DisplayName(value: CPointer<CPointer<Unit>>): Int32
+    func SetDisplayName(value: CPointer<Unit>): Int32
+    func LaunchArgs(value: CPointer<CPointer<Unit>>): Int32
+    func SetLaunchArgs(value: CPointer<Unit>): Int32
+    func Icon(value: CPointer<CPointer<Unit>>): Int32
+    func SetIcon(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Notifications.IToastCollectionFactory (synthetic:Windows_UI_Notifications_IToastCollectionFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["164dd3d7-73c4-44f7-b4ff-fb6d4bf1f4c6", "Windows.UI.Notifications.IToastCollectionFactory", "CreateInstance.value=Com"]
+public interface IToastCollectionFactory <: IInspectable {
+    func CreateInstance(collectionId: CPointer<Unit>, displayName: CPointer<Unit>, launchArgs: CPointer<Unit>, iconUri: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastCollectionManager (synthetic:Windows_UI_Notifications_IToastCollectionManager)
+@When[Windows_UI_Notifications == "on"]
+@Interface["2a1821fe-179d-49bc-b79d-a527920d3665", "Windows.UI.Notifications.IToastCollectionManager", "SaveToastCollectionAsync.operation=Com;FindAllToastCollectionsAsync.operation=Com;GetToastCollectionAsync.operation=Com;RemoveToastCollectionAsync.operation=Com;RemoveAllToastCollectionsAsync.operation=Com;User.value=Com;AppId.value=HString"]
+public interface IToastCollectionManager <: IInspectable {
+    func SaveToastCollectionAsync(collection: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func FindAllToastCollectionsAsync(operation: CPointer<CPointer<Unit>>): Int32
+    func GetToastCollectionAsync(collectionId: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func RemoveToastCollectionAsync(collectionId: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func RemoveAllToastCollectionsAsync(operation: CPointer<CPointer<Unit>>): Int32
+    func User(value: CPointer<CPointer<Unit>>): Int32
+    func AppId(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastDismissedEventArgs (synthetic:Windows_UI_Notifications_IToastDismissedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+@Interface["3f89d935-d9cb-4538-a0f0-ffe7659938f8", "Windows.UI.Notifications.IToastDismissedEventArgs"]
+public interface IToastDismissedEventArgs <: IInspectable {
+    func Reason(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Notifications.IToastFailedEventArgs (synthetic:Windows_UI_Notifications_IToastFailedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+@Interface["35176862-cfd4-44f8-ad64-f500fd896c3b", "Windows.UI.Notifications.IToastFailedEventArgs"]
+public interface IToastFailedEventArgs <: IInspectable {
+    func ErrorCode(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotification (synthetic:Windows_UI_Notifications_IToastNotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["997e2675-059e-4e60-8b06-1760917c8b80", "Windows.UI.Notifications.IToastNotification", "Content.value=Com;ExpirationTime.value=Com"]
+public interface IToastNotification <: IInspectable {
+    func Content(value: CPointer<CPointer<Unit>>): Int32
+    func SetExpirationTime(value: CPointer<Unit>): Int32
+    func ExpirationTime(value: CPointer<CPointer<Unit>>): Int32
+    func Dismissed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveDismissed(token: Int64): Int32
+    func Activated(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveActivated(token: Int64): Int32
+    func Failed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveFailed(token: Int64): Int32
+}
+
+// Windows.UI.Notifications.IToastNotification2 (synthetic:Windows_UI_Notifications_IToastNotification2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["9dfb9fd1-143a-490e-90bf-b9fba7132de7", "Windows.UI.Notifications.IToastNotification2", "Tag.value=HString;Group.value=HString"]
+public interface IToastNotification2 <: IInspectable {
+    func SetTag(value: CPointer<Unit>): Int32
+    func Tag(value: CPointer<CPointer<Unit>>): Int32
+    func SetGroup(value: CPointer<Unit>): Int32
+    func Group(value: CPointer<CPointer<Unit>>): Int32
+    func SetSuppressPopup(value: Bool): Int32
+    func SuppressPopup(value: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotification3 (synthetic:Windows_UI_Notifications_IToastNotification3)
+@When[Windows_UI_Notifications == "on"]
+@Interface["31e8aed8-8141-4f99-bc0a-c4ed21297d77", "Windows.UI.Notifications.IToastNotification3", "RemoteId.value=HString"]
+public interface IToastNotification3 <: IInspectable {
+    func NotificationMirroring(value: CPointer<Int32>): Int32
+    func SetNotificationMirroring(value: Int32): Int32
+    func RemoteId(value: CPointer<CPointer<Unit>>): Int32
+    func SetRemoteId(value: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotification4 (synthetic:Windows_UI_Notifications_IToastNotification4)
+@When[Windows_UI_Notifications == "on"]
+@Interface["15154935-28ea-4727-88e9-c58680e2d118", "Windows.UI.Notifications.IToastNotification4", "Data.value=Com"]
+public interface IToastNotification4 <: IInspectable {
+    func Data(value: CPointer<CPointer<Unit>>): Int32
+    func SetData(value: CPointer<Unit>): Int32
+    func Priority(value: CPointer<Int32>): Int32
+    func SetPriority(value: Int32): Int32
+}
+
+// Windows.UI.Notifications.IToastNotification6 (synthetic:Windows_UI_Notifications_IToastNotification6)
+@When[Windows_UI_Notifications == "on"]
+@Interface["43ebfe53-89ae-5c1e-a279-3aecfe9b6f54", "Windows.UI.Notifications.IToastNotification6"]
+public interface IToastNotification6 <: IInspectable {
+    func ExpiresOnReboot(value: CPointer<Bool>): Int32
+    func SetExpiresOnReboot(value: Bool): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationActionTriggerDetail (synthetic:Windows_UI_Notifications_IToastNotificationActionTriggerDetail)
+@When[Windows_UI_Notifications == "on"]
+@Interface["9445135a-38f3-42f6-96aa-7955b0f03da2", "Windows.UI.Notifications.IToastNotificationActionTriggerDetail", "Argument.value=HString;UserInput.value=Com"]
+public interface IToastNotificationActionTriggerDetail <: IInspectable {
+    func Argument(value: CPointer<CPointer<Unit>>): Int32
+    func UserInput(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationFactory (synthetic:Windows_UI_Notifications_IToastNotificationFactory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["04124b20-82c6-4229-b109-fd9ed4662b53", "Windows.UI.Notifications.IToastNotificationFactory", "CreateToastNotification.value=Com"]
+public interface IToastNotificationFactory <: IInspectable {
+    func CreateToastNotification(content: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationHistory (synthetic:Windows_UI_Notifications_IToastNotificationHistory)
+@When[Windows_UI_Notifications == "on"]
+@Interface["5caddc63-01d3-4c97-986f-0533483fee14", "Windows.UI.Notifications.IToastNotificationHistory"]
+public interface IToastNotificationHistory <: IInspectable {
+    func RemoveGroup(group: CPointer<Unit>): Int32
+    func RemoveGroupWithId(group: CPointer<Unit>, applicationId: CPointer<Unit>): Int32
+    func RemoveGroupedTagWithId(tag: CPointer<Unit>, group: CPointer<Unit>, applicationId: CPointer<Unit>): Int32
+    func RemoveGroupedTag(tag: CPointer<Unit>, group: CPointer<Unit>): Int32
+    func Remove(tag: CPointer<Unit>): Int32
+    func Clear(): Int32
+    func ClearWithId(applicationId: CPointer<Unit>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationHistory2 (synthetic:Windows_UI_Notifications_IToastNotificationHistory2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["3bc3d253-2f31-4092-9129-8ad5abf067da", "Windows.UI.Notifications.IToastNotificationHistory2", "GetHistory.result=Com;GetHistoryWithId.result=Com"]
+public interface IToastNotificationHistory2 <: IInspectable {
+    func GetHistory(result: CPointer<CPointer<Unit>>): Int32
+    func GetHistoryWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationHistoryChangedTriggerDetail (synthetic:Windows_UI_Notifications_IToastNotificationHistoryChangedTriggerDetail)
+@When[Windows_UI_Notifications == "on"]
+@Interface["db037ffa-0068-412c-9c83-267c37f65670", "Windows.UI.Notifications.IToastNotificationHistoryChangedTriggerDetail"]
+public interface IToastNotificationHistoryChangedTriggerDetail <: IInspectable {
+    func ChangeType(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationHistoryChangedTriggerDetail2 (synthetic:Windows_UI_Notifications_IToastNotificationHistoryChangedTriggerDetail2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["0b36e982-c871-49fb-babb-25bdbc4cc45b", "Windows.UI.Notifications.IToastNotificationHistoryChangedTriggerDetail2", "CollectionId.value=HString"]
+public interface IToastNotificationHistoryChangedTriggerDetail2 <: IInspectable {
+    func CollectionId(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationManagerForUser (synthetic:Windows_UI_Notifications_IToastNotificationManagerForUser)
+@When[Windows_UI_Notifications == "on"]
+@Interface["79ab57f6-43fe-487b-8a7f-99567200ae94", "Windows.UI.Notifications.IToastNotificationManagerForUser", "CreateToastNotifier.result=Com;CreateToastNotifierWithId.result=Com;History.value=Com;User.value=Com"]
+public interface IToastNotificationManagerForUser <: IInspectable {
+    func CreateToastNotifier(result: CPointer<CPointer<Unit>>): Int32
+    func CreateToastNotifierWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func History(value: CPointer<CPointer<Unit>>): Int32
+    func User(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationManagerForUser2 (synthetic:Windows_UI_Notifications_IToastNotificationManagerForUser2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["679c64b7-81ab-42c2-8819-c958767753f4", "Windows.UI.Notifications.IToastNotificationManagerForUser2", "GetToastNotifierForToastCollectionIdAsync.operation=Com;GetHistoryForToastCollectionIdAsync.operation=Com;GetToastCollectionManager.result=Com;GetToastCollectionManagerWithAppId.result=Com"]
+public interface IToastNotificationManagerForUser2 <: IInspectable {
+    func GetToastNotifierForToastCollectionIdAsync(collectionId: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func GetHistoryForToastCollectionIdAsync(collectionId: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func GetToastCollectionManager(result: CPointer<CPointer<Unit>>): Int32
+    func GetToastCollectionManagerWithAppId(appId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationManagerForUser3 (synthetic:Windows_UI_Notifications_IToastNotificationManagerForUser3)
+@When[Windows_UI_Notifications == "on"]
+@Interface["3efcb176-6cc1-56dc-973b-251f7aacb1c5", "Windows.UI.Notifications.IToastNotificationManagerForUser3"]
+public interface IToastNotificationManagerForUser3 <: IInspectable {
+    func NotificationMode(value: CPointer<Int32>): Int32
+    func NotificationModeChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveNotificationModeChanged(token: Int64): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationManagerStatics (synthetic:Windows_UI_Notifications_IToastNotificationManagerStatics)
+@When[Windows_UI_Notifications == "on"]
+@Interface["50ac103f-d235-4598-bbef-98fe4d1a3ad4", "Windows.UI.Notifications.IToastNotificationManagerStatics", "CreateToastNotifier.result=Com;CreateToastNotifierWithId.result=Com;GetTemplateContent.result=Com"]
+public interface IToastNotificationManagerStatics <: IInspectable {
+    func CreateToastNotifier(result: CPointer<CPointer<Unit>>): Int32
+    func CreateToastNotifierWithId(applicationId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetTemplateContent(type_: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationManagerStatics2 (synthetic:Windows_UI_Notifications_IToastNotificationManagerStatics2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["7ab93c52-0e48-4750-ba9d-1a4113981847", "Windows.UI.Notifications.IToastNotificationManagerStatics2", "History.value=Com"]
+public interface IToastNotificationManagerStatics2 <: IInspectable {
+    func History(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationManagerStatics4 (synthetic:Windows_UI_Notifications_IToastNotificationManagerStatics4)
+@When[Windows_UI_Notifications == "on"]
+@Interface["8f993fd3-e516-45fb-8130-398e93fa52c3", "Windows.UI.Notifications.IToastNotificationManagerStatics4", "GetForUser.result=Com"]
+public interface IToastNotificationManagerStatics4 <: IInspectable {
+    func GetForUser(user: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func ConfigureNotificationMirroring(value: Int32): Int32
+}
+
+// Windows.UI.Notifications.IToastNotificationManagerStatics5 (synthetic:Windows_UI_Notifications_IToastNotificationManagerStatics5)
+@When[Windows_UI_Notifications == "on"]
+@Interface["d6f5f569-d40d-407c-8989-88cab42cfd14", "Windows.UI.Notifications.IToastNotificationManagerStatics5", "GetDefault.result=Com"]
+public interface IToastNotificationManagerStatics5 <: IInspectable {
+    func GetDefault(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotifier (synthetic:Windows_UI_Notifications_IToastNotifier)
+@When[Windows_UI_Notifications == "on"]
+@Interface["75927b93-03f3-41ec-91d3-6e5bac1b38e7", "Windows.UI.Notifications.IToastNotifier", "GetScheduledToastNotifications.result=Com"]
+public interface IToastNotifier <: IInspectable {
+    func Show(notification: CPointer<Unit>): Int32
+    func Hide(notification: CPointer<Unit>): Int32
+    func Setting(value: CPointer<Int32>): Int32
+    func AddToSchedule(scheduledToast: CPointer<Unit>): Int32
+    func RemoveFromSchedule(scheduledToast: CPointer<Unit>): Int32
+    func GetScheduledToastNotifications(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotifier2 (synthetic:Windows_UI_Notifications_IToastNotifier2)
+@When[Windows_UI_Notifications == "on"]
+@Interface["354389c6-7c01-4bd5-9c20-604340cd2b74", "Windows.UI.Notifications.IToastNotifier2"]
+public interface IToastNotifier2 <: IInspectable {
+    func UpdateWithTagAndGroup(data: CPointer<Unit>, tag: CPointer<Unit>, group: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func UpdateWithTag(data: CPointer<Unit>, tag: CPointer<Unit>, result: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Notifications.IToastNotifier3 (synthetic:Windows_UI_Notifications_IToastNotifier3)
+@When[Windows_UI_Notifications == "on"]
+@Interface["ae75a04a-3b0c-51ad-b7e8-b08ab6052549", "Windows.UI.Notifications.IToastNotifier3"]
+public interface IToastNotifier3 <: IInspectable {
+    func ScheduledToastNotificationShowing(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveScheduledToastNotificationShowing(token: Int64): Int32
+}
+
+// Windows.UI.Notifications.IUserNotification (synthetic:Windows_UI_Notifications_IUserNotification)
+@When[Windows_UI_Notifications == "on"]
+@Interface["adf7e52f-4e53-42d5-9c33-eb5ea515b23e", "Windows.UI.Notifications.IUserNotification", "Notification.value=Com;AppInfo.value=Com"]
+public interface IUserNotification <: IInspectable {
+    func Notification(value: CPointer<CPointer<Unit>>): Int32
+    func AppInfo(value: CPointer<CPointer<Unit>>): Int32
+    func Id(value: CPointer<UInt32>): Int32
+    func CreationTime(value: CPointer<Windows_Foundation.DateTime>): Int32
+}
+
+// Windows.UI.Notifications.IUserNotificationChangedEventArgs (synthetic:Windows_UI_Notifications_IUserNotificationChangedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+@Interface["b6bd6839-79cf-4b25-82c0-0ce1eef81f8c", "Windows.UI.Notifications.IUserNotificationChangedEventArgs"]
+public interface IUserNotificationChangedEventArgs <: IInspectable {
+    func ChangeKind(value: CPointer<Int32>): Int32
+    func UserNotificationId(value: CPointer<UInt32>): Int32
+}
+
+// Windows.UI.Notifications.KnownAdaptiveNotificationHints (synthetic:Windows_UI_Notifications_KnownAdaptiveNotificationHints)
+@When[Windows_UI_Notifications == "on"]
+public struct KnownAdaptiveNotificationHints <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Style(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationHints, IKnownAdaptiveNotificationHintsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Style(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Wrap(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationHints, IKnownAdaptiveNotificationHintsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Wrap(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MaxLines(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationHints, IKnownAdaptiveNotificationHintsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxLines(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func MinLines(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationHints, IKnownAdaptiveNotificationHintsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinLines(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TextStacking(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationHints, IKnownAdaptiveNotificationHintsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TextStacking(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Align(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationHints, IKnownAdaptiveNotificationHintsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Align(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.KnownAdaptiveNotificationHints"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.KnownAdaptiveNotificationHints)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.KnownAdaptiveNotificationHints", KnownAdaptiveNotificationHints.signature())
+    }
+}
+
+// Windows.UI.Notifications.KnownAdaptiveNotificationTextStyles (synthetic:Windows_UI_Notifications_KnownAdaptiveNotificationTextStyles)
+@When[Windows_UI_Notifications == "on"]
+public struct KnownAdaptiveNotificationTextStyles <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Caption(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Caption(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Body(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Body(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Base(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Base(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Subtitle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Subtitle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Title(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Title(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Subheader(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Subheader(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Header(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Header(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TitleNumeral(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TitleNumeral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SubheaderNumeral(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SubheaderNumeral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HeaderNumeral(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeaderNumeral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func CaptionSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CaptionSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BodySubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BodySubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func BaseSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BaseSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SubtitleSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SubtitleSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TitleSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TitleSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SubheaderSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SubheaderSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SubheaderNumeralSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SubheaderNumeralSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HeaderSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeaderSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HeaderNumeralSubtle(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownAdaptiveNotificationTextStyles, IKnownAdaptiveNotificationTextStylesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeaderNumeralSubtle(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.KnownAdaptiveNotificationTextStyles"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.KnownAdaptiveNotificationTextStyles)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.KnownAdaptiveNotificationTextStyles", KnownAdaptiveNotificationTextStyles.signature())
+    }
+}
+
+// Windows.UI.Notifications.KnownNotificationBindings (synthetic:Windows_UI_Notifications_KnownNotificationBindings)
+@When[Windows_UI_Notifications == "on"]
+public struct KnownNotificationBindings <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func ToastGeneric(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownNotificationBindings, IKnownNotificationBindingsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ToastGeneric(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.KnownNotificationBindings"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.KnownNotificationBindings)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.KnownNotificationBindings", KnownNotificationBindings.signature())
+    }
+}
+
+// Windows.UI.Notifications.Notification (synthetic:Windows_UI_Notifications_Notification)
+@When[Windows_UI_Notifications == "on"]
+public class Notification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Notification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Notification {
+        Notification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Notification {
+        Notification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Notification> {
+        let ancestors = [INotification.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Notification>("Notification", INotification.iid(), ancestors, { raw => Notification.fromAbiTake(raw) }, { raw => Notification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INotification {
+        match (unsafe { query(INotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINotification(): INotification {
+        defaultInterface()
+    }
+
+    public mut prop ExpirationTime: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ExpirationTime(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetExpirationTime(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Visual: NotificationVisual {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Visual(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<NotificationVisual>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return NotificationVisual.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<NotificationVisual>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetVisual(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): Notification {
+        var created__: Option<Notification> = Option<Notification>.None
+        try (factory__ = windows_core.factory<Notification, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Notification>(Notification.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce Notification")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.Notification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.Notification;{" + INotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.Notification", Notification.signature(), INotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: Notification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Notification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Notification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Notification {
+        Notification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.NotificationBinding (synthetic:Windows_UI_Notifications_NotificationBinding)
+@When[Windows_UI_Notifications == "on"]
+public class NotificationBinding <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NotificationBinding> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NotificationBinding {
+        NotificationBinding(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NotificationBinding {
+        NotificationBinding(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INotificationBinding.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NotificationBinding> {
+        let ancestors = [INotificationBinding.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NotificationBinding>("NotificationBinding", INotificationBinding.iid(), ancestors, { raw => NotificationBinding.fromAbiTake(raw) }, { raw => NotificationBinding.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INotificationBinding {
+        match (unsafe { query(INotificationBinding.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINotificationBinding(): INotificationBinding {
+        defaultInterface()
+    }
+
+    public prop Hints: Windows_Foundation_Collections.IMap<windows_core.HString, windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Hints(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IMap<windows_core.HString, windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IMap<windows_core.HString, windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop Language: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Language(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetLanguage(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Template: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Template(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTemplate(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func GetTextElements(): Windows_Foundation_Collections.IVectorView<AdaptiveNotificationText> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetTextElements(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<AdaptiveNotificationText>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<AdaptiveNotificationText>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.NotificationBinding"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.NotificationBinding;{" + INotificationBinding.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.NotificationBinding", NotificationBinding.signature(), INotificationBinding.iid())
+    }
+
+    public static func intoWinrtHandle(value: NotificationBinding): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NotificationBinding {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NotificationBinding.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NotificationBinding {
+        NotificationBinding.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.NotificationData (synthetic:Windows_UI_Notifications_NotificationData)
+@When[Windows_UI_Notifications == "on"]
+public class NotificationData <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NotificationData> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NotificationData {
+        NotificationData(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NotificationData {
+        NotificationData(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INotificationData.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NotificationData> {
+        let ancestors = [INotificationData.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NotificationData>("NotificationData", INotificationData.iid(), ancestors, { raw => NotificationData.fromAbiTake(raw) }, { raw => NotificationData.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INotificationData {
+        match (unsafe { query(INotificationData.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINotificationData(): INotificationData {
+        defaultInterface()
+    }
+
+    public mut prop SequenceNumber: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SequenceNumber(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSequenceNumber(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Values: Windows_Foundation_Collections.IMap<windows_core.HString, windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Values(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IMap<windows_core.HString, windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IMap<windows_core.HString, windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func new(): NotificationData {
+        var created__: Option<NotificationData> = Option<NotificationData>.None
+        try (factory__ = windows_core.factory<NotificationData, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<NotificationData>(NotificationData.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce NotificationData")
+        }
+    }
+
+    public static func CreateNotificationDataWithValuesAndSequenceNumber(initialValues: Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_core.HString>>, sequenceNumber: UInt32): NotificationData {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_core.HString>>>(initialValues)) {
+            try (factory__ = windows_core.factory<NotificationData, INotificationDataFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateNotificationDataWithValuesAndSequenceNumber(__argBorrow0.asRaw(), sequenceNumber, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NotificationData>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return NotificationData.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateNotificationDataWithValues(initialValues: Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_core.HString>>): NotificationData {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, windows_core.HString>>>(initialValues)) {
+            try (factory__ = windows_core.factory<NotificationData, INotificationDataFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateNotificationDataWithValues(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NotificationData>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return NotificationData.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.NotificationData"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.NotificationData;{" + INotificationData.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.NotificationData", NotificationData.signature(), INotificationData.iid())
+    }
+
+    public static func intoWinrtHandle(value: NotificationData): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NotificationData {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NotificationData.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NotificationData {
+        NotificationData.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.NotificationKinds (synthetic:Windows_UI_Notifications_NotificationKinds)
+@When[Windows_UI_Notifications == "on"]
+public struct NotificationKinds {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: NotificationKinds): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: NotificationKinds): NotificationKinds {
+        return NotificationKinds(value | other.value)
+    }
+    public operator func &(other: NotificationKinds): NotificationKinds {
+        return NotificationKinds(value & other.value)
+    }
+    public operator func ^(other: NotificationKinds): NotificationKinds {
+        return NotificationKinds(value ^ other.value)
+    }
+    public operator func !(): NotificationKinds {
+        return NotificationKinds(!value)
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const NotificationKinds_Unknown = NotificationKinds(0)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationKinds_Toast = NotificationKinds(1)
+
+// Windows.UI.Notifications.NotificationMirroring (synthetic:Windows_UI_Notifications_NotificationMirroring)
+@When[Windows_UI_Notifications == "on"]
+public struct NotificationMirroring {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const NotificationMirroring_Allowed = NotificationMirroring(0)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationMirroring_Disabled = NotificationMirroring(1)
+
+// Windows.UI.Notifications.NotificationSetting (synthetic:Windows_UI_Notifications_NotificationSetting)
+@When[Windows_UI_Notifications == "on"]
+public struct NotificationSetting {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const NotificationSetting_Enabled = NotificationSetting(0)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationSetting_DisabledForApplication = NotificationSetting(1)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationSetting_DisabledForUser = NotificationSetting(2)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationSetting_DisabledByGroupPolicy = NotificationSetting(3)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationSetting_DisabledByManifest = NotificationSetting(4)
+
+// Windows.UI.Notifications.NotificationUpdateResult (synthetic:Windows_UI_Notifications_NotificationUpdateResult)
+@When[Windows_UI_Notifications == "on"]
+public struct NotificationUpdateResult {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const NotificationUpdateResult_Succeeded = NotificationUpdateResult(0)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationUpdateResult_Failed = NotificationUpdateResult(1)
+@When[Windows_UI_Notifications == "on"]
+public const NotificationUpdateResult_NotificationNotFound = NotificationUpdateResult(2)
+
+// Windows.UI.Notifications.NotificationVisual (synthetic:Windows_UI_Notifications_NotificationVisual)
+@When[Windows_UI_Notifications == "on"]
+public class NotificationVisual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NotificationVisual> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NotificationVisual {
+        NotificationVisual(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NotificationVisual {
+        NotificationVisual(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INotificationVisual.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NotificationVisual> {
+        let ancestors = [INotificationVisual.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NotificationVisual>("NotificationVisual", INotificationVisual.iid(), ancestors, { raw => NotificationVisual.fromAbiTake(raw) }, { raw => NotificationVisual.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INotificationVisual {
+        match (unsafe { query(INotificationVisual.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINotificationVisual(): INotificationVisual {
+        defaultInterface()
+    }
+
+    public prop Bindings: Windows_Foundation_Collections.IVector<NotificationBinding> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Bindings(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVector<NotificationBinding>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVector<NotificationBinding>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop Language: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Language(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetLanguage(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func GetBinding(templateName: windows_core.HString): NotificationBinding {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(templateName)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetBinding(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NotificationBinding>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return NotificationBinding.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.NotificationVisual"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.NotificationVisual;{" + INotificationVisual.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.NotificationVisual", NotificationVisual.signature(), INotificationVisual.iid())
+    }
+
+    public static func intoWinrtHandle(value: NotificationVisual): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NotificationVisual {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NotificationVisual.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NotificationVisual {
+        NotificationVisual.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.PeriodicUpdateRecurrence (synthetic:Windows_UI_Notifications_PeriodicUpdateRecurrence)
+@When[Windows_UI_Notifications == "on"]
+public struct PeriodicUpdateRecurrence {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const PeriodicUpdateRecurrence_HalfHour = PeriodicUpdateRecurrence(0)
+@When[Windows_UI_Notifications == "on"]
+public const PeriodicUpdateRecurrence_Hour = PeriodicUpdateRecurrence(1)
+@When[Windows_UI_Notifications == "on"]
+public const PeriodicUpdateRecurrence_SixHours = PeriodicUpdateRecurrence(2)
+@When[Windows_UI_Notifications == "on"]
+public const PeriodicUpdateRecurrence_TwelveHours = PeriodicUpdateRecurrence(3)
+@When[Windows_UI_Notifications == "on"]
+public const PeriodicUpdateRecurrence_Daily = PeriodicUpdateRecurrence(4)
+
+// Windows.UI.Notifications.ScheduledTileNotification (synthetic:Windows_UI_Notifications_ScheduledTileNotification)
+@When[Windows_UI_Notifications == "on"]
+public class ScheduledTileNotification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ScheduledTileNotification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ScheduledTileNotification {
+        ScheduledTileNotification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ScheduledTileNotification {
+        ScheduledTileNotification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IScheduledTileNotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ScheduledTileNotification> {
+        let ancestors = [IScheduledTileNotification.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ScheduledTileNotification>("ScheduledTileNotification", IScheduledTileNotification.iid(), ancestors, { raw => ScheduledTileNotification.fromAbiTake(raw) }, { raw => ScheduledTileNotification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IScheduledTileNotification {
+        match (unsafe { query(IScheduledTileNotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIScheduledTileNotification(): IScheduledTileNotification {
+        defaultInterface()
+    }
+
+    public prop Content: Windows_Data_Xml_Dom.XmlDocument {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop DeliveryTime: Windows_Foundation.DateTime {
+        get() {
+            var result__ = Windows_Foundation.DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeliveryTime(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop ExpirationTime: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ExpirationTime(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetExpirationTime(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Id: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetId(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Tag: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Tag(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTag(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func CreateScheduledTileNotification(content: Windows_Data_Xml_Dom.XmlDocument, deliveryTime: Windows_Foundation.DateTime): ScheduledTileNotification {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Data_Xml_Dom.XmlDocument>(content)) {
+            try (factory__ = windows_core.factory<ScheduledTileNotification, IScheduledTileNotificationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateScheduledTileNotification(__argBorrow0.asRaw(), deliveryTime, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ScheduledTileNotification>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ScheduledTileNotification.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ScheduledTileNotification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ScheduledTileNotification;{" + IScheduledTileNotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ScheduledTileNotification", ScheduledTileNotification.signature(), IScheduledTileNotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: ScheduledTileNotification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ScheduledTileNotification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ScheduledTileNotification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ScheduledTileNotification {
+        ScheduledTileNotification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ScheduledToastNotification (synthetic:Windows_UI_Notifications_ScheduledToastNotification)
+@When[Windows_UI_Notifications == "on"]
+public class ScheduledToastNotification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ScheduledToastNotification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ScheduledToastNotification {
+        ScheduledToastNotification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ScheduledToastNotification {
+        ScheduledToastNotification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IScheduledToastNotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ScheduledToastNotification> {
+        let ancestors = [IScheduledToastNotification.iid(), IScheduledToastNotification2.iid(), IScheduledToastNotification3.iid(), IScheduledToastNotification4.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ScheduledToastNotification>("ScheduledToastNotification", IScheduledToastNotification.iid(), ancestors, { raw => ScheduledToastNotification.fromAbiTake(raw) }, { raw => ScheduledToastNotification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IScheduledToastNotification {
+        match (unsafe { query(IScheduledToastNotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIScheduledToastNotification(): IScheduledToastNotification {
+        defaultInterface()
+    }
+
+    public func asIScheduledToastNotification2(): IScheduledToastNotification2 {
+        match (unsafe { query<IScheduledToastNotification2>(IScheduledToastNotification2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIScheduledToastNotification3(): IScheduledToastNotification3 {
+        match (unsafe { query<IScheduledToastNotification3>(IScheduledToastNotification3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIScheduledToastNotification4(): IScheduledToastNotification4 {
+        match (unsafe { query<IScheduledToastNotification4>(IScheduledToastNotification4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Content: Windows_Data_Xml_Dom.XmlDocument {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop DeliveryTime: Windows_Foundation.DateTime {
+        get() {
+            var result__ = Windows_Foundation.DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeliveryTime(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Id: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetId(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop MaximumSnoozeCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaximumSnoozeCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop SnoozeInterval: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SnoozeInterval(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func CreateScheduledToastNotification(content: Windows_Data_Xml_Dom.XmlDocument, deliveryTime: Windows_Foundation.DateTime): ScheduledToastNotification {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Data_Xml_Dom.XmlDocument>(content)) {
+            try (factory__ = windows_core.factory<ScheduledToastNotification, IScheduledToastNotificationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateScheduledToastNotification(__argBorrow0.asRaw(), deliveryTime, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ScheduledToastNotification>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ScheduledToastNotification.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateScheduledToastNotificationRecurring(content: Windows_Data_Xml_Dom.XmlDocument, deliveryTime: Windows_Foundation.DateTime, snoozeInterval: Windows_Foundation.TimeSpan, maximumSnoozeCount: UInt32): ScheduledToastNotification {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Data_Xml_Dom.XmlDocument>(content)) {
+            try (factory__ = windows_core.factory<ScheduledToastNotification, IScheduledToastNotificationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateScheduledToastNotificationRecurring(__argBorrow0.asRaw(), deliveryTime, snoozeInterval, maximumSnoozeCount, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ScheduledToastNotification>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ScheduledToastNotification.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ScheduledToastNotification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ScheduledToastNotification;{" + IScheduledToastNotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ScheduledToastNotification", ScheduledToastNotification.signature(), IScheduledToastNotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: ScheduledToastNotification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ScheduledToastNotification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ScheduledToastNotification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ScheduledToastNotification {
+        ScheduledToastNotification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ScheduledToastNotificationShowingEventArgs (synthetic:Windows_UI_Notifications_ScheduledToastNotificationShowingEventArgs)
+@When[Windows_UI_Notifications == "on"]
+public class ScheduledToastNotificationShowingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ScheduledToastNotificationShowingEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ScheduledToastNotificationShowingEventArgs {
+        ScheduledToastNotificationShowingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ScheduledToastNotificationShowingEventArgs {
+        ScheduledToastNotificationShowingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IScheduledToastNotificationShowingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ScheduledToastNotificationShowingEventArgs> {
+        let ancestors = [IScheduledToastNotificationShowingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ScheduledToastNotificationShowingEventArgs>("ScheduledToastNotificationShowingEventArgs", IScheduledToastNotificationShowingEventArgs.iid(), ancestors, { raw => ScheduledToastNotificationShowingEventArgs.fromAbiTake(raw) }, { raw => ScheduledToastNotificationShowingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IScheduledToastNotificationShowingEventArgs {
+        match (unsafe { query(IScheduledToastNotificationShowingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIScheduledToastNotificationShowingEventArgs(): IScheduledToastNotificationShowingEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop Cancel: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cancel(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCancel(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop ScheduledToastNotification: ScheduledToastNotification {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScheduledToastNotification(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ScheduledToastNotification>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ScheduledToastNotification.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func GetDeferral(): Windows_Foundation.Deferral {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDeferral(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.Deferral>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.Deferral.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ScheduledToastNotificationShowingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ScheduledToastNotificationShowingEventArgs;{" + IScheduledToastNotificationShowingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ScheduledToastNotificationShowingEventArgs", ScheduledToastNotificationShowingEventArgs.signature(), IScheduledToastNotificationShowingEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ScheduledToastNotificationShowingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ScheduledToastNotificationShowingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ScheduledToastNotificationShowingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ScheduledToastNotificationShowingEventArgs {
+        ScheduledToastNotificationShowingEventArgs.viewOf(raw)
+    }
 }
 
 // Windows.UI.Notifications.ShownTileNotification (synthetic:Windows_UI_Notifications_ShownTileNotification)
@@ -107,3 +3046,3214 @@ public class ShownTileNotification <: windows_interface.InterfaceWrapperBase & w
         ShownTileNotification.viewOf(raw)
     }
 }
+
+// Windows.UI.Notifications.TileFlyoutNotification (synthetic:Windows_UI_Notifications_TileFlyoutNotification)
+@When[Windows_UI_Notifications == "on"]
+public class TileFlyoutNotification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TileFlyoutNotification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TileFlyoutNotification {
+        TileFlyoutNotification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TileFlyoutNotification {
+        TileFlyoutNotification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITileFlyoutNotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TileFlyoutNotification> {
+        let ancestors = [ITileFlyoutNotification.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TileFlyoutNotification>("TileFlyoutNotification", ITileFlyoutNotification.iid(), ancestors, { raw => TileFlyoutNotification.fromAbiTake(raw) }, { raw => TileFlyoutNotification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITileFlyoutNotification {
+        match (unsafe { query(ITileFlyoutNotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITileFlyoutNotification(): ITileFlyoutNotification {
+        defaultInterface()
+    }
+
+    public prop Content: Windows_Data_Xml_Dom.XmlDocument {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop ExpirationTime: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ExpirationTime(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetExpirationTime(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func CreateTileFlyoutNotification(content: Windows_Data_Xml_Dom.XmlDocument): TileFlyoutNotification {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Data_Xml_Dom.XmlDocument>(content)) {
+            try (factory__ = windows_core.factory<TileFlyoutNotification, ITileFlyoutNotificationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateTileFlyoutNotification(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileFlyoutNotification>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileFlyoutNotification.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.TileFlyoutNotification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.TileFlyoutNotification;{" + ITileFlyoutNotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.TileFlyoutNotification", TileFlyoutNotification.signature(), ITileFlyoutNotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: TileFlyoutNotification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TileFlyoutNotification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TileFlyoutNotification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TileFlyoutNotification {
+        TileFlyoutNotification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.TileFlyoutTemplateType (synthetic:Windows_UI_Notifications_TileFlyoutTemplateType)
+@When[Windows_UI_Notifications == "on"]
+public struct TileFlyoutTemplateType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const TileFlyoutTemplateType_TileFlyoutTemplate01 = TileFlyoutTemplateType(0)
+
+// Windows.UI.Notifications.TileFlyoutUpdateManager (synthetic:Windows_UI_Notifications_TileFlyoutUpdateManager)
+@When[Windows_UI_Notifications == "on"]
+public struct TileFlyoutUpdateManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CreateTileFlyoutUpdaterForApplication(): TileFlyoutUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TileFlyoutUpdateManager, ITileFlyoutUpdateManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateTileFlyoutUpdaterForApplication(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileFlyoutUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileFlyoutUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateTileFlyoutUpdaterForApplicationWithId(applicationId: windows_core.HString): TileFlyoutUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (factory__ = windows_core.factory<TileFlyoutUpdateManager, ITileFlyoutUpdateManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateTileFlyoutUpdaterForApplicationWithId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileFlyoutUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileFlyoutUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateTileFlyoutUpdaterForSecondaryTile(tileId: windows_core.HString): TileFlyoutUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tileId)) {
+            try (factory__ = windows_core.factory<TileFlyoutUpdateManager, ITileFlyoutUpdateManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateTileFlyoutUpdaterForSecondaryTile(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileFlyoutUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileFlyoutUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetTemplateContent(type_: TileFlyoutTemplateType): Windows_Data_Xml_Dom.XmlDocument {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TileFlyoutUpdateManager, ITileFlyoutUpdateManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetTemplateContent(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.TileFlyoutUpdateManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.TileFlyoutUpdateManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.TileFlyoutUpdateManager", TileFlyoutUpdateManager.signature())
+    }
+}
+
+// Windows.UI.Notifications.TileFlyoutUpdater (synthetic:Windows_UI_Notifications_TileFlyoutUpdater)
+@When[Windows_UI_Notifications == "on"]
+public class TileFlyoutUpdater <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TileFlyoutUpdater> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TileFlyoutUpdater {
+        TileFlyoutUpdater(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TileFlyoutUpdater {
+        TileFlyoutUpdater(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITileFlyoutUpdater.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TileFlyoutUpdater> {
+        let ancestors = [ITileFlyoutUpdater.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TileFlyoutUpdater>("TileFlyoutUpdater", ITileFlyoutUpdater.iid(), ancestors, { raw => TileFlyoutUpdater.fromAbiTake(raw) }, { raw => TileFlyoutUpdater.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITileFlyoutUpdater {
+        match (unsafe { query(ITileFlyoutUpdater.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITileFlyoutUpdater(): ITileFlyoutUpdater {
+        defaultInterface()
+    }
+
+    public prop Setting: NotificationSetting {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Setting(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return NotificationSetting(result__)
+        }
+    }
+
+    public func Update(notification: TileFlyoutNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<TileFlyoutNotification>(notification)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Update(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Clear(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Clear() }
+        }
+        hr__.check()
+    }
+
+    public func StartPeriodicUpdate(tileFlyoutContent: Windows_Foundation.Uri, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(tileFlyoutContent)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdate(__argBorrow0.asRaw(), requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StartPeriodicUpdateAtTime(tileFlyoutContent: Windows_Foundation.Uri, startTime: Windows_Foundation.DateTime, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(tileFlyoutContent)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdateAtTime(__argBorrow0.asRaw(), startTime, requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StopPeriodicUpdate(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.StopPeriodicUpdate() }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.TileFlyoutUpdater"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.TileFlyoutUpdater;{" + ITileFlyoutUpdater.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.TileFlyoutUpdater", TileFlyoutUpdater.signature(), ITileFlyoutUpdater.iid())
+    }
+
+    public static func intoWinrtHandle(value: TileFlyoutUpdater): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TileFlyoutUpdater {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TileFlyoutUpdater.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TileFlyoutUpdater {
+        TileFlyoutUpdater.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.TileNotification (synthetic:Windows_UI_Notifications_TileNotification)
+@When[Windows_UI_Notifications == "on"]
+public class TileNotification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TileNotification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TileNotification {
+        TileNotification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TileNotification {
+        TileNotification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITileNotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TileNotification> {
+        let ancestors = [ITileNotification.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TileNotification>("TileNotification", ITileNotification.iid(), ancestors, { raw => TileNotification.fromAbiTake(raw) }, { raw => TileNotification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITileNotification {
+        match (unsafe { query(ITileNotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITileNotification(): ITileNotification {
+        defaultInterface()
+    }
+
+    public prop Content: Windows_Data_Xml_Dom.XmlDocument {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop ExpirationTime: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ExpirationTime(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetExpirationTime(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Tag: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Tag(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTag(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func CreateTileNotification(content: Windows_Data_Xml_Dom.XmlDocument): TileNotification {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Data_Xml_Dom.XmlDocument>(content)) {
+            try (factory__ = windows_core.factory<TileNotification, ITileNotificationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateTileNotification(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileNotification>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileNotification.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.TileNotification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.TileNotification;{" + ITileNotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.TileNotification", TileNotification.signature(), ITileNotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: TileNotification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TileNotification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TileNotification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TileNotification {
+        TileNotification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.TileTemplateType (synthetic:Windows_UI_Notifications_TileTemplateType)
+@When[Windows_UI_Notifications == "on"]
+public struct TileTemplateType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquareImage = TileTemplateType(0)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquareBlock = TileTemplateType(1)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquareText01 = TileTemplateType(2)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquareText02 = TileTemplateType(3)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquareText03 = TileTemplateType(4)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquareText04 = TileTemplateType(5)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquarePeekImageAndText01 = TileTemplateType(6)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquarePeekImageAndText02 = TileTemplateType(7)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquarePeekImageAndText03 = TileTemplateType(8)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquarePeekImageAndText04 = TileTemplateType(9)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideImage = TileTemplateType(10)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideImageCollection = TileTemplateType(11)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideImageAndText01 = TileTemplateType(12)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideImageAndText02 = TileTemplateType(13)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideBlockAndText01 = TileTemplateType(14)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideBlockAndText02 = TileTemplateType(15)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageCollection01 = TileTemplateType(16)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageCollection02 = TileTemplateType(17)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageCollection03 = TileTemplateType(18)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageCollection04 = TileTemplateType(19)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageCollection05 = TileTemplateType(20)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageCollection06 = TileTemplateType(21)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageAndText01 = TileTemplateType(22)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImageAndText02 = TileTemplateType(23)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImage01 = TileTemplateType(24)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImage02 = TileTemplateType(25)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImage03 = TileTemplateType(26)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImage04 = TileTemplateType(27)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImage05 = TileTemplateType(28)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWidePeekImage06 = TileTemplateType(29)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideSmallImageAndText01 = TileTemplateType(30)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideSmallImageAndText02 = TileTemplateType(31)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideSmallImageAndText03 = TileTemplateType(32)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideSmallImageAndText04 = TileTemplateType(33)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideSmallImageAndText05 = TileTemplateType(34)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText01 = TileTemplateType(35)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText02 = TileTemplateType(36)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText03 = TileTemplateType(37)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText04 = TileTemplateType(38)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText05 = TileTemplateType(39)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText06 = TileTemplateType(40)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText07 = TileTemplateType(41)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText08 = TileTemplateType(42)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText09 = TileTemplateType(43)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText10 = TileTemplateType(44)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWideText11 = TileTemplateType(45)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150Image = TileTemplateType(0)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150Block = TileTemplateType(1)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150Text01 = TileTemplateType(2)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150Text02 = TileTemplateType(3)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150Text03 = TileTemplateType(4)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150Text04 = TileTemplateType(5)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150PeekImageAndText01 = TileTemplateType(6)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150PeekImageAndText02 = TileTemplateType(7)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150PeekImageAndText03 = TileTemplateType(8)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150PeekImageAndText04 = TileTemplateType(9)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Image = TileTemplateType(10)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150ImageCollection = TileTemplateType(11)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150ImageAndText01 = TileTemplateType(12)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150ImageAndText02 = TileTemplateType(13)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150BlockAndText01 = TileTemplateType(14)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150BlockAndText02 = TileTemplateType(15)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageCollection01 = TileTemplateType(16)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageCollection02 = TileTemplateType(17)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageCollection03 = TileTemplateType(18)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageCollection04 = TileTemplateType(19)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageCollection05 = TileTemplateType(20)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageCollection06 = TileTemplateType(21)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageAndText01 = TileTemplateType(22)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImageAndText02 = TileTemplateType(23)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImage01 = TileTemplateType(24)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImage02 = TileTemplateType(25)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImage03 = TileTemplateType(26)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImage04 = TileTemplateType(27)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImage05 = TileTemplateType(28)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150PeekImage06 = TileTemplateType(29)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150SmallImageAndText01 = TileTemplateType(30)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150SmallImageAndText02 = TileTemplateType(31)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150SmallImageAndText03 = TileTemplateType(32)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150SmallImageAndText04 = TileTemplateType(33)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150SmallImageAndText05 = TileTemplateType(34)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text01 = TileTemplateType(35)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text02 = TileTemplateType(36)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text03 = TileTemplateType(37)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text04 = TileTemplateType(38)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text05 = TileTemplateType(39)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text06 = TileTemplateType(40)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text07 = TileTemplateType(41)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text08 = TileTemplateType(42)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text09 = TileTemplateType(43)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text10 = TileTemplateType(44)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150Text11 = TileTemplateType(45)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310BlockAndText01 = TileTemplateType(46)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310BlockAndText02 = TileTemplateType(47)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Image = TileTemplateType(48)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageAndText01 = TileTemplateType(49)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageAndText02 = TileTemplateType(50)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageAndTextOverlay01 = TileTemplateType(51)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageAndTextOverlay02 = TileTemplateType(52)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageAndTextOverlay03 = TileTemplateType(53)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageCollectionAndText01 = TileTemplateType(54)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageCollectionAndText02 = TileTemplateType(55)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310ImageCollection = TileTemplateType(56)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310SmallImagesAndTextList01 = TileTemplateType(57)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310SmallImagesAndTextList02 = TileTemplateType(58)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310SmallImagesAndTextList03 = TileTemplateType(59)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310SmallImagesAndTextList04 = TileTemplateType(60)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text01 = TileTemplateType(61)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text02 = TileTemplateType(62)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text03 = TileTemplateType(63)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text04 = TileTemplateType(64)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text05 = TileTemplateType(65)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text06 = TileTemplateType(66)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text07 = TileTemplateType(67)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text08 = TileTemplateType(68)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310TextList01 = TileTemplateType(69)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310TextList02 = TileTemplateType(70)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310TextList03 = TileTemplateType(71)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310SmallImageAndText01 = TileTemplateType(72)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310SmallImagesAndTextList05 = TileTemplateType(73)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare310x310Text09 = TileTemplateType(74)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare71x71IconWithBadge = TileTemplateType(75)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare150x150IconWithBadge = TileTemplateType(76)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileWide310x150IconWithBadgeAndText = TileTemplateType(77)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileSquare71x71Image = TileTemplateType(78)
+@When[Windows_UI_Notifications == "on"]
+public const TileTemplateType_TileTall150x310Image = TileTemplateType(79)
+
+// Windows.UI.Notifications.TileUpdateManager (synthetic:Windows_UI_Notifications_TileUpdateManager)
+@When[Windows_UI_Notifications == "on"]
+public struct TileUpdateManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CreateTileUpdaterForApplication(): TileUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TileUpdateManager, ITileUpdateManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateTileUpdaterForApplication(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateTileUpdaterForApplicationWithId(applicationId: windows_core.HString): TileUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (factory__ = windows_core.factory<TileUpdateManager, ITileUpdateManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateTileUpdaterForApplicationWithId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateTileUpdaterForSecondaryTile(tileId: windows_core.HString): TileUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tileId)) {
+            try (factory__ = windows_core.factory<TileUpdateManager, ITileUpdateManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateTileUpdaterForSecondaryTile(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetTemplateContent(type_: TileTemplateType): Windows_Data_Xml_Dom.XmlDocument {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<TileUpdateManager, ITileUpdateManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetTemplateContent(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetForUser(user: Windows_System.User): TileUpdateManagerForUser {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<TileUpdateManager, ITileUpdateManagerStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileUpdateManagerForUser>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileUpdateManagerForUser.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.TileUpdateManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.TileUpdateManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.TileUpdateManager", TileUpdateManager.signature())
+    }
+}
+
+// Windows.UI.Notifications.TileUpdateManagerForUser (synthetic:Windows_UI_Notifications_TileUpdateManagerForUser)
+@When[Windows_UI_Notifications == "on"]
+public class TileUpdateManagerForUser <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TileUpdateManagerForUser> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TileUpdateManagerForUser {
+        TileUpdateManagerForUser(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TileUpdateManagerForUser {
+        TileUpdateManagerForUser(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITileUpdateManagerForUser.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TileUpdateManagerForUser> {
+        let ancestors = [ITileUpdateManagerForUser.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TileUpdateManagerForUser>("TileUpdateManagerForUser", ITileUpdateManagerForUser.iid(), ancestors, { raw => TileUpdateManagerForUser.fromAbiTake(raw) }, { raw => TileUpdateManagerForUser.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITileUpdateManagerForUser {
+        match (unsafe { query(ITileUpdateManagerForUser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITileUpdateManagerForUser(): ITileUpdateManagerForUser {
+        defaultInterface()
+    }
+
+    public prop User: Windows_System.User {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_System.User>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_System.User.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func CreateTileUpdaterForApplication(): TileUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CreateTileUpdaterForApplication(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateTileUpdaterForApplicationWithId(applicationId: windows_core.HString): TileUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateTileUpdaterForApplicationWithId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateTileUpdaterForSecondaryTile(tileId: windows_core.HString): TileUpdater {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tileId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateTileUpdaterForSecondaryTile(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TileUpdater>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TileUpdater.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.TileUpdateManagerForUser"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.TileUpdateManagerForUser;{" + ITileUpdateManagerForUser.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.TileUpdateManagerForUser", TileUpdateManagerForUser.signature(), ITileUpdateManagerForUser.iid())
+    }
+
+    public static func intoWinrtHandle(value: TileUpdateManagerForUser): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TileUpdateManagerForUser {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TileUpdateManagerForUser.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TileUpdateManagerForUser {
+        TileUpdateManagerForUser.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.TileUpdater (synthetic:Windows_UI_Notifications_TileUpdater)
+@When[Windows_UI_Notifications == "on"]
+public class TileUpdater <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TileUpdater> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TileUpdater {
+        TileUpdater(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TileUpdater {
+        TileUpdater(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITileUpdater.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TileUpdater> {
+        let ancestors = [ITileUpdater.iid(), ITileUpdater2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TileUpdater>("TileUpdater", ITileUpdater.iid(), ancestors, { raw => TileUpdater.fromAbiTake(raw) }, { raw => TileUpdater.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITileUpdater {
+        match (unsafe { query(ITileUpdater.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITileUpdater(): ITileUpdater {
+        defaultInterface()
+    }
+
+    public func asITileUpdater2(): ITileUpdater2 {
+        match (unsafe { query<ITileUpdater2>(ITileUpdater2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Setting: NotificationSetting {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Setting(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return NotificationSetting(result__)
+        }
+    }
+
+    public func Update(notification: TileNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<TileNotification>(notification)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Update(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Clear(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Clear() }
+        }
+        hr__.check()
+    }
+
+    public func EnableNotificationQueue(enable: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.EnableNotificationQueue(enable) }
+        }
+        hr__.check()
+    }
+
+    public func AddToSchedule(scheduledTile: ScheduledTileNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ScheduledTileNotification>(scheduledTile)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AddToSchedule(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func RemoveFromSchedule(scheduledTile: ScheduledTileNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ScheduledTileNotification>(scheduledTile)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RemoveFromSchedule(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func GetScheduledTileNotifications(): Windows_Foundation_Collections.IVectorView<ScheduledTileNotification> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetScheduledTileNotifications(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ScheduledTileNotification>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<ScheduledTileNotification>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func StartPeriodicUpdate(tileContent: Windows_Foundation.Uri, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(tileContent)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdate(__argBorrow0.asRaw(), requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StartPeriodicUpdateAtTime(tileContent: Windows_Foundation.Uri, startTime: Windows_Foundation.DateTime, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(tileContent)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdateAtTime(__argBorrow0.asRaw(), startTime, requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StopPeriodicUpdate(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.StopPeriodicUpdate() }
+        }
+        hr__.check()
+    }
+
+    public func StartPeriodicUpdateBatch(tileContents: Windows_Foundation_Collections.IIterable<Windows_Foundation.Uri>, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Foundation.Uri>>(tileContents)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdateBatch(__argBorrow0.asRaw(), requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func StartPeriodicUpdateBatchAtTime(tileContents: Windows_Foundation_Collections.IIterable<Windows_Foundation.Uri>, startTime: Windows_Foundation.DateTime, requestedInterval: PeriodicUpdateRecurrence): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Foundation.Uri>>(tileContents)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.StartPeriodicUpdateBatchAtTime(__argBorrow0.asRaw(), startTime, requestedInterval.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.TileUpdater"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.TileUpdater;{" + ITileUpdater.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.TileUpdater", TileUpdater.signature(), ITileUpdater.iid())
+    }
+
+    public static func intoWinrtHandle(value: TileUpdater): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TileUpdater {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TileUpdater.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TileUpdater {
+        TileUpdater.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastActivatedEventArgs (synthetic:Windows_UI_Notifications_ToastActivatedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+public class ToastActivatedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastActivatedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastActivatedEventArgs {
+        ToastActivatedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastActivatedEventArgs {
+        ToastActivatedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastActivatedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastActivatedEventArgs> {
+        let ancestors = [IToastActivatedEventArgs.iid(), IToastActivatedEventArgs2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastActivatedEventArgs>("ToastActivatedEventArgs", IToastActivatedEventArgs.iid(), ancestors, { raw => ToastActivatedEventArgs.fromAbiTake(raw) }, { raw => ToastActivatedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastActivatedEventArgs {
+        match (unsafe { query(IToastActivatedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastActivatedEventArgs(): IToastActivatedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIToastActivatedEventArgs2(): IToastActivatedEventArgs2 {
+        match (unsafe { query<IToastActivatedEventArgs2>(IToastActivatedEventArgs2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Arguments: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Arguments(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastActivatedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastActivatedEventArgs;{" + IToastActivatedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastActivatedEventArgs", ToastActivatedEventArgs.signature(), IToastActivatedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastActivatedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastActivatedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastActivatedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastActivatedEventArgs {
+        ToastActivatedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastCollection (synthetic:Windows_UI_Notifications_ToastCollection)
+@When[Windows_UI_Notifications == "on"]
+public class ToastCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastCollection> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastCollection {
+        ToastCollection(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastCollection {
+        ToastCollection(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastCollection.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastCollection> {
+        let ancestors = [IToastCollection.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastCollection>("ToastCollection", IToastCollection.iid(), ancestors, { raw => ToastCollection.fromAbiTake(raw) }, { raw => ToastCollection.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastCollection {
+        match (unsafe { query(IToastCollection.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastCollection(): IToastCollection {
+        defaultInterface()
+    }
+
+    public mut prop DisplayName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDisplayName(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Icon: Windows_Foundation.Uri {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.Uri>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.Uri.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Id: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public mut prop LaunchArgs: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LaunchArgs(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetLaunchArgs(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func CreateInstance(collectionId: windows_core.HString, displayName: windows_core.HString, launchArgs: windows_core.HString, iconUri: Windows_Foundation.Uri): ToastCollection {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(collectionId)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(displayName)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(launchArgs)) {
+                    try (__argBorrow3 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(iconUri)) {
+                        try (factory__ = windows_core.factory<ToastCollection, IToastCollectionFactory>().unwrap()) {
+                            hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), __argBorrow3.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                        }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastCollection>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastCollection.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastCollection"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastCollection;{" + IToastCollection.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastCollection", ToastCollection.signature(), IToastCollection.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastCollection): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastCollection {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastCollection.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastCollection {
+        ToastCollection.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastCollectionManager (synthetic:Windows_UI_Notifications_ToastCollectionManager)
+@When[Windows_UI_Notifications == "on"]
+public class ToastCollectionManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastCollectionManager> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastCollectionManager {
+        ToastCollectionManager(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastCollectionManager {
+        ToastCollectionManager(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastCollectionManager.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastCollectionManager> {
+        let ancestors = [IToastCollectionManager.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastCollectionManager>("ToastCollectionManager", IToastCollectionManager.iid(), ancestors, { raw => ToastCollectionManager.fromAbiTake(raw) }, { raw => ToastCollectionManager.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastCollectionManager {
+        match (unsafe { query(IToastCollectionManager.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastCollectionManager(): IToastCollectionManager {
+        defaultInterface()
+    }
+
+    public prop AppId: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AppId(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop User: Windows_System.User {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_System.User>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_System.User.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func SaveToastCollectionAsync(collection: ToastCollection): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ToastCollection>(collection)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SaveToastCollectionAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindAllToastCollectionsAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ToastCollection>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FindAllToastCollectionsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ToastCollection>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<ToastCollection>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetToastCollectionAsync(collectionId: windows_core.HString): Windows_Foundation.IAsyncOperation<ToastCollection> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(collectionId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetToastCollectionAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ToastCollection>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ToastCollection>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RemoveToastCollectionAsync(collectionId: windows_core.HString): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(collectionId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RemoveToastCollectionAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RemoveAllToastCollectionsAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveAllToastCollectionsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastCollectionManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastCollectionManager;{" + IToastCollectionManager.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastCollectionManager", ToastCollectionManager.signature(), IToastCollectionManager.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastCollectionManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastCollectionManager {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastCollectionManager.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastCollectionManager {
+        ToastCollectionManager.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastDismissalReason (synthetic:Windows_UI_Notifications_ToastDismissalReason)
+@When[Windows_UI_Notifications == "on"]
+public struct ToastDismissalReason {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const ToastDismissalReason_UserCanceled = ToastDismissalReason(0)
+@When[Windows_UI_Notifications == "on"]
+public const ToastDismissalReason_ApplicationHidden = ToastDismissalReason(1)
+@When[Windows_UI_Notifications == "on"]
+public const ToastDismissalReason_TimedOut = ToastDismissalReason(2)
+
+// Windows.UI.Notifications.ToastDismissedEventArgs (synthetic:Windows_UI_Notifications_ToastDismissedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+public class ToastDismissedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastDismissedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastDismissedEventArgs {
+        ToastDismissedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastDismissedEventArgs {
+        ToastDismissedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastDismissedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastDismissedEventArgs> {
+        let ancestors = [IToastDismissedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastDismissedEventArgs>("ToastDismissedEventArgs", IToastDismissedEventArgs.iid(), ancestors, { raw => ToastDismissedEventArgs.fromAbiTake(raw) }, { raw => ToastDismissedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastDismissedEventArgs {
+        match (unsafe { query(IToastDismissedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastDismissedEventArgs(): IToastDismissedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Reason: ToastDismissalReason {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Reason(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ToastDismissalReason(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastDismissedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastDismissedEventArgs;{" + IToastDismissedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastDismissedEventArgs", ToastDismissedEventArgs.signature(), IToastDismissedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastDismissedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastDismissedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastDismissedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastDismissedEventArgs {
+        ToastDismissedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastFailedEventArgs (synthetic:Windows_UI_Notifications_ToastFailedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+public class ToastFailedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastFailedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastFailedEventArgs {
+        ToastFailedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastFailedEventArgs {
+        ToastFailedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastFailedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastFailedEventArgs> {
+        let ancestors = [IToastFailedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastFailedEventArgs>("ToastFailedEventArgs", IToastFailedEventArgs.iid(), ancestors, { raw => ToastFailedEventArgs.fromAbiTake(raw) }, { raw => ToastFailedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastFailedEventArgs {
+        match (unsafe { query(IToastFailedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastFailedEventArgs(): IToastFailedEventArgs {
+        defaultInterface()
+    }
+
+    public prop ErrorCode: Windows_Foundation.HResult {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ErrorCode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastFailedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastFailedEventArgs;{" + IToastFailedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastFailedEventArgs", ToastFailedEventArgs.signature(), IToastFailedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastFailedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastFailedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastFailedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastFailedEventArgs {
+        ToastFailedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastHistoryChangedType (synthetic:Windows_UI_Notifications_ToastHistoryChangedType)
+@When[Windows_UI_Notifications == "on"]
+public struct ToastHistoryChangedType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const ToastHistoryChangedType_Cleared = ToastHistoryChangedType(0)
+@When[Windows_UI_Notifications == "on"]
+public const ToastHistoryChangedType_Removed = ToastHistoryChangedType(1)
+@When[Windows_UI_Notifications == "on"]
+public const ToastHistoryChangedType_Expired = ToastHistoryChangedType(2)
+@When[Windows_UI_Notifications == "on"]
+public const ToastHistoryChangedType_Added = ToastHistoryChangedType(3)
+
+// Windows.UI.Notifications.ToastNotification (synthetic:Windows_UI_Notifications_ToastNotification)
+@When[Windows_UI_Notifications == "on"]
+public class ToastNotification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastNotification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastNotification {
+        ToastNotification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastNotification {
+        ToastNotification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastNotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastNotification> {
+        let ancestors = [IToastNotification.iid(), IToastNotification2.iid(), IToastNotification3.iid(), IToastNotification4.iid(), IToastNotification6.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastNotification>("ToastNotification", IToastNotification.iid(), ancestors, { raw => ToastNotification.fromAbiTake(raw) }, { raw => ToastNotification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastNotification {
+        match (unsafe { query(IToastNotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastNotification(): IToastNotification {
+        defaultInterface()
+    }
+
+    public func asIToastNotification2(): IToastNotification2 {
+        match (unsafe { query<IToastNotification2>(IToastNotification2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToastNotification3(): IToastNotification3 {
+        match (unsafe { query<IToastNotification3>(IToastNotification3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToastNotification4(): IToastNotification4 {
+        match (unsafe { query<IToastNotification4>(IToastNotification4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToastNotification6(): IToastNotification6 {
+        match (unsafe { query<IToastNotification6>(IToastNotification6.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Content: Windows_Data_Xml_Dom.XmlDocument {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop ExpirationTime: Windows_Foundation.IReference<windows_interface.IInspectable> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ExpirationTime(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.IReference<windows_interface.IInspectable>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.IReference<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IReference<windows_interface.IInspectable>>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetExpirationTime(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addActivated(handler: Windows_Foundation.TypedEventHandler<ToastNotification, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ToastNotification, windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Activated(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeActivated(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveActivated(token) }
+        }
+        hr__.check()
+    }
+
+    public func addDismissed(handler: Windows_Foundation.TypedEventHandler<ToastNotification, ToastDismissedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ToastNotification, ToastDismissedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Dismissed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeDismissed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveDismissed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addFailed(handler: Windows_Foundation.TypedEventHandler<ToastNotification, ToastFailedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<ToastNotification, ToastFailedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Failed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeFailed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveFailed(token) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateToastNotification(content: Windows_Data_Xml_Dom.XmlDocument): ToastNotification {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Data_Xml_Dom.XmlDocument>(content)) {
+            try (factory__ = windows_core.factory<ToastNotification, IToastNotificationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateToastNotification(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotification>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotification.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastNotification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastNotification;{" + IToastNotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastNotification", ToastNotification.signature(), IToastNotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastNotification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastNotification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastNotification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastNotification {
+        ToastNotification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastNotificationActionTriggerDetail (synthetic:Windows_UI_Notifications_ToastNotificationActionTriggerDetail)
+@When[Windows_UI_Notifications == "on"]
+public class ToastNotificationActionTriggerDetail <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastNotificationActionTriggerDetail> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastNotificationActionTriggerDetail {
+        ToastNotificationActionTriggerDetail(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastNotificationActionTriggerDetail {
+        ToastNotificationActionTriggerDetail(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastNotificationActionTriggerDetail.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastNotificationActionTriggerDetail> {
+        let ancestors = [IToastNotificationActionTriggerDetail.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastNotificationActionTriggerDetail>("ToastNotificationActionTriggerDetail", IToastNotificationActionTriggerDetail.iid(), ancestors, { raw => ToastNotificationActionTriggerDetail.fromAbiTake(raw) }, { raw => ToastNotificationActionTriggerDetail.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastNotificationActionTriggerDetail {
+        match (unsafe { query(IToastNotificationActionTriggerDetail.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastNotificationActionTriggerDetail(): IToastNotificationActionTriggerDetail {
+        defaultInterface()
+    }
+
+    public prop Argument: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Argument(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop UserInput: Windows_Foundation_Collections.ValueSet {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UserInput(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.ValueSet>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.ValueSet.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastNotificationActionTriggerDetail"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastNotificationActionTriggerDetail;{" + IToastNotificationActionTriggerDetail.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastNotificationActionTriggerDetail", ToastNotificationActionTriggerDetail.signature(), IToastNotificationActionTriggerDetail.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastNotificationActionTriggerDetail): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastNotificationActionTriggerDetail {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastNotificationActionTriggerDetail.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastNotificationActionTriggerDetail {
+        ToastNotificationActionTriggerDetail.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastNotificationHistory (synthetic:Windows_UI_Notifications_ToastNotificationHistory)
+@When[Windows_UI_Notifications == "on"]
+public class ToastNotificationHistory <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastNotificationHistory> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastNotificationHistory {
+        ToastNotificationHistory(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastNotificationHistory {
+        ToastNotificationHistory(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastNotificationHistory.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastNotificationHistory> {
+        let ancestors = [IToastNotificationHistory.iid(), IToastNotificationHistory2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastNotificationHistory>("ToastNotificationHistory", IToastNotificationHistory.iid(), ancestors, { raw => ToastNotificationHistory.fromAbiTake(raw) }, { raw => ToastNotificationHistory.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastNotificationHistory {
+        match (unsafe { query(IToastNotificationHistory.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastNotificationHistory(): IToastNotificationHistory {
+        defaultInterface()
+    }
+
+    public func asIToastNotificationHistory2(): IToastNotificationHistory2 {
+        match (unsafe { query<IToastNotificationHistory2>(IToastNotificationHistory2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func RemoveGroup(group: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(group)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RemoveGroup(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func RemoveGroupWithId(group: windows_core.HString, applicationId: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(group)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.RemoveGroupWithId(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public func RemoveGroupedTagWithId(tag: windows_core.HString, group: windows_core.HString, applicationId: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tag)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(group)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+                    try (interface__ = defaultInterface()) {
+                        hr__ = unsafe { interface__.RemoveGroupedTagWithId(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw()) }
+                    }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public func RemoveGroupedTag(tag: windows_core.HString, group: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tag)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(group)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.RemoveGroupedTag(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Remove(tag: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(tag)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Remove(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Clear(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Clear() }
+        }
+        hr__.check()
+    }
+
+    public func ClearWithId(applicationId: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ClearWithId(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastNotificationHistory"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastNotificationHistory;{" + IToastNotificationHistory.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastNotificationHistory", ToastNotificationHistory.signature(), IToastNotificationHistory.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastNotificationHistory): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastNotificationHistory {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastNotificationHistory.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastNotificationHistory {
+        ToastNotificationHistory.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastNotificationHistoryChangedTriggerDetail (synthetic:Windows_UI_Notifications_ToastNotificationHistoryChangedTriggerDetail)
+@When[Windows_UI_Notifications == "on"]
+public class ToastNotificationHistoryChangedTriggerDetail <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastNotificationHistoryChangedTriggerDetail> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastNotificationHistoryChangedTriggerDetail {
+        ToastNotificationHistoryChangedTriggerDetail(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastNotificationHistoryChangedTriggerDetail {
+        ToastNotificationHistoryChangedTriggerDetail(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastNotificationHistoryChangedTriggerDetail.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastNotificationHistoryChangedTriggerDetail> {
+        let ancestors = [IToastNotificationHistoryChangedTriggerDetail.iid(), IToastNotificationHistoryChangedTriggerDetail2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastNotificationHistoryChangedTriggerDetail>("ToastNotificationHistoryChangedTriggerDetail", IToastNotificationHistoryChangedTriggerDetail.iid(), ancestors, { raw => ToastNotificationHistoryChangedTriggerDetail.fromAbiTake(raw) }, { raw => ToastNotificationHistoryChangedTriggerDetail.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastNotificationHistoryChangedTriggerDetail {
+        match (unsafe { query(IToastNotificationHistoryChangedTriggerDetail.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastNotificationHistoryChangedTriggerDetail(): IToastNotificationHistoryChangedTriggerDetail {
+        defaultInterface()
+    }
+
+    public func asIToastNotificationHistoryChangedTriggerDetail2(): IToastNotificationHistoryChangedTriggerDetail2 {
+        match (unsafe { query<IToastNotificationHistoryChangedTriggerDetail2>(IToastNotificationHistoryChangedTriggerDetail2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop ChangeType: ToastHistoryChangedType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChangeType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ToastHistoryChangedType(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastNotificationHistoryChangedTriggerDetail"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastNotificationHistoryChangedTriggerDetail;{" + IToastNotificationHistoryChangedTriggerDetail.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastNotificationHistoryChangedTriggerDetail", ToastNotificationHistoryChangedTriggerDetail.signature(), IToastNotificationHistoryChangedTriggerDetail.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastNotificationHistoryChangedTriggerDetail): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastNotificationHistoryChangedTriggerDetail {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastNotificationHistoryChangedTriggerDetail.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastNotificationHistoryChangedTriggerDetail {
+        ToastNotificationHistoryChangedTriggerDetail.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastNotificationManager (synthetic:Windows_UI_Notifications_ToastNotificationManager)
+@When[Windows_UI_Notifications == "on"]
+public struct ToastNotificationManager <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CreateToastNotifier(): ToastNotifier {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ToastNotificationManager, IToastNotificationManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CreateToastNotifier(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotifier>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotifier.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateToastNotifierWithId(applicationId: windows_core.HString): ToastNotifier {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (factory__ = windows_core.factory<ToastNotificationManager, IToastNotificationManagerStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateToastNotifierWithId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotifier>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotifier.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetTemplateContent(type_: ToastTemplateType): Windows_Data_Xml_Dom.XmlDocument {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ToastNotificationManager, IToastNotificationManagerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetTemplateContent(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Data_Xml_Dom.XmlDocument>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Data_Xml_Dom.XmlDocument.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDefault(): ToastNotificationManagerForUser {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ToastNotificationManager, IToastNotificationManagerStatics5>().unwrap()) {
+            hr__ = unsafe { factory__.GetDefault(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotificationManagerForUser>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotificationManagerForUser.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetForUser(user: Windows_System.User): ToastNotificationManagerForUser {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (factory__ = windows_core.factory<ToastNotificationManager, IToastNotificationManagerStatics4>().unwrap()) {
+                hr__ = unsafe { factory__.GetForUser(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotificationManagerForUser>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotificationManagerForUser.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ConfigureNotificationMirroring(value: NotificationMirroring): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ToastNotificationManager, IToastNotificationManagerStatics4>().unwrap()) {
+            hr__ = unsafe { factory__.ConfigureNotificationMirroring(value.value) }
+        }
+        hr__.check()
+    }
+
+    public static func History(): ToastNotificationHistory {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ToastNotificationManager, IToastNotificationManagerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.History(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotificationHistory>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotificationHistory.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastNotificationManager"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastNotificationManager)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastNotificationManager", ToastNotificationManager.signature())
+    }
+}
+
+// Windows.UI.Notifications.ToastNotificationManagerForUser (synthetic:Windows_UI_Notifications_ToastNotificationManagerForUser)
+@When[Windows_UI_Notifications == "on"]
+public class ToastNotificationManagerForUser <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastNotificationManagerForUser> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastNotificationManagerForUser {
+        ToastNotificationManagerForUser(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastNotificationManagerForUser {
+        ToastNotificationManagerForUser(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastNotificationManagerForUser.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastNotificationManagerForUser> {
+        let ancestors = [IToastNotificationManagerForUser.iid(), IToastNotificationManagerForUser2.iid(), IToastNotificationManagerForUser3.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastNotificationManagerForUser>("ToastNotificationManagerForUser", IToastNotificationManagerForUser.iid(), ancestors, { raw => ToastNotificationManagerForUser.fromAbiTake(raw) }, { raw => ToastNotificationManagerForUser.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastNotificationManagerForUser {
+        match (unsafe { query(IToastNotificationManagerForUser.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastNotificationManagerForUser(): IToastNotificationManagerForUser {
+        defaultInterface()
+    }
+
+    public func asIToastNotificationManagerForUser2(): IToastNotificationManagerForUser2 {
+        match (unsafe { query<IToastNotificationManagerForUser2>(IToastNotificationManagerForUser2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToastNotificationManagerForUser3(): IToastNotificationManagerForUser3 {
+        match (unsafe { query<IToastNotificationManagerForUser3>(IToastNotificationManagerForUser3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop History: ToastNotificationHistory {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.History(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<ToastNotificationHistory>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return ToastNotificationHistory.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop User: Windows_System.User {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_System.User>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_System.User.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func CreateToastNotifier(): ToastNotifier {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CreateToastNotifier(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotifier>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotifier.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func CreateToastNotifierWithId(applicationId: windows_core.HString): ToastNotifier {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(applicationId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreateToastNotifierWithId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ToastNotifier>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ToastNotifier.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastNotificationManagerForUser"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastNotificationManagerForUser;{" + IToastNotificationManagerForUser.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastNotificationManagerForUser", ToastNotificationManagerForUser.signature(), IToastNotificationManagerForUser.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastNotificationManagerForUser): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastNotificationManagerForUser {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastNotificationManagerForUser.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastNotificationManagerForUser {
+        ToastNotificationManagerForUser.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastNotificationMode (synthetic:Windows_UI_Notifications_ToastNotificationMode)
+@When[Windows_UI_Notifications == "on"]
+public struct ToastNotificationMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const ToastNotificationMode_Unrestricted = ToastNotificationMode(0)
+@When[Windows_UI_Notifications == "on"]
+public const ToastNotificationMode_PriorityOnly = ToastNotificationMode(1)
+@When[Windows_UI_Notifications == "on"]
+public const ToastNotificationMode_AlarmsOnly = ToastNotificationMode(2)
+
+// Windows.UI.Notifications.ToastNotificationPriority (synthetic:Windows_UI_Notifications_ToastNotificationPriority)
+@When[Windows_UI_Notifications == "on"]
+public struct ToastNotificationPriority {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const ToastNotificationPriority_Default = ToastNotificationPriority(0)
+@When[Windows_UI_Notifications == "on"]
+public const ToastNotificationPriority_High = ToastNotificationPriority(1)
+
+// Windows.UI.Notifications.ToastNotifier (synthetic:Windows_UI_Notifications_ToastNotifier)
+@When[Windows_UI_Notifications == "on"]
+public class ToastNotifier <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ToastNotifier> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ToastNotifier {
+        ToastNotifier(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ToastNotifier {
+        ToastNotifier(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IToastNotifier.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ToastNotifier> {
+        let ancestors = [IToastNotifier.iid(), IToastNotifier2.iid(), IToastNotifier3.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ToastNotifier>("ToastNotifier", IToastNotifier.iid(), ancestors, { raw => ToastNotifier.fromAbiTake(raw) }, { raw => ToastNotifier.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IToastNotifier {
+        match (unsafe { query(IToastNotifier.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIToastNotifier(): IToastNotifier {
+        defaultInterface()
+    }
+
+    public func asIToastNotifier2(): IToastNotifier2 {
+        match (unsafe { query<IToastNotifier2>(IToastNotifier2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToastNotifier3(): IToastNotifier3 {
+        match (unsafe { query<IToastNotifier3>(IToastNotifier3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Setting: NotificationSetting {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Setting(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return NotificationSetting(result__)
+        }
+    }
+
+    public func Show(notification: ToastNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ToastNotification>(notification)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Show(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Hide(notification: ToastNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ToastNotification>(notification)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Hide(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func AddToSchedule(scheduledToast: ScheduledToastNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ScheduledToastNotification>(scheduledToast)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AddToSchedule(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func RemoveFromSchedule(scheduledToast: ScheduledToastNotification): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ScheduledToastNotification>(scheduledToast)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RemoveFromSchedule(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func GetScheduledToastNotifications(): Windows_Foundation_Collections.IVectorView<ScheduledToastNotification> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetScheduledToastNotifications(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<ScheduledToastNotification>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<ScheduledToastNotification>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.ToastNotifier"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.ToastNotifier;{" + IToastNotifier.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.ToastNotifier", ToastNotifier.signature(), IToastNotifier.iid())
+    }
+
+    public static func intoWinrtHandle(value: ToastNotifier): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ToastNotifier {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ToastNotifier.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ToastNotifier {
+        ToastNotifier.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.ToastTemplateType (synthetic:Windows_UI_Notifications_ToastTemplateType)
+@When[Windows_UI_Notifications == "on"]
+public struct ToastTemplateType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastImageAndText01 = ToastTemplateType(0)
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastImageAndText02 = ToastTemplateType(1)
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastImageAndText03 = ToastTemplateType(2)
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastImageAndText04 = ToastTemplateType(3)
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastText01 = ToastTemplateType(4)
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastText02 = ToastTemplateType(5)
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastText03 = ToastTemplateType(6)
+@When[Windows_UI_Notifications == "on"]
+public const ToastTemplateType_ToastText04 = ToastTemplateType(7)
+
+// Windows.UI.Notifications.UserNotification (synthetic:Windows_UI_Notifications_UserNotification)
+@When[Windows_UI_Notifications == "on"]
+public class UserNotification <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UserNotification> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UserNotification {
+        UserNotification(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UserNotification {
+        UserNotification(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUserNotification.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UserNotification> {
+        let ancestors = [IUserNotification.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UserNotification>("UserNotification", IUserNotification.iid(), ancestors, { raw => UserNotification.fromAbiTake(raw) }, { raw => UserNotification.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUserNotification {
+        match (unsafe { query(IUserNotification.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUserNotification(): IUserNotification {
+        defaultInterface()
+    }
+
+    public prop AppInfo: Windows_ApplicationModel.AppInfo {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AppInfo(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_ApplicationModel.AppInfo>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_ApplicationModel.AppInfo.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop CreationTime: Windows_Foundation.DateTime {
+        get() {
+            var result__ = Windows_Foundation.DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CreationTime(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Id: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Id(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Notification: Notification {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Notification(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Notification>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Notification.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.UserNotification"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.UserNotification;{" + IUserNotification.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.UserNotification", UserNotification.signature(), IUserNotification.iid())
+    }
+
+    public static func intoWinrtHandle(value: UserNotification): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UserNotification {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UserNotification.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UserNotification {
+        UserNotification.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.UserNotificationChangedEventArgs (synthetic:Windows_UI_Notifications_UserNotificationChangedEventArgs)
+@When[Windows_UI_Notifications == "on"]
+public class UserNotificationChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<UserNotificationChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): UserNotificationChangedEventArgs {
+        UserNotificationChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): UserNotificationChangedEventArgs {
+        UserNotificationChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IUserNotificationChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<UserNotificationChangedEventArgs> {
+        let ancestors = [IUserNotificationChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<UserNotificationChangedEventArgs>("UserNotificationChangedEventArgs", IUserNotificationChangedEventArgs.iid(), ancestors, { raw => UserNotificationChangedEventArgs.fromAbiTake(raw) }, { raw => UserNotificationChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IUserNotificationChangedEventArgs {
+        match (unsafe { query(IUserNotificationChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIUserNotificationChangedEventArgs(): IUserNotificationChangedEventArgs {
+        defaultInterface()
+    }
+
+    public prop ChangeKind: UserNotificationChangedKind {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChangeKind(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return UserNotificationChangedKind(result__)
+        }
+    }
+
+    public prop UserNotificationId: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UserNotificationId(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Notifications.UserNotificationChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Notifications.UserNotificationChangedEventArgs;{" + IUserNotificationChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Notifications.UserNotificationChangedEventArgs", UserNotificationChangedEventArgs.signature(), IUserNotificationChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: UserNotificationChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): UserNotificationChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        UserNotificationChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): UserNotificationChangedEventArgs {
+        UserNotificationChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Notifications.UserNotificationChangedKind (synthetic:Windows_UI_Notifications_UserNotificationChangedKind)
+@When[Windows_UI_Notifications == "on"]
+public struct UserNotificationChangedKind {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Notifications == "on"]
+public const UserNotificationChangedKind_Added = UserNotificationChangedKind(0)
+@When[Windows_UI_Notifications == "on"]
+public const UserNotificationChangedKind_Removed = UserNotificationChangedKind(1)

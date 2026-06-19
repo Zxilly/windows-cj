@@ -5,258 +5,364 @@ package windows_sys.Graphics.DirectX
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
 
-// Windows.Graphics.DirectX.DirectXPixelFormat (synthetic:Windows_Graphics_DirectX_DirectXPixelFormat)
+// Windows.Graphics.DirectX.DirectXAlphaMode (synthetic:Windows_Graphics_DirectX_DirectXAlphaMode)
 @When[Windows_Graphics_DirectX == "on"]
-public struct DirectXPixelFormat {
+public struct DirectXAlphaMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Unknown = DirectXPixelFormat(0)
+public const DirectXAlphaMode_Unspecified = DirectXAlphaMode(0)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32A32Typeless = DirectXPixelFormat(1)
+public const DirectXAlphaMode_Premultiplied = DirectXAlphaMode(1)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32A32Float = DirectXPixelFormat(2)
+public const DirectXAlphaMode_Straight = DirectXAlphaMode(2)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32A32UInt = DirectXPixelFormat(3)
+public const DirectXAlphaMode_Ignore = DirectXAlphaMode(3)
+
+// Windows.Graphics.DirectX.DirectXColorSpace (synthetic:Windows_Graphics_DirectX_DirectXColorSpace)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32A32Int = DirectXPixelFormat(4)
+public struct DirectXColorSpace {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32Typeless = DirectXPixelFormat(5)
+public const DirectXColorSpace_RgbFullG22NoneP709 = DirectXColorSpace(0)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32Float = DirectXPixelFormat(6)
+public const DirectXColorSpace_RgbFullG10NoneP709 = DirectXColorSpace(1)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32UInt = DirectXPixelFormat(7)
+public const DirectXColorSpace_RgbStudioG22NoneP709 = DirectXColorSpace(2)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32B32Int = DirectXPixelFormat(8)
+public const DirectXColorSpace_RgbStudioG22NoneP2020 = DirectXColorSpace(3)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16B16A16Typeless = DirectXPixelFormat(9)
+public const DirectXColorSpace_Reserved = DirectXColorSpace(4)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16B16A16Float = DirectXPixelFormat(10)
+public const DirectXColorSpace_YccFullG22NoneP709X601 = DirectXColorSpace(5)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16B16A16UIntNormalized = DirectXPixelFormat(11)
+public const DirectXColorSpace_YccStudioG22LeftP601 = DirectXColorSpace(6)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16B16A16UInt = DirectXPixelFormat(12)
+public const DirectXColorSpace_YccFullG22LeftP601 = DirectXColorSpace(7)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16B16A16IntNormalized = DirectXPixelFormat(13)
+public const DirectXColorSpace_YccStudioG22LeftP709 = DirectXColorSpace(8)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16B16A16Int = DirectXPixelFormat(14)
+public const DirectXColorSpace_YccFullG22LeftP709 = DirectXColorSpace(9)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32Typeless = DirectXPixelFormat(15)
+public const DirectXColorSpace_YccStudioG22LeftP2020 = DirectXColorSpace(10)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32Float = DirectXPixelFormat(16)
+public const DirectXColorSpace_YccFullG22LeftP2020 = DirectXColorSpace(11)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32UInt = DirectXPixelFormat(17)
+public const DirectXColorSpace_RgbFullG2084NoneP2020 = DirectXColorSpace(12)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G32Int = DirectXPixelFormat(18)
+public const DirectXColorSpace_YccStudioG2084LeftP2020 = DirectXColorSpace(13)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32G8X24Typeless = DirectXPixelFormat(19)
+public const DirectXColorSpace_RgbStudioG2084NoneP2020 = DirectXColorSpace(14)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_D32FloatS8X24UInt = DirectXPixelFormat(20)
+public const DirectXColorSpace_YccStudioG22TopLeftP2020 = DirectXColorSpace(15)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32FloatX8X24Typeless = DirectXPixelFormat(21)
+public const DirectXColorSpace_YccStudioG2084TopLeftP2020 = DirectXColorSpace(16)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_X32TypelessG8X24UInt = DirectXPixelFormat(22)
+public const DirectXColorSpace_RgbFullG22NoneP2020 = DirectXColorSpace(17)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R10G10B10A2Typeless = DirectXPixelFormat(23)
+public const DirectXColorSpace_YccStudioGHlgTopLeftP2020 = DirectXColorSpace(18)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R10G10B10A2UIntNormalized = DirectXPixelFormat(24)
+public const DirectXColorSpace_YccFullGHlgTopLeftP2020 = DirectXColorSpace(19)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R10G10B10A2UInt = DirectXPixelFormat(25)
+public const DirectXColorSpace_RgbStudioG24NoneP709 = DirectXColorSpace(20)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R11G11B10Float = DirectXPixelFormat(26)
+public const DirectXColorSpace_RgbStudioG24NoneP2020 = DirectXColorSpace(21)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8B8A8Typeless = DirectXPixelFormat(27)
+public const DirectXColorSpace_YccStudioG24LeftP709 = DirectXColorSpace(22)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8B8A8UIntNormalized = DirectXPixelFormat(28)
+public const DirectXColorSpace_YccStudioG24LeftP2020 = DirectXColorSpace(23)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8B8A8UIntNormalizedSrgb = DirectXPixelFormat(29)
+public const DirectXColorSpace_YccStudioG24TopLeftP2020 = DirectXColorSpace(24)
+
+// Windows.Graphics.DirectX.DirectXPixelFormat (synthetic:Windows_Graphics_DirectX_DirectXPixelFormat)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8B8A8UInt = DirectXPixelFormat(30)
+public struct DirectXPixelFormat {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8B8A8IntNormalized = DirectXPixelFormat(31)
+public const DirectXPixelFormat_Unknown = DirectXPixelFormat(0)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8B8A8Int = DirectXPixelFormat(32)
+public const DirectXPixelFormat_R32G32B32A32Typeless = DirectXPixelFormat(1)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16Typeless = DirectXPixelFormat(33)
+public const DirectXPixelFormat_R32G32B32A32Float = DirectXPixelFormat(2)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16Float = DirectXPixelFormat(34)
+public const DirectXPixelFormat_R32G32B32A32UInt = DirectXPixelFormat(3)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16UIntNormalized = DirectXPixelFormat(35)
+public const DirectXPixelFormat_R32G32B32A32Int = DirectXPixelFormat(4)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16UInt = DirectXPixelFormat(36)
+public const DirectXPixelFormat_R32G32B32Typeless = DirectXPixelFormat(5)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16IntNormalized = DirectXPixelFormat(37)
+public const DirectXPixelFormat_R32G32B32Float = DirectXPixelFormat(6)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16G16Int = DirectXPixelFormat(38)
+public const DirectXPixelFormat_R32G32B32UInt = DirectXPixelFormat(7)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32Typeless = DirectXPixelFormat(39)
+public const DirectXPixelFormat_R32G32B32Int = DirectXPixelFormat(8)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_D32Float = DirectXPixelFormat(40)
+public const DirectXPixelFormat_R16G16B16A16Typeless = DirectXPixelFormat(9)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32Float = DirectXPixelFormat(41)
+public const DirectXPixelFormat_R16G16B16A16Float = DirectXPixelFormat(10)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32UInt = DirectXPixelFormat(42)
+public const DirectXPixelFormat_R16G16B16A16UIntNormalized = DirectXPixelFormat(11)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R32Int = DirectXPixelFormat(43)
+public const DirectXPixelFormat_R16G16B16A16UInt = DirectXPixelFormat(12)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R24G8Typeless = DirectXPixelFormat(44)
+public const DirectXPixelFormat_R16G16B16A16IntNormalized = DirectXPixelFormat(13)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_D24UIntNormalizedS8UInt = DirectXPixelFormat(45)
+public const DirectXPixelFormat_R16G16B16A16Int = DirectXPixelFormat(14)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R24UIntNormalizedX8Typeless = DirectXPixelFormat(46)
+public const DirectXPixelFormat_R32G32Typeless = DirectXPixelFormat(15)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_X24TypelessG8UInt = DirectXPixelFormat(47)
+public const DirectXPixelFormat_R32G32Float = DirectXPixelFormat(16)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8Typeless = DirectXPixelFormat(48)
+public const DirectXPixelFormat_R32G32UInt = DirectXPixelFormat(17)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8UIntNormalized = DirectXPixelFormat(49)
+public const DirectXPixelFormat_R32G32Int = DirectXPixelFormat(18)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8UInt = DirectXPixelFormat(50)
+public const DirectXPixelFormat_R32G8X24Typeless = DirectXPixelFormat(19)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8IntNormalized = DirectXPixelFormat(51)
+public const DirectXPixelFormat_D32FloatS8X24UInt = DirectXPixelFormat(20)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8Int = DirectXPixelFormat(52)
+public const DirectXPixelFormat_R32FloatX8X24Typeless = DirectXPixelFormat(21)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16Typeless = DirectXPixelFormat(53)
+public const DirectXPixelFormat_X32TypelessG8X24UInt = DirectXPixelFormat(22)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16Float = DirectXPixelFormat(54)
+public const DirectXPixelFormat_R10G10B10A2Typeless = DirectXPixelFormat(23)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_D16UIntNormalized = DirectXPixelFormat(55)
+public const DirectXPixelFormat_R10G10B10A2UIntNormalized = DirectXPixelFormat(24)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16UIntNormalized = DirectXPixelFormat(56)
+public const DirectXPixelFormat_R10G10B10A2UInt = DirectXPixelFormat(25)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16UInt = DirectXPixelFormat(57)
+public const DirectXPixelFormat_R11G11B10Float = DirectXPixelFormat(26)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16IntNormalized = DirectXPixelFormat(58)
+public const DirectXPixelFormat_R8G8B8A8Typeless = DirectXPixelFormat(27)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R16Int = DirectXPixelFormat(59)
+public const DirectXPixelFormat_R8G8B8A8UIntNormalized = DirectXPixelFormat(28)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8Typeless = DirectXPixelFormat(60)
+public const DirectXPixelFormat_R8G8B8A8UIntNormalizedSrgb = DirectXPixelFormat(29)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8UIntNormalized = DirectXPixelFormat(61)
+public const DirectXPixelFormat_R8G8B8A8UInt = DirectXPixelFormat(30)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8UInt = DirectXPixelFormat(62)
+public const DirectXPixelFormat_R8G8B8A8IntNormalized = DirectXPixelFormat(31)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8IntNormalized = DirectXPixelFormat(63)
+public const DirectXPixelFormat_R8G8B8A8Int = DirectXPixelFormat(32)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8Int = DirectXPixelFormat(64)
+public const DirectXPixelFormat_R16G16Typeless = DirectXPixelFormat(33)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_A8UIntNormalized = DirectXPixelFormat(65)
+public const DirectXPixelFormat_R16G16Float = DirectXPixelFormat(34)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R1UIntNormalized = DirectXPixelFormat(66)
+public const DirectXPixelFormat_R16G16UIntNormalized = DirectXPixelFormat(35)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R9G9B9E5SharedExponent = DirectXPixelFormat(67)
+public const DirectXPixelFormat_R16G16UInt = DirectXPixelFormat(36)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R8G8B8G8UIntNormalized = DirectXPixelFormat(68)
+public const DirectXPixelFormat_R16G16IntNormalized = DirectXPixelFormat(37)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_G8R8G8B8UIntNormalized = DirectXPixelFormat(69)
+public const DirectXPixelFormat_R16G16Int = DirectXPixelFormat(38)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC1Typeless = DirectXPixelFormat(70)
+public const DirectXPixelFormat_R32Typeless = DirectXPixelFormat(39)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC1UIntNormalized = DirectXPixelFormat(71)
+public const DirectXPixelFormat_D32Float = DirectXPixelFormat(40)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC1UIntNormalizedSrgb = DirectXPixelFormat(72)
+public const DirectXPixelFormat_R32Float = DirectXPixelFormat(41)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC2Typeless = DirectXPixelFormat(73)
+public const DirectXPixelFormat_R32UInt = DirectXPixelFormat(42)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC2UIntNormalized = DirectXPixelFormat(74)
+public const DirectXPixelFormat_R32Int = DirectXPixelFormat(43)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC2UIntNormalizedSrgb = DirectXPixelFormat(75)
+public const DirectXPixelFormat_R24G8Typeless = DirectXPixelFormat(44)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC3Typeless = DirectXPixelFormat(76)
+public const DirectXPixelFormat_D24UIntNormalizedS8UInt = DirectXPixelFormat(45)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC3UIntNormalized = DirectXPixelFormat(77)
+public const DirectXPixelFormat_R24UIntNormalizedX8Typeless = DirectXPixelFormat(46)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC3UIntNormalizedSrgb = DirectXPixelFormat(78)
+public const DirectXPixelFormat_X24TypelessG8UInt = DirectXPixelFormat(47)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC4Typeless = DirectXPixelFormat(79)
+public const DirectXPixelFormat_R8G8Typeless = DirectXPixelFormat(48)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC4UIntNormalized = DirectXPixelFormat(80)
+public const DirectXPixelFormat_R8G8UIntNormalized = DirectXPixelFormat(49)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC4IntNormalized = DirectXPixelFormat(81)
+public const DirectXPixelFormat_R8G8UInt = DirectXPixelFormat(50)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC5Typeless = DirectXPixelFormat(82)
+public const DirectXPixelFormat_R8G8IntNormalized = DirectXPixelFormat(51)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC5UIntNormalized = DirectXPixelFormat(83)
+public const DirectXPixelFormat_R8G8Int = DirectXPixelFormat(52)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC5IntNormalized = DirectXPixelFormat(84)
+public const DirectXPixelFormat_R16Typeless = DirectXPixelFormat(53)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B5G6R5UIntNormalized = DirectXPixelFormat(85)
+public const DirectXPixelFormat_R16Float = DirectXPixelFormat(54)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B5G5R5A1UIntNormalized = DirectXPixelFormat(86)
+public const DirectXPixelFormat_D16UIntNormalized = DirectXPixelFormat(55)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B8G8R8A8UIntNormalized = DirectXPixelFormat(87)
+public const DirectXPixelFormat_R16UIntNormalized = DirectXPixelFormat(56)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B8G8R8X8UIntNormalized = DirectXPixelFormat(88)
+public const DirectXPixelFormat_R16UInt = DirectXPixelFormat(57)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_R10G10B10XRBiasA2UIntNormalized = DirectXPixelFormat(89)
+public const DirectXPixelFormat_R16IntNormalized = DirectXPixelFormat(58)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B8G8R8A8Typeless = DirectXPixelFormat(90)
+public const DirectXPixelFormat_R16Int = DirectXPixelFormat(59)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B8G8R8A8UIntNormalizedSrgb = DirectXPixelFormat(91)
+public const DirectXPixelFormat_R8Typeless = DirectXPixelFormat(60)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B8G8R8X8Typeless = DirectXPixelFormat(92)
+public const DirectXPixelFormat_R8UIntNormalized = DirectXPixelFormat(61)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B8G8R8X8UIntNormalizedSrgb = DirectXPixelFormat(93)
+public const DirectXPixelFormat_R8UInt = DirectXPixelFormat(62)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC6HTypeless = DirectXPixelFormat(94)
+public const DirectXPixelFormat_R8IntNormalized = DirectXPixelFormat(63)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC6H16UnsignedFloat = DirectXPixelFormat(95)
+public const DirectXPixelFormat_R8Int = DirectXPixelFormat(64)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC6H16Float = DirectXPixelFormat(96)
+public const DirectXPixelFormat_A8UIntNormalized = DirectXPixelFormat(65)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC7Typeless = DirectXPixelFormat(97)
+public const DirectXPixelFormat_R1UIntNormalized = DirectXPixelFormat(66)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC7UIntNormalized = DirectXPixelFormat(98)
+public const DirectXPixelFormat_R9G9B9E5SharedExponent = DirectXPixelFormat(67)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_BC7UIntNormalizedSrgb = DirectXPixelFormat(99)
+public const DirectXPixelFormat_R8G8B8G8UIntNormalized = DirectXPixelFormat(68)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Ayuv = DirectXPixelFormat(100)
+public const DirectXPixelFormat_G8R8G8B8UIntNormalized = DirectXPixelFormat(69)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Y410 = DirectXPixelFormat(101)
+public const DirectXPixelFormat_BC1Typeless = DirectXPixelFormat(70)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Y416 = DirectXPixelFormat(102)
+public const DirectXPixelFormat_BC1UIntNormalized = DirectXPixelFormat(71)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_NV12 = DirectXPixelFormat(103)
+public const DirectXPixelFormat_BC1UIntNormalizedSrgb = DirectXPixelFormat(72)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_P010 = DirectXPixelFormat(104)
+public const DirectXPixelFormat_BC2Typeless = DirectXPixelFormat(73)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_P016 = DirectXPixelFormat(105)
+public const DirectXPixelFormat_BC2UIntNormalized = DirectXPixelFormat(74)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Opaque420 = DirectXPixelFormat(106)
+public const DirectXPixelFormat_BC2UIntNormalizedSrgb = DirectXPixelFormat(75)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Yuy2 = DirectXPixelFormat(107)
+public const DirectXPixelFormat_BC3Typeless = DirectXPixelFormat(76)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Y210 = DirectXPixelFormat(108)
+public const DirectXPixelFormat_BC3UIntNormalized = DirectXPixelFormat(77)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_Y216 = DirectXPixelFormat(109)
+public const DirectXPixelFormat_BC3UIntNormalizedSrgb = DirectXPixelFormat(78)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_NV11 = DirectXPixelFormat(110)
+public const DirectXPixelFormat_BC4Typeless = DirectXPixelFormat(79)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_AI44 = DirectXPixelFormat(111)
+public const DirectXPixelFormat_BC4UIntNormalized = DirectXPixelFormat(80)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_IA44 = DirectXPixelFormat(112)
+public const DirectXPixelFormat_BC4IntNormalized = DirectXPixelFormat(81)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_P8 = DirectXPixelFormat(113)
+public const DirectXPixelFormat_BC5Typeless = DirectXPixelFormat(82)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_A8P8 = DirectXPixelFormat(114)
+public const DirectXPixelFormat_BC5UIntNormalized = DirectXPixelFormat(83)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_B4G4R4A4UIntNormalized = DirectXPixelFormat(115)
+public const DirectXPixelFormat_BC5IntNormalized = DirectXPixelFormat(84)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_P208 = DirectXPixelFormat(130)
+public const DirectXPixelFormat_B5G6R5UIntNormalized = DirectXPixelFormat(85)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_V208 = DirectXPixelFormat(131)
+public const DirectXPixelFormat_B5G5R5A1UIntNormalized = DirectXPixelFormat(86)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_V408 = DirectXPixelFormat(132)
+public const DirectXPixelFormat_B8G8R8A8UIntNormalized = DirectXPixelFormat(87)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_SamplerFeedbackMinMipOpaque = DirectXPixelFormat(189)
+public const DirectXPixelFormat_B8G8R8X8UIntNormalized = DirectXPixelFormat(88)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_SamplerFeedbackMipRegionUsedOpaque = DirectXPixelFormat(190)
+public const DirectXPixelFormat_R10G10B10XRBiasA2UIntNormalized = DirectXPixelFormat(89)
 @When[Windows_Graphics_DirectX == "on"]
-public let DirectXPixelFormat_A4B4G4R4 = DirectXPixelFormat(191)
+public const DirectXPixelFormat_B8G8R8A8Typeless = DirectXPixelFormat(90)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_B8G8R8A8UIntNormalizedSrgb = DirectXPixelFormat(91)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_B8G8R8X8Typeless = DirectXPixelFormat(92)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_B8G8R8X8UIntNormalizedSrgb = DirectXPixelFormat(93)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_BC6HTypeless = DirectXPixelFormat(94)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_BC6H16UnsignedFloat = DirectXPixelFormat(95)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_BC6H16Float = DirectXPixelFormat(96)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_BC7Typeless = DirectXPixelFormat(97)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_BC7UIntNormalized = DirectXPixelFormat(98)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_BC7UIntNormalizedSrgb = DirectXPixelFormat(99)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_Ayuv = DirectXPixelFormat(100)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_Y410 = DirectXPixelFormat(101)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_Y416 = DirectXPixelFormat(102)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_NV12 = DirectXPixelFormat(103)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_P010 = DirectXPixelFormat(104)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_P016 = DirectXPixelFormat(105)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_Opaque420 = DirectXPixelFormat(106)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_Yuy2 = DirectXPixelFormat(107)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_Y210 = DirectXPixelFormat(108)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_Y216 = DirectXPixelFormat(109)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_NV11 = DirectXPixelFormat(110)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_AI44 = DirectXPixelFormat(111)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_IA44 = DirectXPixelFormat(112)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_P8 = DirectXPixelFormat(113)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_A8P8 = DirectXPixelFormat(114)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_B4G4R4A4UIntNormalized = DirectXPixelFormat(115)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_P208 = DirectXPixelFormat(130)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_V208 = DirectXPixelFormat(131)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_V408 = DirectXPixelFormat(132)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_SamplerFeedbackMinMipOpaque = DirectXPixelFormat(189)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_SamplerFeedbackMipRegionUsedOpaque = DirectXPixelFormat(190)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPixelFormat_A4B4G4R4 = DirectXPixelFormat(191)
+
+// Windows.Graphics.DirectX.DirectXPrimitiveTopology (synthetic:Windows_Graphics_DirectX_DirectXPrimitiveTopology)
+@When[Windows_Graphics_DirectX == "on"]
+public struct DirectXPrimitiveTopology {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPrimitiveTopology_Undefined = DirectXPrimitiveTopology(0)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPrimitiveTopology_PointList = DirectXPrimitiveTopology(1)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPrimitiveTopology_LineList = DirectXPrimitiveTopology(2)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPrimitiveTopology_LineStrip = DirectXPrimitiveTopology(3)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPrimitiveTopology_TriangleList = DirectXPrimitiveTopology(4)
+@When[Windows_Graphics_DirectX == "on"]
+public const DirectXPrimitiveTopology_TriangleStrip = DirectXPrimitiveTopology(5)

@@ -11,8 +11,12 @@ import windows_interface.macros.Interface
 import windows_sys.Microsoft.UI.Xaml as Microsoft_UI_Xaml
 @When[Microsoft_UI_Xaml_Media == "on"]
 import windows_sys.Microsoft.UI.Xaml.Media as Microsoft_UI_Xaml_Media
+@When[Windows_ApplicationModel_Background == "on"]
+import windows_sys.ApplicationModel.Background as Windows_ApplicationModel_Background
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Graphics_Imaging == "on"]
+import windows_sys.Graphics.Imaging as Windows_Graphics_Imaging
 @When[Windows_Storage_Streams == "on"]
 import windows_sys.Storage.Streams as Windows_Storage_Streams
 
@@ -20,10 +24,10 @@ import windows_sys.Storage.Streams as Windows_Storage_Streams
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public struct BitmapCreateOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: BitmapCreateOptions): Bool {
@@ -43,9 +47,9 @@ public struct BitmapCreateOptions {
     }
 }
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
-public let BitmapCreateOptions_None = BitmapCreateOptions(0)
+public const BitmapCreateOptions_None = BitmapCreateOptions(0)
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
-public let BitmapCreateOptions_IgnoreImageCache = BitmapCreateOptions(8)
+public const BitmapCreateOptions_IgnoreImageCache = BitmapCreateOptions(8)
 
 // Microsoft.UI.Xaml.Media.Imaging.BitmapImage (synthetic:Microsoft_UI_Xaml_Media_Imaging_BitmapImage)
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
@@ -707,17 +711,17 @@ public class BitmapSource <: windows_interface.InterfaceWrapperBase & windows_in
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public struct DecodePixelType {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
-public let DecodePixelType_Physical = DecodePixelType(0)
+public const DecodePixelType_Physical = DecodePixelType(0)
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
-public let DecodePixelType_Logical = DecodePixelType(1)
+public const DecodePixelType_Logical = DecodePixelType(1)
 
 // Microsoft.UI.Xaml.Media.Imaging.DownloadProgressEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs)
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
@@ -1059,4 +1063,1494 @@ public interface IBitmapSourceStatics <: IInspectable {
 public interface IDownloadProgressEventArgs <: IInspectable {
     func Progress(value: CPointer<Int32>): Int32
     func SetProgress(value: Int32): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IRenderTargetBitmap (synthetic:Microsoft_UI_Xaml_Media_Imaging_IRenderTargetBitmap)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["cf10407d-fa8b-57a3-9574-710529ae0b04", "Microsoft.UI.Xaml.Media.Imaging.IRenderTargetBitmap", "RenderAsync.operation=Com;RenderToSizeAsync.operation=Com;GetPixelsAsync.operation=Com"]
+public interface IRenderTargetBitmap <: IInspectable {
+    func PixelWidth(value: CPointer<Int32>): Int32
+    func PixelHeight(value: CPointer<Int32>): Int32
+    func RenderAsync(element: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func RenderToSizeAsync(element: CPointer<Unit>, scaledWidth: Int32, scaledHeight: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func GetPixelsAsync(operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IRenderTargetBitmapStatics (synthetic:Microsoft_UI_Xaml_Media_Imaging_IRenderTargetBitmapStatics)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["83e822e4-9f84-5986-93b0-e4f7019c367d", "Microsoft.UI.Xaml.Media.Imaging.IRenderTargetBitmapStatics", "PixelWidthProperty.value=Com;PixelHeightProperty.value=Com"]
+public interface IRenderTargetBitmapStatics <: IInspectable {
+    func PixelWidthProperty(value: CPointer<CPointer<Unit>>): Int32
+    func PixelHeightProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISoftwareBitmapSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISoftwareBitmapSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["a6aca802-1f24-5a1e-bf08-781a85ed5511", "Microsoft.UI.Xaml.Media.Imaging.ISoftwareBitmapSource", "SetBitmapAsync.operation=Com"]
+public interface ISoftwareBitmapSource <: IInspectable {
+    func SetBitmapAsync(softwareBitmap: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISurfaceImageSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISurfaceImageSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["ac078d9c-d0e0-5ff9-b73e-98e82e4c8d36", "Microsoft.UI.Xaml.Media.Imaging.ISurfaceImageSource"]
+public interface ISurfaceImageSource <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISurfaceImageSourceFactory (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISurfaceImageSourceFactory)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["09a26ed2-11b3-5ef1-ac56-20d064ccca34", "Microsoft.UI.Xaml.Media.Imaging.ISurfaceImageSourceFactory", "CreateInstanceWithDimensions.innerInterface=Com;CreateInstanceWithDimensions.value=Com;CreateInstanceWithDimensionsAndOpacity.innerInterface=Com;CreateInstanceWithDimensionsAndOpacity.value=Com"]
+public interface ISurfaceImageSourceFactory <: IInspectable {
+    func CreateInstanceWithDimensions(pixelWidth: Int32, pixelHeight: Int32, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+    func CreateInstanceWithDimensionsAndOpacity(pixelWidth: Int32, pixelHeight: Int32, isOpaque: Bool, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISvgImageSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISvgImageSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["d5b61d3c-b68d-53a2-b07b-ba6adfdd5887", "Microsoft.UI.Xaml.Media.Imaging.ISvgImageSource", "UriSource.value=Com;SetSourceAsync.operation=Com"]
+public interface ISvgImageSource <: IInspectable {
+    func UriSource(value: CPointer<CPointer<Unit>>): Int32
+    func SetUriSource(value: CPointer<Unit>): Int32
+    func RasterizePixelWidth(value: CPointer<Float64>): Int32
+    func SetRasterizePixelWidth(value: Float64): Int32
+    func RasterizePixelHeight(value: CPointer<Float64>): Int32
+    func SetRasterizePixelHeight(value: Float64): Int32
+    func Opened(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveOpened(token: Int64): Int32
+    func OpenFailed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveOpenFailed(token: Int64): Int32
+    func SetSourceAsync(streamSource: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceFactory (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISvgImageSourceFactory)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["2f85673f-ac64-570d-9bda-94fa082eead9", "Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com;CreateInstanceWithUriSource.innerInterface=Com;CreateInstanceWithUriSource.value=Com"]
+public interface ISvgImageSourceFactory <: IInspectable {
+    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+    func CreateInstanceWithUriSource(uriSource: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceFailedEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISvgImageSourceFailedEventArgs)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["76e66278-7804-5439-a50d-14c5ba896714", "Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceFailedEventArgs"]
+public interface ISvgImageSourceFailedEventArgs <: IInspectable {
+    func Status(value: CPointer<Int32>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceOpenedEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISvgImageSourceOpenedEventArgs)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["1c9860d5-38d0-5b21-8d48-072f1e254e39", "Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceOpenedEventArgs"]
+public interface ISvgImageSourceOpenedEventArgs <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceStatics (synthetic:Microsoft_UI_Xaml_Media_Imaging_ISvgImageSourceStatics)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["e3ad1068-f4c6-5513-a777-2980f0ba41bd", "Microsoft.UI.Xaml.Media.Imaging.ISvgImageSourceStatics", "UriSourceProperty.value=Com;RasterizePixelWidthProperty.value=Com;RasterizePixelHeightProperty.value=Com"]
+public interface ISvgImageSourceStatics <: IInspectable {
+    func UriSourceProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RasterizePixelWidthProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RasterizePixelHeightProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IVirtualSurfaceImageSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_IVirtualSurfaceImageSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["e4ff96a6-fede-589c-a007-4178b53b6739", "Microsoft.UI.Xaml.Media.Imaging.IVirtualSurfaceImageSource"]
+public interface IVirtualSurfaceImageSource <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IVirtualSurfaceImageSourceFactory (synthetic:Microsoft_UI_Xaml_Media_Imaging_IVirtualSurfaceImageSourceFactory)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["08490f2c-04a8-5031-b9c7-707060d7cd48", "Microsoft.UI.Xaml.Media.Imaging.IVirtualSurfaceImageSourceFactory", "CreateInstanceWithDimensions.value=Com;CreateInstanceWithDimensionsAndOpacity.value=Com"]
+public interface IVirtualSurfaceImageSourceFactory <: IInspectable {
+    func CreateInstanceWithDimensions(pixelWidth: Int32, pixelHeight: Int32, value: CPointer<CPointer<Unit>>): Int32
+    func CreateInstanceWithDimensionsAndOpacity(pixelWidth: Int32, pixelHeight: Int32, isOpaque: Bool, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IWriteableBitmap (synthetic:Microsoft_UI_Xaml_Media_Imaging_IWriteableBitmap)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["78c824a9-0e43-5f1e-93bc-d046cca82b7e", "Microsoft.UI.Xaml.Media.Imaging.IWriteableBitmap", "PixelBuffer.value=Com"]
+public interface IWriteableBitmap <: IInspectable {
+    func PixelBuffer(value: CPointer<CPointer<Unit>>): Int32
+    func Invalidate(): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IWriteableBitmapFactory (synthetic:Microsoft_UI_Xaml_Media_Imaging_IWriteableBitmapFactory)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["26e861d9-b080-512b-96c4-80050e7e08d1", "Microsoft.UI.Xaml.Media.Imaging.IWriteableBitmapFactory", "CreateInstanceWithDimensions.value=Com"]
+public interface IWriteableBitmapFactory <: IInspectable {
+    func CreateInstanceWithDimensions(pixelWidth: Int32, pixelHeight: Int32, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IXamlRenderingBackgroundTask (synthetic:Microsoft_UI_Xaml_Media_Imaging_IXamlRenderingBackgroundTask)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["7807000c-a050-5121-ac74-3322d5358e39", "Microsoft.UI.Xaml.Media.Imaging.IXamlRenderingBackgroundTask"]
+public interface IXamlRenderingBackgroundTask <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IXamlRenderingBackgroundTaskFactory (synthetic:Microsoft_UI_Xaml_Media_Imaging_IXamlRenderingBackgroundTaskFactory)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["205247a3-9ffe-599a-a21a-7181442a9d75", "Microsoft.UI.Xaml.Media.Imaging.IXamlRenderingBackgroundTaskFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IXamlRenderingBackgroundTaskFactory <: IInspectable {
+    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.IXamlRenderingBackgroundTaskOverrides (synthetic:Microsoft_UI_Xaml_Media_Imaging_IXamlRenderingBackgroundTaskOverrides)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+@Interface["18733237-324b-57c0-89b2-5875472acc80", "Microsoft.UI.Xaml.Media.Imaging.IXamlRenderingBackgroundTaskOverrides"]
+public interface IXamlRenderingBackgroundTaskOverrides <: IInspectable {
+    func OnRun(taskInstance: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.RenderTargetBitmap (synthetic:Microsoft_UI_Xaml_Media_Imaging_RenderTargetBitmap)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class RenderTargetBitmap <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RenderTargetBitmap> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RenderTargetBitmap {
+        RenderTargetBitmap(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RenderTargetBitmap {
+        RenderTargetBitmap(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRenderTargetBitmap.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RenderTargetBitmap> {
+        let ancestors = [IRenderTargetBitmap.iid(), Microsoft_UI_Xaml_Media.IImageSource.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RenderTargetBitmap>("RenderTargetBitmap", IRenderTargetBitmap.iid(), ancestors, { raw => RenderTargetBitmap.fromAbiTake(raw) }, { raw => RenderTargetBitmap.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRenderTargetBitmap {
+        match (unsafe { query(IRenderTargetBitmap.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRenderTargetBitmap(): IRenderTargetBitmap {
+        defaultInterface()
+    }
+
+    public func asIImageSource(): Microsoft_UI_Xaml_Media.IImageSource {
+        match (unsafe { query<Microsoft_UI_Xaml_Media.IImageSource>(Microsoft_UI_Xaml_Media.IImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop PixelHeight: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PixelHeight(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PixelWidth: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PixelWidth(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func RenderAsync(element: Microsoft_UI_Xaml.UIElement): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.UIElement>(element)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RenderAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func RenderToSizeAsync(element: Microsoft_UI_Xaml.UIElement, scaledWidth: Int32, scaledHeight: Int32): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.UIElement>(element)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RenderToSizeAsync(__argBorrow0.asRaw(), scaledWidth, scaledHeight, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetPixelsAsync(): Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetPixelsAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IBuffer>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func new(): RenderTargetBitmap {
+        var created__: Option<RenderTargetBitmap> = Option<RenderTargetBitmap>.None
+        try (factory__ = windows_core.factory<RenderTargetBitmap, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<RenderTargetBitmap>(RenderTargetBitmap.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce RenderTargetBitmap")
+        }
+    }
+
+    public static func PixelWidthProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RenderTargetBitmap, IRenderTargetBitmapStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PixelWidthProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PixelHeightProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<RenderTargetBitmap, IRenderTargetBitmapStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PixelHeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.RenderTargetBitmap"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.RenderTargetBitmap;{" + IRenderTargetBitmap.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.RenderTargetBitmap", RenderTargetBitmap.signature(), IRenderTargetBitmap.iid())
+    }
+
+    public static func intoWinrtHandle(value: RenderTargetBitmap): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RenderTargetBitmap {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RenderTargetBitmap.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RenderTargetBitmap {
+        RenderTargetBitmap.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.SoftwareBitmapSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_SoftwareBitmapSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class SoftwareBitmapSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SoftwareBitmapSource> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SoftwareBitmapSource {
+        SoftwareBitmapSource(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SoftwareBitmapSource {
+        SoftwareBitmapSource(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISoftwareBitmapSource.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SoftwareBitmapSource> {
+        let ancestors = [ISoftwareBitmapSource.iid(), Windows_Foundation.IClosable.iid(), Microsoft_UI_Xaml_Media.IImageSource.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SoftwareBitmapSource>("SoftwareBitmapSource", ISoftwareBitmapSource.iid(), ancestors, { raw => SoftwareBitmapSource.fromAbiTake(raw) }, { raw => SoftwareBitmapSource.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISoftwareBitmapSource {
+        match (unsafe { query(ISoftwareBitmapSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISoftwareBitmapSource(): ISoftwareBitmapSource {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIImageSource(): Microsoft_UI_Xaml_Media.IImageSource {
+        match (unsafe { query<Microsoft_UI_Xaml_Media.IImageSource>(Microsoft_UI_Xaml_Media.IImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func SetBitmapAsync(softwareBitmap: Windows_Graphics_Imaging.SoftwareBitmap): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Graphics_Imaging.SoftwareBitmap>(softwareBitmap)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetBitmapAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func new(): SoftwareBitmapSource {
+        var created__: Option<SoftwareBitmapSource> = Option<SoftwareBitmapSource>.None
+        try (factory__ = windows_core.factory<SoftwareBitmapSource, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<SoftwareBitmapSource>(SoftwareBitmapSource.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce SoftwareBitmapSource")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.SoftwareBitmapSource"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.SoftwareBitmapSource;{" + ISoftwareBitmapSource.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.SoftwareBitmapSource", SoftwareBitmapSource.signature(), ISoftwareBitmapSource.iid())
+    }
+
+    public static func intoWinrtHandle(value: SoftwareBitmapSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SoftwareBitmapSource {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SoftwareBitmapSource.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SoftwareBitmapSource {
+        SoftwareBitmapSource.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.SurfaceImageSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_SurfaceImageSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class SurfaceImageSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SurfaceImageSource> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SurfaceImageSource {
+        SurfaceImageSource(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SurfaceImageSource {
+        SurfaceImageSource(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISurfaceImageSource.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SurfaceImageSource> {
+        let ancestors = [ISurfaceImageSource.iid(), Microsoft_UI_Xaml_Media.IImageSource.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SurfaceImageSource>("SurfaceImageSource", ISurfaceImageSource.iid(), ancestors, { raw => SurfaceImageSource.fromAbiTake(raw) }, { raw => SurfaceImageSource.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISurfaceImageSource {
+        match (unsafe { query(ISurfaceImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISurfaceImageSource(): ISurfaceImageSource {
+        defaultInterface()
+    }
+
+    public func asIImageSource(): Microsoft_UI_Xaml_Media.IImageSource {
+        match (unsafe { query<Microsoft_UI_Xaml_Media.IImageSource>(Microsoft_UI_Xaml_Media.IImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithDimensions(pixelWidth: Int32, pixelHeight: Int32, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SurfaceImageSource {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<SurfaceImageSource, ISurfaceImageSourceFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstanceWithDimensions(pixelWidth, pixelHeight, __argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SurfaceImageSource>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg3ValuePartial) =>
+                    if (__arg3ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg3ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg3Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg3Value))
+        return SurfaceImageSource.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithDimensionsAndOpacity(pixelWidth: Int32, pixelHeight: Int32, isOpaque: Bool, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SurfaceImageSource {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<SurfaceImageSource, ISurfaceImageSourceFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstanceWithDimensionsAndOpacity(pixelWidth, pixelHeight, isOpaque, __argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SurfaceImageSource>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg4ValuePartial) =>
+                    if (__arg4ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg4ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg4Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg4Value))
+        return SurfaceImageSource.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.SurfaceImageSource"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.SurfaceImageSource;{" + ISurfaceImageSource.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.SurfaceImageSource", SurfaceImageSource.signature(), ISurfaceImageSource.iid())
+    }
+
+    public static func intoWinrtHandle(value: SurfaceImageSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SurfaceImageSource {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SurfaceImageSource.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SurfaceImageSource {
+        SurfaceImageSource.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.SvgImageSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_SvgImageSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class SvgImageSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SvgImageSource> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SvgImageSource {
+        SvgImageSource(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SvgImageSource {
+        SvgImageSource(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISvgImageSource.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SvgImageSource> {
+        let ancestors = [ISvgImageSource.iid(), Microsoft_UI_Xaml_Media.IImageSource.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SvgImageSource>("SvgImageSource", ISvgImageSource.iid(), ancestors, { raw => SvgImageSource.fromAbiTake(raw) }, { raw => SvgImageSource.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISvgImageSource {
+        match (unsafe { query(ISvgImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISvgImageSource(): ISvgImageSource {
+        defaultInterface()
+    }
+
+    public func asIImageSource(): Microsoft_UI_Xaml_Media.IImageSource {
+        match (unsafe { query<Microsoft_UI_Xaml_Media.IImageSource>(Microsoft_UI_Xaml_Media.IImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop RasterizePixelHeight: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RasterizePixelHeight(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRasterizePixelHeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop RasterizePixelWidth: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RasterizePixelWidth(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRasterizePixelWidth(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop UriSource: Windows_Foundation.Uri {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UriSource(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.Uri>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.Uri.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetUriSource(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addOpenFailed(handler: Windows_Foundation.TypedEventHandler<SvgImageSource, SvgImageSourceFailedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<SvgImageSource, SvgImageSourceFailedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OpenFailed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeOpenFailed(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveOpenFailed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addOpened(handler: Windows_Foundation.TypedEventHandler<SvgImageSource, SvgImageSourceOpenedEventArgs>): Windows_Foundation.EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<SvgImageSource, SvgImageSourceOpenedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Opened(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeOpened(token: Windows_Foundation.EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveOpened(token) }
+        }
+        hr__.check()
+    }
+
+    public func SetSourceAsync(streamSource: Windows_Storage_Streams.IRandomAccessStream): Windows_Foundation.IAsyncOperation<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(streamSource)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSourceAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SvgImageSource {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<SvgImageSource, ISvgImageSourceFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SvgImageSource>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return SvgImageSource.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithUriSource(uriSource: Windows_Foundation.Uri, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): SvgImageSource {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(uriSource)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                try (factory__ = windows_core.factory<SvgImageSource, ISvgImageSourceFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstanceWithUriSource(__argBorrow0.asRaw(), __argBorrow1.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SvgImageSource>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg2ValuePartial) =>
+                    if (__arg2ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg2ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg2Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg2Value))
+        return SvgImageSource.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func UriSourceProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SvgImageSource, ISvgImageSourceStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UriSourceProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RasterizePixelWidthProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SvgImageSource, ISvgImageSourceStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RasterizePixelWidthProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RasterizePixelHeightProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<SvgImageSource, ISvgImageSourceStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RasterizePixelHeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.SvgImageSource"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.SvgImageSource;{" + ISvgImageSource.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.SvgImageSource", SvgImageSource.signature(), ISvgImageSource.iid())
+    }
+
+    public static func intoWinrtHandle(value: SvgImageSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SvgImageSource {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SvgImageSource.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SvgImageSource {
+        SvgImageSource.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceFailedEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_SvgImageSourceFailedEventArgs)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class SvgImageSourceFailedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SvgImageSourceFailedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SvgImageSourceFailedEventArgs {
+        SvgImageSourceFailedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SvgImageSourceFailedEventArgs {
+        SvgImageSourceFailedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISvgImageSourceFailedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SvgImageSourceFailedEventArgs> {
+        let ancestors = [ISvgImageSourceFailedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SvgImageSourceFailedEventArgs>("SvgImageSourceFailedEventArgs", ISvgImageSourceFailedEventArgs.iid(), ancestors, { raw => SvgImageSourceFailedEventArgs.fromAbiTake(raw) }, { raw => SvgImageSourceFailedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISvgImageSourceFailedEventArgs {
+        match (unsafe { query(ISvgImageSourceFailedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISvgImageSourceFailedEventArgs(): ISvgImageSourceFailedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Status: SvgImageSourceLoadStatus {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Status(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return SvgImageSourceLoadStatus(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceFailedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceFailedEventArgs;{" + ISvgImageSourceFailedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceFailedEventArgs", SvgImageSourceFailedEventArgs.signature(), ISvgImageSourceFailedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: SvgImageSourceFailedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SvgImageSourceFailedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SvgImageSourceFailedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SvgImageSourceFailedEventArgs {
+        SvgImageSourceFailedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceLoadStatus (synthetic:Microsoft_UI_Xaml_Media_Imaging_SvgImageSourceLoadStatus)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public struct SvgImageSourceLoadStatus {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public const SvgImageSourceLoadStatus_Success = SvgImageSourceLoadStatus(0)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public const SvgImageSourceLoadStatus_NetworkError = SvgImageSourceLoadStatus(1)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public const SvgImageSourceLoadStatus_InvalidFormat = SvgImageSourceLoadStatus(2)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public const SvgImageSourceLoadStatus_Other = SvgImageSourceLoadStatus(3)
+
+// Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceOpenedEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_SvgImageSourceOpenedEventArgs)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class SvgImageSourceOpenedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SvgImageSourceOpenedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SvgImageSourceOpenedEventArgs {
+        SvgImageSourceOpenedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SvgImageSourceOpenedEventArgs {
+        SvgImageSourceOpenedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISvgImageSourceOpenedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SvgImageSourceOpenedEventArgs> {
+        let ancestors = [ISvgImageSourceOpenedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SvgImageSourceOpenedEventArgs>("SvgImageSourceOpenedEventArgs", ISvgImageSourceOpenedEventArgs.iid(), ancestors, { raw => SvgImageSourceOpenedEventArgs.fromAbiTake(raw) }, { raw => SvgImageSourceOpenedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISvgImageSourceOpenedEventArgs {
+        match (unsafe { query(ISvgImageSourceOpenedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISvgImageSourceOpenedEventArgs(): ISvgImageSourceOpenedEventArgs {
+        defaultInterface()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceOpenedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceOpenedEventArgs;{" + ISvgImageSourceOpenedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.SvgImageSourceOpenedEventArgs", SvgImageSourceOpenedEventArgs.signature(), ISvgImageSourceOpenedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: SvgImageSourceOpenedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SvgImageSourceOpenedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SvgImageSourceOpenedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SvgImageSourceOpenedEventArgs {
+        SvgImageSourceOpenedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.VirtualSurfaceImageSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_VirtualSurfaceImageSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class VirtualSurfaceImageSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<VirtualSurfaceImageSource> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): VirtualSurfaceImageSource {
+        VirtualSurfaceImageSource(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): VirtualSurfaceImageSource {
+        VirtualSurfaceImageSource(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IVirtualSurfaceImageSource.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<VirtualSurfaceImageSource> {
+        let ancestors = [IVirtualSurfaceImageSource.iid(), ISurfaceImageSource.iid(), Microsoft_UI_Xaml_Media.IImageSource.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<VirtualSurfaceImageSource>("VirtualSurfaceImageSource", IVirtualSurfaceImageSource.iid(), ancestors, { raw => VirtualSurfaceImageSource.fromAbiTake(raw) }, { raw => VirtualSurfaceImageSource.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IVirtualSurfaceImageSource {
+        match (unsafe { query(IVirtualSurfaceImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIVirtualSurfaceImageSource(): IVirtualSurfaceImageSource {
+        defaultInterface()
+    }
+
+    public func asISurfaceImageSource(): ISurfaceImageSource {
+        match (unsafe { query<ISurfaceImageSource>(ISurfaceImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIImageSource(): Microsoft_UI_Xaml_Media.IImageSource {
+        match (unsafe { query<Microsoft_UI_Xaml_Media.IImageSource>(Microsoft_UI_Xaml_Media.IImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstanceWithDimensions(pixelWidth: Int32, pixelHeight: Int32): VirtualSurfaceImageSource {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<VirtualSurfaceImageSource, IVirtualSurfaceImageSourceFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstanceWithDimensions(pixelWidth, pixelHeight, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<VirtualSurfaceImageSource>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return VirtualSurfaceImageSource.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstanceWithDimensionsAndOpacity(pixelWidth: Int32, pixelHeight: Int32, isOpaque: Bool): VirtualSurfaceImageSource {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<VirtualSurfaceImageSource, IVirtualSurfaceImageSourceFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstanceWithDimensionsAndOpacity(pixelWidth, pixelHeight, isOpaque, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<VirtualSurfaceImageSource>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return VirtualSurfaceImageSource.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.VirtualSurfaceImageSource"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.VirtualSurfaceImageSource;{" + IVirtualSurfaceImageSource.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.VirtualSurfaceImageSource", VirtualSurfaceImageSource.signature(), IVirtualSurfaceImageSource.iid())
+    }
+
+    public static func intoWinrtHandle(value: VirtualSurfaceImageSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): VirtualSurfaceImageSource {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        VirtualSurfaceImageSource.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): VirtualSurfaceImageSource {
+        VirtualSurfaceImageSource.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap (synthetic:Microsoft_UI_Xaml_Media_Imaging_WriteableBitmap)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class WriteableBitmap <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<WriteableBitmap> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WriteableBitmap {
+        WriteableBitmap(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WriteableBitmap {
+        WriteableBitmap(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IWriteableBitmap.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WriteableBitmap> {
+        let ancestors = [IWriteableBitmap.iid(), IBitmapSource.iid(), Microsoft_UI_Xaml_Media.IImageSource.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<WriteableBitmap>("WriteableBitmap", IWriteableBitmap.iid(), ancestors, { raw => WriteableBitmap.fromAbiTake(raw) }, { raw => WriteableBitmap.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IWriteableBitmap {
+        match (unsafe { query(IWriteableBitmap.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIWriteableBitmap(): IWriteableBitmap {
+        defaultInterface()
+    }
+
+    public func asIBitmapSource(): IBitmapSource {
+        match (unsafe { query<IBitmapSource>(IBitmapSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIImageSource(): Microsoft_UI_Xaml_Media.IImageSource {
+        match (unsafe { query<Microsoft_UI_Xaml_Media.IImageSource>(Microsoft_UI_Xaml_Media.IImageSource.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop PixelBuffer: Windows_Storage_Streams.IBuffer {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PixelBuffer(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Storage_Streams.IBuffer>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Storage_Streams.IBuffer.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func Invalidate(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Invalidate() }
+        }
+        hr__.check()
+    }
+
+    public static func CreateInstanceWithDimensions(pixelWidth: Int32, pixelHeight: Int32): WriteableBitmap {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<WriteableBitmap, IWriteableBitmapFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstanceWithDimensions(pixelWidth, pixelHeight, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<WriteableBitmap>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return WriteableBitmap.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap;{" + IWriteableBitmap.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.WriteableBitmap", WriteableBitmap.signature(), IWriteableBitmap.iid())
+    }
+
+    public static func intoWinrtHandle(value: WriteableBitmap): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): WriteableBitmap {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        WriteableBitmap.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): WriteableBitmap {
+        WriteableBitmap.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Imaging.XamlRenderingBackgroundTask (synthetic:Microsoft_UI_Xaml_Media_Imaging_XamlRenderingBackgroundTask)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
+public class XamlRenderingBackgroundTask <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<XamlRenderingBackgroundTask> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): XamlRenderingBackgroundTask {
+        XamlRenderingBackgroundTask(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): XamlRenderingBackgroundTask {
+        XamlRenderingBackgroundTask(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IXamlRenderingBackgroundTask.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<XamlRenderingBackgroundTask> {
+        let ancestors = [IXamlRenderingBackgroundTask.iid(), IXamlRenderingBackgroundTaskOverrides.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<XamlRenderingBackgroundTask>("XamlRenderingBackgroundTask", IXamlRenderingBackgroundTask.iid(), ancestors, { raw => XamlRenderingBackgroundTask.fromAbiTake(raw) }, { raw => XamlRenderingBackgroundTask.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IXamlRenderingBackgroundTask {
+        match (unsafe { query(IXamlRenderingBackgroundTask.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIXamlRenderingBackgroundTask(): IXamlRenderingBackgroundTask {
+        defaultInterface()
+    }
+
+    public func asIXamlRenderingBackgroundTaskOverrides(): IXamlRenderingBackgroundTaskOverrides {
+        match (unsafe { query<IXamlRenderingBackgroundTaskOverrides>(IXamlRenderingBackgroundTaskOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): XamlRenderingBackgroundTask {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<XamlRenderingBackgroundTask, IXamlRenderingBackgroundTaskFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<XamlRenderingBackgroundTask>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return XamlRenderingBackgroundTask.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Imaging.XamlRenderingBackgroundTask"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Imaging.XamlRenderingBackgroundTask;{" + IXamlRenderingBackgroundTask.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Imaging.XamlRenderingBackgroundTask", XamlRenderingBackgroundTask.signature(), IXamlRenderingBackgroundTask.iid())
+    }
+
+    public static func intoWinrtHandle(value: XamlRenderingBackgroundTask): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): XamlRenderingBackgroundTask {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        XamlRenderingBackgroundTask.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): XamlRenderingBackgroundTask {
+        XamlRenderingBackgroundTask.viewOf(raw)
+    }
 }

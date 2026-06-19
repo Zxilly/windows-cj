@@ -3,12 +3,15 @@
 package windows_sys.Graphics.Imaging
 
 import windows_core as windows_core
+import windows_interface.GUID
 import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 @When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 import windows_sys.Graphics.DirectX.Direct3D11 as Windows_Graphics_DirectX_Direct3D11
 @When[Windows_Storage_Streams == "on"]
@@ -18,19 +21,29 @@ import windows_sys.Storage.Streams as Windows_Storage_Streams
 @When[Windows_Graphics_Imaging == "on"]
 public struct BitmapAlphaMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapAlphaMode_Premultiplied = BitmapAlphaMode(0)
+public const BitmapAlphaMode_Premultiplied = BitmapAlphaMode(0)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapAlphaMode_Straight = BitmapAlphaMode(1)
+public const BitmapAlphaMode_Straight = BitmapAlphaMode(1)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapAlphaMode_Ignore = BitmapAlphaMode(2)
+public const BitmapAlphaMode_Ignore = BitmapAlphaMode(2)
+
+// Windows.Graphics.Imaging.BitmapBounds (synthetic:Windows_Graphics_Imaging_BitmapBounds)
+@When[Windows_Graphics_Imaging == "on"]
+@C
+public struct BitmapBounds {
+    public var X: UInt32 = 0u32
+    public var Y: UInt32 = 0u32
+    public var Width: UInt32 = 0u32
+    public var Height: UInt32 = 0u32
+}
 
 // Windows.Graphics.Imaging.BitmapBuffer (synthetic:Windows_Graphics_Imaging_BitmapBuffer)
 @When[Windows_Graphics_Imaging == "on"]
@@ -145,49 +158,1171 @@ public class BitmapBuffer <: windows_interface.InterfaceWrapperBase & windows_in
 @When[Windows_Graphics_Imaging == "on"]
 public struct BitmapBufferAccessMode {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapBufferAccessMode_Read = BitmapBufferAccessMode(0)
+public const BitmapBufferAccessMode_Read = BitmapBufferAccessMode(0)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapBufferAccessMode_ReadWrite = BitmapBufferAccessMode(1)
+public const BitmapBufferAccessMode_ReadWrite = BitmapBufferAccessMode(1)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapBufferAccessMode_Write = BitmapBufferAccessMode(2)
+public const BitmapBufferAccessMode_Write = BitmapBufferAccessMode(2)
+
+// Windows.Graphics.Imaging.BitmapCodecInformation (synthetic:Windows_Graphics_Imaging_BitmapCodecInformation)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapCodecInformation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapCodecInformation> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapCodecInformation {
+        BitmapCodecInformation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapCodecInformation {
+        BitmapCodecInformation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapCodecInformation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapCodecInformation> {
+        let ancestors = [IBitmapCodecInformation.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapCodecInformation>("BitmapCodecInformation", IBitmapCodecInformation.iid(), ancestors, { raw => BitmapCodecInformation.fromAbiTake(raw) }, { raw => BitmapCodecInformation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapCodecInformation {
+        match (unsafe { query(IBitmapCodecInformation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapCodecInformation(): IBitmapCodecInformation {
+        defaultInterface()
+    }
+
+    public prop CodecId: windows_core.GuidValue {
+        get() {
+            var result__ = GUID()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CodecId(CPointer<GUID>(inout result__)) }
+            }
+            hr__.check()
+            return windows_core.GuidValue.fromRaw(result__)
+        }
+    }
+
+    public prop FileExtensions: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FileExtensions(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop FriendlyName: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FriendlyName(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop MimeTypes: Windows_Foundation_Collections.IVectorView<windows_core.HString> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MimeTypes(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_core.HString>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapCodecInformation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapCodecInformation;{" + IBitmapCodecInformation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapCodecInformation", BitmapCodecInformation.signature(), IBitmapCodecInformation.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapCodecInformation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapCodecInformation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapCodecInformation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapCodecInformation {
+        BitmapCodecInformation.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapDecoder (synthetic:Windows_Graphics_Imaging_BitmapDecoder)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapDecoder <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapDecoder> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapDecoder {
+        BitmapDecoder(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapDecoder {
+        BitmapDecoder(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapDecoder.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapDecoder> {
+        let ancestors = [IBitmapDecoder.iid(), IBitmapFrame.iid(), IBitmapFrameWithSoftwareBitmap.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapDecoder>("BitmapDecoder", IBitmapDecoder.iid(), ancestors, { raw => BitmapDecoder.fromAbiTake(raw) }, { raw => BitmapDecoder.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapDecoder {
+        match (unsafe { query(IBitmapDecoder.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapDecoder(): IBitmapDecoder {
+        defaultInterface()
+    }
+
+    public func asIBitmapFrame(): IBitmapFrame {
+        match (unsafe { query<IBitmapFrame>(IBitmapFrame.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIBitmapFrameWithSoftwareBitmap(): IBitmapFrameWithSoftwareBitmap {
+        match (unsafe { query<IBitmapFrameWithSoftwareBitmap>(IBitmapFrameWithSoftwareBitmap.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop BitmapContainerProperties: BitmapPropertiesView {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BitmapContainerProperties(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<BitmapPropertiesView>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return BitmapPropertiesView.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop DecoderInformation: BitmapCodecInformation {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DecoderInformation(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<BitmapCodecInformation>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return BitmapCodecInformation.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop FrameCount: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FrameCount(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func GetPreviewAsync(): Windows_Foundation.IAsyncOperation<ImageStream> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetPreviewAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ImageStream>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ImageStream>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetFrameAsync(frameIndex: UInt32): Windows_Foundation.IAsyncOperation<BitmapFrame> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetFrameAsync(frameIndex, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapFrame>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapFrame>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HeifDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.HeifDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func WebpDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.WebpDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func BmpDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BmpDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func JpegDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.JpegDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func PngDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PngDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func TiffDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TiffDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func GifDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GifDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func JpegXRDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.JpegXRDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func IcoDecoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IcoDecoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func GetDecoderInformationEnumerator(): Windows_Foundation_Collections.IVectorView<BitmapCodecInformation> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetDecoderInformationEnumerator(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<BitmapCodecInformation>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<BitmapCodecInformation>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateAsync(stream: Windows_Storage_Streams.IRandomAccessStream): Windows_Foundation.IAsyncOperation<BitmapDecoder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(stream)) {
+            try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapDecoder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapDecoder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateWithIdAsync(decoderId: windows_core.GuidValue, stream: Windows_Storage_Streams.IRandomAccessStream): Windows_Foundation.IAsyncOperation<BitmapDecoder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(stream)) {
+            try (factory__ = windows_core.factory<BitmapDecoder, IBitmapDecoderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithIdAsync(decoderId.toRaw(), __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapDecoder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapDecoder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapDecoder"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapDecoder;{" + IBitmapDecoder.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapDecoder", BitmapDecoder.signature(), IBitmapDecoder.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapDecoder): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapDecoder {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapDecoder.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapDecoder {
+        BitmapDecoder.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapEncoder (synthetic:Windows_Graphics_Imaging_BitmapEncoder)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapEncoder <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapEncoder> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapEncoder {
+        BitmapEncoder(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapEncoder {
+        BitmapEncoder(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapEncoder.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapEncoder> {
+        let ancestors = [IBitmapEncoder.iid(), IBitmapEncoderWithSoftwareBitmap.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapEncoder>("BitmapEncoder", IBitmapEncoder.iid(), ancestors, { raw => BitmapEncoder.fromAbiTake(raw) }, { raw => BitmapEncoder.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapEncoder {
+        match (unsafe { query(IBitmapEncoder.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapEncoder(): IBitmapEncoder {
+        defaultInterface()
+    }
+
+    public func asIBitmapEncoderWithSoftwareBitmap(): IBitmapEncoderWithSoftwareBitmap {
+        match (unsafe { query<IBitmapEncoderWithSoftwareBitmap>(IBitmapEncoderWithSoftwareBitmap.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop BitmapContainerProperties: BitmapProperties {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BitmapContainerProperties(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<BitmapProperties>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return BitmapProperties.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop BitmapProperties: BitmapProperties {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BitmapProperties(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<BitmapProperties>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return BitmapProperties.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop BitmapTransform: BitmapTransform {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BitmapTransform(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<BitmapTransform>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return BitmapTransform.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop EncoderInformation: BitmapCodecInformation {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.EncoderInformation(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<BitmapCodecInformation>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return BitmapCodecInformation.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop GeneratedThumbnailHeight: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GeneratedThumbnailHeight(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetGeneratedThumbnailHeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop GeneratedThumbnailWidth: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GeneratedThumbnailWidth(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetGeneratedThumbnailWidth(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsThumbnailGenerated: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsThumbnailGenerated(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsThumbnailGenerated(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func SetPixelData(pixelFormat: BitmapPixelFormat, alphaMode: BitmapAlphaMode, width: UInt32, height: UInt32, dpiX: Float64, dpiY: Float64, pixels: Array<UInt8>): Unit {
+        var hr__ = windows_core.E_POINTER
+        let __arg6AbiValues = Array<UInt8>(pixels.size, { index => pixels[index] })
+        let __arg6AbiArray = windows_core.AbiArray<UInt8>.fromSlice(__arg6AbiValues)
+        let (__arg6Raw, __arg6Len) = __arg6AbiArray.intoAbi()
+        try {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPixelData(pixelFormat.value, alphaMode.value, width, height, dpiX, dpiY, __arg6Len, __arg6Raw) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg6Raw))
+        }
+        hr__.check()
+    }
+
+    public func GoToNextFrameAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GoToNextFrameAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GoToNextFrameWithEncodingOptionsAsync(encodingOptions: Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>>(encodingOptions)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GoToNextFrameWithEncodingOptionsAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FlushAsync(): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FlushAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HeifEncoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.HeifEncoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func BmpEncoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BmpEncoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func JpegEncoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.JpegEncoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func PngEncoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PngEncoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func TiffEncoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TiffEncoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func GifEncoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GifEncoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func JpegXREncoderId(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.JpegXREncoderId(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public static func GetEncoderInformationEnumerator(): Windows_Foundation_Collections.IVectorView<BitmapCodecInformation> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetEncoderInformationEnumerator(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<BitmapCodecInformation>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<BitmapCodecInformation>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateAsync(encoderId: windows_core.GuidValue, stream: Windows_Storage_Streams.IRandomAccessStream): Windows_Foundation.IAsyncOperation<BitmapEncoder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(stream)) {
+            try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateAsync(encoderId.toRaw(), __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapEncoder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapEncoder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateWithEncodingOptionsAsync(encoderId: windows_core.GuidValue, stream: Windows_Storage_Streams.IRandomAccessStream, encodingOptions: Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): Windows_Foundation.IAsyncOperation<BitmapEncoder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(stream)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>>(encodingOptions)) {
+                try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateWithEncodingOptionsAsync(encoderId.toRaw(), __argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapEncoder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapEncoder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateForTranscodingAsync(stream: Windows_Storage_Streams.IRandomAccessStream, bitmapDecoder: BitmapDecoder): Windows_Foundation.IAsyncOperation<BitmapEncoder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IRandomAccessStream>(stream)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<BitmapDecoder>(bitmapDecoder)) {
+                try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateForTranscodingAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapEncoder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapEncoder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateForInPlacePropertyEncodingAsync(bitmapDecoder: BitmapDecoder): Windows_Foundation.IAsyncOperation<BitmapEncoder> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<BitmapDecoder>(bitmapDecoder)) {
+            try (factory__ = windows_core.factory<BitmapEncoder, IBitmapEncoderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateForInPlacePropertyEncodingAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapEncoder>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapEncoder>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapEncoder"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapEncoder;{" + IBitmapEncoder.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapEncoder", BitmapEncoder.signature(), IBitmapEncoder.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapEncoder): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapEncoder {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapEncoder.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapEncoder {
+        BitmapEncoder.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapFlip (synthetic:Windows_Graphics_Imaging_BitmapFlip)
+@When[Windows_Graphics_Imaging == "on"]
+public struct BitmapFlip {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapFlip_None = BitmapFlip(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapFlip_Horizontal = BitmapFlip(1)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapFlip_Vertical = BitmapFlip(2)
+
+// Windows.Graphics.Imaging.BitmapFrame (synthetic:Windows_Graphics_Imaging_BitmapFrame)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapFrame <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapFrame> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapFrame {
+        BitmapFrame(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapFrame {
+        BitmapFrame(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapFrame.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapFrame> {
+        let ancestors = [IBitmapFrame.iid(), IBitmapFrameWithSoftwareBitmap.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapFrame>("BitmapFrame", IBitmapFrame.iid(), ancestors, { raw => BitmapFrame.fromAbiTake(raw) }, { raw => BitmapFrame.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapFrame {
+        match (unsafe { query(IBitmapFrame.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapFrame(): IBitmapFrame {
+        defaultInterface()
+    }
+
+    public func asIBitmapFrameWithSoftwareBitmap(): IBitmapFrameWithSoftwareBitmap {
+        match (unsafe { query<IBitmapFrameWithSoftwareBitmap>(IBitmapFrameWithSoftwareBitmap.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop BitmapAlphaMode: BitmapAlphaMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BitmapAlphaMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return BitmapAlphaMode(result__)
+        }
+    }
+
+    public prop BitmapPixelFormat: BitmapPixelFormat {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BitmapPixelFormat(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return BitmapPixelFormat(result__)
+        }
+    }
+
+    public prop BitmapProperties: BitmapPropertiesView {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BitmapProperties(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<BitmapPropertiesView>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return BitmapPropertiesView.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop DpiX: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DpiX(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop DpiY: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DpiY(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop OrientedPixelHeight: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OrientedPixelHeight(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop OrientedPixelWidth: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OrientedPixelWidth(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PixelHeight: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PixelHeight(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PixelWidth: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PixelWidth(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func GetThumbnailAsync(): Windows_Foundation.IAsyncOperation<ImageStream> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetThumbnailAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<ImageStream>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<ImageStream>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetPixelDataAsync(): Windows_Foundation.IAsyncOperation<PixelDataProvider> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetPixelDataAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<PixelDataProvider>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<PixelDataProvider>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetPixelDataTransformedAsync(pixelFormat: BitmapPixelFormat, alphaMode: BitmapAlphaMode, transform: BitmapTransform, exifOrientationMode: ExifOrientationMode, colorManagementMode: ColorManagementMode): Windows_Foundation.IAsyncOperation<PixelDataProvider> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<BitmapTransform>(transform)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetPixelDataTransformedAsync(pixelFormat.value, alphaMode.value, __argBorrow0.asRaw(), exifOrientationMode.value, colorManagementMode.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<PixelDataProvider>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<PixelDataProvider>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapFrame"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapFrame;{" + IBitmapFrame.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapFrame", BitmapFrame.signature(), IBitmapFrame.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapFrame): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapFrame {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapFrame.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapFrame {
+        BitmapFrame.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapInterpolationMode (synthetic:Windows_Graphics_Imaging_BitmapInterpolationMode)
+@When[Windows_Graphics_Imaging == "on"]
+public struct BitmapInterpolationMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapInterpolationMode_NearestNeighbor = BitmapInterpolationMode(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapInterpolationMode_Linear = BitmapInterpolationMode(1)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapInterpolationMode_Cubic = BitmapInterpolationMode(2)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapInterpolationMode_Fant = BitmapInterpolationMode(3)
 
 // Windows.Graphics.Imaging.BitmapPixelFormat (synthetic:Windows_Graphics_Imaging_BitmapPixelFormat)
 @When[Windows_Graphics_Imaging == "on"]
 public struct BitmapPixelFormat {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Unknown = BitmapPixelFormat(0)
+public const BitmapPixelFormat_Unknown = BitmapPixelFormat(0)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Rgba16 = BitmapPixelFormat(12)
+public const BitmapPixelFormat_Rgba16 = BitmapPixelFormat(12)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Rgba8 = BitmapPixelFormat(30)
+public const BitmapPixelFormat_Rgba8 = BitmapPixelFormat(30)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Gray16 = BitmapPixelFormat(57)
+public const BitmapPixelFormat_Gray16 = BitmapPixelFormat(57)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Gray8 = BitmapPixelFormat(62)
+public const BitmapPixelFormat_Gray8 = BitmapPixelFormat(62)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Bgra8 = BitmapPixelFormat(87)
+public const BitmapPixelFormat_Bgra8 = BitmapPixelFormat(87)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Nv12 = BitmapPixelFormat(103)
+public const BitmapPixelFormat_Nv12 = BitmapPixelFormat(103)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_P010 = BitmapPixelFormat(104)
+public const BitmapPixelFormat_P010 = BitmapPixelFormat(104)
 @When[Windows_Graphics_Imaging == "on"]
-public let BitmapPixelFormat_Yuy2 = BitmapPixelFormat(107)
+public const BitmapPixelFormat_Yuy2 = BitmapPixelFormat(107)
 
 // Windows.Graphics.Imaging.BitmapPlaneDescription (synthetic:Windows_Graphics_Imaging_BitmapPlaneDescription)
 @When[Windows_Graphics_Imaging == "on"]
@@ -199,12 +1334,935 @@ public struct BitmapPlaneDescription {
     public var Stride: Int32 = 0i32
 }
 
+// Windows.Graphics.Imaging.BitmapProperties (synthetic:Windows_Graphics_Imaging_BitmapProperties)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapProperties> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapProperties {
+        BitmapProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapProperties {
+        BitmapProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapProperties> {
+        let ancestors = [IBitmapProperties.iid(), IBitmapPropertiesView.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapProperties>("BitmapProperties", IBitmapProperties.iid(), ancestors, { raw => BitmapProperties.fromAbiTake(raw) }, { raw => BitmapProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapProperties {
+        match (unsafe { query(IBitmapProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapProperties(): IBitmapProperties {
+        defaultInterface()
+    }
+
+    public func asIBitmapPropertiesView(): IBitmapPropertiesView {
+        match (unsafe { query<IBitmapPropertiesView>(IBitmapPropertiesView.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func SetPropertiesAsync(propertiesToSet: Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>): Windows_Foundation.IAsyncAction {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>>(propertiesToSet)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPropertiesAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncAction>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncAction.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapProperties;{" + IBitmapProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapProperties", BitmapProperties.signature(), IBitmapProperties.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapProperties {
+        BitmapProperties.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapPropertiesView (synthetic:Windows_Graphics_Imaging_BitmapPropertiesView)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapPropertiesView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapPropertiesView> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapPropertiesView {
+        BitmapPropertiesView(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapPropertiesView {
+        BitmapPropertiesView(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapPropertiesView.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapPropertiesView> {
+        let ancestors = [IBitmapPropertiesView.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapPropertiesView>("BitmapPropertiesView", IBitmapPropertiesView.iid(), ancestors, { raw => BitmapPropertiesView.fromAbiTake(raw) }, { raw => BitmapPropertiesView.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapPropertiesView {
+        match (unsafe { query(IBitmapPropertiesView.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapPropertiesView(): IBitmapPropertiesView {
+        defaultInterface()
+    }
+
+    public func GetPropertiesAsync(propertiesToRetrieve: Windows_Foundation_Collections.IIterable<windows_core.HString>): Windows_Foundation.IAsyncOperation<BitmapPropertySet> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IIterable<windows_core.HString>>(propertiesToRetrieve)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetPropertiesAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<BitmapPropertySet>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<BitmapPropertySet>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapPropertiesView"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapPropertiesView;{" + IBitmapPropertiesView.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapPropertiesView", BitmapPropertiesView.signature(), IBitmapPropertiesView.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapPropertiesView): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapPropertiesView {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapPropertiesView.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapPropertiesView {
+        BitmapPropertiesView.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapPropertySet (synthetic:Windows_Graphics_Imaging_BitmapPropertySet)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapPropertySet <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapPropertySet> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapPropertySet {
+        BitmapPropertySet(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapPropertySet {
+        BitmapPropertySet(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue>.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapPropertySet> {
+        let ancestors = [Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue>.iid(), Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapPropertySet>("BitmapPropertySet", Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue>.iid(), ancestors, { raw => BitmapPropertySet.fromAbiTake(raw) }, { raw => BitmapPropertySet.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue> {
+        match (unsafe { query(Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMap(): Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue> {
+        defaultInterface()
+    }
+
+    public func asIIterable(): Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>> {
+        match (unsafe { query<Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>>(Windows_Foundation_Collections.IIterable<Windows_Foundation_Collections.IKeyValuePair<windows_core.HString, BitmapTypedValue>>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Size: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Size(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func Lookup(key: windows_core.HString): BitmapTypedValue {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Lookup(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed()) {
+            windows_core.winrtReleaseFailedGenericOut<BitmapTypedValue>(CPointer<CPointer<Unit>>(inout result__))
+        }
+        hr__.check()
+        return windows_core.winrtTakeGenericOut<BitmapTypedValue>(CPointer<CPointer<Unit>>(inout result__))
+    }
+
+    public func HasKey(key: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HasKey(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func GetView(): Windows_Foundation_Collections.IMapView<windows_core.HString, BitmapTypedValue> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IMapView<windows_core.HString, BitmapTypedValue>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IMapView<windows_core.HString, BitmapTypedValue>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Insert(key: windows_core.HString, value: BitmapTypedValue): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<BitmapTypedValue>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.Insert(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<Bool>(inout result__)) }
+                }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func Remove(key: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Remove(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Clear(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Clear() }
+        }
+        hr__.check()
+    }
+
+    public static func new(): BitmapPropertySet {
+        var created__: Option<BitmapPropertySet> = Option<BitmapPropertySet>.None
+        try (factory__ = windows_core.factory<BitmapPropertySet, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<BitmapPropertySet>(BitmapPropertySet.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce BitmapPropertySet")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapPropertySet"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapPropertySet;{" + Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue>.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapPropertySet", BitmapPropertySet.signature(), Windows_Foundation_Collections.IMap<windows_core.HString, BitmapTypedValue>.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapPropertySet): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapPropertySet {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapPropertySet.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapPropertySet {
+        BitmapPropertySet.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapRotation (synthetic:Windows_Graphics_Imaging_BitmapRotation)
+@When[Windows_Graphics_Imaging == "on"]
+public struct BitmapRotation {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapRotation_None = BitmapRotation(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapRotation_Clockwise90Degrees = BitmapRotation(1)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapRotation_Clockwise180Degrees = BitmapRotation(2)
+@When[Windows_Graphics_Imaging == "on"]
+public const BitmapRotation_Clockwise270Degrees = BitmapRotation(3)
+
+// Windows.Graphics.Imaging.BitmapSize (synthetic:Windows_Graphics_Imaging_BitmapSize)
+@When[Windows_Graphics_Imaging == "on"]
+@C
+public struct BitmapSize {
+    public var Width: UInt32 = 0u32
+    public var Height: UInt32 = 0u32
+}
+
+// Windows.Graphics.Imaging.BitmapTransform (synthetic:Windows_Graphics_Imaging_BitmapTransform)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapTransform <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapTransform> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapTransform {
+        BitmapTransform(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapTransform {
+        BitmapTransform(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapTransform.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapTransform> {
+        let ancestors = [IBitmapTransform.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapTransform>("BitmapTransform", IBitmapTransform.iid(), ancestors, { raw => BitmapTransform.fromAbiTake(raw) }, { raw => BitmapTransform.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapTransform {
+        match (unsafe { query(IBitmapTransform.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapTransform(): IBitmapTransform {
+        defaultInterface()
+    }
+
+    public mut prop Bounds: BitmapBounds {
+        get() {
+            var result__ = BitmapBounds()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Bounds(CPointer<BitmapBounds>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetBounds(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Flip: BitmapFlip {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Flip(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return BitmapFlip(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFlip(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InterpolationMode: BitmapInterpolationMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InterpolationMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return BitmapInterpolationMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInterpolationMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Rotation: BitmapRotation {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Rotation(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return BitmapRotation(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRotation(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ScaledHeight: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScaledHeight(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetScaledHeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ScaledWidth: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScaledWidth(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetScaledWidth(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): BitmapTransform {
+        var created__: Option<BitmapTransform> = Option<BitmapTransform>.None
+        try (factory__ = windows_core.factory<BitmapTransform, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<BitmapTransform>(BitmapTransform.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce BitmapTransform")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapTransform"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapTransform;{" + IBitmapTransform.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapTransform", BitmapTransform.signature(), IBitmapTransform.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapTransform): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapTransform {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapTransform.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapTransform {
+        BitmapTransform.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.BitmapTypedValue (synthetic:Windows_Graphics_Imaging_BitmapTypedValue)
+@When[Windows_Graphics_Imaging == "on"]
+public class BitmapTypedValue <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<BitmapTypedValue> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BitmapTypedValue {
+        BitmapTypedValue(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BitmapTypedValue {
+        BitmapTypedValue(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBitmapTypedValue.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BitmapTypedValue> {
+        let ancestors = [IBitmapTypedValue.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<BitmapTypedValue>("BitmapTypedValue", IBitmapTypedValue.iid(), ancestors, { raw => BitmapTypedValue.fromAbiTake(raw) }, { raw => BitmapTypedValue.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBitmapTypedValue {
+        match (unsafe { query(IBitmapTypedValue.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBitmapTypedValue(): IBitmapTypedValue {
+        defaultInterface()
+    }
+
+    public prop Type: Windows_Foundation.PropertyType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Type(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Foundation.PropertyType(result__)
+        }
+    }
+
+    public prop Value: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Value(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func Create(value: windows_interface.IInspectable, type_: Windows_Foundation.PropertyType): BitmapTypedValue {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (factory__ = windows_core.factory<BitmapTypedValue, IBitmapTypedValueFactory>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<BitmapTypedValue>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return BitmapTypedValue.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.BitmapTypedValue"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.BitmapTypedValue;{" + IBitmapTypedValue.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.BitmapTypedValue", BitmapTypedValue.signature(), IBitmapTypedValue.iid())
+    }
+
+    public static func intoWinrtHandle(value: BitmapTypedValue): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): BitmapTypedValue {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        BitmapTypedValue.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): BitmapTypedValue {
+        BitmapTypedValue.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.ColorManagementMode (synthetic:Windows_Graphics_Imaging_ColorManagementMode)
+@When[Windows_Graphics_Imaging == "on"]
+public struct ColorManagementMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const ColorManagementMode_DoNotColorManage = ColorManagementMode(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const ColorManagementMode_ColorManageToSRgb = ColorManagementMode(1)
+
+// Windows.Graphics.Imaging.ExifOrientationMode (synthetic:Windows_Graphics_Imaging_ExifOrientationMode)
+@When[Windows_Graphics_Imaging == "on"]
+public struct ExifOrientationMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const ExifOrientationMode_IgnoreExifOrientation = ExifOrientationMode(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const ExifOrientationMode_RespectExifOrientation = ExifOrientationMode(1)
+
 // Windows.Graphics.Imaging.IBitmapBuffer (synthetic:Windows_Graphics_Imaging_IBitmapBuffer)
 @When[Windows_Graphics_Imaging == "on"]
 @Interface["a53e04c4-399c-438c-b28f-a63a6b83d1a1", "Windows.Graphics.Imaging.IBitmapBuffer"]
 public interface IBitmapBuffer <: IInspectable {
     func GetPlaneCount(value: CPointer<Int32>): Int32
     func GetPlaneDescription(index: Int32, value: CPointer<BitmapPlaneDescription>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapCodecInformation (synthetic:Windows_Graphics_Imaging_IBitmapCodecInformation)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["400caaf2-c4b0-4392-a3b0-6f6f9ba95cb4", "Windows.Graphics.Imaging.IBitmapCodecInformation", "FileExtensions.value=Com;FriendlyName.value=HString;MimeTypes.value=Com"]
+public interface IBitmapCodecInformation <: IInspectable {
+    func CodecId(value: CPointer<GUID>): Int32
+    func FileExtensions(value: CPointer<CPointer<Unit>>): Int32
+    func FriendlyName(value: CPointer<CPointer<Unit>>): Int32
+    func MimeTypes(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapDecoder (synthetic:Windows_Graphics_Imaging_IBitmapDecoder)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["acef22ba-1d74-4c91-9dfc-9620745233e6", "Windows.Graphics.Imaging.IBitmapDecoder", "BitmapContainerProperties.value=Com;DecoderInformation.value=Com;GetPreviewAsync.asyncInfo=Com;GetFrameAsync.asyncInfo=Com"]
+public interface IBitmapDecoder <: IInspectable {
+    func BitmapContainerProperties(value: CPointer<CPointer<Unit>>): Int32
+    func DecoderInformation(value: CPointer<CPointer<Unit>>): Int32
+    func FrameCount(value: CPointer<UInt32>): Int32
+    func GetPreviewAsync(asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func GetFrameAsync(frameIndex: UInt32, asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapDecoderStatics (synthetic:Windows_Graphics_Imaging_IBitmapDecoderStatics)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["438ccb26-bcef-4e95-bad6-23a822e58d01", "Windows.Graphics.Imaging.IBitmapDecoderStatics", "GetDecoderInformationEnumerator.decoderInformationEnumerator=Com;CreateAsync.asyncInfo=Com;CreateWithIdAsync.asyncInfo=Com"]
+public interface IBitmapDecoderStatics <: IInspectable {
+    func BmpDecoderId(value: CPointer<GUID>): Int32
+    func JpegDecoderId(value: CPointer<GUID>): Int32
+    func PngDecoderId(value: CPointer<GUID>): Int32
+    func TiffDecoderId(value: CPointer<GUID>): Int32
+    func GifDecoderId(value: CPointer<GUID>): Int32
+    func JpegXRDecoderId(value: CPointer<GUID>): Int32
+    func IcoDecoderId(value: CPointer<GUID>): Int32
+    func GetDecoderInformationEnumerator(decoderInformationEnumerator: CPointer<CPointer<Unit>>): Int32
+    func CreateAsync(stream: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func CreateWithIdAsync(decoderId: GUID, stream: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapDecoderStatics2 (synthetic:Windows_Graphics_Imaging_IBitmapDecoderStatics2)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["50ba68ea-99a1-40c4-80d9-aef0dafa6c3f", "Windows.Graphics.Imaging.IBitmapDecoderStatics2"]
+public interface IBitmapDecoderStatics2 <: IInspectable {
+    func HeifDecoderId(value: CPointer<GUID>): Int32
+    func WebpDecoderId(value: CPointer<GUID>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapEncoder (synthetic:Windows_Graphics_Imaging_IBitmapEncoder)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["2bc468e3-e1f8-4b54-95e8-32919551ce62", "Windows.Graphics.Imaging.IBitmapEncoder", "EncoderInformation.value=Com;BitmapProperties.value=Com;BitmapContainerProperties.value=Com;BitmapTransform.value=Com;GoToNextFrameAsync.asyncInfo=Com;GoToNextFrameWithEncodingOptionsAsync.asyncInfo=Com;FlushAsync.asyncInfo=Com"]
+public interface IBitmapEncoder <: IInspectable {
+    func EncoderInformation(value: CPointer<CPointer<Unit>>): Int32
+    func BitmapProperties(value: CPointer<CPointer<Unit>>): Int32
+    func BitmapContainerProperties(value: CPointer<CPointer<Unit>>): Int32
+    func IsThumbnailGenerated(value: CPointer<Bool>): Int32
+    func SetIsThumbnailGenerated(value: Bool): Int32
+    func GeneratedThumbnailWidth(value: CPointer<UInt32>): Int32
+    func SetGeneratedThumbnailWidth(value: UInt32): Int32
+    func GeneratedThumbnailHeight(value: CPointer<UInt32>): Int32
+    func SetGeneratedThumbnailHeight(value: UInt32): Int32
+    func BitmapTransform(value: CPointer<CPointer<Unit>>): Int32
+    func SetPixelData(pixelFormat: Int32, alphaMode: Int32, width: UInt32, height: UInt32, dpiX: Float64, dpiY: Float64, pixelsSize: UInt32, pixels: CPointer<UInt8>): Int32
+    func GoToNextFrameAsync(asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func GoToNextFrameWithEncodingOptionsAsync(encodingOptions: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func FlushAsync(asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapEncoderStatics (synthetic:Windows_Graphics_Imaging_IBitmapEncoderStatics)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["a74356a7-a4e4-4eb9-8e40-564de7e1ccb2", "Windows.Graphics.Imaging.IBitmapEncoderStatics", "GetEncoderInformationEnumerator.encoderInformationEnumerator=Com;CreateAsync.asyncInfo=Com;CreateWithEncodingOptionsAsync.asyncInfo=Com;CreateForTranscodingAsync.asyncInfo=Com;CreateForInPlacePropertyEncodingAsync.asyncInfo=Com"]
+public interface IBitmapEncoderStatics <: IInspectable {
+    func BmpEncoderId(value: CPointer<GUID>): Int32
+    func JpegEncoderId(value: CPointer<GUID>): Int32
+    func PngEncoderId(value: CPointer<GUID>): Int32
+    func TiffEncoderId(value: CPointer<GUID>): Int32
+    func GifEncoderId(value: CPointer<GUID>): Int32
+    func JpegXREncoderId(value: CPointer<GUID>): Int32
+    func GetEncoderInformationEnumerator(encoderInformationEnumerator: CPointer<CPointer<Unit>>): Int32
+    func CreateAsync(encoderId: GUID, stream: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func CreateWithEncodingOptionsAsync(encoderId: GUID, stream: CPointer<Unit>, encodingOptions: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func CreateForTranscodingAsync(stream: CPointer<Unit>, bitmapDecoder: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func CreateForInPlacePropertyEncodingAsync(bitmapDecoder: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapEncoderStatics2 (synthetic:Windows_Graphics_Imaging_IBitmapEncoderStatics2)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["33cbc259-fe31-41b1-b812-086d21e87e16", "Windows.Graphics.Imaging.IBitmapEncoderStatics2"]
+public interface IBitmapEncoderStatics2 <: IInspectable {
+    func HeifEncoderId(value: CPointer<GUID>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapEncoderWithSoftwareBitmap (synthetic:Windows_Graphics_Imaging_IBitmapEncoderWithSoftwareBitmap)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["686cd241-4330-4c77-ace4-0334968b1768", "Windows.Graphics.Imaging.IBitmapEncoderWithSoftwareBitmap"]
+public interface IBitmapEncoderWithSoftwareBitmap <: IInspectable {
+    func SetSoftwareBitmap(bitmap: CPointer<Unit>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapFrame (synthetic:Windows_Graphics_Imaging_IBitmapFrame)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["72a49a1c-8081-438d-91bc-94ecfc8185c6", "Windows.Graphics.Imaging.IBitmapFrame", "GetThumbnailAsync.asyncInfo=Com;BitmapProperties.value=Com;GetPixelDataAsync.asyncInfo=Com;GetPixelDataTransformedAsync.asyncInfo=Com"]
+public interface IBitmapFrame <: IInspectable {
+    func GetThumbnailAsync(asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func BitmapProperties(value: CPointer<CPointer<Unit>>): Int32
+    func BitmapPixelFormat(value: CPointer<Int32>): Int32
+    func BitmapAlphaMode(value: CPointer<Int32>): Int32
+    func DpiX(value: CPointer<Float64>): Int32
+    func DpiY(value: CPointer<Float64>): Int32
+    func PixelWidth(value: CPointer<UInt32>): Int32
+    func PixelHeight(value: CPointer<UInt32>): Int32
+    func OrientedPixelWidth(value: CPointer<UInt32>): Int32
+    func OrientedPixelHeight(value: CPointer<UInt32>): Int32
+    func GetPixelDataAsync(asyncInfo: CPointer<CPointer<Unit>>): Int32
+    func GetPixelDataTransformedAsync(pixelFormat: Int32, alphaMode: Int32, transform: CPointer<Unit>, exifOrientationMode: Int32, colorManagementMode: Int32, asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapFrameWithSoftwareBitmap (synthetic:Windows_Graphics_Imaging_IBitmapFrameWithSoftwareBitmap)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["fe287c9a-420c-4963-87ad-691436e08383", "Windows.Graphics.Imaging.IBitmapFrameWithSoftwareBitmap", "GetSoftwareBitmapAsync.value=Com;GetSoftwareBitmapConvertedAsync.value=Com;GetSoftwareBitmapTransformedAsync.value=Com"]
+public interface IBitmapFrameWithSoftwareBitmap <: IInspectable {
+    func GetSoftwareBitmapAsync(value: CPointer<CPointer<Unit>>): Int32
+    func GetSoftwareBitmapConvertedAsync(pixelFormat: Int32, alphaMode: Int32, value: CPointer<CPointer<Unit>>): Int32
+    func GetSoftwareBitmapTransformedAsync(pixelFormat: Int32, alphaMode: Int32, transform: CPointer<Unit>, exifOrientationMode: Int32, colorManagementMode: Int32, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapProperties (synthetic:Windows_Graphics_Imaging_IBitmapProperties)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["ea9f4f1b-b505-4450-a4d1-e8ca94529d8d", "Windows.Graphics.Imaging.IBitmapProperties", "SetPropertiesAsync.asyncInfo=Com"]
+public interface IBitmapProperties <: IInspectable {
+    func SetPropertiesAsync(propertiesToSet: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapPropertiesView (synthetic:Windows_Graphics_Imaging_IBitmapPropertiesView)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["7e0fe87a-3a70-48f8-9c55-196cf5a545f5", "Windows.Graphics.Imaging.IBitmapPropertiesView", "GetPropertiesAsync.asyncInfo=Com"]
+public interface IBitmapPropertiesView <: IInspectable {
+    func GetPropertiesAsync(propertiesToRetrieve: CPointer<Unit>, asyncInfo: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapTransform (synthetic:Windows_Graphics_Imaging_IBitmapTransform)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["ae755344-e268-4d35-adcf-e995d31a8d34", "Windows.Graphics.Imaging.IBitmapTransform"]
+public interface IBitmapTransform <: IInspectable {
+    func ScaledWidth(value: CPointer<UInt32>): Int32
+    func SetScaledWidth(value: UInt32): Int32
+    func ScaledHeight(value: CPointer<UInt32>): Int32
+    func SetScaledHeight(value: UInt32): Int32
+    func InterpolationMode(value: CPointer<Int32>): Int32
+    func SetInterpolationMode(value: Int32): Int32
+    func Flip(value: CPointer<Int32>): Int32
+    func SetFlip(value: Int32): Int32
+    func Rotation(value: CPointer<Int32>): Int32
+    func SetRotation(value: Int32): Int32
+    func Bounds(value: CPointer<BitmapBounds>): Int32
+    func SetBounds(value: BitmapBounds): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapTypedValue (synthetic:Windows_Graphics_Imaging_IBitmapTypedValue)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["cd8044a9-2443-4000-b0cd-79316c56f589", "Windows.Graphics.Imaging.IBitmapTypedValue", "Value.value=Com"]
+public interface IBitmapTypedValue <: IInspectable {
+    func Value(value: CPointer<CPointer<Unit>>): Int32
+    func Type(value: CPointer<Int32>): Int32
+}
+
+// Windows.Graphics.Imaging.IBitmapTypedValueFactory (synthetic:Windows_Graphics_Imaging_IBitmapTypedValueFactory)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["92dbb599-ce13-46bb-9545-cb3a3f63eb8b", "Windows.Graphics.Imaging.IBitmapTypedValueFactory", "Create.bitmapTypedValue=Com"]
+public interface IBitmapTypedValueFactory <: IInspectable {
+    func Create(value: CPointer<Unit>, type_: Int32, bitmapTypedValue: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Graphics.Imaging.IPixelDataProvider (synthetic:Windows_Graphics_Imaging_IPixelDataProvider)
+@When[Windows_Graphics_Imaging == "on"]
+@Interface["dd831f25-185c-4595-9fb9-ccbe6ec18a6f", "Windows.Graphics.Imaging.IPixelDataProvider", "DetachPixelData.pixelData=Array<UInt8>"]
+public interface IPixelDataProvider <: IInspectable {
+    func DetachPixelData(pixelDataSize: CPointer<UInt32>, pixelData: CPointer<CPointer<UInt8>>): Int32
 }
 
 // Windows.Graphics.Imaging.ISoftwareBitmap (synthetic:Windows_Graphics_Imaging_ISoftwareBitmap)
@@ -247,6 +2305,269 @@ public interface ISoftwareBitmapStatics <: IInspectable {
     func CreateCopyFromSurfaceAsync(surface: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
     func CreateCopyWithAlphaFromSurfaceAsync(surface: CPointer<Unit>, alpha: Int32, value: CPointer<CPointer<Unit>>): Int32
 }
+
+// Windows.Graphics.Imaging.ImageStream (synthetic:Windows_Graphics_Imaging_ImageStream)
+@When[Windows_Graphics_Imaging == "on"]
+public class ImageStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ImageStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ImageStream {
+        ImageStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ImageStream {
+        ImageStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_Storage_Streams.IRandomAccessStreamWithContentType.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ImageStream> {
+        let ancestors = [Windows_Storage_Streams.IRandomAccessStreamWithContentType.iid(), Windows_Storage_Streams.IRandomAccessStream.iid(), Windows_Foundation.IClosable.iid(), Windows_Storage_Streams.IInputStream.iid(), Windows_Storage_Streams.IOutputStream.iid(), Windows_Storage_Streams.IContentTypeProvider.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ImageStream>("ImageStream", Windows_Storage_Streams.IRandomAccessStreamWithContentType.iid(), ancestors, { raw => ImageStream.fromAbiTake(raw) }, { raw => ImageStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_Storage_Streams.IRandomAccessStreamWithContentType {
+        match (unsafe { query(Windows_Storage_Streams.IRandomAccessStreamWithContentType.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRandomAccessStreamWithContentType(): Windows_Storage_Streams.IRandomAccessStreamWithContentType {
+        defaultInterface()
+    }
+
+    public func asIRandomAccessStream(): Windows_Storage_Streams.IRandomAccessStream {
+        match (unsafe { query<Windows_Storage_Streams.IRandomAccessStream>(Windows_Storage_Streams.IRandomAccessStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInputStream(): Windows_Storage_Streams.IInputStream {
+        match (unsafe { query<Windows_Storage_Streams.IInputStream>(Windows_Storage_Streams.IInputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIOutputStream(): Windows_Storage_Streams.IOutputStream {
+        match (unsafe { query<Windows_Storage_Streams.IOutputStream>(Windows_Storage_Streams.IOutputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentTypeProvider(): Windows_Storage_Streams.IContentTypeProvider {
+        match (unsafe { query<Windows_Storage_Streams.IContentTypeProvider>(Windows_Storage_Streams.IContentTypeProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.ImageStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.ImageStream;{" + Windows_Storage_Streams.IRandomAccessStreamWithContentType.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.ImageStream", ImageStream.signature(), Windows_Storage_Streams.IRandomAccessStreamWithContentType.iid())
+    }
+
+    public static func intoWinrtHandle(value: ImageStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ImageStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ImageStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ImageStream {
+        ImageStream.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.JpegSubsamplingMode (synthetic:Windows_Graphics_Imaging_JpegSubsamplingMode)
+@When[Windows_Graphics_Imaging == "on"]
+public struct JpegSubsamplingMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const JpegSubsamplingMode_Default = JpegSubsamplingMode(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const JpegSubsamplingMode_Y4Cb2Cr0 = JpegSubsamplingMode(1)
+@When[Windows_Graphics_Imaging == "on"]
+public const JpegSubsamplingMode_Y4Cb2Cr2 = JpegSubsamplingMode(2)
+@When[Windows_Graphics_Imaging == "on"]
+public const JpegSubsamplingMode_Y4Cb4Cr4 = JpegSubsamplingMode(3)
+
+// Windows.Graphics.Imaging.PixelDataProvider (synthetic:Windows_Graphics_Imaging_PixelDataProvider)
+@When[Windows_Graphics_Imaging == "on"]
+public class PixelDataProvider <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PixelDataProvider> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PixelDataProvider {
+        PixelDataProvider(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PixelDataProvider {
+        PixelDataProvider(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPixelDataProvider.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PixelDataProvider> {
+        let ancestors = [IPixelDataProvider.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PixelDataProvider>("PixelDataProvider", IPixelDataProvider.iid(), ancestors, { raw => PixelDataProvider.fromAbiTake(raw) }, { raw => PixelDataProvider.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPixelDataProvider {
+        match (unsafe { query(IPixelDataProvider.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPixelDataProvider(): IPixelDataProvider {
+        defaultInterface()
+    }
+
+    public func DetachPixelData(): Array<UInt8> {
+        var __returnSize = 0u32
+        var __returnData = CPointer<UInt8>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DetachPixelData(CPointer<UInt32>(inout __returnSize), CPointer<CPointer<UInt8>>(inout __returnData)) }
+        }
+        if (hr__.failed() && __returnData.isNotNull()) {
+            windows_core.coTaskMemFree(CPointer<Unit>(__returnData))
+            __returnData = CPointer<UInt8>()
+            __returnSize = 0u32
+        }
+        hr__.check()
+        if (__returnSize > 0u32 && __returnData.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        var __returnValueProjected = Array<UInt8>()
+        var __returnValueOwned: Option<windows_core.AbiArray<UInt8>> = None
+        try {
+            let __returnValueAbiArray = unsafe { windows_core.AbiArray<UInt8>.fromRawParts(__returnData, __returnSize) }
+            __returnValueOwned = Some(__returnValueAbiArray)
+            let __returnValueAbiValues = __returnValueAbiArray.toArray()
+            __returnValueProjected = Array<UInt8>(__returnValueAbiValues.size, { index => __returnValueAbiValues[index] })
+        } finally {
+            match (__returnValueOwned) {
+                case Some(array) => array.close()
+                case None => windows_core.coTaskMemFree(CPointer<Unit>(__returnData))
+            }
+        }
+        return __returnValueProjected
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Graphics.Imaging.PixelDataProvider"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Graphics.Imaging.PixelDataProvider;{" + IPixelDataProvider.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Graphics.Imaging.PixelDataProvider", PixelDataProvider.signature(), IPixelDataProvider.iid())
+    }
+
+    public static func intoWinrtHandle(value: PixelDataProvider): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PixelDataProvider {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PixelDataProvider.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PixelDataProvider {
+        PixelDataProvider.viewOf(raw)
+    }
+}
+
+// Windows.Graphics.Imaging.PngFilterMode (synthetic:Windows_Graphics_Imaging_PngFilterMode)
+@When[Windows_Graphics_Imaging == "on"]
+public struct PngFilterMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const PngFilterMode_Automatic = PngFilterMode(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const PngFilterMode_None = PngFilterMode(1)
+@When[Windows_Graphics_Imaging == "on"]
+public const PngFilterMode_Sub = PngFilterMode(2)
+@When[Windows_Graphics_Imaging == "on"]
+public const PngFilterMode_Up = PngFilterMode(3)
+@When[Windows_Graphics_Imaging == "on"]
+public const PngFilterMode_Average = PngFilterMode(4)
+@When[Windows_Graphics_Imaging == "on"]
+public const PngFilterMode_Paeth = PngFilterMode(5)
+@When[Windows_Graphics_Imaging == "on"]
+public const PngFilterMode_Adaptive = PngFilterMode(6)
 
 // Windows.Graphics.Imaging.SoftwareBitmap (synthetic:Windows_Graphics_Imaging_SoftwareBitmap)
 @When[Windows_Graphics_Imaging == "on"]
@@ -625,3 +2946,31 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         SoftwareBitmap.viewOf(raw)
     }
 }
+
+// Windows.Graphics.Imaging.TiffCompressionMode (synthetic:Windows_Graphics_Imaging_TiffCompressionMode)
+@When[Windows_Graphics_Imaging == "on"]
+public struct TiffCompressionMode {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_Automatic = TiffCompressionMode(0)
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_None = TiffCompressionMode(1)
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_Ccitt3 = TiffCompressionMode(2)
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_Ccitt4 = TiffCompressionMode(3)
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_Lzw = TiffCompressionMode(4)
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_Rle = TiffCompressionMode(5)
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_Zip = TiffCompressionMode(6)
+@When[Windows_Graphics_Imaging == "on"]
+public const TiffCompressionMode_LzwhDifferencing = TiffCompressionMode(7)

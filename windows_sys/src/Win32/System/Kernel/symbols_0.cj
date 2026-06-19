@@ -14,9 +14,9 @@ import windows_sys.Win32.System.Diagnostics.Debug as Windows_Win32_System_Diagno
 @When[Windows_Win32_System_Kernel == "on"]
 public type COMPARTMENT_ID = Int32
 @When[Windows_Win32_System_Kernel == "on"]
-public let COMPARTMENT_ID_UNSPECIFIED_COMPARTMENT_ID: COMPARTMENT_ID = 0
+public const COMPARTMENT_ID_UNSPECIFIED_COMPARTMENT_ID: COMPARTMENT_ID = 0
 @When[Windows_Win32_System_Kernel == "on"]
-public let COMPARTMENT_ID_DEFAULT_COMPARTMENT_ID: COMPARTMENT_ID = 1
+public const COMPARTMENT_ID_DEFAULT_COMPARTMENT_ID: COMPARTMENT_ID = 1
 
 // Windows.Win32.System.Kernel.CSTRING (synthetic:Windows_Win32_System_Kernel_CSTRING)
 @When[Windows_Win32_System_Kernel == "on"]
@@ -31,21 +31,21 @@ public struct CSTRING {
 @When[Windows_Win32_System_Kernel == "on"]
 public type EVENT_TYPE = Int32
 @When[Windows_Win32_System_Kernel == "on"]
-public let EVENT_TYPE_NotificationEvent: EVENT_TYPE = 0
+public const EVENT_TYPE_NotificationEvent: EVENT_TYPE = 0
 @When[Windows_Win32_System_Kernel == "on"]
-public let EVENT_TYPE_SynchronizationEvent: EVENT_TYPE = 1
+public const EVENT_TYPE_SynchronizationEvent: EVENT_TYPE = 1
 
 // Windows.Win32.System.Kernel.EXCEPTION_DISPOSITION (synthetic:Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION)
 @When[Windows_Win32_System_Kernel == "on"]
 public type EXCEPTION_DISPOSITION = Int32
 @When[Windows_Win32_System_Kernel == "on"]
-public let EXCEPTION_DISPOSITION_ExceptionContinueExecution: EXCEPTION_DISPOSITION = 0
+public const EXCEPTION_DISPOSITION_ExceptionContinueExecution: EXCEPTION_DISPOSITION = 0
 @When[Windows_Win32_System_Kernel == "on"]
-public let EXCEPTION_DISPOSITION_ExceptionContinueSearch: EXCEPTION_DISPOSITION = 1
+public const EXCEPTION_DISPOSITION_ExceptionContinueSearch: EXCEPTION_DISPOSITION = 1
 @When[Windows_Win32_System_Kernel == "on"]
-public let EXCEPTION_DISPOSITION_ExceptionNestedException: EXCEPTION_DISPOSITION = 2
+public const EXCEPTION_DISPOSITION_ExceptionNestedException: EXCEPTION_DISPOSITION = 2
 @When[Windows_Win32_System_Kernel == "on"]
-public let EXCEPTION_DISPOSITION_ExceptionCollidedUnwind: EXCEPTION_DISPOSITION = 3
+public const EXCEPTION_DISPOSITION_ExceptionCollidedUnwind: EXCEPTION_DISPOSITION = 3
 
 // Windows.Win32.System.Kernel.EXCEPTION_REGISTRATION_RECORD (synthetic:Windows_Win32_System_Kernel_EXCEPTION_REGISTRATION_RECORD)
 @When[Windows_Win32_System_Kernel == "on"]
@@ -102,11 +102,11 @@ public struct LIST_ENTRY64 {
 @When[Windows_Win32_System_Kernel == "on"]
 public type NT_PRODUCT_TYPE = Int32
 @When[Windows_Win32_System_Kernel == "on"]
-public let NT_PRODUCT_TYPE_NtProductWinNt: NT_PRODUCT_TYPE = 1
+public const NT_PRODUCT_TYPE_NtProductWinNt: NT_PRODUCT_TYPE = 1
 @When[Windows_Win32_System_Kernel == "on"]
-public let NT_PRODUCT_TYPE_NtProductLanManNt: NT_PRODUCT_TYPE = 2
+public const NT_PRODUCT_TYPE_NtProductLanManNt: NT_PRODUCT_TYPE = 2
 @When[Windows_Win32_System_Kernel == "on"]
-public let NT_PRODUCT_TYPE_NtProductServer: NT_PRODUCT_TYPE = 3
+public const NT_PRODUCT_TYPE_NtProductServer: NT_PRODUCT_TYPE = 3
 
 // Windows.Win32.System.Kernel.NT_TIB (synthetic:Windows_Win32_System_Kernel_NT_TIB)
 @When[Windows_Win32_System_Kernel == "on"]
@@ -548,65 +548,65 @@ public struct STRING64 {
 @When[Windows_Win32_System_Kernel == "on"]
 public type SUITE_TYPE = Int32
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_SmallBusiness: SUITE_TYPE = 0
+public const SUITE_TYPE_SmallBusiness: SUITE_TYPE = 0
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_Enterprise: SUITE_TYPE = 1
+public const SUITE_TYPE_Enterprise: SUITE_TYPE = 1
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_BackOffice: SUITE_TYPE = 2
+public const SUITE_TYPE_BackOffice: SUITE_TYPE = 2
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_CommunicationServer: SUITE_TYPE = 3
+public const SUITE_TYPE_CommunicationServer: SUITE_TYPE = 3
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_TerminalServer: SUITE_TYPE = 4
+public const SUITE_TYPE_TerminalServer: SUITE_TYPE = 4
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_SmallBusinessRestricted: SUITE_TYPE = 5
+public const SUITE_TYPE_SmallBusinessRestricted: SUITE_TYPE = 5
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_EmbeddedNT: SUITE_TYPE = 6
+public const SUITE_TYPE_EmbeddedNT: SUITE_TYPE = 6
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_DataCenter: SUITE_TYPE = 7
+public const SUITE_TYPE_DataCenter: SUITE_TYPE = 7
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_SingleUserTS: SUITE_TYPE = 8
+public const SUITE_TYPE_SingleUserTS: SUITE_TYPE = 8
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_Personal: SUITE_TYPE = 9
+public const SUITE_TYPE_Personal: SUITE_TYPE = 9
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_Blade: SUITE_TYPE = 10
+public const SUITE_TYPE_Blade: SUITE_TYPE = 10
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_EmbeddedRestricted: SUITE_TYPE = 11
+public const SUITE_TYPE_EmbeddedRestricted: SUITE_TYPE = 11
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_SecurityAppliance: SUITE_TYPE = 12
+public const SUITE_TYPE_SecurityAppliance: SUITE_TYPE = 12
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_StorageServer: SUITE_TYPE = 13
+public const SUITE_TYPE_StorageServer: SUITE_TYPE = 13
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_ComputeServer: SUITE_TYPE = 14
+public const SUITE_TYPE_ComputeServer: SUITE_TYPE = 14
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_WHServer: SUITE_TYPE = 15
+public const SUITE_TYPE_WHServer: SUITE_TYPE = 15
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_PhoneNT: SUITE_TYPE = 16
+public const SUITE_TYPE_PhoneNT: SUITE_TYPE = 16
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_MultiUserTS: SUITE_TYPE = 17
+public const SUITE_TYPE_MultiUserTS: SUITE_TYPE = 17
 @When[Windows_Win32_System_Kernel == "on"]
-public let SUITE_TYPE_MaxSuiteType: SUITE_TYPE = 18
+public const SUITE_TYPE_MaxSuiteType: SUITE_TYPE = 18
 
 // Windows.Win32.System.Kernel.TIMER_TYPE (synthetic:Windows_Win32_System_Kernel_TIMER_TYPE)
 @When[Windows_Win32_System_Kernel == "on"]
 public type TIMER_TYPE = Int32
 @When[Windows_Win32_System_Kernel == "on"]
-public let TIMER_TYPE_NotificationTimer: TIMER_TYPE = 0
+public const TIMER_TYPE_NotificationTimer: TIMER_TYPE = 0
 @When[Windows_Win32_System_Kernel == "on"]
-public let TIMER_TYPE_SynchronizationTimer: TIMER_TYPE = 1
+public const TIMER_TYPE_SynchronizationTimer: TIMER_TYPE = 1
 
 // Windows.Win32.System.Kernel.WAIT_TYPE (synthetic:Windows_Win32_System_Kernel_WAIT_TYPE)
 @When[Windows_Win32_System_Kernel == "on"]
 public type WAIT_TYPE = Int32
 @When[Windows_Win32_System_Kernel == "on"]
-public let WAIT_TYPE_WaitAll: WAIT_TYPE = 0
+public const WAIT_TYPE_WaitAll: WAIT_TYPE = 0
 @When[Windows_Win32_System_Kernel == "on"]
-public let WAIT_TYPE_WaitAny: WAIT_TYPE = 1
+public const WAIT_TYPE_WaitAny: WAIT_TYPE = 1
 @When[Windows_Win32_System_Kernel == "on"]
-public let WAIT_TYPE_WaitNotification: WAIT_TYPE = 2
+public const WAIT_TYPE_WaitNotification: WAIT_TYPE = 2
 @When[Windows_Win32_System_Kernel == "on"]
-public let WAIT_TYPE_WaitDequeue: WAIT_TYPE = 3
+public const WAIT_TYPE_WaitDequeue: WAIT_TYPE = 3
 @When[Windows_Win32_System_Kernel == "on"]
-public let WAIT_TYPE_WaitDpc: WAIT_TYPE = 4
+public const WAIT_TYPE_WaitDpc: WAIT_TYPE = 4
 
 // Windows.Win32.System.Kernel.WNF_STATE_NAME (synthetic:Windows_Win32_System_Kernel_WNF_STATE_NAME)
 @When[Windows_Win32_System_Kernel == "on"]

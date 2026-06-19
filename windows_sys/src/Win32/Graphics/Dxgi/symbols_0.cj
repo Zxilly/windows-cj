@@ -3,6 +3,7 @@
 package windows_sys.Win32.Graphics.Dxgi
 
 import windows_core as windows_core
+import windows_interface.GUID
 import windows_interface as windows_interface
 
 @When[Windows_Win32_Foundation == "on"]
@@ -11,17 +12,261 @@ import windows_sys.Win32.Foundation as Windows_Win32_Foundation
 import windows_sys.Win32.Graphics.Dxgi.Common as Windows_Win32_Graphics_Dxgi_Common
 @When[Windows_Win32_Graphics_Gdi == "on"]
 import windows_sys.Win32.Graphics.Gdi as Windows_Win32_Graphics_Gdi
+@When[Windows_Win32_Security == "on"]
+import windows_sys.Win32.Security as Windows_Win32_Security
 @When[Windows_Win32_System_Com == "on"]
 import windows_sys.Win32.System.Com as Windows_Win32_System_Com
+
+// Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ADAPTER_DESC)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_ADAPTER_DESC {
+    public var Description: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+    public var VendorId: UInt32 = 0u32
+    public var DeviceId: UInt32 = 0u32
+    public var SubSysId: UInt32 = 0u32
+    public var Revision: UInt32 = 0u32
+    public var DedicatedVideoMemory: CPointer<Unit> = CPointer<Unit>()
+    public var DedicatedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var SharedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var AdapterLuid: Windows_Win32_Foundation.LUID = Windows_Win32_Foundation.LUID()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC1 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ADAPTER_DESC1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_ADAPTER_DESC1 {
+    public var Description: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+    public var VendorId: UInt32 = 0u32
+    public var DeviceId: UInt32 = 0u32
+    public var SubSysId: UInt32 = 0u32
+    public var Revision: UInt32 = 0u32
+    public var DedicatedVideoMemory: CPointer<Unit> = CPointer<Unit>()
+    public var DedicatedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var SharedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var AdapterLuid: Windows_Win32_Foundation.LUID = Windows_Win32_Foundation.LUID()
+    public var Flags: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC2 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ADAPTER_DESC2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_ADAPTER_DESC2 {
+    public var Description: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+    public var VendorId: UInt32 = 0u32
+    public var DeviceId: UInt32 = 0u32
+    public var SubSysId: UInt32 = 0u32
+    public var Revision: UInt32 = 0u32
+    public var DedicatedVideoMemory: CPointer<Unit> = CPointer<Unit>()
+    public var DedicatedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var SharedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var AdapterLuid: Windows_Win32_Foundation.LUID = Windows_Win32_Foundation.LUID()
+    public var Flags: UInt32 = 0u32
+    public var GraphicsPreemptionGranularity: Int32 = 0i32
+    public var ComputePreemptionGranularity: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_DESC3 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ADAPTER_DESC3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_ADAPTER_DESC3 {
+    public var Description: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+    public var VendorId: UInt32 = 0u32
+    public var DeviceId: UInt32 = 0u32
+    public var SubSysId: UInt32 = 0u32
+    public var Revision: UInt32 = 0u32
+    public var DedicatedVideoMemory: CPointer<Unit> = CPointer<Unit>()
+    public var DedicatedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var SharedSystemMemory: CPointer<Unit> = CPointer<Unit>()
+    public var AdapterLuid: Windows_Win32_Foundation.LUID = Windows_Win32_Foundation.LUID()
+    public var Flags: Int32 = 0i32
+    public var GraphicsPreemptionGranularity: Int32 = 0i32
+    public var ComputePreemptionGranularity: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ADAPTER_FLAG)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_ADAPTER_FLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_ADAPTER_FLAG): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_ADAPTER_FLAG): DXGI_ADAPTER_FLAG {
+        return DXGI_ADAPTER_FLAG(value | other.value)
+    }
+    public operator func &(other: DXGI_ADAPTER_FLAG): DXGI_ADAPTER_FLAG {
+        return DXGI_ADAPTER_FLAG(value & other.value)
+    }
+    public operator func ^(other: DXGI_ADAPTER_FLAG): DXGI_ADAPTER_FLAG {
+        return DXGI_ADAPTER_FLAG(value ^ other.value)
+    }
+    public operator func !(): DXGI_ADAPTER_FLAG {
+        return DXGI_ADAPTER_FLAG(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG_DXGI_ADAPTER_FLAG_NONE = DXGI_ADAPTER_FLAG(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG_DXGI_ADAPTER_FLAG_REMOTE = DXGI_ADAPTER_FLAG(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG_DXGI_ADAPTER_FLAG_SOFTWARE = DXGI_ADAPTER_FLAG(2)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_ADAPTER_FLAG3 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ADAPTER_FLAG3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_ADAPTER_FLAG3 {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_ADAPTER_FLAG3): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_ADAPTER_FLAG3): DXGI_ADAPTER_FLAG3 {
+        return DXGI_ADAPTER_FLAG3(value | other.value)
+    }
+    public operator func &(other: DXGI_ADAPTER_FLAG3): DXGI_ADAPTER_FLAG3 {
+        return DXGI_ADAPTER_FLAG3(value & other.value)
+    }
+    public operator func ^(other: DXGI_ADAPTER_FLAG3): DXGI_ADAPTER_FLAG3 {
+        return DXGI_ADAPTER_FLAG3(value ^ other.value)
+    }
+    public operator func !(): DXGI_ADAPTER_FLAG3 {
+        return DXGI_ADAPTER_FLAG3(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG3_DXGI_ADAPTER_FLAG3_NONE = DXGI_ADAPTER_FLAG3(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG3_DXGI_ADAPTER_FLAG3_REMOTE = DXGI_ADAPTER_FLAG3(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG3_DXGI_ADAPTER_FLAG3_SOFTWARE = DXGI_ADAPTER_FLAG3(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG3_DXGI_ADAPTER_FLAG3_ACG_COMPATIBLE = DXGI_ADAPTER_FLAG3(4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG3_DXGI_ADAPTER_FLAG3_SUPPORT_MONITORED_FENCES = DXGI_ADAPTER_FLAG3(8)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG3_DXGI_ADAPTER_FLAG3_SUPPORT_NON_MONITORED_FENCES = DXGI_ADAPTER_FLAG3(16)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_ADAPTER_FLAG3_DXGI_ADAPTER_FLAG3_KEYED_MUTEX_CONFORMANCE = DXGI_ADAPTER_FLAG3(32)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_COMPUTE_PREEMPTION_GRANULARITY (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_COMPUTE_PREEMPTION_GRANULARITY)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_COMPUTE_PREEMPTION_GRANULARITY {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_COMPUTE_PREEMPTION_GRANULARITY_DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY = DXGI_COMPUTE_PREEMPTION_GRANULARITY(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_COMPUTE_PREEMPTION_GRANULARITY_DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY = DXGI_COMPUTE_PREEMPTION_GRANULARITY(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_COMPUTE_PREEMPTION_GRANULARITY_DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY = DXGI_COMPUTE_PREEMPTION_GRANULARITY(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_COMPUTE_PREEMPTION_GRANULARITY_DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY = DXGI_COMPUTE_PREEMPTION_GRANULARITY(3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_COMPUTE_PREEMPTION_GRANULARITY_DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY = DXGI_COMPUTE_PREEMPTION_GRANULARITY(4)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_CREATE_FACTORY_FLAGS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_CREATE_FACTORY_FLAGS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_CREATE_FACTORY_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_CREATE_FACTORY_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_CREATE_FACTORY_FLAGS): DXGI_CREATE_FACTORY_FLAGS {
+        return DXGI_CREATE_FACTORY_FLAGS(value | other.value)
+    }
+    public operator func &(other: DXGI_CREATE_FACTORY_FLAGS): DXGI_CREATE_FACTORY_FLAGS {
+        return DXGI_CREATE_FACTORY_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DXGI_CREATE_FACTORY_FLAGS): DXGI_CREATE_FACTORY_FLAGS {
+        return DXGI_CREATE_FACTORY_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DXGI_CREATE_FACTORY_FLAGS {
+        return DXGI_CREATE_FACTORY_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_CREATE_FACTORY_FLAGS_DXGI_CREATE_FACTORY_DEBUG = DXGI_CREATE_FACTORY_FLAGS(1)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_DEBUG_RLO_FLAGS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_DEBUG_RLO_FLAGS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_DEBUG_RLO_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_DEBUG_RLO_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_DEBUG_RLO_FLAGS): DXGI_DEBUG_RLO_FLAGS {
+        return DXGI_DEBUG_RLO_FLAGS(value | other.value)
+    }
+    public operator func &(other: DXGI_DEBUG_RLO_FLAGS): DXGI_DEBUG_RLO_FLAGS {
+        return DXGI_DEBUG_RLO_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DXGI_DEBUG_RLO_FLAGS): DXGI_DEBUG_RLO_FLAGS {
+        return DXGI_DEBUG_RLO_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DXGI_DEBUG_RLO_FLAGS {
+        return DXGI_DEBUG_RLO_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_DEBUG_RLO_FLAGS_DXGI_DEBUG_RLO_SUMMARY = DXGI_DEBUG_RLO_FLAGS(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_DEBUG_RLO_FLAGS_DXGI_DEBUG_RLO_DETAIL = DXGI_DEBUG_RLO_FLAGS(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_DEBUG_RLO_FLAGS_DXGI_DEBUG_RLO_IGNORE_INTERNAL = DXGI_DEBUG_RLO_FLAGS(4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_DEBUG_RLO_FLAGS_DXGI_DEBUG_RLO_ALL = DXGI_DEBUG_RLO_FLAGS(7)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_DECODE_SWAP_CHAIN_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_DECODE_SWAP_CHAIN_DESC)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_DECODE_SWAP_CHAIN_DESC {
+    public var Flags: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_DISPLAY_COLOR_SPACE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_DISPLAY_COLOR_SPACE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_DISPLAY_COLOR_SPACE {
+    public var PrimaryCoordinates: VArray<Float32, $16> = VArray<Float32, $16>(repeat: 0.0f32)
+    public var WhitePoints: VArray<Float32, $32> = VArray<Float32, $32>(repeat: 0.0f32)
+}
 
 // Windows.Win32.Graphics.Dxgi.DXGI_ENUM_MODES (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public struct DXGI_ENUM_MODES {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: DXGI_ENUM_MODES): Bool {
@@ -41,13 +286,47 @@ public struct DXGI_ENUM_MODES {
     }
 }
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_ENUM_MODES_DXGI_ENUM_MODES_INTERLACED = DXGI_ENUM_MODES(1)
+public const DXGI_ENUM_MODES_DXGI_ENUM_MODES_INTERLACED = DXGI_ENUM_MODES(1)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_ENUM_MODES_DXGI_ENUM_MODES_SCALING = DXGI_ENUM_MODES(2)
+public const DXGI_ENUM_MODES_DXGI_ENUM_MODES_SCALING = DXGI_ENUM_MODES(2)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_ENUM_MODES_DXGI_ENUM_MODES_STEREO = DXGI_ENUM_MODES(4)
+public const DXGI_ENUM_MODES_DXGI_ENUM_MODES_STEREO = DXGI_ENUM_MODES(4)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_ENUM_MODES_DXGI_ENUM_MODES_DISABLED_STEREO = DXGI_ENUM_MODES(8)
+public const DXGI_ENUM_MODES_DXGI_ENUM_MODES_DISABLED_STEREO = DXGI_ENUM_MODES(8)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_FEATURE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_FEATURE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_FEATURE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_FEATURE_DXGI_FEATURE_PRESENT_ALLOW_TEARING = DXGI_FEATURE(0)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_FRAME_PRESENTATION_MODE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_FRAME_PRESENTATION_MODE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_FRAME_PRESENTATION_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_FRAME_PRESENTATION_MODE_DXGI_FRAME_PRESENTATION_MODE_COMPOSED = DXGI_FRAME_PRESENTATION_MODE(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_FRAME_PRESENTATION_MODE_DXGI_FRAME_PRESENTATION_MODE_OVERLAY = DXGI_FRAME_PRESENTATION_MODE(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_FRAME_PRESENTATION_MODE_DXGI_FRAME_PRESENTATION_MODE_NONE = DXGI_FRAME_PRESENTATION_MODE(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_FRAME_PRESENTATION_MODE_DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE = DXGI_FRAME_PRESENTATION_MODE(3)
 
 // Windows.Win32.Graphics.Dxgi.DXGI_FRAME_STATISTICS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_FRAME_STATISTICS)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
@@ -59,6 +338,219 @@ public struct DXGI_FRAME_STATISTICS {
     public var SyncQPCTime: Int64 = 0i64
     public var SyncGPUTime: Int64 = 0i64
 }
+
+// Windows.Win32.Graphics.Dxgi.DXGI_FRAME_STATISTICS_MEDIA (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_FRAME_STATISTICS_MEDIA)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_FRAME_STATISTICS_MEDIA {
+    public var PresentCount: UInt32 = 0u32
+    public var PresentRefreshCount: UInt32 = 0u32
+    public var SyncRefreshCount: UInt32 = 0u32
+    public var SyncQPCTime: Int64 = 0i64
+    public var SyncGPUTime: Int64 = 0i64
+    public var CompositionMode: Int32 = 0i32
+    public var ApprovedPresentDuration: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_GPU_PREFERENCE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_GPU_PREFERENCE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_GPU_PREFERENCE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GPU_PREFERENCE_DXGI_GPU_PREFERENCE_UNSPECIFIED = DXGI_GPU_PREFERENCE(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GPU_PREFERENCE_DXGI_GPU_PREFERENCE_MINIMUM_POWER = DXGI_GPU_PREFERENCE(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GPU_PREFERENCE_DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE = DXGI_GPU_PREFERENCE(2)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_GRAPHICS_PREEMPTION_GRANULARITY (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_GRAPHICS_PREEMPTION_GRANULARITY)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_GRAPHICS_PREEMPTION_GRANULARITY {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GRAPHICS_PREEMPTION_GRANULARITY_DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY = DXGI_GRAPHICS_PREEMPTION_GRANULARITY(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GRAPHICS_PREEMPTION_GRANULARITY_DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY = DXGI_GRAPHICS_PREEMPTION_GRANULARITY(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GRAPHICS_PREEMPTION_GRANULARITY_DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY = DXGI_GRAPHICS_PREEMPTION_GRANULARITY(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GRAPHICS_PREEMPTION_GRANULARITY_DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY = DXGI_GRAPHICS_PREEMPTION_GRANULARITY(3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_GRAPHICS_PREEMPTION_GRANULARITY_DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY = DXGI_GRAPHICS_PREEMPTION_GRANULARITY(4)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS): DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS {
+        return DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS(value | other.value)
+    }
+    public operator func &(other: DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS): DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS {
+        return DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS): DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS {
+        return DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS {
+        return DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS_DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_FULLSCREEN = DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS_DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_WINDOWED = DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS_DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_CURSOR_STRETCHED = DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS(4)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_HDR_METADATA_HDR10 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_HDR_METADATA_HDR10)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_HDR_METADATA_HDR10 {
+    public var RedPrimary: VArray<UInt16, $2> = VArray<UInt16, $2>(repeat: 0u16)
+    public var GreenPrimary: VArray<UInt16, $2> = VArray<UInt16, $2>(repeat: 0u16)
+    public var BluePrimary: VArray<UInt16, $2> = VArray<UInt16, $2>(repeat: 0u16)
+    public var WhitePoint: VArray<UInt16, $2> = VArray<UInt16, $2>(repeat: 0u16)
+    public var MaxMasteringLuminance: UInt32 = 0u32
+    public var MinMasteringLuminance: UInt32 = 0u32
+    public var MaxContentLightLevel: UInt16 = 0u16
+    public var MaxFrameAverageLightLevel: UInt16 = 0u16
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_HDR_METADATA_HDR10PLUS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_HDR_METADATA_HDR10PLUS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_HDR_METADATA_HDR10PLUS {
+    public var Data: VArray<UInt8, $72> = VArray<UInt8, $72>(repeat: 0u8)
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_HDR_METADATA_TYPE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_HDR_METADATA_TYPE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_HDR_METADATA_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_HDR_METADATA_TYPE_DXGI_HDR_METADATA_TYPE_NONE = DXGI_HDR_METADATA_TYPE(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_HDR_METADATA_TYPE_DXGI_HDR_METADATA_TYPE_HDR10 = DXGI_HDR_METADATA_TYPE(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_HDR_METADATA_TYPE_DXGI_HDR_METADATA_TYPE_HDR10PLUS = DXGI_HDR_METADATA_TYPE(2)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_INFO_QUEUE_FILTER (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_INFO_QUEUE_FILTER)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_INFO_QUEUE_FILTER {
+    public var AllowList: DXGI_INFO_QUEUE_FILTER_DESC = DXGI_INFO_QUEUE_FILTER_DESC()
+    public var DenyList: DXGI_INFO_QUEUE_FILTER_DESC = DXGI_INFO_QUEUE_FILTER_DESC()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_INFO_QUEUE_FILTER_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_INFO_QUEUE_FILTER_DESC)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_INFO_QUEUE_FILTER_DESC {
+    public var NumCategories: UInt32 = 0u32
+    public var pCategoryList: CPointer<Unit> = CPointer<Unit>()
+    public var NumSeverities: UInt32 = 0u32
+    public var pSeverityList: CPointer<Unit> = CPointer<Unit>()
+    public var NumIDs: UInt32 = 0u32
+    public var pIDList: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_INFO_QUEUE_MESSAGE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_INFO_QUEUE_MESSAGE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_INFO_QUEUE_MESSAGE {
+    public var Producer: GUID = GUID()
+    public var Category: Int32 = 0i32
+    public var Severity: Int32 = 0i32
+    public var ID: Int32 = 0i32
+    public var pDescription: CPointer<Unit> = CPointer<Unit>()
+    public var DescriptionByteLength: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_INFO_QUEUE_MESSAGE_CATEGORY (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_INFO_QUEUE_MESSAGE_CATEGORY)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_INFO_QUEUE_MESSAGE_CATEGORY {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_UNKNOWN = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_MISCELLANEOUS = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_INITIALIZATION = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_CLEANUP = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_COMPILATION = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_CREATION = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(5)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_SETTING = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(6)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_GETTING = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(7)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_RESOURCE_MANIPULATION = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(8)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_EXECUTION = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(9)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_CATEGORY_DXGI_INFO_QUEUE_MESSAGE_CATEGORY_SHADER = DXGI_INFO_QUEUE_MESSAGE_CATEGORY(10)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_INFO_QUEUE_MESSAGE_SEVERITY (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_INFO_QUEUE_MESSAGE_SEVERITY)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_INFO_QUEUE_MESSAGE_SEVERITY {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_SEVERITY_DXGI_INFO_QUEUE_MESSAGE_SEVERITY_CORRUPTION = DXGI_INFO_QUEUE_MESSAGE_SEVERITY(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_SEVERITY_DXGI_INFO_QUEUE_MESSAGE_SEVERITY_ERROR = DXGI_INFO_QUEUE_MESSAGE_SEVERITY(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_SEVERITY_DXGI_INFO_QUEUE_MESSAGE_SEVERITY_WARNING = DXGI_INFO_QUEUE_MESSAGE_SEVERITY(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_SEVERITY_DXGI_INFO_QUEUE_MESSAGE_SEVERITY_INFO = DXGI_INFO_QUEUE_MESSAGE_SEVERITY(3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_INFO_QUEUE_MESSAGE_SEVERITY_DXGI_INFO_QUEUE_MESSAGE_SEVERITY_MESSAGE = DXGI_INFO_QUEUE_MESSAGE_SEVERITY(4)
 
 // Windows.Win32.Graphics.Dxgi.DXGI_MAPPED_RECT (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MAPPED_RECT)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
@@ -72,10 +564,10 @@ public struct DXGI_MAPPED_RECT {
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public struct DXGI_MAP_FLAGS {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: DXGI_MAP_FLAGS): Bool {
@@ -95,11 +587,938 @@ public struct DXGI_MAP_FLAGS {
     }
 }
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_MAP_FLAGS_DXGI_MAP_READ = DXGI_MAP_FLAGS(1)
+public const DXGI_MAP_FLAGS_DXGI_MAP_READ = DXGI_MAP_FLAGS(1)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_MAP_FLAGS_DXGI_MAP_WRITE = DXGI_MAP_FLAGS(2)
+public const DXGI_MAP_FLAGS_DXGI_MAP_WRITE = DXGI_MAP_FLAGS(2)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_MAP_FLAGS_DXGI_MAP_DISCARD = DXGI_MAP_FLAGS(4)
+public const DXGI_MAP_FLAGS_DXGI_MAP_DISCARD = DXGI_MAP_FLAGS(4)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_MATRIX_3X2_F (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MATRIX_3X2_F)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_MATRIX_3X2_F {
+    public var _11: Float32 = 0.0f32
+    public var _12: Float32 = 0.0f32
+    public var _21: Float32 = 0.0f32
+    public var _22: Float32 = 0.0f32
+    public var _31: Float32 = 0.0f32
+    public var _32: Float32 = 0.0f32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_MEMORY_SEGMENT_GROUP (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MEMORY_SEGMENT_GROUP)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_MEMORY_SEGMENT_GROUP {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MEMORY_SEGMENT_GROUP_DXGI_MEMORY_SEGMENT_GROUP_LOCAL = DXGI_MEMORY_SEGMENT_GROUP(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MEMORY_SEGMENT_GROUP_DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL = DXGI_MEMORY_SEGMENT_GROUP(1)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_MODE_DESC1 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MODE_DESC1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_MODE_DESC1 {
+    public var Width: UInt32 = 0u32
+    public var Height: UInt32 = 0u32
+    public var RefreshRate: Windows_Win32_Graphics_Dxgi_Common.DXGI_RATIONAL = Windows_Win32_Graphics_Dxgi_Common.DXGI_RATIONAL()
+    public var Format: Int32 = 0i32
+    public var ScanlineOrdering: Int32 = 0i32
+    public var Scaling: Int32 = 0i32
+    public var Stereo: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS): DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS {
+        return DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS(value | other.value)
+    }
+    public operator func &(other: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS): DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS {
+        return DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS): DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS {
+        return DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS {
+        return DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS_DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE = DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS_DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709 = DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS_DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC = DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS(4)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_MWA_FLAGS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MWA_FLAGS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_MWA_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_MWA_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_MWA_FLAGS): DXGI_MWA_FLAGS {
+        return DXGI_MWA_FLAGS(value | other.value)
+    }
+    public operator func &(other: DXGI_MWA_FLAGS): DXGI_MWA_FLAGS {
+        return DXGI_MWA_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DXGI_MWA_FLAGS): DXGI_MWA_FLAGS {
+        return DXGI_MWA_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DXGI_MWA_FLAGS {
+        return DXGI_MWA_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MWA_FLAGS_DXGI_MWA_NO_WINDOW_CHANGES = DXGI_MWA_FLAGS(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MWA_FLAGS_DXGI_MWA_NO_ALT_ENTER = DXGI_MWA_FLAGS(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MWA_FLAGS_DXGI_MWA_NO_PRINT_SCREEN = DXGI_MWA_FLAGS(4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_MWA_FLAGS_DXGI_MWA_VALID = DXGI_MWA_FLAGS(7)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_Message_Id (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_Message_Id)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_Message_Id {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_InvalidOutputWindow = DXGI_Message_Id(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_BufferWidthInferred = DXGI_Message_Id(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_BufferHeightInferred = DXGI_Message_Id(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_NoScanoutFlagChanged = DXGI_Message_Id(3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Creation_MaxBufferCountExceeded = DXGI_Message_Id(4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Creation_TooFewBuffers = DXGI_Message_Id(5)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Creation_NoOutputWindow = DXGI_Message_Id(6)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Destruction_OtherMethodsCalled = DXGI_Message_Id(7)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetDesc_pDescIsNULL = DXGI_Message_Id(8)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetBuffer_ppSurfaceIsNULL = DXGI_Message_Id(9)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetBuffer_NoAllocatedBuffers = DXGI_Message_Id(10)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetBuffer_iBufferMustBeZero = DXGI_Message_Id(11)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetBuffer_iBufferOOB = DXGI_Message_Id(12)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetContainingOutput_ppOutputIsNULL = DXGI_Message_Id(13)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_SyncIntervalOOB = DXGI_Message_Id(14)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_InvalidNonPreRotatedFlag = DXGI_Message_Id(15)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_NoAllocatedBuffers = DXGI_Message_Id(16)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_GetDXGIAdapterFailed = DXGI_Message_Id(17)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_BufferCountOOB = DXGI_Message_Id(18)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_UnreleasedReferences = DXGI_Message_Id(19)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidSwapChainFlag = DXGI_Message_Id(20)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidNonPreRotatedFlag = DXGI_Message_Id(21)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeTarget_RefreshRateDivideByZero = DXGI_Message_Id(22)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_InvalidTarget = DXGI_Message_Id(23)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetFrameStatistics_pStatsIsNULL = DXGI_Message_Id(24)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetLastPresentCount_pLastPresentCountIsNULL = DXGI_Message_Id(25)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_RemoteNotSupported = DXGI_Message_Id(26)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_TakeOwnership_FailedToAcquireFullscreenMutex = DXGI_Message_Id(27)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSoftwareAdapter_ppAdapterInterfaceIsNULL = DXGI_Message_Id(28)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_EnumAdapters_ppAdapterInterfaceIsNULL = DXGI_Message_Id(29)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_ppSwapChainIsNULL = DXGI_Message_Id(30)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_pDescIsNULL = DXGI_Message_Id(31)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_UnknownSwapEffect = DXGI_Message_Id(32)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidFlags = DXGI_Message_Id(33)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_NonPreRotatedFlagAndWindowed = DXGI_Message_Id(34)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_NullDeviceInterface = DXGI_Message_Id(35)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_GetWindowAssociation_phWndIsNULL = DXGI_Message_Id(36)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_MakeWindowAssociation_InvalidFlags = DXGI_Message_Id(37)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_InvalidSurface = DXGI_Message_Id(38)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_FlagsSetToZero = DXGI_Message_Id(39)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_DiscardAndReadFlagSet = DXGI_Message_Id(40)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_DiscardButNotWriteFlagSet = DXGI_Message_Id(41)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_NoCPUAccess = DXGI_Message_Id(42)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_ReadFlagSetButCPUAccessIsDynamic = DXGI_Message_Id(43)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_DiscardFlagSetButCPUAccessIsNotDynamic = DXGI_Message_Id(44)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplayModeList_pNumModesIsNULL = DXGI_Message_Id(45)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_ModeHasInvalidWidthOrHeight = DXGI_Message_Id(46)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetCammaControlCapabilities_NoOwnerDevice = DXGI_Message_Id(47)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_TakeOwnership_pDeviceIsNULL = DXGI_Message_Id(48)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_NoOwnerDevice = DXGI_Message_Id(49)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_pDestinationIsNULL = DXGI_Message_Id(50)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_MapOfDestinationFailed = DXGI_Message_Id(51)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetFrameStatistics_NoOwnerDevice = DXGI_Message_Id(52)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetFrameStatistics_pStatsIsNULL = DXGI_Message_Id(53)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_SetGammaControl_NoOwnerDevice = DXGI_Message_Id(54)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetGammaControl_NoOwnerDevice = DXGI_Message_Id(55)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetGammaControl_NoGammaControls = DXGI_Message_Id(56)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_SetDisplaySurface_IDXGIResourceNotSupportedBypPrimary = DXGI_Message_Id(57)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_SetDisplaySurface_pPrimaryIsInvalid = DXGI_Message_Id(58)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_SetDisplaySurface_NoOwnerDevice = DXGI_Message_Id(59)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_TakeOwnership_RemoteDeviceNotSupported = DXGI_Message_Id(60)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplayModeList_RemoteDeviceNotSupported = DXGI_Message_Id(61)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_RemoteDeviceNotSupported = DXGI_Message_Id(62)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDevice_CreateSurface_InvalidParametersWithpSharedResource = DXGI_Message_Id(63)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIObject_GetPrivateData_puiDataSizeIsNULL = DXGI_Message_Id(64)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Creation_InvalidOutputWindow = DXGI_Message_Id(65)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Release_SwapChainIsFullscreen = DXGI_Message_Id(66)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_InvalidTargetSurfaceFormat = DXGI_Message_Id(67)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSoftwareAdapter_ModuleIsNULL = DXGI_Message_Id(68)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_IDXGIDeviceNotSupportedBypConcernedDevice = DXGI_Message_Id(69)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_pModeToMatchOrpClosestMatchIsNULL = DXGI_Message_Id(70)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_ModeHasRefreshRateDenominatorZero = DXGI_Message_Id(71)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_UnknownFormatIsInvalidForConfiguration = DXGI_Message_Id(72)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeScanlineOrdering = DXGI_Message_Id(73)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeScaling = DXGI_Message_Id(74)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeFormatAndDeviceCombination = DXGI_Message_Id(75)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_Creation_CalledFromDllMain = DXGI_Message_Id(76)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_OutputNotOwnedBySwapChainDevice = DXGI_Message_Id(77)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Creation_InvalidWindowStyle = DXGI_Message_Id(78)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetFrameStatistics_UnsupportedStatistics = DXGI_Message_Id(79)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetContainingOutput_SwapchainAdapterDoesNotControlOutput = DXGI_Message_Id(80)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_SetOrGetGammaControl_pArrayIsNULL = DXGI_Message_Id(81)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_FullscreenInvalidForChildWindows = DXGI_Message_Id(82)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_Release_CalledFromDllMain = DXGI_Message_Id(83)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_UnreleasedHDC = DXGI_Message_Id(84)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_NonPreRotatedAndGDICompatibleFlags = DXGI_Message_Id(85)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_NonPreRotatedAndGDICompatibleFlags = DXGI_Message_Id(86)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface1_GetDC_pHdcIsNULL = DXGI_Message_Id(87)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface1_GetDC_SurfaceNotTexture2D = DXGI_Message_Id(88)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface1_GetDC_GDICompatibleFlagNotSet = DXGI_Message_Id(89)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface1_GetDC_UnreleasedHDC = DXGI_Message_Id(90)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface_Map_NoCPUAccess2 = DXGI_Message_Id(91)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface1_ReleaseDC_GetDCNotCalled = DXGI_Message_Id(92)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface1_ReleaseDC_InvalidRectangleDimensions = DXGI_Message_Id(93)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_TakeOwnership_RemoteOutputNotSupported = DXGI_Message_Id(94)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_RemoteOutputNotSupported = DXGI_Message_Id(95)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplayModeList_RemoteOutputNotSupported = DXGI_Message_Id(96)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_pDeviceHasMismatchedDXGIFactory = DXGI_Message_Id(97)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_NonOptimalFSConfiguration = DXGI_Message_Id(98)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_FlipSequentialNotSupportedOnD3D10 = DXGI_Message_Id(99)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_BufferCountOOBForFlipSequential = DXGI_Message_Id(100)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidFormatForFlipSequential = DXGI_Message_Id(101)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_MultiSamplingNotSupportedForFlipSequential = DXGI_Message_Id(102)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_BufferCountOOBForFlipSequential = DXGI_Message_Id(103)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidFormatForFlipSequential = DXGI_Message_Id(104)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_PartialPresentationBeforeStandardPresentation = DXGI_Message_Id(105)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_FullscreenPartialPresentIsInvalid = DXGI_Message_Id(106)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_InvalidPresentTestOrDoNotSequenceFlag = DXGI_Message_Id(107)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ScrollInfoWithNoDirtyRectsSpecified = DXGI_Message_Id(108)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_EmptyScrollRect = DXGI_Message_Id(109)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ScrollRectOutOfBackbufferBounds = DXGI_Message_Id(110)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ScrollRectOutOfBackbufferBoundsWithOffset = DXGI_Message_Id(111)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_EmptyDirtyRect = DXGI_Message_Id(112)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_DirtyRectOutOfBackbufferBounds = DXGI_Message_Id(113)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_UnsupportedBufferUsageFlags = DXGI_Message_Id(114)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_DoNotSequenceFlagSetButPreviousBufferIsUndefined = DXGI_Message_Id(115)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_UnsupportedFlags = DXGI_Message_Id(116)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_FlipModelChainMustResizeOrCreateOnFSTransition = DXGI_Message_Id(117)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_pRestrictToOutputFromOtherIDXGIFactory = DXGI_Message_Id(118)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_RestrictOutputNotSupportedOnAdapter = DXGI_Message_Id(119)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_RestrictToOutputFlagSetButInvalidpRestrictToOutput = DXGI_Message_Id(120)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_RestrictToOutputFlagdWithFullscreen = DXGI_Message_Id(121)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_RestrictOutputFlagWithStaleSwapChain = DXGI_Message_Id(122)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_OtherFlagsCausingInvalidPresentTestFlag = DXGI_Message_Id(123)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_UnavailableInSession0 = DXGI_Message_Id(124)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_MakeWindowAssociation_UnavailableInSession0 = DXGI_Message_Id(125)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_GetWindowAssociation_UnavailableInSession0 = DXGI_Message_Id(126)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIAdapter_EnumOutputs_UnavailableInSession0 = DXGI_Message_Id(127)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_CreationOrSetFullscreenState_StereoDisabled = DXGI_Message_Id(128)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_UnregisterStatus_CookieNotFound = DXGI_Message_Id(129)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithoutFSOrOverlay = DXGI_Message_Id(130)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithoutFlipSequential = DXGI_Message_Id(131)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ProtectedContentWithRDPDriver = DXGI_Message_Id(132)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithDWMOffOrInvalidDisplayAffinity = DXGI_Message_Id(133)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_WidthOrHeightIsZero = DXGI_Message_Id(134)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_OnlyFlipSequentialSupported = DXGI_Message_Id(135)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_UnsupportedOnAdapter = DXGI_Message_Id(136)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_UnsupportedOnWindows7 = DXGI_Message_Id(137)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_FSTransitionWithCompositionSwapChain = DXGI_Message_Id(138)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeTarget_InvalidWithCompositionSwapChain = DXGI_Message_Id(139)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_WidthOrHeightIsZero = DXGI_Message_Id(140)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingNoneIsFlipModelOnly = DXGI_Message_Id(141)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingUnrecognized = DXGI_Message_Id(142)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyFullscreenUnsupported = DXGI_Message_Id(143)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyUnsupported = DXGI_Message_Id(144)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_RestartIsFullscreenOnly = DXGI_Message_Id(145)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_ProtectedWindowlessPresentationRequiresDisplayOnly = DXGI_Message_Id(146)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_DisplayOnlyUnsupported = DXGI_Message_Id(147)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain1_SetBackgroundColor_OutOfRange = DXGI_Message_Id(148)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyFullscreenUnsupported = DXGI_Message_Id(149)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyUnsupported = DXGI_Message_Id(150)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapchain_Present_ScrollUnsupported = DXGI_Message_Id(151)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain1_SetRotation_UnsupportedOS = DXGI_Message_Id(152)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain1_GetRotation_UnsupportedOS = DXGI_Message_Id(153)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapchain_Present_FullscreenRotation = DXGI_Message_Id(154)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_PartialPresentationWithMSAABuffers = DXGI_Message_Id(155)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain1_SetRotation_FlipSequentialRequired = DXGI_Message_Id(156)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain1_SetRotation_InvalidRotation = DXGI_Message_Id(157)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain1_GetRotation_FlipSequentialRequired = DXGI_Message_Id(158)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetHwnd_WrongType = DXGI_Message_Id(159)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetCompositionSurface_WrongType = DXGI_Message_Id(160)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetCoreWindow_WrongType = DXGI_Message_Id(161)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetFullscreenDesc_NonHwnd = DXGI_Message_Id(162)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_CoreWindow = DXGI_Message_Id(163)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_UnsupportedOnWindows7 = DXGI_Message_Id(164)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_pWindowIsNULL = DXGI_Message_Id(165)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_FSUnsupportedForModernApps = DXGI_Message_Id(166)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_MakeWindowAssociation_ModernApp = DXGI_Message_Id(167)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeTarget_ModernApp = DXGI_Message_Id(168)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeTarget_pNewTargetParametersIsNULL = DXGI_Message_Id(169)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_SetDisplaySurface_ModernApp = DXGI_Message_Id(170)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_TakeOwnership_ModernApp = DXGI_Message_Id(171)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_pWindowIsInvalid = DXGI_Message_Id(172)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_CreateSwapChainForCompositionSurface_InvalidHandle = DXGI_Message_Id(173)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISurface1_GetDC_ModernApp = DXGI_Message_Id(174)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingNoneRequiresWindows8OrNewer = DXGI_Message_Id(175)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoAndPreferRight = DXGI_Message_Id(176)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoOrPreferRightWithDoNotSequence = DXGI_Message_Id(177)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoOrPreferRightWithoutStereo = DXGI_Message_Id(178)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoUnsupported = DXGI_Message_Id(179)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_ArraySizeMismatch = DXGI_Message_Id(180)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_PartialPresentationWithSwapEffectDiscard = DXGI_Message_Id(181)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaUnrecognized = DXGI_Message_Id(182)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaIsWindowlessOnly = DXGI_Message_Id(183)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaIsFlipModelOnly = DXGI_Message_Id(184)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_RestrictToOutputAdapterMismatch = DXGI_Message_Id(185)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyOnLegacy = DXGI_Message_Id(186)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyOnLegacy = DXGI_Message_Id(187)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIResource1_CreateSubresourceSurface_InvalidIndex = DXGI_Message_Id(188)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_InvalidScaling = DXGI_Message_Id(189)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForCoreWindow_InvalidSwapEffect = DXGI_Message_Id(190)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIResource1_CreateSharedHandle_UnsupportedOS = DXGI_Message_Id(191)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_RegisterOcclusionStatusWindow_UnsupportedOS = DXGI_Message_Id(192)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_RegisterOcclusionStatusEvent_UnsupportedOS = DXGI_Message_Id(193)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput1_DuplicateOutput_UnsupportedOS = DXGI_Message_Id(194)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDisplayControl_IsStereoEnabled_UnsupportedOS = DXGI_Message_Id(195)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_InvalidAlphaMode = DXGI_Message_Id(196)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_InvalidResource = DXGI_Message_Id(197)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_InvalidLUID = DXGI_Message_Id(198)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_UnsupportedOS = DXGI_Message_Id(199)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_2DOnly = DXGI_Message_Id(200)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_StagingOnly = DXGI_Message_Id(201)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_NeedCPUAccessWrite = DXGI_Message_Id(202)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_NoShared = DXGI_Message_Id(203)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_OnlyMipLevels1 = DXGI_Message_Id(204)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_MappedOrOfferedResource = DXGI_Message_Id(205)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_FSUnsupportedForModernApps = DXGI_Message_Id(206)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_FailedToGoFSButNonPreRotated = DXGI_Message_Id(207)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainOrRegisterOcclusionStatus_BlitModelUsedWhileRegisteredForOcclusionStatusEvents = DXGI_Message_Id(208)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_BlitModelUsedWhileRegisteredForOcclusionStatusEvents = DXGI_Message_Id(209)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_WaitableSwapChainsAreFlipModelOnly = DXGI_Message_Id(210)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_WaitableSwapChainsAreNotFullscreen = DXGI_Message_Id(211)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_Waitable = DXGI_Message_Id(212)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveWaitableFlag = DXGI_Message_Id(213)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetFrameLatencyWaitableObject_OnlyWaitable = DXGI_Message_Id(214)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetMaximumFrameLatency_OnlyWaitable = DXGI_Message_Id(215)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetMaximumFrameLatency_pMaxLatencyIsNULL = DXGI_Message_Id(216)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetMaximumFrameLatency_OnlyWaitable = DXGI_Message_Id(217)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetMaximumFrameLatency_MaxLatencyIsOutOfBounds = DXGI_Message_Id(218)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_ForegroundIsCoreWindowOnly = DXGI_Message_Id(219)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_ForegroundUnsupportedOnAdapter = DXGI_Message_Id(220)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_InvalidScaling = DXGI_Message_Id(221)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_InvalidAlphaMode = DXGI_Message_Id(222)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveForegroundFlag = DXGI_Message_Id(223)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixPointerCannotBeNull = DXGI_Message_Id(224)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetMatrixTransform_RequiresCompositionSwapChain = DXGI_Message_Id(225)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixMustBeFinite = DXGI_Message_Id(226)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixMustBeTranslateAndOrScale = DXGI_Message_Id(227)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetMatrixTransform_MatrixPointerCannotBeNull = DXGI_Message_Id(228)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetMatrixTransform_RequiresCompositionSwapChain = DXGI_Message_Id(229)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_DXGIGetDebugInterface1_NULL_ppDebug = DXGI_Message_Id(230)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_DXGIGetDebugInterface1_InvalidFlags = DXGI_Message_Id(231)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_Decode = DXGI_Message_Id(232)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_Decode = DXGI_Message_Id(233)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetSourceSize_FlipModel = DXGI_Message_Id(234)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetSourceSize_Decode = DXGI_Message_Id(235)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetSourceSize_WidthHeight = DXGI_Message_Id(236)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetSourceSize_NullPointers = DXGI_Message_Id(237)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetSourceSize_Decode = DXGI_Message_Id(238)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDecodeSwapChain_SetColorSpace_InvalidFlags = DXGI_Message_Id(239)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDecodeSwapChain_SetSourceRect_InvalidRect = DXGI_Message_Id(240)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDecodeSwapChain_SetTargetRect_InvalidRect = DXGI_Message_Id(241)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDecodeSwapChain_SetDestSize_InvalidSize = DXGI_Message_Id(242)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDecodeSwapChain_GetSourceRect_InvalidPointer = DXGI_Message_Id(243)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDecodeSwapChain_GetTargetRect_InvalidPointer = DXGI_Message_Id(244)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIDecodeSwapChain_GetDestSize_InvalidPointer = DXGI_Message_Id(245)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_PresentBuffer_YUV = DXGI_Message_Id(246)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetSourceSize_YUV = DXGI_Message_Id(247)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetSourceSize_YUV = DXGI_Message_Id(248)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetMatrixTransform_YUV = DXGI_Message_Id(249)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_GetMatrixTransform_YUV = DXGI_Message_Id(250)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_PartialPresentation_YUV = DXGI_Message_Id(251)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveFlag_YUV = DXGI_Message_Id(252)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_Alignment_YUV = DXGI_Message_Id(253)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_ShaderInputUnsupported_YUV = DXGI_Message_Id(254)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput3_CheckOverlaySupport_NullPointers = DXGI_Message_Id(255)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput3_CheckOverlaySupport_IDXGIDeviceNotSupportedBypConcernedDevice = DXGI_Message_Id(256)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIAdapter_EnumOutputs2_InvalidEnumOutputs2Flag = DXGI_Message_Id(257)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_CreationOrSetFullscreenState_FSUnsupportedForFlipDiscard = DXGI_Message_Id(258)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput4_CheckOverlayColorSpaceSupport_NullPointers = DXGI_Message_Id(259)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput4_CheckOverlayColorSpaceSupport_IDXGIDeviceNotSupportedBypConcernedDevice = DXGI_Message_Id(260)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain3_CheckColorSpaceSupport_NullPointers = DXGI_Message_Id(261)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain3_SetColorSpace1_InvalidColorSpace = DXGI_Message_Id(262)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidHwProtect = DXGI_Message_Id(263)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_HwProtectUnsupported = DXGI_Message_Id(264)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidHwProtect = DXGI_Message_Id(265)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_HwProtectUnsupported = DXGI_Message_Id(266)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers1_D3D12Only = DXGI_Message_Id(267)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers1_FlipModel = DXGI_Message_Id(268)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers1_NodeMaskAndQueueRequired = DXGI_Message_Id(269)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_CreateSwapChain_InvalidHwProtectGdiFlag = DXGI_Message_Id(270)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidHwProtectGdiFlag = DXGI_Message_Id(271)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_10BitFormatNotSupported = DXGI_Message_Id(272)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_FlipSwapEffectRequired = DXGI_Message_Id(273)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidDevice = DXGI_Message_Id(274)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_TakeOwnership_Unsupported = DXGI_Message_Id(275)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidQueue = DXGI_Message_Id(276)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain3_ResizeBuffers1_InvalidQueue = DXGI_Message_Id(277)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChainForHwnd_InvalidScaling = DXGI_Message_Id(278)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidSize = DXGI_Message_Id(279)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidPointer = DXGI_Message_Id(280)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidType = DXGI_Message_Id(281)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_FullscreenAllowTearingIsInvalid = DXGI_Message_Id(282)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_AllowTearingRequiresPresentIntervalZero = DXGI_Message_Id(283)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_AllowTearingRequiresCreationFlag = DXGI_Message_Id(284)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveAllowTearingFlag = DXGI_Message_Id(285)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_AllowTearingFlagIsFlipModelOnly = DXGI_Message_Id(286)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CheckFeatureSupport_InvalidFeature = DXGI_Message_Id(287)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CheckFeatureSupport_InvalidSize = DXGI_Message_Id(288)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput6_CheckHardwareCompositionSupport_NullPointer = DXGI_Message_Id(289)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_SetFullscreenState_PerMonitorDpiShimApplied = DXGI_Message_Id(290)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_DuplicateOutput_PerMonitorDpiShimApplied = DXGI_Message_Id(291)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIOutput_DuplicateOutput1_PerMonitorDpiRequired = DXGI_Message_Id(292)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory7_UnregisterAdaptersChangedEvent_CookieNotFound = DXGI_Message_Id(293)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_LegacyBltModelSwapEffect = DXGI_Message_Id(294)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain4_SetHDRMetaData_MetadataUnchanged = DXGI_Message_Id(295)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGISwapChain_Present_11On12_Released_Resource = DXGI_Message_Id(296)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_CreateSwapChain_MultipleSwapchainRefToSurface_DeferredDtr = DXGI_Message_Id(297)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior = DXGI_Message_Id(298)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow = DXGI_Message_Id(1000)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_DISCARD_BufferCount = DXGI_Message_Id(1001)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_SetFullscreenState_NotAvailable = DXGI_Message_Id(1002)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_ResizeBuffers_NotAvailable = DXGI_Message_Id(1003)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_ResizeTarget_NotAvailable = DXGI_Message_Id(1004)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidLayerIndex = DXGI_Message_Id(1005)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_MultipleLayerIndex = DXGI_Message_Id(1006)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidLayerFlag = DXGI_Message_Id(1007)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidRotation = DXGI_Message_Id(1008)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidBlend = DXGI_Message_Id(1009)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidResource = DXGI_Message_Id(1010)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidMultiPlaneOverlayResource = DXGI_Message_Id(1011)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidIndexForPrimary = DXGI_Message_Id(1012)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidIndexForOverlay = DXGI_Message_Id(1013)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidSubResourceIndex = DXGI_Message_Id(1014)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidSourceRect = DXGI_Message_Id(1015)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidDestinationRect = DXGI_Message_Id(1016)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_MultipleResource = DXGI_Message_Id(1017)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_NotSharedResource = DXGI_Message_Id(1018)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidFlag = DXGI_Message_Id(1019)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidInterval = DXGI_Message_Id(1020)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_MSAA_NotSupported = DXGI_Message_Id(1021)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_ScalingAspectRatioStretch_Supported_ModernApp = DXGI_Message_Id(1022)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_GetFrameStatistics_NotAvailable_ModernApp = DXGI_Message_Id(1023)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present_ReplaceInterval0With1 = DXGI_Message_Id(1024)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FailedRegisterWithCompositor = DXGI_Message_Id(1025)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow_AtRendering = DXGI_Message_Id(1026)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FLIP_SEQUENTIAL_BufferCount = DXGI_Message_Id(1027)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FLIP_Modern_CoreWindow_Only = DXGI_Message_Id(1028)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_Present1_RequiresOverlays = DXGI_Message_Id(1029)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_SetBackgroundColor_FlipSequentialRequired = DXGI_Message_Id(1030)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_Message_Id_DXGI_MSG_Phone_IDXGISwapChain_GetBackgroundColor_FlipSequentialRequired = DXGI_Message_Id(1031)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OFFER_RESOURCE_FLAGS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OFFER_RESOURCE_FLAGS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_OFFER_RESOURCE_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_OFFER_RESOURCE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_OFFER_RESOURCE_FLAGS): DXGI_OFFER_RESOURCE_FLAGS {
+        return DXGI_OFFER_RESOURCE_FLAGS(value | other.value)
+    }
+    public operator func &(other: DXGI_OFFER_RESOURCE_FLAGS): DXGI_OFFER_RESOURCE_FLAGS {
+        return DXGI_OFFER_RESOURCE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DXGI_OFFER_RESOURCE_FLAGS): DXGI_OFFER_RESOURCE_FLAGS {
+        return DXGI_OFFER_RESOURCE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DXGI_OFFER_RESOURCE_FLAGS {
+        return DXGI_OFFER_RESOURCE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OFFER_RESOURCE_FLAGS_DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT = DXGI_OFFER_RESOURCE_FLAGS(1)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OFFER_RESOURCE_PRIORITY (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OFFER_RESOURCE_PRIORITY)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_OFFER_RESOURCE_PRIORITY {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OFFER_RESOURCE_PRIORITY_DXGI_OFFER_RESOURCE_PRIORITY_LOW = DXGI_OFFER_RESOURCE_PRIORITY(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OFFER_RESOURCE_PRIORITY_DXGI_OFFER_RESOURCE_PRIORITY_NORMAL = DXGI_OFFER_RESOURCE_PRIORITY(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OFFER_RESOURCE_PRIORITY_DXGI_OFFER_RESOURCE_PRIORITY_HIGH = DXGI_OFFER_RESOURCE_PRIORITY(3)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTDUPL_DESC)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_OUTDUPL_DESC {
+    public var ModeDesc: Windows_Win32_Graphics_Dxgi_Common.DXGI_MODE_DESC = Windows_Win32_Graphics_Dxgi_Common.DXGI_MODE_DESC()
+    public var Rotation: Int32 = 0i32
+    public var DesktopImageInSystemMemory: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_FLAG (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTDUPL_FLAG)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_OUTDUPL_FLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_OUTDUPL_FLAG): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_OUTDUPL_FLAG): DXGI_OUTDUPL_FLAG {
+        return DXGI_OUTDUPL_FLAG(value | other.value)
+    }
+    public operator func &(other: DXGI_OUTDUPL_FLAG): DXGI_OUTDUPL_FLAG {
+        return DXGI_OUTDUPL_FLAG(value & other.value)
+    }
+    public operator func ^(other: DXGI_OUTDUPL_FLAG): DXGI_OUTDUPL_FLAG {
+        return DXGI_OUTDUPL_FLAG(value ^ other.value)
+    }
+    public operator func !(): DXGI_OUTDUPL_FLAG {
+        return DXGI_OUTDUPL_FLAG(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OUTDUPL_FLAG_DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY = DXGI_OUTDUPL_FLAG(1)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_FRAME_INFO (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTDUPL_FRAME_INFO)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_OUTDUPL_FRAME_INFO {
+    public var LastPresentTime: Int64 = 0i64
+    public var LastMouseUpdateTime: Int64 = 0i64
+    public var AccumulatedFrames: UInt32 = 0u32
+    public var RectsCoalesced: Int32 = 0i32
+    public var ProtectedContentMaskedOut: Int32 = 0i32
+    public var PointerPosition: DXGI_OUTDUPL_POINTER_POSITION = DXGI_OUTDUPL_POINTER_POSITION()
+    public var TotalMetadataBufferSize: UInt32 = 0u32
+    public var PointerShapeBufferSize: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_MOVE_RECT (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTDUPL_MOVE_RECT)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_OUTDUPL_MOVE_RECT {
+    public var SourcePoint: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var DestinationRect: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_POINTER_POSITION (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTDUPL_POINTER_POSITION)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_OUTDUPL_POINTER_POSITION {
+    public var Position: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+    public var Visible: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_POINTER_SHAPE_INFO (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTDUPL_POINTER_SHAPE_INFO)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_OUTDUPL_POINTER_SHAPE_INFO {
+    public var Type: UInt32 = 0u32
+    public var Width: UInt32 = 0u32
+    public var Height: UInt32 = 0u32
+    public var Pitch: UInt32 = 0u32
+    public var HotSpot: Windows_Win32_Foundation.POINT = Windows_Win32_Foundation.POINT()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTDUPL_POINTER_SHAPE_TYPE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTDUPL_POINTER_SHAPE_TYPE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_OUTDUPL_POINTER_SHAPE_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OUTDUPL_POINTER_SHAPE_TYPE_DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME = DXGI_OUTDUPL_POINTER_SHAPE_TYPE(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OUTDUPL_POINTER_SHAPE_TYPE_DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR = DXGI_OUTDUPL_POINTER_SHAPE_TYPE(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OUTDUPL_POINTER_SHAPE_TYPE_DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR = DXGI_OUTDUPL_POINTER_SHAPE_TYPE(4)
 
 // Windows.Win32.Graphics.Dxgi.DXGI_OUTPUT_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTPUT_DESC)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
@@ -112,14 +1531,94 @@ public struct DXGI_OUTPUT_DESC {
     public var Monitor: Windows_Win32_Graphics_Gdi.HMONITOR = Windows_Win32_Graphics_Gdi.HMONITOR()
 }
 
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTPUT_DESC1 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTPUT_DESC1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_OUTPUT_DESC1 {
+    public var DeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var DesktopCoordinates: Windows_Win32_Foundation.RECT = Windows_Win32_Foundation.RECT()
+    public var AttachedToDesktop: Int32 = 0i32
+    public var Rotation: Int32 = 0i32
+    public var Monitor: Windows_Win32_Graphics_Gdi.HMONITOR = Windows_Win32_Graphics_Gdi.HMONITOR()
+    public var BitsPerColor: UInt32 = 0u32
+    public var ColorSpace: Int32 = 0i32
+    public var RedPrimary: VArray<Float32, $2> = VArray<Float32, $2>(repeat: 0.0f32)
+    public var GreenPrimary: VArray<Float32, $2> = VArray<Float32, $2>(repeat: 0.0f32)
+    public var BluePrimary: VArray<Float32, $2> = VArray<Float32, $2>(repeat: 0.0f32)
+    public var WhitePoint: VArray<Float32, $2> = VArray<Float32, $2>(repeat: 0.0f32)
+    public var MinLuminance: Float32 = 0.0f32
+    public var MaxLuminance: Float32 = 0.0f32
+    public var MaxFullFrameLuminance: Float32 = 0.0f32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG): DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG(value | other.value)
+    }
+    public operator func &(other: DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG): DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG(value & other.value)
+    }
+    public operator func ^(other: DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG): DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG(value ^ other.value)
+    }
+    public operator func !(): DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT = DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG(1)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OVERLAY_SUPPORT_FLAG (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OVERLAY_SUPPORT_FLAG)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_OVERLAY_SUPPORT_FLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_OVERLAY_SUPPORT_FLAG): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_OVERLAY_SUPPORT_FLAG): DXGI_OVERLAY_SUPPORT_FLAG {
+        return DXGI_OVERLAY_SUPPORT_FLAG(value | other.value)
+    }
+    public operator func &(other: DXGI_OVERLAY_SUPPORT_FLAG): DXGI_OVERLAY_SUPPORT_FLAG {
+        return DXGI_OVERLAY_SUPPORT_FLAG(value & other.value)
+    }
+    public operator func ^(other: DXGI_OVERLAY_SUPPORT_FLAG): DXGI_OVERLAY_SUPPORT_FLAG {
+        return DXGI_OVERLAY_SUPPORT_FLAG(value ^ other.value)
+    }
+    public operator func !(): DXGI_OVERLAY_SUPPORT_FLAG {
+        return DXGI_OVERLAY_SUPPORT_FLAG(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OVERLAY_SUPPORT_FLAG_DXGI_OVERLAY_SUPPORT_FLAG_DIRECT = DXGI_OVERLAY_SUPPORT_FLAG(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_OVERLAY_SUPPORT_FLAG_DXGI_OVERLAY_SUPPORT_FLAG_SCALING = DXGI_OVERLAY_SUPPORT_FLAG(2)
+
 // Windows.Win32.Graphics.Dxgi.DXGI_PRESENT (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_PRESENT)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public struct DXGI_PRESENT {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: DXGI_PRESENT): Bool {
@@ -139,23 +1638,167 @@ public struct DXGI_PRESENT {
     }
 }
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_TEST = DXGI_PRESENT(1)
+public const DXGI_PRESENT_DXGI_PRESENT_TEST = DXGI_PRESENT(1)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_DO_NOT_SEQUENCE = DXGI_PRESENT(2)
+public const DXGI_PRESENT_DXGI_PRESENT_DO_NOT_SEQUENCE = DXGI_PRESENT(2)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_RESTART = DXGI_PRESENT(4)
+public const DXGI_PRESENT_DXGI_PRESENT_RESTART = DXGI_PRESENT(4)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_DO_NOT_WAIT = DXGI_PRESENT(8)
+public const DXGI_PRESENT_DXGI_PRESENT_DO_NOT_WAIT = DXGI_PRESENT(8)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_STEREO_PREFER_RIGHT = DXGI_PRESENT(16)
+public const DXGI_PRESENT_DXGI_PRESENT_STEREO_PREFER_RIGHT = DXGI_PRESENT(16)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_STEREO_TEMPORARY_MONO = DXGI_PRESENT(32)
+public const DXGI_PRESENT_DXGI_PRESENT_STEREO_TEMPORARY_MONO = DXGI_PRESENT(32)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_RESTRICT_TO_OUTPUT = DXGI_PRESENT(64)
+public const DXGI_PRESENT_DXGI_PRESENT_RESTRICT_TO_OUTPUT = DXGI_PRESENT(64)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_USE_DURATION = DXGI_PRESENT(256)
+public const DXGI_PRESENT_DXGI_PRESENT_USE_DURATION = DXGI_PRESENT(256)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_PRESENT_DXGI_PRESENT_ALLOW_TEARING = DXGI_PRESENT(512)
+public const DXGI_PRESENT_DXGI_PRESENT_ALLOW_TEARING = DXGI_PRESENT(512)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_PRESENT_PARAMETERS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_PARAMETERS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_PRESENT_PARAMETERS {
+    public var DirtyRectsCount: UInt32 = 0u32
+    public var pDirtyRects: CPointer<Unit> = CPointer<Unit>()
+    public var pScrollRect: CPointer<Unit> = CPointer<Unit>()
+    public var pScrollOffset: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_QUERY_VIDEO_MEMORY_INFO (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_QUERY_VIDEO_MEMORY_INFO)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_QUERY_VIDEO_MEMORY_INFO {
+    public var Budget: UInt64 = 0u64
+    public var CurrentUsage: UInt64 = 0u64
+    public var AvailableForReservation: UInt64 = 0u64
+    public var CurrentReservation: UInt64 = 0u64
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_RECLAIM_RESOURCE_RESULTS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_RECLAIM_RESOURCE_RESULTS)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_RECLAIM_RESOURCE_RESULTS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RECLAIM_RESOURCE_RESULTS_DXGI_RECLAIM_RESOURCE_RESULT_OK = DXGI_RECLAIM_RESOURCE_RESULTS(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RECLAIM_RESOURCE_RESULTS_DXGI_RECLAIM_RESOURCE_RESULT_DISCARDED = DXGI_RECLAIM_RESOURCE_RESULTS(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RECLAIM_RESOURCE_RESULTS_DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED = DXGI_RECLAIM_RESOURCE_RESULTS(2)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_RESIDENCY (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_RESIDENCY)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_RESIDENCY {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESIDENCY_DXGI_RESIDENCY_FULLY_RESIDENT = DXGI_RESIDENCY(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESIDENCY_DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY = DXGI_RESIDENCY(2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESIDENCY_DXGI_RESIDENCY_EVICTED_TO_DISK = DXGI_RESIDENCY(3)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_RESOURCE_PRIORITY (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_RESOURCE_PRIORITY)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_RESOURCE_PRIORITY {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESOURCE_PRIORITY_DXGI_RESOURCE_PRIORITY_MINIMUM = DXGI_RESOURCE_PRIORITY(671088640)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESOURCE_PRIORITY_DXGI_RESOURCE_PRIORITY_LOW = DXGI_RESOURCE_PRIORITY(1342177280)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESOURCE_PRIORITY_DXGI_RESOURCE_PRIORITY_NORMAL = DXGI_RESOURCE_PRIORITY(2013265920)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESOURCE_PRIORITY_DXGI_RESOURCE_PRIORITY_HIGH = DXGI_RESOURCE_PRIORITY(2684354560)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_RESOURCE_PRIORITY_DXGI_RESOURCE_PRIORITY_MAXIMUM = DXGI_RESOURCE_PRIORITY(3355443200)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_RGBA (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_RGBA)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_RGBA {
+    public var r: Float32 = 0.0f32
+    public var g: Float32 = 0.0f32
+    public var b: Float32 = 0.0f32
+    public var a: Float32 = 0.0f32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SCALING (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SCALING)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_SCALING {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_SCALING_DXGI_SCALING_STRETCH = DXGI_SCALING(0)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_SCALING_DXGI_SCALING_NONE = DXGI_SCALING(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_SCALING_DXGI_SCALING_ASPECT_RATIO_STRETCH = DXGI_SCALING(2)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SHARED_RESOURCE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SHARED_RESOURCE)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_SHARED_RESOURCE {
+    public var Handle: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SHARED_RESOURCE_RW (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SHARED_RESOURCE_RW)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_SHARED_RESOURCE_RW {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_SHARED_RESOURCE_RW): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_SHARED_RESOURCE_RW): DXGI_SHARED_RESOURCE_RW {
+        return DXGI_SHARED_RESOURCE_RW(value | other.value)
+    }
+    public operator func &(other: DXGI_SHARED_RESOURCE_RW): DXGI_SHARED_RESOURCE_RW {
+        return DXGI_SHARED_RESOURCE_RW(value & other.value)
+    }
+    public operator func ^(other: DXGI_SHARED_RESOURCE_RW): DXGI_SHARED_RESOURCE_RW {
+        return DXGI_SHARED_RESOURCE_RW(value ^ other.value)
+    }
+    public operator func !(): DXGI_SHARED_RESOURCE_RW {
+        return DXGI_SHARED_RESOURCE_RW(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_SHARED_RESOURCE_RW_DXGI_SHARED_RESOURCE_READ = DXGI_SHARED_RESOURCE_RW(2147483648)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_SHARED_RESOURCE_RW_DXGI_SHARED_RESOURCE_WRITE = DXGI_SHARED_RESOURCE_RW(1)
 
 // Windows.Win32.Graphics.Dxgi.DXGI_SURFACE_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SURFACE_DESC)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
@@ -166,6 +1809,37 @@ public struct DXGI_SURFACE_DESC {
     public var Format: Int32 = 0i32
     public var SampleDesc: Windows_Win32_Graphics_Dxgi_Common.DXGI_SAMPLE_DESC = Windows_Win32_Graphics_Dxgi_Common.DXGI_SAMPLE_DESC()
 }
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public struct DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG): DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG(value | other.value)
+    }
+    public operator func &(other: DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG): DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG(value & other.value)
+    }
+    public operator func ^(other: DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG): DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG(value ^ other.value)
+    }
+    public operator func !(): DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG {
+        return DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG(!value)
+    }
+}
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT = DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG(1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public const DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT = DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG(2)
 
 // Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_DESC)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
@@ -181,14 +1855,31 @@ public struct DXGI_SWAP_CHAIN_DESC {
     public var Flags: UInt32 = 0u32
 }
 
+// Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC1 (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_DESC1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_SWAP_CHAIN_DESC1 {
+    public var Width: UInt32 = 0u32
+    public var Height: UInt32 = 0u32
+    public var Format: Int32 = 0i32
+    public var Stereo: Int32 = 0i32
+    public var SampleDesc: Windows_Win32_Graphics_Dxgi_Common.DXGI_SAMPLE_DESC = Windows_Win32_Graphics_Dxgi_Common.DXGI_SAMPLE_DESC()
+    public var BufferUsage: UInt32 = 0u32
+    public var BufferCount: UInt32 = 0u32
+    public var Scaling: Int32 = 0i32
+    public var SwapEffect: Int32 = 0i32
+    public var AlphaMode: Int32 = 0i32
+    public var Flags: UInt32 = 0u32
+}
+
 // Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_FLAG (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public struct DXGI_SWAP_CHAIN_FLAG {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
     public func contains(other: DXGI_SWAP_CHAIN_FLAG): Bool {
@@ -208,60 +1899,70 @@ public struct DXGI_SWAP_CHAIN_FLAG {
     }
 }
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = DXGI_SWAP_CHAIN_FLAG(1)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = DXGI_SWAP_CHAIN_FLAG(1)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = DXGI_SWAP_CHAIN_FLAG(2)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = DXGI_SWAP_CHAIN_FLAG(2)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = DXGI_SWAP_CHAIN_FLAG(4)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = DXGI_SWAP_CHAIN_FLAG(4)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT = DXGI_SWAP_CHAIN_FLAG(8)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT = DXGI_SWAP_CHAIN_FLAG(8)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER = DXGI_SWAP_CHAIN_FLAG(16)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER = DXGI_SWAP_CHAIN_FLAG(16)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY = DXGI_SWAP_CHAIN_FLAG(32)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY = DXGI_SWAP_CHAIN_FLAG(32)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT = DXGI_SWAP_CHAIN_FLAG(64)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT = DXGI_SWAP_CHAIN_FLAG(64)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = DXGI_SWAP_CHAIN_FLAG(128)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = DXGI_SWAP_CHAIN_FLAG(128)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = DXGI_SWAP_CHAIN_FLAG(256)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = DXGI_SWAP_CHAIN_FLAG(256)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = DXGI_SWAP_CHAIN_FLAG(512)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = DXGI_SWAP_CHAIN_FLAG(512)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = DXGI_SWAP_CHAIN_FLAG(1024)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = DXGI_SWAP_CHAIN_FLAG(1024)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = DXGI_SWAP_CHAIN_FLAG(2048)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = DXGI_SWAP_CHAIN_FLAG(2048)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = DXGI_SWAP_CHAIN_FLAG(4096)
+public const DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = DXGI_SWAP_CHAIN_FLAG(4096)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_FULLSCREEN_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FULLSCREEN_DESC)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC {
+    public var RefreshRate: Windows_Win32_Graphics_Dxgi_Common.DXGI_RATIONAL = Windows_Win32_Graphics_Dxgi_Common.DXGI_RATIONAL()
+    public var ScanlineOrdering: Int32 = 0i32
+    public var Scaling: Int32 = 0i32
+    public var Windowed: Int32 = 0i32
+}
 
 // Windows.Win32.Graphics.Dxgi.DXGI_SWAP_EFFECT (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public struct DXGI_SWAP_EFFECT {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_DISCARD = DXGI_SWAP_EFFECT(0)
+public const DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_DISCARD = DXGI_SWAP_EFFECT(0)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_SEQUENTIAL = DXGI_SWAP_EFFECT(1)
+public const DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_SEQUENTIAL = DXGI_SWAP_EFFECT(1)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = DXGI_SWAP_EFFECT(3)
+public const DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = DXGI_SWAP_EFFECT(3)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_FLIP_DISCARD = DXGI_SWAP_EFFECT(4)
+public const DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_FLIP_DISCARD = DXGI_SWAP_EFFECT(4)
 
 // Windows.Win32.Graphics.Dxgi.DXGI_USAGE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_USAGE)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public struct DXGI_USAGE {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: DXGI_USAGE): Bool {
@@ -281,19 +1982,1565 @@ public struct DXGI_USAGE {
     }
 }
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_USAGE_DXGI_USAGE_SHADER_INPUT = DXGI_USAGE(16)
+public const DXGI_USAGE_DXGI_USAGE_SHADER_INPUT = DXGI_USAGE(16)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_USAGE_DXGI_USAGE_RENDER_TARGET_OUTPUT = DXGI_USAGE(32)
+public const DXGI_USAGE_DXGI_USAGE_RENDER_TARGET_OUTPUT = DXGI_USAGE(32)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_USAGE_DXGI_USAGE_BACK_BUFFER = DXGI_USAGE(64)
+public const DXGI_USAGE_DXGI_USAGE_BACK_BUFFER = DXGI_USAGE(64)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_USAGE_DXGI_USAGE_SHARED = DXGI_USAGE(128)
+public const DXGI_USAGE_DXGI_USAGE_SHARED = DXGI_USAGE(128)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_USAGE_DXGI_USAGE_READ_ONLY = DXGI_USAGE(256)
+public const DXGI_USAGE_DXGI_USAGE_READ_ONLY = DXGI_USAGE(256)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_USAGE_DXGI_USAGE_DISCARD_ON_PRESENT = DXGI_USAGE(512)
+public const DXGI_USAGE_DXGI_USAGE_DISCARD_ON_PRESENT = DXGI_USAGE(512)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
-public let DXGI_USAGE_DXGI_USAGE_UNORDERED_ACCESS = DXGI_USAGE(1024)
+public const DXGI_USAGE_DXGI_USAGE_UNORDERED_ACCESS = DXGI_USAGE(1024)
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIAdapter)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIAdapter <: Resource & windows_core.HandleWinrtType<IDXGIAdapter> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIAdapter.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIAdapter"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(605153249u32, 4780u16, 19663u16, 189u8, 20u8, 151u8, 152u8, 232u8, 83u8, 77u8, 192u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIAdapter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIAdapter): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIAdapter.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter {
+        IDXGIAdapter(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter {
+        IDXGIAdapter(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIAdapter): IDXGIAdapter {
+        let raw = IDXGIAdapter.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIAdapter(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapterVtbl (synthetic:IDXGIAdapterVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIAdapterVtbl {
+    public var base_: IDXGIObjectVtbl = IDXGIObjectVtbl()
+    public var EnumOutputs: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CheckInterfaceSupport: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIAdapter1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIAdapter1 <: Resource & windows_core.HandleWinrtType<IDXGIAdapter1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIAdapter1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIAdapter1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(688099169u32, 14393u16, 17958u16, 145u8, 253u8, 8u8, 104u8, 121u8, 1u8, 26u8, 5u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIAdapter1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIAdapter1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIAdapter1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter1 {
+        IDXGIAdapter1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter1 {
+        IDXGIAdapter1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIAdapter1): IDXGIAdapter1 {
+        let raw = IDXGIAdapter1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIAdapter1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter1Vtbl (synthetic:IDXGIAdapter1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIAdapter1Vtbl {
+    public var base_: IDXGIAdapterVtbl = IDXGIAdapterVtbl()
+    public var GetDesc1: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter2 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIAdapter2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIAdapter2 <: Resource & windows_core.HandleWinrtType<IDXGIAdapter2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIAdapter2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIAdapter2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(178368010u32, 64014u16, 19332u16, 134u8, 68u8, 224u8, 95u8, 248u8, 229u8, 172u8, 181u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIAdapter2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIAdapter2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIAdapter2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter2 {
+        IDXGIAdapter2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter2 {
+        IDXGIAdapter2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIAdapter2): IDXGIAdapter2 {
+        let raw = IDXGIAdapter2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIAdapter2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter2Vtbl (synthetic:IDXGIAdapter2Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIAdapter2Vtbl {
+    public var base_: IDXGIAdapter1Vtbl = IDXGIAdapter1Vtbl()
+    public var GetDesc2: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter3 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIAdapter3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIAdapter3 <: Resource & windows_core.HandleWinrtType<IDXGIAdapter3> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIAdapter3.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIAdapter3"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1683580836u32, 5010u16, 17168u16, 167u8, 152u8, 128u8, 83u8, 206u8, 62u8, 147u8, 253u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIAdapter3): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIAdapter3): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIAdapter3.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter3 {
+        IDXGIAdapter3(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter3 {
+        IDXGIAdapter3(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIAdapter3): IDXGIAdapter3 {
+        let raw = IDXGIAdapter3.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIAdapter3(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter3Vtbl (synthetic:IDXGIAdapter3Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIAdapter3Vtbl {
+    public var base_: IDXGIAdapter2Vtbl = IDXGIAdapter2Vtbl()
+    public var RegisterHardwareContentProtectionTeardownStatusEvent: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UnregisterHardwareContentProtectionTeardownStatus: CFunc<(CPointer<Unit>, UInt32) -> Unit> = CFunc<(CPointer<Unit>, UInt32) -> Unit>(CPointer<Unit>())
+    public var QueryVideoMemoryInfo: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetVideoMemoryReservation: CFunc<(CPointer<Unit>, UInt32, Int32, UInt64) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, UInt64) -> Int32>(CPointer<Unit>())
+    public var RegisterVideoMemoryBudgetChangeNotificationEvent: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UnregisterVideoMemoryBudgetChangeNotification: CFunc<(CPointer<Unit>, UInt32) -> Unit> = CFunc<(CPointer<Unit>, UInt32) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter4 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIAdapter4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIAdapter4 <: Resource & windows_core.HandleWinrtType<IDXGIAdapter4> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIAdapter4.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIAdapter4"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1015912913u32, 20415u16, 16769u16, 168u8, 44u8, 175u8, 102u8, 191u8, 123u8, 210u8, 78u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIAdapter4): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIAdapter4): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIAdapter4.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter4 {
+        IDXGIAdapter4(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIAdapter4 {
+        IDXGIAdapter4(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIAdapter4): IDXGIAdapter4 {
+        let raw = IDXGIAdapter4.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIAdapter4(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIAdapter4Vtbl (synthetic:IDXGIAdapter4Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIAdapter4Vtbl {
+    public var base_: IDXGIAdapter3Vtbl = IDXGIAdapter3Vtbl()
+    public var GetDesc3: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDebug (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDebug)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDebug <: Resource & windows_core.HandleWinrtType<IDXGIDebug> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDebug.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDebug"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(295597138u32, 56990u16, 16638u16, 136u8, 6u8, 136u8, 249u8, 12u8, 18u8, 180u8, 65u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDebug): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDebug): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDebug.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDebug {
+        IDXGIDebug(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDebug {
+        IDXGIDebug(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDebug): IDXGIDebug {
+        let raw = IDXGIDebug.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDebug(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDebugVtbl (synthetic:IDXGIDebugVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDebugVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var ReportLiveObjects: CFunc<(CPointer<Unit>, GUID, Int32) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDebug1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDebug1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDebug1 <: Resource & windows_core.HandleWinrtType<IDXGIDebug1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDebug1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDebug1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3315621644u32, 5874u16, 19167u16, 159u8, 77u8, 168u8, 196u8, 213u8, 138u8, 197u8, 80u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDebug1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDebug1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDebug1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDebug1 {
+        IDXGIDebug1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDebug1 {
+        IDXGIDebug1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDebug1): IDXGIDebug1 {
+        let raw = IDXGIDebug1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDebug1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDebug1Vtbl (synthetic:IDXGIDebug1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDebug1Vtbl {
+    public var base_: IDXGIDebugVtbl = IDXGIDebugVtbl()
+    public var EnableLeakTrackingForThread: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var DisableLeakTrackingForThread: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var IsLeakTrackingEnabledForThread: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDecodeSwapChain (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDecodeSwapChain)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDecodeSwapChain <: Resource & windows_core.HandleWinrtType<IDXGIDecodeSwapChain> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDecodeSwapChain.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDecodeSwapChain"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(640878187u32, 17684u16, 19578u16, 143u8, 216u8, 18u8, 234u8, 152u8, 5u8, 157u8, 24u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDecodeSwapChain): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDecodeSwapChain): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDecodeSwapChain.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDecodeSwapChain {
+        IDXGIDecodeSwapChain(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDecodeSwapChain {
+        IDXGIDecodeSwapChain(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDecodeSwapChain): IDXGIDecodeSwapChain {
+        let raw = IDXGIDecodeSwapChain.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDecodeSwapChain(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDecodeSwapChainVtbl (synthetic:IDXGIDecodeSwapChainVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDecodeSwapChainVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var PresentBuffer: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetSourceRect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetTargetRect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetDestSize: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetSourceRect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetTargetRect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDestSize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetColorSpace: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetColorSpace: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDevice)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDevice <: Resource & windows_core.HandleWinrtType<IDXGIDevice> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDevice.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDevice"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1424783354u32, 4983u16, 17638u16, 140u8, 50u8, 136u8, 253u8, 95u8, 68u8, 200u8, 76u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDevice): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDevice): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDevice.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDevice {
+        IDXGIDevice(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDevice {
+        IDXGIDevice(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDevice): IDXGIDevice {
+        let raw = IDXGIDevice.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDevice(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDeviceVtbl (synthetic:IDXGIDeviceVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDeviceVtbl {
+    public var base_: IDXGIObjectVtbl = IDXGIObjectVtbl()
+    public var GetAdapter: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CreateSurface: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var QueryResourceResidency: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetGPUThreadPriority: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetGPUThreadPriority: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDevice1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDevice1 <: Resource & windows_core.HandleWinrtType<IDXGIDevice1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDevice1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDevice1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2010879759u32, 25206u16, 18618u16, 186u8, 40u8, 7u8, 1u8, 67u8, 180u8, 57u8, 44u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDevice1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDevice1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDevice1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDevice1 {
+        IDXGIDevice1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDevice1 {
+        IDXGIDevice1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDevice1): IDXGIDevice1 {
+        let raw = IDXGIDevice1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDevice1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice1Vtbl (synthetic:IDXGIDevice1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDevice1Vtbl {
+    public var base_: IDXGIDeviceVtbl = IDXGIDeviceVtbl()
+    public var SetMaximumFrameLatency: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetMaximumFrameLatency: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice2 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDevice2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDevice2 <: Resource & windows_core.HandleWinrtType<IDXGIDevice2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDevice2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDevice2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(83920407u32, 64509u16, 16465u16, 167u8, 144u8, 20u8, 72u8, 132u8, 180u8, 246u8, 169u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDevice2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDevice2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDevice2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDevice2 {
+        IDXGIDevice2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDevice2 {
+        IDXGIDevice2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDevice2): IDXGIDevice2 {
+        let raw = IDXGIDevice2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDevice2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice2Vtbl (synthetic:IDXGIDevice2Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDevice2Vtbl {
+    public var base_: IDXGIDevice1Vtbl = IDXGIDevice1Vtbl()
+    public var OfferResources: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var ReclaimResources: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var EnqueueSetEvent: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice3 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDevice3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDevice3 <: Resource & windows_core.HandleWinrtType<IDXGIDevice3> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDevice3.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDevice3"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1611106668u32, 12868u16, 19197u16, 191u8, 24u8, 166u8, 211u8, 190u8, 218u8, 80u8, 35u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDevice3): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDevice3): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDevice3.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDevice3 {
+        IDXGIDevice3(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDevice3 {
+        IDXGIDevice3(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDevice3): IDXGIDevice3 {
+        let raw = IDXGIDevice3.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDevice3(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice3Vtbl (synthetic:IDXGIDevice3Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDevice3Vtbl {
+    public var base_: IDXGIDevice2Vtbl = IDXGIDevice2Vtbl()
+    public var Trim: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice4 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDevice4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDevice4 <: Resource & windows_core.HandleWinrtType<IDXGIDevice4> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDevice4.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDevice4"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2511665503u32, 55514u16, 19620u16, 158u8, 230u8, 59u8, 118u8, 213u8, 150u8, 138u8, 16u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDevice4): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDevice4): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDevice4.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDevice4 {
+        IDXGIDevice4(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDevice4 {
+        IDXGIDevice4(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDevice4): IDXGIDevice4 {
+        let raw = IDXGIDevice4.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDevice4(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDevice4Vtbl (synthetic:IDXGIDevice4Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDevice4Vtbl {
+    public var base_: IDXGIDevice3Vtbl = IDXGIDevice3Vtbl()
+    public var OfferResources1: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, Int32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, Int32, UInt32) -> Int32>(CPointer<Unit>())
+    public var ReclaimResources1: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
 
 // Windows.Win32.Graphics.Dxgi.IDXGIDeviceSubObject (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
@@ -409,6 +3656,1466 @@ public class IDXGIDeviceSubObject <: Resource & windows_core.HandleWinrtType<IDX
 public struct IDXGIDeviceSubObjectVtbl {
     public var base_: IDXGIObjectVtbl = IDXGIObjectVtbl()
     public var GetDevice: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDisplayControl (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDisplayControl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIDisplayControl <: Resource & windows_core.HandleWinrtType<IDXGIDisplayControl> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIDisplayControl.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDisplayControl"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3936206618u32, 51342u16, 17542u16, 133u8, 74u8, 152u8, 170u8, 1u8, 56u8, 243u8, 12u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIDisplayControl): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIDisplayControl): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIDisplayControl.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIDisplayControl {
+        IDXGIDisplayControl(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIDisplayControl {
+        IDXGIDisplayControl(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIDisplayControl): IDXGIDisplayControl {
+        let raw = IDXGIDisplayControl.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIDisplayControl(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDisplayControlVtbl (synthetic:IDXGIDisplayControlVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIDisplayControlVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var IsStereoEnabled: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetStereoEnabled: CFunc<(CPointer<Unit>, Int32) -> Unit> = CFunc<(CPointer<Unit>, Int32) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory <: Resource & windows_core.HandleWinrtType<IDXGIFactory> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2071029484u32, 8647u16, 17582u16, 178u8, 26u8, 201u8, 174u8, 50u8, 26u8, 227u8, 105u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory {
+        IDXGIFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory {
+        IDXGIFactory(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory): IDXGIFactory {
+        let raw = IDXGIFactory.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactoryVtbl (synthetic:IDXGIFactoryVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactoryVtbl {
+    public var base_: IDXGIObjectVtbl = IDXGIObjectVtbl()
+    public var EnumAdapters: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var MakeWindowAssociation: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetWindowAssociation: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CreateSwapChain: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CreateSoftwareAdapter: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HMODULE, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HMODULE, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory1 <: Resource & windows_core.HandleWinrtType<IDXGIFactory1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1997188728u32, 62063u16, 19898u16, 168u8, 41u8, 37u8, 60u8, 131u8, 209u8, 179u8, 135u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory1 {
+        IDXGIFactory1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory1 {
+        IDXGIFactory1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory1): IDXGIFactory1 {
+        let raw = IDXGIFactory1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory1Vtbl (synthetic:IDXGIFactory1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactory1Vtbl {
+    public var base_: IDXGIFactoryVtbl = IDXGIFactoryVtbl()
+    public var EnumAdapters1: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var IsCurrent: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory2 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory2 <: Resource & windows_core.HandleWinrtType<IDXGIFactory2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1355299356u32, 57458u16, 19528u16, 135u8, 176u8, 54u8, 48u8, 250u8, 54u8, 166u8, 208u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory2 {
+        IDXGIFactory2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory2 {
+        IDXGIFactory2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory2): IDXGIFactory2 {
+        let raw = IDXGIFactory2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory2Vtbl (synthetic:IDXGIFactory2Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactory2Vtbl {
+    public var base_: IDXGIFactory1Vtbl = IDXGIFactory1Vtbl()
+    public var IsWindowedStereoEnabled: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CreateSwapChainForHwnd: CFunc<(CPointer<Unit>, CPointer<Unit>, Windows_Win32_Foundation.HWND, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Windows_Win32_Foundation.HWND, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CreateSwapChainForCoreWindow: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetSharedResourceAdapterLuid: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RegisterStereoStatusWindow: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RegisterStereoStatusEvent: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UnregisterStereoStatus: CFunc<(CPointer<Unit>, UInt32) -> Unit> = CFunc<(CPointer<Unit>, UInt32) -> Unit>(CPointer<Unit>())
+    public var RegisterOcclusionStatusWindow: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RegisterOcclusionStatusEvent: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UnregisterOcclusionStatus: CFunc<(CPointer<Unit>, UInt32) -> Unit> = CFunc<(CPointer<Unit>, UInt32) -> Unit>(CPointer<Unit>())
+    public var CreateSwapChainForComposition: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory3 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory3 <: Resource & windows_core.HandleWinrtType<IDXGIFactory3> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory3.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory3"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(625489955u32, 52550u16, 19581u16, 134u8, 202u8, 71u8, 170u8, 149u8, 184u8, 55u8, 189u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory3): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory3): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory3.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory3 {
+        IDXGIFactory3(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory3 {
+        IDXGIFactory3(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory3): IDXGIFactory3 {
+        let raw = IDXGIFactory3.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory3(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory3Vtbl (synthetic:IDXGIFactory3Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactory3Vtbl {
+    public var base_: IDXGIFactory2Vtbl = IDXGIFactory2Vtbl()
+    public var GetCreationFlags: CFunc<(CPointer<Unit>) -> UInt32> = CFunc<(CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory4 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory4 <: Resource & windows_core.HandleWinrtType<IDXGIFactory4> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory4.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory4"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(466020866u32, 61238u16, 17999u16, 191u8, 12u8, 33u8, 202u8, 57u8, 229u8, 22u8, 138u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory4): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory4): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory4.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory4 {
+        IDXGIFactory4(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory4 {
+        IDXGIFactory4(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory4): IDXGIFactory4 {
+        let raw = IDXGIFactory4.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory4(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory4Vtbl (synthetic:IDXGIFactory4Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactory4Vtbl {
+    public var base_: IDXGIFactory3Vtbl = IDXGIFactory3Vtbl()
+    public var EnumAdapterByLuid: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.LUID, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.LUID, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EnumWarpAdapter: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory5 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory5)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory5 <: Resource & windows_core.HandleWinrtType<IDXGIFactory5> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory5.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory5"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1983046133u32, 61029u16, 19914u16, 135u8, 253u8, 132u8, 205u8, 117u8, 248u8, 131u8, 141u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory5): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory5): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory5.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory5 {
+        IDXGIFactory5(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory5 {
+        IDXGIFactory5(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory5): IDXGIFactory5 {
+        let raw = IDXGIFactory5.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory5(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory5Vtbl (synthetic:IDXGIFactory5Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactory5Vtbl {
+    public var base_: IDXGIFactory4Vtbl = IDXGIFactory4Vtbl()
+    public var CheckFeatureSupport: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory6 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory6)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory6 <: Resource & windows_core.HandleWinrtType<IDXGIFactory6> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory6.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory6"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3249957199u32, 65289u16, 17577u16, 176u8, 60u8, 119u8, 144u8, 10u8, 10u8, 29u8, 23u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory6): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory6): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory6.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory6 {
+        IDXGIFactory6(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory6 {
+        IDXGIFactory6(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory6): IDXGIFactory6 {
+        let raw = IDXGIFactory6.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory6(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory6Vtbl (synthetic:IDXGIFactory6Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactory6Vtbl {
+    public var base_: IDXGIFactory5Vtbl = IDXGIFactory5Vtbl()
+    public var EnumAdapterByGpuPreference: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory7 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactory7)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactory7 <: Resource & windows_core.HandleWinrtType<IDXGIFactory7> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactory7.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactory7"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2761322221u32, 30427u16, 17626u16, 132u8, 193u8, 238u8, 154u8, 122u8, 251u8, 32u8, 168u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactory7): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactory7): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactory7.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactory7 {
+        IDXGIFactory7(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactory7 {
+        IDXGIFactory7(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactory7): IDXGIFactory7 {
+        let raw = IDXGIFactory7.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactory7(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactory7Vtbl (synthetic:IDXGIFactory7Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactory7Vtbl {
+    public var base_: IDXGIFactory6Vtbl = IDXGIFactory6Vtbl()
+    public var RegisterAdaptersChangedEvent: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UnregisterAdaptersChangedEvent: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactoryMedia (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIFactoryMedia)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIFactoryMedia <: Resource & windows_core.HandleWinrtType<IDXGIFactoryMedia> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIFactoryMedia.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIFactoryMedia"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1105711602u32, 42385u16, 20347u16, 162u8, 229u8, 250u8, 156u8, 132u8, 62u8, 28u8, 18u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIFactoryMedia): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIFactoryMedia): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIFactoryMedia.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIFactoryMedia {
+        IDXGIFactoryMedia(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIFactoryMedia {
+        IDXGIFactoryMedia(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIFactoryMedia): IDXGIFactoryMedia {
+        let raw = IDXGIFactoryMedia.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIFactoryMedia(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIFactoryMediaVtbl (synthetic:IDXGIFactoryMediaVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIFactoryMediaVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var CreateSwapChainForCompositionSurfaceHandle: CFunc<(CPointer<Unit>, CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CreateDecodeSwapChainForCompositionSurfaceHandle: CFunc<(CPointer<Unit>, CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Windows_Win32_Foundation.HANDLE, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIInfoQueue (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIInfoQueue)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIInfoQueue <: Resource & windows_core.HandleWinrtType<IDXGIInfoQueue> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIInfoQueue.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIInfoQueue"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3597943239u32, 26410u16, 18287u16, 158u8, 130u8, 205u8, 85u8, 180u8, 73u8, 73u8, 206u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIInfoQueue): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIInfoQueue): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIInfoQueue.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIInfoQueue {
+        IDXGIInfoQueue(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIInfoQueue {
+        IDXGIInfoQueue(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIInfoQueue): IDXGIInfoQueue {
+        let raw = IDXGIInfoQueue.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIInfoQueue(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIInfoQueueVtbl (synthetic:IDXGIInfoQueueVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIInfoQueueVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetMessageCountLimit: CFunc<(CPointer<Unit>, GUID, UInt64) -> Int32> = CFunc<(CPointer<Unit>, GUID, UInt64) -> Int32>(CPointer<Unit>())
+    public var ClearStoredMessages: CFunc<(CPointer<Unit>, GUID) -> Unit> = CFunc<(CPointer<Unit>, GUID) -> Unit>(CPointer<Unit>())
+    public var GetMessage: CFunc<(CPointer<Unit>, GUID, UInt64, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, UInt64, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetNumStoredMessagesAllowedByRetrievalFilters: CFunc<(CPointer<Unit>, GUID) -> UInt64> = CFunc<(CPointer<Unit>, GUID) -> UInt64>(CPointer<Unit>())
+    public var GetNumStoredMessages: CFunc<(CPointer<Unit>, GUID) -> UInt64> = CFunc<(CPointer<Unit>, GUID) -> UInt64>(CPointer<Unit>())
+    public var GetNumMessagesDiscardedByMessageCountLimit: CFunc<(CPointer<Unit>, GUID) -> UInt64> = CFunc<(CPointer<Unit>, GUID) -> UInt64>(CPointer<Unit>())
+    public var GetMessageCountLimit: CFunc<(CPointer<Unit>, GUID) -> UInt64> = CFunc<(CPointer<Unit>, GUID) -> UInt64>(CPointer<Unit>())
+    public var GetNumMessagesAllowedByStorageFilter: CFunc<(CPointer<Unit>, GUID) -> UInt64> = CFunc<(CPointer<Unit>, GUID) -> UInt64>(CPointer<Unit>())
+    public var GetNumMessagesDeniedByStorageFilter: CFunc<(CPointer<Unit>, GUID) -> UInt64> = CFunc<(CPointer<Unit>, GUID) -> UInt64>(CPointer<Unit>())
+    public var AddStorageFilterEntries: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetStorageFilter: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ClearStorageFilter: CFunc<(CPointer<Unit>, GUID) -> Unit> = CFunc<(CPointer<Unit>, GUID) -> Unit>(CPointer<Unit>())
+    public var PushEmptyStorageFilter: CFunc<(CPointer<Unit>, GUID) -> Int32> = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>())
+    public var PushDenyAllStorageFilter: CFunc<(CPointer<Unit>, GUID) -> Int32> = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>())
+    public var PushCopyOfStorageFilter: CFunc<(CPointer<Unit>, GUID) -> Int32> = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>())
+    public var PushStorageFilter: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var PopStorageFilter: CFunc<(CPointer<Unit>, GUID) -> Unit> = CFunc<(CPointer<Unit>, GUID) -> Unit>(CPointer<Unit>())
+    public var GetStorageFilterStackSize: CFunc<(CPointer<Unit>, GUID) -> UInt32> = CFunc<(CPointer<Unit>, GUID) -> UInt32>(CPointer<Unit>())
+    public var AddRetrievalFilterEntries: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetRetrievalFilter: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ClearRetrievalFilter: CFunc<(CPointer<Unit>, GUID) -> Unit> = CFunc<(CPointer<Unit>, GUID) -> Unit>(CPointer<Unit>())
+    public var PushEmptyRetrievalFilter: CFunc<(CPointer<Unit>, GUID) -> Int32> = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>())
+    public var PushDenyAllRetrievalFilter: CFunc<(CPointer<Unit>, GUID) -> Int32> = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>())
+    public var PushCopyOfRetrievalFilter: CFunc<(CPointer<Unit>, GUID) -> Int32> = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>())
+    public var PushRetrievalFilter: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var PopRetrievalFilter: CFunc<(CPointer<Unit>, GUID) -> Unit> = CFunc<(CPointer<Unit>, GUID) -> Unit>(CPointer<Unit>())
+    public var GetRetrievalFilterStackSize: CFunc<(CPointer<Unit>, GUID) -> UInt32> = CFunc<(CPointer<Unit>, GUID) -> UInt32>(CPointer<Unit>())
+    public var AddMessage: CFunc<(CPointer<Unit>, GUID, Int32, Int32, Int32, CPointer<UInt8>) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32, Int32, Int32, CPointer<UInt8>) -> Int32>(CPointer<Unit>())
+    public var AddApplicationMessage: CFunc<(CPointer<Unit>, Int32, CPointer<UInt8>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<UInt8>) -> Int32>(CPointer<Unit>())
+    public var SetBreakOnCategory: CFunc<(CPointer<Unit>, GUID, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var SetBreakOnSeverity: CFunc<(CPointer<Unit>, GUID, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var SetBreakOnID: CFunc<(CPointer<Unit>, GUID, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var GetBreakOnCategory: CFunc<(CPointer<Unit>, GUID, Int32) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32) -> Int32>(CPointer<Unit>())
+    public var GetBreakOnSeverity: CFunc<(CPointer<Unit>, GUID, Int32) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32) -> Int32>(CPointer<Unit>())
+    public var GetBreakOnID: CFunc<(CPointer<Unit>, GUID, Int32) -> Int32> = CFunc<(CPointer<Unit>, GUID, Int32) -> Int32>(CPointer<Unit>())
+    public var SetMuteDebugOutput: CFunc<(CPointer<Unit>, GUID, Int32) -> Unit> = CFunc<(CPointer<Unit>, GUID, Int32) -> Unit>(CPointer<Unit>())
+    public var GetMuteDebugOutput: CFunc<(CPointer<Unit>, GUID) -> Int32> = CFunc<(CPointer<Unit>, GUID) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIKeyedMutex (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIKeyedMutex)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIKeyedMutex <: Resource & windows_core.HandleWinrtType<IDXGIKeyedMutex> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIKeyedMutex.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIKeyedMutex"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2643333769u32, 55219u16, 18015u16, 129u8, 38u8, 37u8, 14u8, 52u8, 154u8, 248u8, 93u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIKeyedMutex): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIKeyedMutex): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIKeyedMutex.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIKeyedMutex {
+        IDXGIKeyedMutex(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIKeyedMutex {
+        IDXGIKeyedMutex(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIKeyedMutex): IDXGIKeyedMutex {
+        let raw = IDXGIKeyedMutex.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIKeyedMutex(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIKeyedMutexVtbl (synthetic:IDXGIKeyedMutexVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIKeyedMutexVtbl {
+    public var base_: IDXGIDeviceSubObjectVtbl = IDXGIDeviceSubObjectVtbl()
+    public var AcquireSync: CFunc<(CPointer<Unit>, UInt64, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt64, UInt32) -> Int32>(CPointer<Unit>())
+    public var ReleaseSync: CFunc<(CPointer<Unit>, UInt64) -> Int32> = CFunc<(CPointer<Unit>, UInt64) -> Int32>(CPointer<Unit>())
     public init() {}
 }
 
@@ -660,6 +5367,1074 @@ public struct IDXGIOutputVtbl {
     public init() {}
 }
 
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutput1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIOutput1 <: Resource & windows_core.HandleWinrtType<IDXGIOutput1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIOutput1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutput1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(13491880u32, 37787u16, 19331u16, 163u8, 64u8, 166u8, 133u8, 34u8, 102u8, 102u8, 204u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIOutput1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIOutput1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIOutput1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIOutput1 {
+        IDXGIOutput1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIOutput1 {
+        IDXGIOutput1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIOutput1): IDXGIOutput1 {
+        let raw = IDXGIOutput1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIOutput1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput1Vtbl (synthetic:IDXGIOutput1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIOutput1Vtbl {
+    public var base_: IDXGIOutputVtbl = IDXGIOutputVtbl()
+    public var GetDisplayModeList1: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var FindClosestMatchingMode1: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDisplaySurfaceData1: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DuplicateOutput: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput2 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutput2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIOutput2 <: Resource & windows_core.HandleWinrtType<IDXGIOutput2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIOutput2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutput2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1499347409u32, 10020u16, 18019u16, 153u8, 177u8, 218u8, 150u8, 157u8, 226u8, 131u8, 100u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIOutput2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIOutput2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIOutput2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIOutput2 {
+        IDXGIOutput2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIOutput2 {
+        IDXGIOutput2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIOutput2): IDXGIOutput2 {
+        let raw = IDXGIOutput2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIOutput2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput2Vtbl (synthetic:IDXGIOutput2Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIOutput2Vtbl {
+    public var base_: IDXGIOutput1Vtbl = IDXGIOutput1Vtbl()
+    public var SupportsOverlays: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput3 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutput3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIOutput3 <: Resource & windows_core.HandleWinrtType<IDXGIOutput3> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIOutput3.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutput3"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2322313985u32, 32382u16, 16884u16, 168u8, 224u8, 91u8, 50u8, 247u8, 249u8, 155u8, 24u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIOutput3): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIOutput3): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIOutput3.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIOutput3 {
+        IDXGIOutput3(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIOutput3 {
+        IDXGIOutput3(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIOutput3): IDXGIOutput3 {
+        let raw = IDXGIOutput3.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIOutput3(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput3Vtbl (synthetic:IDXGIOutput3Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIOutput3Vtbl {
+    public var base_: IDXGIOutput2Vtbl = IDXGIOutput2Vtbl()
+    public var CheckOverlaySupport: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput4 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutput4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIOutput4 <: Resource & windows_core.HandleWinrtType<IDXGIOutput4> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIOutput4.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutput4"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3699231285u32, 8598u16, 16717u16, 159u8, 83u8, 97u8, 120u8, 132u8, 3u8, 42u8, 96u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIOutput4): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIOutput4): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIOutput4.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIOutput4 {
+        IDXGIOutput4(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIOutput4 {
+        IDXGIOutput4(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIOutput4): IDXGIOutput4 {
+        let raw = IDXGIOutput4.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIOutput4(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput4Vtbl (synthetic:IDXGIOutput4Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIOutput4Vtbl {
+    public var base_: IDXGIOutput3Vtbl = IDXGIOutput3Vtbl()
+    public var CheckOverlayColorSpaceSupport: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput5 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutput5)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIOutput5 <: Resource & windows_core.HandleWinrtType<IDXGIOutput5> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIOutput5.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutput5"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2157999140u32, 43858u16, 17131u16, 131u8, 60u8, 12u8, 66u8, 253u8, 40u8, 45u8, 152u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIOutput5): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIOutput5): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIOutput5.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIOutput5 {
+        IDXGIOutput5(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIOutput5 {
+        IDXGIOutput5(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIOutput5): IDXGIOutput5 {
+        let raw = IDXGIOutput5.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIOutput5(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput5Vtbl (synthetic:IDXGIOutput5Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIOutput5Vtbl {
+    public var base_: IDXGIOutput4Vtbl = IDXGIOutput4Vtbl()
+    public var DuplicateOutput1: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput6 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutput6)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIOutput6 <: Resource & windows_core.HandleWinrtType<IDXGIOutput6> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIOutput6.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutput6"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(109266664u32, 43756u16, 19332u16, 173u8, 215u8, 19u8, 127u8, 81u8, 63u8, 119u8, 161u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIOutput6): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIOutput6): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIOutput6.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIOutput6 {
+        IDXGIOutput6(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIOutput6 {
+        IDXGIOutput6(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIOutput6): IDXGIOutput6 {
+        let raw = IDXGIOutput6.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIOutput6(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput6Vtbl (synthetic:IDXGIOutput6Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIOutput6Vtbl {
+    public var base_: IDXGIOutput5Vtbl = IDXGIOutput5Vtbl()
+    public var GetDesc1: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CheckHardwareCompositionSupport: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutputDuplication (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutputDuplication)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIOutputDuplication <: Resource & windows_core.HandleWinrtType<IDXGIOutputDuplication> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIOutputDuplication.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutputDuplication"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(421329603u32, 41793u16, 18189u16, 178u8, 110u8, 168u8, 100u8, 244u8, 40u8, 49u8, 156u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIOutputDuplication): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIOutputDuplication): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIOutputDuplication.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIOutputDuplication {
+        IDXGIOutputDuplication(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIOutputDuplication {
+        IDXGIOutputDuplication(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIOutputDuplication): IDXGIOutputDuplication {
+        let raw = IDXGIOutputDuplication.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIOutputDuplication(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutputDuplicationVtbl (synthetic:IDXGIOutputDuplicationVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIOutputDuplicationVtbl {
+    public var base_: IDXGIObjectVtbl = IDXGIObjectVtbl()
+    public var GetDesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var AcquireNextFrame: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFrameDirtyRects: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFrameMoveRects: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFramePointerShape: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var MapDesktopSurface: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UnMapDesktopSurface: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ReleaseFrame: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIResource (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIResource)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIResource <: Resource & windows_core.HandleWinrtType<IDXGIResource> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIResource.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIResource"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(56572596u32, 18478u16, 20048u16, 180u8, 31u8, 138u8, 127u8, 139u8, 216u8, 150u8, 11u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIResource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIResource): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIResource.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIResource {
+        IDXGIResource(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIResource {
+        IDXGIResource(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIResource): IDXGIResource {
+        let raw = IDXGIResource.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIResource(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIResourceVtbl (synthetic:IDXGIResourceVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIResourceVtbl {
+    public var base_: IDXGIDeviceSubObjectVtbl = IDXGIDeviceSubObjectVtbl()
+    public var GetSharedHandle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetUsage: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetEvictionPriority: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetEvictionPriority: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIResource1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIResource1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGIResource1 <: Resource & windows_core.HandleWinrtType<IDXGIResource1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGIResource1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIResource1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(815141753u32, 17929u16, 19009u16, 153u8, 142u8, 84u8, 254u8, 86u8, 126u8, 224u8, 193u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGIResource1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGIResource1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGIResource1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGIResource1 {
+        IDXGIResource1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGIResource1 {
+        IDXGIResource1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGIResource1): IDXGIResource1 {
+        let raw = IDXGIResource1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGIResource1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIResource1Vtbl (synthetic:IDXGIResource1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGIResource1Vtbl {
+    public var base_: IDXGIResourceVtbl = IDXGIResourceVtbl()
+    public var CreateSubresourceSurface: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CreateSharedHandle: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
 // Windows.Win32.Graphics.Dxgi.IDXGISurface (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISurface)
 @When[Windows_Win32_Graphics_Dxgi == "on"]
 public class IDXGISurface <: Resource & windows_core.HandleWinrtType<IDXGISurface> {
@@ -776,6 +6551,241 @@ public struct IDXGISurfaceVtbl {
     public var GetDesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var Map: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
     public var Unmap: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISurface1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISurface1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGISurface1 <: Resource & windows_core.HandleWinrtType<IDXGISurface1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGISurface1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISurface1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1256599698u32, 25383u16, 19483u16, 128u8, 174u8, 191u8, 225u8, 46u8, 163u8, 43u8, 134u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGISurface1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGISurface1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGISurface1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGISurface1 {
+        IDXGISurface1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGISurface1 {
+        IDXGISurface1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGISurface1): IDXGISurface1 {
+        let raw = IDXGISurface1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGISurface1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISurface1Vtbl (synthetic:IDXGISurface1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGISurface1Vtbl {
+    public var base_: IDXGISurfaceVtbl = IDXGISurfaceVtbl()
+    public var GetDC: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ReleaseDC: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISurface2 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISurface2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGISurface2 <: Resource & windows_core.HandleWinrtType<IDXGISurface2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGISurface2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISurface2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2879690461u32, 46615u16, 19640u16, 168u8, 102u8, 188u8, 68u8, 215u8, 235u8, 31u8, 162u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGISurface2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGISurface2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGISurface2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGISurface2 {
+        IDXGISurface2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGISurface2 {
+        IDXGISurface2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGISurface2): IDXGISurface2 {
+        let raw = IDXGISurface2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGISurface2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISurface2Vtbl (synthetic:IDXGISurface2Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGISurface2Vtbl {
+    public var base_: IDXGISurface1Vtbl = IDXGISurface1Vtbl()
+    public var GetResource: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public init() {}
 }
 
@@ -902,5 +6912,729 @@ public struct IDXGISwapChainVtbl {
     public var GetContainingOutput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var GetFrameStatistics: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public var GetLastPresentCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain1 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISwapChain1)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGISwapChain1 <: Resource & windows_core.HandleWinrtType<IDXGISwapChain1> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGISwapChain1.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISwapChain1"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2030716407u32, 3394u16, 18550u16, 152u8, 58u8, 10u8, 85u8, 207u8, 230u8, 244u8, 170u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGISwapChain1): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGISwapChain1): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGISwapChain1.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain1 {
+        IDXGISwapChain1(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain1 {
+        IDXGISwapChain1(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGISwapChain1): IDXGISwapChain1 {
+        let raw = IDXGISwapChain1.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGISwapChain1(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain1Vtbl (synthetic:IDXGISwapChain1Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGISwapChain1Vtbl {
+    public var base_: IDXGISwapChainVtbl = IDXGISwapChainVtbl()
+    public var GetDesc1: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFullscreenDesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetHwnd: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetCoreWindow: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Present1: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var IsTemporaryMonoSupported: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetRestrictToOutput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetBackgroundColor: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetBackgroundColor: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetRotation: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetRotation: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain2 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISwapChain2)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGISwapChain2 <: Resource & windows_core.HandleWinrtType<IDXGISwapChain2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGISwapChain2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISwapChain2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2831035076u32, 6559u16, 18758u16, 179u8, 49u8, 121u8, 89u8, 159u8, 185u8, 141u8, 231u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGISwapChain2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGISwapChain2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGISwapChain2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain2 {
+        IDXGISwapChain2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain2 {
+        IDXGISwapChain2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGISwapChain2): IDXGISwapChain2 {
+        let raw = IDXGISwapChain2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGISwapChain2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain2Vtbl (synthetic:IDXGISwapChain2Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGISwapChain2Vtbl {
+    public var base_: IDXGISwapChain1Vtbl = IDXGISwapChain1Vtbl()
+    public var SetSourceSize: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetSourceSize: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetMaximumFrameLatency: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetMaximumFrameLatency: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFrameLatencyWaitableObject: CFunc<(CPointer<Unit>) -> Windows_Win32_Foundation.HANDLE> = CFunc<(CPointer<Unit>) -> Windows_Win32_Foundation.HANDLE>(CPointer<Unit>())
+    public var SetMatrixTransform: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetMatrixTransform: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain3 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISwapChain3)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGISwapChain3 <: Resource & windows_core.HandleWinrtType<IDXGISwapChain3> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGISwapChain3.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISwapChain3"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2497289179u32, 61944u16, 19120u16, 178u8, 54u8, 125u8, 160u8, 23u8, 14u8, 218u8, 177u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGISwapChain3): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGISwapChain3): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGISwapChain3.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain3 {
+        IDXGISwapChain3(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain3 {
+        IDXGISwapChain3(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGISwapChain3): IDXGISwapChain3 {
+        let raw = IDXGISwapChain3.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGISwapChain3(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain3Vtbl (synthetic:IDXGISwapChain3Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGISwapChain3Vtbl {
+    public var base_: IDXGISwapChain2Vtbl = IDXGISwapChain2Vtbl()
+    public var GetCurrentBackBufferIndex: CFunc<(CPointer<Unit>) -> UInt32> = CFunc<(CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var CheckColorSpaceSupport: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetColorSpace1: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var ResizeBuffers1: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, Int32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, Int32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain4 (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISwapChain4)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGISwapChain4 <: Resource & windows_core.HandleWinrtType<IDXGISwapChain4> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGISwapChain4.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISwapChain4"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1029201242u32, 48458u16, 18590u16, 177u8, 244u8, 61u8, 188u8, 182u8, 69u8, 47u8, 251u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGISwapChain4): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGISwapChain4): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGISwapChain4.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain4 {
+        IDXGISwapChain4(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGISwapChain4 {
+        IDXGISwapChain4(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGISwapChain4): IDXGISwapChain4 {
+        let raw = IDXGISwapChain4.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGISwapChain4(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain4Vtbl (synthetic:IDXGISwapChain4Vtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGISwapChain4Vtbl {
+    public var base_: IDXGISwapChain3Vtbl = IDXGISwapChain3Vtbl()
+    public var SetHDRMetaData: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChainMedia (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISwapChainMedia)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGISwapChainMedia <: Resource & windows_core.HandleWinrtType<IDXGISwapChainMedia> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGISwapChainMedia.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISwapChainMedia"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3717576971u32, 61535u16, 20330u16, 189u8, 101u8, 37u8, 191u8, 178u8, 100u8, 189u8, 132u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGISwapChainMedia): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGISwapChainMedia): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGISwapChainMedia.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGISwapChainMedia {
+        IDXGISwapChainMedia(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGISwapChainMedia {
+        IDXGISwapChainMedia(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGISwapChainMedia): IDXGISwapChainMedia {
+        let raw = IDXGISwapChainMedia.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGISwapChainMedia(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChainMediaVtbl (synthetic:IDXGISwapChainMediaVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGISwapChainMediaVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetFrameStatisticsMedia: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetPresentDuration: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var CheckPresentDurationSupport: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGraphicsAnalysis (synthetic:Windows_Win32_Graphics_Dxgi_IDXGraphicsAnalysis)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+public class IDXGraphicsAnalysis <: Resource & windows_core.HandleWinrtType<IDXGraphicsAnalysis> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDXGraphicsAnalysis.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGraphicsAnalysis"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2670007572u32, 40269u16, 18690u16, 157u8, 96u8, 24u8, 152u8, 138u8, 183u8, 212u8, 181u8)
+    }
+
+    public static func intoWinrtHandle(value: IDXGraphicsAnalysis): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDXGraphicsAnalysis): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDXGraphicsAnalysis.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDXGraphicsAnalysis {
+        IDXGraphicsAnalysis(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDXGraphicsAnalysis {
+        IDXGraphicsAnalysis(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDXGraphicsAnalysis): IDXGraphicsAnalysis {
+        let raw = IDXGraphicsAnalysis.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDXGraphicsAnalysis(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGraphicsAnalysisVtbl (synthetic:IDXGraphicsAnalysisVtbl)
+@When[Windows_Win32_Graphics_Dxgi == "on"]
+@C
+public struct IDXGraphicsAnalysisVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var BeginCapture: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var EndCapture: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
     public init() {}
 }

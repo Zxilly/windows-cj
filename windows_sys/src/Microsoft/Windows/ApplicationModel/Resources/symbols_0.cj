@@ -12,6 +12,21 @@ import windows_sys.Foundation as Windows_Foundation
 @When[Windows_Foundation_Collections == "on"]
 import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 
+// Microsoft.Windows.ApplicationModel.Resources.IKnownResourceQualifierNameStatics (synthetic:Microsoft_Windows_ApplicationModel_Resources_IKnownResourceQualifierNameStatics)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
+@Interface["dd6cdedc-559b-50c8-ac53-82fe21f915f3", "Microsoft.Windows.ApplicationModel.Resources.IKnownResourceQualifierNameStatics", "Contrast.value=HString;Custom.value=HString;DeviceFamily.value=HString;HomeRegion.value=HString;Language.value=HString;LayoutDirection.value=HString;Scale.value=HString;TargetSize.value=HString;Theme.value=HString"]
+public interface IKnownResourceQualifierNameStatics <: IInspectable {
+    func Contrast(value: CPointer<CPointer<Unit>>): Int32
+    func Custom(value: CPointer<CPointer<Unit>>): Int32
+    func DeviceFamily(value: CPointer<CPointer<Unit>>): Int32
+    func HomeRegion(value: CPointer<CPointer<Unit>>): Int32
+    func Language(value: CPointer<CPointer<Unit>>): Int32
+    func LayoutDirection(value: CPointer<CPointer<Unit>>): Int32
+    func Scale(value: CPointer<CPointer<Unit>>): Int32
+    func TargetSize(value: CPointer<CPointer<Unit>>): Int32
+    func Theme(value: CPointer<CPointer<Unit>>): Int32
+}
+
 // Microsoft.Windows.ApplicationModel.Resources.IResourceCandidate (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceCandidate)
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["6c54bc0c-ef1e-57b8-b478-34fece737356", "Microsoft.Windows.ApplicationModel.Resources.IResourceCandidate", "ValueAsString.value=HString;ValueAsBytes.value=Array<UInt8>;QualifierValues.value=Com"]
@@ -41,6 +56,29 @@ public interface IResourceContext <: IInspectable {
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["7a3b1158-798c-5949-969d-03510b9ce6ca", "Microsoft.Windows.ApplicationModel.Resources.IResourceContext2"]
 public interface IResourceContext2 <: IInspectable {
+}
+
+// Microsoft.Windows.ApplicationModel.Resources.IResourceLoader (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceLoader)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
+@Interface["bc3f76bf-da46-54cd-8715-8b8aaf16eaac", "Microsoft.Windows.ApplicationModel.Resources.IResourceLoader", "GetString.result=HString;GetStringForUri.result=HString"]
+public interface IResourceLoader <: IInspectable {
+    func GetString(resourceId: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetStringForUri(resourceUri: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.Windows.ApplicationModel.Resources.IResourceLoaderFactory (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceLoaderFactory)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
+@Interface["871f83aa-fb34-50d6-b9b9-2c35f3ffc004", "Microsoft.Windows.ApplicationModel.Resources.IResourceLoaderFactory", "CreateInstance.value=Com;CreateInstance2.value=Com"]
+public interface IResourceLoaderFactory <: IInspectable {
+    func CreateInstance(fileName: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func CreateInstance2(fileName: CPointer<Unit>, resourceMap: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.Windows.ApplicationModel.Resources.IResourceLoaderStatics (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceLoaderStatics)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
+@Interface["ec9c894a-1466-5f2f-8eee-a70cbd2b51bb", "Microsoft.Windows.ApplicationModel.Resources.IResourceLoaderStatics", "GetDefaultResourceFilePath.result=HString"]
+public interface IResourceLoaderStatics <: IInspectable {
+    func GetDefaultResourceFilePath(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceManager (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceManager)
@@ -88,6 +126,154 @@ public interface IResourceNotFoundEventArgs <: IInspectable {
     func Context(value: CPointer<CPointer<Unit>>): Int32
     func Name(value: CPointer<CPointer<Unit>>): Int32
     func SetResolvedCandidate(candidate: CPointer<Unit>): Int32
+}
+
+// Microsoft.Windows.ApplicationModel.Resources.KnownResourceQualifierName (synthetic:Microsoft_Windows_ApplicationModel_Resources_KnownResourceQualifierName)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
+public struct KnownResourceQualifierName <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func Contrast(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Contrast(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Custom(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Custom(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func DeviceFamily(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DeviceFamily(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func HomeRegion(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HomeRegion(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Language(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Language(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func LayoutDirection(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LayoutDirection(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Scale(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Scale(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func TargetSize(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TargetSize(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func Theme(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<KnownResourceQualifierName, IKnownResourceQualifierNameStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Theme(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.Windows.ApplicationModel.Resources.KnownResourceQualifierName"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.Windows.ApplicationModel.Resources.KnownResourceQualifierName)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.Windows.ApplicationModel.Resources.KnownResourceQualifierName", KnownResourceQualifierName.signature())
+    }
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.MrtCoreContract (synthetic:Microsoft_Windows_ApplicationModel_Resources_MrtCoreContract)
@@ -291,21 +477,21 @@ public class ResourceCandidate <: windows_interface.InterfaceWrapperBase & windo
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public struct ResourceCandidateKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
-public let ResourceCandidateKind_Unknown = ResourceCandidateKind(0)
+public const ResourceCandidateKind_Unknown = ResourceCandidateKind(0)
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
-public let ResourceCandidateKind_String_ = ResourceCandidateKind(1)
+public const ResourceCandidateKind_String_ = ResourceCandidateKind(1)
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
-public let ResourceCandidateKind_FilePath = ResourceCandidateKind(2)
+public const ResourceCandidateKind_FilePath = ResourceCandidateKind(2)
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
-public let ResourceCandidateKind_EmbeddedData = ResourceCandidateKind(3)
+public const ResourceCandidateKind_EmbeddedData = ResourceCandidateKind(3)
 
 // Microsoft.Windows.ApplicationModel.Resources.ResourceContext (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceContext)
 @When[Microsoft_Windows_ApplicationModel_Resources == "on"]
@@ -402,6 +588,172 @@ public class ResourceContext <: windows_interface.InterfaceWrapperBase & windows
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): ResourceContext {
         ResourceContext.viewOf(raw)
+    }
+}
+
+// Microsoft.Windows.ApplicationModel.Resources.ResourceLoader (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceLoader)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
+public class ResourceLoader <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ResourceLoader> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ResourceLoader {
+        ResourceLoader(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ResourceLoader {
+        ResourceLoader(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IResourceLoader.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ResourceLoader> {
+        let ancestors = [IResourceLoader.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ResourceLoader>("ResourceLoader", IResourceLoader.iid(), ancestors, { raw => ResourceLoader.fromAbiTake(raw) }, { raw => ResourceLoader.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IResourceLoader {
+        match (unsafe { query(IResourceLoader.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIResourceLoader(): IResourceLoader {
+        defaultInterface()
+    }
+
+    public func GetString(resourceId: windows_core.HString): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(resourceId)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetString(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func GetStringForUri(resourceUri: Windows_Foundation.Uri): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(resourceUri)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetStringForUri(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func new(): ResourceLoader {
+        var created__: Option<ResourceLoader> = Option<ResourceLoader>.None
+        try (factory__ = windows_core.factory<ResourceLoader, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ResourceLoader>(ResourceLoader.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ResourceLoader")
+        }
+    }
+
+    public static func CreateInstance(fileName: windows_core.HString): ResourceLoader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(fileName)) {
+            try (factory__ = windows_core.factory<ResourceLoader, IResourceLoaderFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ResourceLoader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ResourceLoader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance2(fileName: windows_core.HString, resourceMap: windows_core.HString): ResourceLoader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(fileName)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(resourceMap)) {
+                try (factory__ = windows_core.factory<ResourceLoader, IResourceLoaderFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateInstance2(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<ResourceLoader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return ResourceLoader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDefaultResourceFilePath(): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ResourceLoader, IResourceLoaderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetDefaultResourceFilePath(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.Windows.ApplicationModel.Resources.ResourceLoader"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.Windows.ApplicationModel.Resources.ResourceLoader;{" + IResourceLoader.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.Windows.ApplicationModel.Resources.ResourceLoader", ResourceLoader.signature(), IResourceLoader.iid())
+    }
+
+    public static func intoWinrtHandle(value: ResourceLoader): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ResourceLoader {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ResourceLoader.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ResourceLoader {
+        ResourceLoader.viewOf(raw)
     }
 }
 

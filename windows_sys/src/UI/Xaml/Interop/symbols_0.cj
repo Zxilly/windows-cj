@@ -2,26 +2,641 @@
 
 package windows_sys.UI.Xaml.Interop
 
+import windows_core as windows_core
+import windows_interface as windows_interface
+import windows_interface.IInspectable
+import windows_interface.macros.Interface
+
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+
+// Windows.UI.Xaml.Interop.BindableVectorChangedEventHandler (synthetic:Windows_UI_Xaml_Interop_BindableVectorChangedEventHandler)
+@When[Windows_UI_Xaml_Interop == "on"]
+@C
+public struct BindableVectorChangedEventHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+public open class BindableVectorChangedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<BindableVectorChangedEventHandler> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): BindableVectorChangedEventHandler {
+        OwnedBindableVectorChangedEventHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): BindableVectorChangedEventHandler {
+        BindableVectorChangedEventHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1649202401u32, 53255u16, 17329u16, 156u8, 3u8, 175u8, 77u8, 62u8, 98u8, 88u8, 196u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<BindableVectorChangedEventHandler> {
+        windows_interface.InterfaceDescriptor<BindableVectorChangedEventHandler>("Windows.UI.Xaml.Interop.BindableVectorChangedEventHandler", BindableVectorChangedEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => BindableVectorChangedEventHandler.fromAbiTake(raw) }, { raw => BindableVectorChangedEventHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.UI.Xaml.Interop.BindableVectorChangedEventHandler", BindableVectorChangedEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "BindableVectorChangedEventHandlerVtbl", "BindableVectorChangedEventHandler", "BindableVectorChangedEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("vector", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(BindableVectorChangedEventHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Windows.UI.Xaml.Interop.BindableVectorChangedEventHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Xaml.Interop.BindableVectorChangedEventHandler", BindableVectorChangedEventHandler.signature(), BindableVectorChangedEventHandler.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = BindableVectorChangedEventHandler.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): BindableVectorChangedEventHandlerVtbl {
+        readVtbl<BindableVectorChangedEventHandlerVtbl>(BindableVectorChangedEventHandlerVtbl())
+    }
+
+    public unsafe func Invoke(vector: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, vector, e)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): BindableVectorChangedEventHandler {
+        let box = BindableVectorChangedEventHandlerBox(invoke)
+        let object = windows_core.ComObject<BindableVectorChangedEventHandlerBox>.new(box, [BindableVectorChangedEventHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(BindableVectorChangedEventHandler.descriptor())
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+private class OwnedBindableVectorChangedEventHandler <: BindableVectorChangedEventHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+public interface BindableVectorChangedEventHandlerInvokerErased {
+    func __winrtThunk_Invoke(vector: CPointer<Unit>, e: CPointer<Unit>): Int32
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+public interface BindableVectorChangedEventHandlerInvoker <: BindableVectorChangedEventHandlerInvokerErased {
+    func Invoke(vector: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(vector: CPointer<Unit>, e: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(vector, e)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+private class BindableVectorChangedEventHandlerBox <: BindableVectorChangedEventHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<BindableVectorChangedEventHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<BindableVectorChangedEventHandlerVtbl>(buildBindableVectorChangedEventHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(vector: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        invoke_(vector, e)
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+func buildBindableVectorChangedEventHandlerBoxVtbl(): BindableVectorChangedEventHandlerVtbl {
+    var vtbl = BindableVectorChangedEventHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, vector: CPointer<Unit>, e: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<BindableVectorChangedEventHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(vector, e)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Windows.UI.Xaml.Interop.IBindableIterable (synthetic:Windows_UI_Xaml_Interop_IBindableIterable)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["036d2c08-df29-41af-8aa2-d774be62ba6f", "Windows.UI.Xaml.Interop.IBindableIterable", "First.result=Com"]
+public interface IBindableIterable <: IInspectable {
+    func First(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Xaml.Interop.IBindableIterator (synthetic:Windows_UI_Xaml_Interop_IBindableIterator)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["6a1d6c07-076d-49f2-8314-f52c9c9a8331", "Windows.UI.Xaml.Interop.IBindableIterator", "Current.value=Com"]
+public interface IBindableIterator <: IInspectable {
+    func Current(value: CPointer<CPointer<Unit>>): Int32
+    func HasCurrent(value: CPointer<Bool>): Int32
+    func MoveNext(result: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Xaml.Interop.IBindableObservableVector (synthetic:Windows_UI_Xaml_Interop_IBindableObservableVector)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["fe1eb536-7e7f-4f90-ac9a-474984aae512", "Windows.UI.Xaml.Interop.IBindableObservableVector"]
+public interface IBindableObservableVector <: IInspectable {
+    func VectorChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveVectorChanged(token: Int64): Int32
+}
+
+// Windows.UI.Xaml.Interop.IBindableVector (synthetic:Windows_UI_Xaml_Interop_IBindableVector)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["393de7de-6fd0-4c0d-bb71-47244a113e93", "Windows.UI.Xaml.Interop.IBindableVector", "GetAt.result=Com;GetView.result=Com"]
+public interface IBindableVector <: IInspectable {
+    func GetAt(index: UInt32, result: CPointer<CPointer<Unit>>): Int32
+    func Size(value: CPointer<UInt32>): Int32
+    func GetView(result: CPointer<CPointer<Unit>>): Int32
+    func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>, returnValue: CPointer<Bool>): Int32
+    func SetAt(index: UInt32, value: CPointer<Unit>): Int32
+    func InsertAt(index: UInt32, value: CPointer<Unit>): Int32
+    func RemoveAt(index: UInt32): Int32
+    func Append(value: CPointer<Unit>): Int32
+    func RemoveAtEnd(): Int32
+    func Clear(): Int32
+}
+
+// Windows.UI.Xaml.Interop.IBindableVectorView (synthetic:Windows_UI_Xaml_Interop_IBindableVectorView)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["346dd6e7-976e-4bc3-815d-ece243bc0f33", "Windows.UI.Xaml.Interop.IBindableVectorView", "GetAt.result=Com"]
+public interface IBindableVectorView <: IInspectable {
+    func GetAt(index: UInt32, result: CPointer<CPointer<Unit>>): Int32
+    func Size(value: CPointer<UInt32>): Int32
+    func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>, returnValue: CPointer<Bool>): Int32
+}
+
+// Windows.UI.Xaml.Interop.INotifyCollectionChanged (synthetic:Windows_UI_Xaml_Interop_INotifyCollectionChanged)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["28b167d5-1a31-465b-9b25-d5c3ae686c40", "Windows.UI.Xaml.Interop.INotifyCollectionChanged"]
+public interface INotifyCollectionChanged <: IInspectable {
+    func CollectionChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveCollectionChanged(token: Int64): Int32
+}
+
+// Windows.UI.Xaml.Interop.INotifyCollectionChangedEventArgs (synthetic:Windows_UI_Xaml_Interop_INotifyCollectionChangedEventArgs)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["4cf68d33-e3f2-4964-b85e-945b4f7e2f21", "Windows.UI.Xaml.Interop.INotifyCollectionChangedEventArgs", "NewItems.value=Com;OldItems.value=Com"]
+public interface INotifyCollectionChangedEventArgs <: IInspectable {
+    func Action(value: CPointer<Int32>): Int32
+    func NewItems(value: CPointer<CPointer<Unit>>): Int32
+    func OldItems(value: CPointer<CPointer<Unit>>): Int32
+    func NewStartingIndex(value: CPointer<Int32>): Int32
+    func OldStartingIndex(value: CPointer<Int32>): Int32
+}
+
+// Windows.UI.Xaml.Interop.INotifyCollectionChangedEventArgsFactory (synthetic:Windows_UI_Xaml_Interop_INotifyCollectionChangedEventArgsFactory)
+@When[Windows_UI_Xaml_Interop == "on"]
+@Interface["b30c3e3a-df8d-44a5-9a38-7ac0d08ce63d", "Windows.UI.Xaml.Interop.INotifyCollectionChangedEventArgsFactory", "CreateInstanceWithAllParameters.innerInterface=Com;CreateInstanceWithAllParameters.value=Com"]
+public interface INotifyCollectionChangedEventArgsFactory <: IInspectable {
+    func CreateInstanceWithAllParameters(action: Int32, newItems: CPointer<Unit>, oldItems: CPointer<Unit>, newIndex: Int32, oldIndex: Int32, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.UI.Xaml.Interop.NotifyCollectionChangedAction (synthetic:Windows_UI_Xaml_Interop_NotifyCollectionChangedAction)
+@When[Windows_UI_Xaml_Interop == "on"]
+public struct NotifyCollectionChangedAction {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_UI_Xaml_Interop == "on"]
+public const NotifyCollectionChangedAction_Add = NotifyCollectionChangedAction(0)
+@When[Windows_UI_Xaml_Interop == "on"]
+public const NotifyCollectionChangedAction_Remove = NotifyCollectionChangedAction(1)
+@When[Windows_UI_Xaml_Interop == "on"]
+public const NotifyCollectionChangedAction_Replace = NotifyCollectionChangedAction(2)
+@When[Windows_UI_Xaml_Interop == "on"]
+public const NotifyCollectionChangedAction_Move = NotifyCollectionChangedAction(3)
+@When[Windows_UI_Xaml_Interop == "on"]
+public const NotifyCollectionChangedAction_Reset = NotifyCollectionChangedAction(4)
+
+// Windows.UI.Xaml.Interop.NotifyCollectionChangedEventArgs (synthetic:Windows_UI_Xaml_Interop_NotifyCollectionChangedEventArgs)
+@When[Windows_UI_Xaml_Interop == "on"]
+public class NotifyCollectionChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<NotifyCollectionChangedEventArgs> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NotifyCollectionChangedEventArgs {
+        NotifyCollectionChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NotifyCollectionChangedEventArgs {
+        NotifyCollectionChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        INotifyCollectionChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NotifyCollectionChangedEventArgs> {
+        let ancestors = [INotifyCollectionChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<NotifyCollectionChangedEventArgs>("NotifyCollectionChangedEventArgs", INotifyCollectionChangedEventArgs.iid(), ancestors, { raw => NotifyCollectionChangedEventArgs.fromAbiTake(raw) }, { raw => NotifyCollectionChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): INotifyCollectionChangedEventArgs {
+        match (unsafe { query(INotifyCollectionChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asINotifyCollectionChangedEventArgs(): INotifyCollectionChangedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Action: NotifyCollectionChangedAction {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Action(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return NotifyCollectionChangedAction(result__)
+        }
+    }
+
+    public prop NewItems: IBindableVector {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NewItems(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<IBindableVector>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return IBindableVector.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop NewStartingIndex: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NewStartingIndex(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop OldItems: IBindableVector {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OldItems(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<IBindableVector>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return IBindableVector.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop OldStartingIndex: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OldStartingIndex(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func CreateInstanceWithAllParameters(action: NotifyCollectionChangedAction, newItems: IBindableVector, oldItems: IBindableVector, newIndex: Int32, oldIndex: Int32, baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): NotifyCollectionChangedEventArgs {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBindableVector>(newItems)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<IBindableVector>(oldItems)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+                    try (factory__ = windows_core.factory<NotifyCollectionChangedEventArgs, INotifyCollectionChangedEventArgsFactory>().unwrap()) {
+                        hr__ = unsafe { factory__.CreateInstanceWithAllParameters(action.value, __argBorrow0.asRaw(), __argBorrow1.asRaw(), newIndex, oldIndex, __argBorrow2.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+                    }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<NotifyCollectionChangedEventArgs>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg6ValuePartial) =>
+                    if (__arg6ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg6ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg6Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg6Value))
+        return NotifyCollectionChangedEventArgs.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Xaml.Interop.NotifyCollectionChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Xaml.Interop.NotifyCollectionChangedEventArgs;{" + INotifyCollectionChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Xaml.Interop.NotifyCollectionChangedEventArgs", NotifyCollectionChangedEventArgs.signature(), INotifyCollectionChangedEventArgs.iid())
+    }
+
+    public static func intoWinrtHandle(value: NotifyCollectionChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): NotifyCollectionChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        NotifyCollectionChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): NotifyCollectionChangedEventArgs {
+        NotifyCollectionChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Windows.UI.Xaml.Interop.NotifyCollectionChangedEventHandler (synthetic:Windows_UI_Xaml_Interop_NotifyCollectionChangedEventHandler)
+@When[Windows_UI_Xaml_Interop == "on"]
+@C
+public struct NotifyCollectionChangedEventHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+public open class NotifyCollectionChangedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<NotifyCollectionChangedEventHandler> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): NotifyCollectionChangedEventHandler {
+        OwnedNotifyCollectionChangedEventHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): NotifyCollectionChangedEventHandler {
+        NotifyCollectionChangedEventHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3390092156u32, 62338u16, 17809u16, 133u8, 87u8, 94u8, 36u8, 150u8, 82u8, 121u8, 176u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<NotifyCollectionChangedEventHandler> {
+        windows_interface.InterfaceDescriptor<NotifyCollectionChangedEventHandler>("Windows.UI.Xaml.Interop.NotifyCollectionChangedEventHandler", NotifyCollectionChangedEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => NotifyCollectionChangedEventHandler.fromAbiTake(raw) }, { raw => NotifyCollectionChangedEventHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.UI.Xaml.Interop.NotifyCollectionChangedEventHandler", NotifyCollectionChangedEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "NotifyCollectionChangedEventHandlerVtbl", "NotifyCollectionChangedEventHandler", "NotifyCollectionChangedEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("sender", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(NotifyCollectionChangedEventHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Windows.UI.Xaml.Interop.NotifyCollectionChangedEventHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Xaml.Interop.NotifyCollectionChangedEventHandler", NotifyCollectionChangedEventHandler.signature(), NotifyCollectionChangedEventHandler.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = NotifyCollectionChangedEventHandler.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): NotifyCollectionChangedEventHandlerVtbl {
+        readVtbl<NotifyCollectionChangedEventHandlerVtbl>(NotifyCollectionChangedEventHandlerVtbl())
+    }
+
+    public unsafe func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, sender, e)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): NotifyCollectionChangedEventHandler {
+        let box = NotifyCollectionChangedEventHandlerBox(invoke)
+        let object = windows_core.ComObject<NotifyCollectionChangedEventHandlerBox>.new(box, [NotifyCollectionChangedEventHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(NotifyCollectionChangedEventHandler.descriptor())
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+private class OwnedNotifyCollectionChangedEventHandler <: NotifyCollectionChangedEventHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+public interface NotifyCollectionChangedEventHandlerInvokerErased {
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+public interface NotifyCollectionChangedEventHandlerInvoker <: NotifyCollectionChangedEventHandlerInvokerErased {
+    func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(sender, e)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+private class NotifyCollectionChangedEventHandlerBox <: NotifyCollectionChangedEventHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<NotifyCollectionChangedEventHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<NotifyCollectionChangedEventHandlerVtbl>(buildNotifyCollectionChangedEventHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        invoke_(sender, e)
+    }
+}
+
+@When[Windows_UI_Xaml_Interop == "on"]
+func buildNotifyCollectionChangedEventHandlerBoxVtbl(): NotifyCollectionChangedEventHandlerVtbl {
+    var vtbl = NotifyCollectionChangedEventHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, sender: CPointer<Unit>, e: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<NotifyCollectionChangedEventHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(sender, e)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
 
 // Windows.UI.Xaml.Interop.TypeKind (synthetic:Windows_UI_Xaml_Interop_TypeKind)
 @When[Windows_UI_Xaml_Interop == "on"]
 public struct TypeKind {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_UI_Xaml_Interop == "on"]
-public let TypeKind_Primitive = TypeKind(0)
+public const TypeKind_Primitive = TypeKind(0)
 @When[Windows_UI_Xaml_Interop == "on"]
-public let TypeKind_Metadata = TypeKind(1)
+public const TypeKind_Metadata = TypeKind(1)
 @When[Windows_UI_Xaml_Interop == "on"]
-public let TypeKind_Custom = TypeKind(2)
+public const TypeKind_Custom = TypeKind(2)
 
 // Windows.UI.Xaml.Interop.TypeName (synthetic:Windows_UI_Xaml_Interop_TypeName)
 @When[Windows_UI_Xaml_Interop == "on"]

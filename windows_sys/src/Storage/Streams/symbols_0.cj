@@ -3,14 +3,1794 @@
 package windows_sys.Storage.Streams
 
 import windows_core as windows_core
+import windows_interface.GUID
 import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
 @When[Windows_Storage == "on"]
 import windows_sys.Storage as Windows_Storage
+@When[Windows_System == "on"]
+import windows_sys.System as Windows_System
+
+// Windows.Storage.Streams.Buffer (synthetic:Windows_Storage_Streams_Buffer)
+@When[Windows_Storage_Streams == "on"]
+public class Buffer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Buffer> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Buffer {
+        Buffer(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Buffer {
+        Buffer(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IBuffer.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Buffer> {
+        let ancestors = [IBuffer.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Buffer>("Buffer", IBuffer.iid(), ancestors, { raw => Buffer.fromAbiTake(raw) }, { raw => Buffer.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IBuffer {
+        match (unsafe { query(IBuffer.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBuffer(): IBuffer {
+        defaultInterface()
+    }
+
+    public prop Capacity: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Capacity(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Length: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Length(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLength(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func Create(capacity: UInt32): Buffer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Buffer, IBufferFactory>().unwrap()) {
+            hr__ = unsafe { factory__.Create(capacity, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Buffer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Buffer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateCopyFromMemoryBuffer(input: Windows_Foundation.IMemoryBuffer): Buffer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.IMemoryBuffer>(input)) {
+            try (factory__ = windows_core.factory<Buffer, IBufferStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateCopyFromMemoryBuffer(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Buffer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Buffer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateMemoryBufferOverIBuffer(input: IBuffer): Windows_Foundation.MemoryBuffer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(input)) {
+            try (factory__ = windows_core.factory<Buffer, IBufferStatics>().unwrap()) {
+                hr__ = unsafe { factory__.CreateMemoryBufferOverIBuffer(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.MemoryBuffer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.MemoryBuffer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.Buffer"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.Buffer;{" + IBuffer.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.Buffer", Buffer.signature(), IBuffer.iid())
+    }
+
+    public static func intoWinrtHandle(value: Buffer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Buffer {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Buffer.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Buffer {
+        Buffer.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.ByteOrder (synthetic:Windows_Storage_Streams_ByteOrder)
+@When[Windows_Storage_Streams == "on"]
+public struct ByteOrder {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Storage_Streams == "on"]
+public const ByteOrder_LittleEndian = ByteOrder(0)
+@When[Windows_Storage_Streams == "on"]
+public const ByteOrder_BigEndian = ByteOrder(1)
+
+// Windows.Storage.Streams.DataReader (synthetic:Windows_Storage_Streams_DataReader)
+@When[Windows_Storage_Streams == "on"]
+public class DataReader <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DataReader> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DataReader {
+        DataReader(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DataReader {
+        DataReader(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDataReader.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DataReader> {
+        let ancestors = [IDataReader.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DataReader>("DataReader", IDataReader.iid(), ancestors, { raw => DataReader.fromAbiTake(raw) }, { raw => DataReader.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDataReader {
+        match (unsafe { query(IDataReader.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDataReader(): IDataReader {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop ByteOrder: ByteOrder {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ByteOrder(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ByteOrder(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetByteOrder(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop InputStreamOptions: InputStreamOptions {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InputStreamOptions(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return InputStreamOptions(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInputStreamOptions(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop UnconsumedBufferLength: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UnconsumedBufferLength(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop UnicodeEncoding: UnicodeEncoding {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UnicodeEncoding(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return UnicodeEncoding(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetUnicodeEncoding(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func ReadByte(): UInt8 {
+        var result__ = 0u8
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadByte(CPointer<UInt8>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadBytes(value: windows_core.OutSlot<Array<UInt8>>): Unit {
+        var __arg0Size = 0u32
+        var __arg0Data = CPointer<UInt8>()
+        var hr__ = windows_core.E_POINTER
+        if (value.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        value.clear()
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadBytes(CPointer<UInt32>(inout __arg0Size), CPointer<CPointer<UInt8>>(inout __arg0Data)) }
+        }
+        if (hr__.failed() && __arg0Data.isNotNull()) {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Data))
+            __arg0Data = CPointer<UInt8>()
+            __arg0Size = 0u32
+        }
+        hr__.check()
+        if (__arg0Size > 0u32 && __arg0Data.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        var __arg0ValueProjected = Array<UInt8>()
+        var __arg0ValueOwned: Option<windows_core.AbiArray<UInt8>> = None
+        try {
+            let __arg0ValueAbiArray = unsafe { windows_core.AbiArray<UInt8>.fromRawParts(__arg0Data, __arg0Size) }
+            __arg0ValueOwned = Some(__arg0ValueAbiArray)
+            let __arg0ValueAbiValues = __arg0ValueAbiArray.toArray()
+            __arg0ValueProjected = Array<UInt8>(__arg0ValueAbiValues.size, { index => __arg0ValueAbiValues[index] })
+        } finally {
+            match (__arg0ValueOwned) {
+                case Some(array) => array.close()
+                case None => windows_core.coTaskMemFree(CPointer<Unit>(__arg0Data))
+            }
+        }
+        let __arg0Value = __arg0ValueProjected
+        value.write(__arg0Value)
+    }
+
+    public func ReadBuffer(length: UInt32): IBuffer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadBuffer(length, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IBuffer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IBuffer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func ReadBoolean(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadBoolean(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadGuid(): windows_core.GuidValue {
+        var result__ = GUID()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadGuid(CPointer<GUID>(inout result__)) }
+        }
+        hr__.check()
+        return windows_core.GuidValue.fromRaw(result__)
+    }
+
+    public func ReadInt16(): Int16 {
+        var result__ = 0i16
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadInt16(CPointer<Int16>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadInt32(): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadInt32(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadInt64(): Int64 {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadInt64(CPointer<Int64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadUInt16(): UInt16 {
+        var result__ = 0u16
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadUInt16(CPointer<UInt16>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadUInt32(): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadUInt32(CPointer<UInt32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadUInt64(): UInt64 {
+        var result__ = 0u64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadUInt64(CPointer<UInt64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadSingle(): Float32 {
+        var result__ = 0.0f32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadSingle(CPointer<Float32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadDouble(): Float64 {
+        var result__ = 0.0f64
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadDouble(CPointer<Float64>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadString(codeUnitCount: UInt32): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadString(codeUnitCount, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public func ReadDateTime(): Windows_Foundation.DateTime {
+        var result__ = Windows_Foundation.DateTime()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadDateTime(CPointer<Windows_Foundation.DateTime>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ReadTimeSpan(): Windows_Foundation.TimeSpan {
+        var result__ = Windows_Foundation.TimeSpan()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ReadTimeSpan(CPointer<Windows_Foundation.TimeSpan>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func LoadAsync(count: UInt32): DataReaderLoadOperation {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.LoadAsync(count, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DataReaderLoadOperation>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DataReaderLoadOperation.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DetachBuffer(): IBuffer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DetachBuffer(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IBuffer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IBuffer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DetachStream(): IInputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DetachStream(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IInputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IInputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateDataReader(inputStream: IInputStream): DataReader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IInputStream>(inputStream)) {
+            try (factory__ = windows_core.factory<DataReader, IDataReaderFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateDataReader(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DataReader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DataReader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FromBuffer(buffer: IBuffer): DataReader {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(buffer)) {
+            try (factory__ = windows_core.factory<DataReader, IDataReaderStatics>().unwrap()) {
+                hr__ = unsafe { factory__.FromBuffer(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DataReader>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DataReader.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.DataReader"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.DataReader;{" + IDataReader.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.DataReader", DataReader.signature(), IDataReader.iid())
+    }
+
+    public static func intoWinrtHandle(value: DataReader): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DataReader {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DataReader.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DataReader {
+        DataReader.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.DataReaderLoadOperation (synthetic:Windows_Storage_Streams_DataReaderLoadOperation)
+@When[Windows_Storage_Streams == "on"]
+public class DataReaderLoadOperation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DataReaderLoadOperation> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DataReaderLoadOperation {
+        DataReaderLoadOperation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DataReaderLoadOperation {
+        DataReaderLoadOperation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_Foundation.IAsyncOperation<UInt32>.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DataReaderLoadOperation> {
+        let ancestors = [Windows_Foundation.IAsyncOperation<UInt32>.iid(), Windows_Foundation.IAsyncInfo.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DataReaderLoadOperation>("DataReaderLoadOperation", Windows_Foundation.IAsyncOperation<UInt32>.iid(), ancestors, { raw => DataReaderLoadOperation.fromAbiTake(raw) }, { raw => DataReaderLoadOperation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_Foundation.IAsyncOperation<UInt32> {
+        match (unsafe { query(Windows_Foundation.IAsyncOperation<UInt32>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAsyncOperation(): Windows_Foundation.IAsyncOperation<UInt32> {
+        defaultInterface()
+    }
+
+    public func asIAsyncInfo(): Windows_Foundation.IAsyncInfo {
+        match (unsafe { query<Windows_Foundation.IAsyncInfo>(Windows_Foundation.IAsyncInfo.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Completed: Windows_Foundation.AsyncOperationCompletedHandler<UInt32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Completed(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.AsyncOperationCompletedHandler<UInt32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.AsyncOperationCompletedHandler<UInt32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(handler) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.AsyncOperationCompletedHandler<UInt32>>(handler)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCompleted(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func GetResults(): UInt32 {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetResults(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed()) {
+            windows_core.winrtReleaseFailedGenericOut<UInt32>(CPointer<CPointer<Unit>>(inout result__))
+        }
+        hr__.check()
+        return windows_core.winrtTakeGenericOut<UInt32>(CPointer<CPointer<Unit>>(inout result__))
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.DataReaderLoadOperation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.DataReaderLoadOperation;{" + Windows_Foundation.IAsyncOperation<UInt32>.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.DataReaderLoadOperation", DataReaderLoadOperation.signature(), Windows_Foundation.IAsyncOperation<UInt32>.iid())
+    }
+
+    public static func intoWinrtHandle(value: DataReaderLoadOperation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DataReaderLoadOperation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DataReaderLoadOperation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DataReaderLoadOperation {
+        DataReaderLoadOperation.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.DataWriter (synthetic:Windows_Storage_Streams_DataWriter)
+@When[Windows_Storage_Streams == "on"]
+public class DataWriter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DataWriter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DataWriter {
+        DataWriter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DataWriter {
+        DataWriter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IDataWriter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DataWriter> {
+        let ancestors = [IDataWriter.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DataWriter>("DataWriter", IDataWriter.iid(), ancestors, { raw => DataWriter.fromAbiTake(raw) }, { raw => DataWriter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IDataWriter {
+        match (unsafe { query(IDataWriter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIDataWriter(): IDataWriter {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop ByteOrder: ByteOrder {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ByteOrder(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return ByteOrder(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetByteOrder(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop UnicodeEncoding: UnicodeEncoding {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UnicodeEncoding(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return UnicodeEncoding(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetUnicodeEncoding(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop UnstoredBufferLength: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UnstoredBufferLength(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func WriteByte(value: UInt8): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteByte(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteBytes(value: Array<UInt8>): Unit {
+        var hr__ = windows_core.E_POINTER
+        let __arg0AbiValues = Array<UInt8>(value.size, { index => value[index] })
+        let __arg0AbiArray = windows_core.AbiArray<UInt8>.fromSlice(__arg0AbiValues)
+        let (__arg0Raw, __arg0Len) = __arg0AbiArray.intoAbi()
+        try {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WriteBytes(__arg0Len, __arg0Raw) }
+            }
+        } finally {
+            windows_core.coTaskMemFree(CPointer<Unit>(__arg0Raw))
+        }
+        hr__.check()
+    }
+
+    public func WriteBuffer(buffer: IBuffer): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(buffer)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WriteBuffer(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func WriteBufferRange(buffer: IBuffer, start: UInt32, count: UInt32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(buffer)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WriteBufferRange(__argBorrow0.asRaw(), start, count) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func WriteBoolean(value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteBoolean(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteGuid(value: windows_core.GuidValue): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteGuid(value.toRaw()) }
+        }
+        hr__.check()
+    }
+
+    public func WriteInt16(value: Int16): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteInt16(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteInt32(value: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteInt32(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteInt64(value: Int64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteInt64(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteUInt16(value: UInt16): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteUInt16(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteUInt32(value: UInt32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteUInt32(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteUInt64(value: UInt64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteUInt64(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteSingle(value: Float32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteSingle(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteDouble(value: Float64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteDouble(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteDateTime(value: Windows_Foundation.DateTime): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteDateTime(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteTimeSpan(value: Windows_Foundation.TimeSpan): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.WriteTimeSpan(value) }
+        }
+        hr__.check()
+    }
+
+    public func WriteString(value: windows_core.HString): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WriteString(__argBorrow0.asRaw(), CPointer<UInt32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func MeasureString(value: windows_core.HString): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MeasureString(__argBorrow0.asRaw(), CPointer<UInt32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func StoreAsync(): DataWriterStoreOperation {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.StoreAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DataWriterStoreOperation>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DataWriterStoreOperation.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FlushAsync(): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FlushAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DetachBuffer(): IBuffer {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DetachBuffer(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IBuffer>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IBuffer.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func DetachStream(): IOutputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.DetachStream(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IOutputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IOutputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func new(): DataWriter {
+        var created__: Option<DataWriter> = Option<DataWriter>.None
+        try (factory__ = windows_core.factory<DataWriter, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<DataWriter>(DataWriter.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce DataWriter")
+        }
+    }
+
+    public static func CreateDataWriter(outputStream: IOutputStream): DataWriter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IOutputStream>(outputStream)) {
+            try (factory__ = windows_core.factory<DataWriter, IDataWriterFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateDataWriter(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<DataWriter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return DataWriter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.DataWriter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.DataWriter;{" + IDataWriter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.DataWriter", DataWriter.signature(), IDataWriter.iid())
+    }
+
+    public static func intoWinrtHandle(value: DataWriter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DataWriter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DataWriter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DataWriter {
+        DataWriter.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.DataWriterStoreOperation (synthetic:Windows_Storage_Streams_DataWriterStoreOperation)
+@When[Windows_Storage_Streams == "on"]
+public class DataWriterStoreOperation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<DataWriterStoreOperation> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DataWriterStoreOperation {
+        DataWriterStoreOperation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DataWriterStoreOperation {
+        DataWriterStoreOperation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_Foundation.IAsyncOperation<UInt32>.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<DataWriterStoreOperation> {
+        let ancestors = [Windows_Foundation.IAsyncOperation<UInt32>.iid(), Windows_Foundation.IAsyncInfo.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<DataWriterStoreOperation>("DataWriterStoreOperation", Windows_Foundation.IAsyncOperation<UInt32>.iid(), ancestors, { raw => DataWriterStoreOperation.fromAbiTake(raw) }, { raw => DataWriterStoreOperation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_Foundation.IAsyncOperation<UInt32> {
+        match (unsafe { query(Windows_Foundation.IAsyncOperation<UInt32>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAsyncOperation(): Windows_Foundation.IAsyncOperation<UInt32> {
+        defaultInterface()
+    }
+
+    public func asIAsyncInfo(): Windows_Foundation.IAsyncInfo {
+        match (unsafe { query<Windows_Foundation.IAsyncInfo>(Windows_Foundation.IAsyncInfo.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Completed: Windows_Foundation.AsyncOperationCompletedHandler<UInt32> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Completed(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation.AsyncOperationCompletedHandler<UInt32>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation.AsyncOperationCompletedHandler<UInt32>.fromAbiTakeWinrtHandle(result__)
+        }
+        set(handler) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.AsyncOperationCompletedHandler<UInt32>>(handler)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCompleted(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func GetResults(): UInt32 {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetResults(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed()) {
+            windows_core.winrtReleaseFailedGenericOut<UInt32>(CPointer<CPointer<Unit>>(inout result__))
+        }
+        hr__.check()
+        return windows_core.winrtTakeGenericOut<UInt32>(CPointer<CPointer<Unit>>(inout result__))
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.DataWriterStoreOperation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.DataWriterStoreOperation;{" + Windows_Foundation.IAsyncOperation<UInt32>.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.DataWriterStoreOperation", DataWriterStoreOperation.signature(), Windows_Foundation.IAsyncOperation<UInt32>.iid())
+    }
+
+    public static func intoWinrtHandle(value: DataWriterStoreOperation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): DataWriterStoreOperation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        DataWriterStoreOperation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): DataWriterStoreOperation {
+        DataWriterStoreOperation.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.FileInputStream (synthetic:Windows_Storage_Streams_FileInputStream)
+@When[Windows_Storage_Streams == "on"]
+public class FileInputStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FileInputStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FileInputStream {
+        FileInputStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FileInputStream {
+        FileInputStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IInputStream.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FileInputStream> {
+        let ancestors = [IInputStream.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FileInputStream>("FileInputStream", IInputStream.iid(), ancestors, { raw => FileInputStream.fromAbiTake(raw) }, { raw => FileInputStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IInputStream {
+        match (unsafe { query(IInputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIInputStream(): IInputStream {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func ReadAsync(buffer: IBuffer, count: UInt32, options: InputStreamOptions): Windows_Foundation.IAsyncOperationWithProgress<IBuffer, UInt32> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(buffer)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ReadAsync(__argBorrow0.asRaw(), count, options.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.FileInputStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.FileInputStream;{" + IInputStream.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.FileInputStream", FileInputStream.signature(), IInputStream.iid())
+    }
+
+    public static func intoWinrtHandle(value: FileInputStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FileInputStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FileInputStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FileInputStream {
+        FileInputStream.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.FileOpenDisposition (synthetic:Windows_Storage_Streams_FileOpenDisposition)
+@When[Windows_Storage_Streams == "on"]
+public struct FileOpenDisposition {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Storage_Streams == "on"]
+public const FileOpenDisposition_OpenExisting = FileOpenDisposition(0)
+@When[Windows_Storage_Streams == "on"]
+public const FileOpenDisposition_OpenAlways = FileOpenDisposition(1)
+@When[Windows_Storage_Streams == "on"]
+public const FileOpenDisposition_CreateNew = FileOpenDisposition(2)
+@When[Windows_Storage_Streams == "on"]
+public const FileOpenDisposition_CreateAlways = FileOpenDisposition(3)
+@When[Windows_Storage_Streams == "on"]
+public const FileOpenDisposition_TruncateExisting = FileOpenDisposition(4)
+
+// Windows.Storage.Streams.FileOutputStream (synthetic:Windows_Storage_Streams_FileOutputStream)
+@When[Windows_Storage_Streams == "on"]
+public class FileOutputStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FileOutputStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FileOutputStream {
+        FileOutputStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FileOutputStream {
+        FileOutputStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IOutputStream.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FileOutputStream> {
+        let ancestors = [IOutputStream.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FileOutputStream>("FileOutputStream", IOutputStream.iid(), ancestors, { raw => FileOutputStream.fromAbiTake(raw) }, { raw => FileOutputStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IOutputStream {
+        match (unsafe { query(IOutputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIOutputStream(): IOutputStream {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func WriteAsync(buffer: IBuffer): Windows_Foundation.IAsyncOperationWithProgress<UInt32, UInt32> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(buffer)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WriteAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperationWithProgress<UInt32, UInt32>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperationWithProgress<UInt32, UInt32>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FlushAsync(): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FlushAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.FileOutputStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.FileOutputStream;{" + IOutputStream.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.FileOutputStream", FileOutputStream.signature(), IOutputStream.iid())
+    }
+
+    public static func intoWinrtHandle(value: FileOutputStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FileOutputStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FileOutputStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FileOutputStream {
+        FileOutputStream.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.FileRandomAccessStream (synthetic:Windows_Storage_Streams_FileRandomAccessStream)
+@When[Windows_Storage_Streams == "on"]
+public class FileRandomAccessStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<FileRandomAccessStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): FileRandomAccessStream {
+        FileRandomAccessStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): FileRandomAccessStream {
+        FileRandomAccessStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRandomAccessStream.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<FileRandomAccessStream> {
+        let ancestors = [IRandomAccessStream.iid(), Windows_Foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<FileRandomAccessStream>("FileRandomAccessStream", IRandomAccessStream.iid(), ancestors, { raw => FileRandomAccessStream.fromAbiTake(raw) }, { raw => FileRandomAccessStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRandomAccessStream {
+        match (unsafe { query(IRandomAccessStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRandomAccessStream(): IRandomAccessStream {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInputStream(): IInputStream {
+        match (unsafe { query<IInputStream>(IInputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIOutputStream(): IOutputStream {
+        match (unsafe { query<IOutputStream>(IOutputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop CanRead: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanRead(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop CanWrite: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanWrite(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Position: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Size: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Size(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func GetInputStreamAt(position: UInt64): IInputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetInputStreamAt(position, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IInputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IInputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetOutputStreamAt(position: UInt64): IOutputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetOutputStreamAt(position, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IOutputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IOutputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Seek(position: UInt64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Seek(position) }
+        }
+        hr__.check()
+    }
+
+    public func CloneStream(): IRandomAccessStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CloneStream(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IRandomAccessStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IRandomAccessStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenAsync(filePath: windows_core.HString, accessMode: Windows_Storage.FileAccessMode): Windows_Foundation.IAsyncOperation<IRandomAccessStream> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+            try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                hr__ = unsafe { factory__.OpenAsync(__argBorrow0.asRaw(), accessMode.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<IRandomAccessStream>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<IRandomAccessStream>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenWithOptionsAsync(filePath: windows_core.HString, accessMode: Windows_Storage.FileAccessMode, sharingOptions: Windows_Storage.StorageOpenOptions, openDisposition: FileOpenDisposition): Windows_Foundation.IAsyncOperation<IRandomAccessStream> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+            try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                hr__ = unsafe { factory__.OpenWithOptionsAsync(__argBorrow0.asRaw(), accessMode.value, sharingOptions.value, openDisposition.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<IRandomAccessStream>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<IRandomAccessStream>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenTransactedWriteAsync(filePath: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+            try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                hr__ = unsafe { factory__.OpenTransactedWriteAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenTransactedWriteWithOptionsAsync(filePath: windows_core.HString, openOptions: Windows_Storage.StorageOpenOptions, openDisposition: FileOpenDisposition): Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+            try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                hr__ = unsafe { factory__.OpenTransactedWriteWithOptionsAsync(__argBorrow0.asRaw(), openOptions.value, openDisposition.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenForUserAsync(user: Windows_System.User, filePath: windows_core.HString, accessMode: Windows_Storage.FileAccessMode): Windows_Foundation.IAsyncOperation<IRandomAccessStream> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+                try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.OpenForUserAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), accessMode.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<IRandomAccessStream>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<IRandomAccessStream>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenForUserWithOptionsAsync(user: Windows_System.User, filePath: windows_core.HString, accessMode: Windows_Storage.FileAccessMode, sharingOptions: Windows_Storage.StorageOpenOptions, openDisposition: FileOpenDisposition): Windows_Foundation.IAsyncOperation<IRandomAccessStream> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+                try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.OpenForUserWithOptionsAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), accessMode.value, sharingOptions.value, openDisposition.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<IRandomAccessStream>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<IRandomAccessStream>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenTransactedWriteForUserAsync(user: Windows_System.User, filePath: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+                try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.OpenTransactedWriteForUserAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OpenTransactedWriteForUserWithOptionsAsync(user: Windows_System.User, filePath: windows_core.HString, openOptions: Windows_Storage.StorageOpenOptions, openDisposition: FileOpenDisposition): Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_System.User>(user)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filePath)) {
+                try (factory__ = windows_core.factory<FileRandomAccessStream, IFileRandomAccessStreamStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.OpenTransactedWriteForUserWithOptionsAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), openOptions.value, openDisposition.value, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Storage.StorageStreamTransaction>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.FileRandomAccessStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.FileRandomAccessStream;{" + IRandomAccessStream.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.FileRandomAccessStream", FileRandomAccessStream.signature(), IRandomAccessStream.iid())
+    }
+
+    public static func intoWinrtHandle(value: FileRandomAccessStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FileRandomAccessStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FileRandomAccessStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FileRandomAccessStream {
+        FileRandomAccessStream.viewOf(raw)
+    }
+}
 
 // Windows.Storage.Streams.IBuffer (synthetic:Windows_Storage_Streams_IBuffer)
 @When[Windows_Storage_Streams == "on"]
@@ -21,11 +1801,126 @@ public interface IBuffer <: IInspectable {
     func SetLength(value: UInt32): Int32
 }
 
+// Windows.Storage.Streams.IBufferFactory (synthetic:Windows_Storage_Streams_IBufferFactory)
+@When[Windows_Storage_Streams == "on"]
+@Interface["71af914d-c10f-484b-bc50-14bc623b3a27", "Windows.Storage.Streams.IBufferFactory", "Create.value=Com"]
+public interface IBufferFactory <: IInspectable {
+    func Create(capacity: UInt32, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IBufferStatics (synthetic:Windows_Storage_Streams_IBufferStatics)
+@When[Windows_Storage_Streams == "on"]
+@Interface["e901e65b-d716-475a-a90a-af7229b1e741", "Windows.Storage.Streams.IBufferStatics", "CreateCopyFromMemoryBuffer.value=Com;CreateMemoryBufferOverIBuffer.value=Com"]
+public interface IBufferStatics <: IInspectable {
+    func CreateCopyFromMemoryBuffer(input: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+    func CreateMemoryBufferOverIBuffer(input: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.Storage.Streams.IContentTypeProvider (synthetic:Windows_Storage_Streams_IContentTypeProvider)
 @When[Windows_Storage_Streams == "on"]
 @Interface["97d098a5-3b99-4de9-88a5-e11d2f50c795", "Windows.Storage.Streams.IContentTypeProvider", "ContentType.value=HString"]
 public interface IContentTypeProvider <: IInspectable {
     func ContentType(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IDataReader (synthetic:Windows_Storage_Streams_IDataReader)
+@When[Windows_Storage_Streams == "on"]
+@Interface["e2b50029-b4c1-4314-a4b8-fb813a2f275e", "Windows.Storage.Streams.IDataReader", "ReadBytes.value=Array<UInt8>;ReadBuffer.buffer=Com;ReadString.value=HString;LoadAsync.operation=Com;DetachBuffer.buffer=Com;DetachStream.stream=Com"]
+public interface IDataReader <: IInspectable {
+    func UnconsumedBufferLength(value: CPointer<UInt32>): Int32
+    func UnicodeEncoding(value: CPointer<Int32>): Int32
+    func SetUnicodeEncoding(value: Int32): Int32
+    func ByteOrder(value: CPointer<Int32>): Int32
+    func SetByteOrder(value: Int32): Int32
+    func InputStreamOptions(value: CPointer<UInt32>): Int32
+    func SetInputStreamOptions(value: UInt32): Int32
+    func ReadByte(value: CPointer<UInt8>): Int32
+    func ReadBytes(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt8>>): Int32
+    func ReadBuffer(length: UInt32, buffer: CPointer<CPointer<Unit>>): Int32
+    func ReadBoolean(value: CPointer<Bool>): Int32
+    func ReadGuid(value: CPointer<GUID>): Int32
+    func ReadInt16(value: CPointer<Int16>): Int32
+    func ReadInt32(value: CPointer<Int32>): Int32
+    func ReadInt64(value: CPointer<Int64>): Int32
+    func ReadUInt16(value: CPointer<UInt16>): Int32
+    func ReadUInt32(value: CPointer<UInt32>): Int32
+    func ReadUInt64(value: CPointer<UInt64>): Int32
+    func ReadSingle(value: CPointer<Float32>): Int32
+    func ReadDouble(value: CPointer<Float64>): Int32
+    func ReadString(codeUnitCount: UInt32, value: CPointer<CPointer<Unit>>): Int32
+    func ReadDateTime(value: CPointer<Windows_Foundation.DateTime>): Int32
+    func ReadTimeSpan(value: CPointer<Windows_Foundation.TimeSpan>): Int32
+    func LoadAsync(count: UInt32, operation: CPointer<CPointer<Unit>>): Int32
+    func DetachBuffer(buffer: CPointer<CPointer<Unit>>): Int32
+    func DetachStream(stream: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IDataReaderFactory (synthetic:Windows_Storage_Streams_IDataReaderFactory)
+@When[Windows_Storage_Streams == "on"]
+@Interface["d7527847-57da-4e15-914c-06806699a098", "Windows.Storage.Streams.IDataReaderFactory", "CreateDataReader.dataReader=Com"]
+public interface IDataReaderFactory <: IInspectable {
+    func CreateDataReader(inputStream: CPointer<Unit>, dataReader: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IDataReaderStatics (synthetic:Windows_Storage_Streams_IDataReaderStatics)
+@When[Windows_Storage_Streams == "on"]
+@Interface["11fcbfc8-f93a-471b-b121-f379e349313c", "Windows.Storage.Streams.IDataReaderStatics", "FromBuffer.dataReader=Com"]
+public interface IDataReaderStatics <: IInspectable {
+    func FromBuffer(buffer: CPointer<Unit>, dataReader: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IDataWriter (synthetic:Windows_Storage_Streams_IDataWriter)
+@When[Windows_Storage_Streams == "on"]
+@Interface["64b89265-d341-4922-b38a-dd4af8808c4e", "Windows.Storage.Streams.IDataWriter", "StoreAsync.operation=Com;FlushAsync.operation=Com;DetachBuffer.buffer=Com;DetachStream.outputStream=Com"]
+public interface IDataWriter <: IInspectable {
+    func UnstoredBufferLength(value: CPointer<UInt32>): Int32
+    func UnicodeEncoding(value: CPointer<Int32>): Int32
+    func SetUnicodeEncoding(value: Int32): Int32
+    func ByteOrder(value: CPointer<Int32>): Int32
+    func SetByteOrder(value: Int32): Int32
+    func WriteByte(value: UInt8): Int32
+    func WriteBytes(valueSize: UInt32, value: CPointer<UInt8>): Int32
+    func WriteBuffer(buffer: CPointer<Unit>): Int32
+    func WriteBufferRange(buffer: CPointer<Unit>, start: UInt32, count: UInt32): Int32
+    func WriteBoolean(value: Bool): Int32
+    func WriteGuid(value: GUID): Int32
+    func WriteInt16(value: Int16): Int32
+    func WriteInt32(value: Int32): Int32
+    func WriteInt64(value: Int64): Int32
+    func WriteUInt16(value: UInt16): Int32
+    func WriteUInt32(value: UInt32): Int32
+    func WriteUInt64(value: UInt64): Int32
+    func WriteSingle(value: Float32): Int32
+    func WriteDouble(value: Float64): Int32
+    func WriteDateTime(value: Windows_Foundation.DateTime): Int32
+    func WriteTimeSpan(value: Windows_Foundation.TimeSpan): Int32
+    func WriteString(value: CPointer<Unit>, codeUnitCount: CPointer<UInt32>): Int32
+    func MeasureString(value: CPointer<Unit>, codeUnitCount: CPointer<UInt32>): Int32
+    func StoreAsync(operation: CPointer<CPointer<Unit>>): Int32
+    func FlushAsync(operation: CPointer<CPointer<Unit>>): Int32
+    func DetachBuffer(buffer: CPointer<CPointer<Unit>>): Int32
+    func DetachStream(outputStream: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IDataWriterFactory (synthetic:Windows_Storage_Streams_IDataWriterFactory)
+@When[Windows_Storage_Streams == "on"]
+@Interface["338c67c2-8b84-4c2b-9c50-7b8767847a1f", "Windows.Storage.Streams.IDataWriterFactory", "CreateDataWriter.dataWriter=Com"]
+public interface IDataWriterFactory <: IInspectable {
+    func CreateDataWriter(outputStream: CPointer<Unit>, dataWriter: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IFileRandomAccessStreamStatics (synthetic:Windows_Storage_Streams_IFileRandomAccessStreamStatics)
+@When[Windows_Storage_Streams == "on"]
+@Interface["73550107-3b57-4b5d-8345-554d2fc621f0", "Windows.Storage.Streams.IFileRandomAccessStreamStatics", "OpenAsync.operation=Com;OpenWithOptionsAsync.operation=Com;OpenTransactedWriteAsync.operation=Com;OpenTransactedWriteWithOptionsAsync.operation=Com;OpenForUserAsync.operation=Com;OpenForUserWithOptionsAsync.operation=Com;OpenTransactedWriteForUserAsync.operation=Com;OpenTransactedWriteForUserWithOptionsAsync.operation=Com"]
+public interface IFileRandomAccessStreamStatics <: IInspectable {
+    func OpenAsync(filePath: CPointer<Unit>, accessMode: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func OpenWithOptionsAsync(filePath: CPointer<Unit>, accessMode: Int32, sharingOptions: UInt32, openDisposition: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func OpenTransactedWriteAsync(filePath: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func OpenTransactedWriteWithOptionsAsync(filePath: CPointer<Unit>, openOptions: UInt32, openDisposition: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func OpenForUserAsync(user: CPointer<Unit>, filePath: CPointer<Unit>, accessMode: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func OpenForUserWithOptionsAsync(user: CPointer<Unit>, filePath: CPointer<Unit>, accessMode: Int32, sharingOptions: UInt32, openDisposition: Int32, operation: CPointer<CPointer<Unit>>): Int32
+    func OpenTransactedWriteForUserAsync(user: CPointer<Unit>, filePath: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func OpenTransactedWriteForUserWithOptionsAsync(user: CPointer<Unit>, filePath: CPointer<Unit>, openOptions: UInt32, openDisposition: Int32, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IInputStream (synthetic:Windows_Storage_Streams_IInputStream)
@@ -48,6 +1943,14 @@ public interface IInputStreamReference <: IInspectable {
 public interface IOutputStream <: IInspectable {
     func WriteAsync(buffer: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
     func FlushAsync(operation: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Storage.Streams.IPropertySetSerializer (synthetic:Windows_Storage_Streams_IPropertySetSerializer)
+@When[Windows_Storage_Streams == "on"]
+@Interface["6e8ebf1c-ef3d-4376-b20e-5be638aeac77", "Windows.Storage.Streams.IPropertySetSerializer", "Serialize.result=Com"]
+public interface IPropertySetSerializer <: IInspectable {
+    func Serialize(propertySet: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func Deserialize(propertySet: CPointer<Unit>, buffer: CPointer<Unit>): Int32
 }
 
 // Windows.Storage.Streams.IRandomAccessStream (synthetic:Windows_Storage_Streams_IRandomAccessStream)
@@ -81,20 +1984,241 @@ public interface IRandomAccessStreamReferenceStatics <: IInspectable {
     func CreateFromStream(stream: CPointer<Unit>, streamReference: CPointer<CPointer<Unit>>): Int32
 }
 
+// Windows.Storage.Streams.IRandomAccessStreamStatics (synthetic:Windows_Storage_Streams_IRandomAccessStreamStatics)
+@When[Windows_Storage_Streams == "on"]
+@Interface["524cedcf-6e29-4ce5-9573-6b753db66c3a", "Windows.Storage.Streams.IRandomAccessStreamStatics", "CopyAsync.operation=Com;CopySizeAsync.operation=Com;CopyAndCloseAsync.operation=Com"]
+public interface IRandomAccessStreamStatics <: IInspectable {
+    func CopyAsync(source: CPointer<Unit>, destination: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+    func CopySizeAsync(source: CPointer<Unit>, destination: CPointer<Unit>, bytesToCopy: UInt64, operation: CPointer<CPointer<Unit>>): Int32
+    func CopyAndCloseAsync(source: CPointer<Unit>, destination: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
+}
+
 // Windows.Storage.Streams.IRandomAccessStreamWithContentType (synthetic:Windows_Storage_Streams_IRandomAccessStreamWithContentType)
 @When[Windows_Storage_Streams == "on"]
 @Interface["cc254827-4b3d-438f-9232-10c76bc7e038", "Windows.Storage.Streams.IRandomAccessStreamWithContentType"]
 public interface IRandomAccessStreamWithContentType <: IInspectable {
 }
 
+// Windows.Storage.Streams.InMemoryRandomAccessStream (synthetic:Windows_Storage_Streams_InMemoryRandomAccessStream)
+@When[Windows_Storage_Streams == "on"]
+public class InMemoryRandomAccessStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<InMemoryRandomAccessStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): InMemoryRandomAccessStream {
+        InMemoryRandomAccessStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): InMemoryRandomAccessStream {
+        InMemoryRandomAccessStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRandomAccessStream.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<InMemoryRandomAccessStream> {
+        let ancestors = [IRandomAccessStream.iid(), Windows_Foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<InMemoryRandomAccessStream>("InMemoryRandomAccessStream", IRandomAccessStream.iid(), ancestors, { raw => InMemoryRandomAccessStream.fromAbiTake(raw) }, { raw => InMemoryRandomAccessStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRandomAccessStream {
+        match (unsafe { query(IRandomAccessStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRandomAccessStream(): IRandomAccessStream {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInputStream(): IInputStream {
+        match (unsafe { query<IInputStream>(IInputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIOutputStream(): IOutputStream {
+        match (unsafe { query<IOutputStream>(IOutputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop CanRead: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanRead(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop CanWrite: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanWrite(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Position: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Size: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Size(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func GetInputStreamAt(position: UInt64): IInputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetInputStreamAt(position, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IInputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IInputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetOutputStreamAt(position: UInt64): IOutputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetOutputStreamAt(position, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IOutputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IOutputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Seek(position: UInt64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Seek(position) }
+        }
+        hr__.check()
+    }
+
+    public func CloneStream(): IRandomAccessStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CloneStream(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IRandomAccessStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IRandomAccessStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func new(): InMemoryRandomAccessStream {
+        var created__: Option<InMemoryRandomAccessStream> = Option<InMemoryRandomAccessStream>.None
+        try (factory__ = windows_core.factory<InMemoryRandomAccessStream, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<InMemoryRandomAccessStream>(InMemoryRandomAccessStream.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce InMemoryRandomAccessStream")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.InMemoryRandomAccessStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.InMemoryRandomAccessStream;{" + IRandomAccessStream.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.InMemoryRandomAccessStream", InMemoryRandomAccessStream.signature(), IRandomAccessStream.iid())
+    }
+
+    public static func intoWinrtHandle(value: InMemoryRandomAccessStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): InMemoryRandomAccessStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        InMemoryRandomAccessStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): InMemoryRandomAccessStream {
+        InMemoryRandomAccessStream.viewOf(raw)
+    }
+}
+
 // Windows.Storage.Streams.InputStreamOptions (synthetic:Windows_Storage_Streams_InputStreamOptions)
 @When[Windows_Storage_Streams == "on"]
 public struct InputStreamOptions {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: InputStreamOptions): Bool {
@@ -114,11 +2238,498 @@ public struct InputStreamOptions {
     }
 }
 @When[Windows_Storage_Streams == "on"]
-public let InputStreamOptions_None = InputStreamOptions(0)
+public const InputStreamOptions_None = InputStreamOptions(0)
 @When[Windows_Storage_Streams == "on"]
-public let InputStreamOptions_Partial = InputStreamOptions(1)
+public const InputStreamOptions_Partial = InputStreamOptions(1)
 @When[Windows_Storage_Streams == "on"]
-public let InputStreamOptions_ReadAhead = InputStreamOptions(2)
+public const InputStreamOptions_ReadAhead = InputStreamOptions(2)
+
+// Windows.Storage.Streams.InputStreamOverStream (synthetic:Windows_Storage_Streams_InputStreamOverStream)
+@When[Windows_Storage_Streams == "on"]
+public class InputStreamOverStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<InputStreamOverStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): InputStreamOverStream {
+        InputStreamOverStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): InputStreamOverStream {
+        InputStreamOverStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IInputStream.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<InputStreamOverStream> {
+        let ancestors = [IInputStream.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<InputStreamOverStream>("InputStreamOverStream", IInputStream.iid(), ancestors, { raw => InputStreamOverStream.fromAbiTake(raw) }, { raw => InputStreamOverStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IInputStream {
+        match (unsafe { query(IInputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIInputStream(): IInputStream {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func ReadAsync(buffer: IBuffer, count: UInt32, options: InputStreamOptions): Windows_Foundation.IAsyncOperationWithProgress<IBuffer, UInt32> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(buffer)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ReadAsync(__argBorrow0.asRaw(), count, options.value, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperationWithProgress<IBuffer, UInt32>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.InputStreamOverStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.InputStreamOverStream;{" + IInputStream.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.InputStreamOverStream", InputStreamOverStream.signature(), IInputStream.iid())
+    }
+
+    public static func intoWinrtHandle(value: InputStreamOverStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): InputStreamOverStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        InputStreamOverStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): InputStreamOverStream {
+        InputStreamOverStream.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.OutputStreamOverStream (synthetic:Windows_Storage_Streams_OutputStreamOverStream)
+@When[Windows_Storage_Streams == "on"]
+public class OutputStreamOverStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<OutputStreamOverStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): OutputStreamOverStream {
+        OutputStreamOverStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): OutputStreamOverStream {
+        OutputStreamOverStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IOutputStream.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<OutputStreamOverStream> {
+        let ancestors = [IOutputStream.iid(), Windows_Foundation.IClosable.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<OutputStreamOverStream>("OutputStreamOverStream", IOutputStream.iid(), ancestors, { raw => OutputStreamOverStream.fromAbiTake(raw) }, { raw => OutputStreamOverStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IOutputStream {
+        match (unsafe { query(IOutputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIOutputStream(): IOutputStream {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func WriteAsync(buffer: IBuffer): Windows_Foundation.IAsyncOperationWithProgress<UInt32, UInt32> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IBuffer>(buffer)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.WriteAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperationWithProgress<UInt32, UInt32>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperationWithProgress<UInt32, UInt32>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FlushAsync(): Windows_Foundation.IAsyncOperation<Bool> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.FlushAsync(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Bool>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Bool>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.OutputStreamOverStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.OutputStreamOverStream;{" + IOutputStream.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.OutputStreamOverStream", OutputStreamOverStream.signature(), IOutputStream.iid())
+    }
+
+    public static func intoWinrtHandle(value: OutputStreamOverStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): OutputStreamOverStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        OutputStreamOverStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): OutputStreamOverStream {
+        OutputStreamOverStream.viewOf(raw)
+    }
+}
+
+// Windows.Storage.Streams.RandomAccessStream (synthetic:Windows_Storage_Streams_RandomAccessStream)
+@When[Windows_Storage_Streams == "on"]
+public struct RandomAccessStream <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func CopyAsync(source: IInputStream, destination: IOutputStream): Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IInputStream>(source)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<IOutputStream>(destination)) {
+                try (factory__ = windows_core.factory<RandomAccessStream, IRandomAccessStreamStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CopyAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CopySizeAsync(source: IInputStream, destination: IOutputStream, bytesToCopy: UInt64): Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IInputStream>(source)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<IOutputStream>(destination)) {
+                try (factory__ = windows_core.factory<RandomAccessStream, IRandomAccessStreamStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CopySizeAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), bytesToCopy, CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CopyAndCloseAsync(source: IInputStream, destination: IOutputStream): Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IInputStream>(source)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<IOutputStream>(destination)) {
+                try (factory__ = windows_core.factory<RandomAccessStream, IRandomAccessStreamStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.CopyAndCloseAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperationWithProgress<UInt64, UInt64>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.RandomAccessStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.RandomAccessStream)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.RandomAccessStream", RandomAccessStream.signature())
+    }
+}
+
+// Windows.Storage.Streams.RandomAccessStreamOverStream (synthetic:Windows_Storage_Streams_RandomAccessStreamOverStream)
+@When[Windows_Storage_Streams == "on"]
+public class RandomAccessStreamOverStream <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<RandomAccessStreamOverStream> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): RandomAccessStreamOverStream {
+        RandomAccessStreamOverStream(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): RandomAccessStreamOverStream {
+        RandomAccessStreamOverStream(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IRandomAccessStream.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<RandomAccessStreamOverStream> {
+        let ancestors = [IRandomAccessStream.iid(), Windows_Foundation.IClosable.iid(), IInputStream.iid(), IOutputStream.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<RandomAccessStreamOverStream>("RandomAccessStreamOverStream", IRandomAccessStream.iid(), ancestors, { raw => RandomAccessStreamOverStream.fromAbiTake(raw) }, { raw => RandomAccessStreamOverStream.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IRandomAccessStream {
+        match (unsafe { query(IRandomAccessStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRandomAccessStream(): IRandomAccessStream {
+        defaultInterface()
+    }
+
+    public func asIClosable(): Windows_Foundation.IClosable {
+        match (unsafe { query<Windows_Foundation.IClosable>(Windows_Foundation.IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInputStream(): IInputStream {
+        match (unsafe { query<IInputStream>(IInputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIOutputStream(): IOutputStream {
+        match (unsafe { query<IOutputStream>(IOutputStream.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop CanRead: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanRead(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop CanWrite: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CanWrite(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Position: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Size: UInt64 {
+        get() {
+            var result__ = 0u64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Size(CPointer<UInt64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func GetInputStreamAt(position: UInt64): IInputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetInputStreamAt(position, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IInputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IInputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetOutputStreamAt(position: UInt64): IOutputStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetOutputStreamAt(position, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IOutputStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IOutputStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Seek(position: UInt64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Seek(position) }
+        }
+        hr__.check()
+    }
+
+    public func CloneStream(): IRandomAccessStream {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CloneStream(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IRandomAccessStream>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IRandomAccessStream.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Storage.Streams.RandomAccessStreamOverStream"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Storage.Streams.RandomAccessStreamOverStream;{" + IRandomAccessStream.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Storage.Streams.RandomAccessStreamOverStream", RandomAccessStreamOverStream.signature(), IRandomAccessStream.iid())
+    }
+
+    public static func intoWinrtHandle(value: RandomAccessStreamOverStream): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): RandomAccessStreamOverStream {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        RandomAccessStreamOverStream.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): RandomAccessStreamOverStream {
+        RandomAccessStreamOverStream.viewOf(raw)
+    }
+}
 
 // Windows.Storage.Streams.RandomAccessStreamReference (synthetic:Windows_Storage_Streams_RandomAccessStreamReference)
 @When[Windows_Storage_Streams == "on"]
@@ -256,3 +2867,21 @@ public class RandomAccessStreamReference <: windows_interface.InterfaceWrapperBa
         RandomAccessStreamReference.viewOf(raw)
     }
 }
+
+// Windows.Storage.Streams.UnicodeEncoding (synthetic:Windows_Storage_Streams_UnicodeEncoding)
+@When[Windows_Storage_Streams == "on"]
+public struct UnicodeEncoding {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Storage_Streams == "on"]
+public const UnicodeEncoding_Utf8 = UnicodeEncoding(0)
+@When[Windows_Storage_Streams == "on"]
+public const UnicodeEncoding_Utf16LE = UnicodeEncoding(1)
+@When[Windows_Storage_Streams == "on"]
+public const UnicodeEncoding_Utf16BE = UnicodeEncoding(2)

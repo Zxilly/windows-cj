@@ -9,11 +9,138 @@ import windows_interface.macros.Interface
 
 @When[Microsoft_UI_Xaml == "on"]
 import windows_sys.Microsoft.UI.Xaml as Microsoft_UI_Xaml
+@When[Microsoft_UI_Xaml_Automation == "on"]
+import windows_sys.Microsoft.UI.Xaml.Automation as Microsoft_UI_Xaml_Automation
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
+import windows_sys.Microsoft.UI.Xaml.Automation.Peers as Microsoft_UI_Xaml_Automation_Peers
+@When[Microsoft_UI_Xaml_Automation_Text == "on"]
+import windows_sys.Microsoft.UI.Xaml.Automation.Text as Microsoft_UI_Xaml_Automation_Text
+@When[Windows_Foundation == "on"]
+import windows_sys.Foundation as Windows_Foundation
+@When[Windows_UI == "on"]
+import windows_sys.UI as Windows_UI
+
+// Microsoft.UI.Xaml.Automation.Provider.IAnnotationProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IAnnotationProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["546ab18e-986d-5deb-8f2a-2d9303a43006", "Microsoft.UI.Xaml.Automation.Provider.IAnnotationProvider", "AnnotationTypeName.value=HString;Author.value=HString;DateTime.value=HString;Target.value=Com"]
+public interface IAnnotationProvider <: IInspectable {
+    func AnnotationTypeId(value: CPointer<Int32>): Int32
+    func AnnotationTypeName(value: CPointer<CPointer<Unit>>): Int32
+    func Author(value: CPointer<CPointer<Unit>>): Int32
+    func DateTime(value: CPointer<CPointer<Unit>>): Int32
+    func Target(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ICustomNavigationProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ICustomNavigationProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["cad51322-faa9-5a2b-90f0-b762c46178b3", "Microsoft.UI.Xaml.Automation.Provider.ICustomNavigationProvider", "NavigateCustom.result=Com"]
+public interface ICustomNavigationProvider <: IInspectable {
+    func NavigateCustom(direction: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IDockProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IDockProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["9882b971-70ea-5c6d-a818-7a7ab68c6f3b", "Microsoft.UI.Xaml.Automation.Provider.IDockProvider"]
+public interface IDockProvider <: IInspectable {
+    func DockPosition(value: CPointer<Int32>): Int32
+    func SetDockPosition(dockPosition: Int32): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IDragProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IDragProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["c60bb643-a356-5132-a258-ffba6c7480f2", "Microsoft.UI.Xaml.Automation.Provider.IDragProvider", "DropEffect.value=HString;DropEffects.value=Array<windows_core.HString>;GetGrabbedItems.result=Array<IRawElementProviderSimple>"]
+public interface IDragProvider <: IInspectable {
+    func IsGrabbed(value: CPointer<Bool>): Int32
+    func DropEffect(value: CPointer<CPointer<Unit>>): Int32
+    func DropEffects(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func GetGrabbedItems(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IDropTargetProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IDropTargetProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["9b2a9f3d-bbb1-510d-99e8-0e0ae14a6e3b", "Microsoft.UI.Xaml.Automation.Provider.IDropTargetProvider", "DropEffect.value=HString;DropEffects.value=Array<windows_core.HString>"]
+public interface IDropTargetProvider <: IInspectable {
+    func DropEffect(value: CPointer<CPointer<Unit>>): Int32
+    func DropEffects(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IExpandCollapseProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IExpandCollapseProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["6cef349c-b181-5d0b-b297-c3b0166120c3", "Microsoft.UI.Xaml.Automation.Provider.IExpandCollapseProvider"]
+public interface IExpandCollapseProvider <: IInspectable {
+    func ExpandCollapseState(value: CPointer<Int32>): Int32
+    func Collapse(): Int32
+    func Expand(): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IGridItemProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IGridItemProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["d2557a0e-6909-5170-a680-60728df339b4", "Microsoft.UI.Xaml.Automation.Provider.IGridItemProvider", "ContainingGrid.value=Com"]
+public interface IGridItemProvider <: IInspectable {
+    func Column(value: CPointer<Int32>): Int32
+    func ColumnSpan(value: CPointer<Int32>): Int32
+    func ContainingGrid(value: CPointer<CPointer<Unit>>): Int32
+    func Row(value: CPointer<Int32>): Int32
+    func RowSpan(value: CPointer<Int32>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IGridProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IGridProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["50992d5e-d225-56e9-a25a-78c372e81955", "Microsoft.UI.Xaml.Automation.Provider.IGridProvider", "GetItem.result=Com"]
+public interface IGridProvider <: IInspectable {
+    func ColumnCount(value: CPointer<Int32>): Int32
+    func RowCount(value: CPointer<Int32>): Int32
+    func GetItem(row: Int32, column: Int32, result: CPointer<CPointer<Unit>>): Int32
+}
 
 // Microsoft.UI.Xaml.Automation.Provider.IIRawElementProviderSimple (synthetic:Microsoft_UI_Xaml_Automation_Provider_IIRawElementProviderSimple)
 @When[Microsoft_UI_Xaml_Automation_Provider == "on"]
 @Interface["f90bc239-ade2-55c9-a838-a3b0579763c5", "Microsoft.UI.Xaml.Automation.Provider.IIRawElementProviderSimple"]
 public interface IIRawElementProviderSimple <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IInvokeProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IInvokeProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["02481105-3378-544d-b4e1-a1b368afbc02", "Microsoft.UI.Xaml.Automation.Provider.IInvokeProvider"]
+public interface IInvokeProvider <: IInspectable {
+    func Invoke(): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IItemContainerProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IItemContainerProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["ad297363-694e-5885-997d-a2d6dff415a7", "Microsoft.UI.Xaml.Automation.Provider.IItemContainerProvider", "FindItemByProperty.result=Com"]
+public interface IItemContainerProvider <: IInspectable {
+    func FindItemByProperty(startAfter: CPointer<Unit>, automationProperty: CPointer<Unit>, value: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IMultipleViewProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IMultipleViewProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["60be5484-3d8f-51fd-beab-423422ee1e03", "Microsoft.UI.Xaml.Automation.Provider.IMultipleViewProvider", "GetSupportedViews.result=Array<Int32>;GetViewName.result=HString"]
+public interface IMultipleViewProvider <: IInspectable {
+    func CurrentView(value: CPointer<Int32>): Int32
+    func GetSupportedViews(resultSize: CPointer<UInt32>, result: CPointer<CPointer<Int32>>): Int32
+    func GetViewName(viewId: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func SetCurrentView(viewId: Int32): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IObjectModelProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IObjectModelProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["92953ed0-4bd8-5624-8e3d-78d45fde9cf2", "Microsoft.UI.Xaml.Automation.Provider.IObjectModelProvider", "GetUnderlyingObjectModel.result=Com"]
+public interface IObjectModelProvider <: IInspectable {
+    func GetUnderlyingObjectModel(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IRangeValueProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IRangeValueProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["729ae414-1e8f-5020-82bb-bb574d145fd8", "Microsoft.UI.Xaml.Automation.Provider.IRangeValueProvider"]
+public interface IRangeValueProvider <: IInspectable {
+    func IsReadOnly(value: CPointer<Bool>): Int32
+    func LargeChange(value: CPointer<Float64>): Int32
+    func Maximum(value: CPointer<Float64>): Int32
+    func Minimum(value: CPointer<Float64>): Int32
+    func SmallChange(value: CPointer<Float64>): Int32
+    func Value(value: CPointer<Float64>): Int32
+    func SetValue(value: Float64): Int32
 }
 
 // Microsoft.UI.Xaml.Automation.Provider.IRawElementProviderSimple (synthetic:Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple)
@@ -96,4 +223,229 @@ public class IRawElementProviderSimple <: windows_interface.InterfaceWrapperBase
     public static func viewWinrtHandle(raw: CPointer<Unit>): IRawElementProviderSimple {
         IRawElementProviderSimple.viewOf(raw)
     }
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IScrollItemProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IScrollItemProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["8a6fb8eb-e5f1-58eb-8e72-8b95f236fc47", "Microsoft.UI.Xaml.Automation.Provider.IScrollItemProvider"]
+public interface IScrollItemProvider <: IInspectable {
+    func ScrollIntoView(): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IScrollProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IScrollProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["7e2e5af3-ff50-5365-bcfe-ef424b2fd590", "Microsoft.UI.Xaml.Automation.Provider.IScrollProvider"]
+public interface IScrollProvider <: IInspectable {
+    func HorizontallyScrollable(value: CPointer<Bool>): Int32
+    func HorizontalScrollPercent(value: CPointer<Float64>): Int32
+    func HorizontalViewSize(value: CPointer<Float64>): Int32
+    func VerticallyScrollable(value: CPointer<Bool>): Int32
+    func VerticalScrollPercent(value: CPointer<Float64>): Int32
+    func VerticalViewSize(value: CPointer<Float64>): Int32
+    func Scroll(horizontalAmount: Int32, verticalAmount: Int32): Int32
+    func SetScrollPercent(horizontalPercent: Float64, verticalPercent: Float64): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ISelectionItemProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ISelectionItemProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["c9dfdd81-d4ac-5d31-be7f-24fab16060e4", "Microsoft.UI.Xaml.Automation.Provider.ISelectionItemProvider", "SelectionContainer.value=Com"]
+public interface ISelectionItemProvider <: IInspectable {
+    func IsSelected(value: CPointer<Bool>): Int32
+    func SelectionContainer(value: CPointer<CPointer<Unit>>): Int32
+    func AddToSelection(): Int32
+    func RemoveFromSelection(): Int32
+    func Select(): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ISelectionProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ISelectionProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["80d56d4e-0052-541f-9411-9d1778b3bfca", "Microsoft.UI.Xaml.Automation.Provider.ISelectionProvider", "GetSelection.result=Array<IRawElementProviderSimple>"]
+public interface ISelectionProvider <: IInspectable {
+    func CanSelectMultiple(value: CPointer<Bool>): Int32
+    func IsSelectionRequired(value: CPointer<Bool>): Int32
+    func GetSelection(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ISpreadsheetItemProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ISpreadsheetItemProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["51c1ce89-b21f-592c-8768-0accdefd5738", "Microsoft.UI.Xaml.Automation.Provider.ISpreadsheetItemProvider", "Formula.value=HString;GetAnnotationObjects.result=Array<IRawElementProviderSimple>;GetAnnotationTypes.result=Array<Microsoft_UI_Xaml_Automation.AnnotationType>"]
+public interface ISpreadsheetItemProvider <: IInspectable {
+    func Formula(value: CPointer<CPointer<Unit>>): Int32
+    func GetAnnotationObjects(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func GetAnnotationTypes(resultSize: CPointer<UInt32>, result: CPointer<CPointer<Int32>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ISpreadsheetProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ISpreadsheetProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["1ff41bac-d9e3-5e48-b5f8-9eab0fb2d9d8", "Microsoft.UI.Xaml.Automation.Provider.ISpreadsheetProvider", "GetItemByName.result=Com"]
+public interface ISpreadsheetProvider <: IInspectable {
+    func GetItemByName(name: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IStylesProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IStylesProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["d8895839-0048-54de-9c1f-152de6665e80", "Microsoft.UI.Xaml.Automation.Provider.IStylesProvider", "ExtendedProperties.value=HString;FillPatternStyle.value=HString;Shape.value=HString;StyleName.value=HString"]
+public interface IStylesProvider <: IInspectable {
+    func ExtendedProperties(value: CPointer<CPointer<Unit>>): Int32
+    func FillColor(value: CPointer<Windows_UI.Color>): Int32
+    func FillPatternColor(value: CPointer<Windows_UI.Color>): Int32
+    func FillPatternStyle(value: CPointer<CPointer<Unit>>): Int32
+    func Shape(value: CPointer<CPointer<Unit>>): Int32
+    func StyleId(value: CPointer<Int32>): Int32
+    func StyleName(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ISynchronizedInputProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ISynchronizedInputProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["c5615613-936d-5289-a190-e82057e0ff5a", "Microsoft.UI.Xaml.Automation.Provider.ISynchronizedInputProvider"]
+public interface ISynchronizedInputProvider <: IInspectable {
+    func Cancel(): Int32
+    func StartListening(inputType: Int32): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITableItemProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITableItemProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["6ce6f038-54d4-5553-a4ad-03cbcf358197", "Microsoft.UI.Xaml.Automation.Provider.ITableItemProvider", "GetColumnHeaderItems.result=Array<IRawElementProviderSimple>;GetRowHeaderItems.result=Array<IRawElementProviderSimple>"]
+public interface ITableItemProvider <: IInspectable {
+    func GetColumnHeaderItems(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func GetRowHeaderItems(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITableProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITableProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["9aba6724-b22d-5db8-8abb-81f911f18af2", "Microsoft.UI.Xaml.Automation.Provider.ITableProvider", "GetColumnHeaders.result=Array<IRawElementProviderSimple>;GetRowHeaders.result=Array<IRawElementProviderSimple>"]
+public interface ITableProvider <: IInspectable {
+    func RowOrColumnMajor(value: CPointer<Int32>): Int32
+    func GetColumnHeaders(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func GetRowHeaders(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITextChildProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITextChildProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["7c72e55f-f75d-5522-aeb5-c1f82c32933b", "Microsoft.UI.Xaml.Automation.Provider.ITextChildProvider", "TextContainer.value=Com;TextRange.value=Com"]
+public interface ITextChildProvider <: IInspectable {
+    func TextContainer(value: CPointer<CPointer<Unit>>): Int32
+    func TextRange(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITextEditProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITextEditProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["7f09bbe8-bea7-5dd3-ba6b-28dbb402fad4", "Microsoft.UI.Xaml.Automation.Provider.ITextEditProvider", "GetActiveComposition.result=Com;GetConversionTarget.result=Com"]
+public interface ITextEditProvider <: IInspectable {
+    func GetActiveComposition(result: CPointer<CPointer<Unit>>): Int32
+    func GetConversionTarget(result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITextProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITextProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["37e7dce6-fe7a-56a7-a47a-9462872c67ef", "Microsoft.UI.Xaml.Automation.Provider.ITextProvider", "DocumentRange.value=Com;GetSelection.result=Array<ITextRangeProvider>;GetVisibleRanges.result=Array<ITextRangeProvider>;RangeFromChild.result=Com;RangeFromPoint.result=Com"]
+public interface ITextProvider <: IInspectable {
+    func DocumentRange(value: CPointer<CPointer<Unit>>): Int32
+    func SupportedTextSelection(value: CPointer<Int32>): Int32
+    func GetSelection(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func GetVisibleRanges(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+    func RangeFromChild(childElement: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func RangeFromPoint(screenLocation: Windows_Foundation.Point, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITextProvider2 (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITextProvider2)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["6844f012-c7e6-5763-ba04-5b6db910cd34", "Microsoft.UI.Xaml.Automation.Provider.ITextProvider2", "RangeFromAnnotation.result=Com;GetCaretRange.returnValue=Com"]
+public interface ITextProvider2 <: IInspectable {
+    func RangeFromAnnotation(annotationElement: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetCaretRange(isActive: CPointer<Bool>, returnValue: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITextRangeProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITextRangeProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["84210361-6ce2-5084-bf3b-28afa6e9851f", "Microsoft.UI.Xaml.Automation.Provider.ITextRangeProvider", "Clone.result=Com;FindAttribute.result=Com;FindText.result=Com;GetAttributeValue.result=Com;GetBoundingRectangles.returnValue=Array<Float64>;GetEnclosingElement.result=Com;GetText.result=HString;GetChildren.result=Array<IRawElementProviderSimple>"]
+public interface ITextRangeProvider <: IInspectable {
+    func Clone(result: CPointer<CPointer<Unit>>): Int32
+    func Compare(textRangeProvider: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func CompareEndpoints(endpoint: Int32, textRangeProvider: CPointer<Unit>, targetEndpoint: Int32, result: CPointer<Int32>): Int32
+    func ExpandToEnclosingUnit(unit: Int32): Int32
+    func FindAttribute(attributeId: Int32, value: CPointer<Unit>, backward: Bool, result: CPointer<CPointer<Unit>>): Int32
+    func FindText(text: CPointer<Unit>, backward: Bool, ignoreCase: Bool, result: CPointer<CPointer<Unit>>): Int32
+    func GetAttributeValue(attributeId: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func GetBoundingRectangles(returnValueSize: CPointer<UInt32>, returnValue: CPointer<CPointer<Float64>>): Int32
+    func GetEnclosingElement(result: CPointer<CPointer<Unit>>): Int32
+    func GetText(maxLength: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func Move(unit: Int32, count: Int32, result: CPointer<Int32>): Int32
+    func MoveEndpointByUnit(endpoint: Int32, unit: Int32, count: Int32, result: CPointer<Int32>): Int32
+    func MoveEndpointByRange(endpoint: Int32, textRangeProvider: CPointer<Unit>, targetEndpoint: Int32): Int32
+    func Select(): Int32
+    func AddToSelection(): Int32
+    func RemoveFromSelection(): Int32
+    func ScrollIntoView(alignToTop: Bool): Int32
+    func GetChildren(resultSize: CPointer<UInt32>, result: CPointer<CPointer<CPointer<Unit>>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITextRangeProvider2 (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITextRangeProvider2)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["34d4a80e-36bb-5362-a53b-490428a8b367", "Microsoft.UI.Xaml.Automation.Provider.ITextRangeProvider2"]
+public interface ITextRangeProvider2 <: IInspectable {
+    func ShowContextMenu(): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IToggleProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IToggleProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["021080c2-30a9-52ef-bc32-2b79847b6ba7", "Microsoft.UI.Xaml.Automation.Provider.IToggleProvider"]
+public interface IToggleProvider <: IInspectable {
+    func ToggleState(value: CPointer<Int32>): Int32
+    func Toggle(): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITransformProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITransformProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["6fd76988-8f52-5ef2-a826-9c8c4951c911", "Microsoft.UI.Xaml.Automation.Provider.ITransformProvider"]
+public interface ITransformProvider <: IInspectable {
+    func CanMove(value: CPointer<Bool>): Int32
+    func CanResize(value: CPointer<Bool>): Int32
+    func CanRotate(value: CPointer<Bool>): Int32
+    func Move(x: Float64, y: Float64): Int32
+    func Resize(width: Float64, height: Float64): Int32
+    func Rotate(degrees: Float64): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.ITransformProvider2 (synthetic:Microsoft_UI_Xaml_Automation_Provider_ITransformProvider2)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["7d91d02d-8401-5cf8-bbc4-47391a524215", "Microsoft.UI.Xaml.Automation.Provider.ITransformProvider2"]
+public interface ITransformProvider2 <: IInspectable {
+    func CanZoom(value: CPointer<Bool>): Int32
+    func ZoomLevel(value: CPointer<Float64>): Int32
+    func MaxZoom(value: CPointer<Float64>): Int32
+    func MinZoom(value: CPointer<Float64>): Int32
+    func Zoom(zoom: Float64): Int32
+    func ZoomByUnit(zoomUnit: Int32): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IValueProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IValueProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["984f11cf-4611-588e-b52e-b96a12322c71", "Microsoft.UI.Xaml.Automation.Provider.IValueProvider", "Value.value=HString"]
+public interface IValueProvider <: IInspectable {
+    func IsReadOnly(value: CPointer<Bool>): Int32
+    func Value(value: CPointer<CPointer<Unit>>): Int32
+    func SetValue(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IVirtualizedItemProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IVirtualizedItemProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["098f858a-2e63-5985-ab87-f8ebdb1c5740", "Microsoft.UI.Xaml.Automation.Provider.IVirtualizedItemProvider"]
+public interface IVirtualizedItemProvider <: IInspectable {
+    func Realize(): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.Provider.IWindowProvider (synthetic:Microsoft_UI_Xaml_Automation_Provider_IWindowProvider)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
+@Interface["83f1df99-9ddf-575e-a651-2ee657fd16e0", "Microsoft.UI.Xaml.Automation.Provider.IWindowProvider"]
+public interface IWindowProvider <: IInspectable {
+    func IsModal(value: CPointer<Bool>): Int32
+    func IsTopmost(value: CPointer<Bool>): Int32
+    func Maximizable(value: CPointer<Bool>): Int32
+    func Minimizable(value: CPointer<Bool>): Int32
+    func InteractionState(value: CPointer<Int32>): Int32
+    func VisualState(value: CPointer<Int32>): Int32
+    func Close(): Int32
+    func SetVisualState(state: Int32): Int32
+    func WaitForInputIdle(milliseconds: Int32, result: CPointer<Bool>): Int32
 }

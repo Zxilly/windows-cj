@@ -11,6 +11,1442 @@ import windows_sys.Win32.Foundation as Windows_Win32_Foundation
 import windows_sys.Win32.Graphics.Dxgi as Windows_Win32_Graphics_Dxgi
 @When[Windows_Win32_System_Com == "on"]
 import windows_sys.Win32.System.Com as Windows_Win32_System_Com
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
+import windows_sys.Win32.UI.WindowsAndMessaging as Windows_Win32_UI_WindowsAndMessaging
+
+// Windows.Win32.System.WinRT.Xaml.Apis (synthetic:Windows_Win32_System_WinRT_Xaml_Apis)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public struct Apis {
+    public init() {}
+    public static const E_SURFACE_CONTENTS_LOST: UInt32 = 2150301728
+}
+
+// Windows.Win32.System.WinRT.Xaml.IDesktopWindowXamlSourceNative (synthetic:Windows_Win32_System_WinRT_Xaml_IDesktopWindowXamlSourceNative)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IDesktopWindowXamlSourceNative <: Resource & windows_core.HandleWinrtType<IDesktopWindowXamlSourceNative> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDesktopWindowXamlSourceNative.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IDesktopWindowXamlSourceNative"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1019015615u32, 12150u16, 20124u16, 150u8, 171u8, 232u8, 75u8, 55u8, 151u8, 37u8, 84u8)
+    }
+
+    public static func intoWinrtHandle(value: IDesktopWindowXamlSourceNative): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDesktopWindowXamlSourceNative): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDesktopWindowXamlSourceNative.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDesktopWindowXamlSourceNative {
+        IDesktopWindowXamlSourceNative(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDesktopWindowXamlSourceNative {
+        IDesktopWindowXamlSourceNative(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDesktopWindowXamlSourceNative): IDesktopWindowXamlSourceNative {
+        let raw = IDesktopWindowXamlSourceNative.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDesktopWindowXamlSourceNative(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IDesktopWindowXamlSourceNativeVtbl (synthetic:IDesktopWindowXamlSourceNativeVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IDesktopWindowXamlSourceNativeVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var AttachToWindow: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND) -> Int32>(CPointer<Unit>())
+    public var WindowHandle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IDesktopWindowXamlSourceNative2 (synthetic:Windows_Win32_System_WinRT_Xaml_IDesktopWindowXamlSourceNative2)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IDesktopWindowXamlSourceNative2 <: Resource & windows_core.HandleWinrtType<IDesktopWindowXamlSourceNative2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDesktopWindowXamlSourceNative2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IDesktopWindowXamlSourceNative2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3822901447u32, 12375u16, 18066u16, 153u8, 195u8, 123u8, 119u8, 32u8, 175u8, 218u8, 49u8)
+    }
+
+    public static func intoWinrtHandle(value: IDesktopWindowXamlSourceNative2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDesktopWindowXamlSourceNative2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDesktopWindowXamlSourceNative2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDesktopWindowXamlSourceNative2 {
+        IDesktopWindowXamlSourceNative2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDesktopWindowXamlSourceNative2 {
+        IDesktopWindowXamlSourceNative2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDesktopWindowXamlSourceNative2): IDesktopWindowXamlSourceNative2 {
+        let raw = IDesktopWindowXamlSourceNative2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDesktopWindowXamlSourceNative2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IDesktopWindowXamlSourceNative2Vtbl (synthetic:IDesktopWindowXamlSourceNative2Vtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IDesktopWindowXamlSourceNative2Vtbl {
+    public var base_: IDesktopWindowXamlSourceNativeVtbl = IDesktopWindowXamlSourceNativeVtbl()
+    public var PreTranslateMessage: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IFindReferenceTargetsCallback (synthetic:Windows_Win32_System_WinRT_Xaml_IFindReferenceTargetsCallback)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IFindReferenceTargetsCallback <: Resource & windows_core.HandleWinrtType<IFindReferenceTargetsCallback> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IFindReferenceTargetsCallback.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IFindReferenceTargetsCallback"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(78858348u32, 18055u16, 16937u16, 141u8, 20u8, 80u8, 90u8, 181u8, 132u8, 221u8, 136u8)
+    }
+
+    public static func intoWinrtHandle(value: IFindReferenceTargetsCallback): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IFindReferenceTargetsCallback): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IFindReferenceTargetsCallback.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IFindReferenceTargetsCallback {
+        IFindReferenceTargetsCallback(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IFindReferenceTargetsCallback {
+        IFindReferenceTargetsCallback(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IFindReferenceTargetsCallback): IFindReferenceTargetsCallback {
+        let raw = IFindReferenceTargetsCallback.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IFindReferenceTargetsCallback(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IFindReferenceTargetsCallbackVtbl (synthetic:IFindReferenceTargetsCallbackVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IFindReferenceTargetsCallbackVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var FoundTrackerTarget: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTracker (synthetic:Windows_Win32_System_WinRT_Xaml_IReferenceTracker)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IReferenceTracker <: Resource & windows_core.HandleWinrtType<IReferenceTracker> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IReferenceTracker.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IReferenceTracker"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(299086138u32, 6158u16, 18313u16, 168u8, 190u8, 119u8, 18u8, 136u8, 40u8, 147u8, 230u8)
+    }
+
+    public static func intoWinrtHandle(value: IReferenceTracker): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IReferenceTracker): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IReferenceTracker.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IReferenceTracker {
+        IReferenceTracker(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IReferenceTracker {
+        IReferenceTracker(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IReferenceTracker): IReferenceTracker {
+        let raw = IReferenceTracker.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IReferenceTracker(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerVtbl (synthetic:IReferenceTrackerVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IReferenceTrackerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var ConnectFromTrackerSource: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DisconnectFromTrackerSource: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var FindTrackerTargets: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetReferenceTrackerManager: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var AddRefFromTrackerSource: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ReleaseFromTrackerSource: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var PegFromTrackerSource: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerExtension (synthetic:Windows_Win32_System_WinRT_Xaml_IReferenceTrackerExtension)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IReferenceTrackerExtension <: Resource & windows_core.HandleWinrtType<IReferenceTrackerExtension> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IReferenceTrackerExtension.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IReferenceTrackerExtension"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1317633194u32, 22997u16, 17939u16, 143u8, 140u8, 247u8, 235u8, 209u8, 243u8, 153u8, 176u8)
+    }
+
+    public static func intoWinrtHandle(value: IReferenceTrackerExtension): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IReferenceTrackerExtension): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IReferenceTrackerExtension.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerExtension {
+        IReferenceTrackerExtension(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerExtension {
+        IReferenceTrackerExtension(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IReferenceTrackerExtension): IReferenceTrackerExtension {
+        let raw = IReferenceTrackerExtension.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IReferenceTrackerExtension(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerExtensionVtbl (synthetic:IReferenceTrackerExtensionVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IReferenceTrackerExtensionVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerHost (synthetic:Windows_Win32_System_WinRT_Xaml_IReferenceTrackerHost)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IReferenceTrackerHost <: Resource & windows_core.HandleWinrtType<IReferenceTrackerHost> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IReferenceTrackerHost.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IReferenceTrackerHost"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(698817642u32, 15426u16, 17430u16, 163u8, 157u8, 226u8, 130u8, 90u8, 7u8, 167u8, 115u8)
+    }
+
+    public static func intoWinrtHandle(value: IReferenceTrackerHost): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IReferenceTrackerHost): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IReferenceTrackerHost.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerHost {
+        IReferenceTrackerHost(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerHost {
+        IReferenceTrackerHost(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IReferenceTrackerHost): IReferenceTrackerHost {
+        let raw = IReferenceTrackerHost.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IReferenceTrackerHost(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerHostVtbl (synthetic:IReferenceTrackerHostVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IReferenceTrackerHostVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var DisconnectUnusedReferenceSources: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var ReleaseDisconnectedReferenceSources: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var NotifyEndOfReferenceTrackingOnThread: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetTrackerTarget: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var AddMemoryPressure: CFunc<(CPointer<Unit>, UInt64) -> Int32> = CFunc<(CPointer<Unit>, UInt64) -> Int32>(CPointer<Unit>())
+    public var RemoveMemoryPressure: CFunc<(CPointer<Unit>, UInt64) -> Int32> = CFunc<(CPointer<Unit>, UInt64) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerManager (synthetic:Windows_Win32_System_WinRT_Xaml_IReferenceTrackerManager)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IReferenceTrackerManager <: Resource & windows_core.HandleWinrtType<IReferenceTrackerManager> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IReferenceTrackerManager.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IReferenceTrackerManager"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1022461108u32, 31947u16, 19930u16, 132u8, 85u8, 126u8, 108u8, 233u8, 154u8, 50u8, 152u8)
+    }
+
+    public static func intoWinrtHandle(value: IReferenceTrackerManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IReferenceTrackerManager): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IReferenceTrackerManager.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerManager {
+        IReferenceTrackerManager(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerManager {
+        IReferenceTrackerManager(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IReferenceTrackerManager): IReferenceTrackerManager {
+        let raw = IReferenceTrackerManager.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IReferenceTrackerManager(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerManagerVtbl (synthetic:IReferenceTrackerManagerVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IReferenceTrackerManagerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var ReferenceTrackingStarted: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var FindTrackerTargetsCompleted: CFunc<(CPointer<Unit>, UInt8) -> Int32> = CFunc<(CPointer<Unit>, UInt8) -> Int32>(CPointer<Unit>())
+    public var ReferenceTrackingCompleted: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetReferenceTrackerHost: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerTarget (synthetic:Windows_Win32_System_WinRT_Xaml_IReferenceTrackerTarget)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IReferenceTrackerTarget <: Resource & windows_core.HandleWinrtType<IReferenceTrackerTarget> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IReferenceTrackerTarget.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IReferenceTrackerTarget"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1690125304u32, 49134u16, 20164u16, 183u8, 235u8, 41u8, 53u8, 21u8, 141u8, 174u8, 33u8)
+    }
+
+    public static func intoWinrtHandle(value: IReferenceTrackerTarget): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IReferenceTrackerTarget): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IReferenceTrackerTarget.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerTarget {
+        IReferenceTrackerTarget(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IReferenceTrackerTarget {
+        IReferenceTrackerTarget(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IReferenceTrackerTarget): IReferenceTrackerTarget {
+        let raw = IReferenceTrackerTarget.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IReferenceTrackerTarget(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IReferenceTrackerTargetVtbl (synthetic:IReferenceTrackerTargetVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IReferenceTrackerTargetVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var AddRefFromReferenceTracker: CFunc<(CPointer<Unit>) -> UInt32> = CFunc<(CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var ReleaseFromReferenceTracker: CFunc<(CPointer<Unit>) -> UInt32> = CFunc<(CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var Peg: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Unpeg: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceManagerNative (synthetic:Windows_Win32_System_WinRT_Xaml_ISurfaceImageSourceManagerNative)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class ISurfaceImageSourceManagerNative <: Resource & windows_core.HandleWinrtType<ISurfaceImageSourceManagerNative> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ISurfaceImageSourceManagerNative.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceManagerNative"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1283954871u32, 7560u16, 18959u16, 181u8, 155u8, 185u8, 63u8, 96u8, 13u8, 232u8, 200u8)
+    }
+
+    public static func intoWinrtHandle(value: ISurfaceImageSourceManagerNative): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ISurfaceImageSourceManagerNative): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ISurfaceImageSourceManagerNative.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ISurfaceImageSourceManagerNative {
+        ISurfaceImageSourceManagerNative(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ISurfaceImageSourceManagerNative {
+        ISurfaceImageSourceManagerNative(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ISurfaceImageSourceManagerNative): ISurfaceImageSourceManagerNative {
+        let raw = ISurfaceImageSourceManagerNative.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ISurfaceImageSourceManagerNative(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceManagerNativeVtbl (synthetic:ISurfaceImageSourceManagerNativeVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct ISurfaceImageSourceManagerNativeVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var FlushAllSurfacesWithDevice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceNative (synthetic:Windows_Win32_System_WinRT_Xaml_ISurfaceImageSourceNative)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class ISurfaceImageSourceNative <: Resource & windows_core.HandleWinrtType<ISurfaceImageSourceNative> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ISurfaceImageSourceNative.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceNative"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(4075417025u32, 54023u16, 17701u16, 152u8, 134u8, 15u8, 175u8, 170u8, 68u8, 22u8, 60u8)
+    }
+
+    public static func intoWinrtHandle(value: ISurfaceImageSourceNative): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ISurfaceImageSourceNative): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ISurfaceImageSourceNative.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ISurfaceImageSourceNative {
+        ISurfaceImageSourceNative(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ISurfaceImageSourceNative {
+        ISurfaceImageSourceNative(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ISurfaceImageSourceNative): ISurfaceImageSourceNative {
+        let raw = ISurfaceImageSourceNative.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ISurfaceImageSourceNative(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceNativeVtbl (synthetic:ISurfaceImageSourceNativeVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct ISurfaceImageSourceNativeVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetDevice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var BeginDraw: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.RECT, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.RECT, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EndDraw: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceNativeWithD2D (synthetic:Windows_Win32_System_WinRT_Xaml_ISurfaceImageSourceNativeWithD2D)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class ISurfaceImageSourceNativeWithD2D <: Resource & windows_core.HandleWinrtType<ISurfaceImageSourceNativeWithD2D> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ISurfaceImageSourceNativeWithD2D.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceNativeWithD2D"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1412006435u32, 16865u16, 19009u16, 156u8, 8u8, 2u8, 232u8, 37u8, 104u8, 100u8, 161u8)
+    }
+
+    public static func intoWinrtHandle(value: ISurfaceImageSourceNativeWithD2D): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ISurfaceImageSourceNativeWithD2D): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ISurfaceImageSourceNativeWithD2D.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ISurfaceImageSourceNativeWithD2D {
+        ISurfaceImageSourceNativeWithD2D(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ISurfaceImageSourceNativeWithD2D {
+        ISurfaceImageSourceNativeWithD2D(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ISurfaceImageSourceNativeWithD2D): ISurfaceImageSourceNativeWithD2D {
+        let raw = ISurfaceImageSourceNativeWithD2D.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ISurfaceImageSourceNativeWithD2D(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISurfaceImageSourceNativeWithD2DVtbl (synthetic:ISurfaceImageSourceNativeWithD2DVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct ISurfaceImageSourceNativeWithD2DVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetDevice: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var BeginDraw: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EndDraw: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SuspendDraw: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ResumeDraw: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISwapChainBackgroundPanelNative (synthetic:Windows_Win32_System_WinRT_Xaml_ISwapChainBackgroundPanelNative)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class ISwapChainBackgroundPanelNative <: Resource & windows_core.HandleWinrtType<ISwapChainBackgroundPanelNative> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ISwapChainBackgroundPanelNative.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.ISwapChainBackgroundPanelNative"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1136573774u32, 44501u16, 16437u16, 143u8, 133u8, 86u8, 8u8, 208u8, 142u8, 157u8, 201u8)
+    }
+
+    public static func intoWinrtHandle(value: ISwapChainBackgroundPanelNative): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ISwapChainBackgroundPanelNative): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ISwapChainBackgroundPanelNative.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ISwapChainBackgroundPanelNative {
+        ISwapChainBackgroundPanelNative(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ISwapChainBackgroundPanelNative {
+        ISwapChainBackgroundPanelNative(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ISwapChainBackgroundPanelNative): ISwapChainBackgroundPanelNative {
+        let raw = ISwapChainBackgroundPanelNative.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ISwapChainBackgroundPanelNative(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISwapChainBackgroundPanelNativeVtbl (synthetic:ISwapChainBackgroundPanelNativeVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct ISwapChainBackgroundPanelNativeVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetSwapChain: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
 
 // Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNative (synthetic:Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative)
 @When[Windows_Win32_System_WinRT_Xaml == "on"]
@@ -128,3 +1564,502 @@ public struct ISwapChainPanelNativeVtbl {
     public var SetSwapChain: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
     public init() {}
 }
+
+// Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNative2 (synthetic:Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative2)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class ISwapChainPanelNative2 <: Resource & windows_core.HandleWinrtType<ISwapChainPanelNative2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ISwapChainPanelNative2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNative2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3584226828u32, 14258u16, 17570u16, 147u8, 123u8, 141u8, 142u8, 185u8, 114u8, 104u8, 33u8)
+    }
+
+    public static func intoWinrtHandle(value: ISwapChainPanelNative2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ISwapChainPanelNative2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ISwapChainPanelNative2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ISwapChainPanelNative2 {
+        ISwapChainPanelNative2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ISwapChainPanelNative2 {
+        ISwapChainPanelNative2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ISwapChainPanelNative2): ISwapChainPanelNative2 {
+        let raw = ISwapChainPanelNative2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ISwapChainPanelNative2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNative2Vtbl (synthetic:ISwapChainPanelNative2Vtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct ISwapChainPanelNative2Vtbl {
+    public var base_: ISwapChainPanelNativeVtbl = ISwapChainPanelNativeVtbl()
+    public var SetSwapChainHandle: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HANDLE) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.ITrackerOwner (synthetic:Windows_Win32_System_WinRT_Xaml_ITrackerOwner)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class ITrackerOwner <: Resource & windows_core.HandleWinrtType<ITrackerOwner> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ITrackerOwner.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.ITrackerOwner"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3945054731u32, 38934u16, 19143u16, 140u8, 255u8, 54u8, 246u8, 122u8, 17u8, 143u8, 78u8)
+    }
+
+    public static func intoWinrtHandle(value: ITrackerOwner): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ITrackerOwner): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ITrackerOwner.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ITrackerOwner {
+        ITrackerOwner(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ITrackerOwner {
+        ITrackerOwner(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ITrackerOwner): ITrackerOwner {
+        let raw = ITrackerOwner.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ITrackerOwner(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.ITrackerOwnerVtbl (synthetic:ITrackerOwnerVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct ITrackerOwnerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var CreateTrackerHandle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DeleteTrackerHandle: CFunc<(CPointer<Unit>, TrackerHandle) -> Int32> = CFunc<(CPointer<Unit>, TrackerHandle) -> Int32>(CPointer<Unit>())
+    public var SetTrackerValue: CFunc<(CPointer<Unit>, TrackerHandle, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, TrackerHandle, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var TryGetSafeTrackerValue: CFunc<(CPointer<Unit>, TrackerHandle, CPointer<Unit>) -> UInt8> = CFunc<(CPointer<Unit>, TrackerHandle, CPointer<Unit>) -> UInt8>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IVirtualSurfaceImageSourceNative (synthetic:Windows_Win32_System_WinRT_Xaml_IVirtualSurfaceImageSourceNative)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IVirtualSurfaceImageSourceNative <: Resource & windows_core.HandleWinrtType<IVirtualSurfaceImageSourceNative> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IVirtualSurfaceImageSourceNative.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IVirtualSurfaceImageSourceNative"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3914664323u32, 13835u16, 20307u16, 179u8, 145u8, 175u8, 214u8, 149u8, 7u8, 134u8, 145u8)
+    }
+
+    public static func intoWinrtHandle(value: IVirtualSurfaceImageSourceNative): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IVirtualSurfaceImageSourceNative): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IVirtualSurfaceImageSourceNative.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IVirtualSurfaceImageSourceNative {
+        IVirtualSurfaceImageSourceNative(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IVirtualSurfaceImageSourceNative {
+        IVirtualSurfaceImageSourceNative(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IVirtualSurfaceImageSourceNative): IVirtualSurfaceImageSourceNative {
+        let raw = IVirtualSurfaceImageSourceNative.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IVirtualSurfaceImageSourceNative(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IVirtualSurfaceImageSourceNativeVtbl (synthetic:IVirtualSurfaceImageSourceNativeVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IVirtualSurfaceImageSourceNativeVtbl {
+    public var base_: ISurfaceImageSourceNativeVtbl = ISurfaceImageSourceNativeVtbl()
+    public var Invalidate: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.RECT) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.RECT) -> Int32>(CPointer<Unit>())
+    public var GetUpdateRectCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetUpdateRects: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetVisibleBounds: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RegisterForUpdatesNeeded: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Resize: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.IVirtualSurfaceUpdatesCallbackNative (synthetic:Windows_Win32_System_WinRT_Xaml_IVirtualSurfaceUpdatesCallbackNative)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public class IVirtualSurfaceUpdatesCallbackNative <: Resource & windows_core.HandleWinrtType<IVirtualSurfaceUpdatesCallbackNative> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IVirtualSurfaceUpdatesCallbackNative.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.WinRT.Xaml.IVirtualSurfaceUpdatesCallbackNative"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3690129735u32, 36460u16, 16980u16, 158u8, 238u8, 119u8, 56u8, 247u8, 19u8, 134u8, 201u8)
+    }
+
+    public static func intoWinrtHandle(value: IVirtualSurfaceUpdatesCallbackNative): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IVirtualSurfaceUpdatesCallbackNative): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IVirtualSurfaceUpdatesCallbackNative.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IVirtualSurfaceUpdatesCallbackNative {
+        IVirtualSurfaceUpdatesCallbackNative(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IVirtualSurfaceUpdatesCallbackNative {
+        IVirtualSurfaceUpdatesCallbackNative(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IVirtualSurfaceUpdatesCallbackNative): IVirtualSurfaceUpdatesCallbackNative {
+        let raw = IVirtualSurfaceUpdatesCallbackNative.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IVirtualSurfaceUpdatesCallbackNative(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.WinRT.Xaml.IVirtualSurfaceUpdatesCallbackNativeVtbl (synthetic:IVirtualSurfaceUpdatesCallbackNativeVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct IVirtualSurfaceUpdatesCallbackNativeVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var UpdatesNeeded: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.WinRT.Xaml.TrackerHandle (synthetic:Windows_Win32_System_WinRT_Xaml_TrackerHandle)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+@C
+public struct TrackerHandle {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.WinRT.Xaml.XAML_REFERENCETRACKER_DISCONNECT (synthetic:Windows_Win32_System_WinRT_Xaml_XAML_REFERENCETRACKER_DISCONNECT)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public struct XAML_REFERENCETRACKER_DISCONNECT {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public const XAML_REFERENCETRACKER_DISCONNECT_XAML_REFERENCETRACKER_DISCONNECT_DEFAULT = XAML_REFERENCETRACKER_DISCONNECT(0)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
+public const XAML_REFERENCETRACKER_DISCONNECT_XAML_REFERENCETRACKER_DISCONNECT_SUSPEND = XAML_REFERENCETRACKER_DISCONNECT(1)

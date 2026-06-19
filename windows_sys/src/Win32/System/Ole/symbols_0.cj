@@ -3,14 +3,75 @@
 package windows_sys.Win32.System.Ole
 
 import windows_core as windows_core
+import windows_interface.GUID
 import windows_interface as windows_interface
+import windows_polyfill as windows_polyfill
 
 @When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Windows_Win32_Foundation
+@When[Windows_Win32_Graphics_Gdi == "on"]
+import windows_sys.Win32.Graphics.Gdi as Windows_Win32_Graphics_Gdi
 @When[Windows_Win32_System_Com == "on"]
 import windows_sys.Win32.System.Com as Windows_Win32_System_Com
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
+import windows_sys.Win32.System.Com.StructuredStorage as Windows_Win32_System_Com_StructuredStorage
+@When[Windows_Win32_System_Memory == "on"]
+import windows_sys.Win32.System.Memory as Windows_Win32_System_Memory
+@When[Windows_Win32_System_SystemServices == "on"]
+import windows_sys.Win32.System.SystemServices as Windows_Win32_System_SystemServices
 @When[Windows_Win32_System_Variant == "on"]
 import windows_sys.Win32.System.Variant as Windows_Win32_System_Variant
+@When[Windows_Win32_UI_Controls == "on"]
+import windows_sys.Win32.UI.Controls as Windows_Win32_UI_Controls
+@When[Windows_Win32_UI_Controls_Dialogs == "on"]
+import windows_sys.Win32.UI.Controls.Dialogs as Windows_Win32_UI_Controls_Dialogs
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
+import windows_sys.Win32.UI.WindowsAndMessaging as Windows_Win32_UI_WindowsAndMessaging
+
+// Windows.Win32.System.Ole.ACTIVATEFLAGS (synthetic:Windows_Win32_System_Ole_ACTIVATEFLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct ACTIVATEFLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const ACTIVATEFLAGS_ACTIVATE_WINDOWLESS = ACTIVATEFLAGS(1)
+
+// Windows.Win32.System.Ole.ACTIVEOBJECT_FLAGS (synthetic:Windows_Win32_System_Ole_ACTIVEOBJECT_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct ACTIVEOBJECT_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: ACTIVEOBJECT_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: ACTIVEOBJECT_FLAGS): ACTIVEOBJECT_FLAGS {
+        return ACTIVEOBJECT_FLAGS(value | other.value)
+    }
+    public operator func &(other: ACTIVEOBJECT_FLAGS): ACTIVEOBJECT_FLAGS {
+        return ACTIVEOBJECT_FLAGS(value & other.value)
+    }
+    public operator func ^(other: ACTIVEOBJECT_FLAGS): ACTIVEOBJECT_FLAGS {
+        return ACTIVEOBJECT_FLAGS(value ^ other.value)
+    }
+    public operator func !(): ACTIVEOBJECT_FLAGS {
+        return ACTIVEOBJECT_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const ACTIVEOBJECT_FLAGS_ACTIVEOBJECT_STRONG = ACTIVEOBJECT_FLAGS(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const ACTIVEOBJECT_FLAGS_ACTIVEOBJECT_WEAK = ACTIVEOBJECT_FLAGS(1)
 
 // Windows.Win32.System.Ole.ARRAYDESC (synthetic:Windows_Win32_System_Ole_ARRAYDESC)
 @When[Windows_Win32_System_Ole == "on"]
@@ -19,6 +80,10343 @@ public struct ARRAYDESC {
     public var tdescElem: Windows_Win32_System_Com.TYPEDESC = Windows_Win32_System_Com.TYPEDESC()
     public var cDims: UInt16 = 0u16
     public var rgbounds: VArray<Windows_Win32_System_Com.SAFEARRAYBOUND, $1> = VArray<Windows_Win32_System_Com.SAFEARRAYBOUND, $1>(repeat: Windows_Win32_System_Com.SAFEARRAYBOUND())
+}
+
+// Windows.Win32.System.Ole.BINDSPEED (synthetic:Windows_Win32_System_Ole_BINDSPEED)
+@When[Windows_Win32_System_Ole == "on"]
+public struct BINDSPEED {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const BINDSPEED_BINDSPEED_INDEFINITE = BINDSPEED(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const BINDSPEED_BINDSPEED_MODERATE = BINDSPEED(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const BINDSPEED_BINDSPEED_IMMEDIATE = BINDSPEED(3)
+
+// Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS (synthetic:Windows_Win32_System_Ole_BUSY_DIALOG_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct BUSY_DIALOG_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: BUSY_DIALOG_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: BUSY_DIALOG_FLAGS): BUSY_DIALOG_FLAGS {
+        return BUSY_DIALOG_FLAGS(value | other.value)
+    }
+    public operator func &(other: BUSY_DIALOG_FLAGS): BUSY_DIALOG_FLAGS {
+        return BUSY_DIALOG_FLAGS(value & other.value)
+    }
+    public operator func ^(other: BUSY_DIALOG_FLAGS): BUSY_DIALOG_FLAGS {
+        return BUSY_DIALOG_FLAGS(value ^ other.value)
+    }
+    public operator func !(): BUSY_DIALOG_FLAGS {
+        return BUSY_DIALOG_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const BUSY_DIALOG_FLAGS_BZ_DISABLECANCELBUTTON = BUSY_DIALOG_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const BUSY_DIALOG_FLAGS_BZ_DISABLESWITCHTOBUTTON = BUSY_DIALOG_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const BUSY_DIALOG_FLAGS_BZ_DISABLERETRYBUTTON = BUSY_DIALOG_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const BUSY_DIALOG_FLAGS_BZ_NOTRESPONDINGDIALOG = BUSY_DIALOG_FLAGS(8)
+
+// Windows.Win32.System.Ole.CADWORD (synthetic:Windows_Win32_System_Ole_CADWORD)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct CADWORD {
+    public var cElems: UInt32 = 0u32
+    public var pElems: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.CALPOLESTR (synthetic:Windows_Win32_System_Ole_CALPOLESTR)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct CALPOLESTR {
+    public var cElems: UInt32 = 0u32
+    public var pElems: CPointer<CPointer<UInt16>> = CPointer<CPointer<UInt16>>()
+}
+
+// Windows.Win32.System.Ole.CAUUID (synthetic:Windows_Win32_System_Ole_CAUUID)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct CAUUID {
+    public var cElems: UInt32 = 0u32
+    public var pElems: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.CHANGEKIND (synthetic:Windows_Win32_System_Ole_CHANGEKIND)
+@When[Windows_Win32_System_Ole == "on"]
+public struct CHANGEKIND {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_ADDMEMBER = CHANGEKIND(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_DELETEMEMBER = CHANGEKIND(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_SETNAMES = CHANGEKIND(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_SETDOCUMENTATION = CHANGEKIND(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_GENERAL = CHANGEKIND(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_INVALIDATE = CHANGEKIND(5)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_CHANGEFAILED = CHANGEKIND(6)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGEKIND_CHANGEKIND_MAX = CHANGEKIND(7)
+
+// Windows.Win32.System.Ole.CHANGE_ICON_FLAGS (synthetic:Windows_Win32_System_Ole_CHANGE_ICON_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct CHANGE_ICON_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: CHANGE_ICON_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: CHANGE_ICON_FLAGS): CHANGE_ICON_FLAGS {
+        return CHANGE_ICON_FLAGS(value | other.value)
+    }
+    public operator func &(other: CHANGE_ICON_FLAGS): CHANGE_ICON_FLAGS {
+        return CHANGE_ICON_FLAGS(value & other.value)
+    }
+    public operator func ^(other: CHANGE_ICON_FLAGS): CHANGE_ICON_FLAGS {
+        return CHANGE_ICON_FLAGS(value ^ other.value)
+    }
+    public operator func !(): CHANGE_ICON_FLAGS {
+        return CHANGE_ICON_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_ICON_FLAGS_CIF_SHOWHELP = CHANGE_ICON_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_ICON_FLAGS_CIF_SELECTCURRENT = CHANGE_ICON_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_ICON_FLAGS_CIF_SELECTDEFAULT = CHANGE_ICON_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_ICON_FLAGS_CIF_SELECTFROMFILE = CHANGE_ICON_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_ICON_FLAGS_CIF_USEICONEXE = CHANGE_ICON_FLAGS(16)
+
+// Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS (synthetic:Windows_Win32_System_Ole_CHANGE_SOURCE_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct CHANGE_SOURCE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: CHANGE_SOURCE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: CHANGE_SOURCE_FLAGS): CHANGE_SOURCE_FLAGS {
+        return CHANGE_SOURCE_FLAGS(value | other.value)
+    }
+    public operator func &(other: CHANGE_SOURCE_FLAGS): CHANGE_SOURCE_FLAGS {
+        return CHANGE_SOURCE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: CHANGE_SOURCE_FLAGS): CHANGE_SOURCE_FLAGS {
+        return CHANGE_SOURCE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): CHANGE_SOURCE_FLAGS {
+        return CHANGE_SOURCE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_SOURCE_FLAGS_CSF_SHOWHELP = CHANGE_SOURCE_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_SOURCE_FLAGS_CSF_VALIDSOURCE = CHANGE_SOURCE_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_SOURCE_FLAGS_CSF_ONLYGETSOURCE = CHANGE_SOURCE_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const CHANGE_SOURCE_FLAGS_CSF_EXPLORER = CHANGE_SOURCE_FLAGS(8)
+
+// Windows.Win32.System.Ole.CLEANLOCALSTORAGE (synthetic:Windows_Win32_System_Ole_CLEANLOCALSTORAGE)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct CLEANLOCALSTORAGE {
+    public var pInterface: CPointer<Unit> = CPointer<Unit>()
+    public var pStorage: CPointer<Unit> = CPointer<Unit>()
+    public var flags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.CLIPBOARD_FORMAT (synthetic:Windows_Win32_System_Ole_CLIPBOARD_FORMAT)
+@When[Windows_Win32_System_Ole == "on"]
+public struct CLIPBOARD_FORMAT {
+    public let value: UInt16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_TEXT = CLIPBOARD_FORMAT(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_BITMAP = CLIPBOARD_FORMAT(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_METAFILEPICT = CLIPBOARD_FORMAT(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_SYLK = CLIPBOARD_FORMAT(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_DIF = CLIPBOARD_FORMAT(5)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_TIFF = CLIPBOARD_FORMAT(6)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_OEMTEXT = CLIPBOARD_FORMAT(7)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_DIB = CLIPBOARD_FORMAT(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_PALETTE = CLIPBOARD_FORMAT(9)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_PENDATA = CLIPBOARD_FORMAT(10)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_RIFF = CLIPBOARD_FORMAT(11)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_WAVE = CLIPBOARD_FORMAT(12)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_UNICODETEXT = CLIPBOARD_FORMAT(13)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_ENHMETAFILE = CLIPBOARD_FORMAT(14)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_HDROP = CLIPBOARD_FORMAT(15)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_LOCALE = CLIPBOARD_FORMAT(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_DIBV5 = CLIPBOARD_FORMAT(17)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_MAX = CLIPBOARD_FORMAT(18)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_OWNERDISPLAY = CLIPBOARD_FORMAT(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_DSPTEXT = CLIPBOARD_FORMAT(129)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_DSPBITMAP = CLIPBOARD_FORMAT(130)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_DSPMETAFILEPICT = CLIPBOARD_FORMAT(131)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_DSPENHMETAFILE = CLIPBOARD_FORMAT(142)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_PRIVATEFIRST = CLIPBOARD_FORMAT(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_PRIVATELAST = CLIPBOARD_FORMAT(767)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_GDIOBJFIRST = CLIPBOARD_FORMAT(768)
+@When[Windows_Win32_System_Ole == "on"]
+public const CLIPBOARD_FORMAT_CF_GDIOBJLAST = CLIPBOARD_FORMAT(1023)
+
+// Windows.Win32.System.Ole.CONTROLINFO (synthetic:Windows_Win32_System_Ole_CONTROLINFO)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct CONTROLINFO {
+    public var cb: UInt32 = 0u32
+    public var hAccel: Windows_Win32_UI_WindowsAndMessaging.HACCEL = Windows_Win32_UI_WindowsAndMessaging.HACCEL()
+    public var cAccel: UInt16 = 0u16
+    public var dwFlags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.CTRLINFO (synthetic:Windows_Win32_System_Ole_CTRLINFO)
+@When[Windows_Win32_System_Ole == "on"]
+public struct CTRLINFO {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const CTRLINFO_CTRLINFO_EATS_RETURN = CTRLINFO(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const CTRLINFO_CTRLINFO_EATS_ESCAPE = CTRLINFO(2)
+
+// Windows.Win32.System.Ole.DISCARDCACHE (synthetic:Windows_Win32_System_Ole_DISCARDCACHE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct DISCARDCACHE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const DISCARDCACHE_DISCARDCACHE_SAVEIFDIRTY = DISCARDCACHE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const DISCARDCACHE_DISCARDCACHE_NOSAVE = DISCARDCACHE(1)
+
+// Windows.Win32.System.Ole.DOCMISC (synthetic:Windows_Win32_System_Ole_DOCMISC)
+@When[Windows_Win32_System_Ole == "on"]
+public struct DOCMISC {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const DOCMISC_DOCMISC_CANCREATEMULTIPLEVIEWS = DOCMISC(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const DOCMISC_DOCMISC_SUPPORTCOMPLEXRECTANGLES = DOCMISC(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const DOCMISC_DOCMISC_CANTOPENEDIT = DOCMISC(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const DOCMISC_DOCMISC_NOFILESUPPORT = DOCMISC(8)
+
+// Windows.Win32.System.Ole.DROPEFFECT (synthetic:Windows_Win32_System_Ole_DROPEFFECT)
+@When[Windows_Win32_System_Ole == "on"]
+public struct DROPEFFECT {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: DROPEFFECT): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DROPEFFECT): DROPEFFECT {
+        return DROPEFFECT(value | other.value)
+    }
+    public operator func &(other: DROPEFFECT): DROPEFFECT {
+        return DROPEFFECT(value & other.value)
+    }
+    public operator func ^(other: DROPEFFECT): DROPEFFECT {
+        return DROPEFFECT(value ^ other.value)
+    }
+    public operator func !(): DROPEFFECT {
+        return DROPEFFECT(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const DROPEFFECT_DROPEFFECT_NONE = DROPEFFECT(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const DROPEFFECT_DROPEFFECT_COPY = DROPEFFECT(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const DROPEFFECT_DROPEFFECT_MOVE = DROPEFFECT(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const DROPEFFECT_DROPEFFECT_LINK = DROPEFFECT(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const DROPEFFECT_DROPEFFECT_SCROLL = DROPEFFECT(2147483648)
+
+// Windows.Win32.System.Ole.DVASPECTINFO (synthetic:Windows_Win32_System_Ole_DVASPECTINFO)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct DVASPECTINFO {
+    public var cb: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.DVASPECTINFOFLAG (synthetic:Windows_Win32_System_Ole_DVASPECTINFOFLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct DVASPECTINFOFLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const DVASPECTINFOFLAG_DVASPECTINFOFLAG_CANOPTIMIZE = DVASPECTINFOFLAG(1)
+
+// Windows.Win32.System.Ole.DVEXTENTINFO (synthetic:Windows_Win32_System_Ole_DVEXTENTINFO)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct DVEXTENTINFO {
+    public var cb: UInt32 = 0u32
+    public var dwExtentMode: UInt32 = 0u32
+    public var sizelProposed: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+}
+
+// Windows.Win32.System.Ole.DVEXTENTMODE (synthetic:Windows_Win32_System_Ole_DVEXTENTMODE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct DVEXTENTMODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const DVEXTENTMODE_DVEXTENT_CONTENT = DVEXTENTMODE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const DVEXTENTMODE_DVEXTENT_INTEGRAL = DVEXTENTMODE(1)
+
+// Windows.Win32.System.Ole.EDIT_LINKS_FLAGS (synthetic:Windows_Win32_System_Ole_EDIT_LINKS_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct EDIT_LINKS_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: EDIT_LINKS_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: EDIT_LINKS_FLAGS): EDIT_LINKS_FLAGS {
+        return EDIT_LINKS_FLAGS(value | other.value)
+    }
+    public operator func &(other: EDIT_LINKS_FLAGS): EDIT_LINKS_FLAGS {
+        return EDIT_LINKS_FLAGS(value & other.value)
+    }
+    public operator func ^(other: EDIT_LINKS_FLAGS): EDIT_LINKS_FLAGS {
+        return EDIT_LINKS_FLAGS(value ^ other.value)
+    }
+    public operator func !(): EDIT_LINKS_FLAGS {
+        return EDIT_LINKS_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const EDIT_LINKS_FLAGS_ELF_SHOWHELP = EDIT_LINKS_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const EDIT_LINKS_FLAGS_ELF_DISABLEUPDATENOW = EDIT_LINKS_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const EDIT_LINKS_FLAGS_ELF_DISABLEOPENSOURCE = EDIT_LINKS_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const EDIT_LINKS_FLAGS_ELF_DISABLECHANGESOURCE = EDIT_LINKS_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const EDIT_LINKS_FLAGS_ELF_DISABLECANCELLINK = EDIT_LINKS_FLAGS(16)
+
+// Windows.Win32.System.Ole.EMBDHLP_FLAGS (synthetic:Windows_Win32_System_Ole_EMBDHLP_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct EMBDHLP_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: EMBDHLP_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: EMBDHLP_FLAGS): EMBDHLP_FLAGS {
+        return EMBDHLP_FLAGS(value | other.value)
+    }
+    public operator func &(other: EMBDHLP_FLAGS): EMBDHLP_FLAGS {
+        return EMBDHLP_FLAGS(value & other.value)
+    }
+    public operator func ^(other: EMBDHLP_FLAGS): EMBDHLP_FLAGS {
+        return EMBDHLP_FLAGS(value ^ other.value)
+    }
+    public operator func !(): EMBDHLP_FLAGS {
+        return EMBDHLP_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const EMBDHLP_FLAGS_EMBDHLP_INPROC_HANDLER = EMBDHLP_FLAGS(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const EMBDHLP_FLAGS_EMBDHLP_INPROC_SERVER = EMBDHLP_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const EMBDHLP_FLAGS_EMBDHLP_CREATENOW = EMBDHLP_FLAGS(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const EMBDHLP_FLAGS_EMBDHLP_DELAYCREATE = EMBDHLP_FLAGS(65536)
+
+// Windows.Win32.System.Ole.ENUM_CONTROLS_WHICH_FLAGS (synthetic:Windows_Win32_System_Ole_ENUM_CONTROLS_WHICH_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct ENUM_CONTROLS_WHICH_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GCW_WCH_SIBLING = ENUM_CONTROLS_WHICH_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GC_WCH_CONTAINER = ENUM_CONTROLS_WHICH_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GC_WCH_CONTAINED = ENUM_CONTROLS_WHICH_FLAGS(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GC_WCH_ALL = ENUM_CONTROLS_WHICH_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GC_WCH_FREVERSEDIR = ENUM_CONTROLS_WHICH_FLAGS(134217728)
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GC_WCH_FONLYAFTER = ENUM_CONTROLS_WHICH_FLAGS(268435456)
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GC_WCH_FONLYBEFORE = ENUM_CONTROLS_WHICH_FLAGS(536870912)
+@When[Windows_Win32_System_Ole == "on"]
+public const ENUM_CONTROLS_WHICH_FLAGS_GC_WCH_FSELECTED = ENUM_CONTROLS_WHICH_FLAGS(1073741824)
+
+// Windows.Win32.System.Ole.FDEX_PROP_FLAGS (synthetic:Windows_Win32_System_Ole_FDEX_PROP_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct FDEX_PROP_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: FDEX_PROP_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: FDEX_PROP_FLAGS): FDEX_PROP_FLAGS {
+        return FDEX_PROP_FLAGS(value | other.value)
+    }
+    public operator func &(other: FDEX_PROP_FLAGS): FDEX_PROP_FLAGS {
+        return FDEX_PROP_FLAGS(value & other.value)
+    }
+    public operator func ^(other: FDEX_PROP_FLAGS): FDEX_PROP_FLAGS {
+        return FDEX_PROP_FLAGS(value ^ other.value)
+    }
+    public operator func !(): FDEX_PROP_FLAGS {
+        return FDEX_PROP_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCanGet = FDEX_PROP_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCannotGet = FDEX_PROP_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCanPut = FDEX_PROP_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCannotPut = FDEX_PROP_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCanPutRef = FDEX_PROP_FLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCannotPutRef = FDEX_PROP_FLAGS(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropNoSideEffects = FDEX_PROP_FLAGS(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropDynamicType = FDEX_PROP_FLAGS(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCanCall = FDEX_PROP_FLAGS(256)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCannotCall = FDEX_PROP_FLAGS(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCanConstruct = FDEX_PROP_FLAGS(1024)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCannotConstruct = FDEX_PROP_FLAGS(2048)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCanSourceEvents = FDEX_PROP_FLAGS(4096)
+@When[Windows_Win32_System_Ole == "on"]
+public const FDEX_PROP_FLAGS_fdexPropCannotSourceEvents = FDEX_PROP_FLAGS(8192)
+
+// Windows.Win32.System.Ole.FONTDESC (synthetic:Windows_Win32_System_Ole_FONTDESC)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct FONTDESC {
+    public var cbSizeofstruct: UInt32 = 0u32
+    public var lpstrName: CPointer<UInt16> = CPointer<UInt16>()
+    public var cySize: Windows_Win32_System_Com.CY = Windows_Win32_System_Com.CY()
+    public var sWeight: Int16 = 0i16
+    public var sCharset: Int16 = 0i16
+    public var fItalic: Int32 = 0i32
+    public var fUnderline: Int32 = 0i32
+    public var fStrikethrough: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.GUIDKIND (synthetic:Windows_Win32_System_Ole_GUIDKIND)
+@When[Windows_Win32_System_Ole == "on"]
+public struct GUIDKIND {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const GUIDKIND_GUIDKIND_DEFAULT_SOURCE_DISP_IID = GUIDKIND(1)
+
+// Windows.Win32.System.Ole.HITRESULT (synthetic:Windows_Win32_System_Ole_HITRESULT)
+@When[Windows_Win32_System_Ole == "on"]
+public struct HITRESULT {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const HITRESULT_HITRESULT_OUTSIDE = HITRESULT(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const HITRESULT_HITRESULT_TRANSPARENT = HITRESULT(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const HITRESULT_HITRESULT_CLOSE = HITRESULT(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const HITRESULT_HITRESULT_HIT = HITRESULT(3)
+
+// Windows.Win32.System.Ole.IAdviseSinkEx (synthetic:Windows_Win32_System_Ole_IAdviseSinkEx)
+@When[Windows_Win32_System_Ole == "on"]
+public class IAdviseSinkEx <: Resource & windows_core.HandleWinrtType<IAdviseSinkEx> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IAdviseSinkEx.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IAdviseSinkEx"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(988955280u32, 3222u16, 4558u16, 160u8, 207u8, 0u8, 170u8, 0u8, 96u8, 10u8, 184u8)
+    }
+
+    public static func intoWinrtHandle(value: IAdviseSinkEx): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IAdviseSinkEx): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IAdviseSinkEx.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IAdviseSinkEx {
+        IAdviseSinkEx(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IAdviseSinkEx {
+        IAdviseSinkEx(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IAdviseSinkEx): IAdviseSinkEx {
+        let raw = IAdviseSinkEx.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IAdviseSinkEx(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IAdviseSinkExVtbl (synthetic:IAdviseSinkExVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IAdviseSinkExVtbl {
+    public var base_: Windows_Win32_System_Com.IAdviseSinkVtbl = Windows_Win32_System_Com.IAdviseSinkVtbl()
+    public var OnViewStatusChange: CFunc<(CPointer<Unit>, UInt32) -> Unit> = CFunc<(CPointer<Unit>, UInt32) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ICanHandleException (synthetic:Windows_Win32_System_Ole_ICanHandleException)
+@When[Windows_Win32_System_Ole == "on"]
+public class ICanHandleException <: Resource & windows_core.HandleWinrtType<ICanHandleException> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ICanHandleException.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ICanHandleException"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3310980704u32, 45831u16, 4561u16, 178u8, 125u8, 0u8, 96u8, 8u8, 195u8, 251u8, 251u8)
+    }
+
+    public static func intoWinrtHandle(value: ICanHandleException): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ICanHandleException): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ICanHandleException.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ICanHandleException {
+        ICanHandleException(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ICanHandleException {
+        ICanHandleException(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ICanHandleException): ICanHandleException {
+        let raw = ICanHandleException.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ICanHandleException(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ICanHandleExceptionVtbl (synthetic:ICanHandleExceptionVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ICanHandleExceptionVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var CanHandleException: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IClassFactory2 (synthetic:Windows_Win32_System_Ole_IClassFactory2)
+@When[Windows_Win32_System_Ole == "on"]
+public class IClassFactory2 <: Resource & windows_core.HandleWinrtType<IClassFactory2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IClassFactory2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IClassFactory2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443343u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: IClassFactory2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IClassFactory2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IClassFactory2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IClassFactory2 {
+        IClassFactory2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IClassFactory2 {
+        IClassFactory2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IClassFactory2): IClassFactory2 {
+        let raw = IClassFactory2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IClassFactory2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IClassFactory2Vtbl (synthetic:IClassFactory2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IClassFactory2Vtbl {
+    public var base_: Windows_Win32_System_Com.IClassFactoryVtbl = Windows_Win32_System_Com.IClassFactoryVtbl()
+    public var GetLicInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RequestLicKey: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var CreateInstanceLic: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IContinue (synthetic:Windows_Win32_System_Ole_IContinue)
+@When[Windows_Win32_System_Ole == "on"]
+public class IContinue <: Resource & windows_core.HandleWinrtType<IContinue> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IContinue.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IContinue"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(298u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IContinue): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IContinue): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IContinue.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IContinue {
+        IContinue(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IContinue {
+        IContinue(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IContinue): IContinue {
+        let raw = IContinue.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IContinue(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IContinueVtbl (synthetic:IContinueVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IContinueVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var FContinue: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IContinueCallback (synthetic:Windows_Win32_System_Ole_IContinueCallback)
+@When[Windows_Win32_System_Ole == "on"]
+public class IContinueCallback <: Resource & windows_core.HandleWinrtType<IContinueCallback> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IContinueCallback.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IContinueCallback"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3072507082u32, 20072u16, 4123u16, 162u8, 188u8, 0u8, 170u8, 0u8, 64u8, 71u8, 112u8)
+    }
+
+    public static func intoWinrtHandle(value: IContinueCallback): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IContinueCallback): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IContinueCallback.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IContinueCallback {
+        IContinueCallback(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IContinueCallback {
+        IContinueCallback(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IContinueCallback): IContinueCallback {
+        let raw = IContinueCallback.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IContinueCallback(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IContinueCallbackVtbl (synthetic:IContinueCallbackVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IContinueCallbackVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var FContinue: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var FContinuePrinting: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ICreateErrorInfo (synthetic:Windows_Win32_System_Ole_ICreateErrorInfo)
+@When[Windows_Win32_System_Ole == "on"]
+public class ICreateErrorInfo <: Resource & windows_core.HandleWinrtType<ICreateErrorInfo> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ICreateErrorInfo.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ICreateErrorInfo"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(586167104u32, 21629u16, 4123u16, 142u8, 101u8, 8u8, 0u8, 43u8, 43u8, 209u8, 25u8)
+    }
+
+    public static func intoWinrtHandle(value: ICreateErrorInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ICreateErrorInfo): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ICreateErrorInfo.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ICreateErrorInfo {
+        ICreateErrorInfo(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ICreateErrorInfo {
+        ICreateErrorInfo(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ICreateErrorInfo): ICreateErrorInfo {
+        let raw = ICreateErrorInfo.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ICreateErrorInfo(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ICreateErrorInfoVtbl (synthetic:ICreateErrorInfoVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ICreateErrorInfoVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetGUID: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetSource: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetDescription: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetHelpFile: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetHelpContext: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ICreateTypeInfo (synthetic:Windows_Win32_System_Ole_ICreateTypeInfo)
+@When[Windows_Win32_System_Ole == "on"]
+public class ICreateTypeInfo <: Resource & windows_core.HandleWinrtType<ICreateTypeInfo> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ICreateTypeInfo.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ICreateTypeInfo"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132101u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: ICreateTypeInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ICreateTypeInfo): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ICreateTypeInfo.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ICreateTypeInfo {
+        ICreateTypeInfo(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ICreateTypeInfo {
+        ICreateTypeInfo(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ICreateTypeInfo): ICreateTypeInfo {
+        let raw = ICreateTypeInfo.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ICreateTypeInfo(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ICreateTypeInfoVtbl (synthetic:ICreateTypeInfoVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ICreateTypeInfoVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetGuid: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetTypeFlags: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetDocString: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetHelpContext: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetVersion: CFunc<(CPointer<Unit>, UInt16, UInt16) -> Int32> = CFunc<(CPointer<Unit>, UInt16, UInt16) -> Int32>(CPointer<Unit>())
+    public var AddRefTypeInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var AddFuncDesc: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var AddImplType: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetImplTypeFlags: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>())
+    public var SetAlignment: CFunc<(CPointer<Unit>, UInt16) -> Int32> = CFunc<(CPointer<Unit>, UInt16) -> Int32>(CPointer<Unit>())
+    public var SetSchema: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var AddVarDesc: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetFuncAndParamNames: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetVarName: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetTypeDescAlias: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DefineFuncAsDllEntry: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetFuncDocString: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetVarDocString: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetFuncHelpContext: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetVarHelpContext: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetMops: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetTypeIdldesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var LayOut: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ICreateTypeInfo2 (synthetic:Windows_Win32_System_Ole_ICreateTypeInfo2)
+@When[Windows_Win32_System_Ole == "on"]
+public class ICreateTypeInfo2 <: Resource & windows_core.HandleWinrtType<ICreateTypeInfo2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ICreateTypeInfo2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ICreateTypeInfo2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132110u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: ICreateTypeInfo2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ICreateTypeInfo2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ICreateTypeInfo2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ICreateTypeInfo2 {
+        ICreateTypeInfo2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ICreateTypeInfo2 {
+        ICreateTypeInfo2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ICreateTypeInfo2): ICreateTypeInfo2 {
+        let raw = ICreateTypeInfo2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ICreateTypeInfo2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ICreateTypeInfo2Vtbl (synthetic:ICreateTypeInfo2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ICreateTypeInfo2Vtbl {
+    public var base_: ICreateTypeInfoVtbl = ICreateTypeInfoVtbl()
+    public var DeleteFuncDesc: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var DeleteFuncDescByMemId: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var DeleteVarDesc: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var DeleteVarDescByMemId: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var DeleteImplType: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetCustData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetFuncCustData: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetParamCustData: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetVarCustData: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetImplTypeCustData: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetHelpStringContext: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetFuncHelpStringContext: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetVarHelpStringContext: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var Invalidate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ICreateTypeLib (synthetic:Windows_Win32_System_Ole_ICreateTypeLib)
+@When[Windows_Win32_System_Ole == "on"]
+public class ICreateTypeLib <: Resource & windows_core.HandleWinrtType<ICreateTypeLib> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ICreateTypeLib.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ICreateTypeLib"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132102u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: ICreateTypeLib): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ICreateTypeLib): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ICreateTypeLib.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ICreateTypeLib {
+        ICreateTypeLib(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ICreateTypeLib {
+        ICreateTypeLib(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ICreateTypeLib): ICreateTypeLib {
+        let raw = ICreateTypeLib.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ICreateTypeLib(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ICreateTypeLibVtbl (synthetic:ICreateTypeLibVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ICreateTypeLibVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var CreateTypeInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetVersion: CFunc<(CPointer<Unit>, UInt16, UInt16) -> Int32> = CFunc<(CPointer<Unit>, UInt16, UInt16) -> Int32>(CPointer<Unit>())
+    public var SetGuid: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetDocString: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetHelpFileName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetHelpContext: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetLcid: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetLibFlags: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SaveAllChanges: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ICreateTypeLib2 (synthetic:Windows_Win32_System_Ole_ICreateTypeLib2)
+@When[Windows_Win32_System_Ole == "on"]
+public class ICreateTypeLib2 <: Resource & windows_core.HandleWinrtType<ICreateTypeLib2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ICreateTypeLib2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ICreateTypeLib2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132111u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: ICreateTypeLib2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ICreateTypeLib2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ICreateTypeLib2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ICreateTypeLib2 {
+        ICreateTypeLib2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ICreateTypeLib2 {
+        ICreateTypeLib2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ICreateTypeLib2): ICreateTypeLib2 {
+        let raw = ICreateTypeLib2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ICreateTypeLib2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ICreateTypeLib2Vtbl (synthetic:ICreateTypeLib2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ICreateTypeLib2Vtbl {
+    public var base_: ICreateTypeLibVtbl = ICreateTypeLibVtbl()
+    public var DeleteTypeInfo: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var SetCustData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetHelpStringContext: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetHelpStringDll: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IDispError (synthetic:Windows_Win32_System_Ole_IDispError)
+@When[Windows_Win32_System_Ole == "on"]
+public class IDispError <: Resource & windows_core.HandleWinrtType<IDispError> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDispError.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IDispError"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2800719969u32, 50976u16, 4560u16, 147u8, 55u8, 0u8, 160u8, 201u8, 13u8, 202u8, 169u8)
+    }
+
+    public static func intoWinrtHandle(value: IDispError): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDispError): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDispError.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDispError {
+        IDispError(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDispError {
+        IDispError(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDispError): IDispError {
+        let raw = IDispError.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDispError(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IDispErrorVtbl (synthetic:IDispErrorVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IDispErrorVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var QueryErrorInfo: CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetNext: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetHresult: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var GetSource: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var GetHelpInfo: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IDispatchEx (synthetic:Windows_Win32_System_Ole_IDispatchEx)
+@When[Windows_Win32_System_Ole == "on"]
+public class IDispatchEx <: Resource & windows_core.HandleWinrtType<IDispatchEx> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDispatchEx.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IDispatchEx"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2800719968u32, 50976u16, 4560u16, 147u8, 55u8, 0u8, 160u8, 201u8, 13u8, 202u8, 169u8)
+    }
+
+    public static func intoWinrtHandle(value: IDispatchEx): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDispatchEx): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDispatchEx.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDispatchEx {
+        IDispatchEx(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDispatchEx {
+        IDispatchEx(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDispatchEx): IDispatchEx {
+        let raw = IDispatchEx.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDispatchEx(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IDispatchExVtbl (synthetic:IDispatchExVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IDispatchExVtbl {
+    public var base_: Windows_Win32_System_Com.IDispatchVtbl = Windows_Win32_System_Com.IDispatchVtbl()
+    public var GetDispID: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var InvokeEx: CFunc<(CPointer<Unit>, Int32, UInt32, UInt16, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32, UInt16, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DeleteMemberByName: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var DeleteMemberByDispID: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetMemberProperties: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetMemberName: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var GetNextDispID: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetNameSpaceParent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IDropSource (synthetic:Windows_Win32_System_Ole_IDropSource)
+@When[Windows_Win32_System_Ole == "on"]
+public class IDropSource <: Resource & windows_core.HandleWinrtType<IDropSource> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDropSource.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IDropSource"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(289u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IDropSource): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDropSource): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDropSource.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDropSource {
+        IDropSource(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDropSource {
+        IDropSource(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDropSource): IDropSource {
+        let raw = IDropSource.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDropSource(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IDropSourceVtbl (synthetic:IDropSourceVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IDropSourceVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var QueryContinueDrag: CFunc<(CPointer<Unit>, Int32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32) -> Int32>(CPointer<Unit>())
+    public var GiveFeedback: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IDropSourceNotify (synthetic:Windows_Win32_System_Ole_IDropSourceNotify)
+@When[Windows_Win32_System_Ole == "on"]
+public class IDropSourceNotify <: Resource & windows_core.HandleWinrtType<IDropSourceNotify> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDropSourceNotify.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IDropSourceNotify"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(299u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IDropSourceNotify): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDropSourceNotify): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDropSourceNotify.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDropSourceNotify {
+        IDropSourceNotify(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDropSourceNotify {
+        IDropSourceNotify(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDropSourceNotify): IDropSourceNotify {
+        let raw = IDropSourceNotify.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDropSourceNotify(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IDropSourceNotifyVtbl (synthetic:IDropSourceNotifyVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IDropSourceNotifyVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var DragEnterTarget: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND) -> Int32>(CPointer<Unit>())
+    public var DragLeaveTarget: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IDropTarget (synthetic:Windows_Win32_System_Ole_IDropTarget)
+@When[Windows_Win32_System_Ole == "on"]
+public class IDropTarget <: Resource & windows_core.HandleWinrtType<IDropTarget> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDropTarget.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IDropTarget"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(290u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IDropTarget): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDropTarget): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDropTarget.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDropTarget {
+        IDropTarget(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDropTarget {
+        IDropTarget(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDropTarget): IDropTarget {
+        let raw = IDropTarget.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDropTarget(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IDropTargetVtbl (synthetic:IDropTargetVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IDropTargetVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var DragEnter: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Windows_Win32_Foundation.POINTL, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Windows_Win32_Foundation.POINTL, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DragOver: CFunc<(CPointer<Unit>, UInt32, Windows_Win32_Foundation.POINTL, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Windows_Win32_Foundation.POINTL, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DragLeave: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Drop: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Windows_Win32_Foundation.POINTL, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Windows_Win32_Foundation.POINTL, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IEnterpriseDropTarget (synthetic:Windows_Win32_System_Ole_IEnterpriseDropTarget)
+@When[Windows_Win32_System_Ole == "on"]
+public class IEnterpriseDropTarget <: Resource & windows_core.HandleWinrtType<IEnterpriseDropTarget> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IEnterpriseDropTarget.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IEnterpriseDropTarget"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(957233272u32, 64853u16, 19992u16, 129u8, 157u8, 70u8, 130u8, 8u8, 28u8, 12u8, 253u8)
+    }
+
+    public static func intoWinrtHandle(value: IEnterpriseDropTarget): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IEnterpriseDropTarget): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IEnterpriseDropTarget.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IEnterpriseDropTarget {
+        IEnterpriseDropTarget(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IEnterpriseDropTarget {
+        IEnterpriseDropTarget(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IEnterpriseDropTarget): IEnterpriseDropTarget {
+        let raw = IEnterpriseDropTarget.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IEnterpriseDropTarget(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IEnterpriseDropTargetVtbl (synthetic:IEnterpriseDropTargetVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IEnterpriseDropTargetVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetDropSourceEnterpriseId: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var IsEvaluatingEdpPolicy: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IEnumOLEVERB (synthetic:Windows_Win32_System_Ole_IEnumOLEVERB)
+@When[Windows_Win32_System_Ole == "on"]
+public class IEnumOLEVERB <: Resource & windows_core.HandleWinrtType<IEnumOLEVERB> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IEnumOLEVERB.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IEnumOLEVERB"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(260u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IEnumOLEVERB): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IEnumOLEVERB): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IEnumOLEVERB.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IEnumOLEVERB {
+        IEnumOLEVERB(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IEnumOLEVERB {
+        IEnumOLEVERB(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IEnumOLEVERB): IEnumOLEVERB {
+        let raw = IEnumOLEVERB.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IEnumOLEVERB(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IEnumOLEVERBVtbl (synthetic:IEnumOLEVERBVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IEnumOLEVERBVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reset: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IEnumOleDocumentViews (synthetic:Windows_Win32_System_Ole_IEnumOleDocumentViews)
+@When[Windows_Win32_System_Ole == "on"]
+public class IEnumOleDocumentViews <: Resource & windows_core.HandleWinrtType<IEnumOleDocumentViews> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IEnumOleDocumentViews.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IEnumOleDocumentViews"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3072507080u32, 20072u16, 4123u16, 162u8, 188u8, 0u8, 170u8, 0u8, 64u8, 71u8, 112u8)
+    }
+
+    public static func intoWinrtHandle(value: IEnumOleDocumentViews): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IEnumOleDocumentViews): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IEnumOleDocumentViews.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IEnumOleDocumentViews {
+        IEnumOleDocumentViews(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IEnumOleDocumentViews {
+        IEnumOleDocumentViews(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IEnumOleDocumentViews): IEnumOleDocumentViews {
+        let raw = IEnumOleDocumentViews.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IEnumOleDocumentViews(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IEnumOleDocumentViewsVtbl (synthetic:IEnumOleDocumentViewsVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IEnumOleDocumentViewsVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reset: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IEnumOleUndoUnits (synthetic:Windows_Win32_System_Ole_IEnumOleUndoUnits)
+@When[Windows_Win32_System_Ole == "on"]
+public class IEnumOleUndoUnits <: Resource & windows_core.HandleWinrtType<IEnumOleUndoUnits> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IEnumOleUndoUnits.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IEnumOleUndoUnits"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3018310464u32, 61335u16, 4558u16, 155u8, 201u8, 0u8, 170u8, 0u8, 96u8, 142u8, 1u8)
+    }
+
+    public static func intoWinrtHandle(value: IEnumOleUndoUnits): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IEnumOleUndoUnits): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IEnumOleUndoUnits.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IEnumOleUndoUnits {
+        IEnumOleUndoUnits(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IEnumOleUndoUnits {
+        IEnumOleUndoUnits(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IEnumOleUndoUnits): IEnumOleUndoUnits {
+        let raw = IEnumOleUndoUnits.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IEnumOleUndoUnits(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IEnumOleUndoUnitsVtbl (synthetic:IEnumOleUndoUnitsVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IEnumOleUndoUnitsVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reset: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IEnumVARIANT (synthetic:Windows_Win32_System_Ole_IEnumVARIANT)
+@When[Windows_Win32_System_Ole == "on"]
+public class IEnumVARIANT <: Resource & windows_core.HandleWinrtType<IEnumVARIANT> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IEnumVARIANT.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IEnumVARIANT"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132100u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IEnumVARIANT): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IEnumVARIANT): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IEnumVARIANT.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IEnumVARIANT {
+        IEnumVARIANT(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IEnumVARIANT {
+        IEnumVARIANT(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IEnumVARIANT): IEnumVARIANT {
+        let raw = IEnumVARIANT.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IEnumVARIANT(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IEnumVARIANTVtbl (synthetic:IEnumVARIANTVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IEnumVARIANTVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reset: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IFont (synthetic:Windows_Win32_System_Ole_IFont)
+@When[Windows_Win32_System_Ole == "on"]
+public class IFont <: Resource & windows_core.HandleWinrtType<IFont> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IFont.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IFont"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3203850242u32, 43124u16, 4122u16, 139u8, 186u8, 0u8, 170u8, 0u8, 48u8, 12u8, 171u8)
+    }
+
+    public static func intoWinrtHandle(value: IFont): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IFont): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IFont.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IFont {
+        IFont(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IFont {
+        IFont(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IFont): IFont {
+        let raw = IFont.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IFont(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IFontVtbl (synthetic:IFontVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IFontVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var SetName: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Size: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetSize: CFunc<(CPointer<Unit>, Windows_Win32_System_Com.CY) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_System_Com.CY) -> Int32>(CPointer<Unit>())
+    public var Bold: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var SetBold: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Italic: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var SetItalic: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Underline: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var SetUnderline: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Strikethrough: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var SetStrikethrough: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Weight: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetWeight: CFunc<(CPointer<Unit>, Int16) -> Int32> = CFunc<(CPointer<Unit>, Int16) -> Int32>(CPointer<Unit>())
+    public var Charset: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetCharset: CFunc<(CPointer<Unit>, Int16) -> Int32> = CFunc<(CPointer<Unit>, Int16) -> Int32>(CPointer<Unit>())
+    public var hFont: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var IsEqual: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetRatio: CFunc<(CPointer<Unit>, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var QueryTextMetrics: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var AddRefHfont: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HFONT) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HFONT) -> Int32>(CPointer<Unit>())
+    public var ReleaseHfont: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HFONT) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HFONT) -> Int32>(CPointer<Unit>())
+    public var SetHdc: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IFontDisp (synthetic:Windows_Win32_System_Ole_IFontDisp)
+@When[Windows_Win32_System_Ole == "on"]
+public class IFontDisp <: Resource & windows_core.HandleWinrtType<IFontDisp> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IFontDisp.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IFontDisp"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3203850243u32, 43124u16, 4122u16, 139u8, 186u8, 0u8, 170u8, 0u8, 48u8, 12u8, 171u8)
+    }
+
+    public static func intoWinrtHandle(value: IFontDisp): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IFontDisp): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IFontDisp.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IFontDisp {
+        IFontDisp(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IFontDisp {
+        IFontDisp(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IFontDisp): IFontDisp {
+        let raw = IFontDisp.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IFontDisp(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IFontDispVtbl (synthetic:IFontDispVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IFontDispVtbl {
+    public var base_: Windows_Win32_System_Com.IDispatchVtbl = Windows_Win32_System_Com.IDispatchVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IFontEventsDisp (synthetic:Windows_Win32_System_Ole_IFontEventsDisp)
+@When[Windows_Win32_System_Ole == "on"]
+public class IFontEventsDisp <: Resource & windows_core.HandleWinrtType<IFontEventsDisp> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IFontEventsDisp.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IFontEventsDisp"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1324748810u32, 44936u16, 4560u16, 152u8, 70u8, 0u8, 192u8, 79u8, 194u8, 153u8, 147u8)
+    }
+
+    public static func intoWinrtHandle(value: IFontEventsDisp): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IFontEventsDisp): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IFontEventsDisp.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IFontEventsDisp {
+        IFontEventsDisp(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IFontEventsDisp {
+        IFontEventsDisp(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IFontEventsDisp): IFontEventsDisp {
+        let raw = IFontEventsDisp.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IFontEventsDisp(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IFontEventsDispVtbl (synthetic:IFontEventsDispVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IFontEventsDispVtbl {
+    public var base_: Windows_Win32_System_Com.IDispatchVtbl = Windows_Win32_System_Com.IDispatchVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IGNOREMIME (synthetic:Windows_Win32_System_Ole_IGNOREMIME)
+@When[Windows_Win32_System_Ole == "on"]
+public struct IGNOREMIME {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const IGNOREMIME_IGNOREMIME_PROMPT = IGNOREMIME(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const IGNOREMIME_IGNOREMIME_TEXT = IGNOREMIME(2)
+
+// Windows.Win32.System.Ole.IGetOleObject (synthetic:Windows_Win32_System_Ole_IGetOleObject)
+@When[Windows_Win32_System_Ole == "on"]
+public class IGetOleObject <: Resource & windows_core.HandleWinrtType<IGetOleObject> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IGetOleObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IGetOleObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2322603424u32, 20459u16, 4123u16, 168u8, 46u8, 8u8, 0u8, 43u8, 43u8, 35u8, 55u8)
+    }
+
+    public static func intoWinrtHandle(value: IGetOleObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IGetOleObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IGetOleObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IGetOleObject {
+        IGetOleObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IGetOleObject {
+        IGetOleObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IGetOleObject): IGetOleObject {
+        let raw = IGetOleObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IGetOleObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IGetOleObjectVtbl (synthetic:IGetOleObjectVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IGetOleObjectVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetOleObject: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IGetVBAObject (synthetic:Windows_Win32_System_Ole_IGetVBAObject)
+@When[Windows_Win32_System_Ole == "on"]
+public class IGetVBAObject <: Resource & windows_core.HandleWinrtType<IGetVBAObject> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IGetVBAObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IGetVBAObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2440247904u32, 16204u16, 4123u16, 163u8, 246u8, 0u8, 170u8, 0u8, 52u8, 228u8, 233u8)
+    }
+
+    public static func intoWinrtHandle(value: IGetVBAObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IGetVBAObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IGetVBAObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IGetVBAObject {
+        IGetVBAObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IGetVBAObject {
+        IGetVBAObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IGetVBAObject): IGetVBAObject {
+        let raw = IGetVBAObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IGetVBAObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IGetVBAObjectVtbl (synthetic:IGetVBAObjectVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IGetVBAObjectVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetObject: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS (synthetic:Windows_Win32_System_Ole_INSERT_OBJECT_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct INSERT_OBJECT_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: INSERT_OBJECT_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: INSERT_OBJECT_FLAGS): INSERT_OBJECT_FLAGS {
+        return INSERT_OBJECT_FLAGS(value | other.value)
+    }
+    public operator func &(other: INSERT_OBJECT_FLAGS): INSERT_OBJECT_FLAGS {
+        return INSERT_OBJECT_FLAGS(value & other.value)
+    }
+    public operator func ^(other: INSERT_OBJECT_FLAGS): INSERT_OBJECT_FLAGS {
+        return INSERT_OBJECT_FLAGS(value ^ other.value)
+    }
+    public operator func !(): INSERT_OBJECT_FLAGS {
+        return INSERT_OBJECT_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_SHOWHELP = INSERT_OBJECT_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_SELECTCREATENEW = INSERT_OBJECT_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_SELECTCREATEFROMFILE = INSERT_OBJECT_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_CHECKLINK = INSERT_OBJECT_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_CHECKDISPLAYASICON = INSERT_OBJECT_FLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_CREATENEWOBJECT = INSERT_OBJECT_FLAGS(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_CREATEFILEOBJECT = INSERT_OBJECT_FLAGS(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_CREATELINKOBJECT = INSERT_OBJECT_FLAGS(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_DISABLELINK = INSERT_OBJECT_FLAGS(256)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_VERIFYSERVERSEXIST = INSERT_OBJECT_FLAGS(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_DISABLEDISPLAYASICON = INSERT_OBJECT_FLAGS(1024)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_HIDECHANGEICON = INSERT_OBJECT_FLAGS(2048)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_SHOWINSERTCONTROL = INSERT_OBJECT_FLAGS(4096)
+@When[Windows_Win32_System_Ole == "on"]
+public const INSERT_OBJECT_FLAGS_IOF_SELECTCREATECONTROL = INSERT_OBJECT_FLAGS(8192)
+
+// Windows.Win32.System.Ole.INTERFACEDATA (synthetic:Windows_Win32_System_Ole_INTERFACEDATA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct INTERFACEDATA {
+    public var pmethdata: CPointer<Unit> = CPointer<Unit>()
+    public var cMembers: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.IObjectIdentity (synthetic:Windows_Win32_System_Ole_IObjectIdentity)
+@When[Windows_Win32_System_Ole == "on"]
+public class IObjectIdentity <: Resource & windows_core.HandleWinrtType<IObjectIdentity> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IObjectIdentity.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IObjectIdentity"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3389306854u32, 3361u16, 4561u16, 140u8, 197u8, 0u8, 192u8, 79u8, 194u8, 176u8, 133u8)
+    }
+
+    public static func intoWinrtHandle(value: IObjectIdentity): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IObjectIdentity): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IObjectIdentity.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IObjectIdentity {
+        IObjectIdentity(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IObjectIdentity {
+        IObjectIdentity(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IObjectIdentity): IObjectIdentity {
+        let raw = IObjectIdentity.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IObjectIdentity(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IObjectIdentityVtbl (synthetic:IObjectIdentityVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IObjectIdentityVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var IsEqualObject: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IObjectWithSite (synthetic:Windows_Win32_System_Ole_IObjectWithSite)
+@When[Windows_Win32_System_Ole == "on"]
+public class IObjectWithSite <: Resource & windows_core.HandleWinrtType<IObjectWithSite> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IObjectWithSite.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IObjectWithSite"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(4232577443u32, 11177u16, 4559u16, 162u8, 41u8, 0u8, 170u8, 0u8, 61u8, 115u8, 82u8)
+    }
+
+    public static func intoWinrtHandle(value: IObjectWithSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IObjectWithSite): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IObjectWithSite.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IObjectWithSite {
+        IObjectWithSite(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IObjectWithSite {
+        IObjectWithSite(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IObjectWithSite): IObjectWithSite {
+        let raw = IObjectWithSite.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IObjectWithSite(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IObjectWithSiteVtbl (synthetic:IObjectWithSiteVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IObjectWithSiteVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetSite: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetSite: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleAdviseHolder (synthetic:Windows_Win32_System_Ole_IOleAdviseHolder)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleAdviseHolder <: Resource & windows_core.HandleWinrtType<IOleAdviseHolder> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleAdviseHolder.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleAdviseHolder"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(273u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleAdviseHolder): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleAdviseHolder): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleAdviseHolder.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleAdviseHolder {
+        IOleAdviseHolder(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleAdviseHolder {
+        IOleAdviseHolder(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleAdviseHolder): IOleAdviseHolder {
+        let raw = IOleAdviseHolder.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleAdviseHolder(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleAdviseHolderVtbl (synthetic:IOleAdviseHolderVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleAdviseHolderVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Advise: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Unadvise: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var EnumAdvise: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SendOnRename: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SendOnSave: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SendOnClose: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleCache (synthetic:Windows_Win32_System_Ole_IOleCache)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleCache <: Resource & windows_core.HandleWinrtType<IOleCache> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleCache.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleCache"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(286u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleCache): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleCache): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleCache.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleCache {
+        IOleCache(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleCache {
+        IOleCache(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleCache): IOleCache {
+        let raw = IOleCache.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleCache(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleCacheVtbl (synthetic:IOleCacheVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleCacheVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Cache: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Uncache: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var EnumCache: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var InitCache: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleCache2 (synthetic:Windows_Win32_System_Ole_IOleCache2)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleCache2 <: Resource & windows_core.HandleWinrtType<IOleCache2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleCache2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleCache2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(296u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleCache2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleCache2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleCache2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleCache2 {
+        IOleCache2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleCache2 {
+        IOleCache2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleCache2): IOleCache2 {
+        let raw = IOleCache2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleCache2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleCache2Vtbl (synthetic:IOleCache2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleCache2Vtbl {
+    public var base_: IOleCacheVtbl = IOleCacheVtbl()
+    public var UpdateCache: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DiscardCache: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleCacheControl (synthetic:Windows_Win32_System_Ole_IOleCacheControl)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleCacheControl <: Resource & windows_core.HandleWinrtType<IOleCacheControl> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleCacheControl.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleCacheControl"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(297u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleCacheControl): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleCacheControl): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleCacheControl.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleCacheControl {
+        IOleCacheControl(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleCacheControl {
+        IOleCacheControl(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleCacheControl): IOleCacheControl {
+        let raw = IOleCacheControl.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleCacheControl(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleCacheControlVtbl (synthetic:IOleCacheControlVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleCacheControlVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var OnRun: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnStop: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleClientSite (synthetic:Windows_Win32_System_Ole_IOleClientSite)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleClientSite <: Resource & windows_core.HandleWinrtType<IOleClientSite> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleClientSite.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleClientSite"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(280u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleClientSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleClientSite): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleClientSite.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleClientSite {
+        IOleClientSite(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleClientSite {
+        IOleClientSite(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleClientSite): IOleClientSite {
+        let raw = IOleClientSite.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleClientSite(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleClientSiteVtbl (synthetic:IOleClientSiteVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleClientSiteVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SaveObject: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetMoniker: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetContainer: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ShowObject: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnShowWindow: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var RequestNewObjectLayout: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleCommandTarget (synthetic:Windows_Win32_System_Ole_IOleCommandTarget)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleCommandTarget <: Resource & windows_core.HandleWinrtType<IOleCommandTarget> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleCommandTarget.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleCommandTarget"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3072507083u32, 20072u16, 4123u16, 162u8, 188u8, 0u8, 170u8, 0u8, 64u8, 71u8, 112u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleCommandTarget): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleCommandTarget): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleCommandTarget.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleCommandTarget {
+        IOleCommandTarget(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleCommandTarget {
+        IOleCommandTarget(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleCommandTarget): IOleCommandTarget {
+        let raw = IOleCommandTarget.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleCommandTarget(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleCommandTargetVtbl (synthetic:IOleCommandTargetVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleCommandTargetVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var QueryStatus: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Exec: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleContainer (synthetic:Windows_Win32_System_Ole_IOleContainer)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleContainer <: Resource & windows_core.HandleWinrtType<IOleContainer> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleContainer.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleContainer"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(283u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleContainer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleContainer): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleContainer.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleContainer {
+        IOleContainer(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleContainer {
+        IOleContainer(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleContainer): IOleContainer {
+        let raw = IOleContainer.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleContainer(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleContainerVtbl (synthetic:IOleContainerVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleContainerVtbl {
+    public var base_: IParseDisplayNameVtbl = IParseDisplayNameVtbl()
+    public var EnumObjects: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var LockContainer: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleControl (synthetic:Windows_Win32_System_Ole_IOleControl)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleControl <: Resource & windows_core.HandleWinrtType<IOleControl> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleControl.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleControl"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443336u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleControl): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleControl): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleControl.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleControl {
+        IOleControl(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleControl {
+        IOleControl(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleControl): IOleControl {
+        let raw = IOleControl.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleControl(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleControlVtbl (synthetic:IOleControlVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleControlVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetControlInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnMnemonic: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnAmbientPropertyChange: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var FreezeEvents: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleControlSite (synthetic:Windows_Win32_System_Ole_IOleControlSite)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleControlSite <: Resource & windows_core.HandleWinrtType<IOleControlSite> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleControlSite.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleControlSite"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443337u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleControlSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleControlSite): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleControlSite.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleControlSite {
+        IOleControlSite(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleControlSite {
+        IOleControlSite(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleControlSite): IOleControlSite {
+        let raw = IOleControlSite.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleControlSite(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleControlSiteVtbl (synthetic:IOleControlSiteVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleControlSiteVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var OnControlInfoChanged: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var LockInPlaceActive: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetExtendedControl: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var TransformCoords: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var TranslateAccelerator: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var OnFocus: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var ShowPropertyFrame: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleDocument (synthetic:Windows_Win32_System_Ole_IOleDocument)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleDocument <: Resource & windows_core.HandleWinrtType<IOleDocument> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleDocument.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleDocument"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3072507077u32, 20072u16, 4123u16, 162u8, 188u8, 0u8, 170u8, 0u8, 64u8, 71u8, 112u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleDocument): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleDocument): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleDocument.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleDocument {
+        IOleDocument(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleDocument {
+        IOleDocument(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleDocument): IOleDocument {
+        let raw = IOleDocument.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleDocument(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleDocumentVtbl (synthetic:IOleDocumentVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleDocumentVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var CreateView: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDocMiscStatus: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EnumViews: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleDocumentSite (synthetic:Windows_Win32_System_Ole_IOleDocumentSite)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleDocumentSite <: Resource & windows_core.HandleWinrtType<IOleDocumentSite> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleDocumentSite.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleDocumentSite"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3072507079u32, 20072u16, 4123u16, 162u8, 188u8, 0u8, 170u8, 0u8, 64u8, 71u8, 112u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleDocumentSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleDocumentSite): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleDocumentSite.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleDocumentSite {
+        IOleDocumentSite(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleDocumentSite {
+        IOleDocumentSite(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleDocumentSite): IOleDocumentSite {
+        let raw = IOleDocumentSite.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleDocumentSite(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleDocumentSiteVtbl (synthetic:IOleDocumentSiteVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleDocumentSiteVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var ActivateMe: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleDocumentView (synthetic:Windows_Win32_System_Ole_IOleDocumentView)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleDocumentView <: Resource & windows_core.HandleWinrtType<IOleDocumentView> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleDocumentView.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleDocumentView"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3072507078u32, 20072u16, 4123u16, 162u8, 188u8, 0u8, 170u8, 0u8, 64u8, 71u8, 112u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleDocumentView): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleDocumentView): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleDocumentView.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleDocumentView {
+        IOleDocumentView(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleDocumentView {
+        IOleDocumentView(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleDocumentView): IOleDocumentView {
+        let raw = IOleDocumentView.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleDocumentView(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleDocumentViewVtbl (synthetic:IOleDocumentViewVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleDocumentViewVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetInPlaceSite: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetInPlaceSite: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDocument: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetRect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetRect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetRectComplex: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Show: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var UIActivate: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Open: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CloseView: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SaveViewState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ApplyViewState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceActiveObject (synthetic:Windows_Win32_System_Ole_IOleInPlaceActiveObject)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceActiveObject <: Resource & windows_core.HandleWinrtType<IOleInPlaceActiveObject> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceActiveObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceActiveObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(279u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceActiveObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceActiveObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceActiveObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceActiveObject {
+        IOleInPlaceActiveObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceActiveObject {
+        IOleInPlaceActiveObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceActiveObject): IOleInPlaceActiveObject {
+        let raw = IOleInPlaceActiveObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceActiveObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceActiveObjectVtbl (synthetic:IOleInPlaceActiveObjectVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceActiveObjectVtbl {
+    public var base_: IOleWindowVtbl = IOleWindowVtbl()
+    public var TranslateAccelerator: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnFrameWindowActivate: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var OnDocWindowActivate: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var ResizeBorder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var EnableModeless: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceFrame (synthetic:Windows_Win32_System_Ole_IOleInPlaceFrame)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceFrame <: Resource & windows_core.HandleWinrtType<IOleInPlaceFrame> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceFrame.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceFrame"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(278u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceFrame): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceFrame): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceFrame.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceFrame {
+        IOleInPlaceFrame(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceFrame {
+        IOleInPlaceFrame(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceFrame): IOleInPlaceFrame {
+        let raw = IOleInPlaceFrame.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceFrame(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceFrameVtbl (synthetic:IOleInPlaceFrameVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceFrameVtbl {
+    public var base_: IOleInPlaceUIWindowVtbl = IOleInPlaceUIWindowVtbl()
+    public var InsertMenus: CFunc<(CPointer<Unit>, Windows_Win32_UI_WindowsAndMessaging.HMENU, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_UI_WindowsAndMessaging.HMENU, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetMenu: CFunc<(CPointer<Unit>, Windows_Win32_UI_WindowsAndMessaging.HMENU, CPointer<Unit>, Windows_Win32_Foundation.HWND) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_UI_WindowsAndMessaging.HMENU, CPointer<Unit>, Windows_Win32_Foundation.HWND) -> Int32>(CPointer<Unit>())
+    public var RemoveMenus: CFunc<(CPointer<Unit>, Windows_Win32_UI_WindowsAndMessaging.HMENU) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_UI_WindowsAndMessaging.HMENU) -> Int32>(CPointer<Unit>())
+    public var SetStatusText: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var EnableModeless: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var TranslateAccelerator: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt16) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt16) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceObject (synthetic:Windows_Win32_System_Ole_IOleInPlaceObject)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceObject <: Resource & windows_core.HandleWinrtType<IOleInPlaceObject> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(275u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceObject {
+        IOleInPlaceObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceObject {
+        IOleInPlaceObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceObject): IOleInPlaceObject {
+        let raw = IOleInPlaceObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceObjectVtbl (synthetic:IOleInPlaceObjectVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceObjectVtbl {
+    public var base_: IOleWindowVtbl = IOleWindowVtbl()
+    public var InPlaceDeactivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UIDeactivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetObjectRects: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ReactivateAndUndo: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceObjectWindowless (synthetic:Windows_Win32_System_Ole_IOleInPlaceObjectWindowless)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceObjectWindowless <: Resource & windows_core.HandleWinrtType<IOleInPlaceObjectWindowless> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceObjectWindowless.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceObjectWindowless"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(471881420u32, 24308u16, 4123u16, 139u8, 200u8, 0u8, 170u8, 0u8, 62u8, 59u8, 41u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceObjectWindowless): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceObjectWindowless): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceObjectWindowless.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceObjectWindowless {
+        IOleInPlaceObjectWindowless(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceObjectWindowless {
+        IOleInPlaceObjectWindowless(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceObjectWindowless): IOleInPlaceObjectWindowless {
+        let raw = IOleInPlaceObjectWindowless.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceObjectWindowless(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceObjectWindowlessVtbl (synthetic:IOleInPlaceObjectWindowlessVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceObjectWindowlessVtbl {
+    public var base_: IOleInPlaceObjectVtbl = IOleInPlaceObjectVtbl()
+    public var OnWindowMessage: CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative, CPointer<IntNative>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative, CPointer<IntNative>) -> Int32>(CPointer<Unit>())
+    public var GetDropTarget: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceSite (synthetic:Windows_Win32_System_Ole_IOleInPlaceSite)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceSite <: Resource & windows_core.HandleWinrtType<IOleInPlaceSite> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceSite.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceSite"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(281u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceSite): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceSite.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceSite {
+        IOleInPlaceSite(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceSite {
+        IOleInPlaceSite(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceSite): IOleInPlaceSite {
+        let raw = IOleInPlaceSite.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceSite(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceSiteVtbl (synthetic:IOleInPlaceSiteVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceSiteVtbl {
+    public var base_: IOleWindowVtbl = IOleWindowVtbl()
+    public var CanInPlaceActivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnInPlaceActivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnUIActivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetWindowContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Scroll: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.SIZE) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.SIZE) -> Int32>(CPointer<Unit>())
+    public var OnUIDeactivate: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var OnInPlaceDeactivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DiscardUndoState: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DeactivateAndUndo: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnPosRectChange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceSiteEx (synthetic:Windows_Win32_System_Ole_IOleInPlaceSiteEx)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceSiteEx <: Resource & windows_core.HandleWinrtType<IOleInPlaceSiteEx> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceSiteEx.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceSiteEx"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2620173696u32, 13348u16, 4559u16, 182u8, 112u8, 0u8, 170u8, 0u8, 76u8, 214u8, 216u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceSiteEx): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceSiteEx): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceSiteEx.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceSiteEx {
+        IOleInPlaceSiteEx(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceSiteEx {
+        IOleInPlaceSiteEx(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceSiteEx): IOleInPlaceSiteEx {
+        let raw = IOleInPlaceSiteEx.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceSiteEx(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceSiteExVtbl (synthetic:IOleInPlaceSiteExVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceSiteExVtbl {
+    public var base_: IOleInPlaceSiteVtbl = IOleInPlaceSiteVtbl()
+    public var OnInPlaceActivateEx: CFunc<(CPointer<Unit>, CPointer<Int32>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>, UInt32) -> Int32>(CPointer<Unit>())
+    public var OnInPlaceDeactivateEx: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var RequestUIActivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceSiteWindowless (synthetic:Windows_Win32_System_Ole_IOleInPlaceSiteWindowless)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceSiteWindowless <: Resource & windows_core.HandleWinrtType<IOleInPlaceSiteWindowless> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceSiteWindowless.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceSiteWindowless"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2452532640u32, 13348u16, 4559u16, 182u8, 112u8, 0u8, 170u8, 0u8, 76u8, 214u8, 216u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceSiteWindowless): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceSiteWindowless): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceSiteWindowless.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceSiteWindowless {
+        IOleInPlaceSiteWindowless(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceSiteWindowless {
+        IOleInPlaceSiteWindowless(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceSiteWindowless): IOleInPlaceSiteWindowless {
+        let raw = IOleInPlaceSiteWindowless.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceSiteWindowless(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceSiteWindowlessVtbl (synthetic:IOleInPlaceSiteWindowlessVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceSiteWindowlessVtbl {
+    public var base_: IOleInPlaceSiteExVtbl = IOleInPlaceSiteExVtbl()
+    public var CanWindowlessActivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetCapture: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetCapture: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetFocus: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetFocus: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetDC: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ReleaseDC: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC) -> Int32>(CPointer<Unit>())
+    public var InvalidateRect: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var InvalidateRgn: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HRGN, Int32) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HRGN, Int32) -> Int32>(CPointer<Unit>())
+    public var ScrollRect: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var AdjustRect: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnDefWindowMessage: CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative, CPointer<IntNative>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UIntNative, IntNative, CPointer<IntNative>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceUIWindow (synthetic:Windows_Win32_System_Ole_IOleInPlaceUIWindow)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleInPlaceUIWindow <: Resource & windows_core.HandleWinrtType<IOleInPlaceUIWindow> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleInPlaceUIWindow.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleInPlaceUIWindow"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(277u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleInPlaceUIWindow): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleInPlaceUIWindow): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleInPlaceUIWindow.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleInPlaceUIWindow {
+        IOleInPlaceUIWindow(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleInPlaceUIWindow {
+        IOleInPlaceUIWindow(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleInPlaceUIWindow): IOleInPlaceUIWindow {
+        let raw = IOleInPlaceUIWindow.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleInPlaceUIWindow(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleInPlaceUIWindowVtbl (synthetic:IOleInPlaceUIWindowVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleInPlaceUIWindowVtbl {
+    public var base_: IOleWindowVtbl = IOleWindowVtbl()
+    public var GetBorder: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RequestBorderSpace: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetBorderSpace: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetActiveObject: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleItemContainer (synthetic:Windows_Win32_System_Ole_IOleItemContainer)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleItemContainer <: Resource & windows_core.HandleWinrtType<IOleItemContainer> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleItemContainer.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleItemContainer"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(284u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleItemContainer): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleItemContainer): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleItemContainer.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleItemContainer {
+        IOleItemContainer(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleItemContainer {
+        IOleItemContainer(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleItemContainer): IOleItemContainer {
+        let raw = IOleItemContainer.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleItemContainer(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleItemContainerVtbl (synthetic:IOleItemContainerVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleItemContainerVtbl {
+    public var base_: IOleContainerVtbl = IOleContainerVtbl()
+    public var GetObject: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetObjectStorage: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var IsRunning: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleLink (synthetic:Windows_Win32_System_Ole_IOleLink)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleLink <: Resource & windows_core.HandleWinrtType<IOleLink> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleLink.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleLink"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(285u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleLink): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleLink): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleLink.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleLink {
+        IOleLink(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleLink {
+        IOleLink(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleLink): IOleLink {
+        let raw = IOleLink.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleLink(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleLinkVtbl (synthetic:IOleLinkVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleLinkVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetUpdateOptions: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetUpdateOptions: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetSourceMoniker: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetSourceMoniker: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetSourceDisplayName: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var GetSourceDisplayName: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32>(CPointer<Unit>())
+    public var BindToSource: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var BindIfRunning: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetBoundSource: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UnbindSource: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Update: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleObject (synthetic:Windows_Win32_System_Ole_IOleObject)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleObject <: Resource & windows_core.HandleWinrtType<IOleObject> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(274u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleObject {
+        IOleObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleObject {
+        IOleObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleObject): IOleObject {
+        let raw = IOleObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleObjectVtbl (synthetic:IOleObjectVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleObjectVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetClientSite: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetClientSite: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetHostNames: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var Close: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetMoniker: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetMoniker: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var InitFromData: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetClipboardData: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DoVerb: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>, Int32, Windows_Win32_Foundation.HWND, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>, Int32, Windows_Win32_Foundation.HWND, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EnumVerbs: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Update: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var IsUpToDate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetUserClassID: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetUserType: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>) -> Int32>(CPointer<Unit>())
+    public var SetExtent: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetExtent: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Advise: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Unadvise: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var EnumAdvise: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetMiscStatus: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetColorScheme: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleParentUndoUnit (synthetic:Windows_Win32_System_Ole_IOleParentUndoUnit)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleParentUndoUnit <: Resource & windows_core.HandleWinrtType<IOleParentUndoUnit> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleParentUndoUnit.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleParentUndoUnit"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2717578032u32, 61335u16, 4558u16, 155u8, 201u8, 0u8, 170u8, 0u8, 96u8, 142u8, 1u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleParentUndoUnit): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleParentUndoUnit): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleParentUndoUnit.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleParentUndoUnit {
+        IOleParentUndoUnit(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleParentUndoUnit {
+        IOleParentUndoUnit(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleParentUndoUnit): IOleParentUndoUnit {
+        let raw = IOleParentUndoUnit.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleParentUndoUnit(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleParentUndoUnitVtbl (synthetic:IOleParentUndoUnitVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleParentUndoUnitVtbl {
+    public var base_: IOleUndoUnitVtbl = IOleUndoUnitVtbl()
+    public var Open: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Close: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var FindUnit: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetParentState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUILinkContainerA (synthetic:Windows_Win32_System_Ole_IOleUILinkContainerA)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUILinkContainerA <: Resource & windows_core.HandleWinrtType<IOleUILinkContainerA> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUILinkContainerA.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUILinkContainerA"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public static func intoWinrtHandle(value: IOleUILinkContainerA): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUILinkContainerA): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUILinkContainerA.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUILinkContainerA {
+        IOleUILinkContainerA(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUILinkContainerA {
+        IOleUILinkContainerA(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUILinkContainerA): IOleUILinkContainerA {
+        let raw = IOleUILinkContainerA.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUILinkContainerA(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUILinkContainerAVtbl (synthetic:IOleUILinkContainerAVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUILinkContainerAVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetNextLink: CFunc<(CPointer<Unit>, UInt32) -> UInt32> = CFunc<(CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var SetLinkUpdateOptions: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetLinkUpdateOptions: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetLinkSource: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, UInt32, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetLinkSource: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt8>>, CPointer<Unit>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>, CPointer<Int32>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt8>>, CPointer<Unit>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>, CPointer<Int32>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var OpenLinkSource: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var UpdateLink: CFunc<(CPointer<Unit>, UInt32, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var CancelLink: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUILinkContainerW (synthetic:Windows_Win32_System_Ole_IOleUILinkContainerW)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUILinkContainerW <: Resource & windows_core.HandleWinrtType<IOleUILinkContainerW> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUILinkContainerW.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUILinkContainerW"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public static func intoWinrtHandle(value: IOleUILinkContainerW): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUILinkContainerW): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUILinkContainerW.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUILinkContainerW {
+        IOleUILinkContainerW(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUILinkContainerW {
+        IOleUILinkContainerW(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUILinkContainerW): IOleUILinkContainerW {
+        let raw = IOleUILinkContainerW.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUILinkContainerW(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUILinkContainerWVtbl (synthetic:IOleUILinkContainerWVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUILinkContainerWVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetNextLink: CFunc<(CPointer<Unit>, UInt32) -> UInt32> = CFunc<(CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
+    public var SetLinkUpdateOptions: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetLinkUpdateOptions: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetLinkSource: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, UInt32, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, UInt32, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetLinkSource: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>, CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<Int32>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<UInt16>>, CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<Int32>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var OpenLinkSource: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var UpdateLink: CFunc<(CPointer<Unit>, UInt32, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var CancelLink: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUILinkInfoA (synthetic:Windows_Win32_System_Ole_IOleUILinkInfoA)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUILinkInfoA <: Resource & windows_core.HandleWinrtType<IOleUILinkInfoA> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUILinkInfoA.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUILinkInfoA"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public static func intoWinrtHandle(value: IOleUILinkInfoA): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUILinkInfoA): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUILinkInfoA.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUILinkInfoA {
+        IOleUILinkInfoA(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUILinkInfoA {
+        IOleUILinkInfoA(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUILinkInfoA): IOleUILinkInfoA {
+        let raw = IOleUILinkInfoA.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUILinkInfoA(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUILinkInfoAVtbl (synthetic:IOleUILinkInfoAVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUILinkInfoAVtbl {
+    public var base_: IOleUILinkContainerAVtbl = IOleUILinkContainerAVtbl()
+    public var GetLastUpdate: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUILinkInfoW (synthetic:Windows_Win32_System_Ole_IOleUILinkInfoW)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUILinkInfoW <: Resource & windows_core.HandleWinrtType<IOleUILinkInfoW> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUILinkInfoW.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUILinkInfoW"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public static func intoWinrtHandle(value: IOleUILinkInfoW): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUILinkInfoW): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUILinkInfoW.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUILinkInfoW {
+        IOleUILinkInfoW(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUILinkInfoW {
+        IOleUILinkInfoW(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUILinkInfoW): IOleUILinkInfoW {
+        let raw = IOleUILinkInfoW.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUILinkInfoW(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUILinkInfoWVtbl (synthetic:IOleUILinkInfoWVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUILinkInfoWVtbl {
+    public var base_: IOleUILinkContainerWVtbl = IOleUILinkContainerWVtbl()
+    public var GetLastUpdate: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUIObjInfoA (synthetic:Windows_Win32_System_Ole_IOleUIObjInfoA)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUIObjInfoA <: Resource & windows_core.HandleWinrtType<IOleUIObjInfoA> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUIObjInfoA.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUIObjInfoA"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public static func intoWinrtHandle(value: IOleUIObjInfoA): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUIObjInfoA): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUIObjInfoA.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUIObjInfoA {
+        IOleUIObjInfoA(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUIObjInfoA {
+        IOleUIObjInfoA(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUIObjInfoA): IOleUIObjInfoA {
+        let raw = IOleUIObjInfoA.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUIObjInfoA(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUIObjInfoAVtbl (synthetic:IOleUIObjInfoAVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUIObjInfoAVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetObjectInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>, CPointer<CPointer<UInt8>>) -> Int32>(CPointer<Unit>())
+    public var GetConvertInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ConvertObject: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetViewInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetViewInfo: CFunc<(CPointer<Unit>, UInt32, Windows_Win32_Foundation.HGLOBAL, UInt32, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Windows_Win32_Foundation.HGLOBAL, UInt32, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUIObjInfoW (synthetic:Windows_Win32_System_Ole_IOleUIObjInfoW)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUIObjInfoW <: Resource & windows_core.HandleWinrtType<IOleUIObjInfoW> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUIObjInfoW.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUIObjInfoW"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+
+    public static func intoWinrtHandle(value: IOleUIObjInfoW): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUIObjInfoW): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUIObjInfoW.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUIObjInfoW {
+        IOleUIObjInfoW(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUIObjInfoW {
+        IOleUIObjInfoW(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUIObjInfoW): IOleUIObjInfoW {
+        let raw = IOleUIObjInfoW.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUIObjInfoW(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUIObjInfoWVtbl (synthetic:IOleUIObjInfoWVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUIObjInfoWVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetObjectInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32>(CPointer<Unit>())
+    public var GetConvertInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ConvertObject: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetViewInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetViewInfo: CFunc<(CPointer<Unit>, UInt32, Windows_Win32_Foundation.HGLOBAL, UInt32, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Windows_Win32_Foundation.HGLOBAL, UInt32, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUndoManager (synthetic:Windows_Win32_System_Ole_IOleUndoManager)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUndoManager <: Resource & windows_core.HandleWinrtType<IOleUndoManager> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUndoManager.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUndoManager"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3489788416u32, 61335u16, 4558u16, 155u8, 201u8, 0u8, 170u8, 0u8, 96u8, 142u8, 1u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleUndoManager): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUndoManager): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUndoManager.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUndoManager {
+        IOleUndoManager(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUndoManager {
+        IOleUndoManager(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUndoManager): IOleUndoManager {
+        let raw = IOleUndoManager.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUndoManager(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUndoManagerVtbl (synthetic:IOleUndoManagerVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUndoManagerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Open: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Close: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Add: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetOpenParentState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var DiscardFrom: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var UndoTo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var RedoTo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EnumUndoable: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EnumRedoable: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetLastUndoDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var GetLastRedoDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var Enable: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleUndoUnit (synthetic:Windows_Win32_System_Ole_IOleUndoUnit)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleUndoUnit <: Resource & windows_core.HandleWinrtType<IOleUndoUnit> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleUndoUnit.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleUndoUnit"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2303382448u32, 61335u16, 4558u16, 155u8, 201u8, 0u8, 170u8, 0u8, 96u8, 142u8, 1u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleUndoUnit): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleUndoUnit): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleUndoUnit.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleUndoUnit {
+        IOleUndoUnit(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleUndoUnit {
+        IOleUndoUnit(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleUndoUnit): IOleUndoUnit {
+        let raw = IOleUndoUnit.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleUndoUnit(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleUndoUnitVtbl (synthetic:IOleUndoUnitVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleUndoUnitVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Do: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var GetUnitType: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnNextAdd: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IOleWindow (synthetic:Windows_Win32_System_Ole_IOleWindow)
+@When[Windows_Win32_System_Ole == "on"]
+public class IOleWindow <: Resource & windows_core.HandleWinrtType<IOleWindow> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IOleWindow.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IOleWindow"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(276u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IOleWindow): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IOleWindow): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IOleWindow.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IOleWindow {
+        IOleWindow(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IOleWindow {
+        IOleWindow(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IOleWindow): IOleWindow {
+        let raw = IOleWindow.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IOleWindow(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IOleWindowVtbl (synthetic:IOleWindowVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IOleWindowVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetWindow: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ContextSensitiveHelp: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IParseDisplayName (synthetic:Windows_Win32_System_Ole_IParseDisplayName)
+@When[Windows_Win32_System_Ole == "on"]
+public class IParseDisplayName <: Resource & windows_core.HandleWinrtType<IParseDisplayName> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IParseDisplayName.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IParseDisplayName"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(282u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IParseDisplayName): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IParseDisplayName): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IParseDisplayName.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IParseDisplayName {
+        IParseDisplayName(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IParseDisplayName {
+        IParseDisplayName(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IParseDisplayName): IParseDisplayName {
+        let raw = IParseDisplayName.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IParseDisplayName(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IParseDisplayNameVtbl (synthetic:IParseDisplayNameVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IParseDisplayNameVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var ParseDisplayName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPerPropertyBrowsing (synthetic:Windows_Win32_System_Ole_IPerPropertyBrowsing)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPerPropertyBrowsing <: Resource & windows_core.HandleWinrtType<IPerPropertyBrowsing> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPerPropertyBrowsing.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPerPropertyBrowsing"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(929813418u32, 14405u16, 4123u16, 132u8, 237u8, 8u8, 0u8, 43u8, 46u8, 199u8, 19u8)
+    }
+
+    public static func intoWinrtHandle(value: IPerPropertyBrowsing): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPerPropertyBrowsing): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPerPropertyBrowsing.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPerPropertyBrowsing {
+        IPerPropertyBrowsing(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPerPropertyBrowsing {
+        IPerPropertyBrowsing(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPerPropertyBrowsing): IPerPropertyBrowsing {
+        let raw = IPerPropertyBrowsing.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPerPropertyBrowsing(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPerPropertyBrowsingVtbl (synthetic:IPerPropertyBrowsingVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPerPropertyBrowsingVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetDisplayString: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var MapPropertyToPage: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetPredefinedStrings: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetPredefinedValue: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPersistPropertyBag (synthetic:Windows_Win32_System_Ole_IPersistPropertyBag)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPersistPropertyBag <: Resource & windows_core.HandleWinrtType<IPersistPropertyBag> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPersistPropertyBag.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPersistPropertyBag"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(936922976u32, 17099u16, 4558u16, 129u8, 53u8, 0u8, 170u8, 0u8, 75u8, 184u8, 81u8)
+    }
+
+    public static func intoWinrtHandle(value: IPersistPropertyBag): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPersistPropertyBag): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPersistPropertyBag.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPersistPropertyBag {
+        IPersistPropertyBag(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPersistPropertyBag {
+        IPersistPropertyBag(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPersistPropertyBag): IPersistPropertyBag {
+        let raw = IPersistPropertyBag.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPersistPropertyBag(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPersistPropertyBagVtbl (synthetic:IPersistPropertyBagVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPersistPropertyBagVtbl {
+    public var base_: Windows_Win32_System_Com.IPersistVtbl = Windows_Win32_System_Com.IPersistVtbl()
+    public var InitNew: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Load: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Save: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPersistPropertyBag2 (synthetic:Windows_Win32_System_Ole_IPersistPropertyBag2)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPersistPropertyBag2 <: Resource & windows_core.HandleWinrtType<IPersistPropertyBag2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPersistPropertyBag2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPersistPropertyBag2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(586504321u32, 10251u16, 4560u16, 168u8, 169u8, 0u8, 160u8, 201u8, 12u8, 32u8, 4u8)
+    }
+
+    public static func intoWinrtHandle(value: IPersistPropertyBag2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPersistPropertyBag2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPersistPropertyBag2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPersistPropertyBag2 {
+        IPersistPropertyBag2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPersistPropertyBag2 {
+        IPersistPropertyBag2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPersistPropertyBag2): IPersistPropertyBag2 {
+        let raw = IPersistPropertyBag2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPersistPropertyBag2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPersistPropertyBag2Vtbl (synthetic:IPersistPropertyBag2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPersistPropertyBag2Vtbl {
+    public var base_: Windows_Win32_System_Com.IPersistVtbl = Windows_Win32_System_Com.IPersistVtbl()
+    public var InitNew: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Load: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Save: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32) -> Int32>(CPointer<Unit>())
+    public var IsDirty: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPicture (synthetic:Windows_Win32_System_Ole_IPicture)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPicture <: Resource & windows_core.HandleWinrtType<IPicture> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPicture.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPicture"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2079852928u32, 48946u16, 4122u16, 139u8, 187u8, 0u8, 170u8, 0u8, 48u8, 12u8, 171u8)
+    }
+
+    public static func intoWinrtHandle(value: IPicture): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPicture): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPicture.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPicture {
+        IPicture(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPicture {
+        IPicture(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPicture): IPicture {
+        let raw = IPicture.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPicture(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPictureVtbl (synthetic:IPictureVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPictureVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Handle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var hPal: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Type: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Width: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Height: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Render: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var set_hPal: CFunc<(CPointer<Unit>, OLE_HANDLE) -> Int32> = CFunc<(CPointer<Unit>, OLE_HANDLE) -> Int32>(CPointer<Unit>())
+    public var CurDC: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SelectPicture: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var KeepOriginalFormat: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var SetKeepOriginalFormat: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var PictureChanged: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SaveAsFile: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Attributes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPicture2 (synthetic:Windows_Win32_System_Ole_IPicture2)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPicture2 <: Resource & windows_core.HandleWinrtType<IPicture2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPicture2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPicture2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(4112014808u32, 8210u16, 19211u16, 170u8, 217u8, 240u8, 82u8, 198u8, 189u8, 72u8, 43u8)
+    }
+
+    public static func intoWinrtHandle(value: IPicture2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPicture2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPicture2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPicture2 {
+        IPicture2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPicture2 {
+        IPicture2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPicture2): IPicture2 {
+        let raw = IPicture2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPicture2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPicture2Vtbl (synthetic:IPicture2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPicture2Vtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Handle: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var hPal: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Type: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Width: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Height: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Render: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, Int32, Int32, Int32, Int32, Int32, Int32, Int32, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var set_hPal: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CurDC: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SelectPicture: CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var KeepOriginalFormat: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public var SetKeepOriginalFormat: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var PictureChanged: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SaveAsFile: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Attributes: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPictureDisp (synthetic:Windows_Win32_System_Ole_IPictureDisp)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPictureDisp <: Resource & windows_core.HandleWinrtType<IPictureDisp> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPictureDisp.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPictureDisp"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2079852929u32, 48946u16, 4122u16, 139u8, 187u8, 0u8, 170u8, 0u8, 48u8, 12u8, 171u8)
+    }
+
+    public static func intoWinrtHandle(value: IPictureDisp): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPictureDisp): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPictureDisp.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPictureDisp {
+        IPictureDisp(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPictureDisp {
+        IPictureDisp(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPictureDisp): IPictureDisp {
+        let raw = IPictureDisp.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPictureDisp(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPictureDispVtbl (synthetic:IPictureDispVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPictureDispVtbl {
+    public var base_: Windows_Win32_System_Com.IDispatchVtbl = Windows_Win32_System_Com.IDispatchVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPointerInactive (synthetic:Windows_Win32_System_Ole_IPointerInactive)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPointerInactive <: Resource & windows_core.HandleWinrtType<IPointerInactive> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPointerInactive.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPointerInactive"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1436027808u32, 13738u16, 4559u16, 182u8, 113u8, 0u8, 170u8, 0u8, 76u8, 214u8, 216u8)
+    }
+
+    public static func intoWinrtHandle(value: IPointerInactive): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPointerInactive): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPointerInactive.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPointerInactive {
+        IPointerInactive(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPointerInactive {
+        IPointerInactive(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPointerInactive): IPointerInactive {
+        let raw = IPointerInactive.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPointerInactive(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPointerInactiveVtbl (synthetic:IPointerInactiveVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPointerInactiveVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetActivationPolicy: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var OnInactiveMouseMove: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32, UInt32) -> Int32>(CPointer<Unit>())
+    public var OnInactiveSetCursor: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32, UInt32, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32, Int32, UInt32, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPrint (synthetic:Windows_Win32_System_Ole_IPrint)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPrint <: Resource & windows_core.HandleWinrtType<IPrint> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPrint.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPrint"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3072507081u32, 20072u16, 4123u16, 162u8, 188u8, 0u8, 170u8, 0u8, 64u8, 71u8, 112u8)
+    }
+
+    public static func intoWinrtHandle(value: IPrint): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPrint): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPrint.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPrint {
+        IPrint(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPrint {
+        IPrint(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPrint): IPrint {
+        let raw = IPrint.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPrint(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPrintVtbl (synthetic:IPrintVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPrintVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetInitialPageNum: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var GetPageInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Print: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPropertyNotifySink (synthetic:Windows_Win32_System_Ole_IPropertyNotifySink)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPropertyNotifySink <: Resource & windows_core.HandleWinrtType<IPropertyNotifySink> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPropertyNotifySink.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPropertyNotifySink"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2616966146u32, 61425u16, 4122u16, 132u8, 237u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: IPropertyNotifySink): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPropertyNotifySink): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPropertyNotifySink.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPropertyNotifySink {
+        IPropertyNotifySink(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPropertyNotifySink {
+        IPropertyNotifySink(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPropertyNotifySink): IPropertyNotifySink {
+        let raw = IPropertyNotifySink.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPropertyNotifySink(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPropertyNotifySinkVtbl (synthetic:IPropertyNotifySinkVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPropertyNotifySinkVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var OnChanged: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var OnRequestEdit: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPropertyPage (synthetic:Windows_Win32_System_Ole_IPropertyPage)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPropertyPage <: Resource & windows_core.HandleWinrtType<IPropertyPage> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPropertyPage.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPropertyPage"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443341u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: IPropertyPage): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPropertyPage): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPropertyPage.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPropertyPage {
+        IPropertyPage(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPropertyPage {
+        IPropertyPage(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPropertyPage): IPropertyPage {
+        let raw = IPropertyPage.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPropertyPage(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPropertyPageVtbl (synthetic:IPropertyPageVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPropertyPageVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetPageSite: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Activate: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var Deactivate: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetPageInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetObjects: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Show: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Move: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var IsPageDirty: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Apply: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Help: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public var TranslateAccelerator: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPropertyPage2 (synthetic:Windows_Win32_System_Ole_IPropertyPage2)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPropertyPage2 <: Resource & windows_core.HandleWinrtType<IPropertyPage2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPropertyPage2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPropertyPage2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(31737445u32, 9388u16, 4123u16, 132u8, 237u8, 8u8, 0u8, 43u8, 46u8, 199u8, 19u8)
+    }
+
+    public static func intoWinrtHandle(value: IPropertyPage2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPropertyPage2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPropertyPage2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPropertyPage2 {
+        IPropertyPage2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPropertyPage2 {
+        IPropertyPage2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPropertyPage2): IPropertyPage2 {
+        let raw = IPropertyPage2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPropertyPage2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPropertyPage2Vtbl (synthetic:IPropertyPage2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPropertyPage2Vtbl {
+    public var base_: IPropertyPageVtbl = IPropertyPageVtbl()
+    public var EditProperty: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IPropertyPageSite (synthetic:Windows_Win32_System_Ole_IPropertyPageSite)
+@When[Windows_Win32_System_Ole == "on"]
+public class IPropertyPageSite <: Resource & windows_core.HandleWinrtType<IPropertyPageSite> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPropertyPageSite.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IPropertyPageSite"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443340u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: IPropertyPageSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPropertyPageSite): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPropertyPageSite.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPropertyPageSite {
+        IPropertyPageSite(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPropertyPageSite {
+        IPropertyPageSite(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPropertyPageSite): IPropertyPageSite {
+        let raw = IPropertyPageSite.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPropertyPageSite(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IPropertyPageSiteVtbl (synthetic:IPropertyPageSiteVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IPropertyPageSiteVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var OnStatusChange: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetLocaleID: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetPageContainer: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var TranslateAccelerator: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IProtectFocus (synthetic:Windows_Win32_System_Ole_IProtectFocus)
+@When[Windows_Win32_System_Ole == "on"]
+public class IProtectFocus <: Resource & windows_core.HandleWinrtType<IProtectFocus> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IProtectFocus.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IProtectFocus"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3625947299u32, 33110u16, 17655u16, 173u8, 40u8, 90u8, 187u8, 135u8, 0u8, 50u8, 116u8)
+    }
+
+    public static func intoWinrtHandle(value: IProtectFocus): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IProtectFocus): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IProtectFocus.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IProtectFocus {
+        IProtectFocus(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IProtectFocus {
+        IProtectFocus(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IProtectFocus): IProtectFocus {
+        let raw = IProtectFocus.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IProtectFocus(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IProtectFocusVtbl (synthetic:IProtectFocusVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IProtectFocusVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var AllowFocusChange: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IProtectedModeMenuServices (synthetic:Windows_Win32_System_Ole_IProtectedModeMenuServices)
+@When[Windows_Win32_System_Ole == "on"]
+public class IProtectedModeMenuServices <: Resource & windows_core.HandleWinrtType<IProtectedModeMenuServices> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IProtectedModeMenuServices.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IProtectedModeMenuServices"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1942029806u32, 40447u16, 18951u16, 184u8, 60u8, 126u8, 255u8, 41u8, 12u8, 38u8, 110u8)
+    }
+
+    public static func intoWinrtHandle(value: IProtectedModeMenuServices): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IProtectedModeMenuServices): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IProtectedModeMenuServices.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IProtectedModeMenuServices {
+        IProtectedModeMenuServices(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IProtectedModeMenuServices {
+        IProtectedModeMenuServices(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IProtectedModeMenuServices): IProtectedModeMenuServices {
+        let raw = IProtectedModeMenuServices.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IProtectedModeMenuServices(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IProtectedModeMenuServicesVtbl (synthetic:IProtectedModeMenuServicesVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IProtectedModeMenuServicesVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var CreateMenu: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var LoadMenu: CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var LoadMenuID: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt16, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IProvideClassInfo (synthetic:Windows_Win32_System_Ole_IProvideClassInfo)
+@When[Windows_Win32_System_Ole == "on"]
+public class IProvideClassInfo <: Resource & windows_core.HandleWinrtType<IProvideClassInfo> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IProvideClassInfo.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IProvideClassInfo"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443331u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: IProvideClassInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IProvideClassInfo): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IProvideClassInfo.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IProvideClassInfo {
+        IProvideClassInfo(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IProvideClassInfo {
+        IProvideClassInfo(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IProvideClassInfo): IProvideClassInfo {
+        let raw = IProvideClassInfo.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IProvideClassInfo(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IProvideClassInfoVtbl (synthetic:IProvideClassInfoVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IProvideClassInfoVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetClassInfo: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IProvideClassInfo2 (synthetic:Windows_Win32_System_Ole_IProvideClassInfo2)
+@When[Windows_Win32_System_Ole == "on"]
+public class IProvideClassInfo2 <: Resource & windows_core.HandleWinrtType<IProvideClassInfo2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IProvideClassInfo2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IProvideClassInfo2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2797353664u32, 56234u16, 4558u16, 157u8, 227u8, 0u8, 170u8, 0u8, 75u8, 184u8, 81u8)
+    }
+
+    public static func intoWinrtHandle(value: IProvideClassInfo2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IProvideClassInfo2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IProvideClassInfo2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IProvideClassInfo2 {
+        IProvideClassInfo2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IProvideClassInfo2 {
+        IProvideClassInfo2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IProvideClassInfo2): IProvideClassInfo2 {
+        let raw = IProvideClassInfo2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IProvideClassInfo2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IProvideClassInfo2Vtbl (synthetic:IProvideClassInfo2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IProvideClassInfo2Vtbl {
+    public var base_: IProvideClassInfoVtbl = IProvideClassInfoVtbl()
+    public var GetGUID: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IProvideMultipleClassInfo (synthetic:Windows_Win32_System_Ole_IProvideMultipleClassInfo)
+@When[Windows_Win32_System_Ole == "on"]
+public class IProvideMultipleClassInfo <: Resource & windows_core.HandleWinrtType<IProvideMultipleClassInfo> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IProvideMultipleClassInfo.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IProvideMultipleClassInfo"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2813045185u32, 35203u16, 4559u16, 143u8, 32u8, 0u8, 128u8, 95u8, 44u8, 208u8, 100u8)
+    }
+
+    public static func intoWinrtHandle(value: IProvideMultipleClassInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IProvideMultipleClassInfo): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IProvideMultipleClassInfo.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IProvideMultipleClassInfo {
+        IProvideMultipleClassInfo(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IProvideMultipleClassInfo {
+        IProvideMultipleClassInfo(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IProvideMultipleClassInfo): IProvideMultipleClassInfo {
+        let raw = IProvideMultipleClassInfo.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IProvideMultipleClassInfo(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IProvideMultipleClassInfoVtbl (synthetic:IProvideMultipleClassInfoVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IProvideMultipleClassInfoVtbl {
+    public var base_: IProvideClassInfo2Vtbl = IProvideClassInfo2Vtbl()
+    public var GetMultiTypeInfoCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetInfoOfIndex: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IProvideRuntimeContext (synthetic:Windows_Win32_System_Ole_IProvideRuntimeContext)
+@When[Windows_Win32_System_Ole == "on"]
+public class IProvideRuntimeContext <: Resource & windows_core.HandleWinrtType<IProvideRuntimeContext> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IProvideRuntimeContext.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IProvideRuntimeContext"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(283263306u32, 60505u16, 18898u16, 188u8, 81u8, 90u8, 221u8, 44u8, 54u8, 254u8, 188u8)
+    }
+
+    public static func intoWinrtHandle(value: IProvideRuntimeContext): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IProvideRuntimeContext): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IProvideRuntimeContext.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IProvideRuntimeContext {
+        IProvideRuntimeContext(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IProvideRuntimeContext {
+        IProvideRuntimeContext(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IProvideRuntimeContext): IProvideRuntimeContext {
+        let raw = IProvideRuntimeContext.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IProvideRuntimeContext(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IProvideRuntimeContextVtbl (synthetic:IProvideRuntimeContextVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IProvideRuntimeContextVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetCurrentSourceContext: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int16>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int16>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IQuickActivate (synthetic:Windows_Win32_System_Ole_IQuickActivate)
+@When[Windows_Win32_System_Ole == "on"]
+public class IQuickActivate <: Resource & windows_core.HandleWinrtType<IQuickActivate> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IQuickActivate.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IQuickActivate"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3478252816u32, 25342u16, 4559u16, 191u8, 134u8, 0u8, 160u8, 201u8, 3u8, 72u8, 54u8)
+    }
+
+    public static func intoWinrtHandle(value: IQuickActivate): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IQuickActivate): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IQuickActivate.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IQuickActivate {
+        IQuickActivate(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IQuickActivate {
+        IQuickActivate(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IQuickActivate): IQuickActivate {
+        let raw = IQuickActivate.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IQuickActivate(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IQuickActivateVtbl (synthetic:IQuickActivateVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IQuickActivateVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var QuickActivate: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetContentExtent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetContentExtent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
 }
 
 // Windows.Win32.System.Ole.IRecordInfo (synthetic:Windows_Win32_System_Ole_IRecordInfo)
@@ -153,6 +10551,3046 @@ public struct IRecordInfoVtbl {
     public init() {}
 }
 
+// Windows.Win32.System.Ole.ISimpleFrameSite (synthetic:Windows_Win32_System_Ole_ISimpleFrameSite)
+@When[Windows_Win32_System_Ole == "on"]
+public class ISimpleFrameSite <: Resource & windows_core.HandleWinrtType<ISimpleFrameSite> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ISimpleFrameSite.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ISimpleFrameSite"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1948978689u32, 5350u16, 4123u16, 145u8, 78u8, 0u8, 170u8, 0u8, 48u8, 12u8, 171u8)
+    }
+
+    public static func intoWinrtHandle(value: ISimpleFrameSite): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ISimpleFrameSite): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ISimpleFrameSite.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ISimpleFrameSite {
+        ISimpleFrameSite(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ISimpleFrameSite {
+        ISimpleFrameSite(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ISimpleFrameSite): ISimpleFrameSite {
+        let raw = ISimpleFrameSite.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ISimpleFrameSite(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ISimpleFrameSiteVtbl (synthetic:ISimpleFrameSiteVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ISimpleFrameSiteVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var PreMessageFilter: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative, CPointer<IntNative>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative, CPointer<IntNative>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var PostMessageFilter: CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative, CPointer<IntNative>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative, CPointer<IntNative>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ISpecifyPropertyPages (synthetic:Windows_Win32_System_Ole_ISpecifyPropertyPages)
+@When[Windows_Win32_System_Ole == "on"]
+public class ISpecifyPropertyPages <: Resource & windows_core.HandleWinrtType<ISpecifyPropertyPages> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ISpecifyPropertyPages.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ISpecifyPropertyPages"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443339u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
+
+    public static func intoWinrtHandle(value: ISpecifyPropertyPages): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ISpecifyPropertyPages): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ISpecifyPropertyPages.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ISpecifyPropertyPages {
+        ISpecifyPropertyPages(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ISpecifyPropertyPages {
+        ISpecifyPropertyPages(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ISpecifyPropertyPages): ISpecifyPropertyPages {
+        let raw = ISpecifyPropertyPages.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ISpecifyPropertyPages(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ISpecifyPropertyPagesVtbl (synthetic:ISpecifyPropertyPagesVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ISpecifyPropertyPagesVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetPages: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ITypeChangeEvents (synthetic:Windows_Win32_System_Ole_ITypeChangeEvents)
+@When[Windows_Win32_System_Ole == "on"]
+public class ITypeChangeEvents <: Resource & windows_core.HandleWinrtType<ITypeChangeEvents> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ITypeChangeEvents.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ITypeChangeEvents"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132112u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: ITypeChangeEvents): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ITypeChangeEvents): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ITypeChangeEvents.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ITypeChangeEvents {
+        ITypeChangeEvents(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ITypeChangeEvents {
+        ITypeChangeEvents(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ITypeChangeEvents): ITypeChangeEvents {
+        let raw = ITypeChangeEvents.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ITypeChangeEvents(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ITypeChangeEventsVtbl (synthetic:ITypeChangeEventsVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ITypeChangeEventsVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var RequestTypeChange: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var AfterTypeChange: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<UInt16>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<UInt16>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ITypeFactory (synthetic:Windows_Win32_System_Ole_ITypeFactory)
+@When[Windows_Win32_System_Ole == "on"]
+public class ITypeFactory <: Resource & windows_core.HandleWinrtType<ITypeFactory> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ITypeFactory.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ITypeFactory"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(46u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: ITypeFactory): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ITypeFactory): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ITypeFactory.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ITypeFactory {
+        ITypeFactory(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ITypeFactory {
+        ITypeFactory(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ITypeFactory): ITypeFactory {
+        let raw = ITypeFactory.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ITypeFactory(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ITypeFactoryVtbl (synthetic:ITypeFactoryVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ITypeFactoryVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var CreateFromTypeInfo: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.ITypeMarshal (synthetic:Windows_Win32_System_Ole_ITypeMarshal)
+@When[Windows_Win32_System_Ole == "on"]
+public class ITypeMarshal <: Resource & windows_core.HandleWinrtType<ITypeMarshal> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ITypeMarshal.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.ITypeMarshal"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(45u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: ITypeMarshal): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ITypeMarshal): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ITypeMarshal.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ITypeMarshal {
+        ITypeMarshal(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ITypeMarshal {
+        ITypeMarshal(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ITypeMarshal): ITypeMarshal {
+        let raw = ITypeMarshal.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ITypeMarshal(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.ITypeMarshalVtbl (synthetic:ITypeMarshalVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct ITypeMarshalVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Size: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Marshal: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Unmarshal: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Free: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IVBFormat (synthetic:Windows_Win32_System_Ole_IVBFormat)
+@When[Windows_Win32_System_Ole == "on"]
+public class IVBFormat <: Resource & windows_core.HandleWinrtType<IVBFormat> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IVBFormat.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IVBFormat"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2554985824u32, 14184u16, 4123u16, 141u8, 114u8, 174u8, 97u8, 100u8, 255u8, 227u8, 207u8)
+    }
+
+    public static func intoWinrtHandle(value: IVBFormat): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IVBFormat): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IVBFormat.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IVBFormat {
+        IVBFormat(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IVBFormat {
+        IVBFormat(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IVBFormat): IVBFormat {
+        let raw = IVBFormat.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IVBFormat(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IVBFormatVtbl (synthetic:IVBFormatVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IVBFormatVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Format: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt16, Int32, Int16, UInt16, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt16, Int32, Int16, UInt16, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IVBGetControl (synthetic:Windows_Win32_System_Ole_IVBGetControl)
+@When[Windows_Win32_System_Ole == "on"]
+public class IVBGetControl <: Resource & windows_core.HandleWinrtType<IVBGetControl> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IVBGetControl.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IVBGetControl"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1084248224u32, 15409u16, 4123u16, 168u8, 46u8, 8u8, 0u8, 43u8, 43u8, 35u8, 55u8)
+    }
+
+    public static func intoWinrtHandle(value: IVBGetControl): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IVBGetControl): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IVBGetControl.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IVBGetControl {
+        IVBGetControl(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IVBGetControl {
+        IVBGetControl(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IVBGetControl): IVBGetControl {
+        let raw = IVBGetControl.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IVBGetControl(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IVBGetControlVtbl (synthetic:IVBGetControlVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IVBGetControlVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var EnumControls: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IVariantChangeType (synthetic:Windows_Win32_System_Ole_IVariantChangeType)
+@When[Windows_Win32_System_Ole == "on"]
+public class IVariantChangeType <: Resource & windows_core.HandleWinrtType<IVariantChangeType> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IVariantChangeType.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IVariantChangeType"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2800719970u32, 50976u16, 4560u16, 147u8, 55u8, 0u8, 160u8, 201u8, 13u8, 202u8, 169u8)
+    }
+
+    public static func intoWinrtHandle(value: IVariantChangeType): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IVariantChangeType): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IVariantChangeType.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IVariantChangeType {
+        IVariantChangeType(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IVariantChangeType {
+        IVariantChangeType(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IVariantChangeType): IVariantChangeType {
+        let raw = IVariantChangeType.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IVariantChangeType(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IVariantChangeTypeVtbl (synthetic:IVariantChangeTypeVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IVariantChangeTypeVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var ChangeType: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt16) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt16) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IViewObject (synthetic:Windows_Win32_System_Ole_IViewObject)
+@When[Windows_Win32_System_Ole == "on"]
+public class IViewObject <: Resource & windows_core.HandleWinrtType<IViewObject> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IViewObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IViewObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(269u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IViewObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IViewObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IViewObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IViewObject {
+        IViewObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IViewObject {
+        IViewObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IViewObject): IViewObject {
+        let raw = IViewObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IViewObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IViewObjectVtbl (synthetic:IViewObjectVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IViewObjectVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Draw: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetColorSet: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Freeze: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Unfreeze: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var SetAdvise: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetAdvise: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IViewObject2 (synthetic:Windows_Win32_System_Ole_IViewObject2)
+@When[Windows_Win32_System_Ole == "on"]
+public class IViewObject2 <: Resource & windows_core.HandleWinrtType<IViewObject2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IViewObject2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IViewObject2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(295u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
+
+    public static func intoWinrtHandle(value: IViewObject2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IViewObject2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IViewObject2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IViewObject2 {
+        IViewObject2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IViewObject2 {
+        IViewObject2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IViewObject2): IViewObject2 {
+        let raw = IViewObject2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IViewObject2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IViewObject2Vtbl (synthetic:IViewObject2Vtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IViewObject2Vtbl {
+    public var base_: IViewObjectVtbl = IViewObjectVtbl()
+    public var GetExtent: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IViewObjectEx (synthetic:Windows_Win32_System_Ole_IViewObjectEx)
+@When[Windows_Win32_System_Ole == "on"]
+public class IViewObjectEx <: Resource & windows_core.HandleWinrtType<IViewObjectEx> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IViewObjectEx.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IViewObjectEx"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(988955282u32, 3222u16, 4558u16, 160u8, 207u8, 0u8, 170u8, 0u8, 96u8, 10u8, 184u8)
+    }
+
+    public static func intoWinrtHandle(value: IViewObjectEx): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IViewObjectEx): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IViewObjectEx.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IViewObjectEx {
+        IViewObjectEx(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IViewObjectEx {
+        IViewObjectEx(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IViewObjectEx): IViewObjectEx {
+        let raw = IViewObjectEx.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IViewObjectEx(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IViewObjectExVtbl (synthetic:IViewObjectExVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IViewObjectExVtbl {
+    public var base_: IViewObject2Vtbl = IViewObject2Vtbl()
+    public var GetRect: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetViewStatus: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var QueryHitPoint: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, Windows_Win32_Foundation.POINT, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, Windows_Win32_Foundation.POINT, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var QueryHitRect: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetNaturalExtent: CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, Int32, CPointer<Unit>, Windows_Win32_Graphics_Gdi.HDC, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.IZoomEvents (synthetic:Windows_Win32_System_Ole_IZoomEvents)
+@When[Windows_Win32_System_Ole == "on"]
+public class IZoomEvents <: Resource & windows_core.HandleWinrtType<IZoomEvents> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IZoomEvents.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Ole.IZoomEvents"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1102479696u32, 36940u16, 19991u16, 160u8, 186u8, 164u8, 56u8, 24u8, 46u8, 53u8, 157u8)
+    }
+
+    public static func intoWinrtHandle(value: IZoomEvents): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IZoomEvents): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IZoomEvents.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IZoomEvents {
+        IZoomEvents(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IZoomEvents {
+        IZoomEvents(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IZoomEvents): IZoomEvents {
+        let raw = IZoomEvents.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IZoomEvents(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Ole.IZoomEventsVtbl (synthetic:IZoomEventsVtbl)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct IZoomEventsVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var OnZoomPercentChanged: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Ole.KEYMODIFIERS (synthetic:Windows_Win32_System_Ole_KEYMODIFIERS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct KEYMODIFIERS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: KEYMODIFIERS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: KEYMODIFIERS): KEYMODIFIERS {
+        return KEYMODIFIERS(value | other.value)
+    }
+    public operator func &(other: KEYMODIFIERS): KEYMODIFIERS {
+        return KEYMODIFIERS(value & other.value)
+    }
+    public operator func ^(other: KEYMODIFIERS): KEYMODIFIERS {
+        return KEYMODIFIERS(value ^ other.value)
+    }
+    public operator func !(): KEYMODIFIERS {
+        return KEYMODIFIERS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const KEYMODIFIERS_KEYMOD_SHIFT = KEYMODIFIERS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const KEYMODIFIERS_KEYMOD_CONTROL = KEYMODIFIERS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const KEYMODIFIERS_KEYMOD_ALT = KEYMODIFIERS(4)
+
+// Windows.Win32.System.Ole.LIBFLAGS (synthetic:Windows_Win32_System_Ole_LIBFLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct LIBFLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const LIBFLAGS_LIBFLAG_FRESTRICTED = LIBFLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const LIBFLAGS_LIBFLAG_FCONTROL = LIBFLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const LIBFLAGS_LIBFLAG_FHIDDEN = LIBFLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const LIBFLAGS_LIBFLAG_FHASDISKIMAGE = LIBFLAGS(8)
+
+// Windows.Win32.System.Ole.LICINFO (synthetic:Windows_Win32_System_Ole_LICINFO)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct LICINFO {
+    public var cbLicInfo: Int32 = 0i32
+    public var fRuntimeKeyAvail: Int32 = 0i32
+    public var fLicVerified: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.LOAD_PICTURE_FLAGS (synthetic:Windows_Win32_System_Ole_LOAD_PICTURE_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct LOAD_PICTURE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: LOAD_PICTURE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: LOAD_PICTURE_FLAGS): LOAD_PICTURE_FLAGS {
+        return LOAD_PICTURE_FLAGS(value | other.value)
+    }
+    public operator func &(other: LOAD_PICTURE_FLAGS): LOAD_PICTURE_FLAGS {
+        return LOAD_PICTURE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: LOAD_PICTURE_FLAGS): LOAD_PICTURE_FLAGS {
+        return LOAD_PICTURE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): LOAD_PICTURE_FLAGS {
+        return LOAD_PICTURE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const LOAD_PICTURE_FLAGS_LP_DEFAULT = LOAD_PICTURE_FLAGS(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const LOAD_PICTURE_FLAGS_LP_MONOCHROME = LOAD_PICTURE_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const LOAD_PICTURE_FLAGS_LP_VGACOLOR = LOAD_PICTURE_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const LOAD_PICTURE_FLAGS_LP_COLOR = LOAD_PICTURE_FLAGS(4)
+
+// Windows.Win32.System.Ole.LPFNOLEUIHOOK (synthetic:Windows_Win32_System_Ole_LPFNOLEUIHOOK)
+@When[Windows_Win32_System_Ole == "on"]
+public type LPFNOLEUIHOOK = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>
+
+// Windows.Win32.System.Ole.MEDIAPLAYBACK_STATE (synthetic:Windows_Win32_System_Ole_MEDIAPLAYBACK_STATE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct MEDIAPLAYBACK_STATE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const MEDIAPLAYBACK_STATE_MEDIAPLAYBACK_RESUME = MEDIAPLAYBACK_STATE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const MEDIAPLAYBACK_STATE_MEDIAPLAYBACK_PAUSE = MEDIAPLAYBACK_STATE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const MEDIAPLAYBACK_STATE_MEDIAPLAYBACK_PAUSE_AND_SUSPEND = MEDIAPLAYBACK_STATE(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const MEDIAPLAYBACK_STATE_MEDIAPLAYBACK_RESUME_FROM_SUSPEND = MEDIAPLAYBACK_STATE(3)
+
+// Windows.Win32.System.Ole.METHODDATA (synthetic:Windows_Win32_System_Ole_METHODDATA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct METHODDATA {
+    public var szName: CPointer<UInt16> = CPointer<UInt16>()
+    public var ppdata: CPointer<Unit> = CPointer<Unit>()
+    public var dispid: Int32 = 0i32
+    public var iMeth: UInt32 = 0u32
+    public var cc: Int32 = 0i32
+    public var cArgs: UInt32 = 0u32
+    public var wFlags: UInt16 = 0u16
+    public var vtReturn: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Ole.MULTICLASSINFO_FLAGS (synthetic:Windows_Win32_System_Ole_MULTICLASSINFO_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct MULTICLASSINFO_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const MULTICLASSINFO_FLAGS_MULTICLASSINFO_GETTYPEINFO = MULTICLASSINFO_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const MULTICLASSINFO_FLAGS_MULTICLASSINFO_GETNUMRESERVEDDISPIDS = MULTICLASSINFO_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const MULTICLASSINFO_FLAGS_MULTICLASSINFO_GETIIDPRIMARY = MULTICLASSINFO_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const MULTICLASSINFO_FLAGS_MULTICLASSINFO_GETIIDSOURCE = MULTICLASSINFO_FLAGS(8)
+
+// Windows.Win32.System.Ole.NUMPARSE (synthetic:Windows_Win32_System_Ole_NUMPARSE)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct NUMPARSE {
+    public var cDig: Int32 = 0i32
+    public var dwInFlags: UInt32 = 0u32
+    public var dwOutFlags: UInt32 = 0u32
+    public var cchUsed: Int32 = 0i32
+    public var nBaseShift: Int32 = 0i32
+    public var nPwr10: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.NUMPARSE_FLAGS (synthetic:Windows_Win32_System_Ole_NUMPARSE_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct NUMPARSE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: NUMPARSE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: NUMPARSE_FLAGS): NUMPARSE_FLAGS {
+        return NUMPARSE_FLAGS(value | other.value)
+    }
+    public operator func &(other: NUMPARSE_FLAGS): NUMPARSE_FLAGS {
+        return NUMPARSE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: NUMPARSE_FLAGS): NUMPARSE_FLAGS {
+        return NUMPARSE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): NUMPARSE_FLAGS {
+        return NUMPARSE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_LEADING_WHITE = NUMPARSE_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_TRAILING_WHITE = NUMPARSE_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_LEADING_PLUS = NUMPARSE_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_TRAILING_PLUS = NUMPARSE_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_LEADING_MINUS = NUMPARSE_FLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_TRAILING_MINUS = NUMPARSE_FLAGS(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_HEX_OCT = NUMPARSE_FLAGS(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_PARENS = NUMPARSE_FLAGS(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_DECIMAL = NUMPARSE_FLAGS(256)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_THOUSANDS = NUMPARSE_FLAGS(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_CURRENCY = NUMPARSE_FLAGS(1024)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_EXPONENT = NUMPARSE_FLAGS(2048)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_USE_ALL = NUMPARSE_FLAGS(4096)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_STD = NUMPARSE_FLAGS(8191)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_NEG = NUMPARSE_FLAGS(65536)
+@When[Windows_Win32_System_Ole == "on"]
+public const NUMPARSE_FLAGS_NUMPRS_INEXACT = NUMPARSE_FLAGS(131072)
+
+// Windows.Win32.System.Ole.OBJECTDESCRIPTOR (synthetic:Windows_Win32_System_Ole_OBJECTDESCRIPTOR)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OBJECTDESCRIPTOR {
+    public var cbSize: UInt32 = 0u32
+    public var clsid: GUID = GUID()
+    public var dwDrawAspect: UInt32 = 0u32
+    public var sizel: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+    public var pointl: Windows_Win32_Foundation.POINTL = Windows_Win32_Foundation.POINTL()
+    public var dwStatus: UInt32 = 0u32
+    public var dwFullUserTypeName: UInt32 = 0u32
+    public var dwSrcOfCopy: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS (synthetic:Windows_Win32_System_Ole_OBJECT_PROPERTIES_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OBJECT_PROPERTIES_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: OBJECT_PROPERTIES_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: OBJECT_PROPERTIES_FLAGS): OBJECT_PROPERTIES_FLAGS {
+        return OBJECT_PROPERTIES_FLAGS(value | other.value)
+    }
+    public operator func &(other: OBJECT_PROPERTIES_FLAGS): OBJECT_PROPERTIES_FLAGS {
+        return OBJECT_PROPERTIES_FLAGS(value & other.value)
+    }
+    public operator func ^(other: OBJECT_PROPERTIES_FLAGS): OBJECT_PROPERTIES_FLAGS {
+        return OBJECT_PROPERTIES_FLAGS(value ^ other.value)
+    }
+    public operator func !(): OBJECT_PROPERTIES_FLAGS {
+        return OBJECT_PROPERTIES_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OBJECT_PROPERTIES_FLAGS_OPF_OBJECTISLINK = OBJECT_PROPERTIES_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OBJECT_PROPERTIES_FLAGS_OPF_NOFILLDEFAULT = OBJECT_PROPERTIES_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OBJECT_PROPERTIES_FLAGS_OPF_SHOWHELP = OBJECT_PROPERTIES_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OBJECT_PROPERTIES_FLAGS_OPF_DISABLECONVERT = OBJECT_PROPERTIES_FLAGS(8)
+
+// Windows.Win32.System.Ole.OCPFIPARAMS (synthetic:Windows_Win32_System_Ole_OCPFIPARAMS)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OCPFIPARAMS {
+    public var cbStructSize: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var x: Int32 = 0i32
+    public var y: Int32 = 0i32
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var cObjects: UInt32 = 0u32
+    public var lplpUnk: CPointer<Unit> = CPointer<Unit>()
+    public var cPages: UInt32 = 0u32
+    public var lpPages: CPointer<Unit> = CPointer<Unit>()
+    public var lcid: UInt32 = 0u32
+    public var dispidInitialProperty: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.OLECLOSE (synthetic:Windows_Win32_System_Ole_OLECLOSE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECLOSE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECLOSE_OLECLOSE_SAVEIFDIRTY = OLECLOSE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECLOSE_OLECLOSE_NOSAVE = OLECLOSE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECLOSE_OLECLOSE_PROMPTSAVE = OLECLOSE(2)
+
+// Windows.Win32.System.Ole.OLECMD (synthetic:Windows_Win32_System_Ole_OLECMD)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLECMD {
+    public var cmdID: UInt32 = 0u32
+    public var cmdf: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.OLECMDEXECOPT (synthetic:Windows_Win32_System_Ole_OLECMDEXECOPT)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDEXECOPT {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDEXECOPT_OLECMDEXECOPT_DODEFAULT = OLECMDEXECOPT(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDEXECOPT_OLECMDEXECOPT_PROMPTUSER = OLECMDEXECOPT(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDEXECOPT_OLECMDEXECOPT_DONTPROMPTUSER = OLECMDEXECOPT(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDEXECOPT_OLECMDEXECOPT_SHOWHELP = OLECMDEXECOPT(3)
+
+// Windows.Win32.System.Ole.OLECMDF (synthetic:Windows_Win32_System_Ole_OLECMDF)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDF {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDF_OLECMDF_SUPPORTED = OLECMDF(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDF_OLECMDF_ENABLED = OLECMDF(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDF_OLECMDF_LATCHED = OLECMDF(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDF_OLECMDF_NINCHED = OLECMDF(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDF_OLECMDF_INVISIBLE = OLECMDF(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDF_OLECMDF_DEFHIDEONCTXTMENU = OLECMDF(32)
+
+// Windows.Win32.System.Ole.OLECMDID (synthetic:Windows_Win32_System_Ole_OLECMDID)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDID {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_OPEN = OLECMDID(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_NEW = OLECMDID(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SAVE = OLECMDID(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SAVEAS = OLECMDID(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SAVECOPYAS = OLECMDID(5)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PRINT = OLECMDID(6)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PRINTPREVIEW = OLECMDID(7)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PAGESETUP = OLECMDID(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SPELL = OLECMDID(9)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PROPERTIES = OLECMDID(10)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_CUT = OLECMDID(11)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_COPY = OLECMDID(12)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PASTE = OLECMDID(13)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PASTESPECIAL = OLECMDID(14)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_UNDO = OLECMDID(15)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_REDO = OLECMDID(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SELECTALL = OLECMDID(17)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_CLEARSELECTION = OLECMDID(18)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ZOOM = OLECMDID(19)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_GETZOOMRANGE = OLECMDID(20)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_UPDATECOMMANDS = OLECMDID(21)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_REFRESH = OLECMDID(22)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_STOP = OLECMDID(23)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_HIDETOOLBARS = OLECMDID(24)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SETPROGRESSMAX = OLECMDID(25)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SETPROGRESSPOS = OLECMDID(26)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SETPROGRESSTEXT = OLECMDID(27)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SETTITLE = OLECMDID(28)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SETDOWNLOADSTATE = OLECMDID(29)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_STOPDOWNLOAD = OLECMDID(30)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ONTOOLBARACTIVATED = OLECMDID(31)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_FIND = OLECMDID(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_DELETE = OLECMDID(33)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_HTTPEQUIV = OLECMDID(34)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_HTTPEQUIV_DONE = OLECMDID(35)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ENABLE_INTERACTION = OLECMDID(36)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ONUNLOAD = OLECMDID(37)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PROPERTYBAG2 = OLECMDID(38)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PREREFRESH = OLECMDID(39)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWSCRIPTERROR = OLECMDID(40)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWMESSAGE = OLECMDID(41)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWFIND = OLECMDID(42)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWPAGESETUP = OLECMDID(43)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWPRINT = OLECMDID(44)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_CLOSE = OLECMDID(45)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ALLOWUILESSSAVEAS = OLECMDID(46)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_DONTDOWNLOADCSS = OLECMDID(47)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_UPDATEPAGESTATUS = OLECMDID(48)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PRINT2 = OLECMDID(49)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PRINTPREVIEW2 = OLECMDID(50)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SETPRINTTEMPLATE = OLECMDID(51)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_GETPRINTTEMPLATE = OLECMDID(52)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PAGEACTIONBLOCKED = OLECMDID(55)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PAGEACTIONUIQUERY = OLECMDID(56)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_FOCUSVIEWCONTROLS = OLECMDID(57)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_FOCUSVIEWCONTROLSQUERY = OLECMDID(58)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWPAGEACTIONMENU = OLECMDID(59)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ADDTRAVELENTRY = OLECMDID(60)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_UPDATETRAVELENTRY = OLECMDID(61)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_UPDATEBACKFORWARDSTATE = OLECMDID(62)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_OPTICAL_ZOOM = OLECMDID(63)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_OPTICAL_GETZOOMRANGE = OLECMDID(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_WINDOWSTATECHANGED = OLECMDID(65)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ACTIVEXINSTALLSCOPE = OLECMDID(66)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_UPDATETRAVELENTRY_DATARECOVERY = OLECMDID(67)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWTASKDLG = OLECMDID(68)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_POPSTATEEVENT = OLECMDID(69)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_VIEWPORT_MODE = OLECMDID(70)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_LAYOUT_VIEWPORT_WIDTH = OLECMDID(71)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_VISUAL_VIEWPORT_EXCLUDE_BOTTOM = OLECMDID(72)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_USER_OPTICAL_ZOOM = OLECMDID(73)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_PAGEAVAILABLE = OLECMDID(74)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_GETUSERSCALABLE = OLECMDID(75)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_UPDATE_CARET = OLECMDID(76)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ENABLE_VISIBILITY = OLECMDID(77)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_MEDIA_PLAYBACK = OLECMDID(78)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SETFAVICON = OLECMDID(79)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SET_HOST_FULLSCREENMODE = OLECMDID(80)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_EXITFULLSCREEN = OLECMDID(81)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SCROLLCOMPLETE = OLECMDID(82)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_ONBEFOREUNLOAD = OLECMDID(83)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWMESSAGE_BLOCKABLE = OLECMDID(84)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OLECMDID_SHOWTASKDLG_BLOCKABLE = OLECMDID(85)
+
+// Windows.Win32.System.Ole.OLECMDID_BROWSERSTATEFLAG (synthetic:Windows_Win32_System_Ole_OLECMDID_BROWSERSTATEFLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDID_BROWSERSTATEFLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_BROWSERSTATEFLAG_OLECMDIDF_BROWSERSTATE_EXTENSIONSOFF = OLECMDID_BROWSERSTATEFLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_BROWSERSTATEFLAG_OLECMDIDF_BROWSERSTATE_IESECURITY = OLECMDID_BROWSERSTATEFLAG(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_BROWSERSTATEFLAG_OLECMDIDF_BROWSERSTATE_PROTECTEDMODE_OFF = OLECMDID_BROWSERSTATEFLAG(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_BROWSERSTATEFLAG_OLECMDIDF_BROWSERSTATE_RESET = OLECMDID_BROWSERSTATEFLAG(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_BROWSERSTATEFLAG_OLECMDIDF_BROWSERSTATE_REQUIRESACTIVEX = OLECMDID_BROWSERSTATEFLAG(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_BROWSERSTATEFLAG_OLECMDIDF_BROWSERSTATE_DESKTOPHTMLDIALOG = OLECMDID_BROWSERSTATEFLAG(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_BROWSERSTATEFLAG_OLECMDIDF_BROWSERSTATE_BLOCKEDVERSION = OLECMDID_BROWSERSTATEFLAG(64)
+
+// Windows.Win32.System.Ole.OLECMDID_OPTICAL_ZOOMFLAG (synthetic:Windows_Win32_System_Ole_OLECMDID_OPTICAL_ZOOMFLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDID_OPTICAL_ZOOMFLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OPTICAL_ZOOMFLAG_OLECMDIDF_OPTICAL_ZOOM_NOPERSIST = OLECMDID_OPTICAL_ZOOMFLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OPTICAL_ZOOMFLAG_OLECMDIDF_OPTICAL_ZOOM_NOLAYOUT = OLECMDID_OPTICAL_ZOOMFLAG(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OPTICAL_ZOOMFLAG_OLECMDIDF_OPTICAL_ZOOM_NOTRANSIENT = OLECMDID_OPTICAL_ZOOMFLAG(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_OPTICAL_ZOOMFLAG_OLECMDIDF_OPTICAL_ZOOM_RELOADFORNEWTAB = OLECMDID_OPTICAL_ZOOMFLAG(64)
+
+// Windows.Win32.System.Ole.OLECMDID_PAGEACTIONFLAG (synthetic:Windows_Win32_System_Ole_OLECMDID_PAGEACTIONFLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDID_PAGEACTIONFLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_FILEDOWNLOAD = OLECMDID_PAGEACTIONFLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_ACTIVEXINSTALL = OLECMDID_PAGEACTIONFLAG(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_ACTIVEXTRUSTFAIL = OLECMDID_PAGEACTIONFLAG(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_ACTIVEXUSERDISABLE = OLECMDID_PAGEACTIONFLAG(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_ACTIVEXDISALLOW = OLECMDID_PAGEACTIONFLAG(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_ACTIVEXUNSAFE = OLECMDID_PAGEACTIONFLAG(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_POPUPWINDOW = OLECMDID_PAGEACTIONFLAG(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_LOCALMACHINE = OLECMDID_PAGEACTIONFLAG(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_MIMETEXTPLAIN = OLECMDID_PAGEACTIONFLAG(256)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_SCRIPTNAVIGATE = OLECMDID_PAGEACTIONFLAG(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_SCRIPTNAVIGATE_ACTIVEXINSTALL = OLECMDID_PAGEACTIONFLAG(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_PROTLOCKDOWNLOCALMACHINE = OLECMDID_PAGEACTIONFLAG(1024)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_PROTLOCKDOWNTRUSTED = OLECMDID_PAGEACTIONFLAG(2048)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_PROTLOCKDOWNINTRANET = OLECMDID_PAGEACTIONFLAG(4096)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_PROTLOCKDOWNINTERNET = OLECMDID_PAGEACTIONFLAG(8192)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_PROTLOCKDOWNRESTRICTED = OLECMDID_PAGEACTIONFLAG(16384)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_PROTLOCKDOWNDENY = OLECMDID_PAGEACTIONFLAG(32768)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_POPUPALLOWED = OLECMDID_PAGEACTIONFLAG(65536)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_SCRIPTPROMPT = OLECMDID_PAGEACTIONFLAG(131072)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_ACTIVEXUSERAPPROVAL = OLECMDID_PAGEACTIONFLAG(262144)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_MIXEDCONTENT = OLECMDID_PAGEACTIONFLAG(524288)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_INVALID_CERT = OLECMDID_PAGEACTIONFLAG(1048576)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_INTRANETZONEREQUEST = OLECMDID_PAGEACTIONFLAG(2097152)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_XSSFILTERED = OLECMDID_PAGEACTIONFLAG(4194304)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_SPOOFABLEIDNHOST = OLECMDID_PAGEACTIONFLAG(8388608)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_ACTIVEX_EPM_INCOMPATIBLE = OLECMDID_PAGEACTIONFLAG(16777216)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_SCRIPTNAVIGATE_ACTIVEXUSERAPPROVAL = OLECMDID_PAGEACTIONFLAG(33554432)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_WPCBLOCKED = OLECMDID_PAGEACTIONFLAG(67108864)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_WPCBLOCKED_ACTIVEX = OLECMDID_PAGEACTIONFLAG(134217728)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_EXTENSION_COMPAT_BLOCKED = OLECMDID_PAGEACTIONFLAG(268435456)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_NORESETACTIVEX = OLECMDID_PAGEACTIONFLAG(536870912)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_GENERIC_STATE = OLECMDID_PAGEACTIONFLAG(1073741824)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_PAGEACTIONFLAG_OLECMDIDF_PAGEACTION_RESET = OLECMDID_PAGEACTIONFLAG(-2147483648)
+
+// Windows.Win32.System.Ole.OLECMDID_REFRESHFLAG (synthetic:Windows_Win32_System_Ole_OLECMDID_REFRESHFLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDID_REFRESHFLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_NORMAL = OLECMDID_REFRESHFLAG(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_IFEXPIRED = OLECMDID_REFRESHFLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_CONTINUE = OLECMDID_REFRESHFLAG(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_COMPLETELY = OLECMDID_REFRESHFLAG(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_NO_CACHE = OLECMDID_REFRESHFLAG(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_RELOAD = OLECMDID_REFRESHFLAG(5)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_LEVELMASK = OLECMDID_REFRESHFLAG(255)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_CLEARUSERINPUT = OLECMDID_REFRESHFLAG(4096)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PROMPTIFOFFLINE = OLECMDID_REFRESHFLAG(8192)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_THROUGHSCRIPT = OLECMDID_REFRESHFLAG(16384)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_SKIPBEFOREUNLOADEVENT = OLECMDID_REFRESHFLAG(32768)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_ACTIVEXINSTALL = OLECMDID_REFRESHFLAG(65536)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_FILEDOWNLOAD = OLECMDID_REFRESHFLAG(131072)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_LOCALMACHINE = OLECMDID_REFRESHFLAG(262144)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_POPUPWINDOW = OLECMDID_REFRESHFLAG(524288)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNLOCALMACHINE = OLECMDID_REFRESHFLAG(1048576)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNTRUSTED = OLECMDID_REFRESHFLAG(2097152)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNINTRANET = OLECMDID_REFRESHFLAG(4194304)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNINTERNET = OLECMDID_REFRESHFLAG(8388608)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNRESTRICTED = OLECMDID_REFRESHFLAG(16777216)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_MIXEDCONTENT = OLECMDID_REFRESHFLAG(33554432)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_INVALID_CERT = OLECMDID_REFRESHFLAG(67108864)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_REFRESHFLAG_OLECMDIDF_REFRESH_PAGEACTION_ALLOW_VERSION = OLECMDID_REFRESHFLAG(134217728)
+
+// Windows.Win32.System.Ole.OLECMDID_VIEWPORT_MODE_FLAG (synthetic:Windows_Win32_System_Ole_OLECMDID_VIEWPORT_MODE_FLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDID_VIEWPORT_MODE_FLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_VIEWPORT_MODE_FLAG_OLECMDIDF_VIEWPORTMODE_FIXED_LAYOUT_WIDTH = OLECMDID_VIEWPORT_MODE_FLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_VIEWPORT_MODE_FLAG_OLECMDIDF_VIEWPORTMODE_EXCLUDE_VISUAL_BOTTOM = OLECMDID_VIEWPORT_MODE_FLAG(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_VIEWPORT_MODE_FLAG_OLECMDIDF_VIEWPORTMODE_FIXED_LAYOUT_WIDTH_VALID = OLECMDID_VIEWPORT_MODE_FLAG(65536)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_VIEWPORT_MODE_FLAG_OLECMDIDF_VIEWPORTMODE_EXCLUDE_VISUAL_BOTTOM_VALID = OLECMDID_VIEWPORT_MODE_FLAG(131072)
+
+// Windows.Win32.System.Ole.OLECMDID_WINDOWSTATE_FLAG (synthetic:Windows_Win32_System_Ole_OLECMDID_WINDOWSTATE_FLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDID_WINDOWSTATE_FLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_WINDOWSTATE_FLAG_OLECMDIDF_WINDOWSTATE_USERVISIBLE = OLECMDID_WINDOWSTATE_FLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_WINDOWSTATE_FLAG_OLECMDIDF_WINDOWSTATE_ENABLED = OLECMDID_WINDOWSTATE_FLAG(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_WINDOWSTATE_FLAG_OLECMDIDF_WINDOWSTATE_USERVISIBLE_VALID = OLECMDID_WINDOWSTATE_FLAG(65536)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDID_WINDOWSTATE_FLAG_OLECMDIDF_WINDOWSTATE_ENABLED_VALID = OLECMDID_WINDOWSTATE_FLAG(131072)
+
+// Windows.Win32.System.Ole.OLECMDTEXT (synthetic:Windows_Win32_System_Ole_OLECMDTEXT)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLECMDTEXT {
+    public var cmdtextf: UInt32 = 0u32
+    public var cwActual: UInt32 = 0u32
+    public var cwBuf: UInt32 = 0u32
+    public var rgwz: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Ole.OLECMDTEXTF (synthetic:Windows_Win32_System_Ole_OLECMDTEXTF)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECMDTEXTF {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDTEXTF_OLECMDTEXTF_NONE = OLECMDTEXTF(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDTEXTF_OLECMDTEXTF_NAME = OLECMDTEXTF(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECMDTEXTF_OLECMDTEXTF_STATUS = OLECMDTEXTF(2)
+
+// Windows.Win32.System.Ole.OLECONTF (synthetic:Windows_Win32_System_Ole_OLECONTF)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECONTF {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECONTF_OLECONTF_EMBEDDINGS = OLECONTF(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECONTF_OLECONTF_LINKS = OLECONTF(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECONTF_OLECONTF_OTHERS = OLECONTF(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECONTF_OLECONTF_ONLYUSER = OLECONTF(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECONTF_OLECONTF_ONLYIFRUNNING = OLECONTF(16)
+
+// Windows.Win32.System.Ole.OLECREATE (synthetic:Windows_Win32_System_Ole_OLECREATE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLECREATE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECREATE_OLECREATE_ZERO = OLECREATE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLECREATE_OLECREATE_LEAVERUNNING = OLECREATE(1)
+
+// Windows.Win32.System.Ole.OLEDCFLAGS (synthetic:Windows_Win32_System_Ole_OLEDCFLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEDCFLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEDCFLAGS_OLEDC_NODRAW = OLEDCFLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEDCFLAGS_OLEDC_PAINTBKGND = OLEDCFLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEDCFLAGS_OLEDC_OFFSCREEN = OLEDCFLAGS(4)
+
+// Windows.Win32.System.Ole.OLEGETMONIKER (synthetic:Windows_Win32_System_Ole_OLEGETMONIKER)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEGETMONIKER {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEGETMONIKER_OLEGETMONIKER_ONLYIFTHERE = OLEGETMONIKER(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEGETMONIKER_OLEGETMONIKER_FORCEASSIGN = OLEGETMONIKER(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEGETMONIKER_OLEGETMONIKER_UNASSIGN = OLEGETMONIKER(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEGETMONIKER_OLEGETMONIKER_TEMPFORUSER = OLEGETMONIKER(4)
+
+// Windows.Win32.System.Ole.OLEINPLACEFRAMEINFO (synthetic:Windows_Win32_System_Ole_OLEINPLACEFRAMEINFO)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEINPLACEFRAMEINFO {
+    public var cb: UInt32 = 0u32
+    public var fMDIApp: Int32 = 0i32
+    public var hwndFrame: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var haccel: Windows_Win32_UI_WindowsAndMessaging.HACCEL = Windows_Win32_UI_WindowsAndMessaging.HACCEL()
+    public var cAccelEntries: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.OLEIVERB (synthetic:Windows_Win32_System_Ole_OLEIVERB)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEIVERB {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEIVERB_OLEIVERB_PRIMARY = OLEIVERB(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEIVERB_OLEIVERB_SHOW = OLEIVERB(-1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEIVERB_OLEIVERB_OPEN = OLEIVERB(-2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEIVERB_OLEIVERB_HIDE = OLEIVERB(-3)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEIVERB_OLEIVERB_UIACTIVATE = OLEIVERB(-4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEIVERB_OLEIVERB_INPLACEACTIVATE = OLEIVERB(-5)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEIVERB_OLEIVERB_DISCARDUNDOSTATE = OLEIVERB(-6)
+
+// Windows.Win32.System.Ole.OLELINKBIND (synthetic:Windows_Win32_System_Ole_OLELINKBIND)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLELINKBIND {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLELINKBIND_OLELINKBIND_EVENIFCLASSDIFF = OLELINKBIND(1)
+
+// Windows.Win32.System.Ole.OLEMENUGROUPWIDTHS (synthetic:Windows_Win32_System_Ole_OLEMENUGROUPWIDTHS)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEMENUGROUPWIDTHS {
+    public var width: VArray<Int32, $6> = VArray<Int32, $6>(repeat: 0i32)
+}
+
+// Windows.Win32.System.Ole.OLEMISC (synthetic:Windows_Win32_System_Ole_OLEMISC)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEMISC {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_RECOMPOSEONRESIZE = OLEMISC(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_ONLYICONIC = OLEMISC(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_INSERTNOTREPLACE = OLEMISC(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_STATIC = OLEMISC(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_CANTLINKINSIDE = OLEMISC(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_CANLINKBYOLE1 = OLEMISC(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_ISLINKOBJECT = OLEMISC(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_INSIDEOUT = OLEMISC(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_ACTIVATEWHENVISIBLE = OLEMISC(256)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_RENDERINGISDEVICEINDEPENDENT = OLEMISC(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_INVISIBLEATRUNTIME = OLEMISC(1024)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_ALWAYSRUN = OLEMISC(2048)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_ACTSLIKEBUTTON = OLEMISC(4096)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_ACTSLIKELABEL = OLEMISC(8192)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_NOUIACTIVATE = OLEMISC(16384)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_ALIGNABLE = OLEMISC(32768)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_SIMPLEFRAME = OLEMISC(65536)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_SETCLIENTSITEFIRST = OLEMISC(131072)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_IMEMODE = OLEMISC(262144)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_IGNOREACTIVATEWHENVISIBLE = OLEMISC(524288)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_WANTSTOMENUMERGE = OLEMISC(1048576)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEMISC_OLEMISC_SUPPORTSMULTILEVELUNDO = OLEMISC(2097152)
+
+// Windows.Win32.System.Ole.OLERENDER (synthetic:Windows_Win32_System_Ole_OLERENDER)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLERENDER {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLERENDER_OLERENDER_NONE = OLERENDER(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLERENDER_OLERENDER_DRAW = OLERENDER(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLERENDER_OLERENDER_FORMAT = OLERENDER(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLERENDER_OLERENDER_ASIS = OLERENDER(3)
+
+// Windows.Win32.System.Ole.OLESTREAMQUERYCONVERTOLELINKCALLBACK (synthetic:Windows_Win32_System_Ole_OLESTREAMQUERYCONVERTOLELINKCALLBACK)
+@When[Windows_Win32_System_Ole == "on"]
+public type OLESTREAMQUERYCONVERTOLELINKCALLBACK = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Ole.OLEUIBUSYA (synthetic:Windows_Win32_System_Ole_OLEUIBUSYA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIBUSYA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt8> = CPointer<UInt8>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var hTask: Windows_Win32_Foundation.HTASK = Windows_Win32_Foundation.HTASK()
+    public var lphWndDialog: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIBUSYW (synthetic:Windows_Win32_System_Ole_OLEUIBUSYW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIBUSYW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt16> = CPointer<UInt16>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var hTask: Windows_Win32_Foundation.HTASK = Windows_Win32_Foundation.HTASK()
+    public var lphWndDialog: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUICHANGEICONA (synthetic:Windows_Win32_System_Ole_OLEUICHANGEICONA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUICHANGEICONA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt8> = CPointer<UInt8>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+    public var clsid: GUID = GUID()
+    public var szIconExe: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0i8)
+    public var cchIconExe: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.OLEUICHANGEICONW (synthetic:Windows_Win32_System_Ole_OLEUICHANGEICONW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUICHANGEICONW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt16> = CPointer<UInt16>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+    public var clsid: GUID = GUID()
+    public var szIconExe: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0u16)
+    public var cchIconExe: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.OLEUICHANGESOURCEA (synthetic:Windows_Win32_System_Ole_OLEUICHANGESOURCEA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUICHANGESOURCEA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt8> = CPointer<UInt8>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var lpOFN: CPointer<Unit> = CPointer<Unit>()
+    public var dwReserved1: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0u32)
+    public var lpOleUILinkContainer: CPointer<Unit> = CPointer<Unit>()
+    public var dwLink: UInt32 = 0u32
+    public var lpszDisplayName: CPointer<UInt8> = CPointer<UInt8>()
+    public var nFileLength: UInt32 = 0u32
+    public var lpszFrom: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpszTo: CPointer<UInt8> = CPointer<UInt8>()
+}
+
+// Windows.Win32.System.Ole.OLEUICHANGESOURCEW (synthetic:Windows_Win32_System_Ole_OLEUICHANGESOURCEW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUICHANGESOURCEW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt16> = CPointer<UInt16>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var lpOFN: CPointer<Unit> = CPointer<Unit>()
+    public var dwReserved1: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0u32)
+    public var lpOleUILinkContainer: CPointer<Unit> = CPointer<Unit>()
+    public var dwLink: UInt32 = 0u32
+    public var lpszDisplayName: CPointer<UInt16> = CPointer<UInt16>()
+    public var nFileLength: UInt32 = 0u32
+    public var lpszFrom: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpszTo: CPointer<UInt16> = CPointer<UInt16>()
+}
+
+// Windows.Win32.System.Ole.OLEUICONVERTA (synthetic:Windows_Win32_System_Ole_OLEUICONVERTA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUICONVERTA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt8> = CPointer<UInt8>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var clsid: GUID = GUID()
+    public var clsidConvertDefault: GUID = GUID()
+    public var clsidActivateDefault: GUID = GUID()
+    public var clsidNew: GUID = GUID()
+    public var dvAspect: UInt32 = 0u32
+    public var wFormat: UInt16 = 0u16
+    public var fIsLinkedObject: Int32 = 0i32
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+    public var lpszUserType: CPointer<UInt8> = CPointer<UInt8>()
+    public var fObjectsIconChanged: Int32 = 0i32
+    public var lpszDefLabel: CPointer<UInt8> = CPointer<UInt8>()
+    public var cClsidExclude: UInt32 = 0u32
+    public var lpClsidExclude: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUICONVERTW (synthetic:Windows_Win32_System_Ole_OLEUICONVERTW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUICONVERTW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt16> = CPointer<UInt16>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var clsid: GUID = GUID()
+    public var clsidConvertDefault: GUID = GUID()
+    public var clsidActivateDefault: GUID = GUID()
+    public var clsidNew: GUID = GUID()
+    public var dvAspect: UInt32 = 0u32
+    public var wFormat: UInt16 = 0u16
+    public var fIsLinkedObject: Int32 = 0i32
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+    public var lpszUserType: CPointer<UInt16> = CPointer<UInt16>()
+    public var fObjectsIconChanged: Int32 = 0i32
+    public var lpszDefLabel: CPointer<UInt16> = CPointer<UInt16>()
+    public var cClsidExclude: UInt32 = 0u32
+    public var lpClsidExclude: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIEDITLINKSA (synthetic:Windows_Win32_System_Ole_OLEUIEDITLINKSA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIEDITLINKSA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt8> = CPointer<UInt8>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var lpOleUILinkContainer: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIEDITLINKSW (synthetic:Windows_Win32_System_Ole_OLEUIEDITLINKSW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIEDITLINKSW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt16> = CPointer<UInt16>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var lpOleUILinkContainer: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIGNRLPROPSA (synthetic:Windows_Win32_System_Ole_OLEUIGNRLPROPSA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIGNRLPROPSA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var dwReserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var dwReserved2: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var lpOP: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIGNRLPROPSW (synthetic:Windows_Win32_System_Ole_OLEUIGNRLPROPSW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIGNRLPROPSW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var dwReserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var dwReserved2: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var lpOP: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIINSERTOBJECTA (synthetic:Windows_Win32_System_Ole_OLEUIINSERTOBJECTA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIINSERTOBJECTA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt8> = CPointer<UInt8>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var clsid: GUID = GUID()
+    public var lpszFile: CPointer<UInt8> = CPointer<UInt8>()
+    public var cchFile: UInt32 = 0u32
+    public var cClsidExclude: UInt32 = 0u32
+    public var lpClsidExclude: CPointer<Unit> = CPointer<Unit>()
+    public var iid: GUID = GUID()
+    public var oleRender: UInt32 = 0u32
+    public var lpFormatEtc: CPointer<Unit> = CPointer<Unit>()
+    public var lpIOleClientSite: CPointer<Unit> = CPointer<Unit>()
+    public var lpIStorage: CPointer<Unit> = CPointer<Unit>()
+    public var ppvObj: CPointer<Unit> = CPointer<Unit>()
+    public var sc: Int32 = 0i32
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+}
+
+// Windows.Win32.System.Ole.OLEUIINSERTOBJECTW (synthetic:Windows_Win32_System_Ole_OLEUIINSERTOBJECTW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIINSERTOBJECTW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt16> = CPointer<UInt16>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var clsid: GUID = GUID()
+    public var lpszFile: CPointer<UInt16> = CPointer<UInt16>()
+    public var cchFile: UInt32 = 0u32
+    public var cClsidExclude: UInt32 = 0u32
+    public var lpClsidExclude: CPointer<Unit> = CPointer<Unit>()
+    public var iid: GUID = GUID()
+    public var oleRender: UInt32 = 0u32
+    public var lpFormatEtc: CPointer<Unit> = CPointer<Unit>()
+    public var lpIOleClientSite: CPointer<Unit> = CPointer<Unit>()
+    public var lpIStorage: CPointer<Unit> = CPointer<Unit>()
+    public var ppvObj: CPointer<Unit> = CPointer<Unit>()
+    public var sc: Int32 = 0i32
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+}
+
+// Windows.Win32.System.Ole.OLEUILINKPROPSA (synthetic:Windows_Win32_System_Ole_OLEUILINKPROPSA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUILINKPROPSA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var dwReserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var dwReserved2: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var lpOP: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUILINKPROPSW (synthetic:Windows_Win32_System_Ole_OLEUILINKPROPSW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUILINKPROPSW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var dwReserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var dwReserved2: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var lpOP: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIOBJECTPROPSA (synthetic:Windows_Win32_System_Ole_OLEUIOBJECTPROPSA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIOBJECTPROPSA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var lpPS: CPointer<Unit> = CPointer<Unit>()
+    public var dwObject: UInt32 = 0u32
+    public var lpObjInfo: CPointer<Unit> = CPointer<Unit>()
+    public var dwLink: UInt32 = 0u32
+    public var lpLinkInfo: CPointer<Unit> = CPointer<Unit>()
+    public var lpGP: CPointer<Unit> = CPointer<Unit>()
+    public var lpVP: CPointer<Unit> = CPointer<Unit>()
+    public var lpLP: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIOBJECTPROPSW (synthetic:Windows_Win32_System_Ole_OLEUIOBJECTPROPSW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIOBJECTPROPSW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var lpPS: CPointer<Unit> = CPointer<Unit>()
+    public var dwObject: UInt32 = 0u32
+    public var lpObjInfo: CPointer<Unit> = CPointer<Unit>()
+    public var dwLink: UInt32 = 0u32
+    public var lpLinkInfo: CPointer<Unit> = CPointer<Unit>()
+    public var lpGP: CPointer<Unit> = CPointer<Unit>()
+    public var lpVP: CPointer<Unit> = CPointer<Unit>()
+    public var lpLP: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.OLEUIPASTEENTRYA (synthetic:Windows_Win32_System_Ole_OLEUIPASTEENTRYA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIPASTEENTRYA {
+    public var fmtetc: Windows_Win32_System_Com.FORMATETC = Windows_Win32_System_Com.FORMATETC()
+    public var lpstrFormatName: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpstrResultText: CPointer<UInt8> = CPointer<UInt8>()
+    public var dwFlags: UInt32 = 0u32
+    public var dwScratchSpace: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.OLEUIPASTEENTRYW (synthetic:Windows_Win32_System_Ole_OLEUIPASTEENTRYW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIPASTEENTRYW {
+    public var fmtetc: Windows_Win32_System_Com.FORMATETC = Windows_Win32_System_Com.FORMATETC()
+    public var lpstrFormatName: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpstrResultText: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwFlags: UInt32 = 0u32
+    public var dwScratchSpace: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.OLEUIPASTEFLAG (synthetic:Windows_Win32_System_Ole_OLEUIPASTEFLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEUIPASTEFLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_ENABLEICON = OLEUIPASTEFLAG(2048)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_PASTEONLY = OLEUIPASTEFLAG(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_PASTE = OLEUIPASTEFLAG(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKANYTYPE = OLEUIPASTEFLAG(1024)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE1 = OLEUIPASTEFLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE2 = OLEUIPASTEFLAG(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE3 = OLEUIPASTEFLAG(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE4 = OLEUIPASTEFLAG(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE5 = OLEUIPASTEFLAG(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE6 = OLEUIPASTEFLAG(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE7 = OLEUIPASTEFLAG(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUIPASTEFLAG_OLEUIPASTE_LINKTYPE8 = OLEUIPASTEFLAG(128)
+
+// Windows.Win32.System.Ole.OLEUIPASTESPECIALA (synthetic:Windows_Win32_System_Ole_OLEUIPASTESPECIALA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIPASTESPECIALA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt8> = CPointer<UInt8>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt8> = CPointer<UInt8>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var lpSrcDataObj: CPointer<Unit> = CPointer<Unit>()
+    public var arrPasteEntries: CPointer<Unit> = CPointer<Unit>()
+    public var cPasteEntries: Int32 = 0i32
+    public var arrLinkTypes: CPointer<Unit> = CPointer<Unit>()
+    public var cLinkTypes: Int32 = 0i32
+    public var cClsidExclude: UInt32 = 0u32
+    public var lpClsidExclude: CPointer<Unit> = CPointer<Unit>()
+    public var nSelectedIndex: Int32 = 0i32
+    public var fLink: Int32 = 0i32
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+    public var sizel: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+}
+
+// Windows.Win32.System.Ole.OLEUIPASTESPECIALW (synthetic:Windows_Win32_System_Ole_OLEUIPASTESPECIALW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIPASTESPECIALW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var hWndOwner: Windows_Win32_Foundation.HWND = Windows_Win32_Foundation.HWND()
+    public var lpszCaption: CPointer<UInt16> = CPointer<UInt16>()
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var hInstance: Windows_Win32_Foundation.HINSTANCE = Windows_Win32_Foundation.HINSTANCE()
+    public var lpszTemplate: CPointer<UInt16> = CPointer<UInt16>()
+    public var hResource: Windows_Win32_Foundation.HRSRC = Windows_Win32_Foundation.HRSRC()
+    public var lpSrcDataObj: CPointer<Unit> = CPointer<Unit>()
+    public var arrPasteEntries: CPointer<Unit> = CPointer<Unit>()
+    public var cPasteEntries: Int32 = 0i32
+    public var arrLinkTypes: CPointer<Unit> = CPointer<Unit>()
+    public var cLinkTypes: Int32 = 0i32
+    public var cClsidExclude: UInt32 = 0u32
+    public var lpClsidExclude: CPointer<Unit> = CPointer<Unit>()
+    public var nSelectedIndex: Int32 = 0i32
+    public var fLink: Int32 = 0i32
+    public var hMetaPict: Windows_Win32_Foundation.HGLOBAL = Windows_Win32_Foundation.HGLOBAL()
+    public var sizel: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+}
+
+// Windows.Win32.System.Ole.OLEUIVIEWPROPSA (synthetic:Windows_Win32_System_Ole_OLEUIVIEWPROPSA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIVIEWPROPSA {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var dwReserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var dwReserved2: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var lpOP: CPointer<Unit> = CPointer<Unit>()
+    public var nScaleMin: Int32 = 0i32
+    public var nScaleMax: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.OLEUIVIEWPROPSW (synthetic:Windows_Win32_System_Ole_OLEUIVIEWPROPSW)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEUIVIEWPROPSW {
+    public var cbStruct: UInt32 = 0u32
+    public var dwFlags: UInt32 = 0u32
+    public var dwReserved1: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+    public var lpfnHook: CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32> = CFunc<(Windows_Win32_Foundation.HWND, UInt32, UIntNative, IntNative) -> UInt32>(CPointer<Unit>())
+    public var lCustData: IntNative = 0
+    public var dwReserved2: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var lpOP: CPointer<Unit> = CPointer<Unit>()
+    public var nScaleMin: Int32 = 0i32
+    public var nScaleMax: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.OLEUPDATE (synthetic:Windows_Win32_System_Ole_OLEUPDATE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEUPDATE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUPDATE_OLEUPDATE_ALWAYS = OLEUPDATE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEUPDATE_OLEUPDATE_ONCALL = OLEUPDATE(3)
+
+// Windows.Win32.System.Ole.OLEVERB (synthetic:Windows_Win32_System_Ole_OLEVERB)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLEVERB {
+    public var lVerb: Int32 = 0i32
+    public var lpszVerbName: CPointer<UInt16> = CPointer<UInt16>()
+    public var fuFlags: UInt32 = 0u32
+    public var grfAttribs: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.OLEVERBATTRIB (synthetic:Windows_Win32_System_Ole_OLEVERBATTRIB)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEVERBATTRIB {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEVERBATTRIB_OLEVERBATTRIB_NEVERDIRTIES = OLEVERBATTRIB(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEVERBATTRIB_OLEVERBATTRIB_ONCONTAINERMENU = OLEVERBATTRIB(2)
+
+// Windows.Win32.System.Ole.OLEWHICHMK (synthetic:Windows_Win32_System_Ole_OLEWHICHMK)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLEWHICHMK {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEWHICHMK_OLEWHICHMK_CONTAINER = OLEWHICHMK(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEWHICHMK_OLEWHICHMK_OBJREL = OLEWHICHMK(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLEWHICHMK_OLEWHICHMK_OBJFULL = OLEWHICHMK(3)
+
+// Windows.Win32.System.Ole.OLE_HANDLE (synthetic:Windows_Win32_System_Ole_OLE_HANDLE)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct OLE_HANDLE {
+    public var Value: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.OLE_TRISTATE (synthetic:Windows_Win32_System_Ole_OLE_TRISTATE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct OLE_TRISTATE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const OLE_TRISTATE_triUnchecked = OLE_TRISTATE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLE_TRISTATE_triChecked = OLE_TRISTATE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const OLE_TRISTATE_triGray = OLE_TRISTATE(2)
+
+// Windows.Win32.System.Ole.PAGEACTION_UI (synthetic:Windows_Win32_System_Ole_PAGEACTION_UI)
+@When[Windows_Win32_System_Ole == "on"]
+public struct PAGEACTION_UI {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const PAGEACTION_UI_PAGEACTION_UI_DEFAULT = PAGEACTION_UI(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const PAGEACTION_UI_PAGEACTION_UI_MODAL = PAGEACTION_UI(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PAGEACTION_UI_PAGEACTION_UI_MODELESS = PAGEACTION_UI(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const PAGEACTION_UI_PAGEACTION_UI_SILENT = PAGEACTION_UI(3)
+
+// Windows.Win32.System.Ole.PAGERANGE (synthetic:Windows_Win32_System_Ole_PAGERANGE)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PAGERANGE {
+    public var nFromPage: Int32 = 0i32
+    public var nToPage: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.PAGESET (synthetic:Windows_Win32_System_Ole_PAGESET)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PAGESET {
+    public var cbStruct: UInt32 = 0u32
+    public var fOddPages: Int32 = 0i32
+    public var fEvenPages: Int32 = 0i32
+    public var cPageRange: UInt32 = 0u32
+    public var rgPages: VArray<PAGERANGE, $1> = VArray<PAGERANGE, $1>(repeat: PAGERANGE())
+}
+
+// Windows.Win32.System.Ole.PARAMDATA (synthetic:Windows_Win32_System_Ole_PARAMDATA)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PARAMDATA {
+    public var szName: CPointer<UInt16> = CPointer<UInt16>()
+    public var vt: UInt16 = 0u16
+}
+
 // Windows.Win32.System.Ole.PARAMDESC (synthetic:Windows_Win32_System_Ole_PARAMDESC)
 @When[Windows_Win32_System_Ole == "on"]
 @C
@@ -173,18 +13611,2146 @@ public struct PARAMDESCEX {
 @When[Windows_Win32_System_Ole == "on"]
 public type PARAMFLAGS = UInt16
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_NONE: PARAMFLAGS = 0
+public const PARAMFLAGS_PARAMFLAG_NONE: PARAMFLAGS = 0
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_FIN: PARAMFLAGS = 1
+public const PARAMFLAGS_PARAMFLAG_FIN: PARAMFLAGS = 1
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_FOUT: PARAMFLAGS = 2
+public const PARAMFLAGS_PARAMFLAG_FOUT: PARAMFLAGS = 2
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_FLCID: PARAMFLAGS = 4
+public const PARAMFLAGS_PARAMFLAG_FLCID: PARAMFLAGS = 4
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_FRETVAL: PARAMFLAGS = 8
+public const PARAMFLAGS_PARAMFLAG_FRETVAL: PARAMFLAGS = 8
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_FOPT: PARAMFLAGS = 16
+public const PARAMFLAGS_PARAMFLAG_FOPT: PARAMFLAGS = 16
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_FHASDEFAULT: PARAMFLAGS = 32
+public const PARAMFLAGS_PARAMFLAG_FHASDEFAULT: PARAMFLAGS = 32
 @When[Windows_Win32_System_Ole == "on"]
-public let PARAMFLAGS_PARAMFLAG_FHASCUSTDATA: PARAMFLAGS = 64
+public const PARAMFLAGS_PARAMFLAG_FHASCUSTDATA: PARAMFLAGS = 64
+
+// Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS (synthetic:Windows_Win32_System_Ole_PASTE_SPECIAL_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct PASTE_SPECIAL_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: PASTE_SPECIAL_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: PASTE_SPECIAL_FLAGS): PASTE_SPECIAL_FLAGS {
+        return PASTE_SPECIAL_FLAGS(value | other.value)
+    }
+    public operator func &(other: PASTE_SPECIAL_FLAGS): PASTE_SPECIAL_FLAGS {
+        return PASTE_SPECIAL_FLAGS(value & other.value)
+    }
+    public operator func ^(other: PASTE_SPECIAL_FLAGS): PASTE_SPECIAL_FLAGS {
+        return PASTE_SPECIAL_FLAGS(value ^ other.value)
+    }
+    public operator func !(): PASTE_SPECIAL_FLAGS {
+        return PASTE_SPECIAL_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_SHOWHELP = PASTE_SPECIAL_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_SELECTPASTE = PASTE_SPECIAL_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_SELECTPASTELINK = PASTE_SPECIAL_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_CHECKDISPLAYASICON = PASTE_SPECIAL_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_DISABLEDISPLAYASICON = PASTE_SPECIAL_FLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_HIDECHANGEICON = PASTE_SPECIAL_FLAGS(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_STAYONCLIPBOARDCHANGE = PASTE_SPECIAL_FLAGS(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const PASTE_SPECIAL_FLAGS_PSF_NOREFRESHDATAOBJECT = PASTE_SPECIAL_FLAGS(128)
+
+// Windows.Win32.System.Ole.PICTDESC (synthetic:Windows_Win32_System_Ole_PICTDESC)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PICTDESC {
+    public var cbSizeofstruct: UInt32 = 0u32
+    public var picType: UInt32 = 0u32
+    public var Anonymous: PICTDESC__Anonymous_e__Union = PICTDESC__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Ole.PICTDESC._Anonymous_e__Union (synthetic:Windows_Win32_System_Ole_PICTDESC__Anonymous_e__Union)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PICTDESC__Anonymous_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop bmp: PICTDESC__Anonymous_e__Union__bmp_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__bmp_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__bmp_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop wmf: PICTDESC__Anonymous_e__Union__wmf_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__wmf_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__wmf_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop icon: PICTDESC__Anonymous_e__Union__icon_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__icon_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__icon_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop emf: PICTDESC__Anonymous_e__Union__emf_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__emf_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PICTDESC__Anonymous_e__Union__emf_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Ole.PICTDESC._Anonymous_e__Union._bmp_e__Struct (synthetic:Windows_Win32_System_Ole_PICTDESC__Anonymous_e__Union__bmp_e__Struct)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PICTDESC__Anonymous_e__Union__bmp_e__Struct {
+    public var hbitmap: Windows_Win32_Graphics_Gdi.HBITMAP = Windows_Win32_Graphics_Gdi.HBITMAP()
+    public var hpal: Windows_Win32_Graphics_Gdi.HPALETTE = Windows_Win32_Graphics_Gdi.HPALETTE()
+}
+
+// Windows.Win32.System.Ole.PICTDESC._Anonymous_e__Union._emf_e__Struct (synthetic:Windows_Win32_System_Ole_PICTDESC__Anonymous_e__Union__emf_e__Struct)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PICTDESC__Anonymous_e__Union__emf_e__Struct {
+    public var hemf: Windows_Win32_Graphics_Gdi.HENHMETAFILE = Windows_Win32_Graphics_Gdi.HENHMETAFILE()
+}
+
+// Windows.Win32.System.Ole.PICTDESC._Anonymous_e__Union._icon_e__Struct (synthetic:Windows_Win32_System_Ole_PICTDESC__Anonymous_e__Union__icon_e__Struct)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PICTDESC__Anonymous_e__Union__icon_e__Struct {
+    public var hicon: Windows_Win32_UI_WindowsAndMessaging.HICON = Windows_Win32_UI_WindowsAndMessaging.HICON()
+}
+
+// Windows.Win32.System.Ole.PICTDESC._Anonymous_e__Union._wmf_e__Struct (synthetic:Windows_Win32_System_Ole_PICTDESC__Anonymous_e__Union__wmf_e__Struct)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PICTDESC__Anonymous_e__Union__wmf_e__Struct {
+    public var hmeta: Windows_Win32_Graphics_Gdi.HMETAFILE = Windows_Win32_Graphics_Gdi.HMETAFILE()
+    public var xExt: Int32 = 0i32
+    public var yExt: Int32 = 0i32
+}
+
+// Windows.Win32.System.Ole.PICTUREATTRIBUTES (synthetic:Windows_Win32_System_Ole_PICTUREATTRIBUTES)
+@When[Windows_Win32_System_Ole == "on"]
+public struct PICTUREATTRIBUTES {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTUREATTRIBUTES_PICTURE_SCALABLE = PICTUREATTRIBUTES(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTUREATTRIBUTES_PICTURE_TRANSPARENT = PICTUREATTRIBUTES(2)
+
+// Windows.Win32.System.Ole.PICTYPE (synthetic:Windows_Win32_System_Ole_PICTYPE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct PICTYPE {
+    public let value: Int16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTYPE_PICTYPE_UNINITIALIZED = PICTYPE(-1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTYPE_PICTYPE_NONE = PICTYPE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTYPE_PICTYPE_BITMAP = PICTYPE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTYPE_PICTYPE_METAFILE = PICTYPE(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTYPE_PICTYPE_ICON = PICTYPE(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const PICTYPE_PICTYPE_ENHMETAFILE = PICTYPE(4)
+
+// Windows.Win32.System.Ole.POINTERINACTIVE (synthetic:Windows_Win32_System_Ole_POINTERINACTIVE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct POINTERINACTIVE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const POINTERINACTIVE_POINTERINACTIVE_ACTIVATEONENTRY = POINTERINACTIVE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const POINTERINACTIVE_POINTERINACTIVE_DEACTIVATEONLEAVE = POINTERINACTIVE(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const POINTERINACTIVE_POINTERINACTIVE_ACTIVATEONDRAG = POINTERINACTIVE(4)
+
+// Windows.Win32.System.Ole.POINTF (synthetic:Windows_Win32_System_Ole_POINTF)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct POINTF {
+    public var x: Float32 = 0.0f32
+    public var y: Float32 = 0.0f32
+}
+
+// Windows.Win32.System.Ole.PRINTFLAG (synthetic:Windows_Win32_System_Ole_PRINTFLAG)
+@When[Windows_Win32_System_Ole == "on"]
+public struct PRINTFLAG {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: PRINTFLAG): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: PRINTFLAG): PRINTFLAG {
+        return PRINTFLAG(value | other.value)
+    }
+    public operator func &(other: PRINTFLAG): PRINTFLAG {
+        return PRINTFLAG(value & other.value)
+    }
+    public operator func ^(other: PRINTFLAG): PRINTFLAG {
+        return PRINTFLAG(value ^ other.value)
+    }
+    public operator func !(): PRINTFLAG {
+        return PRINTFLAG(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const PRINTFLAG_PRINTFLAG_MAYBOTHERUSER = PRINTFLAG(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PRINTFLAG_PRINTFLAG_PROMPTUSER = PRINTFLAG(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const PRINTFLAG_PRINTFLAG_USERMAYCHANGEPRINTER = PRINTFLAG(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const PRINTFLAG_PRINTFLAG_RECOMPOSETODEVICE = PRINTFLAG(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const PRINTFLAG_PRINTFLAG_DONTACTUALLYPRINT = PRINTFLAG(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const PRINTFLAG_PRINTFLAG_FORCEPROPERTIES = PRINTFLAG(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const PRINTFLAG_PRINTFLAG_PRINTTOFILE = PRINTFLAG(64)
+
+// Windows.Win32.System.Ole.PROPBAG2_TYPE (synthetic:Windows_Win32_System_Ole_PROPBAG2_TYPE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct PROPBAG2_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPBAG2_TYPE_PROPBAG2_TYPE_UNDEFINED = PROPBAG2_TYPE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPBAG2_TYPE_PROPBAG2_TYPE_DATA = PROPBAG2_TYPE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPBAG2_TYPE_PROPBAG2_TYPE_URL = PROPBAG2_TYPE(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPBAG2_TYPE_PROPBAG2_TYPE_OBJECT = PROPBAG2_TYPE(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPBAG2_TYPE_PROPBAG2_TYPE_STREAM = PROPBAG2_TYPE(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPBAG2_TYPE_PROPBAG2_TYPE_STORAGE = PROPBAG2_TYPE(5)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPBAG2_TYPE_PROPBAG2_TYPE_MONIKER = PROPBAG2_TYPE(6)
+
+// Windows.Win32.System.Ole.PROPPAGEINFO (synthetic:Windows_Win32_System_Ole_PROPPAGEINFO)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct PROPPAGEINFO {
+    public var cb: UInt32 = 0u32
+    public var pszTitle: CPointer<UInt16> = CPointer<UInt16>()
+    public var size: Windows_Win32_Foundation.SIZE = Windows_Win32_Foundation.SIZE()
+    public var pszDocString: CPointer<UInt16> = CPointer<UInt16>()
+    public var pszHelpFile: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwHelpContext: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.PROPPAGESTATUS (synthetic:Windows_Win32_System_Ole_PROPPAGESTATUS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct PROPPAGESTATUS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPPAGESTATUS_PROPPAGESTATUS_DIRTY = PROPPAGESTATUS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPPAGESTATUS_PROPPAGESTATUS_VALIDATE = PROPPAGESTATUS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const PROPPAGESTATUS_PROPPAGESTATUS_CLEAN = PROPPAGESTATUS(4)
+
+// Windows.Win32.System.Ole.QACONTAINER (synthetic:Windows_Win32_System_Ole_QACONTAINER)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct QACONTAINER {
+    public var cbSize: UInt32 = 0u32
+    public var pClientSite: CPointer<Unit> = CPointer<Unit>()
+    public var pAdviseSink: CPointer<Unit> = CPointer<Unit>()
+    public var pPropertyNotifySink: CPointer<Unit> = CPointer<Unit>()
+    public var pUnkEventSink: CPointer<Unit> = CPointer<Unit>()
+    public var dwAmbientFlags: UInt32 = 0u32
+    public var colorFore: UInt32 = 0u32
+    public var colorBack: UInt32 = 0u32
+    public var pFont: CPointer<Unit> = CPointer<Unit>()
+    public var pUndoMgr: CPointer<Unit> = CPointer<Unit>()
+    public var dwAppearance: UInt32 = 0u32
+    public var lcid: Int32 = 0i32
+    public var hpal: Windows_Win32_Graphics_Gdi.HPALETTE = Windows_Win32_Graphics_Gdi.HPALETTE()
+    public var pBindHost: CPointer<Unit> = CPointer<Unit>()
+    public var pOleControlSite: CPointer<Unit> = CPointer<Unit>()
+    public var pServiceProvider: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.QACONTAINERFLAGS (synthetic:Windows_Win32_System_Ole_QACONTAINERFLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct QACONTAINERFLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_SHOWHATCHING = QACONTAINERFLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_SHOWGRABHANDLES = QACONTAINERFLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_USERMODE = QACONTAINERFLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_DISPLAYASDEFAULT = QACONTAINERFLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_UIDEAD = QACONTAINERFLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_AUTOCLIP = QACONTAINERFLAGS(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_MESSAGEREFLECT = QACONTAINERFLAGS(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const QACONTAINERFLAGS_QACONTAINER_SUPPORTSMNEMONICS = QACONTAINERFLAGS(128)
+
+// Windows.Win32.System.Ole.QACONTROL (synthetic:Windows_Win32_System_Ole_QACONTROL)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct QACONTROL {
+    public var cbSize: UInt32 = 0u32
+    public var dwMiscStatus: UInt32 = 0u32
+    public var dwViewStatus: UInt32 = 0u32
+    public var dwEventCookie: UInt32 = 0u32
+    public var dwPropNotifyCookie: UInt32 = 0u32
+    public var dwPointerActivationPolicy: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Ole.READYSTATE (synthetic:Windows_Win32_System_Ole_READYSTATE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct READYSTATE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const READYSTATE_READYSTATE_UNINITIALIZED = READYSTATE(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const READYSTATE_READYSTATE_LOADING = READYSTATE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const READYSTATE_READYSTATE_LOADED = READYSTATE(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const READYSTATE_READYSTATE_INTERACTIVE = READYSTATE(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const READYSTATE_READYSTATE_COMPLETE = READYSTATE(4)
+
+// Windows.Win32.System.Ole.REGKIND (synthetic:Windows_Win32_System_Ole_REGKIND)
+@When[Windows_Win32_System_Ole == "on"]
+public struct REGKIND {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const REGKIND_REGKIND_DEFAULT = REGKIND(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const REGKIND_REGKIND_REGISTER = REGKIND(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const REGKIND_REGKIND_NONE = REGKIND(2)
+
+// Windows.Win32.System.Ole.SAFEARRAYUNION (synthetic:Windows_Win32_System_Ole_SAFEARRAYUNION)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARRAYUNION {
+    public var sfType: UInt32 = 0u32
+    public var u: SAFEARRAYUNION__u_e__Struct = SAFEARRAYUNION__u_e__Struct()
+}
+
+// Windows.Win32.System.Ole.SAFEARRAYUNION._u_e__Struct (synthetic:Windows_Win32_System_Ole_SAFEARRAYUNION__u_e__Struct)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARRAYUNION__u_e__Struct {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop BstrStr: SAFEARR_BSTR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_BSTR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_BSTR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop UnknownStr: SAFEARR_UNKNOWN {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_UNKNOWN>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_UNKNOWN>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop DispatchStr: SAFEARR_DISPATCH {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_DISPATCH>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_DISPATCH>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop VariantStr: SAFEARR_VARIANT {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_VARIANT>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_VARIANT>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop RecordStr: SAFEARR_BRECORD {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_BRECORD>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_BRECORD>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop HaveIidStr: SAFEARR_HAVEIID {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_HAVEIID>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<SAFEARR_HAVEIID>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ByteStr: Windows_Win32_System_Com.BYTE_SIZEDARR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.BYTE_SIZEDARR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.BYTE_SIZEDARR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop WordStr: Windows_Win32_System_Com.WORD_SIZEDARR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.WORD_SIZEDARR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.WORD_SIZEDARR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop LongStr: Windows_Win32_System_Com.DWORD_SIZEDARR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.DWORD_SIZEDARR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.DWORD_SIZEDARR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop HyperStr: Windows_Win32_System_Com.HYPER_SIZEDARR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.HYPER_SIZEDARR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.HYPER_SIZEDARR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Ole.SAFEARR_BRECORD (synthetic:Windows_Win32_System_Ole_SAFEARR_BRECORD)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARR_BRECORD {
+    public var Size: UInt32 = 0u32
+    public var aRecord: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.SAFEARR_BSTR (synthetic:Windows_Win32_System_Ole_SAFEARR_BSTR)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARR_BSTR {
+    public var Size: UInt32 = 0u32
+    public var aBstr: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.SAFEARR_DISPATCH (synthetic:Windows_Win32_System_Ole_SAFEARR_DISPATCH)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARR_DISPATCH {
+    public var Size: UInt32 = 0u32
+    public var apDispatch: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.SAFEARR_HAVEIID (synthetic:Windows_Win32_System_Ole_SAFEARR_HAVEIID)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARR_HAVEIID {
+    public var Size: UInt32 = 0u32
+    public var apUnknown: CPointer<Unit> = CPointer<Unit>()
+    public var iid: GUID = GUID()
+}
+
+// Windows.Win32.System.Ole.SAFEARR_UNKNOWN (synthetic:Windows_Win32_System_Ole_SAFEARR_UNKNOWN)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARR_UNKNOWN {
+    public var Size: UInt32 = 0u32
+    public var apUnknown: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.SAFEARR_VARIANT (synthetic:Windows_Win32_System_Ole_SAFEARR_VARIANT)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct SAFEARR_VARIANT {
+    public var Size: UInt32 = 0u32
+    public var aVariant: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole.SF_TYPE (synthetic:Windows_Win32_System_Ole_SF_TYPE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct SF_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_ERROR = SF_TYPE(10)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_I1 = SF_TYPE(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_I2 = SF_TYPE(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_I4 = SF_TYPE(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_I8 = SF_TYPE(20)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_BSTR = SF_TYPE(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_UNKNOWN = SF_TYPE(13)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_DISPATCH = SF_TYPE(9)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_VARIANT = SF_TYPE(12)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_RECORD = SF_TYPE(36)
+@When[Windows_Win32_System_Ole == "on"]
+public const SF_TYPE_SF_HAVEIID = SF_TYPE(32781)
+
+// Windows.Win32.System.Ole.TYPEFLAGS (synthetic:Windows_Win32_System_Ole_TYPEFLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct TYPEFLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FAPPOBJECT = TYPEFLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FCANCREATE = TYPEFLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FLICENSED = TYPEFLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FPREDECLID = TYPEFLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FHIDDEN = TYPEFLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FCONTROL = TYPEFLAGS(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FDUAL = TYPEFLAGS(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FNONEXTENSIBLE = TYPEFLAGS(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FOLEAUTOMATION = TYPEFLAGS(256)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FRESTRICTED = TYPEFLAGS(512)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FAGGREGATABLE = TYPEFLAGS(1024)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FREPLACEABLE = TYPEFLAGS(2048)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FDISPATCHABLE = TYPEFLAGS(4096)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FREVERSEBIND = TYPEFLAGS(8192)
+@When[Windows_Win32_System_Ole == "on"]
+public const TYPEFLAGS_TYPEFLAG_FPROXY = TYPEFLAGS(16384)
+
+// Windows.Win32.System.Ole.UASFLAGS (synthetic:Windows_Win32_System_Ole_UASFLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct UASFLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const UASFLAGS_UAS_NORMAL = UASFLAGS(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const UASFLAGS_UAS_BLOCKED = UASFLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const UASFLAGS_UAS_NOPARENTENABLE = UASFLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const UASFLAGS_UAS_MASK = UASFLAGS(3)
+
+// Windows.Win32.System.Ole.UDATE (synthetic:Windows_Win32_System_Ole_UDATE)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct UDATE {
+    public var st: Windows_Win32_Foundation.SYSTEMTIME = Windows_Win32_Foundation.SYSTEMTIME()
+    public var wDayOfYear: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Ole.UI_CONVERT_FLAGS (synthetic:Windows_Win32_System_Ole_UI_CONVERT_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct UI_CONVERT_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: UI_CONVERT_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: UI_CONVERT_FLAGS): UI_CONVERT_FLAGS {
+        return UI_CONVERT_FLAGS(value | other.value)
+    }
+    public operator func &(other: UI_CONVERT_FLAGS): UI_CONVERT_FLAGS {
+        return UI_CONVERT_FLAGS(value & other.value)
+    }
+    public operator func ^(other: UI_CONVERT_FLAGS): UI_CONVERT_FLAGS {
+        return UI_CONVERT_FLAGS(value ^ other.value)
+    }
+    public operator func !(): UI_CONVERT_FLAGS {
+        return UI_CONVERT_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_SHOWHELPBUTTON = UI_CONVERT_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_SETCONVERTDEFAULT = UI_CONVERT_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_SETACTIVATEDEFAULT = UI_CONVERT_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_SELECTCONVERTTO = UI_CONVERT_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_SELECTACTIVATEAS = UI_CONVERT_FLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_DISABLEDISPLAYASICON = UI_CONVERT_FLAGS(32)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_DISABLEACTIVATEAS = UI_CONVERT_FLAGS(64)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_HIDECHANGEICON = UI_CONVERT_FLAGS(128)
+@When[Windows_Win32_System_Ole == "on"]
+public const UI_CONVERT_FLAGS_CF_CONVERTONLY = UI_CONVERT_FLAGS(256)
+
+// Windows.Win32.System.Ole.UPDFCACHE_FLAGS (synthetic:Windows_Win32_System_Ole_UPDFCACHE_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct UPDFCACHE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: UPDFCACHE_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: UPDFCACHE_FLAGS): UPDFCACHE_FLAGS {
+        return UPDFCACHE_FLAGS(value | other.value)
+    }
+    public operator func &(other: UPDFCACHE_FLAGS): UPDFCACHE_FLAGS {
+        return UPDFCACHE_FLAGS(value & other.value)
+    }
+    public operator func ^(other: UPDFCACHE_FLAGS): UPDFCACHE_FLAGS {
+        return UPDFCACHE_FLAGS(value ^ other.value)
+    }
+    public operator func !(): UPDFCACHE_FLAGS {
+        return UPDFCACHE_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_ALL = UPDFCACHE_FLAGS(2147483647)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_ALLBUTNODATACACHE = UPDFCACHE_FLAGS(2147483646)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_NORMALCACHE = UPDFCACHE_FLAGS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_IFBLANK = UPDFCACHE_FLAGS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_ONLYIFBLANK = UPDFCACHE_FLAGS(2147483648)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_NODATACACHE = UPDFCACHE_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_ONSAVECACHE = UPDFCACHE_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_ONSTOPCACHE = UPDFCACHE_FLAGS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const UPDFCACHE_FLAGS_UPDFCACHE_IFBLANKORONSAVECACHE = UPDFCACHE_FLAGS(18)
+
+// Windows.Win32.System.Ole.USERCLASSTYPE (synthetic:Windows_Win32_System_Ole_USERCLASSTYPE)
+@When[Windows_Win32_System_Ole == "on"]
+public struct USERCLASSTYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const USERCLASSTYPE_USERCLASSTYPE_FULL = USERCLASSTYPE(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const USERCLASSTYPE_USERCLASSTYPE_SHORT = USERCLASSTYPE(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const USERCLASSTYPE_USERCLASSTYPE_APPNAME = USERCLASSTYPE(3)
+
+// Windows.Win32.System.Ole.VARCMP (synthetic:Windows_Win32_System_Ole_VARCMP)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VARCMP {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VARCMP_VARCMP_LT = VARCMP(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARCMP_VARCMP_EQ = VARCMP(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARCMP_VARCMP_GT = VARCMP(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARCMP_VARCMP_NULL = VARCMP(3)
+
+// Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY (synthetic:Windows_Win32_System_Ole_VARFORMAT_FIRST_DAY)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VARFORMAT_FIRST_DAY {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_SYSTEMDEFAULT = VARFORMAT_FIRST_DAY(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_MONDAY = VARFORMAT_FIRST_DAY(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_TUESDAY = VARFORMAT_FIRST_DAY(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_WEDNESDAY = VARFORMAT_FIRST_DAY(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_THURSDAY = VARFORMAT_FIRST_DAY(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_FRIDAY = VARFORMAT_FIRST_DAY(5)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_SATURDAY = VARFORMAT_FIRST_DAY(6)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_DAY_VARFORMAT_FIRST_DAY_SUNDAY = VARFORMAT_FIRST_DAY(7)
+
+// Windows.Win32.System.Ole.VARFORMAT_FIRST_WEEK (synthetic:Windows_Win32_System_Ole_VARFORMAT_FIRST_WEEK)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VARFORMAT_FIRST_WEEK {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_WEEK_VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT = VARFORMAT_FIRST_WEEK(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_WEEK_VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST = VARFORMAT_FIRST_WEEK(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_WEEK_VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR = VARFORMAT_FIRST_WEEK(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_FIRST_WEEK_VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS = VARFORMAT_FIRST_WEEK(3)
+
+// Windows.Win32.System.Ole.VARFORMAT_GROUP (synthetic:Windows_Win32_System_Ole_VARFORMAT_GROUP)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VARFORMAT_GROUP {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_GROUP_VARFORMAT_GROUP_SYSTEMDEFAULT = VARFORMAT_GROUP(-2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_GROUP_VARFORMAT_GROUP_THOUSANDS = VARFORMAT_GROUP(-1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_GROUP_VARFORMAT_GROUP_NOTTHOUSANDS = VARFORMAT_GROUP(0)
+
+// Windows.Win32.System.Ole.VARFORMAT_LEADING_DIGIT (synthetic:Windows_Win32_System_Ole_VARFORMAT_LEADING_DIGIT)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VARFORMAT_LEADING_DIGIT {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_LEADING_DIGIT_VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT = VARFORMAT_LEADING_DIGIT(-2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_LEADING_DIGIT_VARFORMAT_LEADING_DIGIT_INCLUDED = VARFORMAT_LEADING_DIGIT(-1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_LEADING_DIGIT_VARFORMAT_LEADING_DIGIT_NOTINCLUDED = VARFORMAT_LEADING_DIGIT(0)
+
+// Windows.Win32.System.Ole.VARFORMAT_NAMED_FORMAT (synthetic:Windows_Win32_System_Ole_VARFORMAT_NAMED_FORMAT)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VARFORMAT_NAMED_FORMAT {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_NAMED_FORMAT_VARFORMAT_NAMED_FORMAT_GENERALDATE = VARFORMAT_NAMED_FORMAT(0)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_NAMED_FORMAT_VARFORMAT_NAMED_FORMAT_LONGDATE = VARFORMAT_NAMED_FORMAT(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_NAMED_FORMAT_VARFORMAT_NAMED_FORMAT_SHORTDATE = VARFORMAT_NAMED_FORMAT(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_NAMED_FORMAT_VARFORMAT_NAMED_FORMAT_LONGTIME = VARFORMAT_NAMED_FORMAT(3)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_NAMED_FORMAT_VARFORMAT_NAMED_FORMAT_SHORTTIME = VARFORMAT_NAMED_FORMAT(4)
+
+// Windows.Win32.System.Ole.VARFORMAT_PARENTHESES (synthetic:Windows_Win32_System_Ole_VARFORMAT_PARENTHESES)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VARFORMAT_PARENTHESES {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_PARENTHESES_VARFORMAT_PARENTHESES_SYSTEMDEFAULT = VARFORMAT_PARENTHESES(-2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_PARENTHESES_VARFORMAT_PARENTHESES_USED = VARFORMAT_PARENTHESES(-1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VARFORMAT_PARENTHESES_VARFORMAT_PARENTHESES_NOTUSED = VARFORMAT_PARENTHESES(0)
+
+// Windows.Win32.System.Ole.VIEWSTATUS (synthetic:Windows_Win32_System_Ole_VIEWSTATUS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VIEWSTATUS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEWSTATUS_VIEWSTATUS_OPAQUE = VIEWSTATUS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEWSTATUS_VIEWSTATUS_SOLIDBKGND = VIEWSTATUS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEWSTATUS_VIEWSTATUS_DVASPECTOPAQUE = VIEWSTATUS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEWSTATUS_VIEWSTATUS_DVASPECTTRANSPARENT = VIEWSTATUS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEWSTATUS_VIEWSTATUS_SURFACE = VIEWSTATUS(16)
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEWSTATUS_VIEWSTATUS_3DSURFACE = VIEWSTATUS(32)
+
+// Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS (synthetic:Windows_Win32_System_Ole_VIEW_OBJECT_PROPERTIES_FLAGS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct VIEW_OBJECT_PROPERTIES_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: VIEW_OBJECT_PROPERTIES_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: VIEW_OBJECT_PROPERTIES_FLAGS): VIEW_OBJECT_PROPERTIES_FLAGS {
+        return VIEW_OBJECT_PROPERTIES_FLAGS(value | other.value)
+    }
+    public operator func &(other: VIEW_OBJECT_PROPERTIES_FLAGS): VIEW_OBJECT_PROPERTIES_FLAGS {
+        return VIEW_OBJECT_PROPERTIES_FLAGS(value & other.value)
+    }
+    public operator func ^(other: VIEW_OBJECT_PROPERTIES_FLAGS): VIEW_OBJECT_PROPERTIES_FLAGS {
+        return VIEW_OBJECT_PROPERTIES_FLAGS(value ^ other.value)
+    }
+    public operator func !(): VIEW_OBJECT_PROPERTIES_FLAGS {
+        return VIEW_OBJECT_PROPERTIES_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEW_OBJECT_PROPERTIES_FLAGS_VPF_SELECTRELATIVE = VIEW_OBJECT_PROPERTIES_FLAGS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEW_OBJECT_PROPERTIES_FLAGS_VPF_DISABLERELATIVE = VIEW_OBJECT_PROPERTIES_FLAGS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const VIEW_OBJECT_PROPERTIES_FLAGS_VPF_DISABLESCALE = VIEW_OBJECT_PROPERTIES_FLAGS(4)
+
+// Windows.Win32.System.Ole.WPCSETTING (synthetic:Windows_Win32_System_Ole_WPCSETTING)
+@When[Windows_Win32_System_Ole == "on"]
+public struct WPCSETTING {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const WPCSETTING_WPCSETTING_LOGGING_ENABLED = WPCSETTING(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const WPCSETTING_WPCSETTING_FILEDOWNLOAD_BLOCKED = WPCSETTING(2)
+
+// Windows.Win32.System.Ole.XFORMCOORDS (synthetic:Windows_Win32_System_Ole_XFORMCOORDS)
+@When[Windows_Win32_System_Ole == "on"]
+public struct XFORMCOORDS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Ole == "on"]
+public const XFORMCOORDS_XFORMCOORDS_POSITION = XFORMCOORDS(1)
+@When[Windows_Win32_System_Ole == "on"]
+public const XFORMCOORDS_XFORMCOORDS_SIZE = XFORMCOORDS(2)
+@When[Windows_Win32_System_Ole == "on"]
+public const XFORMCOORDS_XFORMCOORDS_HIMETRICTOCONTAINER = XFORMCOORDS(4)
+@When[Windows_Win32_System_Ole == "on"]
+public const XFORMCOORDS_XFORMCOORDS_CONTAINERTOHIMETRIC = XFORMCOORDS(8)
+@When[Windows_Win32_System_Ole == "on"]
+public const XFORMCOORDS_XFORMCOORDS_EVENTCOMPAT = XFORMCOORDS(16)
+
+// Windows.Win32.System.Ole._wireBRECORD (synthetic:Windows_Win32_System_Ole__wireBRECORD)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct _wireBRECORD {
+    public var fFlags: UInt32 = 0u32
+    public var clSize: UInt32 = 0u32
+    public var pRecInfo: CPointer<Unit> = CPointer<Unit>()
+    public var pRecord: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Ole._wireSAFEARRAY (synthetic:Windows_Win32_System_Ole__wireSAFEARRAY)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct _wireSAFEARRAY {
+    public var cDims: UInt16 = 0u16
+    public var fFeatures: UInt16 = 0u16
+    public var cbElements: UInt32 = 0u32
+    public var cLocks: UInt32 = 0u32
+    public var uArrayStructs: SAFEARRAYUNION = SAFEARRAYUNION()
+    public var rgsabound: VArray<Windows_Win32_System_Com.SAFEARRAYBOUND, $1> = VArray<Windows_Win32_System_Com.SAFEARRAYBOUND, $1>(repeat: Windows_Win32_System_Com.SAFEARRAYBOUND())
+}
+
+// Windows.Win32.System.Ole._wireVARIANT (synthetic:Windows_Win32_System_Ole__wireVARIANT)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct _wireVARIANT {
+    public var clSize: UInt32 = 0u32
+    public var rpcReserved: UInt32 = 0u32
+    public var vt: UInt16 = 0u16
+    public var wReserved1: UInt16 = 0u16
+    public var wReserved2: UInt16 = 0u16
+    public var wReserved3: UInt16 = 0u16
+    public var Anonymous: _wireVARIANT__Anonymous_e__Union = _wireVARIANT__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Ole._wireVARIANT._Anonymous_e__Union (synthetic:Windows_Win32_System_Ole__wireVARIANT__Anonymous_e__Union)
+@When[Windows_Win32_System_Ole == "on"]
+@C
+public struct _wireVARIANT__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
+
+    public mut prop llVal: Int64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop lVal: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop bVal: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop iVal: Int16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop fltVal: Float32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadFloat32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteFloat32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop dblVal: Float64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadFloat64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteFloat64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop boolVal: Int16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop scode: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cyVal: Windows_Win32_System_Com.CY {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.CY>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_System_Com.CY>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop date: Float64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadFloat64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteFloat64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop bstrVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop punkVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pdispVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop parray: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop brecVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pbVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop piVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop plVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pllVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pfltVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pdblVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pboolVal: CPointer<Int16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Int16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pscode: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcyVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pdate: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pbstrVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ppunkVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ppdispVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pparray: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pvarVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop cVal: Int8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uiVal: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ulVal: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ullVal: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop intVal: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop uintVal: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop decVal: Windows_Win32_Foundation.DECIMAL {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_Foundation.DECIMAL>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_Foundation.DECIMAL>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pdecVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pcVal: CPointer<UInt8> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<UInt8>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop puiVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pulVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pullVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop pintVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop puintVal: CPointer<Unit> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPointer<Unit>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}

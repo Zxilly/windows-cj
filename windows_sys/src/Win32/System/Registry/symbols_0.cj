@@ -57,41 +57,41 @@ public struct PVALUEW {
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_CREATE_KEY_DISPOSITION = UInt32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_CREATE_KEY_DISPOSITION_REG_CREATED_NEW_KEY: REG_CREATE_KEY_DISPOSITION = 1
+public const REG_CREATE_KEY_DISPOSITION_REG_CREATED_NEW_KEY: REG_CREATE_KEY_DISPOSITION = 1
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_CREATE_KEY_DISPOSITION_REG_OPENED_EXISTING_KEY: REG_CREATE_KEY_DISPOSITION = 2
+public const REG_CREATE_KEY_DISPOSITION_REG_OPENED_EXISTING_KEY: REG_CREATE_KEY_DISPOSITION = 2
 
 // Windows.Win32.System.Registry.REG_NOTIFY_FILTER (synthetic:Windows_Win32_System_Registry_REG_NOTIFY_FILTER)
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_NOTIFY_FILTER = UInt32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_NAME: REG_NOTIFY_FILTER = 1
+public const REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_NAME: REG_NOTIFY_FILTER = 1
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_ATTRIBUTES: REG_NOTIFY_FILTER = 2
+public const REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_ATTRIBUTES: REG_NOTIFY_FILTER = 2
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_LAST_SET: REG_NOTIFY_FILTER = 4
+public const REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_LAST_SET: REG_NOTIFY_FILTER = 4
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_SECURITY: REG_NOTIFY_FILTER = 8
+public const REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_SECURITY: REG_NOTIFY_FILTER = 8
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_NOTIFY_FILTER_REG_NOTIFY_THREAD_AGNOSTIC: REG_NOTIFY_FILTER = 268435456
+public const REG_NOTIFY_FILTER_REG_NOTIFY_THREAD_AGNOSTIC: REG_NOTIFY_FILTER = 268435456
 
 // Windows.Win32.System.Registry.REG_OPEN_CREATE_OPTIONS (synthetic:Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS)
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_OPEN_CREATE_OPTIONS = UInt32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_OPEN_CREATE_OPTIONS_REG_OPTION_RESERVED: REG_OPEN_CREATE_OPTIONS = 0
+public const REG_OPEN_CREATE_OPTIONS_REG_OPTION_RESERVED: REG_OPEN_CREATE_OPTIONS = 0
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_OPEN_CREATE_OPTIONS_REG_OPTION_NON_VOLATILE: REG_OPEN_CREATE_OPTIONS = 0
+public const REG_OPEN_CREATE_OPTIONS_REG_OPTION_NON_VOLATILE: REG_OPEN_CREATE_OPTIONS = 0
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_OPEN_CREATE_OPTIONS_REG_OPTION_VOLATILE: REG_OPEN_CREATE_OPTIONS = 1
+public const REG_OPEN_CREATE_OPTIONS_REG_OPTION_VOLATILE: REG_OPEN_CREATE_OPTIONS = 1
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_OPEN_CREATE_OPTIONS_REG_OPTION_CREATE_LINK: REG_OPEN_CREATE_OPTIONS = 2
+public const REG_OPEN_CREATE_OPTIONS_REG_OPTION_CREATE_LINK: REG_OPEN_CREATE_OPTIONS = 2
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_OPEN_CREATE_OPTIONS_REG_OPTION_BACKUP_RESTORE: REG_OPEN_CREATE_OPTIONS = 4
+public const REG_OPEN_CREATE_OPTIONS_REG_OPTION_BACKUP_RESTORE: REG_OPEN_CREATE_OPTIONS = 4
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_OPEN_CREATE_OPTIONS_REG_OPTION_OPEN_LINK: REG_OPEN_CREATE_OPTIONS = 8
+public const REG_OPEN_CREATE_OPTIONS_REG_OPTION_OPEN_LINK: REG_OPEN_CREATE_OPTIONS = 8
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_OPEN_CREATE_OPTIONS_REG_OPTION_DONT_VIRTUALIZE: REG_OPEN_CREATE_OPTIONS = 16
+public const REG_OPEN_CREATE_OPTIONS_REG_OPTION_DONT_VIRTUALIZE: REG_OPEN_CREATE_OPTIONS = 16
 
 // Windows.Win32.System.Registry.REG_PROVIDER (synthetic:Windows_Win32_System_Registry_REG_PROVIDER)
 @When[Windows_Win32_System_Registry == "on"]
@@ -109,115 +109,115 @@ public struct REG_PROVIDER {
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_RESTORE_KEY_FLAGS = Int32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_RESTORE_KEY_FLAGS_REG_FORCE_RESTORE: REG_RESTORE_KEY_FLAGS = 8
+public const REG_RESTORE_KEY_FLAGS_REG_FORCE_RESTORE: REG_RESTORE_KEY_FLAGS = 8
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_RESTORE_KEY_FLAGS_REG_WHOLE_HIVE_VOLATILE: REG_RESTORE_KEY_FLAGS = 1
+public const REG_RESTORE_KEY_FLAGS_REG_WHOLE_HIVE_VOLATILE: REG_RESTORE_KEY_FLAGS = 1
 
 // Windows.Win32.System.Registry.REG_ROUTINE_FLAGS (synthetic:Windows_Win32_System_Registry_REG_ROUTINE_FLAGS)
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_ROUTINE_FLAGS = UInt32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_DWORD: REG_ROUTINE_FLAGS = 24
+public const REG_ROUTINE_FLAGS_RRF_RT_DWORD: REG_ROUTINE_FLAGS = 24
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_QWORD: REG_ROUTINE_FLAGS = 72
+public const REG_ROUTINE_FLAGS_RRF_RT_QWORD: REG_ROUTINE_FLAGS = 72
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_REG_NONE: REG_ROUTINE_FLAGS = 1
+public const REG_ROUTINE_FLAGS_RRF_RT_REG_NONE: REG_ROUTINE_FLAGS = 1
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_REG_SZ: REG_ROUTINE_FLAGS = 2
+public const REG_ROUTINE_FLAGS_RRF_RT_REG_SZ: REG_ROUTINE_FLAGS = 2
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_REG_EXPAND_SZ: REG_ROUTINE_FLAGS = 4
+public const REG_ROUTINE_FLAGS_RRF_RT_REG_EXPAND_SZ: REG_ROUTINE_FLAGS = 4
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_REG_BINARY: REG_ROUTINE_FLAGS = 8
+public const REG_ROUTINE_FLAGS_RRF_RT_REG_BINARY: REG_ROUTINE_FLAGS = 8
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_REG_DWORD: REG_ROUTINE_FLAGS = 16
+public const REG_ROUTINE_FLAGS_RRF_RT_REG_DWORD: REG_ROUTINE_FLAGS = 16
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_REG_MULTI_SZ: REG_ROUTINE_FLAGS = 32
+public const REG_ROUTINE_FLAGS_RRF_RT_REG_MULTI_SZ: REG_ROUTINE_FLAGS = 32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_REG_QWORD: REG_ROUTINE_FLAGS = 64
+public const REG_ROUTINE_FLAGS_RRF_RT_REG_QWORD: REG_ROUTINE_FLAGS = 64
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_RT_ANY: REG_ROUTINE_FLAGS = 65535
+public const REG_ROUTINE_FLAGS_RRF_RT_ANY: REG_ROUTINE_FLAGS = 65535
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_SUBKEY_WOW6464KEY: REG_ROUTINE_FLAGS = 65536
+public const REG_ROUTINE_FLAGS_RRF_SUBKEY_WOW6464KEY: REG_ROUTINE_FLAGS = 65536
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_SUBKEY_WOW6432KEY: REG_ROUTINE_FLAGS = 131072
+public const REG_ROUTINE_FLAGS_RRF_SUBKEY_WOW6432KEY: REG_ROUTINE_FLAGS = 131072
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_WOW64_MASK: REG_ROUTINE_FLAGS = 196608
+public const REG_ROUTINE_FLAGS_RRF_WOW64_MASK: REG_ROUTINE_FLAGS = 196608
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_NOEXPAND: REG_ROUTINE_FLAGS = 268435456
+public const REG_ROUTINE_FLAGS_RRF_NOEXPAND: REG_ROUTINE_FLAGS = 268435456
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_ROUTINE_FLAGS_RRF_ZEROONFAILURE: REG_ROUTINE_FLAGS = 536870912
+public const REG_ROUTINE_FLAGS_RRF_ZEROONFAILURE: REG_ROUTINE_FLAGS = 536870912
 
 // Windows.Win32.System.Registry.REG_SAM_FLAGS (synthetic:Windows_Win32_System_Registry_REG_SAM_FLAGS)
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_SAM_FLAGS = UInt32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_QUERY_VALUE: REG_SAM_FLAGS = 1
+public const REG_SAM_FLAGS_KEY_QUERY_VALUE: REG_SAM_FLAGS = 1
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_SET_VALUE: REG_SAM_FLAGS = 2
+public const REG_SAM_FLAGS_KEY_SET_VALUE: REG_SAM_FLAGS = 2
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_CREATE_SUB_KEY: REG_SAM_FLAGS = 4
+public const REG_SAM_FLAGS_KEY_CREATE_SUB_KEY: REG_SAM_FLAGS = 4
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_ENUMERATE_SUB_KEYS: REG_SAM_FLAGS = 8
+public const REG_SAM_FLAGS_KEY_ENUMERATE_SUB_KEYS: REG_SAM_FLAGS = 8
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_NOTIFY: REG_SAM_FLAGS = 16
+public const REG_SAM_FLAGS_KEY_NOTIFY: REG_SAM_FLAGS = 16
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_CREATE_LINK: REG_SAM_FLAGS = 32
+public const REG_SAM_FLAGS_KEY_CREATE_LINK: REG_SAM_FLAGS = 32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_WOW64_32KEY: REG_SAM_FLAGS = 512
+public const REG_SAM_FLAGS_KEY_WOW64_32KEY: REG_SAM_FLAGS = 512
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_WOW64_64KEY: REG_SAM_FLAGS = 256
+public const REG_SAM_FLAGS_KEY_WOW64_64KEY: REG_SAM_FLAGS = 256
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_WOW64_RES: REG_SAM_FLAGS = 768
+public const REG_SAM_FLAGS_KEY_WOW64_RES: REG_SAM_FLAGS = 768
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_READ: REG_SAM_FLAGS = 131097
+public const REG_SAM_FLAGS_KEY_READ: REG_SAM_FLAGS = 131097
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_WRITE: REG_SAM_FLAGS = 131078
+public const REG_SAM_FLAGS_KEY_WRITE: REG_SAM_FLAGS = 131078
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_EXECUTE: REG_SAM_FLAGS = 131097
+public const REG_SAM_FLAGS_KEY_EXECUTE: REG_SAM_FLAGS = 131097
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAM_FLAGS_KEY_ALL_ACCESS: REG_SAM_FLAGS = 983103
+public const REG_SAM_FLAGS_KEY_ALL_ACCESS: REG_SAM_FLAGS = 983103
 
 // Windows.Win32.System.Registry.REG_SAVE_FORMAT (synthetic:Windows_Win32_System_Registry_REG_SAVE_FORMAT)
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_SAVE_FORMAT = UInt32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAVE_FORMAT_REG_STANDARD_FORMAT: REG_SAVE_FORMAT = 1
+public const REG_SAVE_FORMAT_REG_STANDARD_FORMAT: REG_SAVE_FORMAT = 1
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAVE_FORMAT_REG_LATEST_FORMAT: REG_SAVE_FORMAT = 2
+public const REG_SAVE_FORMAT_REG_LATEST_FORMAT: REG_SAVE_FORMAT = 2
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_SAVE_FORMAT_REG_NO_COMPRESSION: REG_SAVE_FORMAT = 4
+public const REG_SAVE_FORMAT_REG_NO_COMPRESSION: REG_SAVE_FORMAT = 4
 
 // Windows.Win32.System.Registry.REG_VALUE_TYPE (synthetic:Windows_Win32_System_Registry_REG_VALUE_TYPE)
 @When[Windows_Win32_System_Registry == "on"]
 public type REG_VALUE_TYPE = UInt32
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_NONE: REG_VALUE_TYPE = 0
+public const REG_VALUE_TYPE_REG_NONE: REG_VALUE_TYPE = 0
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_SZ: REG_VALUE_TYPE = 1
+public const REG_VALUE_TYPE_REG_SZ: REG_VALUE_TYPE = 1
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_EXPAND_SZ: REG_VALUE_TYPE = 2
+public const REG_VALUE_TYPE_REG_EXPAND_SZ: REG_VALUE_TYPE = 2
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_BINARY: REG_VALUE_TYPE = 3
+public const REG_VALUE_TYPE_REG_BINARY: REG_VALUE_TYPE = 3
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_DWORD: REG_VALUE_TYPE = 4
+public const REG_VALUE_TYPE_REG_DWORD: REG_VALUE_TYPE = 4
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_DWORD_LITTLE_ENDIAN: REG_VALUE_TYPE = 4
+public const REG_VALUE_TYPE_REG_DWORD_LITTLE_ENDIAN: REG_VALUE_TYPE = 4
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_DWORD_BIG_ENDIAN: REG_VALUE_TYPE = 5
+public const REG_VALUE_TYPE_REG_DWORD_BIG_ENDIAN: REG_VALUE_TYPE = 5
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_LINK: REG_VALUE_TYPE = 6
+public const REG_VALUE_TYPE_REG_LINK: REG_VALUE_TYPE = 6
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_MULTI_SZ: REG_VALUE_TYPE = 7
+public const REG_VALUE_TYPE_REG_MULTI_SZ: REG_VALUE_TYPE = 7
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_RESOURCE_LIST: REG_VALUE_TYPE = 8
+public const REG_VALUE_TYPE_REG_RESOURCE_LIST: REG_VALUE_TYPE = 8
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_FULL_RESOURCE_DESCRIPTOR: REG_VALUE_TYPE = 9
+public const REG_VALUE_TYPE_REG_FULL_RESOURCE_DESCRIPTOR: REG_VALUE_TYPE = 9
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_RESOURCE_REQUIREMENTS_LIST: REG_VALUE_TYPE = 10
+public const REG_VALUE_TYPE_REG_RESOURCE_REQUIREMENTS_LIST: REG_VALUE_TYPE = 10
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_QWORD: REG_VALUE_TYPE = 11
+public const REG_VALUE_TYPE_REG_QWORD: REG_VALUE_TYPE = 11
 @When[Windows_Win32_System_Registry == "on"]
-public let REG_VALUE_TYPE_REG_QWORD_LITTLE_ENDIAN: REG_VALUE_TYPE = 11
+public const REG_VALUE_TYPE_REG_QWORD_LITTLE_ENDIAN: REG_VALUE_TYPE = 11
 
 // Windows.Win32.System.Registry.VALENTA (synthetic:Windows_Win32_System_Registry_VALENTA)
 @When[Windows_Win32_System_Registry == "on"]

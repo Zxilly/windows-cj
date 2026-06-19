@@ -10,6 +10,21 @@ import windows_interface.macros.Interface
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
 
+// Windows.Graphics.DisplayAdapterId (synthetic:Windows_Graphics_DisplayAdapterId)
+@When[Windows_Graphics == "on"]
+@C
+public struct DisplayAdapterId {
+    public var LowPart: UInt32 = 0u32
+    public var HighPart: Int32 = 0i32
+}
+
+// Windows.Graphics.DisplayId (synthetic:Windows_Graphics_DisplayId)
+@When[Windows_Graphics == "on"]
+@C
+public struct DisplayId {
+    public var Value: UInt64 = 0u64
+}
+
 // Windows.Graphics.IGeometrySource2D (synthetic:Windows_Graphics_IGeometrySource2D)
 @When[Windows_Graphics == "on"]
 @Interface["caff7902-670c-4181-a624-da977203b845", "Windows.Graphics.IGeometrySource2D"]

@@ -14,21 +14,21 @@ import windows_sys.Foundation as Windows_Foundation
 @When[Windows_Foundation_Collections == "on"]
 public struct CollectionChange {
     public let value: Int32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: Int32) {
+    public const init(value: Int32) {
         this.value = value
     }
 }
 @When[Windows_Foundation_Collections == "on"]
-public let CollectionChange_Reset = CollectionChange(0)
+public const CollectionChange_Reset = CollectionChange(0)
 @When[Windows_Foundation_Collections == "on"]
-public let CollectionChange_ItemInserted = CollectionChange(1)
+public const CollectionChange_ItemInserted = CollectionChange(1)
 @When[Windows_Foundation_Collections == "on"]
-public let CollectionChange_ItemRemoved = CollectionChange(2)
+public const CollectionChange_ItemRemoved = CollectionChange(2)
 @When[Windows_Foundation_Collections == "on"]
-public let CollectionChange_ItemChanged = CollectionChange(3)
+public const CollectionChange_ItemChanged = CollectionChange(3)
 
 // Windows.Foundation.Collections.IIterable`1 (synthetic:Windows_Foundation_Collections_IIterable_1)
 @When[Windows_Foundation_Collections == "on"]
@@ -3429,6 +3429,405 @@ func buildMapChangedEventHandlerBoxVtbl<K, V>(): MapChangedEventHandlerVtbl wher
     return vtbl
 }
 
+
+// Windows.Foundation.Collections.PropertySet (synthetic:Windows_Foundation_Collections_PropertySet)
+@When[Windows_Foundation_Collections == "on"]
+public class PropertySet <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PropertySet> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PropertySet {
+        PropertySet(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PropertySet {
+        PropertySet(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPropertySet.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PropertySet> {
+        let ancestors = [IPropertySet.iid(), IObservableMap<windows_core.HString, windows_interface.IInspectable>.iid(), IMap<windows_core.HString, windows_interface.IInspectable>.iid(), IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PropertySet>("PropertySet", IPropertySet.iid(), ancestors, { raw => PropertySet.fromAbiTake(raw) }, { raw => PropertySet.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPropertySet {
+        match (unsafe { query(IPropertySet.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPropertySet(): IPropertySet {
+        defaultInterface()
+    }
+
+    public func asIObservableMap(): IObservableMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<IObservableMap<windows_core.HString, windows_interface.IInspectable>>(IObservableMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIMap(): IMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<IMap<windows_core.HString, windows_interface.IInspectable>>(IMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIIterable(): IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>> {
+        match (unsafe { query<IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>>(IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func new(): PropertySet {
+        var created__: Option<PropertySet> = Option<PropertySet>.None
+        try (factory__ = windows_core.factory<PropertySet, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<PropertySet>(PropertySet.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce PropertySet")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.Collections.PropertySet"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Foundation.Collections.PropertySet;{" + IPropertySet.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.Collections.PropertySet", PropertySet.signature(), IPropertySet.iid())
+    }
+
+    public static func intoWinrtHandle(value: PropertySet): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PropertySet {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PropertySet.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PropertySet {
+        PropertySet.viewOf(raw)
+    }
+}
+
+// Windows.Foundation.Collections.StringMap (synthetic:Windows_Foundation_Collections_StringMap)
+@When[Windows_Foundation_Collections == "on"]
+public class StringMap <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<StringMap> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): StringMap {
+        StringMap(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): StringMap {
+        StringMap(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMap<windows_core.HString, windows_core.HString>.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<StringMap> {
+        let ancestors = [IMap<windows_core.HString, windows_core.HString>.iid(), IIterable<IKeyValuePair<windows_core.HString, windows_core.HString>>.iid(), IObservableMap<windows_core.HString, windows_core.HString>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<StringMap>("StringMap", IMap<windows_core.HString, windows_core.HString>.iid(), ancestors, { raw => StringMap.fromAbiTake(raw) }, { raw => StringMap.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMap<windows_core.HString, windows_core.HString> {
+        match (unsafe { query(IMap<windows_core.HString, windows_core.HString>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMap(): IMap<windows_core.HString, windows_core.HString> {
+        defaultInterface()
+    }
+
+    public func asIIterable(): IIterable<IKeyValuePair<windows_core.HString, windows_core.HString>> {
+        match (unsafe { query<IIterable<IKeyValuePair<windows_core.HString, windows_core.HString>>>(IIterable<IKeyValuePair<windows_core.HString, windows_core.HString>>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIObservableMap(): IObservableMap<windows_core.HString, windows_core.HString> {
+        match (unsafe { query<IObservableMap<windows_core.HString, windows_core.HString>>(IObservableMap<windows_core.HString, windows_core.HString>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Size: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Size(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func Lookup(key: windows_core.HString): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Lookup(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed()) {
+            windows_core.winrtReleaseFailedGenericOut<windows_core.HString>(CPointer<CPointer<Unit>>(inout result__))
+        }
+        hr__.check()
+        return windows_core.winrtTakeGenericOut<windows_core.HString>(CPointer<CPointer<Unit>>(inout result__))
+    }
+
+    public func HasKey(key: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HasKey(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func GetView(): IMapView<windows_core.HString, windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetView(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IMapView<windows_core.HString, windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IMapView<windows_core.HString, windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Insert(key: windows_core.HString, value: windows_core.HString): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.Insert(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<Bool>(inout result__)) }
+                }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func Remove(key: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Remove(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Clear(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Clear() }
+        }
+        hr__.check()
+    }
+
+    public static func new(): StringMap {
+        var created__: Option<StringMap> = Option<StringMap>.None
+        try (factory__ = windows_core.factory<StringMap, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<StringMap>(StringMap.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce StringMap")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.Collections.StringMap"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Foundation.Collections.StringMap;{" + IMap<windows_core.HString, windows_core.HString>.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.Collections.StringMap", StringMap.signature(), IMap<windows_core.HString, windows_core.HString>.iid())
+    }
+
+    public static func intoWinrtHandle(value: StringMap): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): StringMap {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        StringMap.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): StringMap {
+        StringMap.viewOf(raw)
+    }
+}
+
+// Windows.Foundation.Collections.ValueSet (synthetic:Windows_Foundation_Collections_ValueSet)
+@When[Windows_Foundation_Collections == "on"]
+public class ValueSet <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ValueSet> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ValueSet {
+        ValueSet(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ValueSet {
+        ValueSet(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPropertySet.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ValueSet> {
+        let ancestors = [IPropertySet.iid(), IObservableMap<windows_core.HString, windows_interface.IInspectable>.iid(), IMap<windows_core.HString, windows_interface.IInspectable>.iid(), IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ValueSet>("ValueSet", IPropertySet.iid(), ancestors, { raw => ValueSet.fromAbiTake(raw) }, { raw => ValueSet.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPropertySet {
+        match (unsafe { query(IPropertySet.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPropertySet(): IPropertySet {
+        defaultInterface()
+    }
+
+    public func asIObservableMap(): IObservableMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<IObservableMap<windows_core.HString, windows_interface.IInspectable>>(IObservableMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIMap(): IMap<windows_core.HString, windows_interface.IInspectable> {
+        match (unsafe { query<IMap<windows_core.HString, windows_interface.IInspectable>>(IMap<windows_core.HString, windows_interface.IInspectable>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIIterable(): IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>> {
+        match (unsafe { query<IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>>(IIterable<IKeyValuePair<windows_core.HString, windows_interface.IInspectable>>.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func new(): ValueSet {
+        var created__: Option<ValueSet> = Option<ValueSet>.None
+        try (factory__ = windows_core.factory<ValueSet, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ValueSet>(ValueSet.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ValueSet")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Foundation.Collections.ValueSet"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Foundation.Collections.ValueSet;{" + IPropertySet.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Foundation.Collections.ValueSet", ValueSet.signature(), IPropertySet.iid())
+    }
+
+    public static func intoWinrtHandle(value: ValueSet): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ValueSet {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ValueSet.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ValueSet {
+        ValueSet.viewOf(raw)
+    }
+}
 
 // Windows.Foundation.Collections.VectorChangedEventHandler`1 (synthetic:Windows_Foundation_Collections_VectorChangedEventHandler_1)
 @When[Windows_Foundation_Collections == "on"]

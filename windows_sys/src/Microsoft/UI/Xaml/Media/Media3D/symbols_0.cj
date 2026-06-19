@@ -10,6 +10,589 @@ import windows_interface.macros.Interface
 @When[Microsoft_UI_Xaml == "on"]
 import windows_sys.Microsoft.UI.Xaml as Microsoft_UI_Xaml
 
+// Microsoft.UI.Xaml.Media.Media3D.CompositeTransform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_CompositeTransform3D)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+public class CompositeTransform3D <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<CompositeTransform3D> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): CompositeTransform3D {
+        CompositeTransform3D(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): CompositeTransform3D {
+        CompositeTransform3D(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ICompositeTransform3D.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<CompositeTransform3D> {
+        let ancestors = [ICompositeTransform3D.iid(), ITransform3D.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<CompositeTransform3D>("CompositeTransform3D", ICompositeTransform3D.iid(), ancestors, { raw => CompositeTransform3D.fromAbiTake(raw) }, { raw => CompositeTransform3D.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ICompositeTransform3D {
+        match (unsafe { query(ICompositeTransform3D.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositeTransform3D(): ICompositeTransform3D {
+        defaultInterface()
+    }
+
+    public func asITransform3D(): ITransform3D {
+        match (unsafe { query<ITransform3D>(ITransform3D.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop CenterX: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CenterX(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCenterX(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CenterY: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CenterY(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCenterY(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CenterZ: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CenterZ(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCenterZ(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop RotationX: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RotationX(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRotationX(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop RotationY: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RotationY(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRotationY(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop RotationZ: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RotationZ(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRotationZ(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ScaleX: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScaleX(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetScaleX(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ScaleY: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScaleY(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetScaleY(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ScaleZ: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScaleZ(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetScaleZ(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TranslateX: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TranslateX(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTranslateX(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TranslateY: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TranslateY(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTranslateY(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TranslateZ: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TranslateZ(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTranslateZ(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): CompositeTransform3D {
+        var created__: Option<CompositeTransform3D> = Option<CompositeTransform3D>.None
+        try (factory__ = windows_core.factory<CompositeTransform3D, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<CompositeTransform3D>(CompositeTransform3D.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce CompositeTransform3D")
+        }
+    }
+
+    public static func CenterXProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CenterXProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CenterYProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CenterYProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CenterZProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CenterZProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RotationXProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RotationXProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RotationYProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RotationYProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func RotationZProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RotationZProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ScaleXProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ScaleXProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ScaleYProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ScaleYProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ScaleZProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ScaleZProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TranslateXProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TranslateXProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TranslateYProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TranslateYProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TranslateZProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<CompositeTransform3D, ICompositeTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TranslateZProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Media3D.CompositeTransform3D"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Media3D.CompositeTransform3D;{" + ICompositeTransform3D.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Media3D.CompositeTransform3D", CompositeTransform3D.signature(), ICompositeTransform3D.iid())
+    }
+
+    public static func intoWinrtHandle(value: CompositeTransform3D): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): CompositeTransform3D {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        CompositeTransform3D.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): CompositeTransform3D {
+        CompositeTransform3D.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.ICompositeTransform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_ICompositeTransform3D)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+@Interface["cbaf163f-c254-5dcf-8ae4-40e21ce1b4ca", "Microsoft.UI.Xaml.Media.Media3D.ICompositeTransform3D"]
+public interface ICompositeTransform3D <: IInspectable {
+    func CenterX(value: CPointer<Float64>): Int32
+    func SetCenterX(value: Float64): Int32
+    func CenterY(value: CPointer<Float64>): Int32
+    func SetCenterY(value: Float64): Int32
+    func CenterZ(value: CPointer<Float64>): Int32
+    func SetCenterZ(value: Float64): Int32
+    func RotationX(value: CPointer<Float64>): Int32
+    func SetRotationX(value: Float64): Int32
+    func RotationY(value: CPointer<Float64>): Int32
+    func SetRotationY(value: Float64): Int32
+    func RotationZ(value: CPointer<Float64>): Int32
+    func SetRotationZ(value: Float64): Int32
+    func ScaleX(value: CPointer<Float64>): Int32
+    func SetScaleX(value: Float64): Int32
+    func ScaleY(value: CPointer<Float64>): Int32
+    func SetScaleY(value: Float64): Int32
+    func ScaleZ(value: CPointer<Float64>): Int32
+    func SetScaleZ(value: Float64): Int32
+    func TranslateX(value: CPointer<Float64>): Int32
+    func SetTranslateX(value: Float64): Int32
+    func TranslateY(value: CPointer<Float64>): Int32
+    func SetTranslateY(value: Float64): Int32
+    func TranslateZ(value: CPointer<Float64>): Int32
+    func SetTranslateZ(value: Float64): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.ICompositeTransform3DStatics (synthetic:Microsoft_UI_Xaml_Media_Media3D_ICompositeTransform3DStatics)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+@Interface["b64d4181-6988-5d46-858a-224db7089dc4", "Microsoft.UI.Xaml.Media.Media3D.ICompositeTransform3DStatics", "CenterXProperty.value=Com;CenterYProperty.value=Com;CenterZProperty.value=Com;RotationXProperty.value=Com;RotationYProperty.value=Com;RotationZProperty.value=Com;ScaleXProperty.value=Com;ScaleYProperty.value=Com;ScaleZProperty.value=Com;TranslateXProperty.value=Com;TranslateYProperty.value=Com;TranslateZProperty.value=Com"]
+public interface ICompositeTransform3DStatics <: IInspectable {
+    func CenterXProperty(value: CPointer<CPointer<Unit>>): Int32
+    func CenterYProperty(value: CPointer<CPointer<Unit>>): Int32
+    func CenterZProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RotationXProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RotationYProperty(value: CPointer<CPointer<Unit>>): Int32
+    func RotationZProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ScaleXProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ScaleYProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ScaleZProperty(value: CPointer<CPointer<Unit>>): Int32
+    func TranslateXProperty(value: CPointer<CPointer<Unit>>): Int32
+    func TranslateYProperty(value: CPointer<CPointer<Unit>>): Int32
+    func TranslateZProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.IMatrix3DHelper (synthetic:Microsoft_UI_Xaml_Media_Media3D_IMatrix3DHelper)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+@Interface["d2909be1-9c28-5b38-b63c-88e838644533", "Microsoft.UI.Xaml.Media.Media3D.IMatrix3DHelper"]
+public interface IMatrix3DHelper <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.IMatrix3DHelperStatics (synthetic:Microsoft_UI_Xaml_Media_Media3D_IMatrix3DHelperStatics)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+@Interface["930e447b-265c-5ded-9e64-57b8933c55c3", "Microsoft.UI.Xaml.Media.Media3D.IMatrix3DHelperStatics"]
+public interface IMatrix3DHelperStatics <: IInspectable {
+    func Identity(value: CPointer<Matrix3D>): Int32
+    func Multiply(matrix1: Matrix3D, matrix2: Matrix3D, result: CPointer<Matrix3D>): Int32
+    func FromElements(m11: Float64, m12: Float64, m13: Float64, m14: Float64, m21: Float64, m22: Float64, m23: Float64, m24: Float64, m31: Float64, m32: Float64, m33: Float64, m34: Float64, offsetX: Float64, offsetY: Float64, offsetZ: Float64, m44: Float64, result: CPointer<Matrix3D>): Int32
+    func GetHasInverse(target: Matrix3D, result: CPointer<Bool>): Int32
+    func GetIsIdentity(target: Matrix3D, result: CPointer<Bool>): Int32
+    func Invert(target: Matrix3D, result: CPointer<Matrix3D>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.IPerspectiveTransform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_IPerspectiveTransform3D)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+@Interface["4006cc46-684e-54ea-a421-dae5b0556b85", "Microsoft.UI.Xaml.Media.Media3D.IPerspectiveTransform3D"]
+public interface IPerspectiveTransform3D <: IInspectable {
+    func Depth(value: CPointer<Float64>): Int32
+    func SetDepth(value: Float64): Int32
+    func OffsetX(value: CPointer<Float64>): Int32
+    func SetOffsetX(value: Float64): Int32
+    func OffsetY(value: CPointer<Float64>): Int32
+    func SetOffsetY(value: Float64): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.IPerspectiveTransform3DStatics (synthetic:Microsoft_UI_Xaml_Media_Media3D_IPerspectiveTransform3DStatics)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+@Interface["3b16aa8d-0ee2-5d46-a723-dc8e5c1c0b19", "Microsoft.UI.Xaml.Media.Media3D.IPerspectiveTransform3DStatics", "DepthProperty.value=Com;OffsetXProperty.value=Com;OffsetYProperty.value=Com"]
+public interface IPerspectiveTransform3DStatics <: IInspectable {
+    func DepthProperty(value: CPointer<CPointer<Unit>>): Int32
+    func OffsetXProperty(value: CPointer<CPointer<Unit>>): Int32
+    func OffsetYProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
 // Microsoft.UI.Xaml.Media.Media3D.ITransform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_ITransform3D)
 @When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 @Interface["afea4941-2e49-533c-9f8f-2c126ef9893a", "Microsoft.UI.Xaml.Media.Media3D.ITransform3D"]
@@ -21,6 +604,362 @@ public interface ITransform3D <: IInspectable {
 @Interface["9bcce0a1-10ac-5319-bdf1-548d2e5ae504", "Microsoft.UI.Xaml.Media.Media3D.ITransform3DFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface ITransform3DFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.Matrix3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_Matrix3D)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+@C
+public struct Matrix3D {
+    public var M11: Float64 = 0.0f64
+    public var M12: Float64 = 0.0f64
+    public var M13: Float64 = 0.0f64
+    public var M14: Float64 = 0.0f64
+    public var M21: Float64 = 0.0f64
+    public var M22: Float64 = 0.0f64
+    public var M23: Float64 = 0.0f64
+    public var M24: Float64 = 0.0f64
+    public var M31: Float64 = 0.0f64
+    public var M32: Float64 = 0.0f64
+    public var M33: Float64 = 0.0f64
+    public var M34: Float64 = 0.0f64
+    public var OffsetX: Float64 = 0.0f64
+    public var OffsetY: Float64 = 0.0f64
+    public var OffsetZ: Float64 = 0.0f64
+    public var M44: Float64 = 0.0f64
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.Matrix3DHelper (synthetic:Microsoft_UI_Xaml_Media_Media3D_Matrix3DHelper)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+public class Matrix3DHelper <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Matrix3DHelper> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Matrix3DHelper {
+        Matrix3DHelper(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Matrix3DHelper {
+        Matrix3DHelper(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMatrix3DHelper.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Matrix3DHelper> {
+        let ancestors = [IMatrix3DHelper.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Matrix3DHelper>("Matrix3DHelper", IMatrix3DHelper.iid(), ancestors, { raw => Matrix3DHelper.fromAbiTake(raw) }, { raw => Matrix3DHelper.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMatrix3DHelper {
+        match (unsafe { query(IMatrix3DHelper.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMatrix3DHelper(): IMatrix3DHelper {
+        defaultInterface()
+    }
+
+    public static func Identity(): Matrix3D {
+        var result__ = Matrix3D()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Matrix3DHelper, IMatrix3DHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Identity(CPointer<Matrix3D>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Multiply(matrix1: Matrix3D, matrix2: Matrix3D): Matrix3D {
+        var result__ = Matrix3D()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Matrix3DHelper, IMatrix3DHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Multiply(matrix1, matrix2, CPointer<Matrix3D>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func FromElements(m11: Float64, m12: Float64, m13: Float64, m14: Float64, m21: Float64, m22: Float64, m23: Float64, m24: Float64, m31: Float64, m32: Float64, m33: Float64, m34: Float64, offsetX: Float64, offsetY: Float64, offsetZ: Float64, m44: Float64): Matrix3D {
+        var result__ = Matrix3D()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Matrix3DHelper, IMatrix3DHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FromElements(m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, offsetX, offsetY, offsetZ, m44, CPointer<Matrix3D>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GetHasInverse(target: Matrix3D): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Matrix3DHelper, IMatrix3DHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetHasInverse(target, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GetIsIdentity(target: Matrix3D): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Matrix3DHelper, IMatrix3DHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetIsIdentity(target, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Invert(target: Matrix3D): Matrix3D {
+        var result__ = Matrix3D()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Matrix3DHelper, IMatrix3DHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Invert(target, CPointer<Matrix3D>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Media3D.Matrix3DHelper"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Media3D.Matrix3DHelper;{" + IMatrix3DHelper.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Media3D.Matrix3DHelper", Matrix3DHelper.signature(), IMatrix3DHelper.iid())
+    }
+
+    public static func intoWinrtHandle(value: Matrix3DHelper): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Matrix3DHelper {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Matrix3DHelper.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Matrix3DHelper {
+        Matrix3DHelper.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.Media3D.PerspectiveTransform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_PerspectiveTransform3D)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
+public class PerspectiveTransform3D <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<PerspectiveTransform3D> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): PerspectiveTransform3D {
+        PerspectiveTransform3D(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): PerspectiveTransform3D {
+        PerspectiveTransform3D(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IPerspectiveTransform3D.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<PerspectiveTransform3D> {
+        let ancestors = [IPerspectiveTransform3D.iid(), ITransform3D.iid(), Microsoft_UI_Xaml.IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<PerspectiveTransform3D>("PerspectiveTransform3D", IPerspectiveTransform3D.iid(), ancestors, { raw => PerspectiveTransform3D.fromAbiTake(raw) }, { raw => PerspectiveTransform3D.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IPerspectiveTransform3D {
+        match (unsafe { query(IPerspectiveTransform3D.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIPerspectiveTransform3D(): IPerspectiveTransform3D {
+        defaultInterface()
+    }
+
+    public func asITransform3D(): ITransform3D {
+        match (unsafe { query<ITransform3D>(ITransform3D.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml.IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml.IDependencyObject>(Microsoft_UI_Xaml.IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Depth: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Depth(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDepth(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OffsetX: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OffsetX(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetOffsetX(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OffsetY: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OffsetY(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetOffsetY(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): PerspectiveTransform3D {
+        var created__: Option<PerspectiveTransform3D> = Option<PerspectiveTransform3D>.None
+        try (factory__ = windows_core.factory<PerspectiveTransform3D, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<PerspectiveTransform3D>(PerspectiveTransform3D.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce PerspectiveTransform3D")
+        }
+    }
+
+    public static func DepthProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PerspectiveTransform3D, IPerspectiveTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DepthProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OffsetXProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PerspectiveTransform3D, IPerspectiveTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OffsetXProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OffsetYProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<PerspectiveTransform3D, IPerspectiveTransform3DStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OffsetYProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.Media3D.PerspectiveTransform3D"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.Media3D.PerspectiveTransform3D;{" + IPerspectiveTransform3D.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.Media3D.PerspectiveTransform3D", PerspectiveTransform3D.signature(), IPerspectiveTransform3D.iid())
+    }
+
+    public static func intoWinrtHandle(value: PerspectiveTransform3D): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): PerspectiveTransform3D {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        PerspectiveTransform3D.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): PerspectiveTransform3D {
+        PerspectiveTransform3D.viewOf(raw)
+    }
 }
 
 // Microsoft.UI.Xaml.Media.Media3D.Transform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_Transform3D)

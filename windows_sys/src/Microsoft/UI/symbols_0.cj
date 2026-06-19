@@ -11,6 +11,8 @@ import windows_interface.macros.Interface
 import windows_sys.Microsoft.Foundation as Microsoft_Foundation
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_UI == "on"]
+import windows_sys.UI as Windows_UI
 
 // Microsoft.UI.ClosableNotifierHandler (synthetic:Microsoft_UI_ClosableNotifierHandler)
 @When[Microsoft_UI == "on"]
@@ -178,6 +180,1590 @@ func buildClosableNotifierHandlerBoxVtbl(): ClosableNotifierHandlerVtbl {
 }
 
 
+// Microsoft.UI.ColorHelper (synthetic:Microsoft_UI_ColorHelper)
+@When[Microsoft_UI == "on"]
+public class ColorHelper <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ColorHelper> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ColorHelper {
+        ColorHelper(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ColorHelper {
+        ColorHelper(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IColorHelper.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ColorHelper> {
+        let ancestors = [IColorHelper.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ColorHelper>("ColorHelper", IColorHelper.iid(), ancestors, { raw => ColorHelper.fromAbiTake(raw) }, { raw => ColorHelper.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IColorHelper {
+        match (unsafe { query(IColorHelper.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIColorHelper(): IColorHelper {
+        defaultInterface()
+    }
+
+    public static func ToDisplayName(color: Windows_UI.Color): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ColorHelper, IColorHelperStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.ToDisplayName(color, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func FromArgb(a: UInt8, r: UInt8, g: UInt8, b: UInt8): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<ColorHelper, IColorHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FromArgb(a, r, g, b, CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.ColorHelper"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.ColorHelper;{" + IColorHelper.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.ColorHelper", ColorHelper.signature(), IColorHelper.iid())
+    }
+
+    public static func intoWinrtHandle(value: ColorHelper): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ColorHelper {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ColorHelper.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ColorHelper {
+        ColorHelper.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Colors (synthetic:Microsoft_UI_Colors)
+@When[Microsoft_UI == "on"]
+public class Colors <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<Colors> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Colors {
+        Colors(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Colors {
+        Colors(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IColors.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Colors> {
+        let ancestors = [IColors.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Colors>("Colors", IColors.iid(), ancestors, { raw => Colors.fromAbiTake(raw) }, { raw => Colors.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IColors {
+        match (unsafe { query(IColors.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIColors(): IColors {
+        defaultInterface()
+    }
+
+    public static func AliceBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AliceBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func AntiqueWhite(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AntiqueWhite(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Aqua(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Aqua(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Aquamarine(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Aquamarine(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Azure(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Azure(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Beige(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Beige(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Bisque(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Bisque(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Black(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Black(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func BlanchedAlmond(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BlanchedAlmond(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Blue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Blue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func BlueViolet(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BlueViolet(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Brown(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Brown(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func BurlyWood(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BurlyWood(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func CadetBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CadetBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Chartreuse(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Chartreuse(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Chocolate(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Chocolate(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Coral(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Coral(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func CornflowerBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CornflowerBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Cornsilk(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Cornsilk(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Crimson(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Crimson(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Cyan(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Cyan(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkCyan(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkCyan(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkGoldenrod(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkGoldenrod(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkGray(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkGray(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkKhaki(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkKhaki(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkMagenta(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkMagenta(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkOliveGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkOliveGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkOrange(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkOrange(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkOrchid(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkOrchid(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkRed(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkRed(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkSalmon(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkSalmon(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkSeaGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkSeaGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkSlateBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkSlateBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkSlateGray(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkSlateGray(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkTurquoise(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkTurquoise(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DarkViolet(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DarkViolet(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DeepPink(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DeepPink(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DeepSkyBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DeepSkyBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DimGray(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DimGray(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func DodgerBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DodgerBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Firebrick(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Firebrick(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func FloralWhite(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FloralWhite(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func ForestGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ForestGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Fuchsia(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Fuchsia(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Gainsboro(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Gainsboro(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GhostWhite(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GhostWhite(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Gold(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Gold(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Goldenrod(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Goldenrod(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Gray(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Gray(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Green(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Green(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GreenYellow(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GreenYellow(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Honeydew(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Honeydew(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func HotPink(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HotPink(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IndianRed(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IndianRed(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Indigo(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Indigo(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Ivory(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Ivory(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Khaki(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Khaki(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Lavender(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Lavender(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LavenderBlush(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LavenderBlush(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LawnGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LawnGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LemonChiffon(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LemonChiffon(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightCoral(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightCoral(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightCyan(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightCyan(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightGoldenrodYellow(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightGoldenrodYellow(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightGray(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightGray(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightPink(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightPink(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightSalmon(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightSalmon(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightSeaGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightSeaGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightSkyBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightSkyBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightSlateGray(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightSlateGray(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightSteelBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightSteelBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LightYellow(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightYellow(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Lime(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Lime(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func LimeGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LimeGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Linen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Linen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Magenta(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Magenta(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Maroon(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Maroon(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumAquamarine(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumAquamarine(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumOrchid(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumOrchid(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumPurple(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumPurple(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumSeaGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumSeaGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumSlateBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumSlateBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumSpringGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumSpringGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumTurquoise(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumTurquoise(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MediumVioletRed(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MediumVioletRed(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MidnightBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MidnightBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MintCream(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MintCream(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MistyRose(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MistyRose(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Moccasin(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Moccasin(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func NavajoWhite(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NavajoWhite(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Navy(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Navy(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func OldLace(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OldLace(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Olive(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Olive(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func OliveDrab(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OliveDrab(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Orange(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Orange(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func OrangeRed(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OrangeRed(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Orchid(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Orchid(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PaleGoldenrod(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PaleGoldenrod(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PaleGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PaleGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PaleTurquoise(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PaleTurquoise(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PaleVioletRed(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PaleVioletRed(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PapayaWhip(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PapayaWhip(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PeachPuff(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PeachPuff(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Peru(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Peru(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Pink(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Pink(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Plum(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Plum(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func PowderBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PowderBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Purple(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Purple(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Red(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Red(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RosyBrown(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RosyBrown(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RoyalBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RoyalBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SaddleBrown(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SaddleBrown(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Salmon(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Salmon(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SandyBrown(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SandyBrown(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SeaGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SeaGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SeaShell(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SeaShell(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Sienna(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Sienna(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Silver(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Silver(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SkyBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SkyBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SlateBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SlateBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SlateGray(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SlateGray(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Snow(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Snow(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SpringGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SpringGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SteelBlue(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SteelBlue(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Tan(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Tan(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Teal(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Teal(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Thistle(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Thistle(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Tomato(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Tomato(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Transparent(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Transparent(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Turquoise(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Turquoise(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Violet(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Violet(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Wheat(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Wheat(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func White(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.White(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func WhiteSmoke(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.WhiteSmoke(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func Yellow(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.Yellow(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func YellowGreen(): Windows_UI.Color {
+        var result__ = Windows_UI.Color()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Colors, IColorsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.YellowGreen(CPointer<Windows_UI.Color>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Colors"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Colors;{" + IColors.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Colors", Colors.signature(), IColors.iid())
+    }
+
+    public static func intoWinrtHandle(value: Colors): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Colors {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Colors.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Colors {
+        Colors.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.DisplayId (synthetic:Microsoft_UI_DisplayId)
 @When[Microsoft_UI == "on"]
 @C
@@ -194,6 +1780,179 @@ public interface IClosableNotifier <: IInspectable {
     func RemoveClosed(token: Int64): Int32
     func FrameworkClosed(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
     func RemoveFrameworkClosed(token: Int64): Int32
+}
+
+// Microsoft.UI.IColorHelper (synthetic:Microsoft_UI_IColorHelper)
+@When[Microsoft_UI == "on"]
+@Interface["3adddccd-3949-585b-a566-ccb8350dd221", "Microsoft.UI.IColorHelper"]
+public interface IColorHelper <: IInspectable {
+}
+
+// Microsoft.UI.IColorHelperStatics (synthetic:Microsoft_UI_IColorHelperStatics)
+@When[Microsoft_UI == "on"]
+@Interface["1d1d85a1-eb63-538a-84f0-019210bc406b", "Microsoft.UI.IColorHelperStatics"]
+public interface IColorHelperStatics <: IInspectable {
+    func FromArgb(a: UInt8, r: UInt8, g: UInt8, b: UInt8, result: CPointer<Windows_UI.Color>): Int32
+}
+
+// Microsoft.UI.IColorHelperStatics2 (synthetic:Microsoft_UI_IColorHelperStatics2)
+@When[Microsoft_UI == "on"]
+@Interface["982a2d93-0ec4-56b7-9c20-0b5c77949066", "Microsoft.UI.IColorHelperStatics2", "ToDisplayName.result=HString"]
+public interface IColorHelperStatics2 <: IInspectable {
+    func ToDisplayName(color: Windows_UI.Color, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.IColors (synthetic:Microsoft_UI_IColors)
+@When[Microsoft_UI == "on"]
+@Interface["8cf15863-8411-5afd-946c-328e04da2f2f", "Microsoft.UI.IColors"]
+public interface IColors <: IInspectable {
+}
+
+// Microsoft.UI.IColorsStatics (synthetic:Microsoft_UI_IColorsStatics)
+@When[Microsoft_UI == "on"]
+@Interface["8620a5b0-015a-57ac-a3f3-895d0b1269ae", "Microsoft.UI.IColorsStatics"]
+public interface IColorsStatics <: IInspectable {
+    func AliceBlue(value: CPointer<Windows_UI.Color>): Int32
+    func AntiqueWhite(value: CPointer<Windows_UI.Color>): Int32
+    func Aqua(value: CPointer<Windows_UI.Color>): Int32
+    func Aquamarine(value: CPointer<Windows_UI.Color>): Int32
+    func Azure(value: CPointer<Windows_UI.Color>): Int32
+    func Beige(value: CPointer<Windows_UI.Color>): Int32
+    func Bisque(value: CPointer<Windows_UI.Color>): Int32
+    func Black(value: CPointer<Windows_UI.Color>): Int32
+    func BlanchedAlmond(value: CPointer<Windows_UI.Color>): Int32
+    func Blue(value: CPointer<Windows_UI.Color>): Int32
+    func BlueViolet(value: CPointer<Windows_UI.Color>): Int32
+    func Brown(value: CPointer<Windows_UI.Color>): Int32
+    func BurlyWood(value: CPointer<Windows_UI.Color>): Int32
+    func CadetBlue(value: CPointer<Windows_UI.Color>): Int32
+    func Chartreuse(value: CPointer<Windows_UI.Color>): Int32
+    func Chocolate(value: CPointer<Windows_UI.Color>): Int32
+    func Coral(value: CPointer<Windows_UI.Color>): Int32
+    func CornflowerBlue(value: CPointer<Windows_UI.Color>): Int32
+    func Cornsilk(value: CPointer<Windows_UI.Color>): Int32
+    func Crimson(value: CPointer<Windows_UI.Color>): Int32
+    func Cyan(value: CPointer<Windows_UI.Color>): Int32
+    func DarkBlue(value: CPointer<Windows_UI.Color>): Int32
+    func DarkCyan(value: CPointer<Windows_UI.Color>): Int32
+    func DarkGoldenrod(value: CPointer<Windows_UI.Color>): Int32
+    func DarkGray(value: CPointer<Windows_UI.Color>): Int32
+    func DarkGreen(value: CPointer<Windows_UI.Color>): Int32
+    func DarkKhaki(value: CPointer<Windows_UI.Color>): Int32
+    func DarkMagenta(value: CPointer<Windows_UI.Color>): Int32
+    func DarkOliveGreen(value: CPointer<Windows_UI.Color>): Int32
+    func DarkOrange(value: CPointer<Windows_UI.Color>): Int32
+    func DarkOrchid(value: CPointer<Windows_UI.Color>): Int32
+    func DarkRed(value: CPointer<Windows_UI.Color>): Int32
+    func DarkSalmon(value: CPointer<Windows_UI.Color>): Int32
+    func DarkSeaGreen(value: CPointer<Windows_UI.Color>): Int32
+    func DarkSlateBlue(value: CPointer<Windows_UI.Color>): Int32
+    func DarkSlateGray(value: CPointer<Windows_UI.Color>): Int32
+    func DarkTurquoise(value: CPointer<Windows_UI.Color>): Int32
+    func DarkViolet(value: CPointer<Windows_UI.Color>): Int32
+    func DeepPink(value: CPointer<Windows_UI.Color>): Int32
+    func DeepSkyBlue(value: CPointer<Windows_UI.Color>): Int32
+    func DimGray(value: CPointer<Windows_UI.Color>): Int32
+    func DodgerBlue(value: CPointer<Windows_UI.Color>): Int32
+    func Firebrick(value: CPointer<Windows_UI.Color>): Int32
+    func FloralWhite(value: CPointer<Windows_UI.Color>): Int32
+    func ForestGreen(value: CPointer<Windows_UI.Color>): Int32
+    func Fuchsia(value: CPointer<Windows_UI.Color>): Int32
+    func Gainsboro(value: CPointer<Windows_UI.Color>): Int32
+    func GhostWhite(value: CPointer<Windows_UI.Color>): Int32
+    func Gold(value: CPointer<Windows_UI.Color>): Int32
+    func Goldenrod(value: CPointer<Windows_UI.Color>): Int32
+    func Gray(value: CPointer<Windows_UI.Color>): Int32
+    func Green(value: CPointer<Windows_UI.Color>): Int32
+    func GreenYellow(value: CPointer<Windows_UI.Color>): Int32
+    func Honeydew(value: CPointer<Windows_UI.Color>): Int32
+    func HotPink(value: CPointer<Windows_UI.Color>): Int32
+    func IndianRed(value: CPointer<Windows_UI.Color>): Int32
+    func Indigo(value: CPointer<Windows_UI.Color>): Int32
+    func Ivory(value: CPointer<Windows_UI.Color>): Int32
+    func Khaki(value: CPointer<Windows_UI.Color>): Int32
+    func Lavender(value: CPointer<Windows_UI.Color>): Int32
+    func LavenderBlush(value: CPointer<Windows_UI.Color>): Int32
+    func LawnGreen(value: CPointer<Windows_UI.Color>): Int32
+    func LemonChiffon(value: CPointer<Windows_UI.Color>): Int32
+    func LightBlue(value: CPointer<Windows_UI.Color>): Int32
+    func LightCoral(value: CPointer<Windows_UI.Color>): Int32
+    func LightCyan(value: CPointer<Windows_UI.Color>): Int32
+    func LightGoldenrodYellow(value: CPointer<Windows_UI.Color>): Int32
+    func LightGreen(value: CPointer<Windows_UI.Color>): Int32
+    func LightGray(value: CPointer<Windows_UI.Color>): Int32
+    func LightPink(value: CPointer<Windows_UI.Color>): Int32
+    func LightSalmon(value: CPointer<Windows_UI.Color>): Int32
+    func LightSeaGreen(value: CPointer<Windows_UI.Color>): Int32
+    func LightSkyBlue(value: CPointer<Windows_UI.Color>): Int32
+    func LightSlateGray(value: CPointer<Windows_UI.Color>): Int32
+    func LightSteelBlue(value: CPointer<Windows_UI.Color>): Int32
+    func LightYellow(value: CPointer<Windows_UI.Color>): Int32
+    func Lime(value: CPointer<Windows_UI.Color>): Int32
+    func LimeGreen(value: CPointer<Windows_UI.Color>): Int32
+    func Linen(value: CPointer<Windows_UI.Color>): Int32
+    func Magenta(value: CPointer<Windows_UI.Color>): Int32
+    func Maroon(value: CPointer<Windows_UI.Color>): Int32
+    func MediumAquamarine(value: CPointer<Windows_UI.Color>): Int32
+    func MediumBlue(value: CPointer<Windows_UI.Color>): Int32
+    func MediumOrchid(value: CPointer<Windows_UI.Color>): Int32
+    func MediumPurple(value: CPointer<Windows_UI.Color>): Int32
+    func MediumSeaGreen(value: CPointer<Windows_UI.Color>): Int32
+    func MediumSlateBlue(value: CPointer<Windows_UI.Color>): Int32
+    func MediumSpringGreen(value: CPointer<Windows_UI.Color>): Int32
+    func MediumTurquoise(value: CPointer<Windows_UI.Color>): Int32
+    func MediumVioletRed(value: CPointer<Windows_UI.Color>): Int32
+    func MidnightBlue(value: CPointer<Windows_UI.Color>): Int32
+    func MintCream(value: CPointer<Windows_UI.Color>): Int32
+    func MistyRose(value: CPointer<Windows_UI.Color>): Int32
+    func Moccasin(value: CPointer<Windows_UI.Color>): Int32
+    func NavajoWhite(value: CPointer<Windows_UI.Color>): Int32
+    func Navy(value: CPointer<Windows_UI.Color>): Int32
+    func OldLace(value: CPointer<Windows_UI.Color>): Int32
+    func Olive(value: CPointer<Windows_UI.Color>): Int32
+    func OliveDrab(value: CPointer<Windows_UI.Color>): Int32
+    func Orange(value: CPointer<Windows_UI.Color>): Int32
+    func OrangeRed(value: CPointer<Windows_UI.Color>): Int32
+    func Orchid(value: CPointer<Windows_UI.Color>): Int32
+    func PaleGoldenrod(value: CPointer<Windows_UI.Color>): Int32
+    func PaleGreen(value: CPointer<Windows_UI.Color>): Int32
+    func PaleTurquoise(value: CPointer<Windows_UI.Color>): Int32
+    func PaleVioletRed(value: CPointer<Windows_UI.Color>): Int32
+    func PapayaWhip(value: CPointer<Windows_UI.Color>): Int32
+    func PeachPuff(value: CPointer<Windows_UI.Color>): Int32
+    func Peru(value: CPointer<Windows_UI.Color>): Int32
+    func Pink(value: CPointer<Windows_UI.Color>): Int32
+    func Plum(value: CPointer<Windows_UI.Color>): Int32
+    func PowderBlue(value: CPointer<Windows_UI.Color>): Int32
+    func Purple(value: CPointer<Windows_UI.Color>): Int32
+    func Red(value: CPointer<Windows_UI.Color>): Int32
+    func RosyBrown(value: CPointer<Windows_UI.Color>): Int32
+    func RoyalBlue(value: CPointer<Windows_UI.Color>): Int32
+    func SaddleBrown(value: CPointer<Windows_UI.Color>): Int32
+    func Salmon(value: CPointer<Windows_UI.Color>): Int32
+    func SandyBrown(value: CPointer<Windows_UI.Color>): Int32
+    func SeaGreen(value: CPointer<Windows_UI.Color>): Int32
+    func SeaShell(value: CPointer<Windows_UI.Color>): Int32
+    func Sienna(value: CPointer<Windows_UI.Color>): Int32
+    func Silver(value: CPointer<Windows_UI.Color>): Int32
+    func SkyBlue(value: CPointer<Windows_UI.Color>): Int32
+    func SlateBlue(value: CPointer<Windows_UI.Color>): Int32
+    func SlateGray(value: CPointer<Windows_UI.Color>): Int32
+    func Snow(value: CPointer<Windows_UI.Color>): Int32
+    func SpringGreen(value: CPointer<Windows_UI.Color>): Int32
+    func SteelBlue(value: CPointer<Windows_UI.Color>): Int32
+    func Tan(value: CPointer<Windows_UI.Color>): Int32
+    func Teal(value: CPointer<Windows_UI.Color>): Int32
+    func Thistle(value: CPointer<Windows_UI.Color>): Int32
+    func Tomato(value: CPointer<Windows_UI.Color>): Int32
+    func Transparent(value: CPointer<Windows_UI.Color>): Int32
+    func Turquoise(value: CPointer<Windows_UI.Color>): Int32
+    func Violet(value: CPointer<Windows_UI.Color>): Int32
+    func Wheat(value: CPointer<Windows_UI.Color>): Int32
+    func White(value: CPointer<Windows_UI.Color>): Int32
+    func WhiteSmoke(value: CPointer<Windows_UI.Color>): Int32
+    func Yellow(value: CPointer<Windows_UI.Color>): Int32
+    func YellowGreen(value: CPointer<Windows_UI.Color>): Int32
 }
 
 // Microsoft.UI.IconId (synthetic:Microsoft_UI_IconId)

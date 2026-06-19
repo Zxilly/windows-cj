@@ -2,8 +2,1482 @@
 
 package windows_sys.Data.Text
 
+import windows_core as windows_core
+import windows_interface as windows_interface
+import windows_interface.IInspectable
+import windows_interface.macros.Interface
+
 @When[Windows_Foundation == "on"]
 import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_UI_Text_Core == "on"]
+import windows_sys.UI.Text.Core as Windows_UI_Text_Core
+
+// Windows.Data.Text.AlternateNormalizationFormat (synthetic:Windows_Data_Text_AlternateNormalizationFormat)
+@When[Windows_Data_Text == "on"]
+public struct AlternateNormalizationFormat {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Data_Text == "on"]
+public const AlternateNormalizationFormat_NotNormalized = AlternateNormalizationFormat(0)
+@When[Windows_Data_Text == "on"]
+public const AlternateNormalizationFormat_Number = AlternateNormalizationFormat(1)
+@When[Windows_Data_Text == "on"]
+public const AlternateNormalizationFormat_Currency = AlternateNormalizationFormat(3)
+@When[Windows_Data_Text == "on"]
+public const AlternateNormalizationFormat_Date = AlternateNormalizationFormat(4)
+@When[Windows_Data_Text == "on"]
+public const AlternateNormalizationFormat_Time = AlternateNormalizationFormat(5)
+
+// Windows.Data.Text.AlternateWordForm (synthetic:Windows_Data_Text_AlternateWordForm)
+@When[Windows_Data_Text == "on"]
+public class AlternateWordForm <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<AlternateWordForm> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): AlternateWordForm {
+        AlternateWordForm(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): AlternateWordForm {
+        AlternateWordForm(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IAlternateWordForm.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<AlternateWordForm> {
+        let ancestors = [IAlternateWordForm.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<AlternateWordForm>("AlternateWordForm", IAlternateWordForm.iid(), ancestors, { raw => AlternateWordForm.fromAbiTake(raw) }, { raw => AlternateWordForm.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IAlternateWordForm {
+        match (unsafe { query(IAlternateWordForm.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAlternateWordForm(): IAlternateWordForm {
+        defaultInterface()
+    }
+
+    public prop AlternateText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlternateText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop NormalizationFormat: AlternateNormalizationFormat {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NormalizationFormat(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return AlternateNormalizationFormat(result__)
+        }
+    }
+
+    public prop SourceTextSegment: TextSegment {
+        get() {
+            var result__ = TextSegment()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SourceTextSegment(CPointer<TextSegment>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.AlternateWordForm"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.AlternateWordForm;{" + IAlternateWordForm.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.AlternateWordForm", AlternateWordForm.signature(), IAlternateWordForm.iid())
+    }
+
+    public static func intoWinrtHandle(value: AlternateWordForm): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): AlternateWordForm {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        AlternateWordForm.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): AlternateWordForm {
+        AlternateWordForm.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.IAlternateWordForm (synthetic:Windows_Data_Text_IAlternateWordForm)
+@When[Windows_Data_Text == "on"]
+@Interface["47396c1e-51b9-4207-9146-248e636a1d1d", "Windows.Data.Text.IAlternateWordForm", "AlternateText.value=HString"]
+public interface IAlternateWordForm <: IInspectable {
+    func SourceTextSegment(value: CPointer<TextSegment>): Int32
+    func AlternateText(value: CPointer<CPointer<Unit>>): Int32
+    func NormalizationFormat(value: CPointer<Int32>): Int32
+}
+
+// Windows.Data.Text.ISelectableWordSegment (synthetic:Windows_Data_Text_ISelectableWordSegment)
+@When[Windows_Data_Text == "on"]
+@Interface["916a4cb7-8aa7-4c78-b374-5dedb752e60b", "Windows.Data.Text.ISelectableWordSegment", "Text.value=HString"]
+public interface ISelectableWordSegment <: IInspectable {
+    func Text(value: CPointer<CPointer<Unit>>): Int32
+    func SourceTextSegment(value: CPointer<TextSegment>): Int32
+}
+
+// Windows.Data.Text.ISelectableWordsSegmenter (synthetic:Windows_Data_Text_ISelectableWordsSegmenter)
+@When[Windows_Data_Text == "on"]
+@Interface["f6dc31e7-4b13-45c5-8897-7d71269e085d", "Windows.Data.Text.ISelectableWordsSegmenter", "ResolvedLanguage.value=HString;GetTokenAt.result=Com;GetTokens.result=Com"]
+public interface ISelectableWordsSegmenter <: IInspectable {
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func GetTokenAt(text: CPointer<Unit>, startIndex: UInt32, result: CPointer<CPointer<Unit>>): Int32
+    func GetTokens(text: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func Tokenize(text: CPointer<Unit>, startIndex: UInt32, handler: CPointer<Unit>): Int32
+}
+
+// Windows.Data.Text.ISelectableWordsSegmenterFactory (synthetic:Windows_Data_Text_ISelectableWordsSegmenterFactory)
+@When[Windows_Data_Text == "on"]
+@Interface["8c7a7648-6057-4339-bc70-f210010a4150", "Windows.Data.Text.ISelectableWordsSegmenterFactory", "CreateWithLanguage.result=Com"]
+public interface ISelectableWordsSegmenterFactory <: IInspectable {
+    func CreateWithLanguage(language: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ISemanticTextQuery (synthetic:Windows_Data_Text_ISemanticTextQuery)
+@When[Windows_Data_Text == "on"]
+@Interface["6a1cab51-1fb2-4909-80b8-35731a2b3e7f", "Windows.Data.Text.ISemanticTextQuery", "Find.result=Com;FindInProperty.result=Com"]
+public interface ISemanticTextQuery <: IInspectable {
+    func Find(content: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func FindInProperty(propertyContent: CPointer<Unit>, propertyName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ISemanticTextQueryFactory (synthetic:Windows_Data_Text_ISemanticTextQueryFactory)
+@When[Windows_Data_Text == "on"]
+@Interface["238c0503-f995-4587-8777-a2b7d80acfef", "Windows.Data.Text.ISemanticTextQueryFactory", "Create.result=Com;CreateWithLanguage.result=Com"]
+public interface ISemanticTextQueryFactory <: IInspectable {
+    func Create(aqsFilter: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CreateWithLanguage(aqsFilter: CPointer<Unit>, filterLanguage: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextConversionGenerator (synthetic:Windows_Data_Text_ITextConversionGenerator)
+@When[Windows_Data_Text == "on"]
+@Interface["03606a5e-2aa9-4ab6-af8b-a562b63a8992", "Windows.Data.Text.ITextConversionGenerator", "ResolvedLanguage.value=HString;GetCandidatesAsync.result=Com;GetCandidatesWithMaxCountAsync.result=Com"]
+public interface ITextConversionGenerator <: IInspectable {
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func LanguageAvailableButNotInstalled(value: CPointer<Bool>): Int32
+    func GetCandidatesAsync(input: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetCandidatesWithMaxCountAsync(input: CPointer<Unit>, maxCandidates: UInt32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextConversionGeneratorFactory (synthetic:Windows_Data_Text_ITextConversionGeneratorFactory)
+@When[Windows_Data_Text == "on"]
+@Interface["fcaa3781-3083-49ab-be15-56dfbbb74d6f", "Windows.Data.Text.ITextConversionGeneratorFactory", "Create.result=Com"]
+public interface ITextConversionGeneratorFactory <: IInspectable {
+    func Create(languageTag: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextPhoneme (synthetic:Windows_Data_Text_ITextPhoneme)
+@When[Windows_Data_Text == "on"]
+@Interface["9362a40a-9b7a-4569-94cf-d84f2f38cf9b", "Windows.Data.Text.ITextPhoneme", "DisplayText.value=HString;ReadingText.value=HString"]
+public interface ITextPhoneme <: IInspectable {
+    func DisplayText(value: CPointer<CPointer<Unit>>): Int32
+    func ReadingText(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextPredictionGenerator (synthetic:Windows_Data_Text_ITextPredictionGenerator)
+@When[Windows_Data_Text == "on"]
+@Interface["5eacab07-abf1-4cb6-9d9e-326f2b468756", "Windows.Data.Text.ITextPredictionGenerator", "ResolvedLanguage.value=HString;GetCandidatesAsync.result=Com;GetCandidatesWithMaxCountAsync.result=Com"]
+public interface ITextPredictionGenerator <: IInspectable {
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func LanguageAvailableButNotInstalled(value: CPointer<Bool>): Int32
+    func GetCandidatesAsync(input: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetCandidatesWithMaxCountAsync(input: CPointer<Unit>, maxCandidates: UInt32, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextPredictionGenerator2 (synthetic:Windows_Data_Text_ITextPredictionGenerator2)
+@When[Windows_Data_Text == "on"]
+@Interface["b84723b8-2c77-486a-900a-a3453eedc15d", "Windows.Data.Text.ITextPredictionGenerator2", "GetCandidatesWithParametersAsync.result=Com;GetNextWordCandidatesAsync.result=Com"]
+public interface ITextPredictionGenerator2 <: IInspectable {
+    func GetCandidatesWithParametersAsync(input: CPointer<Unit>, maxCandidates: UInt32, predictionOptions: UInt32, previousStrings: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetNextWordCandidatesAsync(maxCandidates: UInt32, previousStrings: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func InputScope(value: CPointer<Int32>): Int32
+    func SetInputScope(value: Int32): Int32
+}
+
+// Windows.Data.Text.ITextPredictionGeneratorFactory (synthetic:Windows_Data_Text_ITextPredictionGeneratorFactory)
+@When[Windows_Data_Text == "on"]
+@Interface["7257b416-8ba2-4751-9d30-9d85435653a2", "Windows.Data.Text.ITextPredictionGeneratorFactory", "Create.result=Com"]
+public interface ITextPredictionGeneratorFactory <: IInspectable {
+    func Create(languageTag: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextReverseConversionGenerator (synthetic:Windows_Data_Text_ITextReverseConversionGenerator)
+@When[Windows_Data_Text == "on"]
+@Interface["51e7f514-9c51-4d86-ae1b-b498fbad8313", "Windows.Data.Text.ITextReverseConversionGenerator", "ResolvedLanguage.value=HString;ConvertBackAsync.result=Com"]
+public interface ITextReverseConversionGenerator <: IInspectable {
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func LanguageAvailableButNotInstalled(value: CPointer<Bool>): Int32
+    func ConvertBackAsync(input: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextReverseConversionGenerator2 (synthetic:Windows_Data_Text_ITextReverseConversionGenerator2)
+@When[Windows_Data_Text == "on"]
+@Interface["1aafd2ec-85d6-46fd-828a-3a4830fa6e18", "Windows.Data.Text.ITextReverseConversionGenerator2", "GetPhonemesAsync.result=Com"]
+public interface ITextReverseConversionGenerator2 <: IInspectable {
+    func GetPhonemesAsync(input: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.ITextReverseConversionGeneratorFactory (synthetic:Windows_Data_Text_ITextReverseConversionGeneratorFactory)
+@When[Windows_Data_Text == "on"]
+@Interface["63bed326-1fda-41f6-89d5-23ddea3c729a", "Windows.Data.Text.ITextReverseConversionGeneratorFactory", "Create.result=Com"]
+public interface ITextReverseConversionGeneratorFactory <: IInspectable {
+    func Create(languageTag: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.IUnicodeCharactersStatics (synthetic:Windows_Data_Text_IUnicodeCharactersStatics)
+@When[Windows_Data_Text == "on"]
+@Interface["97909e87-9291-4f91-b6c8-b6e359d7a7fb", "Windows.Data.Text.IUnicodeCharactersStatics"]
+public interface IUnicodeCharactersStatics <: IInspectable {
+    func GetCodepointFromSurrogatePair(highSurrogate: UInt32, lowSurrogate: UInt32, codepoint: CPointer<UInt32>): Int32
+    func GetSurrogatePairFromCodepoint(codepoint: UInt32, highSurrogate: CPointer<UInt16>, lowSurrogate: CPointer<UInt16>): Int32
+    func IsHighSurrogate(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsLowSurrogate(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsSupplementary(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsNoncharacter(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsWhitespace(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsAlphabetic(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsCased(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsUppercase(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsLowercase(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsIdStart(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsIdContinue(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsGraphemeBase(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func IsGraphemeExtend(codepoint: UInt32, value: CPointer<Bool>): Int32
+    func GetNumericType(codepoint: UInt32, value: CPointer<Int32>): Int32
+    func GetGeneralCategory(codepoint: UInt32, value: CPointer<Int32>): Int32
+}
+
+// Windows.Data.Text.IWordSegment (synthetic:Windows_Data_Text_IWordSegment)
+@When[Windows_Data_Text == "on"]
+@Interface["d2d4ba6d-987c-4cc0-b6bd-d49a11b38f9a", "Windows.Data.Text.IWordSegment", "Text.value=HString;AlternateForms.value=Com"]
+public interface IWordSegment <: IInspectable {
+    func Text(value: CPointer<CPointer<Unit>>): Int32
+    func SourceTextSegment(value: CPointer<TextSegment>): Int32
+    func AlternateForms(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.IWordsSegmenter (synthetic:Windows_Data_Text_IWordsSegmenter)
+@When[Windows_Data_Text == "on"]
+@Interface["86b4d4d1-b2fe-4e34-a81d-66640300454f", "Windows.Data.Text.IWordsSegmenter", "ResolvedLanguage.value=HString;GetTokenAt.result=Com;GetTokens.result=Com"]
+public interface IWordsSegmenter <: IInspectable {
+    func ResolvedLanguage(value: CPointer<CPointer<Unit>>): Int32
+    func GetTokenAt(text: CPointer<Unit>, startIndex: UInt32, result: CPointer<CPointer<Unit>>): Int32
+    func GetTokens(text: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func Tokenize(text: CPointer<Unit>, startIndex: UInt32, handler: CPointer<Unit>): Int32
+}
+
+// Windows.Data.Text.IWordsSegmenterFactory (synthetic:Windows_Data_Text_IWordsSegmenterFactory)
+@When[Windows_Data_Text == "on"]
+@Interface["e6977274-fc35-455c-8bfb-6d7f4653ca97", "Windows.Data.Text.IWordsSegmenterFactory", "CreateWithLanguage.result=Com"]
+public interface IWordsSegmenterFactory <: IInspectable {
+    func CreateWithLanguage(language: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Windows.Data.Text.SelectableWordSegment (synthetic:Windows_Data_Text_SelectableWordSegment)
+@When[Windows_Data_Text == "on"]
+public class SelectableWordSegment <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SelectableWordSegment> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectableWordSegment {
+        SelectableWordSegment(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectableWordSegment {
+        SelectableWordSegment(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISelectableWordSegment.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectableWordSegment> {
+        let ancestors = [ISelectableWordSegment.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SelectableWordSegment>("SelectableWordSegment", ISelectableWordSegment.iid(), ancestors, { raw => SelectableWordSegment.fromAbiTake(raw) }, { raw => SelectableWordSegment.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISelectableWordSegment {
+        match (unsafe { query(ISelectableWordSegment.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISelectableWordSegment(): ISelectableWordSegment {
+        defaultInterface()
+    }
+
+    public prop SourceTextSegment: TextSegment {
+        get() {
+            var result__ = TextSegment()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SourceTextSegment(CPointer<TextSegment>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Text: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Text(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.SelectableWordSegment"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.SelectableWordSegment;{" + ISelectableWordSegment.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.SelectableWordSegment", SelectableWordSegment.signature(), ISelectableWordSegment.iid())
+    }
+
+    public static func intoWinrtHandle(value: SelectableWordSegment): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SelectableWordSegment {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SelectableWordSegment.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SelectableWordSegment {
+        SelectableWordSegment.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.SelectableWordSegmentsTokenizingHandler (synthetic:Windows_Data_Text_SelectableWordSegmentsTokenizingHandler)
+@When[Windows_Data_Text == "on"]
+@C
+public struct SelectableWordSegmentsTokenizingHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+@When[Windows_Data_Text == "on"]
+public open class SelectableWordSegmentsTokenizingHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<SelectableWordSegmentsTokenizingHandler> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectableWordSegmentsTokenizingHandler {
+        OwnedSelectableWordSegmentsTokenizingHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectableWordSegmentsTokenizingHandler {
+        SelectableWordSegmentsTokenizingHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(977140892u32, 44766u16, 19911u16, 158u8, 108u8, 65u8, 192u8, 68u8, 189u8, 53u8, 146u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectableWordSegmentsTokenizingHandler> {
+        windows_interface.InterfaceDescriptor<SelectableWordSegmentsTokenizingHandler>("Windows.Data.Text.SelectableWordSegmentsTokenizingHandler", SelectableWordSegmentsTokenizingHandler.iid(), [windows_interface.IUnknown.iid()], { raw => SelectableWordSegmentsTokenizingHandler.fromAbiTake(raw) }, { raw => SelectableWordSegmentsTokenizingHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Data.Text.SelectableWordSegmentsTokenizingHandler", SelectableWordSegmentsTokenizingHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "SelectableWordSegmentsTokenizingHandlerVtbl", "SelectableWordSegmentsTokenizingHandler", "SelectableWordSegmentsTokenizingHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("precedingWords", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("words", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(SelectableWordSegmentsTokenizingHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Windows.Data.Text.SelectableWordSegmentsTokenizingHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.SelectableWordSegmentsTokenizingHandler", SelectableWordSegmentsTokenizingHandler.signature(), SelectableWordSegmentsTokenizingHandler.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = SelectableWordSegmentsTokenizingHandler.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): SelectableWordSegmentsTokenizingHandlerVtbl {
+        readVtbl<SelectableWordSegmentsTokenizingHandlerVtbl>(SelectableWordSegmentsTokenizingHandlerVtbl())
+    }
+
+    public unsafe func Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, precedingWords, words)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): SelectableWordSegmentsTokenizingHandler {
+        let box = SelectableWordSegmentsTokenizingHandlerBox(invoke)
+        let object = windows_core.ComObject<SelectableWordSegmentsTokenizingHandlerBox>.new(box, [SelectableWordSegmentsTokenizingHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(SelectableWordSegmentsTokenizingHandler.descriptor())
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+private class OwnedSelectableWordSegmentsTokenizingHandler <: SelectableWordSegmentsTokenizingHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+public interface SelectableWordSegmentsTokenizingHandlerInvokerErased {
+    func __winrtThunk_Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Int32
+}
+
+@When[Windows_Data_Text == "on"]
+public interface SelectableWordSegmentsTokenizingHandlerInvoker <: SelectableWordSegmentsTokenizingHandlerInvokerErased {
+    func Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(precedingWords, words)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+private class SelectableWordSegmentsTokenizingHandlerBox <: SelectableWordSegmentsTokenizingHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<SelectableWordSegmentsTokenizingHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<SelectableWordSegmentsTokenizingHandlerVtbl>(buildSelectableWordSegmentsTokenizingHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Unit {
+        invoke_(precedingWords, words)
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+func buildSelectableWordSegmentsTokenizingHandlerBoxVtbl(): SelectableWordSegmentsTokenizingHandlerVtbl {
+    var vtbl = SelectableWordSegmentsTokenizingHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, precedingWords: CPointer<Unit>, words: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<SelectableWordSegmentsTokenizingHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(precedingWords, words)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Windows.Data.Text.SelectableWordsSegmenter (synthetic:Windows_Data_Text_SelectableWordsSegmenter)
+@When[Windows_Data_Text == "on"]
+public class SelectableWordsSegmenter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SelectableWordsSegmenter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SelectableWordsSegmenter {
+        SelectableWordsSegmenter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SelectableWordsSegmenter {
+        SelectableWordsSegmenter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISelectableWordsSegmenter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SelectableWordsSegmenter> {
+        let ancestors = [ISelectableWordsSegmenter.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SelectableWordsSegmenter>("SelectableWordsSegmenter", ISelectableWordsSegmenter.iid(), ancestors, { raw => SelectableWordsSegmenter.fromAbiTake(raw) }, { raw => SelectableWordsSegmenter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISelectableWordsSegmenter {
+        match (unsafe { query(ISelectableWordsSegmenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISelectableWordsSegmenter(): ISelectableWordsSegmenter {
+        defaultInterface()
+    }
+
+    public prop ResolvedLanguage: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResolvedLanguage(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func GetTokenAt(text: windows_core.HString, startIndex: UInt32): SelectableWordSegment {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetTokenAt(__argBorrow0.asRaw(), startIndex, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SelectableWordSegment>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SelectableWordSegment.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetTokens(text: windows_core.HString): Windows_Foundation_Collections.IVectorView<SelectableWordSegment> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetTokens(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<SelectableWordSegment>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<SelectableWordSegment>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Tokenize(text: windows_core.HString, startIndex: UInt32, handler: SelectableWordSegmentsTokenizingHandler): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<SelectableWordSegmentsTokenizingHandler>(handler)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.Tokenize(__argBorrow0.asRaw(), startIndex, __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func CreateWithLanguage(language: windows_core.HString): SelectableWordsSegmenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(language)) {
+            try (factory__ = windows_core.factory<SelectableWordsSegmenter, ISelectableWordsSegmenterFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithLanguage(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SelectableWordsSegmenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SelectableWordsSegmenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.SelectableWordsSegmenter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.SelectableWordsSegmenter;{" + ISelectableWordsSegmenter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.SelectableWordsSegmenter", SelectableWordsSegmenter.signature(), ISelectableWordsSegmenter.iid())
+    }
+
+    public static func intoWinrtHandle(value: SelectableWordsSegmenter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SelectableWordsSegmenter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SelectableWordsSegmenter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SelectableWordsSegmenter {
+        SelectableWordsSegmenter.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.SemanticTextQuery (synthetic:Windows_Data_Text_SemanticTextQuery)
+@When[Windows_Data_Text == "on"]
+public class SemanticTextQuery <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<SemanticTextQuery> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): SemanticTextQuery {
+        SemanticTextQuery(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): SemanticTextQuery {
+        SemanticTextQuery(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ISemanticTextQuery.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<SemanticTextQuery> {
+        let ancestors = [ISemanticTextQuery.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<SemanticTextQuery>("SemanticTextQuery", ISemanticTextQuery.iid(), ancestors, { raw => SemanticTextQuery.fromAbiTake(raw) }, { raw => SemanticTextQuery.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ISemanticTextQuery {
+        match (unsafe { query(ISemanticTextQuery.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asISemanticTextQuery(): ISemanticTextQuery {
+        defaultInterface()
+    }
+
+    public func Find(content: windows_core.HString): Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(content)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Find(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func FindInProperty(propertyContent: windows_core.HString, propertyName: windows_core.HString): Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(propertyContent)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(propertyName)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.FindInProperty(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Create(aqsFilter: windows_core.HString): SemanticTextQuery {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(aqsFilter)) {
+            try (factory__ = windows_core.factory<SemanticTextQuery, ISemanticTextQueryFactory>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SemanticTextQuery>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SemanticTextQuery.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateWithLanguage(aqsFilter: windows_core.HString, filterLanguage: windows_core.HString): SemanticTextQuery {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(aqsFilter)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(filterLanguage)) {
+                try (factory__ = windows_core.factory<SemanticTextQuery, ISemanticTextQueryFactory>().unwrap()) {
+                    hr__ = unsafe { factory__.CreateWithLanguage(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<SemanticTextQuery>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return SemanticTextQuery.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.SemanticTextQuery"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.SemanticTextQuery;{" + ISemanticTextQuery.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.SemanticTextQuery", SemanticTextQuery.signature(), ISemanticTextQuery.iid())
+    }
+
+    public static func intoWinrtHandle(value: SemanticTextQuery): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): SemanticTextQuery {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        SemanticTextQuery.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): SemanticTextQuery {
+        SemanticTextQuery.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.TextConversionGenerator (synthetic:Windows_Data_Text_TextConversionGenerator)
+@When[Windows_Data_Text == "on"]
+public class TextConversionGenerator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TextConversionGenerator> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TextConversionGenerator {
+        TextConversionGenerator(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TextConversionGenerator {
+        TextConversionGenerator(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITextConversionGenerator.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TextConversionGenerator> {
+        let ancestors = [ITextConversionGenerator.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TextConversionGenerator>("TextConversionGenerator", ITextConversionGenerator.iid(), ancestors, { raw => TextConversionGenerator.fromAbiTake(raw) }, { raw => TextConversionGenerator.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITextConversionGenerator {
+        match (unsafe { query(ITextConversionGenerator.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextConversionGenerator(): ITextConversionGenerator {
+        defaultInterface()
+    }
+
+    public prop LanguageAvailableButNotInstalled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LanguageAvailableButNotInstalled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop ResolvedLanguage: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResolvedLanguage(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func GetCandidatesAsync(input: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(input)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetCandidatesAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetCandidatesWithMaxCountAsync(input: windows_core.HString, maxCandidates: UInt32): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(input)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetCandidatesWithMaxCountAsync(__argBorrow0.asRaw(), maxCandidates, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Create(languageTag: windows_core.HString): TextConversionGenerator {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(languageTag)) {
+            try (factory__ = windows_core.factory<TextConversionGenerator, ITextConversionGeneratorFactory>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TextConversionGenerator>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TextConversionGenerator.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.TextConversionGenerator"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.TextConversionGenerator;{" + ITextConversionGenerator.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.TextConversionGenerator", TextConversionGenerator.signature(), ITextConversionGenerator.iid())
+    }
+
+    public static func intoWinrtHandle(value: TextConversionGenerator): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TextConversionGenerator {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TextConversionGenerator.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TextConversionGenerator {
+        TextConversionGenerator.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.TextPhoneme (synthetic:Windows_Data_Text_TextPhoneme)
+@When[Windows_Data_Text == "on"]
+public class TextPhoneme <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TextPhoneme> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TextPhoneme {
+        TextPhoneme(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TextPhoneme {
+        TextPhoneme(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITextPhoneme.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TextPhoneme> {
+        let ancestors = [ITextPhoneme.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TextPhoneme>("TextPhoneme", ITextPhoneme.iid(), ancestors, { raw => TextPhoneme.fromAbiTake(raw) }, { raw => TextPhoneme.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITextPhoneme {
+        match (unsafe { query(ITextPhoneme.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextPhoneme(): ITextPhoneme {
+        defaultInterface()
+    }
+
+    public prop DisplayText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop ReadingText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ReadingText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.TextPhoneme"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.TextPhoneme;{" + ITextPhoneme.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.TextPhoneme", TextPhoneme.signature(), ITextPhoneme.iid())
+    }
+
+    public static func intoWinrtHandle(value: TextPhoneme): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TextPhoneme {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TextPhoneme.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TextPhoneme {
+        TextPhoneme.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.TextPredictionGenerator (synthetic:Windows_Data_Text_TextPredictionGenerator)
+@When[Windows_Data_Text == "on"]
+public class TextPredictionGenerator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TextPredictionGenerator> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TextPredictionGenerator {
+        TextPredictionGenerator(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TextPredictionGenerator {
+        TextPredictionGenerator(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITextPredictionGenerator.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TextPredictionGenerator> {
+        let ancestors = [ITextPredictionGenerator.iid(), ITextPredictionGenerator2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TextPredictionGenerator>("TextPredictionGenerator", ITextPredictionGenerator.iid(), ancestors, { raw => TextPredictionGenerator.fromAbiTake(raw) }, { raw => TextPredictionGenerator.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITextPredictionGenerator {
+        match (unsafe { query(ITextPredictionGenerator.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextPredictionGenerator(): ITextPredictionGenerator {
+        defaultInterface()
+    }
+
+    public func asITextPredictionGenerator2(): ITextPredictionGenerator2 {
+        match (unsafe { query<ITextPredictionGenerator2>(ITextPredictionGenerator2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop LanguageAvailableButNotInstalled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LanguageAvailableButNotInstalled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop ResolvedLanguage: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResolvedLanguage(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func GetCandidatesAsync(input: windows_core.HString): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(input)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetCandidatesAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetCandidatesWithMaxCountAsync(input: windows_core.HString, maxCandidates: UInt32): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(input)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetCandidatesWithMaxCountAsync(__argBorrow0.asRaw(), maxCandidates, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<windows_core.HString>>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Create(languageTag: windows_core.HString): TextPredictionGenerator {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(languageTag)) {
+            try (factory__ = windows_core.factory<TextPredictionGenerator, ITextPredictionGeneratorFactory>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TextPredictionGenerator>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TextPredictionGenerator.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.TextPredictionGenerator"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.TextPredictionGenerator;{" + ITextPredictionGenerator.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.TextPredictionGenerator", TextPredictionGenerator.signature(), ITextPredictionGenerator.iid())
+    }
+
+    public static func intoWinrtHandle(value: TextPredictionGenerator): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TextPredictionGenerator {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TextPredictionGenerator.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TextPredictionGenerator {
+        TextPredictionGenerator.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.TextPredictionOptions (synthetic:Windows_Data_Text_TextPredictionOptions)
+@When[Windows_Data_Text == "on"]
+public struct TextPredictionOptions {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: TextPredictionOptions): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: TextPredictionOptions): TextPredictionOptions {
+        return TextPredictionOptions(value | other.value)
+    }
+    public operator func &(other: TextPredictionOptions): TextPredictionOptions {
+        return TextPredictionOptions(value & other.value)
+    }
+    public operator func ^(other: TextPredictionOptions): TextPredictionOptions {
+        return TextPredictionOptions(value ^ other.value)
+    }
+    public operator func !(): TextPredictionOptions {
+        return TextPredictionOptions(!value)
+    }
+}
+@When[Windows_Data_Text == "on"]
+public const TextPredictionOptions_None = TextPredictionOptions(0)
+@When[Windows_Data_Text == "on"]
+public const TextPredictionOptions_Predictions = TextPredictionOptions(1)
+@When[Windows_Data_Text == "on"]
+public const TextPredictionOptions_Corrections = TextPredictionOptions(2)
+
+// Windows.Data.Text.TextReverseConversionGenerator (synthetic:Windows_Data_Text_TextReverseConversionGenerator)
+@When[Windows_Data_Text == "on"]
+public class TextReverseConversionGenerator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<TextReverseConversionGenerator> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): TextReverseConversionGenerator {
+        TextReverseConversionGenerator(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): TextReverseConversionGenerator {
+        TextReverseConversionGenerator(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        ITextReverseConversionGenerator.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<TextReverseConversionGenerator> {
+        let ancestors = [ITextReverseConversionGenerator.iid(), ITextReverseConversionGenerator2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<TextReverseConversionGenerator>("TextReverseConversionGenerator", ITextReverseConversionGenerator.iid(), ancestors, { raw => TextReverseConversionGenerator.fromAbiTake(raw) }, { raw => TextReverseConversionGenerator.viewOf(raw) })
+    }
+
+    public func defaultInterface(): ITextReverseConversionGenerator {
+        match (unsafe { query(ITextReverseConversionGenerator.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextReverseConversionGenerator(): ITextReverseConversionGenerator {
+        defaultInterface()
+    }
+
+    public func asITextReverseConversionGenerator2(): ITextReverseConversionGenerator2 {
+        match (unsafe { query<ITextReverseConversionGenerator2>(ITextReverseConversionGenerator2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop LanguageAvailableButNotInstalled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LanguageAvailableButNotInstalled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop ResolvedLanguage: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResolvedLanguage(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func ConvertBackAsync(input: windows_core.HString): Windows_Foundation.IAsyncOperation<windows_core.HString> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(input)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ConvertBackAsync(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<windows_core.HString>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation.IAsyncOperation<windows_core.HString>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func Create(languageTag: windows_core.HString): TextReverseConversionGenerator {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(languageTag)) {
+            try (factory__ = windows_core.factory<TextReverseConversionGenerator, ITextReverseConversionGeneratorFactory>().unwrap()) {
+                hr__ = unsafe { factory__.Create(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<TextReverseConversionGenerator>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return TextReverseConversionGenerator.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.TextReverseConversionGenerator"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.TextReverseConversionGenerator;{" + ITextReverseConversionGenerator.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.TextReverseConversionGenerator", TextReverseConversionGenerator.signature(), ITextReverseConversionGenerator.iid())
+    }
+
+    public static func intoWinrtHandle(value: TextReverseConversionGenerator): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): TextReverseConversionGenerator {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        TextReverseConversionGenerator.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): TextReverseConversionGenerator {
+        TextReverseConversionGenerator.viewOf(raw)
+    }
+}
 
 // Windows.Data.Text.TextSegment (synthetic:Windows_Data_Text_TextSegment)
 @When[Windows_Data_Text == "on"]
@@ -11,4 +1485,746 @@ import windows_sys.Foundation as Windows_Foundation
 public struct TextSegment {
     public var StartPosition: UInt32 = 0u32
     public var Length: UInt32 = 0u32
+}
+
+// Windows.Data.Text.UnicodeCharacters (synthetic:Windows_Data_Text_UnicodeCharacters)
+@When[Windows_Data_Text == "on"]
+public struct UnicodeCharacters <: windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init() {}
+
+    public static func GetCodepointFromSurrogatePair(highSurrogate: UInt32, lowSurrogate: UInt32): UInt32 {
+        var result__ = 0u32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetCodepointFromSurrogatePair(highSurrogate, lowSurrogate, CPointer<UInt32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GetSurrogatePairFromCodepoint(codepoint: UInt32, highSurrogate: windows_core.OutSlot<UInt16>, lowSurrogate: windows_core.OutSlot<UInt16>): Unit {
+        var hr__ = windows_core.E_POINTER
+        var nullOutSlot__ = false
+        if (highSurrogate.isNull()) {
+            nullOutSlot__ = true
+        } else {
+            highSurrogate.clear()
+        }
+        if (lowSurrogate.isNull()) {
+            nullOutSlot__ = true
+        } else {
+            lowSurrogate.clear()
+        }
+        if (nullOutSlot__) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetSurrogatePairFromCodepoint(codepoint, highSurrogate.borrowMut<UInt16>(), lowSurrogate.borrowMut<UInt16>()) }
+        }
+        hr__.check()
+        let __arg1Value = match (highSurrogate.takeAbi<UInt16>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        highSurrogate.write(__arg1Value)
+        let __arg2Value = match (lowSurrogate.takeAbi<UInt16>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        lowSurrogate.write(__arg2Value)
+    }
+
+    public static func IsHighSurrogate(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsHighSurrogate(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsLowSurrogate(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsLowSurrogate(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsSupplementary(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSupplementary(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsNoncharacter(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsNoncharacter(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsWhitespace(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsWhitespace(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsAlphabetic(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsAlphabetic(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsCased(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsCased(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsUppercase(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsUppercase(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsLowercase(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsLowercase(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsIdStart(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsIdStart(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsIdContinue(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsIdContinue(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsGraphemeBase(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsGraphemeBase(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func IsGraphemeExtend(codepoint: UInt32): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsGraphemeExtend(codepoint, CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func GetNumericType(codepoint: UInt32): UnicodeNumericType {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetNumericType(codepoint, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return UnicodeNumericType(result__)
+    }
+
+    public static func GetGeneralCategory(codepoint: UInt32): UnicodeGeneralCategory {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<UnicodeCharacters, IUnicodeCharactersStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetGeneralCategory(codepoint, CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return UnicodeGeneralCategory(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.UnicodeCharacters"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.UnicodeCharacters)"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.UnicodeCharacters", UnicodeCharacters.signature())
+    }
+}
+
+// Windows.Data.Text.UnicodeGeneralCategory (synthetic:Windows_Data_Text_UnicodeGeneralCategory)
+@When[Windows_Data_Text == "on"]
+public struct UnicodeGeneralCategory {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_UppercaseLetter = UnicodeGeneralCategory(0)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_LowercaseLetter = UnicodeGeneralCategory(1)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_TitlecaseLetter = UnicodeGeneralCategory(2)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_ModifierLetter = UnicodeGeneralCategory(3)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_OtherLetter = UnicodeGeneralCategory(4)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_NonspacingMark = UnicodeGeneralCategory(5)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_SpacingCombiningMark = UnicodeGeneralCategory(6)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_EnclosingMark = UnicodeGeneralCategory(7)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_DecimalDigitNumber = UnicodeGeneralCategory(8)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_LetterNumber = UnicodeGeneralCategory(9)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_OtherNumber = UnicodeGeneralCategory(10)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_SpaceSeparator = UnicodeGeneralCategory(11)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_LineSeparator = UnicodeGeneralCategory(12)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_ParagraphSeparator = UnicodeGeneralCategory(13)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_Control = UnicodeGeneralCategory(14)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_Format = UnicodeGeneralCategory(15)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_Surrogate = UnicodeGeneralCategory(16)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_PrivateUse = UnicodeGeneralCategory(17)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_ConnectorPunctuation = UnicodeGeneralCategory(18)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_DashPunctuation = UnicodeGeneralCategory(19)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_OpenPunctuation = UnicodeGeneralCategory(20)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_ClosePunctuation = UnicodeGeneralCategory(21)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_InitialQuotePunctuation = UnicodeGeneralCategory(22)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_FinalQuotePunctuation = UnicodeGeneralCategory(23)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_OtherPunctuation = UnicodeGeneralCategory(24)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_MathSymbol = UnicodeGeneralCategory(25)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_CurrencySymbol = UnicodeGeneralCategory(26)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_ModifierSymbol = UnicodeGeneralCategory(27)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_OtherSymbol = UnicodeGeneralCategory(28)
+@When[Windows_Data_Text == "on"]
+public const UnicodeGeneralCategory_NotAssigned = UnicodeGeneralCategory(29)
+
+// Windows.Data.Text.UnicodeNumericType (synthetic:Windows_Data_Text_UnicodeNumericType)
+@When[Windows_Data_Text == "on"]
+public struct UnicodeNumericType {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Data_Text == "on"]
+public const UnicodeNumericType_None = UnicodeNumericType(0)
+@When[Windows_Data_Text == "on"]
+public const UnicodeNumericType_Decimal = UnicodeNumericType(1)
+@When[Windows_Data_Text == "on"]
+public const UnicodeNumericType_Digit = UnicodeNumericType(2)
+@When[Windows_Data_Text == "on"]
+public const UnicodeNumericType_Numeric = UnicodeNumericType(3)
+
+// Windows.Data.Text.WordSegment (synthetic:Windows_Data_Text_WordSegment)
+@When[Windows_Data_Text == "on"]
+public class WordSegment <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<WordSegment> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WordSegment {
+        WordSegment(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WordSegment {
+        WordSegment(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IWordSegment.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WordSegment> {
+        let ancestors = [IWordSegment.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<WordSegment>("WordSegment", IWordSegment.iid(), ancestors, { raw => WordSegment.fromAbiTake(raw) }, { raw => WordSegment.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IWordSegment {
+        match (unsafe { query(IWordSegment.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIWordSegment(): IWordSegment {
+        defaultInterface()
+    }
+
+    public prop AlternateForms: Windows_Foundation_Collections.IVectorView<AlternateWordForm> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlternateForms(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<AlternateWordForm>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections.IVectorView<AlternateWordForm>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop SourceTextSegment: TextSegment {
+        get() {
+            var result__ = TextSegment()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SourceTextSegment(CPointer<TextSegment>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Text: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Text(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.WordSegment"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.WordSegment;{" + IWordSegment.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.WordSegment", WordSegment.signature(), IWordSegment.iid())
+    }
+
+    public static func intoWinrtHandle(value: WordSegment): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): WordSegment {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        WordSegment.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): WordSegment {
+        WordSegment.viewOf(raw)
+    }
+}
+
+// Windows.Data.Text.WordSegmentsTokenizingHandler (synthetic:Windows_Data_Text_WordSegmentsTokenizingHandler)
+@When[Windows_Data_Text == "on"]
+@C
+public struct WordSegmentsTokenizingHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+@When[Windows_Data_Text == "on"]
+public open class WordSegmentsTokenizingHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<WordSegmentsTokenizingHandler> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WordSegmentsTokenizingHandler {
+        OwnedWordSegmentsTokenizingHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WordSegmentsTokenizingHandler {
+        WordSegmentsTokenizingHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2782749527u32, 48938u16, 19535u16, 163u8, 31u8, 41u8, 231u8, 28u8, 111u8, 139u8, 53u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WordSegmentsTokenizingHandler> {
+        windows_interface.InterfaceDescriptor<WordSegmentsTokenizingHandler>("Windows.Data.Text.WordSegmentsTokenizingHandler", WordSegmentsTokenizingHandler.iid(), [windows_interface.IUnknown.iid()], { raw => WordSegmentsTokenizingHandler.fromAbiTake(raw) }, { raw => WordSegmentsTokenizingHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Data.Text.WordSegmentsTokenizingHandler", WordSegmentsTokenizingHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "WordSegmentsTokenizingHandlerVtbl", "WordSegmentsTokenizingHandler", "WordSegmentsTokenizingHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("precedingWords", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("words", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(WordSegmentsTokenizingHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Windows.Data.Text.WordSegmentsTokenizingHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.WordSegmentsTokenizingHandler", WordSegmentsTokenizingHandler.signature(), WordSegmentsTokenizingHandler.iid())
+    }
+
+    public static func runtimeContract(): windows_interface.RuntimeTypeContract {
+        let value__ = WordSegmentsTokenizingHandler.signature()
+        windows_interface.RuntimeTypeContract(value__, value__)
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): WordSegmentsTokenizingHandlerVtbl {
+        readVtbl<WordSegmentsTokenizingHandlerVtbl>(WordSegmentsTokenizingHandlerVtbl())
+    }
+
+    public unsafe func Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, precedingWords, words)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): WordSegmentsTokenizingHandler {
+        let box = WordSegmentsTokenizingHandlerBox(invoke)
+        let object = windows_core.ComObject<WordSegmentsTokenizingHandlerBox>.new(box, [WordSegmentsTokenizingHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(WordSegmentsTokenizingHandler.descriptor())
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+private class OwnedWordSegmentsTokenizingHandler <: WordSegmentsTokenizingHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+public interface WordSegmentsTokenizingHandlerInvokerErased {
+    func __winrtThunk_Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Int32
+}
+
+@When[Windows_Data_Text == "on"]
+public interface WordSegmentsTokenizingHandlerInvoker <: WordSegmentsTokenizingHandlerInvokerErased {
+    func Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(precedingWords, words)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+private class WordSegmentsTokenizingHandlerBox <: WordSegmentsTokenizingHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<WordSegmentsTokenizingHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<WordSegmentsTokenizingHandlerVtbl>(buildWordSegmentsTokenizingHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(precedingWords: CPointer<Unit>, words: CPointer<Unit>): Unit {
+        invoke_(precedingWords, words)
+    }
+}
+
+@When[Windows_Data_Text == "on"]
+func buildWordSegmentsTokenizingHandlerBoxVtbl(): WordSegmentsTokenizingHandlerVtbl {
+    var vtbl = WordSegmentsTokenizingHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, precedingWords: CPointer<Unit>, words: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<WordSegmentsTokenizingHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(precedingWords, words)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Windows.Data.Text.WordsSegmenter (synthetic:Windows_Data_Text_WordsSegmenter)
+@When[Windows_Data_Text == "on"]
+public class WordsSegmenter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<WordsSegmenter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): WordsSegmenter {
+        WordsSegmenter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): WordsSegmenter {
+        WordsSegmenter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IWordsSegmenter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<WordsSegmenter> {
+        let ancestors = [IWordsSegmenter.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<WordsSegmenter>("WordsSegmenter", IWordsSegmenter.iid(), ancestors, { raw => WordsSegmenter.fromAbiTake(raw) }, { raw => WordsSegmenter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IWordsSegmenter {
+        match (unsafe { query(IWordsSegmenter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIWordsSegmenter(): IWordsSegmenter {
+        defaultInterface()
+    }
+
+    public prop ResolvedLanguage: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ResolvedLanguage(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public func GetTokenAt(text: windows_core.HString, startIndex: UInt32): WordSegment {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetTokenAt(__argBorrow0.asRaw(), startIndex, CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<WordSegment>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return WordSegment.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetTokens(text: windows_core.HString): Windows_Foundation_Collections.IVectorView<WordSegment> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.GetTokens(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IVectorView<WordSegment>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections.IVectorView<WordSegment>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func Tokenize(text: windows_core.HString, startIndex: UInt32, handler: WordSegmentsTokenizingHandler): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(text)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<WordSegmentsTokenizingHandler>(handler)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.Tokenize(__argBorrow0.asRaw(), startIndex, __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func CreateWithLanguage(language: windows_core.HString): WordsSegmenter {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(language)) {
+            try (factory__ = windows_core.factory<WordsSegmenter, IWordsSegmenterFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithLanguage(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<WordsSegmenter>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return WordsSegmenter.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.Data.Text.WordsSegmenter"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.Data.Text.WordsSegmenter;{" + IWordsSegmenter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.Data.Text.WordsSegmenter", WordsSegmenter.signature(), IWordsSegmenter.iid())
+    }
+
+    public static func intoWinrtHandle(value: WordsSegmenter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): WordsSegmenter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        WordsSegmenter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): WordsSegmenter {
+        WordsSegmenter.viewOf(raw)
+    }
 }

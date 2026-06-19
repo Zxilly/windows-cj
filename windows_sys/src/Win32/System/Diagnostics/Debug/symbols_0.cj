@@ -2,10 +2,534 @@
 
 package windows_sys.Win32.System.Diagnostics.Debug
 
+import windows_core as windows_core
+import windows_interface.GUID
+import windows_interface as windows_interface
+import windows_polyfill as windows_polyfill
+
 @When[Windows_Win32_Foundation == "on"]
 import windows_sys.Win32.Foundation as Windows_Win32_Foundation
+@When[Windows_Win32_Security_WinTrust == "on"]
+import windows_sys.Win32.Security.WinTrust as Windows_Win32_Security_WinTrust
+@When[Windows_Win32_Storage_FileSystem == "on"]
+import windows_sys.Win32.Storage.FileSystem as Windows_Win32_Storage_FileSystem
+@When[Windows_Win32_System_Com == "on"]
+import windows_sys.Win32.System.Com as Windows_Win32_System_Com
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
+import windows_sys.Win32.System.Com.StructuredStorage as Windows_Win32_System_Com_StructuredStorage
 @When[Windows_Win32_System_Kernel == "on"]
 import windows_sys.Win32.System.Kernel as Windows_Win32_System_Kernel
+@When[Windows_Win32_System_Memory == "on"]
+import windows_sys.Win32.System.Memory as Windows_Win32_System_Memory
+@When[Windows_Win32_System_Ole == "on"]
+import windows_sys.Win32.System.Ole as Windows_Win32_System_Ole
+@When[Windows_Win32_System_SystemInformation == "on"]
+import windows_sys.Win32.System.SystemInformation as Windows_Win32_System_SystemInformation
+@When[Windows_Win32_System_Threading == "on"]
+import windows_sys.Win32.System.Threading as Windows_Win32_System_Threading
+@When[Windows_Win32_System_Time == "on"]
+import windows_sys.Win32.System.Time as Windows_Win32_System_Time
+@When[Windows_Win32_System_Variant == "on"]
+import windows_sys.Win32.System.Variant as Windows_Win32_System_Variant
+@When[Windows_Win32_UI_WindowsAndMessaging == "on"]
+import windows_sys.Win32.UI.WindowsAndMessaging as Windows_Win32_UI_WindowsAndMessaging
+
+// Windows.Win32.System.Diagnostics.Debug.ADDRESS (synthetic:Windows_Win32_System_Diagnostics_Debug_ADDRESS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct ADDRESS {
+    public var Offset: UInt32 = 0u32
+    public var Segment: UInt16 = 0u16
+    public var Mode: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.ADDRESS64 (synthetic:Windows_Win32_System_Diagnostics_Debug_ADDRESS64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct ADDRESS64 {
+    public var Offset: UInt64 = 0u64
+    public var Segment: UInt16 = 0u16
+    public var Mode: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.ADDRESS_MODE (synthetic:Windows_Win32_System_Diagnostics_Debug_ADDRESS_MODE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct ADDRESS_MODE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const ADDRESS_MODE_AddrMode1616 = ADDRESS_MODE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const ADDRESS_MODE_AddrMode1632 = ADDRESS_MODE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const ADDRESS_MODE_AddrModeReal = ADDRESS_MODE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const ADDRESS_MODE_AddrModeFlat = ADDRESS_MODE(3)
+
+// Windows.Win32.System.Diagnostics.Debug.AER_BRIDGE_DESCRIPTOR_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_AER_BRIDGE_DESCRIPTOR_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct AER_BRIDGE_DESCRIPTOR_FLAGS {
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public mut prop Anonymous: AER_BRIDGE_DESCRIPTOR_FLAGS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<AER_BRIDGE_DESCRIPTOR_FLAGS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<AER_BRIDGE_DESCRIPTOR_FLAGS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsUSHORT: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.AER_BRIDGE_DESCRIPTOR_FLAGS._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_AER_BRIDGE_DESCRIPTOR_FLAGS__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct AER_BRIDGE_DESCRIPTOR_FLAGS__Anonymous_e__Struct {
+    public var _bitfield: UInt16 = 0u16
+
+    public mut prop UncorrectableErrorMaskRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop UncorrectableErrorSeverityRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop CorrectableErrorMaskRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 2, 1, val)
+        }
+    }
+
+    public mut prop AdvancedCapsAndControlRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 3, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 3, 1, val)
+        }
+    }
+
+    public mut prop SecondaryUncorrectableErrorMaskRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 4, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 4, 1, val)
+        }
+    }
+
+    public mut prop SecondaryUncorrectableErrorSevRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 5, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 5, 1, val)
+        }
+    }
+
+    public mut prop SecondaryCapsAndControlRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 6, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 6, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 7, 9)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 7, 9, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.AER_ENDPOINT_DESCRIPTOR_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_AER_ENDPOINT_DESCRIPTOR_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct AER_ENDPOINT_DESCRIPTOR_FLAGS {
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public mut prop Anonymous: AER_ENDPOINT_DESCRIPTOR_FLAGS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<AER_ENDPOINT_DESCRIPTOR_FLAGS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<AER_ENDPOINT_DESCRIPTOR_FLAGS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsUSHORT: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.AER_ENDPOINT_DESCRIPTOR_FLAGS._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_AER_ENDPOINT_DESCRIPTOR_FLAGS__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct AER_ENDPOINT_DESCRIPTOR_FLAGS__Anonymous_e__Struct {
+    public var _bitfield: UInt16 = 0u16
+
+    public mut prop UncorrectableErrorMaskRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop UncorrectableErrorSeverityRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop CorrectableErrorMaskRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 2, 1, val)
+        }
+    }
+
+    public mut prop AdvancedCapsAndControlRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 3, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 3, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 4, 12)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 4, 12, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.AER_ROOTPORT_DESCRIPTOR_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_AER_ROOTPORT_DESCRIPTOR_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct AER_ROOTPORT_DESCRIPTOR_FLAGS {
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public mut prop Anonymous: AER_ROOTPORT_DESCRIPTOR_FLAGS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<AER_ROOTPORT_DESCRIPTOR_FLAGS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<AER_ROOTPORT_DESCRIPTOR_FLAGS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsUSHORT: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.AER_ROOTPORT_DESCRIPTOR_FLAGS._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_AER_ROOTPORT_DESCRIPTOR_FLAGS__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct AER_ROOTPORT_DESCRIPTOR_FLAGS__Anonymous_e__Struct {
+    public var _bitfield: UInt16 = 0u16
+
+    public mut prop UncorrectableErrorMaskRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop UncorrectableErrorSeverityRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop CorrectableErrorMaskRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 2, 1, val)
+        }
+    }
+
+    public mut prop AdvancedCapsAndControlRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 3, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 3, 1, val)
+        }
+    }
+
+    public mut prop RootErrorCommandRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 4, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 4, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 5, 11)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 5, 11, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.APC_CALLBACK_DATA (synthetic:Windows_Win32_System_Diagnostics_Debug_APC_CALLBACK_DATA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct APC_CALLBACK_DATA {
+    public var Parameter: CPointer<Unit> = CPointer<Unit>()
+    public var ContextRecord: CPointer<Unit> = CPointer<Unit>()
+    public var Reserved0: CPointer<Unit> = CPointer<Unit>()
+    public var Reserved1: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.API_VERSION (synthetic:Windows_Win32_System_Diagnostics_Debug_API_VERSION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct API_VERSION {
+    public var MajorVersion: UInt16 = 0u16
+    public var MinorVersion: UInt16 = 0u16
+    public var Revision: UInt16 = 0u16
+    public var Reserved: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Diagnostics.Debug.ARM64_NT_CONTEXT (synthetic:Windows_Win32_System_Diagnostics_Debug_ARM64_NT_CONTEXT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct ARM64_NT_CONTEXT {
+    public var ContextFlags: UInt32 = 0u32
+    public var Cpsr: UInt32 = 0u32
+    public var Anonymous: ARM64_NT_CONTEXT__Anonymous_e__Union = ARM64_NT_CONTEXT__Anonymous_e__Union()
+    public var Sp: UInt64 = 0u64
+    public var Pc: UInt64 = 0u64
+    public var V: VArray<ARM64_NT_NEON128, $32> = VArray<ARM64_NT_NEON128, $32>(repeat: ARM64_NT_NEON128())
+    public var Fpcr: UInt32 = 0u32
+    public var Fpsr: UInt32 = 0u32
+    public var Bcr: VArray<UInt32, $8> = VArray<UInt32, $8>(repeat: 0u32)
+    public var Bvr: VArray<UInt64, $8> = VArray<UInt64, $8>(repeat: 0u64)
+    public var Wcr: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+    public var Wvr: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.ARM64_NT_CONTEXT._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_ARM64_NT_CONTEXT__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct ARM64_NT_CONTEXT__Anonymous_e__Union {
+    public var _raw: VArray<UInt64, $31> = VArray<UInt64, $31>(repeat: 0u64)
+
+    public mut prop Anonymous: ARM64_NT_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<ARM64_NT_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<ARM64_NT_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop X: VArray<UInt64, $31> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $31>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt64, $31>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.ARM64_NT_CONTEXT._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_ARM64_NT_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct ARM64_NT_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct {
+    public var X0: UInt64 = 0u64
+    public var X1: UInt64 = 0u64
+    public var X2: UInt64 = 0u64
+    public var X3: UInt64 = 0u64
+    public var X4: UInt64 = 0u64
+    public var X5: UInt64 = 0u64
+    public var X6: UInt64 = 0u64
+    public var X7: UInt64 = 0u64
+    public var X8: UInt64 = 0u64
+    public var X9: UInt64 = 0u64
+    public var X10: UInt64 = 0u64
+    public var X11: UInt64 = 0u64
+    public var X12: UInt64 = 0u64
+    public var X13: UInt64 = 0u64
+    public var X14: UInt64 = 0u64
+    public var X15: UInt64 = 0u64
+    public var X16: UInt64 = 0u64
+    public var X17: UInt64 = 0u64
+    public var X18: UInt64 = 0u64
+    public var X19: UInt64 = 0u64
+    public var X20: UInt64 = 0u64
+    public var X21: UInt64 = 0u64
+    public var X22: UInt64 = 0u64
+    public var X23: UInt64 = 0u64
+    public var X24: UInt64 = 0u64
+    public var X25: UInt64 = 0u64
+    public var X26: UInt64 = 0u64
+    public var X27: UInt64 = 0u64
+    public var X28: UInt64 = 0u64
+    public var Fp: UInt64 = 0u64
+    public var Lr: UInt64 = 0u64
+}
 
 // Windows.Win32.System.Diagnostics.Debug.ARM64_NT_NEON128 (synthetic:Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128)
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
@@ -132,6 +656,1110 @@ public struct ARM64_NT_NEON128__Anonymous_e__Struct {
     public var High: Int64 = 0i64
 }
 
+// Windows.Win32.System.Diagnostics.Debug.BUGCHECK_ERROR (synthetic:Windows_Win32_System_Diagnostics_Debug_BUGCHECK_ERROR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct BUGCHECK_ERROR {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HARDWARE_PROFILE_UNDOCKED_STRING = BUGCHECK_ERROR(1073807361)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HARDWARE_PROFILE_DOCKED_STRING = BUGCHECK_ERROR(1073807362)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HARDWARE_PROFILE_UNKNOWN_STRING = BUGCHECK_ERROR(1073807363)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINDOWS_NT_BANNER = BUGCHECK_ERROR(1073741950)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINDOWS_NT_CSD_STRING = BUGCHECK_ERROR(1073741959)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINDOWS_NT_INFO_STRING = BUGCHECK_ERROR(1073741960)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINDOWS_NT_MP_STRING = BUGCHECK_ERROR(1073741961)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_THREAD_TERMINATE_HELD_MUTEX = BUGCHECK_ERROR(1073741962)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINDOWS_NT_INFO_STRING_PLURAL = BUGCHECK_ERROR(1073741981)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINDOWS_NT_RC_STRING = BUGCHECK_ERROR(1073741982)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_APC_INDEX_MISMATCH = BUGCHECK_ERROR(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DEVICE_QUEUE_NOT_BUSY = BUGCHECK_ERROR(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_AFFINITY_SET = BUGCHECK_ERROR(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_DATA_ACCESS_TRAP = BUGCHECK_ERROR(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_PROCESS_ATTACH_ATTEMPT = BUGCHECK_ERROR(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_PROCESS_DETACH_ATTEMPT = BUGCHECK_ERROR(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_SOFTWARE_INTERRUPT = BUGCHECK_ERROR(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IRQL_NOT_DISPATCH_LEVEL = BUGCHECK_ERROR(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IRQL_NOT_GREATER_OR_EQUAL = BUGCHECK_ERROR(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IRQL_NOT_LESS_OR_EQUAL = BUGCHECK_ERROR(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_EXCEPTION_HANDLING_SUPPORT = BUGCHECK_ERROR(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MAXIMUM_WAIT_OBJECTS_EXCEEDED = BUGCHECK_ERROR(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MUTEX_LEVEL_NUMBER_VIOLATION = BUGCHECK_ERROR(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_USER_MODE_CONTEXT = BUGCHECK_ERROR(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SPIN_LOCK_ALREADY_OWNED = BUGCHECK_ERROR(15)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SPIN_LOCK_NOT_OWNED = BUGCHECK_ERROR(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_THREAD_NOT_MUTEX_OWNER = BUGCHECK_ERROR(17)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TRAP_CAUSE_UNKNOWN = BUGCHECK_ERROR(18)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EMPTY_THREAD_REAPER_LIST = BUGCHECK_ERROR(19)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CREATE_DELETE_LOCK_NOT_LOCKED = BUGCHECK_ERROR(20)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_LAST_CHANCE_CALLED_FROM_KMODE = BUGCHECK_ERROR(21)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CID_HANDLE_CREATION = BUGCHECK_ERROR(22)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CID_HANDLE_DELETION = BUGCHECK_ERROR(23)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REFERENCE_BY_POINTER = BUGCHECK_ERROR(24)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BAD_POOL_HEADER = BUGCHECK_ERROR(25)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MEMORY_MANAGEMENT = BUGCHECK_ERROR(26)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PFN_SHARE_COUNT = BUGCHECK_ERROR(27)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PFN_REFERENCE_COUNT = BUGCHECK_ERROR(28)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_SPIN_LOCK_AVAILABLE = BUGCHECK_ERROR(29)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KMODE_EXCEPTION_NOT_HANDLED = BUGCHECK_ERROR(30)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SHARED_RESOURCE_CONV_ERROR = BUGCHECK_ERROR(31)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_APC_PENDING_DURING_EXIT = BUGCHECK_ERROR(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_QUOTA_UNDERFLOW = BUGCHECK_ERROR(33)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FILE_SYSTEM = BUGCHECK_ERROR(34)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FAT_FILE_SYSTEM = BUGCHECK_ERROR(35)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NTFS_FILE_SYSTEM = BUGCHECK_ERROR(36)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NPFS_FILE_SYSTEM = BUGCHECK_ERROR(37)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CDFS_FILE_SYSTEM = BUGCHECK_ERROR(38)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RDR_FILE_SYSTEM = BUGCHECK_ERROR(39)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CORRUPT_ACCESS_TOKEN = BUGCHECK_ERROR(40)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURITY_SYSTEM = BUGCHECK_ERROR(41)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INCONSISTENT_IRP = BUGCHECK_ERROR(42)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PANIC_STACK_SWITCH = BUGCHECK_ERROR(43)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PORT_DRIVER_INTERNAL = BUGCHECK_ERROR(44)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SCSI_DISK_DRIVER_INTERNAL = BUGCHECK_ERROR(45)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DATA_BUS_ERROR = BUGCHECK_ERROR(46)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INSTRUCTION_BUS_ERROR = BUGCHECK_ERROR(47)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SET_OF_INVALID_CONTEXT = BUGCHECK_ERROR(48)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PHASE0_INITIALIZATION_FAILED = BUGCHECK_ERROR(49)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PHASE1_INITIALIZATION_FAILED = BUGCHECK_ERROR(50)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNEXPECTED_INITIALIZATION_CALL = BUGCHECK_ERROR(51)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CACHE_MANAGER = BUGCHECK_ERROR(52)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_MORE_IRP_STACK_LOCATIONS = BUGCHECK_ERROR(53)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DEVICE_REFERENCE_COUNT_NOT_ZERO = BUGCHECK_ERROR(54)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FLOPPY_INTERNAL_ERROR = BUGCHECK_ERROR(55)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SERIAL_DRIVER_INTERNAL = BUGCHECK_ERROR(56)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_EXIT_OWNED_MUTEX = BUGCHECK_ERROR(57)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_UNWIND_PREVIOUS_USER = BUGCHECK_ERROR(58)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_SERVICE_EXCEPTION = BUGCHECK_ERROR(59)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INTERRUPT_UNWIND_ATTEMPTED = BUGCHECK_ERROR(60)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INTERRUPT_EXCEPTION_NOT_HANDLED = BUGCHECK_ERROR(61)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MULTIPROCESSOR_CONFIGURATION_NOT_SUPPORTED = BUGCHECK_ERROR(62)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_MORE_SYSTEM_PTES = BUGCHECK_ERROR(63)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TARGET_MDL_TOO_SMALL = BUGCHECK_ERROR(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MUST_SUCCEED_POOL_EMPTY = BUGCHECK_ERROR(65)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ATDISK_DRIVER_INTERNAL = BUGCHECK_ERROR(66)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_SUCH_PARTITION = BUGCHECK_ERROR(67)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MULTIPLE_IRP_COMPLETE_REQUESTS = BUGCHECK_ERROR(68)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INSUFFICIENT_SYSTEM_MAP_REGS = BUGCHECK_ERROR(69)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DEREF_UNKNOWN_LOGON_SESSION = BUGCHECK_ERROR(70)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REF_UNKNOWN_LOGON_SESSION = BUGCHECK_ERROR(71)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CANCEL_STATE_IN_COMPLETED_IRP = BUGCHECK_ERROR(72)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PAGE_FAULT_WITH_INTERRUPTS_OFF = BUGCHECK_ERROR(73)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IRQL_GT_ZERO_AT_SYSTEM_SERVICE = BUGCHECK_ERROR(74)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_STREAMS_INTERNAL_ERROR = BUGCHECK_ERROR(75)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FATAL_UNHANDLED_HARD_ERROR = BUGCHECK_ERROR(76)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_PAGES_AVAILABLE = BUGCHECK_ERROR(77)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PFN_LIST_CORRUPT = BUGCHECK_ERROR(78)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NDIS_INTERNAL_ERROR = BUGCHECK_ERROR(79)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PAGE_FAULT_IN_NONPAGED_AREA = BUGCHECK_ERROR(80)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PAGE_FAULT_IN_NONPAGED_AREA_M = BUGCHECK_ERROR(268435536)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REGISTRY_ERROR = BUGCHECK_ERROR(81)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MAILSLOT_FILE_SYSTEM = BUGCHECK_ERROR(82)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NO_BOOT_DEVICE = BUGCHECK_ERROR(83)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_LM_SERVER_INTERNAL_ERROR = BUGCHECK_ERROR(84)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DATA_COHERENCY_EXCEPTION = BUGCHECK_ERROR(85)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INSTRUCTION_COHERENCY_EXCEPTION = BUGCHECK_ERROR(86)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XNS_INTERNAL_ERROR = BUGCHECK_ERROR(87)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VOLMGRX_INTERNAL_ERROR = BUGCHECK_ERROR(88)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PINBALL_FILE_SYSTEM = BUGCHECK_ERROR(89)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRITICAL_SERVICE_FAILED = BUGCHECK_ERROR(90)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SET_ENV_VAR_FAILED = BUGCHECK_ERROR(91)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HAL_INITIALIZATION_FAILED = BUGCHECK_ERROR(92)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNSUPPORTED_PROCESSOR = BUGCHECK_ERROR(93)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_OBJECT_INITIALIZATION_FAILED = BUGCHECK_ERROR(94)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURITY_INITIALIZATION_FAILED = BUGCHECK_ERROR(95)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PROCESS_INITIALIZATION_FAILED = BUGCHECK_ERROR(96)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HAL1_INITIALIZATION_FAILED = BUGCHECK_ERROR(97)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_OBJECT1_INITIALIZATION_FAILED = BUGCHECK_ERROR(98)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURITY1_INITIALIZATION_FAILED = BUGCHECK_ERROR(99)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYMBOLIC_INITIALIZATION_FAILED = BUGCHECK_ERROR(100)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MEMORY1_INITIALIZATION_FAILED = BUGCHECK_ERROR(101)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CACHE_INITIALIZATION_FAILED = BUGCHECK_ERROR(102)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CONFIG_INITIALIZATION_FAILED = BUGCHECK_ERROR(103)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FILE_INITIALIZATION_FAILED = BUGCHECK_ERROR(104)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IO1_INITIALIZATION_FAILED = BUGCHECK_ERROR(105)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_LPC_INITIALIZATION_FAILED = BUGCHECK_ERROR(106)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PROCESS1_INITIALIZATION_FAILED = BUGCHECK_ERROR(107)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REFMON_INITIALIZATION_FAILED = BUGCHECK_ERROR(108)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SESSION1_INITIALIZATION_FAILED = BUGCHECK_ERROR(109)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOOTPROC_INITIALIZATION_FAILED = BUGCHECK_ERROR(110)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VSL_INITIALIZATION_FAILED = BUGCHECK_ERROR(111)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SOFT_RESTART_FATAL_ERROR = BUGCHECK_ERROR(112)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ASSIGN_DRIVE_LETTERS_FAILED = BUGCHECK_ERROR(114)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CONFIG_LIST_FAILED = BUGCHECK_ERROR(115)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BAD_SYSTEM_CONFIG_INFO = BUGCHECK_ERROR(116)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CANNOT_WRITE_CONFIGURATION = BUGCHECK_ERROR(117)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PROCESS_HAS_LOCKED_PAGES = BUGCHECK_ERROR(118)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_STACK_INPAGE_ERROR = BUGCHECK_ERROR(119)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PHASE0_EXCEPTION = BUGCHECK_ERROR(120)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MISMATCHED_HAL = BUGCHECK_ERROR(121)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_DATA_INPAGE_ERROR = BUGCHECK_ERROR(122)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INACCESSIBLE_BOOT_DEVICE = BUGCHECK_ERROR(123)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_NDIS_DRIVER = BUGCHECK_ERROR(124)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INSTALL_MORE_MEMORY = BUGCHECK_ERROR(125)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_THREAD_EXCEPTION_NOT_HANDLED = BUGCHECK_ERROR(126)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_THREAD_EXCEPTION_NOT_HANDLED_M = BUGCHECK_ERROR(268435582)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNEXPECTED_KERNEL_MODE_TRAP = BUGCHECK_ERROR(127)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNEXPECTED_KERNEL_MODE_TRAP_M = BUGCHECK_ERROR(268435583)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NMI_HARDWARE_FAILURE = BUGCHECK_ERROR(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SPIN_LOCK_INIT_FAILURE = BUGCHECK_ERROR(129)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DFS_FILE_SYSTEM = BUGCHECK_ERROR(130)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_OFS_FILE_SYSTEM = BUGCHECK_ERROR(131)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RECOM_DRIVER = BUGCHECK_ERROR(132)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SETUP_FAILURE = BUGCHECK_ERROR(133)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_AUDIT_FAILURE = BUGCHECK_ERROR(134)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MBR_CHECKSUM_MISMATCH = BUGCHECK_ERROR(139)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_MODE_EXCEPTION_NOT_HANDLED = BUGCHECK_ERROR(142)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_MODE_EXCEPTION_NOT_HANDLED_M = BUGCHECK_ERROR(268435598)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PP0_INITIALIZATION_FAILED = BUGCHECK_ERROR(143)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PP1_INITIALIZATION_FAILED = BUGCHECK_ERROR(144)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_INIT_OR_RIT_FAILURE = BUGCHECK_ERROR(145)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UP_DRIVER_ON_MP_SYSTEM = BUGCHECK_ERROR(146)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_KERNEL_HANDLE = BUGCHECK_ERROR(147)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_STACK_LOCKED_AT_EXIT = BUGCHECK_ERROR(148)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PNP_INTERNAL_ERROR = BUGCHECK_ERROR(149)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_WORK_QUEUE_ITEM = BUGCHECK_ERROR(150)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOUND_IMAGE_UNSUPPORTED = BUGCHECK_ERROR(151)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_END_OF_NT_EVALUATION_PERIOD = BUGCHECK_ERROR(152)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_REGION_OR_SEGMENT = BUGCHECK_ERROR(153)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_LICENSE_VIOLATION = BUGCHECK_ERROR(154)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UDFS_FILE_SYSTEM = BUGCHECK_ERROR(155)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MACHINE_CHECK_EXCEPTION = BUGCHECK_ERROR(156)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_USER_MODE_HEALTH_MONITOR = BUGCHECK_ERROR(158)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_POWER_STATE_FAILURE = BUGCHECK_ERROR(159)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INTERNAL_POWER_ERROR = BUGCHECK_ERROR(160)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PCI_BUS_DRIVER_INTERNAL = BUGCHECK_ERROR(161)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MEMORY_IMAGE_CORRUPT = BUGCHECK_ERROR(162)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ACPI_DRIVER_INTERNAL = BUGCHECK_ERROR(163)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CNSS_FILE_SYSTEM_FILTER = BUGCHECK_ERROR(164)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ACPI_BIOS_ERROR = BUGCHECK_ERROR(165)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FP_EMULATION_ERROR = BUGCHECK_ERROR(166)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BAD_EXHANDLE = BUGCHECK_ERROR(167)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOOTING_IN_SAFEMODE_MINIMAL = BUGCHECK_ERROR(168)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOOTING_IN_SAFEMODE_NETWORK = BUGCHECK_ERROR(169)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOOTING_IN_SAFEMODE_DSREPAIR = BUGCHECK_ERROR(170)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SESSION_HAS_VALID_POOL_ON_EXIT = BUGCHECK_ERROR(171)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HAL_MEMORY_ALLOCATION = BUGCHECK_ERROR(172)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_DRIVER_DEBUG_REPORT_REQUEST = BUGCHECK_ERROR(1073741997)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BGI_DETECTED_VIOLATION = BUGCHECK_ERROR(177)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_DRIVER_INIT_FAILURE = BUGCHECK_ERROR(180)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOOTLOG_LOADED = BUGCHECK_ERROR(181)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOOTLOG_NOT_LOADED = BUGCHECK_ERROR(182)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BOOTLOG_ENABLED = BUGCHECK_ERROR(183)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ATTEMPTED_SWITCH_FROM_DPC = BUGCHECK_ERROR(184)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CHIPSET_DETECTED_ERROR = BUGCHECK_ERROR(185)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SESSION_HAS_VALID_VIEWS_ON_EXIT = BUGCHECK_ERROR(186)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NETWORK_BOOT_INITIALIZATION_FAILED = BUGCHECK_ERROR(187)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NETWORK_BOOT_DUPLICATE_ADDRESS = BUGCHECK_ERROR(188)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_HIBERNATED_STATE = BUGCHECK_ERROR(189)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ATTEMPTED_WRITE_TO_READONLY_MEMORY = BUGCHECK_ERROR(190)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MUTEX_ALREADY_OWNED = BUGCHECK_ERROR(191)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PCI_CONFIG_SPACE_ACCESS_FAILURE = BUGCHECK_ERROR(192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SPECIAL_POOL_DETECTED_MEMORY_CORRUPTION = BUGCHECK_ERROR(193)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BAD_POOL_CALLER = BUGCHECK_ERROR(194)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_IMAGE_BAD_SIGNATURE = BUGCHECK_ERROR(195)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_VERIFIER_DETECTED_VIOLATION = BUGCHECK_ERROR(196)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_CORRUPTED_EXPOOL = BUGCHECK_ERROR(197)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_CAUGHT_MODIFYING_FREED_POOL = BUGCHECK_ERROR(198)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TIMER_OR_DPC_INVALID = BUGCHECK_ERROR(199)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IRQL_UNEXPECTED_VALUE = BUGCHECK_ERROR(200)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_VERIFIER_IOMANAGER_VIOLATION = BUGCHECK_ERROR(201)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PNP_DETECTED_FATAL_ERROR = BUGCHECK_ERROR(202)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_LEFT_LOCKED_PAGES_IN_PROCESS = BUGCHECK_ERROR(203)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PAGE_FAULT_IN_FREED_SPECIAL_POOL = BUGCHECK_ERROR(204)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PAGE_FAULT_BEYOND_END_OF_ALLOCATION = BUGCHECK_ERROR(205)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_UNLOADED_WITHOUT_CANCELLING_PENDING_OPERATIONS = BUGCHECK_ERROR(206)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE = BUGCHECK_ERROR(207)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_CORRUPTED_MMPOOL = BUGCHECK_ERROR(208)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_IRQL_NOT_LESS_OR_EQUAL = BUGCHECK_ERROR(209)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_ID_DRIVER = BUGCHECK_ERROR(210)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_PORTION_MUST_BE_NONPAGED = BUGCHECK_ERROR(211)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_SCAN_AT_RAISED_IRQL_CAUGHT_IMPROPER_DRIVER_UNLOAD = BUGCHECK_ERROR(212)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_PAGE_FAULT_IN_FREED_SPECIAL_POOL = BUGCHECK_ERROR(213)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_PAGE_FAULT_BEYOND_END_OF_ALLOCATION = BUGCHECK_ERROR(214)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_PAGE_FAULT_BEYOND_END_OF_ALLOCATION_M = BUGCHECK_ERROR(268435670)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_UNMAPPING_INVALID_VIEW = BUGCHECK_ERROR(215)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_USED_EXCESSIVE_PTES = BUGCHECK_ERROR(216)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_LOCKED_PAGES_TRACKER_CORRUPTION = BUGCHECK_ERROR(217)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYSTEM_PTE_MISUSE = BUGCHECK_ERROR(218)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_CORRUPTED_SYSPTES = BUGCHECK_ERROR(219)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_INVALID_STACK_ACCESS = BUGCHECK_ERROR(220)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_POOL_CORRUPTION_IN_FILE_AREA = BUGCHECK_ERROR(222)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IMPERSONATING_WORKER_THREAD = BUGCHECK_ERROR(223)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ACPI_BIOS_FATAL_ERROR = BUGCHECK_ERROR(224)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_RETURNED_AT_BAD_IRQL = BUGCHECK_ERROR(225)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MANUALLY_INITIATED_CRASH = BUGCHECK_ERROR(226)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RESOURCE_NOT_OWNED = BUGCHECK_ERROR(227)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_INVALID = BUGCHECK_ERROR(228)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_POWER_FAILURE_SIMULATE = BUGCHECK_ERROR(229)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_VERIFIER_DMA_VIOLATION = BUGCHECK_ERROR(230)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_FLOATING_POINT_STATE = BUGCHECK_ERROR(231)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_CANCEL_OF_FILE_OPEN = BUGCHECK_ERROR(232)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ACTIVE_EX_WORKER_THREAD_TERMINATION = BUGCHECK_ERROR(233)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_UNSPECIFIED = BUGCHECK_ERROR(61440)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_BLANKSCREEN = BUGCHECK_ERROR(61442)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_INPUT = BUGCHECK_ERROR(61443)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_WATCHDOG = BUGCHECK_ERROR(61444)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_STARTNOTVISIBLE = BUGCHECK_ERROR(61445)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_NAVIGATIONMODEL = BUGCHECK_ERROR(61446)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_OUTOFMEMORY = BUGCHECK_ERROR(61447)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_GRAPHICS = BUGCHECK_ERROR(61448)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_NAVSERVERTIMEOUT = BUGCHECK_ERROR(61449)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_CHROMEPROCESSCRASH = BUGCHECK_ERROR(61450)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_NOTIFICATIONDISMISSAL = BUGCHECK_ERROR(61451)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_SPEECHDISMISSAL = BUGCHECK_ERROR(61452)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_CALLDISMISSAL = BUGCHECK_ERROR(61453)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_APPBARDISMISSAL = BUGCHECK_ERROR(61454)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_RILADAPTATIONCRASH = BUGCHECK_ERROR(61455)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_APPLISTUNREACHABLE = BUGCHECK_ERROR(61456)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_REPORTNOTIFICATIONFAILURE = BUGCHECK_ERROR(61457)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_UNEXPECTEDSHUTDOWN = BUGCHECK_ERROR(61458)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_RPCFAILURE = BUGCHECK_ERROR(61459)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_AUXILIARYFULLDUMP = BUGCHECK_ERROR(61460)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_ACCOUNTPROVSVCINITFAILURE = BUGCHECK_ERROR(61461)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_MTBFCOMMANDTIMEOUT = BUGCHECK_ERROR(789)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_MTBFCOMMANDHANG = BUGCHECK_ERROR(61697)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_MTBFPASSBUGCHECK = BUGCHECK_ERROR(61698)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_MTBFIOERROR = BUGCHECK_ERROR(61699)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_RENDERTHREADHANG = BUGCHECK_ERROR(61952)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_RENDERMOBILEUIOOM = BUGCHECK_ERROR(61953)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_DEVICEUPDATEUNSPECIFIED = BUGCHECK_ERROR(62208)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_AUDIODRIVERHANG = BUGCHECK_ERROR(62464)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_BATTERYPULLOUT = BUGCHECK_ERROR(62720)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_MEDIACORETESTHANG = BUGCHECK_ERROR(62976)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_RESOURCEMANAGEMENT = BUGCHECK_ERROR(63232)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_CAPTURESERVICE = BUGCHECK_ERROR(63488)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_WAITFORSHELLREADY = BUGCHECK_ERROR(63744)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_NONRESPONSIVEPROCESS = BUGCHECK_ERROR(404)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SAVER_SICKAPPLICATION = BUGCHECK_ERROR(34918)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_THREAD_STUCK_IN_DEVICE_DRIVER = BUGCHECK_ERROR(234)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_THREAD_STUCK_IN_DEVICE_DRIVER_M = BUGCHECK_ERROR(268435690)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DIRTY_MAPPED_PAGES_CONGESTION = BUGCHECK_ERROR(235)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SESSION_HAS_VALID_SPECIAL_POOL_ON_EXIT = BUGCHECK_ERROR(236)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNMOUNTABLE_BOOT_VOLUME = BUGCHECK_ERROR(237)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRITICAL_PROCESS_DIED = BUGCHECK_ERROR(239)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_STORAGE_MINIPORT_ERROR = BUGCHECK_ERROR(240)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SCSI_VERIFIER_DETECTED_VIOLATION = BUGCHECK_ERROR(241)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HARDWARE_INTERRUPT_STORM = BUGCHECK_ERROR(242)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DISORDERLY_SHUTDOWN = BUGCHECK_ERROR(243)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRITICAL_OBJECT_TERMINATION = BUGCHECK_ERROR(244)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FLTMGR_FILE_SYSTEM = BUGCHECK_ERROR(245)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PCI_VERIFIER_DETECTED_VIOLATION = BUGCHECK_ERROR(246)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_OVERRAN_STACK_BUFFER = BUGCHECK_ERROR(247)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RAMDISK_BOOT_INITIALIZATION_FAILED = BUGCHECK_ERROR(248)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_RETURNED_STATUS_REPARSE_FOR_VOLUME_OPEN = BUGCHECK_ERROR(249)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HTTP_DRIVER_CORRUPTED = BUGCHECK_ERROR(250)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RECURSIVE_MACHINE_CHECK = BUGCHECK_ERROR(251)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ATTEMPTED_EXECUTE_OF_NOEXECUTE_MEMORY = BUGCHECK_ERROR(252)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DIRTY_NOWRITE_PAGES_CONGESTION = BUGCHECK_ERROR(253)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_USB_DRIVER = BUGCHECK_ERROR(254)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BC_BLUETOOTH_VERIFIER_FAULT = BUGCHECK_ERROR(3070)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BC_BTHMINI_VERIFIER_FAULT = BUGCHECK_ERROR(3071)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RESERVE_QUEUE_OVERFLOW = BUGCHECK_ERROR(255)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_LOADER_BLOCK_MISMATCH = BUGCHECK_ERROR(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLOCK_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(257)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DPC_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(258)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MUP_FILE_SYSTEM = BUGCHECK_ERROR(259)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_AGP_INVALID_ACCESS = BUGCHECK_ERROR(260)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_AGP_GART_CORRUPTION = BUGCHECK_ERROR(261)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_AGP_ILLEGALLY_REPROGRAMMED = BUGCHECK_ERROR(262)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_EXPAND_STACK_ACTIVE = BUGCHECK_ERROR(263)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_THIRD_PARTY_FILE_SYSTEM_FAILURE = BUGCHECK_ERROR(264)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRITICAL_STRUCTURE_CORRUPTION = BUGCHECK_ERROR(265)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_APP_TAGGING_INITIALIZATION_FAILED = BUGCHECK_ERROR(266)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DFSC_FILE_SYSTEM = BUGCHECK_ERROR(267)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FSRTL_EXTRA_CREATE_PARAMETER_VIOLATION = BUGCHECK_ERROR(268)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WDF_VIOLATION = BUGCHECK_ERROR(269)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_MEMORY_MANAGEMENT_INTERNAL = BUGCHECK_ERROR(270)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_INVALID_CRUNTIME_PARAMETER = BUGCHECK_ERROR(272)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RECURSIVE_NMI = BUGCHECK_ERROR(273)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MSRPC_STATE_VIOLATION = BUGCHECK_ERROR(274)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_DXGKRNL_FATAL_ERROR = BUGCHECK_ERROR(275)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_SHADOW_DRIVER_FATAL_ERROR = BUGCHECK_ERROR(276)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_AGP_INTERNAL = BUGCHECK_ERROR(277)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_TDR_FAILURE = BUGCHECK_ERROR(278)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_TDR_TIMEOUT_DETECTED = BUGCHECK_ERROR(279)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NTHV_GUEST_ERROR = BUGCHECK_ERROR(280)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_SCHEDULER_INTERNAL_ERROR = BUGCHECK_ERROR(281)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EM_INITIALIZATION_ERROR = BUGCHECK_ERROR(282)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_RETURNED_HOLDING_CANCEL_LOCK = BUGCHECK_ERROR(283)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ATTEMPTED_WRITE_TO_CM_PROTECTED_STORAGE = BUGCHECK_ERROR(284)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EVENT_TRACING_FATAL_ERROR = BUGCHECK_ERROR(285)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TOO_MANY_RECURSIVE_FAULTS = BUGCHECK_ERROR(286)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_DRIVER_HANDLE = BUGCHECK_ERROR(287)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BITLOCKER_FATAL_ERROR = BUGCHECK_ERROR(288)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_VIOLATION = BUGCHECK_ERROR(289)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WHEA_INTERNAL_ERROR = BUGCHECK_ERROR(290)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRYPTO_SELF_TEST_FAILURE = BUGCHECK_ERROR(291)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WHEA_UNCORRECTABLE_ERROR = BUGCHECK_ERROR(292)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NMR_INVALID_STATE = BUGCHECK_ERROR(293)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NETIO_INVALID_POOL_CALLER = BUGCHECK_ERROR(294)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PAGE_NOT_ZERO = BUGCHECK_ERROR(295)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_RETURNED_WITH_BAD_IO_PRIORITY = BUGCHECK_ERROR(296)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_RETURNED_WITH_BAD_PAGING_IO_PRIORITY = BUGCHECK_ERROR(297)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MUI_NO_VALID_SYSTEM_LANGUAGE = BUGCHECK_ERROR(298)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FAULTY_HARDWARE_CORRUPTED_PAGE = BUGCHECK_ERROR(299)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EXFAT_FILE_SYSTEM = BUGCHECK_ERROR(300)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VOLSNAP_OVERLAPPED_TABLE_ACCESS = BUGCHECK_ERROR(301)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_MDL_RANGE = BUGCHECK_ERROR(302)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VHD_BOOT_INITIALIZATION_FAILED = BUGCHECK_ERROR(303)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DYNAMIC_ADD_PROCESSOR_MISMATCH = BUGCHECK_ERROR(304)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_EXTENDED_PROCESSOR_STATE = BUGCHECK_ERROR(305)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_RESOURCE_OWNER_POINTER_INVALID = BUGCHECK_ERROR(306)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DPC_WATCHDOG_VIOLATION = BUGCHECK_ERROR(307)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVE_EXTENDER = BUGCHECK_ERROR(308)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REGISTRY_FILTER_DRIVER_EXCEPTION = BUGCHECK_ERROR(309)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VHD_BOOT_HOST_VOLUME_NOT_ENOUGH_SPACE = BUGCHECK_ERROR(310)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_HANDLE_MANAGER = BUGCHECK_ERROR(311)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_GPIO_CONTROLLER_DRIVER_ERROR = BUGCHECK_ERROR(312)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_SECURITY_CHECK_FAILURE = BUGCHECK_ERROR(313)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_MODE_HEAP_CORRUPTION = BUGCHECK_ERROR(314)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PASSIVE_INTERRUPT_ERROR = BUGCHECK_ERROR(315)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_IO_BOOST_STATE = BUGCHECK_ERROR(316)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRITICAL_INITIALIZATION_FAILURE = BUGCHECK_ERROR(317)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ERRATA_WORKAROUND_UNSUCCESSFUL = BUGCHECK_ERROR(318)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REGISTRY_CALLBACK_DRIVER_EXCEPTION = BUGCHECK_ERROR(319)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_STORAGE_DEVICE_ABNORMALITY_DETECTED = BUGCHECK_ERROR(320)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_ENGINE_TIMEOUT_DETECTED = BUGCHECK_ERROR(321)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_TDR_APPLICATION_BLOCKED = BUGCHECK_ERROR(322)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PROCESSOR_DRIVER_INTERNAL = BUGCHECK_ERROR(323)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_USB3_DRIVER = BUGCHECK_ERROR(324)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURE_BOOT_VIOLATION = BUGCHECK_ERROR(325)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_NDIS_NET_BUFFER_LIST_INFO_ILLEGALLY_TRANSFERRED = BUGCHECK_ERROR(326)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ABNORMAL_RESET_DETECTED = BUGCHECK_ERROR(327)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IO_OBJECT_INVALID = BUGCHECK_ERROR(328)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REFS_FILE_SYSTEM = BUGCHECK_ERROR(329)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_WMI_INTERNAL = BUGCHECK_ERROR(330)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SOC_SUBSYSTEM_FAILURE = BUGCHECK_ERROR(331)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FATAL_ABNORMAL_RESET_ERROR = BUGCHECK_ERROR(332)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EXCEPTION_SCOPE_INVALID = BUGCHECK_ERROR(333)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SOC_CRITICAL_DEVICE_REMOVED = BUGCHECK_ERROR(334)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PDC_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(335)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TCPIP_AOAC_NIC_ACTIVE_REFERENCE_LEAK = BUGCHECK_ERROR(336)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNSUPPORTED_INSTRUCTION_MODE = BUGCHECK_ERROR(337)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_PUSH_LOCK_FLAGS = BUGCHECK_ERROR(338)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_LOCK_ENTRY_LEAKED_ON_THREAD_TERMINATION = BUGCHECK_ERROR(339)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNEXPECTED_STORE_EXCEPTION = BUGCHECK_ERROR(340)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_OS_DATA_TAMPERING = BUGCHECK_ERROR(341)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINSOCK_DETECTED_HUNG_CLOSESOCKET_LIVEDUMP = BUGCHECK_ERROR(342)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_THREAD_PRIORITY_FLOOR_VIOLATION = BUGCHECK_ERROR(343)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ILLEGAL_IOMMU_PAGE_FAULT = BUGCHECK_ERROR(344)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HAL_ILLEGAL_IOMMU_PAGE_FAULT = BUGCHECK_ERROR(345)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SDBUS_INTERNAL_ERROR = BUGCHECK_ERROR(346)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_RETURNED_WITH_SYSTEM_PAGE_PRIORITY_ACTIVE = BUGCHECK_ERROR(347)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PDC_WATCHDOG_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(348)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SOC_SUBSYSTEM_FAILURE_LIVEDUMP = BUGCHECK_ERROR(349)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_NDIS_DRIVER_LIVE_DUMP = BUGCHECK_ERROR(350)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CONNECTED_STANDBY_WATCHDOG_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(351)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_ATOMIC_CHECK_FAILURE = BUGCHECK_ERROR(352)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_LIVE_SYSTEM_DUMP = BUGCHECK_ERROR(353)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_AUTO_BOOST_INVALID_LOCK_RELEASE = BUGCHECK_ERROR(354)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_TEST_CONDITION = BUGCHECK_ERROR(355)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_CRITICAL_FAILURE = BUGCHECK_ERROR(356)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_STATUS_IO_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(357)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_RESOURCE_CALL_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(358)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_SNAPSHOT_DEVICE_INFO_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(359)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_STATE_TRANSITION_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(360)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_VOLUME_ARRIVAL_LIVEDUMP = BUGCHECK_ERROR(361)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_VOLUME_REMOVAL_LIVEDUMP = BUGCHECK_ERROR(362)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_CLUSTER_WATCHDOG_LIVEDUMP = BUGCHECK_ERROR(363)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_RUNDOWN_PROTECTION_FLAGS = BUGCHECK_ERROR(364)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_SLOT_ALLOCATOR_FLAGS = BUGCHECK_ERROR(365)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ERESOURCE_INVALID_RELEASE = BUGCHECK_ERROR(366)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_STATE_TRANSITION_INTERVAL_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(367)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSV_CLUSSVC_DISCONNECT_WATCHDOG = BUGCHECK_ERROR(368)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRYPTO_LIBRARY_INTERNAL_ERROR = BUGCHECK_ERROR(369)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURE_KERNEL_HIBERNATE_ERROR = BUGCHECK_ERROR(370)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_COREMSGCALL_INTERNAL_ERROR = BUGCHECK_ERROR(371)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_COREMSG_INTERNAL_ERROR = BUGCHECK_ERROR(372)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PREVIOUS_FATAL_ABNORMAL_RESET_ERROR = BUGCHECK_ERROR(373)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_STORAGE_STACK_FATAL_ERROR = BUGCHECK_ERROR(374)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ELAM_DRIVER_DETECTED_FATAL_ERROR = BUGCHECK_ERROR(376)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CLUSPORT_STATUS_IO_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(377)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PROFILER_CONFIGURATION_ILLEGAL = BUGCHECK_ERROR(379)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PDC_LOCK_WATCHDOG_LIVEDUMP = BUGCHECK_ERROR(380)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PDC_UNEXPECTED_REVOCATION_LIVEDUMP = BUGCHECK_ERROR(381)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MICROCODE_REVISION_MISMATCH = BUGCHECK_ERROR(382)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HYPERGUARD_INITIALIZATION_FAILURE = BUGCHECK_ERROR(383)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WVR_LIVEDUMP_REPLICATION_IOCONTEXT_TIMEOUT = BUGCHECK_ERROR(384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WVR_LIVEDUMP_STATE_TRANSITION_TIMEOUT = BUGCHECK_ERROR(385)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WVR_LIVEDUMP_RECOVERY_IOCONTEXT_TIMEOUT = BUGCHECK_ERROR(386)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WVR_LIVEDUMP_APP_IO_TIMEOUT = BUGCHECK_ERROR(387)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WVR_LIVEDUMP_MANUALLY_INITIATED = BUGCHECK_ERROR(388)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WVR_LIVEDUMP_STATE_FAILURE = BUGCHECK_ERROR(389)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WVR_LIVEDUMP_CRITICAL_ERROR = BUGCHECK_ERROR(390)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_DWMINIT_TIMEOUT_FALLBACK_BDD = BUGCHECK_ERROR(391)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_CSVFS_LIVEDUMP = BUGCHECK_ERROR(392)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BAD_OBJECT_HEADER = BUGCHECK_ERROR(393)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SILO_CORRUPT = BUGCHECK_ERROR(394)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURE_KERNEL_ERROR = BUGCHECK_ERROR(395)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HYPERGUARD_VIOLATION = BUGCHECK_ERROR(396)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURE_FAULT_UNHANDLED = BUGCHECK_ERROR(397)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_PARTITION_REFERENCE_VIOLATION = BUGCHECK_ERROR(398)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYNTHETIC_EXCEPTION_UNHANDLED = BUGCHECK_ERROR(399)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_CRITICAL_FAILURE_LIVEDUMP = BUGCHECK_ERROR(400)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PF_DETECTED_CORRUPTION = BUGCHECK_ERROR(401)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_AUTO_BOOST_LOCK_ACQUISITION_WITH_RAISED_IRQL = BUGCHECK_ERROR(402)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_DXGKRNL_LIVEDUMP = BUGCHECK_ERROR(403)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_STORAGE_SLOT_IN_USE = BUGCHECK_ERROR(409)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SMB_SERVER_LIVEDUMP = BUGCHECK_ERROR(405)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_LOADER_ROLLBACK_DETECTED = BUGCHECK_ERROR(406)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_SECURITY_FAILURE = BUGCHECK_ERROR(407)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UFX_LIVEDUMP = BUGCHECK_ERROR(408)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_RETURNED_WHILE_ATTACHED_TO_SILO = BUGCHECK_ERROR(410)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TTM_FATAL_ERROR = BUGCHECK_ERROR(411)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_POWER_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(412)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CLUSTER_SVHDX_LIVEDUMP = BUGCHECK_ERROR(413)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_NETADAPTER_DRIVER = BUGCHECK_ERROR(414)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PDC_PRIVILEGE_CHECK_LIVEDUMP = BUGCHECK_ERROR(415)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TTM_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(416)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_CALLOUT_WATCHDOG_LIVEDUMP = BUGCHECK_ERROR(417)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_CALLOUT_WATCHDOG_BUGCHECK = BUGCHECK_ERROR(418)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CALL_HAS_NOT_RETURNED_WATCHDOG_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(419)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIPS_SW_HW_DIVERGENCE_LIVEDUMP = BUGCHECK_ERROR(420)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_USB_DRIPS_BLOCKER_SURPRISE_REMOVAL_LIVEDUMP = BUGCHECK_ERROR(421)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BLUETOOTH_ERROR_RECOVERY_LIVEDUMP = BUGCHECK_ERROR(422)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SMB_REDIRECTOR_LIVEDUMP = BUGCHECK_ERROR(423)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_DXGKRNL_BLACK_SCREEN_LIVEDUMP = BUGCHECK_ERROR(424)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DIRECTED_FX_TRANSITION_LIVEDUMP = BUGCHECK_ERROR(425)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EXCEPTION_ON_INVALID_STACK = BUGCHECK_ERROR(426)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNWIND_ON_INVALID_STACK = BUGCHECK_ERROR(427)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_MINIPORT_FAILED_LIVEDUMP = BUGCHECK_ERROR(432)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_MINIPORT_BLACK_SCREEN_LIVEDUMP = BUGCHECK_ERROR(440)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_VERIFIER_DETECTED_VIOLATION_LIVEDUMP = BUGCHECK_ERROR(452)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IO_THREADPOOL_DEADLOCK_LIVEDUMP = BUGCHECK_ERROR(453)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_FAST_ERESOURCE_PRECONDITION_VIOLATION = BUGCHECK_ERROR(454)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_STORE_DATA_STRUCTURE_CORRUPTION = BUGCHECK_ERROR(455)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MANUALLY_INITIATED_POWER_BUTTON_HOLD = BUGCHECK_ERROR(456)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_USER_MODE_HEALTH_MONITOR_LIVEDUMP = BUGCHECK_ERROR(457)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SYNTHETIC_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(458)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_SILO_DETACH = BUGCHECK_ERROR(459)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EXRESOURCE_TIMEOUT_LIVEDUMP = BUGCHECK_ERROR(460)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_CALLBACK_STACK_ADDRESS = BUGCHECK_ERROR(461)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_KERNEL_STACK_ADDRESS = BUGCHECK_ERROR(462)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HARDWARE_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(463)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ACPI_FIRMWARE_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(464)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_TELEMETRY_ASSERTS_LIVEDUMP = BUGCHECK_ERROR(465)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_INVALID_STATE = BUGCHECK_ERROR(466)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WFP_INVALID_OPERATION = BUGCHECK_ERROR(467)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UCMUCSI_LIVEDUMP = BUGCHECK_ERROR(468)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_PNP_WATCHDOG = BUGCHECK_ERROR(469)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WORKER_THREAD_RETURNED_WITH_NON_DEFAULT_WORKLOAD_CLASS = BUGCHECK_ERROR(470)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_EFS_FATAL_ERROR = BUGCHECK_ERROR(471)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UCMUCSI_FAILURE = BUGCHECK_ERROR(472)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HAL_IOMMU_INTERNAL_ERROR = BUGCHECK_ERROR(473)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HAL_BLOCKED_PROCESSOR_INTERNAL_ERROR = BUGCHECK_ERROR(474)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IPI_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(475)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DMA_COMMON_BUFFER_VECTOR_ERROR = BUGCHECK_ERROR(476)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_MBBADAPTER_DRIVER = BUGCHECK_ERROR(477)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCODE_WIFIADAPTER_DRIVER = BUGCHECK_ERROR(478)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PROCESSOR_START_TIMEOUT = BUGCHECK_ERROR(479)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_ALTERNATE_SYSTEM_CALL_HANDLER_REGISTRATION = BUGCHECK_ERROR(480)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DEVICE_DIAGNOSTIC_LOG_LIVEDUMP = BUGCHECK_ERROR(481)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_AZURE_DEVICE_FW_DUMP = BUGCHECK_ERROR(482)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BREAKAWAY_CABLE_TRANSITION = BUGCHECK_ERROR(483)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VIDEO_DXGKRNL_SYSMM_FATAL_ERROR = BUGCHECK_ERROR(484)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DRIVER_VERIFIER_TRACKING_LIVE_DUMP = BUGCHECK_ERROR(485)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CRASHDUMP_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(486)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_REGISTRY_LIVE_DUMP = BUGCHECK_ERROR(487)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_THREAD_AFFINITY_STATE = BUGCHECK_ERROR(488)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_ILLEGAL_ATS_INITIALIZATION = BUGCHECK_ERROR(489)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SECURE_PCI_CONFIG_SPACE_ACCESS_VIOLATION = BUGCHECK_ERROR(490)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_DAM_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(491)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HANDLE_LIVE_DUMP = BUGCHECK_ERROR(492)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HANDLE_ERROR_ON_CRITICAL_THREAD = BUGCHECK_ERROR(493)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MPSDRV_QUERY_USER = BUGCHECK_ERROR(1073742318)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_VMBUS_LIVEDUMP = BUGCHECK_ERROR(1073742319)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_USB4_HARDWARE_VIOLATION = BUGCHECK_ERROR(496)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KASAN_ENLIGHTENMENT_VIOLATION = BUGCHECK_ERROR(497)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KASAN_ILLEGAL_ACCESS = BUGCHECK_ERROR(498)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IORING = BUGCHECK_ERROR(499)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MDL_CACHE = BUGCHECK_ERROR(500)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_APPLICATION_HANG_KERNEL_LIVEDUMP = BUGCHECK_ERROR(501)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MISALIGNED_POINTER_PARAMETER = BUGCHECK_ERROR(502)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MSSECCORE_ASSERTION_FAILURE = BUGCHECK_ERROR(503)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_MINIMAL_PROCESS_STATE = BUGCHECK_ERROR(504)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PREVIOUS_MODE_MISMATCH = BUGCHECK_ERROR(505)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SMB_SRV_REQUEST_VALIDATION_FAILURE = BUGCHECK_ERROR(506)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_IOMMU_INTERRUPT_REMAPPING_FAULT = BUGCHECK_ERROR(507)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WIN32K_CALLOUT_UNREGISTER_FAILED = BUGCHECK_ERROR(508)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HAL_SPE_INTERNAL_ERROR = BUGCHECK_ERROR(509)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_SMB_CLIENT_REQUEST_VALIDATION_FAILURE = BUGCHECK_ERROR(510)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_CPU_SCHEDULER_INTERNAL_ERROR = BUGCHECK_ERROR(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_PROCESS_TERMINATE_LIKELY_DEADLOCK = BUGCHECK_ERROR(513)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_UNEXPECTED_CODEPATH = BUGCHECK_ERROR(514)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_INVALID_EXTENSION_STATE = BUGCHECK_ERROR(515)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_STORAGE_DRIVER_LIVEDUMP = BUGCHECK_ERROR(519)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_VMCTRL_CS_TIMEOUT = BUGCHECK_ERROR(854)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_CORRUPTED_IMAGE = BUGCHECK_ERROR(855)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_INVERTED_FUNCTION_TABLE_OVERFLOW = BUGCHECK_ERROR(856)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_CORRUPTED_IMAGE_BASE = BUGCHECK_ERROR(857)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_XDS_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(858)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_SHUTDOWN_WATCHDOG_TIMEOUT = BUGCHECK_ERROR(859)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_CANNOT_MANAGE_PARTITION_MEMORY = BUGCHECK_ERROR(861)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_360_SYSTEM_CRASH = BUGCHECK_ERROR(864)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_360_SYSTEM_CRASH_RESERVED = BUGCHECK_ERROR(1056)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_SECURITY_FAILUE = BUGCHECK_ERROR(1057)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_KERNEL_CFG_INIT_FAILURE = BUGCHECK_ERROR(1058)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MANUALLY_INITIATED_POWER_BUTTON_HOLD_LIVE_DUMP = BUGCHECK_ERROR(4552)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_HYPERVISOR_ERROR = BUGCHECK_ERROR(131073)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_XBOX_MANUALLY_INITIATED_CRASH = BUGCHECK_ERROR(196614)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MANUALLY_INITIATED_BLACKSCREEN_HOTKEY_LIVE_DUMP = BUGCHECK_ERROR(8648)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_WINLOGON_FATAL_ERROR = BUGCHECK_ERROR(3221226010)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_MANUALLY_INITIATED_CRASH1 = BUGCHECK_ERROR(3735936685)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const BUGCHECK_ERROR_BUGCHECK_CONTEXT_MODIFIER = BUGCHECK_ERROR(2147483648)
+
 // Windows.Win32.System.Diagnostics.Debug.CONTEXT (synthetic:Windows_Win32_System_Diagnostics_Debug_CONTEXT)
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
@@ -242,117 +1870,1609 @@ public struct CONTEXT__Anonymous_e__Union__Anonymous_e__Struct {
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type CONTEXT_FLAGS = UInt32
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_AMD64: CONTEXT_FLAGS = 1048576
+public const CONTEXT_FLAGS_CONTEXT_AMD64: CONTEXT_FLAGS = 1048576
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_CONTROL_AMD64: CONTEXT_FLAGS = 1048577
+public const CONTEXT_FLAGS_CONTEXT_CONTROL_AMD64: CONTEXT_FLAGS = 1048577
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_INTEGER_AMD64: CONTEXT_FLAGS = 1048578
+public const CONTEXT_FLAGS_CONTEXT_INTEGER_AMD64: CONTEXT_FLAGS = 1048578
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_SEGMENTS_AMD64: CONTEXT_FLAGS = 1048580
+public const CONTEXT_FLAGS_CONTEXT_SEGMENTS_AMD64: CONTEXT_FLAGS = 1048580
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_AMD64: CONTEXT_FLAGS = 1048584
+public const CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_AMD64: CONTEXT_FLAGS = 1048584
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_AMD64: CONTEXT_FLAGS = 1048592
+public const CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_AMD64: CONTEXT_FLAGS = 1048592
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FULL_AMD64: CONTEXT_FLAGS = 1048587
+public const CONTEXT_FLAGS_CONTEXT_FULL_AMD64: CONTEXT_FLAGS = 1048587
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_ALL_AMD64: CONTEXT_FLAGS = 1048607
+public const CONTEXT_FLAGS_CONTEXT_ALL_AMD64: CONTEXT_FLAGS = 1048607
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_XSTATE_AMD64: CONTEXT_FLAGS = 1048640
+public const CONTEXT_FLAGS_CONTEXT_XSTATE_AMD64: CONTEXT_FLAGS = 1048640
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_KERNEL_CET_AMD64: CONTEXT_FLAGS = 1048704
+public const CONTEXT_FLAGS_CONTEXT_KERNEL_CET_AMD64: CONTEXT_FLAGS = 1048704
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_KERNEL_DEBUGGER_AMD64: CONTEXT_FLAGS = 67108864
+public const CONTEXT_FLAGS_CONTEXT_KERNEL_DEBUGGER_AMD64: CONTEXT_FLAGS = 67108864
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_AMD64: CONTEXT_FLAGS = 134217728
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_AMD64: CONTEXT_FLAGS = 134217728
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_AMD64: CONTEXT_FLAGS = 268435456
+public const CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_AMD64: CONTEXT_FLAGS = 268435456
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_AMD64: CONTEXT_FLAGS = 1073741824
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_AMD64: CONTEXT_FLAGS = 1073741824
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_AMD64: CONTEXT_FLAGS = 2147483648
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_AMD64: CONTEXT_FLAGS = 2147483648
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_AMD64: CONTEXT_FLAGS = 536870912
+public const CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_AMD64: CONTEXT_FLAGS = 536870912
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_X86: CONTEXT_FLAGS = 65536
+public const CONTEXT_FLAGS_CONTEXT_X86: CONTEXT_FLAGS = 65536
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_CONTROL_X86: CONTEXT_FLAGS = 65537
+public const CONTEXT_FLAGS_CONTEXT_CONTROL_X86: CONTEXT_FLAGS = 65537
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_INTEGER_X86: CONTEXT_FLAGS = 65538
+public const CONTEXT_FLAGS_CONTEXT_INTEGER_X86: CONTEXT_FLAGS = 65538
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_SEGMENTS_X86: CONTEXT_FLAGS = 65540
+public const CONTEXT_FLAGS_CONTEXT_SEGMENTS_X86: CONTEXT_FLAGS = 65540
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_X86: CONTEXT_FLAGS = 65544
+public const CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_X86: CONTEXT_FLAGS = 65544
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_X86: CONTEXT_FLAGS = 65552
+public const CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_X86: CONTEXT_FLAGS = 65552
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXTENDED_REGISTERS_X86: CONTEXT_FLAGS = 65568
+public const CONTEXT_FLAGS_CONTEXT_EXTENDED_REGISTERS_X86: CONTEXT_FLAGS = 65568
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FULL_X86: CONTEXT_FLAGS = 65543
+public const CONTEXT_FLAGS_CONTEXT_FULL_X86: CONTEXT_FLAGS = 65543
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_ALL_X86: CONTEXT_FLAGS = 65599
+public const CONTEXT_FLAGS_CONTEXT_ALL_X86: CONTEXT_FLAGS = 65599
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_XSTATE_X86: CONTEXT_FLAGS = 65600
+public const CONTEXT_FLAGS_CONTEXT_XSTATE_X86: CONTEXT_FLAGS = 65600
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_X86: CONTEXT_FLAGS = 134217728
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_X86: CONTEXT_FLAGS = 134217728
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_X86: CONTEXT_FLAGS = 268435456
+public const CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_X86: CONTEXT_FLAGS = 268435456
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_X86: CONTEXT_FLAGS = 1073741824
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_X86: CONTEXT_FLAGS = 1073741824
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_X86: CONTEXT_FLAGS = 2147483648
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_X86: CONTEXT_FLAGS = 2147483648
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_ARM64: CONTEXT_FLAGS = 4194304
+public const CONTEXT_FLAGS_CONTEXT_ARM64: CONTEXT_FLAGS = 4194304
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_CONTROL_ARM64: CONTEXT_FLAGS = 4194305
+public const CONTEXT_FLAGS_CONTEXT_CONTROL_ARM64: CONTEXT_FLAGS = 4194305
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_INTEGER_ARM64: CONTEXT_FLAGS = 4194306
+public const CONTEXT_FLAGS_CONTEXT_INTEGER_ARM64: CONTEXT_FLAGS = 4194306
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_ARM64: CONTEXT_FLAGS = 4194308
+public const CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_ARM64: CONTEXT_FLAGS = 4194308
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_ARM64: CONTEXT_FLAGS = 4194312
+public const CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_ARM64: CONTEXT_FLAGS = 4194312
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_X18_ARM64: CONTEXT_FLAGS = 4194320
+public const CONTEXT_FLAGS_CONTEXT_X18_ARM64: CONTEXT_FLAGS = 4194320
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FULL_ARM64: CONTEXT_FLAGS = 4194311
+public const CONTEXT_FLAGS_CONTEXT_FULL_ARM64: CONTEXT_FLAGS = 4194311
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_ALL_ARM64: CONTEXT_FLAGS = 4194335
+public const CONTEXT_FLAGS_CONTEXT_ALL_ARM64: CONTEXT_FLAGS = 4194335
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_ARM64: CONTEXT_FLAGS = 134217728
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_ARM64: CONTEXT_FLAGS = 134217728
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_ARM64: CONTEXT_FLAGS = 268435456
+public const CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_ARM64: CONTEXT_FLAGS = 268435456
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_ARM64: CONTEXT_FLAGS = 1073741824
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_ARM64: CONTEXT_FLAGS = 1073741824
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_ARM64: CONTEXT_FLAGS = 2147483648
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_ARM64: CONTEXT_FLAGS = 2147483648
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_ARM64: CONTEXT_FLAGS = 536870912
+public const CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_ARM64: CONTEXT_FLAGS = 536870912
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_RET_TO_GUEST_ARM64: CONTEXT_FLAGS = 1073741824
+public const CONTEXT_FLAGS_CONTEXT_RET_TO_GUEST_ARM64: CONTEXT_FLAGS = 1073741824
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_ARM: CONTEXT_FLAGS = 2097152
+public const CONTEXT_FLAGS_CONTEXT_ARM: CONTEXT_FLAGS = 2097152
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_CONTROL_ARM: CONTEXT_FLAGS = 2097153
+public const CONTEXT_FLAGS_CONTEXT_CONTROL_ARM: CONTEXT_FLAGS = 2097153
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_INTEGER_ARM: CONTEXT_FLAGS = 2097154
+public const CONTEXT_FLAGS_CONTEXT_INTEGER_ARM: CONTEXT_FLAGS = 2097154
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_ARM: CONTEXT_FLAGS = 2097156
+public const CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_ARM: CONTEXT_FLAGS = 2097156
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_ARM: CONTEXT_FLAGS = 2097160
+public const CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_ARM: CONTEXT_FLAGS = 2097160
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_FULL_ARM: CONTEXT_FLAGS = 2097159
+public const CONTEXT_FLAGS_CONTEXT_FULL_ARM: CONTEXT_FLAGS = 2097159
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_ALL_ARM: CONTEXT_FLAGS = 2097167
+public const CONTEXT_FLAGS_CONTEXT_ALL_ARM: CONTEXT_FLAGS = 2097167
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_ARM: CONTEXT_FLAGS = 134217728
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_ARM: CONTEXT_FLAGS = 134217728
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_ARM: CONTEXT_FLAGS = 268435456
+public const CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_ARM: CONTEXT_FLAGS = 268435456
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_ARM: CONTEXT_FLAGS = 1073741824
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_ARM: CONTEXT_FLAGS = 1073741824
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_ARM: CONTEXT_FLAGS = 2147483648
+public const CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_ARM: CONTEXT_FLAGS = 2147483648
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
-public let CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_ARM: CONTEXT_FLAGS = 536870912
+public const CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_ARM: CONTEXT_FLAGS = 536870912
+
+// Windows.Win32.System.Diagnostics.Debug.CPU_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_CPU_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct CPU_INFORMATION {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop X86CpuInfo: CPU_INFORMATION__X86CpuInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPU_INFORMATION__X86CpuInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPU_INFORMATION__X86CpuInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop OtherCpuInfo: CPU_INFORMATION__OtherCpuInfo_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPU_INFORMATION__OtherCpuInfo_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CPU_INFORMATION__OtherCpuInfo_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.CPU_INFORMATION._OtherCpuInfo_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_CPU_INFORMATION__OtherCpuInfo_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct CPU_INFORMATION__OtherCpuInfo_e__Struct {
+    public var ProcessorFeatures: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.CPU_INFORMATION._X86CpuInfo_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_CPU_INFORMATION__X86CpuInfo_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct CPU_INFORMATION__X86CpuInfo_e__Struct {
+    public var VendorId: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var VersionInformation: UInt32 = 0u32
+    public var FeatureInformation: UInt32 = 0u32
+    public var AMDExtendedCpuFeatures: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.CREATE_PROCESS_DEBUG_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_CREATE_PROCESS_DEBUG_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct CREATE_PROCESS_DEBUG_INFO {
+    public var hFile: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var hProcess: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var hThread: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var lpBaseOfImage: CPointer<Unit> = CPointer<Unit>()
+    public var dwDebugInfoFileOffset: UInt32 = 0u32
+    public var nDebugInfoSize: UInt32 = 0u32
+    public var lpThreadLocalBase: CPointer<Unit> = CPointer<Unit>()
+    public var lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32> = CFunc<(CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+    public var lpImageName: CPointer<Unit> = CPointer<Unit>()
+    public var fUnicode: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Diagnostics.Debug.CREATE_THREAD_DEBUG_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_CREATE_THREAD_DEBUG_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct CREATE_THREAD_DEBUG_INFO {
+    public var hThread: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var lpThreadLocalBase: CPointer<Unit> = CPointer<Unit>()
+    public var lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32> = CFunc<(CPointer<Unit>) -> UInt32>(CPointer<Unit>())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DBGHELP_DATA_REPORT_STRUCT (synthetic:Windows_Win32_System_Diagnostics_Debug_DBGHELP_DATA_REPORT_STRUCT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DBGHELP_DATA_REPORT_STRUCT {
+    public var pBinPathNonExist: CPointer<UInt16> = CPointer<UInt16>()
+    public var pSymbolPathNonExist: CPointer<UInt16> = CPointer<UInt16>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DBGPROP_ATTRIB_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_DBGPROP_ATTRIB_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct DBGPROP_ATTRIB_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DBGPROP_ATTRIB_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DBGPROP_ATTRIB_FLAGS): DBGPROP_ATTRIB_FLAGS {
+        return DBGPROP_ATTRIB_FLAGS(value | other.value)
+    }
+    public operator func &(other: DBGPROP_ATTRIB_FLAGS): DBGPROP_ATTRIB_FLAGS {
+        return DBGPROP_ATTRIB_FLAGS(value & other.value)
+    }
+    public operator func ^(other: DBGPROP_ATTRIB_FLAGS): DBGPROP_ATTRIB_FLAGS {
+        return DBGPROP_ATTRIB_FLAGS(value ^ other.value)
+    }
+    public operator func !(): DBGPROP_ATTRIB_FLAGS {
+        return DBGPROP_ATTRIB_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_NO_ATTRIB = DBGPROP_ATTRIB_FLAGS(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_IS_INVALID = DBGPROP_ATTRIB_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_IS_EXPANDABLE = DBGPROP_ATTRIB_FLAGS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_IS_FAKE = DBGPROP_ATTRIB_FLAGS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_IS_METHOD = DBGPROP_ATTRIB_FLAGS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_IS_EVENT = DBGPROP_ATTRIB_FLAGS(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_IS_RAW_STRING = DBGPROP_ATTRIB_FLAGS(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_READONLY = DBGPROP_ATTRIB_FLAGS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_ACCESS_PUBLIC = DBGPROP_ATTRIB_FLAGS(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_ACCESS_PRIVATE = DBGPROP_ATTRIB_FLAGS(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_ACCESS_PROTECTED = DBGPROP_ATTRIB_FLAGS(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_ACCESS_FINAL = DBGPROP_ATTRIB_FLAGS(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_STORAGE_GLOBAL = DBGPROP_ATTRIB_FLAGS(65536)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_STORAGE_STATIC = DBGPROP_ATTRIB_FLAGS(131072)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_STORAGE_FIELD = DBGPROP_ATTRIB_FLAGS(262144)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_STORAGE_VIRTUAL = DBGPROP_ATTRIB_FLAGS(524288)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_TYPE_IS_CONSTANT = DBGPROP_ATTRIB_FLAGS(1048576)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_TYPE_IS_SYNCHRONIZED = DBGPROP_ATTRIB_FLAGS(2097152)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_TYPE_IS_VOLATILE = DBGPROP_ATTRIB_FLAGS(4194304)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_HAS_EXTENDED_ATTRIBS = DBGPROP_ATTRIB_FLAGS(8388608)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_FRAME_INTRYBLOCK = DBGPROP_ATTRIB_FLAGS(16777216)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_FRAME_INCATCHBLOCK = DBGPROP_ATTRIB_FLAGS(33554432)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_FRAME_INFINALLYBLOCK = DBGPROP_ATTRIB_FLAGS(67108864)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_IS_RETURN_VALUE = DBGPROP_ATTRIB_FLAGS(134217728)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_ATTRIB_FLAGS_DBGPROP_ATTRIB_VALUE_PENDING_MUTATION = DBGPROP_ATTRIB_FLAGS(268435456)
+
+// Windows.Win32.System.Diagnostics.Debug.DBGPROP_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_DBGPROP_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct DBGPROP_INFO {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: DBGPROP_INFO): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: DBGPROP_INFO): DBGPROP_INFO {
+        return DBGPROP_INFO(value | other.value)
+    }
+    public operator func &(other: DBGPROP_INFO): DBGPROP_INFO {
+        return DBGPROP_INFO(value & other.value)
+    }
+    public operator func ^(other: DBGPROP_INFO): DBGPROP_INFO {
+        return DBGPROP_INFO(value ^ other.value)
+    }
+    public operator func !(): DBGPROP_INFO {
+        return DBGPROP_INFO(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_NAME = DBGPROP_INFO(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_TYPE = DBGPROP_INFO(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_VALUE = DBGPROP_INFO(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_FULLNAME = DBGPROP_INFO(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_ATTRIBUTES = DBGPROP_INFO(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_DEBUGPROP = DBGPROP_INFO(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_BEAUTIFY = DBGPROP_INFO(33554432)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_CALLTOSTRING = DBGPROP_INFO(67108864)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DBGPROP_INFO_DBGPROP_INFO_AUTOEXPAND = DBGPROP_INFO(134217728)
+
+// Windows.Win32.System.Diagnostics.Debug.DEBUG_EVENT (synthetic:Windows_Win32_System_Diagnostics_Debug_DEBUG_EVENT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DEBUG_EVENT {
+    public var dwDebugEventCode: UInt32 = 0u32
+    public var dwProcessId: UInt32 = 0u32
+    public var dwThreadId: UInt32 = 0u32
+    public var u: DEBUG_EVENT__u_e__Union = DEBUG_EVENT__u_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DEBUG_EVENT._u_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_DEBUG_EVENT__u_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DEBUG_EVENT__u_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Exception: EXCEPTION_DEBUG_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXCEPTION_DEBUG_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXCEPTION_DEBUG_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop CreateThread: CREATE_THREAD_DEBUG_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_THREAD_DEBUG_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_THREAD_DEBUG_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop CreateProcessInfo: CREATE_PROCESS_DEBUG_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_PROCESS_DEBUG_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<CREATE_PROCESS_DEBUG_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ExitThread: EXIT_THREAD_DEBUG_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXIT_THREAD_DEBUG_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXIT_THREAD_DEBUG_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ExitProcess: EXIT_PROCESS_DEBUG_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXIT_PROCESS_DEBUG_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<EXIT_PROCESS_DEBUG_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop LoadDll: LOAD_DLL_DEBUG_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<LOAD_DLL_DEBUG_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<LOAD_DLL_DEBUG_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop UnloadDll: UNLOAD_DLL_DEBUG_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<UNLOAD_DLL_DEBUG_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<UNLOAD_DLL_DEBUG_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop DebugString: OUTPUT_DEBUG_STRING_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OUTPUT_DEBUG_STRING_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<OUTPUT_DEBUG_STRING_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop RipInfo: RIP_INFO {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RIP_INFO>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<RIP_INFO>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DEBUG_EVENT_CODE (synthetic:Windows_Win32_System_Diagnostics_Debug_DEBUG_EVENT_CODE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct DEBUG_EVENT_CODE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_CREATE_PROCESS_DEBUG_EVENT = DEBUG_EVENT_CODE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_CREATE_THREAD_DEBUG_EVENT = DEBUG_EVENT_CODE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_EXCEPTION_DEBUG_EVENT = DEBUG_EVENT_CODE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_EXIT_PROCESS_DEBUG_EVENT = DEBUG_EVENT_CODE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_EXIT_THREAD_DEBUG_EVENT = DEBUG_EVENT_CODE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_LOAD_DLL_DEBUG_EVENT = DEBUG_EVENT_CODE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_OUTPUT_DEBUG_STRING_EVENT = DEBUG_EVENT_CODE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_RIP_EVENT = DEBUG_EVENT_CODE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DEBUG_EVENT_CODE_UNLOAD_DLL_DEBUG_EVENT = DEBUG_EVENT_CODE(7)
+
+// Windows.Win32.System.Diagnostics.Debug.DIGEST_FUNCTION (synthetic:Windows_Win32_System_Diagnostics_Debug_DIGEST_FUNCTION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type DIGEST_FUNCTION = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.DIMM_ADDRESS (synthetic:Windows_Win32_System_Diagnostics_Debug_DIMM_ADDRESS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DIMM_ADDRESS {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Ddr4: DIMM_ADDRESS__Ddr4_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDRESS__Ddr4_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDRESS__Ddr4_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Ddr5: DIMM_ADDRESS__Ddr5_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDRESS__Ddr5_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDRESS__Ddr5_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DIMM_ADDRESS._Ddr4_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_DIMM_ADDRESS__Ddr4_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DIMM_ADDRESS__Ddr4_e__Struct {
+    public var _bitfield: UInt64 = 0u64
+
+    public mut prop SocketId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 0, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 0, 4, val)
+        }
+    }
+
+    public mut prop MemoryControllerId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 4, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 4, 2, val)
+        }
+    }
+
+    public mut prop ChannelId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 6, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 6, 2, val)
+        }
+    }
+
+    public mut prop DimmSlot: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 8, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 8, 2, val)
+        }
+    }
+
+    public mut prop DimmRank: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 10, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 10, 2, val)
+        }
+    }
+
+    public mut prop Device: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 12, 5)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 12, 5, val)
+        }
+    }
+
+    public mut prop ChipSelect: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 17, 3)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 17, 3, val)
+        }
+    }
+
+    public mut prop Bank: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 20, 8)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 20, 8, val)
+        }
+    }
+
+    public mut prop Dq: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 28, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 28, 4, val)
+        }
+    }
+
+    public mut prop Reserved: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 32, 32)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 32, 32, val)
+        }
+    }
+    public var Row: UInt32 = 0u32
+    public var Column: UInt32 = 0u32
+    public var Info: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DIMM_ADDRESS._Ddr5_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_DIMM_ADDRESS__Ddr5_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DIMM_ADDRESS__Ddr5_e__Struct {
+    public var _bitfield: UInt64 = 0u64
+
+    public mut prop SocketId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 0, 5)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 0, 5, val)
+        }
+    }
+
+    public mut prop MemoryControllerId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 5, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 5, 4, val)
+        }
+    }
+
+    public mut prop ChannelId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 9, 3)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 9, 3, val)
+        }
+    }
+
+    public mut prop SubChannelId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 12, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 12, 2, val)
+        }
+    }
+
+    public mut prop DimmSlot: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 14, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 14, 2, val)
+        }
+    }
+
+    public mut prop DimmRank: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 16, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 16, 4, val)
+        }
+    }
+
+    public mut prop Device: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 20, 6)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 20, 6, val)
+        }
+    }
+
+    public mut prop ChipId: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 26, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 26, 4, val)
+        }
+    }
+
+    public mut prop Bank: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 30, 8)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 30, 8, val)
+        }
+    }
+
+    public mut prop Dq: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 38, 5)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 38, 5, val)
+        }
+    }
+
+    public mut prop Reserved: UInt64 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt64(_bitfield, 43, 21)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt64(_bitfield, 43, 21, val)
+        }
+    }
+    public var Row: UInt32 = 0u32
+    public var Column: UInt32 = 0u32
+    public var Info: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DIMM_ADDR_VALID_BITS (synthetic:Windows_Win32_System_Diagnostics_Debug_DIMM_ADDR_VALID_BITS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DIMM_ADDR_VALID_BITS {
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public mut prop VB_DDR4: DIMM_ADDR_VALID_BITS_DDR4 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDR_VALID_BITS_DDR4>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDR_VALID_BITS_DDR4>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop VB_DDR5: DIMM_ADDR_VALID_BITS_DDR5 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDR_VALID_BITS_DDR5>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DIMM_ADDR_VALID_BITS_DDR5>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsUINT32: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DIMM_ADDR_VALID_BITS_DDR4 (synthetic:Windows_Win32_System_Diagnostics_Debug_DIMM_ADDR_VALID_BITS_DDR4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DIMM_ADDR_VALID_BITS_DDR4 {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop SocketId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop MemoryControllerId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop ChannelId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 2, 1, val)
+        }
+    }
+
+    public mut prop DimmSlot: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 3, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 3, 1, val)
+        }
+    }
+
+    public mut prop DimmRank: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 4, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 4, 1, val)
+        }
+    }
+
+    public mut prop Device: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 5, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 5, 1, val)
+        }
+    }
+
+    public mut prop ChipSelect: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 6, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 6, 1, val)
+        }
+    }
+
+    public mut prop Bank: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 7, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 7, 1, val)
+        }
+    }
+
+    public mut prop Dq: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 8, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 8, 1, val)
+        }
+    }
+
+    public mut prop Row: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 9, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 9, 1, val)
+        }
+    }
+
+    public mut prop Column: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 10, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 10, 1, val)
+        }
+    }
+
+    public mut prop Info: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 11, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 11, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 12, 20)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 12, 20, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DIMM_ADDR_VALID_BITS_DDR5 (synthetic:Windows_Win32_System_Diagnostics_Debug_DIMM_ADDR_VALID_BITS_DDR5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DIMM_ADDR_VALID_BITS_DDR5 {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop SocketId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop MemoryControllerId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop ChannelId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 2, 1, val)
+        }
+    }
+
+    public mut prop SubChannelId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 3, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 3, 1, val)
+        }
+    }
+
+    public mut prop DimmSlot: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 4, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 4, 1, val)
+        }
+    }
+
+    public mut prop DimmRank: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 5, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 5, 1, val)
+        }
+    }
+
+    public mut prop Device: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 6, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 6, 1, val)
+        }
+    }
+
+    public mut prop ChipId: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 7, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 7, 1, val)
+        }
+    }
+
+    public mut prop Bank: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 8, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 8, 1, val)
+        }
+    }
+
+    public mut prop Dq: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 9, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 9, 1, val)
+        }
+    }
+
+    public mut prop Row: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 10, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 10, 1, val)
+        }
+    }
+
+    public mut prop Column: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 11, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 11, 1, val)
+        }
+    }
+
+    public mut prop Info: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 12, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 12, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 13, 19)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 13, 19, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DIMM_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_DIMM_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DIMM_INFO {
+    public var DimmAddress: DIMM_ADDRESS = DIMM_ADDRESS()
+    public var ValidBits: DIMM_ADDR_VALID_BITS = DIMM_ADDR_VALID_BITS()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DISCRIMINATEDUNION_TAG_VALUE (synthetic:Windows_Win32_System_Diagnostics_Debug_DISCRIMINATEDUNION_TAG_VALUE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DISCRIMINATEDUNION_TAG_VALUE {
+    public var value: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+    public var valueSizeBytes: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DISPATCHER_CONTEXT (synthetic:Windows_Win32_System_Diagnostics_Debug_DISPATCHER_CONTEXT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DISPATCHER_CONTEXT {
+    public var ControlPc: CPointer<Unit> = CPointer<Unit>()
+    public var ImageBase: CPointer<Unit> = CPointer<Unit>()
+    public var FunctionEntry: CPointer<Unit> = CPointer<Unit>()
+    public var EstablisherFrame: CPointer<Unit> = CPointer<Unit>()
+    public var TargetPc: CPointer<Unit> = CPointer<Unit>()
+    public var ContextRecord: CPointer<Unit> = CPointer<Unit>()
+    public var LanguageHandler: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var HandlerData: CPointer<Unit> = CPointer<Unit>()
+    public var HistoryTable: CPointer<Unit> = CPointer<Unit>()
+    public var ScopeIndex: UInt32 = 0u32
+    public var ControlPcIsUnwound: UInt8 = 0u8
+    public var NonVolatileRegisters: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DUMP_FILE_ATTRIBUTES (synthetic:Windows_Win32_System_Diagnostics_Debug_DUMP_FILE_ATTRIBUTES)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DUMP_FILE_ATTRIBUTES {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop Anonymous: DUMP_FILE_ATTRIBUTES__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DUMP_FILE_ATTRIBUTES__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<DUMP_FILE_ATTRIBUTES__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Attributes: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DUMP_FILE_ATTRIBUTES._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_DUMP_FILE_ATTRIBUTES__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DUMP_FILE_ATTRIBUTES__Anonymous_e__Struct {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop HiberCrash: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop DumpDevicePowerOff: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop InsufficientDumpfileSize: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 2, 1, val)
+        }
+    }
+
+    public mut prop KernelGeneratedTriageDump: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 3, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 3, 1, val)
+        }
+    }
+
+    public mut prop LiveDumpGeneratedDump: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 4, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 4, 1, val)
+        }
+    }
+
+    public mut prop DumpIsGeneratedOffline: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 5, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 5, 1, val)
+        }
+    }
+
+    public mut prop FilterDumpFile: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 6, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 6, 1, val)
+        }
+    }
+
+    public mut prop EarlyBootCrash: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 7, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 7, 1, val)
+        }
+    }
+
+    public mut prop EncryptedDumpData: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 8, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 8, 1, val)
+        }
+    }
+
+    public mut prop DecryptedDump: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 9, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 9, 1, val)
+        }
+    }
+
+    public mut prop ReservedFlags: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 10, 22)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 10, 22, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DUMP_HEADER32 (synthetic:Windows_Win32_System_Diagnostics_Debug_DUMP_HEADER32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DUMP_HEADER32 {
+    public var Signature: UInt32 = 0u32
+    public var ValidDump: UInt32 = 0u32
+    public var MajorVersion: UInt32 = 0u32
+    public var MinorVersion: UInt32 = 0u32
+    public var DirectoryTableBase: UInt32 = 0u32
+    public var PfnDataBase: UInt32 = 0u32
+    public var PsLoadedModuleList: UInt32 = 0u32
+    public var PsActiveProcessHead: UInt32 = 0u32
+    public var MachineImageType: UInt32 = 0u32
+    public var NumberProcessors: UInt32 = 0u32
+    public var BugCheckCode: UInt32 = 0u32
+    public var BugCheckParameter1: UInt32 = 0u32
+    public var BugCheckParameter2: UInt32 = 0u32
+    public var BugCheckParameter3: UInt32 = 0u32
+    public var BugCheckParameter4: UInt32 = 0u32
+    public var VersionUser: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0i8)
+    public var PaeEnabled: UInt8 = 0u8
+    public var KdSecondaryVersion: UInt8 = 0u8
+    public var Spare3: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+    public var KdDebuggerDataBlock: UInt32 = 0u32
+    public var Anonymous: DUMP_HEADER32__Anonymous_e__Union = DUMP_HEADER32__Anonymous_e__Union()
+    public var ContextRecord: VArray<UInt8, $1200> = VArray<UInt8, $1200>(repeat: 0u8)
+    public var Exception: EXCEPTION_RECORD32 = EXCEPTION_RECORD32()
+    public var Comment: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0i8)
+    public var Attributes: DUMP_FILE_ATTRIBUTES = DUMP_FILE_ATTRIBUTES()
+    public var BootId: UInt32 = 0u32
+    public var _reserved0: VArray<UInt8, $1760> = VArray<UInt8, $1760>(repeat: 0u8)
+    public var DumpType: UInt32 = 0u32
+    public var MiniDumpFields: UInt32 = 0u32
+    public var SecondaryDataState: UInt32 = 0u32
+    public var ProductType: UInt32 = 0u32
+    public var SuiteMask: UInt32 = 0u32
+    public var WriterStatus: UInt32 = 0u32
+    public var RequiredDumpSpace: Int64 = 0i64
+    public var _reserved2: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
+    public var SystemUpTime: Int64 = 0i64
+    public var SystemTime: Int64 = 0i64
+    public var _reserved3: VArray<UInt8, $56> = VArray<UInt8, $56>(repeat: 0u8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DUMP_HEADER32._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_DUMP_HEADER32__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DUMP_HEADER32__Anonymous_e__Union {
+    public var _raw: VArray<UInt8, $700> = VArray<UInt8, $700>(repeat: 0u8)
+
+    public mut prop PhysicalMemoryBlock: PHYSICAL_MEMORY_DESCRIPTOR32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PHYSICAL_MEMORY_DESCRIPTOR32>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PHYSICAL_MEMORY_DESCRIPTOR32>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop PhysicalMemoryBlockBuffer: VArray<UInt8, $700> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $700>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $700>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DUMP_HEADER64 (synthetic:Windows_Win32_System_Diagnostics_Debug_DUMP_HEADER64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DUMP_HEADER64 {
+    public var Signature: UInt32 = 0u32
+    public var ValidDump: UInt32 = 0u32
+    public var MajorVersion: UInt32 = 0u32
+    public var MinorVersion: UInt32 = 0u32
+    public var DirectoryTableBase: UInt64 = 0u64
+    public var PfnDataBase: UInt64 = 0u64
+    public var PsLoadedModuleList: UInt64 = 0u64
+    public var PsActiveProcessHead: UInt64 = 0u64
+    public var MachineImageType: UInt32 = 0u32
+    public var NumberProcessors: UInt32 = 0u32
+    public var BugCheckCode: UInt32 = 0u32
+    public var BugCheckParameter1: UInt64 = 0u64
+    public var BugCheckParameter2: UInt64 = 0u64
+    public var BugCheckParameter3: UInt64 = 0u64
+    public var BugCheckParameter4: UInt64 = 0u64
+    public var VersionUser: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0i8)
+    public var KdDebuggerDataBlock: UInt64 = 0u64
+    public var Anonymous: DUMP_HEADER64__Anonymous_e__Union = DUMP_HEADER64__Anonymous_e__Union()
+    public var ContextRecord: VArray<UInt8, $3000> = VArray<UInt8, $3000>(repeat: 0u8)
+    public var Exception: EXCEPTION_RECORD64 = EXCEPTION_RECORD64()
+    public var DumpType: UInt32 = 0u32
+    public var RequiredDumpSpace: Int64 = 0i64
+    public var SystemTime: Int64 = 0i64
+    public var Comment: VArray<Int8, $128> = VArray<Int8, $128>(repeat: 0i8)
+    public var SystemUpTime: Int64 = 0i64
+    public var MiniDumpFields: UInt32 = 0u32
+    public var SecondaryDataState: UInt32 = 0u32
+    public var ProductType: UInt32 = 0u32
+    public var SuiteMask: UInt32 = 0u32
+    public var WriterStatus: UInt32 = 0u32
+    public var Unused1: UInt8 = 0u8
+    public var KdSecondaryVersion: UInt8 = 0u8
+    public var Unused: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+    public var Attributes: DUMP_FILE_ATTRIBUTES = DUMP_FILE_ATTRIBUTES()
+    public var BootId: UInt32 = 0u32
+    public var _reserved0: VArray<UInt8, $4008> = VArray<UInt8, $4008>(repeat: 0u8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DUMP_HEADER64._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_DUMP_HEADER64__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DUMP_HEADER64__Anonymous_e__Union {
+    public var _raw: VArray<UInt8, $700> = VArray<UInt8, $700>(repeat: 0u8)
+
+    public mut prop PhysicalMemoryBlock: PHYSICAL_MEMORY_DESCRIPTOR64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PHYSICAL_MEMORY_DESCRIPTOR64>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PHYSICAL_MEMORY_DESCRIPTOR64>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop PhysicalMemoryBlockBuffer: VArray<UInt8, $700> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $700>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<UInt8, $700>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.DUMP_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_DUMP_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct DUMP_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_INVALID = DUMP_TYPE(-1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_UNKNOWN = DUMP_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_FULL = DUMP_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_SUMMARY = DUMP_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_HEADER = DUMP_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_TRIAGE = DUMP_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_BITMAP_FULL = DUMP_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_BITMAP_KERNEL = DUMP_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const DUMP_TYPE_DUMP_TYPE_AUTOMATIC = DUMP_TYPE(7)
+
+// Windows.Win32.System.Diagnostics.Debug.DebugPropertyInfo (synthetic:Windows_Win32_System_Diagnostics_Debug_DebugPropertyInfo)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct DebugPropertyInfo {
+    public var m_dwValidFields: UInt32 = 0u32
+    public var m_bstrName: CPointer<Unit> = CPointer<Unit>()
+    public var m_bstrType: CPointer<Unit> = CPointer<Unit>()
+    public var m_bstrValue: CPointer<Unit> = CPointer<Unit>()
+    public var m_bstrFullName: CPointer<Unit> = CPointer<Unit>()
+    public var m_dwAttrib: UInt32 = 0u32
+    public var m_pDebugProp: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.EXCEPTION_DEBUG_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_EXCEPTION_DEBUG_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct EXCEPTION_DEBUG_INFO {
+    public var ExceptionRecord: EXCEPTION_RECORD = EXCEPTION_RECORD()
+    public var dwFirstChance: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.EXCEPTION_POINTERS (synthetic:Windows_Win32_System_Diagnostics_Debug_EXCEPTION_POINTERS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct EXCEPTION_POINTERS {
+    public var ExceptionRecord: CPointer<Unit> = CPointer<Unit>()
+    public var ContextRecord: CPointer<Unit> = CPointer<Unit>()
+}
 
 // Windows.Win32.System.Diagnostics.Debug.EXCEPTION_RECORD (synthetic:Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD)
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
@@ -366,12 +3486,8896 @@ public struct EXCEPTION_RECORD {
     public var ExceptionInformation: VArray<CPointer<Unit>, $15> = VArray<CPointer<Unit>, $15>(repeat: CPointer<Unit>())
 }
 
+// Windows.Win32.System.Diagnostics.Debug.EXCEPTION_RECORD32 (synthetic:Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct EXCEPTION_RECORD32 {
+    public var ExceptionCode: Int32 = 0i32
+    public var ExceptionFlags: UInt32 = 0u32
+    public var ExceptionRecord: UInt32 = 0u32
+    public var ExceptionAddress: UInt32 = 0u32
+    public var NumberParameters: UInt32 = 0u32
+    public var ExceptionInformation: VArray<UInt32, $15> = VArray<UInt32, $15>(repeat: 0u32)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.EXCEPTION_RECORD64 (synthetic:Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct EXCEPTION_RECORD64 {
+    public var ExceptionCode: Int32 = 0i32
+    public var ExceptionFlags: UInt32 = 0u32
+    public var ExceptionRecord: UInt64 = 0u64
+    public var ExceptionAddress: UInt64 = 0u64
+    public var NumberParameters: UInt32 = 0u32
+    public var __unusedAlignment: UInt32 = 0u32
+    public var ExceptionInformation: VArray<UInt64, $15> = VArray<UInt64, $15>(repeat: 0u64)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.EXIT_PROCESS_DEBUG_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_EXIT_PROCESS_DEBUG_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct EXIT_PROCESS_DEBUG_INFO {
+    public var dwExitCode: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.EXIT_THREAD_DEBUG_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_EXIT_THREAD_DEBUG_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct EXIT_THREAD_DEBUG_INFO {
+    public var dwExitCode: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.EX_PROP_INFO_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_EX_PROP_INFO_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct EX_PROP_INFO_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const EX_PROP_INFO_FLAGS_EX_PROP_INFO_ID = EX_PROP_INFO_FLAGS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const EX_PROP_INFO_FLAGS_EX_PROP_INFO_NTYPE = EX_PROP_INFO_FLAGS(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const EX_PROP_INFO_FLAGS_EX_PROP_INFO_NVALUE = EX_PROP_INFO_FLAGS(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const EX_PROP_INFO_FLAGS_EX_PROP_INFO_LOCKBYTES = EX_PROP_INFO_FLAGS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const EX_PROP_INFO_FLAGS_EX_PROP_INFO_DEBUGEXTPROP = EX_PROP_INFO_FLAGS(4096)
+
+// Windows.Win32.System.Diagnostics.Debug.ExtendedDebugPropertyInfo (synthetic:Windows_Win32_System_Diagnostics_Debug_ExtendedDebugPropertyInfo)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct ExtendedDebugPropertyInfo {
+    public var dwValidFields: UInt32 = 0u32
+    public var pszName: CPointer<UInt16> = CPointer<UInt16>()
+    public var pszType: CPointer<UInt16> = CPointer<UInt16>()
+    public var pszValue: CPointer<UInt16> = CPointer<UInt16>()
+    public var pszFullName: CPointer<UInt16> = CPointer<UInt16>()
+    public var dwAttrib: UInt32 = 0u32
+    public var pDebugProp: CPointer<Unit> = CPointer<Unit>()
+    public var nDISPID: UInt32 = 0u32
+    public var nType: UInt32 = 0u32
+    public var varValue: Windows_Win32_System_Variant.VARIANT = Windows_Win32_System_Variant.VARIANT()
+    public var plbValue: CPointer<Unit> = CPointer<Unit>()
+    public var pDebugExtProp: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE (synthetic:Windows_Win32_System_Diagnostics_Debug_FACILITY_CODE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct FACILITY_CODE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_NULL = FACILITY_CODE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_RPC = FACILITY_CODE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DISPATCH = FACILITY_CODE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_STORAGE = FACILITY_CODE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_ITF = FACILITY_CODE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WIN32 = FACILITY_CODE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINDOWS = FACILITY_CODE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SSPI = FACILITY_CODE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SECURITY = FACILITY_CODE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_CONTROL = FACILITY_CODE(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_CERT = FACILITY_CODE(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_INTERNET = FACILITY_CODE(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_MEDIASERVER = FACILITY_CODE(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_MSMQ = FACILITY_CODE(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SETUPAPI = FACILITY_CODE(15)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SCARD = FACILITY_CODE(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_COMPLUS = FACILITY_CODE(17)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_AAF = FACILITY_CODE(18)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_URT = FACILITY_CODE(19)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_ACS = FACILITY_CODE(20)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DPLAY = FACILITY_CODE(21)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_UMI = FACILITY_CODE(22)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SXS = FACILITY_CODE(23)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINDOWS_CE = FACILITY_CODE(24)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_HTTP = FACILITY_CODE(25)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_COMMONLOG = FACILITY_CODE(26)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WER = FACILITY_CODE(27)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_FILTER_MANAGER = FACILITY_CODE(31)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_BACKGROUNDCOPY = FACILITY_CODE(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_CONFIGURATION = FACILITY_CODE(33)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WIA = FACILITY_CODE(33)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_STATE_MANAGEMENT = FACILITY_CODE(34)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_METADIRECTORY = FACILITY_CODE(35)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINDOWSUPDATE = FACILITY_CODE(36)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECTORYSERVICE = FACILITY_CODE(37)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_GRAPHICS = FACILITY_CODE(38)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SHELL = FACILITY_CODE(39)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_NAP = FACILITY_CODE(39)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_TPM_SERVICES = FACILITY_CODE(40)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_TPM_SOFTWARE = FACILITY_CODE(41)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_UI = FACILITY_CODE(42)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_XAML = FACILITY_CODE(43)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_ACTION_QUEUE = FACILITY_CODE(44)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_PLA = FACILITY_CODE(48)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINDOWS_SETUP = FACILITY_CODE(48)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_FVE = FACILITY_CODE(49)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_FWP = FACILITY_CODE(50)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINRM = FACILITY_CODE(51)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_NDIS = FACILITY_CODE(52)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_HYPERVISOR = FACILITY_CODE(53)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_CMI = FACILITY_CODE(54)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_VIRTUALIZATION = FACILITY_CODE(55)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_VOLMGR = FACILITY_CODE(56)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_BCD = FACILITY_CODE(57)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_VHD = FACILITY_CODE(58)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_HNS = FACILITY_CODE(59)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SDIAG = FACILITY_CODE(60)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WEBSERVICES = FACILITY_CODE(61)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINPE = FACILITY_CODE(61)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WPN = FACILITY_CODE(62)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINDOWS_STORE = FACILITY_CODE(63)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_INPUT = FACILITY_CODE(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_QUIC = FACILITY_CODE(65)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_EAP = FACILITY_CODE(66)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_IORING = FACILITY_CODE(70)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINDOWS_DEFENDER = FACILITY_CODE(80)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_OPC = FACILITY_CODE(81)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_XPS = FACILITY_CODE(82)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_MBN = FACILITY_CODE(84)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_POWERSHELL = FACILITY_CODE(84)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_RAS = FACILITY_CODE(83)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_P2P_INT = FACILITY_CODE(98)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_P2P = FACILITY_CODE(99)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DAF = FACILITY_CODE(100)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_BLUETOOTH_ATT = FACILITY_CODE(101)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_AUDIO = FACILITY_CODE(102)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_STATEREPOSITORY = FACILITY_CODE(103)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_VISUALCPP = FACILITY_CODE(109)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SCRIPT = FACILITY_CODE(112)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_PARSE = FACILITY_CODE(113)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_BLB = FACILITY_CODE(120)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_BLB_CLI = FACILITY_CODE(121)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WSBAPP = FACILITY_CODE(122)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_BLBUI = FACILITY_CODE(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USN = FACILITY_CODE(129)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_VOLSNAP = FACILITY_CODE(130)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_TIERING = FACILITY_CODE(131)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WSB_ONLINE = FACILITY_CODE(133)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_ONLINE_ID = FACILITY_CODE(134)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEVICE_UPDATE_AGENT = FACILITY_CODE(135)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DRVSERVICING = FACILITY_CODE(136)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DLS = FACILITY_CODE(153)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DELIVERY_OPTIMIZATION = FACILITY_CODE(208)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_SPACES = FACILITY_CODE(231)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USER_MODE_SECURITY_CORE = FACILITY_CODE(232)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_LICENSING = FACILITY_CODE(234)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SOS = FACILITY_CODE(160)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_OCP_UPDATE_AGENT = FACILITY_CODE(173)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEBUGGERS = FACILITY_CODE(176)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SPP = FACILITY_CODE(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_RESTORE = FACILITY_CODE(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DMSERVER = FACILITY_CODE(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_SERVER = FACILITY_CODE(257)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_IMAGING = FACILITY_CODE(258)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_MANAGEMENT = FACILITY_CODE(259)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_UTIL = FACILITY_CODE(260)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_BINLSVC = FACILITY_CODE(261)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_PXE = FACILITY_CODE(263)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_TFTP = FACILITY_CODE(264)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_TRANSPORT_MANAGEMENT = FACILITY_CODE(272)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_DRIVER_PROVISIONING = FACILITY_CODE(278)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_MULTICAST_SERVER = FACILITY_CODE(289)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_MULTICAST_CLIENT = FACILITY_CODE(290)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEPLOYMENT_SERVICES_CONTENT_PROVIDER = FACILITY_CODE(293)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_HSP_SERVICES = FACILITY_CODE(296)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_HSP_SOFTWARE = FACILITY_CODE(297)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_LINGUISTIC_SERVICES = FACILITY_CODE(305)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_AUDIOSTREAMING = FACILITY_CODE(1094)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_TTD = FACILITY_CODE(1490)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_ACCELERATOR = FACILITY_CODE(1536)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WMAAECMA = FACILITY_CODE(1996)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECTMUSIC = FACILITY_CODE(2168)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECT3D10 = FACILITY_CODE(2169)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DXGI = FACILITY_CODE(2170)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DXGI_DDI = FACILITY_CODE(2171)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECT3D11 = FACILITY_CODE(2172)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECT3D11_DEBUG = FACILITY_CODE(2173)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECT3D12 = FACILITY_CODE(2174)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECT3D12_DEBUG = FACILITY_CODE(2175)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DXCORE = FACILITY_CODE(2176)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_PRESENTATION = FACILITY_CODE(2177)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_LEAP = FACILITY_CODE(2184)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_AUDCLNT = FACILITY_CODE(2185)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINCODEC_DWRITE_DWM = FACILITY_CODE(2200)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WINML = FACILITY_CODE(2192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DIRECT2D = FACILITY_CODE(2201)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_DEFRAG = FACILITY_CODE(2304)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_SDBUS = FACILITY_CODE(2305)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_JSCRIPT = FACILITY_CODE(2306)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_PIDGENX = FACILITY_CODE(2561)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_EAS = FACILITY_CODE(85)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WEB = FACILITY_CODE(885)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WEB_SOCKET = FACILITY_CODE(886)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_MOBILE = FACILITY_CODE(1793)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SQLITE = FACILITY_CODE(1967)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SERVICE_FABRIC = FACILITY_CODE(1968)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_UTC = FACILITY_CODE(1989)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_WEP = FACILITY_CODE(2049)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_SYNCENGINE = FACILITY_CODE(2050)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_XBOX = FACILITY_CODE(2339)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_GAME = FACILITY_CODE(2340)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_UNIONFS = FACILITY_CODE(2341)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_PRM = FACILITY_CODE(2342)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_USERMODE_WIN_ACCEL = FACILITY_CODE(2343)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_PPF = FACILITY_CODE(2344)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_PIX = FACILITY_CODE(2748)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FACILITY_CODE_FACILITY_NT_BIT = FACILITY_CODE(268435456)
+
+// Windows.Win32.System.Diagnostics.Debug.FORMAT_MESSAGE_OPTIONS (synthetic:Windows_Win32_System_Diagnostics_Debug_FORMAT_MESSAGE_OPTIONS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct FORMAT_MESSAGE_OPTIONS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: FORMAT_MESSAGE_OPTIONS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: FORMAT_MESSAGE_OPTIONS): FORMAT_MESSAGE_OPTIONS {
+        return FORMAT_MESSAGE_OPTIONS(value | other.value)
+    }
+    public operator func &(other: FORMAT_MESSAGE_OPTIONS): FORMAT_MESSAGE_OPTIONS {
+        return FORMAT_MESSAGE_OPTIONS(value & other.value)
+    }
+    public operator func ^(other: FORMAT_MESSAGE_OPTIONS): FORMAT_MESSAGE_OPTIONS {
+        return FORMAT_MESSAGE_OPTIONS(value ^ other.value)
+    }
+    public operator func !(): FORMAT_MESSAGE_OPTIONS {
+        return FORMAT_MESSAGE_OPTIONS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FORMAT_MESSAGE_OPTIONS_FORMAT_MESSAGE_ALLOCATE_BUFFER = FORMAT_MESSAGE_OPTIONS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FORMAT_MESSAGE_OPTIONS_FORMAT_MESSAGE_ARGUMENT_ARRAY = FORMAT_MESSAGE_OPTIONS(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FORMAT_MESSAGE_OPTIONS_FORMAT_MESSAGE_FROM_HMODULE = FORMAT_MESSAGE_OPTIONS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FORMAT_MESSAGE_OPTIONS_FORMAT_MESSAGE_FROM_STRING = FORMAT_MESSAGE_OPTIONS(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FORMAT_MESSAGE_OPTIONS_FORMAT_MESSAGE_FROM_SYSTEM = FORMAT_MESSAGE_OPTIONS(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const FORMAT_MESSAGE_OPTIONS_FORMAT_MESSAGE_IGNORE_INSERTS = FORMAT_MESSAGE_OPTIONS(512)
+
+// Windows.Win32.System.Diagnostics.Debug.FPO_DATA (synthetic:Windows_Win32_System_Diagnostics_Debug_FPO_DATA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct FPO_DATA {
+    public var ulOffStart: UInt32 = 0u32
+    public var cbProcSize: UInt32 = 0u32
+    public var cdwLocals: UInt32 = 0u32
+    public var cdwParams: UInt16 = 0u16
+    public var _bitfield: UInt16 = 0u16
+
+    public mut prop cbProlog: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 0, 8)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 0, 8, val)
+        }
+    }
+
+    public mut prop cbRegs: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 8, 3)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 8, 3, val)
+        }
+    }
+
+    public mut prop fHasSEH: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 11, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 11, 1, val)
+        }
+    }
+
+    public mut prop fUseBP: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 12, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 12, 1, val)
+        }
+    }
+
+    public mut prop reserved: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 13, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 13, 1, val)
+        }
+    }
+
+    public mut prop cbFrame: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 14, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 14, 2, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugExtendedProperty (synthetic:Windows_Win32_System_Diagnostics_Debug_IDebugExtendedProperty)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IDebugExtendedProperty <: Resource & windows_core.HandleWinrtType<IDebugExtendedProperty> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDebugExtendedProperty.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IDebugExtendedProperty"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865874u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IDebugExtendedProperty): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDebugExtendedProperty): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDebugExtendedProperty.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDebugExtendedProperty {
+        IDebugExtendedProperty(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDebugExtendedProperty {
+        IDebugExtendedProperty(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDebugExtendedProperty): IDebugExtendedProperty {
+        let raw = IDebugExtendedProperty.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDebugExtendedProperty(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugExtendedPropertyVtbl (synthetic:IDebugExtendedPropertyVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IDebugExtendedPropertyVtbl {
+    public var base_: IDebugPropertyVtbl = IDebugPropertyVtbl()
+    public var GetExtendedPropertyInfo: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var EnumExtendedMembers: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugProperty (synthetic:Windows_Win32_System_Diagnostics_Debug_IDebugProperty)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IDebugProperty <: Resource & windows_core.HandleWinrtType<IDebugProperty> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDebugProperty.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IDebugProperty"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865872u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IDebugProperty): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDebugProperty): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDebugProperty.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDebugProperty {
+        IDebugProperty(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDebugProperty {
+        IDebugProperty(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDebugProperty): IDebugProperty {
+        let raw = IDebugProperty.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDebugProperty(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyVtbl (synthetic:IDebugPropertyVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IDebugPropertyVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetPropertyInfo: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetExtendedInfo: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetValueAsString: CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> Int32>(CPointer<Unit>())
+    public var EnumMembers: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetParent: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_All (synthetic:Windows_Win32_System_Diagnostics_Debug_IDebugPropertyEnumType_All)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IDebugPropertyEnumType_All <: Resource & windows_core.HandleWinrtType<IDebugPropertyEnumType_All> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDebugPropertyEnumType_All.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_All"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865877u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IDebugPropertyEnumType_All): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDebugPropertyEnumType_All): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDebugPropertyEnumType_All.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_All {
+        IDebugPropertyEnumType_All(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_All {
+        IDebugPropertyEnumType_All(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDebugPropertyEnumType_All): IDebugPropertyEnumType_All {
+        let raw = IDebugPropertyEnumType_All.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDebugPropertyEnumType_All(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_AllVtbl (synthetic:IDebugPropertyEnumType_AllVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IDebugPropertyEnumType_AllVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_Arguments (synthetic:Windows_Win32_System_Diagnostics_Debug_IDebugPropertyEnumType_Arguments)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IDebugPropertyEnumType_Arguments <: Resource & windows_core.HandleWinrtType<IDebugPropertyEnumType_Arguments> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDebugPropertyEnumType_Arguments.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_Arguments"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865879u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IDebugPropertyEnumType_Arguments): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDebugPropertyEnumType_Arguments): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDebugPropertyEnumType_Arguments.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_Arguments {
+        IDebugPropertyEnumType_Arguments(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_Arguments {
+        IDebugPropertyEnumType_Arguments(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDebugPropertyEnumType_Arguments): IDebugPropertyEnumType_Arguments {
+        let raw = IDebugPropertyEnumType_Arguments.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDebugPropertyEnumType_Arguments(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_ArgumentsVtbl (synthetic:IDebugPropertyEnumType_ArgumentsVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IDebugPropertyEnumType_ArgumentsVtbl {
+    public var base_: IDebugPropertyEnumType_AllVtbl = IDebugPropertyEnumType_AllVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_Locals (synthetic:Windows_Win32_System_Diagnostics_Debug_IDebugPropertyEnumType_Locals)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IDebugPropertyEnumType_Locals <: Resource & windows_core.HandleWinrtType<IDebugPropertyEnumType_Locals> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDebugPropertyEnumType_Locals.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_Locals"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865878u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IDebugPropertyEnumType_Locals): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDebugPropertyEnumType_Locals): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDebugPropertyEnumType_Locals.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_Locals {
+        IDebugPropertyEnumType_Locals(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_Locals {
+        IDebugPropertyEnumType_Locals(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDebugPropertyEnumType_Locals): IDebugPropertyEnumType_Locals {
+        let raw = IDebugPropertyEnumType_Locals.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDebugPropertyEnumType_Locals(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_LocalsVtbl (synthetic:IDebugPropertyEnumType_LocalsVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IDebugPropertyEnumType_LocalsVtbl {
+    public var base_: IDebugPropertyEnumType_AllVtbl = IDebugPropertyEnumType_AllVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_LocalsPlusArgs (synthetic:Windows_Win32_System_Diagnostics_Debug_IDebugPropertyEnumType_LocalsPlusArgs)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IDebugPropertyEnumType_LocalsPlusArgs <: Resource & windows_core.HandleWinrtType<IDebugPropertyEnumType_LocalsPlusArgs> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDebugPropertyEnumType_LocalsPlusArgs.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_LocalsPlusArgs"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865880u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IDebugPropertyEnumType_LocalsPlusArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDebugPropertyEnumType_LocalsPlusArgs): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDebugPropertyEnumType_LocalsPlusArgs.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_LocalsPlusArgs {
+        IDebugPropertyEnumType_LocalsPlusArgs(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_LocalsPlusArgs {
+        IDebugPropertyEnumType_LocalsPlusArgs(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDebugPropertyEnumType_LocalsPlusArgs): IDebugPropertyEnumType_LocalsPlusArgs {
+        let raw = IDebugPropertyEnumType_LocalsPlusArgs.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDebugPropertyEnumType_LocalsPlusArgs(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_LocalsPlusArgsVtbl (synthetic:IDebugPropertyEnumType_LocalsPlusArgsVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IDebugPropertyEnumType_LocalsPlusArgsVtbl {
+    public var base_: IDebugPropertyEnumType_AllVtbl = IDebugPropertyEnumType_AllVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_Registers (synthetic:Windows_Win32_System_Diagnostics_Debug_IDebugPropertyEnumType_Registers)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IDebugPropertyEnumType_Registers <: Resource & windows_core.HandleWinrtType<IDebugPropertyEnumType_Registers> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IDebugPropertyEnumType_Registers.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_Registers"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865881u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IDebugPropertyEnumType_Registers): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IDebugPropertyEnumType_Registers): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IDebugPropertyEnumType_Registers.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_Registers {
+        IDebugPropertyEnumType_Registers(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IDebugPropertyEnumType_Registers {
+        IDebugPropertyEnumType_Registers(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IDebugPropertyEnumType_Registers): IDebugPropertyEnumType_Registers {
+        let raw = IDebugPropertyEnumType_Registers.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IDebugPropertyEnumType_Registers(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IDebugPropertyEnumType_RegistersVtbl (synthetic:IDebugPropertyEnumType_RegistersVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IDebugPropertyEnumType_RegistersVtbl {
+    public var base_: IDebugPropertyEnumType_AllVtbl = IDebugPropertyEnumType_AllVtbl()
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IEnumDebugExtendedPropertyInfo (synthetic:Windows_Win32_System_Diagnostics_Debug_IEnumDebugExtendedPropertyInfo)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IEnumDebugExtendedPropertyInfo <: Resource & windows_core.HandleWinrtType<IEnumDebugExtendedPropertyInfo> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IEnumDebugExtendedPropertyInfo.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IEnumDebugExtendedPropertyInfo"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865875u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IEnumDebugExtendedPropertyInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IEnumDebugExtendedPropertyInfo): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IEnumDebugExtendedPropertyInfo.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IEnumDebugExtendedPropertyInfo {
+        IEnumDebugExtendedPropertyInfo(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IEnumDebugExtendedPropertyInfo {
+        IEnumDebugExtendedPropertyInfo(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IEnumDebugExtendedPropertyInfo): IEnumDebugExtendedPropertyInfo {
+        let raw = IEnumDebugExtendedPropertyInfo.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IEnumDebugExtendedPropertyInfo(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IEnumDebugExtendedPropertyInfoVtbl (synthetic:IEnumDebugExtendedPropertyInfoVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IEnumDebugExtendedPropertyInfoVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reset: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IEnumDebugPropertyInfo (synthetic:Windows_Win32_System_Diagnostics_Debug_IEnumDebugPropertyInfo)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IEnumDebugPropertyInfo <: Resource & windows_core.HandleWinrtType<IEnumDebugPropertyInfo> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IEnumDebugPropertyInfo.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IEnumDebugPropertyInfo"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865873u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IEnumDebugPropertyInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IEnumDebugPropertyInfo): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IEnumDebugPropertyInfo.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IEnumDebugPropertyInfo {
+        IEnumDebugPropertyInfo(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IEnumDebugPropertyInfo {
+        IEnumDebugPropertyInfo(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IEnumDebugPropertyInfo): IEnumDebugPropertyInfo {
+        let raw = IEnumDebugPropertyInfo.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IEnumDebugPropertyInfo(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IEnumDebugPropertyInfoVtbl (synthetic:IEnumDebugPropertyInfoVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IEnumDebugPropertyInfoVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Next: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Skip: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Reset: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Clone: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_CBA_EVENT (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_CBA_EVENT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_CBA_EVENT {
+    public var severity: UInt32 = 0u32
+    public var code: UInt32 = 0u32
+    public var desc: CPointer<UInt8> = CPointer<UInt8>()
+    public var object: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_CBA_EVENTW (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_CBA_EVENTW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_CBA_EVENTW {
+    public var severity: UInt32 = 0u32
+    public var code: UInt32 = 0u32
+    public var desc: CPointer<UInt16> = CPointer<UInt16>()
+    public var object: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_CBA_EVENT_SEVERITY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_CBA_EVENT_SEVERITY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGEHLP_CBA_EVENT_SEVERITY {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_CBA_EVENT_SEVERITY_sevInfo = IMAGEHLP_CBA_EVENT_SEVERITY(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_CBA_EVENT_SEVERITY_sevProblem = IMAGEHLP_CBA_EVENT_SEVERITY(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_CBA_EVENT_SEVERITY_sevAttn = IMAGEHLP_CBA_EVENT_SEVERITY(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_CBA_EVENT_SEVERITY_sevFatal = IMAGEHLP_CBA_EVENT_SEVERITY(3)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_CBA_READ_MEMORY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_CBA_READ_MEMORY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_CBA_READ_MEMORY {
+    public var addr: UInt64 = 0u64
+    public var buf: CPointer<Unit> = CPointer<Unit>()
+    public var bytes: UInt32 = 0u32
+    public var bytesread: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_DEFERRED_SYMBOL_LOAD (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_DEFERRED_SYMBOL_LOAD)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_DEFERRED_SYMBOL_LOAD {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var BaseOfImage: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var FileName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0i8)
+    public var Reparse: UInt8 = 0u8
+    public var hFile: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_DEFERRED_SYMBOL_LOAD64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_DEFERRED_SYMBOL_LOAD64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_DEFERRED_SYMBOL_LOAD64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var BaseOfImage: UInt64 = 0u64
+    public var CheckSum: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var FileName: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0i8)
+    public var Reparse: UInt8 = 0u8
+    public var hFile: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var Flags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_DEFERRED_SYMBOL_LOADW64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_DEFERRED_SYMBOL_LOADW64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_DEFERRED_SYMBOL_LOADW64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var BaseOfImage: UInt64 = 0u64
+    public var CheckSum: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var FileName: VArray<UInt16, $261> = VArray<UInt16, $261>(repeat: 0u16)
+    public var Reparse: UInt8 = 0u8
+    public var hFile: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var Flags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_DUPLICATE_SYMBOL (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_DUPLICATE_SYMBOL)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_DUPLICATE_SYMBOL {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var NumberOfDups: UInt32 = 0u32
+    public var Symbol: CPointer<Unit> = CPointer<Unit>()
+    public var SelectedSymbol: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_DUPLICATE_SYMBOL64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_DUPLICATE_SYMBOL64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_DUPLICATE_SYMBOL64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var NumberOfDups: UInt32 = 0u32
+    public var Symbol: CPointer<Unit> = CPointer<Unit>()
+    public var SelectedSymbol: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_EXTENDED_OPTIONS (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_EXTENDED_OPTIONS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGEHLP_EXTENDED_OPTIONS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_EXTENDED_OPTIONS_SYMOPT_EX_DISABLEACCESSTIMEUPDATE = IMAGEHLP_EXTENDED_OPTIONS(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_EXTENDED_OPTIONS_SYMOPT_EX_LASTVALIDDEBUGDIRECTORY = IMAGEHLP_EXTENDED_OPTIONS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_EXTENDED_OPTIONS_SYMOPT_EX_NOIMPLICITPATTERNSEARCH = IMAGEHLP_EXTENDED_OPTIONS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_EXTENDED_OPTIONS_SYMOPT_EX_NEVERLOADSYMBOLS = IMAGEHLP_EXTENDED_OPTIONS(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_EXTENDED_OPTIONS_SYMOPT_EX_MAX = IMAGEHLP_EXTENDED_OPTIONS(4)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_GET_TYPE_INFO_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_GET_TYPE_INFO_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGEHLP_GET_TYPE_INFO_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_GET_TYPE_INFO_FLAGS_IMAGEHLP_GET_TYPE_INFO_CHILDREN = IMAGEHLP_GET_TYPE_INFO_FLAGS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_GET_TYPE_INFO_FLAGS_IMAGEHLP_GET_TYPE_INFO_UNCACHED = IMAGEHLP_GET_TYPE_INFO_FLAGS(1)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_GET_TYPE_INFO_PARAMS (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_GET_TYPE_INFO_PARAMS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_GET_TYPE_INFO_PARAMS {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var NumIds: UInt32 = 0u32
+    public var TypeIds: CPointer<Unit> = CPointer<Unit>()
+    public var TagFilter: UInt64 = 0u64
+    public var NumReqs: UInt32 = 0u32
+    public var ReqKinds: CPointer<Unit> = CPointer<Unit>()
+    public var ReqOffsets: CPointer<Unit> = CPointer<Unit>()
+    public var ReqSizes: CPointer<Unit> = CPointer<Unit>()
+    public var ReqStride: CPointer<Unit> = CPointer<Unit>()
+    public var BufferSize: CPointer<Unit> = CPointer<Unit>()
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var EntriesMatched: UInt32 = 0u32
+    public var EntriesFilled: UInt32 = 0u32
+    public var TagsFound: UInt64 = 0u64
+    public var AllReqsValid: UInt64 = 0u64
+    public var NumReqsValid: UInt32 = 0u32
+    public var ReqsValid: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_HD_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_HD_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGEHLP_HD_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_HD_TYPE_hdBase = IMAGEHLP_HD_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_HD_TYPE_hdSym = IMAGEHLP_HD_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_HD_TYPE_hdSrc = IMAGEHLP_HD_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_HD_TYPE_hdMax = IMAGEHLP_HD_TYPE(3)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_JIT_SYMBOLMAP (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_JIT_SYMBOLMAP)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_JIT_SYMBOLMAP {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Address: UInt64 = 0u64
+    public var BaseOfImage: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_LINE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_LINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_LINE {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Key: CPointer<Unit> = CPointer<Unit>()
+    public var LineNumber: UInt32 = 0u32
+    public var FileName: CPointer<UInt8> = CPointer<UInt8>()
+    public var Address: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_LINE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_LINE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_LINE64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Key: CPointer<Unit> = CPointer<Unit>()
+    public var LineNumber: UInt32 = 0u32
+    public var FileName: CPointer<UInt8> = CPointer<UInt8>()
+    public var Address: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_LINEW (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_LINEW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_LINEW {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Key: CPointer<Unit> = CPointer<Unit>()
+    public var LineNumber: UInt32 = 0u32
+    public var FileName: CPointer<UInt8> = CPointer<UInt8>()
+    public var Address: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_LINEW64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_LINEW64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_LINEW64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Key: CPointer<Unit> = CPointer<Unit>()
+    public var LineNumber: UInt32 = 0u32
+    public var FileName: CPointer<UInt16> = CPointer<UInt16>()
+    public var Address: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_MODULE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_MODULE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_MODULE {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var BaseOfImage: UInt32 = 0u32
+    public var ImageSize: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var NumSyms: UInt32 = 0u32
+    public var SymType: Int32 = 0i32
+    public var ModuleName: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0i8)
+    public var ImageName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0i8)
+    public var LoadedImageName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_MODULE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_MODULE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_MODULE64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var BaseOfImage: UInt64 = 0u64
+    public var ImageSize: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var NumSyms: UInt32 = 0u32
+    public var SymType: Int32 = 0i32
+    public var ModuleName: VArray<Int8, $32> = VArray<Int8, $32>(repeat: 0i8)
+    public var ImageName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0i8)
+    public var LoadedImageName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0i8)
+    public var LoadedPdbName: VArray<Int8, $256> = VArray<Int8, $256>(repeat: 0i8)
+    public var CVSig: UInt32 = 0u32
+    public var CVData: VArray<Int8, $780> = VArray<Int8, $780>(repeat: 0i8)
+    public var PdbSig: UInt32 = 0u32
+    public var PdbSig70: GUID = GUID()
+    public var PdbAge: UInt32 = 0u32
+    public var PdbUnmatched: Int32 = 0i32
+    public var DbgUnmatched: Int32 = 0i32
+    public var LineNumbers: Int32 = 0i32
+    public var GlobalSymbols: Int32 = 0i32
+    public var TypeInfo: Int32 = 0i32
+    public var SourceIndexed: Int32 = 0i32
+    public var Publics: Int32 = 0i32
+    public var MachineType: UInt32 = 0u32
+    public var Reserved: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_MODULE64_EX (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_MODULE64_EX)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_MODULE64_EX {
+    public var Module: IMAGEHLP_MODULE64 = IMAGEHLP_MODULE64()
+    public var RegionFlags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_MODULEW (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_MODULEW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_MODULEW {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var BaseOfImage: UInt32 = 0u32
+    public var ImageSize: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var NumSyms: UInt32 = 0u32
+    public var SymType: Int32 = 0i32
+    public var ModuleName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var ImageName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0u16)
+    public var LoadedImageName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_MODULEW64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_MODULEW64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_MODULEW64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var BaseOfImage: UInt64 = 0u64
+    public var ImageSize: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var NumSyms: UInt32 = 0u32
+    public var SymType: Int32 = 0i32
+    public var ModuleName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var ImageName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0u16)
+    public var LoadedImageName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0u16)
+    public var LoadedPdbName: VArray<UInt16, $256> = VArray<UInt16, $256>(repeat: 0u16)
+    public var CVSig: UInt32 = 0u32
+    public var CVData: VArray<UInt16, $780> = VArray<UInt16, $780>(repeat: 0u16)
+    public var PdbSig: UInt32 = 0u32
+    public var PdbSig70: GUID = GUID()
+    public var PdbAge: UInt32 = 0u32
+    public var PdbUnmatched: Int32 = 0i32
+    public var DbgUnmatched: Int32 = 0i32
+    public var LineNumbers: Int32 = 0i32
+    public var GlobalSymbols: Int32 = 0i32
+    public var TypeInfo: Int32 = 0i32
+    public var SourceIndexed: Int32 = 0i32
+    public var Publics: Int32 = 0i32
+    public var MachineType: UInt32 = 0u32
+    public var Reserved: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_MODULEW64_EX (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_MODULEW64_EX)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_MODULEW64_EX {
+    public var Module: IMAGEHLP_MODULEW64 = IMAGEHLP_MODULEW64()
+    public var RegionFlags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SF_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SF_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGEHLP_SF_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SF_TYPE_sfImage = IMAGEHLP_SF_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SF_TYPE_sfDbg = IMAGEHLP_SF_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SF_TYPE_sfPdb = IMAGEHLP_SF_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SF_TYPE_sfMpd = IMAGEHLP_SF_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SF_TYPE_sfMax = IMAGEHLP_SF_TYPE(4)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_STACK_FRAME (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_STACK_FRAME)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_STACK_FRAME {
+    public var InstructionOffset: UInt64 = 0u64
+    public var ReturnOffset: UInt64 = 0u64
+    public var FrameOffset: UInt64 = 0u64
+    public var StackOffset: UInt64 = 0u64
+    public var BackingStoreOffset: UInt64 = 0u64
+    public var FuncTableEntry: UInt64 = 0u64
+    public var Params: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0u64)
+    public var Reserved: VArray<UInt64, $5> = VArray<UInt64, $5>(repeat: 0u64)
+    public var Virtual: Int32 = 0i32
+    public var Reserved2: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_STATUS_REASON (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_STATUS_REASON)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGEHLP_STATUS_REASON {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindOutOfMemory = IMAGEHLP_STATUS_REASON(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindRvaToVaFailed = IMAGEHLP_STATUS_REASON(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindNoRoomInImage = IMAGEHLP_STATUS_REASON(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImportModuleFailed = IMAGEHLP_STATUS_REASON(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImportProcedureFailed = IMAGEHLP_STATUS_REASON(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImportModule = IMAGEHLP_STATUS_REASON(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImportProcedure = IMAGEHLP_STATUS_REASON(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindForwarder = IMAGEHLP_STATUS_REASON(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindForwarderNOT = IMAGEHLP_STATUS_REASON(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImageModified = IMAGEHLP_STATUS_REASON(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindExpandFileHeaders = IMAGEHLP_STATUS_REASON(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImageComplete = IMAGEHLP_STATUS_REASON(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindMismatchedSymbols = IMAGEHLP_STATUS_REASON(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindSymbolsNotUpdated = IMAGEHLP_STATUS_REASON(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImportProcedure32 = IMAGEHLP_STATUS_REASON(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindImportProcedure64 = IMAGEHLP_STATUS_REASON(15)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindForwarder32 = IMAGEHLP_STATUS_REASON(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindForwarder64 = IMAGEHLP_STATUS_REASON(17)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindForwarderNOT32 = IMAGEHLP_STATUS_REASON(18)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_STATUS_REASON_BindForwarderNOT64 = IMAGEHLP_STATUS_REASON(19)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOL (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOL)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOL {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Address: UInt32 = 0u32
+    public var Size: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var MaxNameLength: UInt32 = 0u32
+    public var Name: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOL64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOL64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOL64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Address: UInt64 = 0u64
+    public var Size: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var MaxNameLength: UInt32 = 0u32
+    public var Name: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOL64_PACKAGE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOL64_PACKAGE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOL64_PACKAGE {
+    public var sym: IMAGEHLP_SYMBOL64 = IMAGEHLP_SYMBOL64()
+    public var name: VArray<Int8, $2001> = VArray<Int8, $2001>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOLW (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOLW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOLW {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Address: UInt32 = 0u32
+    public var Size: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var MaxNameLength: UInt32 = 0u32
+    public var Name: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOLW64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOLW64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOLW64 {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Address: UInt64 = 0u64
+    public var Size: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var MaxNameLength: UInt32 = 0u32
+    public var Name: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOLW64_PACKAGE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOLW64_PACKAGE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOLW64_PACKAGE {
+    public var sym: IMAGEHLP_SYMBOLW64 = IMAGEHLP_SYMBOLW64()
+    public var name: VArray<UInt16, $2001> = VArray<UInt16, $2001>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOLW_PACKAGE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOLW_PACKAGE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOLW_PACKAGE {
+    public var sym: IMAGEHLP_SYMBOLW = IMAGEHLP_SYMBOLW()
+    public var name: VArray<UInt16, $2001> = VArray<UInt16, $2001>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOL_PACKAGE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOL_PACKAGE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOL_PACKAGE {
+    public var sym: IMAGEHLP_SYMBOL = IMAGEHLP_SYMBOL()
+    public var name: VArray<Int8, $2001> = VArray<Int8, $2001>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOL_SRC (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOL_SRC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGEHLP_SYMBOL_SRC {
+    public var sizeofstruct: UInt32 = 0u32
+    public var type_: UInt32 = 0u32
+    public var file: VArray<Int8, $260> = VArray<Int8, $260>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGEHLP_SYMBOL_TYPE_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGEHLP_SYMBOL_TYPE_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGEHLP_SYMBOL_TYPE_INFO {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_SYMTAG = IMAGEHLP_SYMBOL_TYPE_INFO(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_SYMNAME = IMAGEHLP_SYMBOL_TYPE_INFO(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_LENGTH = IMAGEHLP_SYMBOL_TYPE_INFO(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_TYPE = IMAGEHLP_SYMBOL_TYPE_INFO(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_TYPEID = IMAGEHLP_SYMBOL_TYPE_INFO(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_BASETYPE = IMAGEHLP_SYMBOL_TYPE_INFO(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_ARRAYINDEXTYPEID = IMAGEHLP_SYMBOL_TYPE_INFO(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_FINDCHILDREN = IMAGEHLP_SYMBOL_TYPE_INFO(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_DATAKIND = IMAGEHLP_SYMBOL_TYPE_INFO(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_ADDRESSOFFSET = IMAGEHLP_SYMBOL_TYPE_INFO(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_OFFSET = IMAGEHLP_SYMBOL_TYPE_INFO(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_VALUE = IMAGEHLP_SYMBOL_TYPE_INFO(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_COUNT = IMAGEHLP_SYMBOL_TYPE_INFO(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_CHILDRENCOUNT = IMAGEHLP_SYMBOL_TYPE_INFO(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_BITPOSITION = IMAGEHLP_SYMBOL_TYPE_INFO(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_VIRTUALBASECLASS = IMAGEHLP_SYMBOL_TYPE_INFO(15)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_VIRTUALTABLESHAPEID = IMAGEHLP_SYMBOL_TYPE_INFO(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_VIRTUALBASEPOINTEROFFSET = IMAGEHLP_SYMBOL_TYPE_INFO(17)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_CLASSPARENTID = IMAGEHLP_SYMBOL_TYPE_INFO(18)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_NESTED = IMAGEHLP_SYMBOL_TYPE_INFO(19)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_SYMINDEX = IMAGEHLP_SYMBOL_TYPE_INFO(20)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_LEXICALPARENT = IMAGEHLP_SYMBOL_TYPE_INFO(21)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_ADDRESS = IMAGEHLP_SYMBOL_TYPE_INFO(22)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_THISADJUST = IMAGEHLP_SYMBOL_TYPE_INFO(23)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_UDTKIND = IMAGEHLP_SYMBOL_TYPE_INFO(24)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_IS_EQUIV_TO = IMAGEHLP_SYMBOL_TYPE_INFO(25)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_CALLING_CONVENTION = IMAGEHLP_SYMBOL_TYPE_INFO(26)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_IS_CLOSE_EQUIV_TO = IMAGEHLP_SYMBOL_TYPE_INFO(27)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GTIEX_REQS_VALID = IMAGEHLP_SYMBOL_TYPE_INFO(28)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_VIRTUALBASEOFFSET = IMAGEHLP_SYMBOL_TYPE_INFO(29)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_VIRTUALBASEDISPINDEX = IMAGEHLP_SYMBOL_TYPE_INFO(30)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_IS_REFERENCE = IMAGEHLP_SYMBOL_TYPE_INFO(31)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_INDIRECTVIRTUALBASECLASS = IMAGEHLP_SYMBOL_TYPE_INFO(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_VIRTUALBASETABLETYPE = IMAGEHLP_SYMBOL_TYPE_INFO(33)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_OBJECTPOINTERTYPE = IMAGEHLP_SYMBOL_TYPE_INFO(34)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_DISCRIMINATEDUNION_TAG_TYPEID = IMAGEHLP_SYMBOL_TYPE_INFO(35)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_DISCRIMINATEDUNION_TAG_OFFSET = IMAGEHLP_SYMBOL_TYPE_INFO(36)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_DISCRIMINATEDUNION_TAG_RANGESCOUNT = IMAGEHLP_SYMBOL_TYPE_INFO(37)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_TI_GET_DISCRIMINATEDUNION_TAG_RANGES = IMAGEHLP_SYMBOL_TYPE_INFO(38)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGEHLP_SYMBOL_TYPE_INFO_IMAGEHLP_SYMBOL_TYPE_INFO_MAX = IMAGEHLP_SYMBOL_TYPE_INFO(39)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY {
+    public var BeginAddress: UInt32 = 0u32
+    public var Anonymous: IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union = IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop UnwindData: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous: IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union__Anonymous_e__Struct {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop Flag: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 2, val)
+        }
+    }
+
+    public mut prop FunctionLength: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 2, 11)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 2, 11, val)
+        }
+    }
+
+    public mut prop RegF: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 13, 3)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 13, 3, val)
+        }
+    }
+
+    public mut prop RegI: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 16, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 16, 4, val)
+        }
+    }
+
+    public mut prop H: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 20, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 20, 1, val)
+        }
+    }
+
+    public mut prop CR: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 21, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 21, 2, val)
+        }
+    }
+
+    public mut prop FrameSize: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 23, 9)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 23, 9, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_COFF_SYMBOLS_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_COFF_SYMBOLS_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_COFF_SYMBOLS_HEADER {
+    public var NumberOfSymbols: UInt32 = 0u32
+    public var LvaToFirstSymbol: UInt32 = 0u32
+    public var NumberOfLinenumbers: UInt32 = 0u32
+    public var LvaToFirstLinenumber: UInt32 = 0u32
+    public var RvaToFirstByteOfCode: UInt32 = 0u32
+    public var RvaToLastByteOfCode: UInt32 = 0u32
+    public var RvaToFirstByteOfData: UInt32 = 0u32
+    public var RvaToLastByteOfData: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_COR20_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_COR20_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_COR20_HEADER {
+    public var cb: UInt32 = 0u32
+    public var MajorRuntimeVersion: UInt16 = 0u16
+    public var MinorRuntimeVersion: UInt16 = 0u16
+    public var MetaData: IMAGE_DATA_DIRECTORY = IMAGE_DATA_DIRECTORY()
+    public var Flags: UInt32 = 0u32
+    public var Anonymous: IMAGE_COR20_HEADER__Anonymous_e__Union = IMAGE_COR20_HEADER__Anonymous_e__Union()
+    public var Resources: IMAGE_DATA_DIRECTORY = IMAGE_DATA_DIRECTORY()
+    public var StrongNameSignature: IMAGE_DATA_DIRECTORY = IMAGE_DATA_DIRECTORY()
+    public var CodeManagerTable: IMAGE_DATA_DIRECTORY = IMAGE_DATA_DIRECTORY()
+    public var VTableFixups: IMAGE_DATA_DIRECTORY = IMAGE_DATA_DIRECTORY()
+    public var ExportAddressTableJumps: IMAGE_DATA_DIRECTORY = IMAGE_DATA_DIRECTORY()
+    public var ManagedNativeHeader: IMAGE_DATA_DIRECTORY = IMAGE_DATA_DIRECTORY()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_COR20_HEADER._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_COR20_HEADER__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_COR20_HEADER__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop EntryPointToken: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop EntryPointRVA: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_DATA_DIRECTORY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_DATA_DIRECTORY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_DATA_DIRECTORY {
+    public var VirtualAddress: UInt32 = 0u32
+    public var Size: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_DEBUG_DIRECTORY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_DEBUG_DIRECTORY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_DEBUG_DIRECTORY {
+    public var Characteristics: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var MajorVersion: UInt16 = 0u16
+    public var MinorVersion: UInt16 = 0u16
+    public var Type: UInt32 = 0u32
+    public var SizeOfData: UInt32 = 0u32
+    public var AddressOfRawData: UInt32 = 0u32
+    public var PointerToRawData: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_DEBUG_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_DEBUG_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_DEBUG_INFORMATION {
+    public var List: Windows_Win32_System_Kernel.LIST_ENTRY = Windows_Win32_System_Kernel.LIST_ENTRY()
+    public var ReservedSize: UInt32 = 0u32
+    public var ReservedMappedBase: CPointer<Unit> = CPointer<Unit>()
+    public var ReservedMachine: UInt16 = 0u16
+    public var ReservedCharacteristics: UInt16 = 0u16
+    public var ReservedCheckSum: UInt32 = 0u32
+    public var ImageBase: UInt32 = 0u32
+    public var SizeOfImage: UInt32 = 0u32
+    public var ReservedNumberOfSections: UInt32 = 0u32
+    public var ReservedSections: CPointer<Unit> = CPointer<Unit>()
+    public var ReservedExportedNamesSize: UInt32 = 0u32
+    public var ReservedExportedNames: CPointer<UInt8> = CPointer<UInt8>()
+    public var ReservedNumberOfFunctionTableEntries: UInt32 = 0u32
+    public var ReservedFunctionTableEntries: CPointer<Unit> = CPointer<Unit>()
+    public var ReservedLowestFunctionStartingAddress: UInt32 = 0u32
+    public var ReservedHighestFunctionEndingAddress: UInt32 = 0u32
+    public var ReservedNumberOfFpoTableEntries: UInt32 = 0u32
+    public var ReservedFpoTableEntries: CPointer<Unit> = CPointer<Unit>()
+    public var SizeOfCoffSymbols: UInt32 = 0u32
+    public var CoffSymbols: CPointer<Unit> = CPointer<Unit>()
+    public var ReservedSizeOfCodeViewSymbols: UInt32 = 0u32
+    public var ReservedCodeViewSymbols: CPointer<Unit> = CPointer<Unit>()
+    public var ImageFilePath: CPointer<UInt8> = CPointer<UInt8>()
+    public var ImageFileName: CPointer<UInt8> = CPointer<UInt8>()
+    public var ReservedDebugFilePath: CPointer<UInt8> = CPointer<UInt8>()
+    public var ReservedTimeDateStamp: UInt32 = 0u32
+    public var ReservedRomImage: Int32 = 0i32
+    public var ReservedDebugDirectory: CPointer<Unit> = CPointer<Unit>()
+    public var ReservedNumberOfDebugDirectories: UInt32 = 0u32
+    public var ReservedOriginalFunctionTableBaseAddress: UInt32 = 0u32
+    public var Reserved: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_DEBUG_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_DEBUG_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_DEBUG_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_UNKNOWN = IMAGE_DEBUG_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_COFF = IMAGE_DEBUG_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_CODEVIEW = IMAGE_DEBUG_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_FPO = IMAGE_DEBUG_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_MISC = IMAGE_DEBUG_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_EXCEPTION = IMAGE_DEBUG_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_FIXUP = IMAGE_DEBUG_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DEBUG_TYPE_IMAGE_DEBUG_TYPE_BORLAND = IMAGE_DEBUG_TYPE(9)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_DIRECTORY_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_DIRECTORY_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_DIRECTORY_ENTRY {
+    public let value: UInt16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_ARCHITECTURE = IMAGE_DIRECTORY_ENTRY(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_BASERELOC = IMAGE_DIRECTORY_ENTRY(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT = IMAGE_DIRECTORY_ENTRY(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR = IMAGE_DIRECTORY_ENTRY(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_DEBUG = IMAGE_DIRECTORY_ENTRY(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT = IMAGE_DIRECTORY_ENTRY(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_EXCEPTION = IMAGE_DIRECTORY_ENTRY(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_EXPORT = IMAGE_DIRECTORY_ENTRY(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_GLOBALPTR = IMAGE_DIRECTORY_ENTRY(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_IAT = IMAGE_DIRECTORY_ENTRY(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_IMPORT = IMAGE_DIRECTORY_ENTRY(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG = IMAGE_DIRECTORY_ENTRY(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_RESOURCE = IMAGE_DIRECTORY_ENTRY(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_SECURITY = IMAGE_DIRECTORY_ENTRY(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DIRECTORY_ENTRY_IMAGE_DIRECTORY_ENTRY_TLS = IMAGE_DIRECTORY_ENTRY(9)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_DLL_CHARACTERISTICS (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_DLL_CHARACTERISTICS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_DLL_CHARACTERISTICS {
+    public let value: UInt16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt16) {
+        this.value = value
+    }
+    public func contains(other: IMAGE_DLL_CHARACTERISTICS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: IMAGE_DLL_CHARACTERISTICS): IMAGE_DLL_CHARACTERISTICS {
+        return IMAGE_DLL_CHARACTERISTICS(value | other.value)
+    }
+    public operator func &(other: IMAGE_DLL_CHARACTERISTICS): IMAGE_DLL_CHARACTERISTICS {
+        return IMAGE_DLL_CHARACTERISTICS(value & other.value)
+    }
+    public operator func ^(other: IMAGE_DLL_CHARACTERISTICS): IMAGE_DLL_CHARACTERISTICS {
+        return IMAGE_DLL_CHARACTERISTICS(value ^ other.value)
+    }
+    public operator func !(): IMAGE_DLL_CHARACTERISTICS {
+        return IMAGE_DLL_CHARACTERISTICS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA = IMAGE_DLL_CHARACTERISTICS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE = IMAGE_DLL_CHARACTERISTICS(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY = IMAGE_DLL_CHARACTERISTICS(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_NX_COMPAT = IMAGE_DLL_CHARACTERISTICS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_NO_ISOLATION = IMAGE_DLL_CHARACTERISTICS(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_NO_SEH = IMAGE_DLL_CHARACTERISTICS(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_NO_BIND = IMAGE_DLL_CHARACTERISTICS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_APPCONTAINER = IMAGE_DLL_CHARACTERISTICS(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_WDM_DRIVER = IMAGE_DLL_CHARACTERISTICS(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_GUARD_CF = IMAGE_DLL_CHARACTERISTICS(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE = IMAGE_DLL_CHARACTERISTICS(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_CET_COMPAT = IMAGE_DLL_CHARACTERISTICS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_CET_COMPAT_STRICT_MODE = IMAGE_DLL_CHARACTERISTICS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_CET_SET_CONTEXT_IP_VALIDATION_RELAXED_MODE = IMAGE_DLL_CHARACTERISTICS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_CET_DYNAMIC_APIS_ALLOW_IN_PROC = IMAGE_DLL_CHARACTERISTICS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_CET_RESERVED_1 = IMAGE_DLL_CHARACTERISTICS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_CET_RESERVED_2 = IMAGE_DLL_CHARACTERISTICS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_FORWARD_CFI_COMPAT = IMAGE_DLL_CHARACTERISTICS(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_DLL_CHARACTERISTICS_IMAGE_DLLCHARACTERISTICS_EX_HOTPATCH_COMPATIBLE = IMAGE_DLL_CHARACTERISTICS(128)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_FILE_CHARACTERISTICS (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_FILE_CHARACTERISTICS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_FILE_CHARACTERISTICS {
+    public let value: UInt16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt16) {
+        this.value = value
+    }
+    public func contains(other: IMAGE_FILE_CHARACTERISTICS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: IMAGE_FILE_CHARACTERISTICS): IMAGE_FILE_CHARACTERISTICS {
+        return IMAGE_FILE_CHARACTERISTICS(value | other.value)
+    }
+    public operator func &(other: IMAGE_FILE_CHARACTERISTICS): IMAGE_FILE_CHARACTERISTICS {
+        return IMAGE_FILE_CHARACTERISTICS(value & other.value)
+    }
+    public operator func ^(other: IMAGE_FILE_CHARACTERISTICS): IMAGE_FILE_CHARACTERISTICS {
+        return IMAGE_FILE_CHARACTERISTICS(value ^ other.value)
+    }
+    public operator func !(): IMAGE_FILE_CHARACTERISTICS {
+        return IMAGE_FILE_CHARACTERISTICS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_RELOCS_STRIPPED = IMAGE_FILE_CHARACTERISTICS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_EXECUTABLE_IMAGE = IMAGE_FILE_CHARACTERISTICS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_LINE_NUMS_STRIPPED = IMAGE_FILE_CHARACTERISTICS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_LOCAL_SYMS_STRIPPED = IMAGE_FILE_CHARACTERISTICS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_AGGRESIVE_WS_TRIM = IMAGE_FILE_CHARACTERISTICS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_LARGE_ADDRESS_AWARE = IMAGE_FILE_CHARACTERISTICS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_BYTES_REVERSED_LO = IMAGE_FILE_CHARACTERISTICS(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_32BIT_MACHINE = IMAGE_FILE_CHARACTERISTICS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_DEBUG_STRIPPED = IMAGE_FILE_CHARACTERISTICS(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP = IMAGE_FILE_CHARACTERISTICS(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_NET_RUN_FROM_SWAP = IMAGE_FILE_CHARACTERISTICS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_SYSTEM = IMAGE_FILE_CHARACTERISTICS(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_DLL = IMAGE_FILE_CHARACTERISTICS(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_UP_SYSTEM_ONLY = IMAGE_FILE_CHARACTERISTICS(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS_IMAGE_FILE_BYTES_REVERSED_HI = IMAGE_FILE_CHARACTERISTICS(32768)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_FILE_CHARACTERISTICS2 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_FILE_CHARACTERISTICS2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_FILE_CHARACTERISTICS2 {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: IMAGE_FILE_CHARACTERISTICS2): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: IMAGE_FILE_CHARACTERISTICS2): IMAGE_FILE_CHARACTERISTICS2 {
+        return IMAGE_FILE_CHARACTERISTICS2(value | other.value)
+    }
+    public operator func &(other: IMAGE_FILE_CHARACTERISTICS2): IMAGE_FILE_CHARACTERISTICS2 {
+        return IMAGE_FILE_CHARACTERISTICS2(value & other.value)
+    }
+    public operator func ^(other: IMAGE_FILE_CHARACTERISTICS2): IMAGE_FILE_CHARACTERISTICS2 {
+        return IMAGE_FILE_CHARACTERISTICS2(value ^ other.value)
+    }
+    public operator func !(): IMAGE_FILE_CHARACTERISTICS2 {
+        return IMAGE_FILE_CHARACTERISTICS2(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_RELOCS_STRIPPED2 = IMAGE_FILE_CHARACTERISTICS2(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_EXECUTABLE_IMAGE2 = IMAGE_FILE_CHARACTERISTICS2(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_LINE_NUMS_STRIPPED2 = IMAGE_FILE_CHARACTERISTICS2(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_LOCAL_SYMS_STRIPPED2 = IMAGE_FILE_CHARACTERISTICS2(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_AGGRESIVE_WS_TRIM2 = IMAGE_FILE_CHARACTERISTICS2(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_LARGE_ADDRESS_AWARE2 = IMAGE_FILE_CHARACTERISTICS2(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_BYTES_REVERSED_LO2 = IMAGE_FILE_CHARACTERISTICS2(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_32BIT_MACHINE2 = IMAGE_FILE_CHARACTERISTICS2(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_DEBUG_STRIPPED2 = IMAGE_FILE_CHARACTERISTICS2(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP2 = IMAGE_FILE_CHARACTERISTICS2(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_NET_RUN_FROM_SWAP2 = IMAGE_FILE_CHARACTERISTICS2(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_SYSTEM_2 = IMAGE_FILE_CHARACTERISTICS2(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_DLL_2 = IMAGE_FILE_CHARACTERISTICS2(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_UP_SYSTEM_ONLY_2 = IMAGE_FILE_CHARACTERISTICS2(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_FILE_CHARACTERISTICS2_IMAGE_FILE_BYTES_REVERSED_HI_2 = IMAGE_FILE_CHARACTERISTICS2(32768)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_FILE_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_FILE_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_FILE_HEADER {
+    public var Machine: UInt16 = 0u16
+    public var NumberOfSections: UInt16 = 0u16
+    public var TimeDateStamp: UInt32 = 0u32
+    public var PointerToSymbolTable: UInt32 = 0u32
+    public var NumberOfSymbols: UInt32 = 0u32
+    public var SizeOfOptionalHeader: UInt16 = 0u16
+    public var Characteristics: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_FUNCTION_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_FUNCTION_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_FUNCTION_ENTRY {
+    public var StartingAddress: UInt32 = 0u32
+    public var EndingAddress: UInt32 = 0u32
+    public var EndOfPrologue: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_FUNCTION_ENTRY64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_FUNCTION_ENTRY64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_FUNCTION_ENTRY64 {
+    public var StartingAddress: UInt64 = 0u64
+    public var EndingAddress: UInt64 = 0u64
+    public var Anonymous: IMAGE_FUNCTION_ENTRY64__Anonymous_e__Union = IMAGE_FUNCTION_ENTRY64__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_FUNCTION_ENTRY64._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_FUNCTION_ENTRY64__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_FUNCTION_ENTRY64__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
+
+    public mut prop EndOfPrologue: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop UnwindInfoAddress: UInt64 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt64(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt64(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_LOAD_CONFIG_CODE_INTEGRITY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_LOAD_CONFIG_CODE_INTEGRITY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_LOAD_CONFIG_CODE_INTEGRITY {
+    public var Flags: UInt16 = 0u16
+    public var Catalog: UInt16 = 0u16
+    public var CatalogOffset: UInt32 = 0u32
+    public var Reserved: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_LOAD_CONFIG_DIRECTORY32 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_LOAD_CONFIG_DIRECTORY32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_LOAD_CONFIG_DIRECTORY32 {
+    public var Size: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var MajorVersion: UInt16 = 0u16
+    public var MinorVersion: UInt16 = 0u16
+    public var GlobalFlagsClear: UInt32 = 0u32
+    public var GlobalFlagsSet: UInt32 = 0u32
+    public var CriticalSectionDefaultTimeout: UInt32 = 0u32
+    public var DeCommitFreeBlockThreshold: UInt32 = 0u32
+    public var DeCommitTotalFreeThreshold: UInt32 = 0u32
+    public var LockPrefixTable: UInt32 = 0u32
+    public var MaximumAllocationSize: UInt32 = 0u32
+    public var VirtualMemoryThreshold: UInt32 = 0u32
+    public var ProcessHeapFlags: UInt32 = 0u32
+    public var ProcessAffinityMask: UInt32 = 0u32
+    public var CSDVersion: UInt16 = 0u16
+    public var DependentLoadFlags: UInt16 = 0u16
+    public var EditList: UInt32 = 0u32
+    public var SecurityCookie: UInt32 = 0u32
+    public var SEHandlerTable: UInt32 = 0u32
+    public var SEHandlerCount: UInt32 = 0u32
+    public var GuardCFCheckFunctionPointer: UInt32 = 0u32
+    public var GuardCFDispatchFunctionPointer: UInt32 = 0u32
+    public var GuardCFFunctionTable: UInt32 = 0u32
+    public var GuardCFFunctionCount: UInt32 = 0u32
+    public var GuardFlags: UInt32 = 0u32
+    public var CodeIntegrity: IMAGE_LOAD_CONFIG_CODE_INTEGRITY = IMAGE_LOAD_CONFIG_CODE_INTEGRITY()
+    public var GuardAddressTakenIatEntryTable: UInt32 = 0u32
+    public var GuardAddressTakenIatEntryCount: UInt32 = 0u32
+    public var GuardLongJumpTargetTable: UInt32 = 0u32
+    public var GuardLongJumpTargetCount: UInt32 = 0u32
+    public var DynamicValueRelocTable: UInt32 = 0u32
+    public var CHPEMetadataPointer: UInt32 = 0u32
+    public var GuardRFFailureRoutine: UInt32 = 0u32
+    public var GuardRFFailureRoutineFunctionPointer: UInt32 = 0u32
+    public var DynamicValueRelocTableOffset: UInt32 = 0u32
+    public var DynamicValueRelocTableSection: UInt16 = 0u16
+    public var Reserved2: UInt16 = 0u16
+    public var GuardRFVerifyStackPointerFunctionPointer: UInt32 = 0u32
+    public var HotPatchTableOffset: UInt32 = 0u32
+    public var Reserved3: UInt32 = 0u32
+    public var EnclaveConfigurationPointer: UInt32 = 0u32
+    public var VolatileMetadataPointer: UInt32 = 0u32
+    public var GuardEHContinuationTable: UInt32 = 0u32
+    public var GuardEHContinuationCount: UInt32 = 0u32
+    public var GuardXFGCheckFunctionPointer: UInt32 = 0u32
+    public var GuardXFGDispatchFunctionPointer: UInt32 = 0u32
+    public var GuardXFGTableDispatchFunctionPointer: UInt32 = 0u32
+    public var CastGuardOsDeterminedFailureMode: UInt32 = 0u32
+    public var GuardMemcpyFunctionPointer: UInt32 = 0u32
+    public var UmaFunctionPointers: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_LOAD_CONFIG_DIRECTORY64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_LOAD_CONFIG_DIRECTORY64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_LOAD_CONFIG_DIRECTORY64 {
+    public var Size: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var MajorVersion: UInt16 = 0u16
+    public var MinorVersion: UInt16 = 0u16
+    public var GlobalFlagsClear: UInt32 = 0u32
+    public var GlobalFlagsSet: UInt32 = 0u32
+    public var CriticalSectionDefaultTimeout: UInt32 = 0u32
+    public var DeCommitFreeBlockThreshold: UInt64 = 0u64
+    public var DeCommitTotalFreeThreshold: UInt64 = 0u64
+    public var LockPrefixTable: UInt64 = 0u64
+    public var MaximumAllocationSize: UInt64 = 0u64
+    public var VirtualMemoryThreshold: UInt64 = 0u64
+    public var ProcessAffinityMask: UInt64 = 0u64
+    public var ProcessHeapFlags: UInt32 = 0u32
+    public var CSDVersion: UInt16 = 0u16
+    public var DependentLoadFlags: UInt16 = 0u16
+    public var EditList: UInt64 = 0u64
+    public var SecurityCookie: UInt64 = 0u64
+    public var SEHandlerTable: UInt64 = 0u64
+    public var SEHandlerCount: UInt64 = 0u64
+    public var GuardCFCheckFunctionPointer: UInt64 = 0u64
+    public var GuardCFDispatchFunctionPointer: UInt64 = 0u64
+    public var GuardCFFunctionTable: UInt64 = 0u64
+    public var GuardCFFunctionCount: UInt64 = 0u64
+    public var GuardFlags: UInt32 = 0u32
+    public var CodeIntegrity: IMAGE_LOAD_CONFIG_CODE_INTEGRITY = IMAGE_LOAD_CONFIG_CODE_INTEGRITY()
+    public var GuardAddressTakenIatEntryTable: UInt64 = 0u64
+    public var GuardAddressTakenIatEntryCount: UInt64 = 0u64
+    public var GuardLongJumpTargetTable: UInt64 = 0u64
+    public var GuardLongJumpTargetCount: UInt64 = 0u64
+    public var DynamicValueRelocTable: UInt64 = 0u64
+    public var CHPEMetadataPointer: UInt64 = 0u64
+    public var GuardRFFailureRoutine: UInt64 = 0u64
+    public var GuardRFFailureRoutineFunctionPointer: UInt64 = 0u64
+    public var DynamicValueRelocTableOffset: UInt32 = 0u32
+    public var DynamicValueRelocTableSection: UInt16 = 0u16
+    public var Reserved2: UInt16 = 0u16
+    public var GuardRFVerifyStackPointerFunctionPointer: UInt64 = 0u64
+    public var HotPatchTableOffset: UInt32 = 0u32
+    public var Reserved3: UInt32 = 0u32
+    public var EnclaveConfigurationPointer: UInt64 = 0u64
+    public var VolatileMetadataPointer: UInt64 = 0u64
+    public var GuardEHContinuationTable: UInt64 = 0u64
+    public var GuardEHContinuationCount: UInt64 = 0u64
+    public var GuardXFGCheckFunctionPointer: UInt64 = 0u64
+    public var GuardXFGDispatchFunctionPointer: UInt64 = 0u64
+    public var GuardXFGTableDispatchFunctionPointer: UInt64 = 0u64
+    public var CastGuardOsDeterminedFailureMode: UInt64 = 0u64
+    public var GuardMemcpyFunctionPointer: UInt64 = 0u64
+    public var UmaFunctionPointers: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_NT_HEADERS32 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_NT_HEADERS32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_NT_HEADERS32 {
+    public var Signature: UInt32 = 0u32
+    public var FileHeader: IMAGE_FILE_HEADER = IMAGE_FILE_HEADER()
+    public var OptionalHeader: IMAGE_OPTIONAL_HEADER32 = IMAGE_OPTIONAL_HEADER32()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_NT_HEADERS64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_NT_HEADERS64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_NT_HEADERS64 {
+    public var Signature: UInt32 = 0u32
+    public var FileHeader: IMAGE_FILE_HEADER = IMAGE_FILE_HEADER()
+    public var OptionalHeader: IMAGE_OPTIONAL_HEADER64 = IMAGE_OPTIONAL_HEADER64()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_OPTIONAL_HEADER32 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_OPTIONAL_HEADER32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_OPTIONAL_HEADER32 {
+    public var Magic: UInt16 = 0u16
+    public var MajorLinkerVersion: UInt8 = 0u8
+    public var MinorLinkerVersion: UInt8 = 0u8
+    public var SizeOfCode: UInt32 = 0u32
+    public var SizeOfInitializedData: UInt32 = 0u32
+    public var SizeOfUninitializedData: UInt32 = 0u32
+    public var AddressOfEntryPoint: UInt32 = 0u32
+    public var BaseOfCode: UInt32 = 0u32
+    public var BaseOfData: UInt32 = 0u32
+    public var ImageBase: UInt32 = 0u32
+    public var SectionAlignment: UInt32 = 0u32
+    public var FileAlignment: UInt32 = 0u32
+    public var MajorOperatingSystemVersion: UInt16 = 0u16
+    public var MinorOperatingSystemVersion: UInt16 = 0u16
+    public var MajorImageVersion: UInt16 = 0u16
+    public var MinorImageVersion: UInt16 = 0u16
+    public var MajorSubsystemVersion: UInt16 = 0u16
+    public var MinorSubsystemVersion: UInt16 = 0u16
+    public var Win32VersionValue: UInt32 = 0u32
+    public var SizeOfImage: UInt32 = 0u32
+    public var SizeOfHeaders: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var Subsystem: UInt16 = 0u16
+    public var DllCharacteristics: UInt16 = 0u16
+    public var SizeOfStackReserve: UInt32 = 0u32
+    public var SizeOfStackCommit: UInt32 = 0u32
+    public var SizeOfHeapReserve: UInt32 = 0u32
+    public var SizeOfHeapCommit: UInt32 = 0u32
+    public var LoaderFlags: UInt32 = 0u32
+    public var NumberOfRvaAndSizes: UInt32 = 0u32
+    public var DataDirectory: VArray<IMAGE_DATA_DIRECTORY, $16> = VArray<IMAGE_DATA_DIRECTORY, $16>(repeat: IMAGE_DATA_DIRECTORY())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_OPTIONAL_HEADER64 (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_OPTIONAL_HEADER64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_OPTIONAL_HEADER64 {
+    public var Magic: UInt16 = 0u16
+    public var MajorLinkerVersion: UInt8 = 0u8
+    public var MinorLinkerVersion: UInt8 = 0u8
+    public var SizeOfCode: UInt32 = 0u32
+    public var SizeOfInitializedData: UInt32 = 0u32
+    public var SizeOfUninitializedData: UInt32 = 0u32
+    public var AddressOfEntryPoint: UInt32 = 0u32
+    public var BaseOfCode: UInt32 = 0u32
+    public var ImageBase: UInt64 = 0u64
+    public var SectionAlignment: UInt32 = 0u32
+    public var FileAlignment: UInt32 = 0u32
+    public var MajorOperatingSystemVersion: UInt16 = 0u16
+    public var MinorOperatingSystemVersion: UInt16 = 0u16
+    public var MajorImageVersion: UInt16 = 0u16
+    public var MinorImageVersion: UInt16 = 0u16
+    public var MajorSubsystemVersion: UInt16 = 0u16
+    public var MinorSubsystemVersion: UInt16 = 0u16
+    public var Win32VersionValue: UInt32 = 0u32
+    public var SizeOfImage: UInt32 = 0u32
+    public var SizeOfHeaders: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var Subsystem: UInt16 = 0u16
+    public var DllCharacteristics: UInt16 = 0u16
+    public var SizeOfStackReserve: UInt64 = 0u64
+    public var SizeOfStackCommit: UInt64 = 0u64
+    public var SizeOfHeapReserve: UInt64 = 0u64
+    public var SizeOfHeapCommit: UInt64 = 0u64
+    public var LoaderFlags: UInt32 = 0u32
+    public var NumberOfRvaAndSizes: UInt32 = 0u32
+    public var DataDirectory: VArray<IMAGE_DATA_DIRECTORY, $16> = VArray<IMAGE_DATA_DIRECTORY, $16>(repeat: IMAGE_DATA_DIRECTORY())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_OPTIONAL_HEADER_MAGIC (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_OPTIONAL_HEADER_MAGIC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_OPTIONAL_HEADER_MAGIC {
+    public let value: UInt16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_OPTIONAL_HEADER_MAGIC_IMAGE_NT_OPTIONAL_HDR_MAGIC = IMAGE_OPTIONAL_HEADER_MAGIC(523)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_OPTIONAL_HEADER_MAGIC_IMAGE_NT_OPTIONAL_HDR32_MAGIC = IMAGE_OPTIONAL_HEADER_MAGIC(267)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_OPTIONAL_HEADER_MAGIC_IMAGE_NT_OPTIONAL_HDR64_MAGIC = IMAGE_OPTIONAL_HEADER_MAGIC(523)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_OPTIONAL_HEADER_MAGIC_IMAGE_ROM_OPTIONAL_HDR_MAGIC = IMAGE_OPTIONAL_HEADER_MAGIC(263)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_ROM_HEADERS (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_ROM_HEADERS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_ROM_HEADERS {
+    public var FileHeader: IMAGE_FILE_HEADER = IMAGE_FILE_HEADER()
+    public var OptionalHeader: IMAGE_ROM_OPTIONAL_HEADER = IMAGE_ROM_OPTIONAL_HEADER()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_ROM_OPTIONAL_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_ROM_OPTIONAL_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_ROM_OPTIONAL_HEADER {
+    public var Magic: UInt16 = 0u16
+    public var MajorLinkerVersion: UInt8 = 0u8
+    public var MinorLinkerVersion: UInt8 = 0u8
+    public var SizeOfCode: UInt32 = 0u32
+    public var SizeOfInitializedData: UInt32 = 0u32
+    public var SizeOfUninitializedData: UInt32 = 0u32
+    public var AddressOfEntryPoint: UInt32 = 0u32
+    public var BaseOfCode: UInt32 = 0u32
+    public var BaseOfData: UInt32 = 0u32
+    public var BaseOfBss: UInt32 = 0u32
+    public var GprMask: UInt32 = 0u32
+    public var CprMask: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0u32)
+    public var GpValue: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_RUNTIME_FUNCTION_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_RUNTIME_FUNCTION_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_RUNTIME_FUNCTION_ENTRY {
+    public var BeginAddress: UInt32 = 0u32
+    public var EndAddress: UInt32 = 0u32
+    public var Anonymous: IMAGE_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union = IMAGE_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_RUNTIME_FUNCTION_ENTRY._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_RUNTIME_FUNCTION_ENTRY__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop UnwindInfoAddress: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop UnwindData: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_SECTION_CHARACTERISTICS (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_SECTION_CHARACTERISTICS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_SECTION_CHARACTERISTICS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: IMAGE_SECTION_CHARACTERISTICS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: IMAGE_SECTION_CHARACTERISTICS): IMAGE_SECTION_CHARACTERISTICS {
+        return IMAGE_SECTION_CHARACTERISTICS(value | other.value)
+    }
+    public operator func &(other: IMAGE_SECTION_CHARACTERISTICS): IMAGE_SECTION_CHARACTERISTICS {
+        return IMAGE_SECTION_CHARACTERISTICS(value & other.value)
+    }
+    public operator func ^(other: IMAGE_SECTION_CHARACTERISTICS): IMAGE_SECTION_CHARACTERISTICS {
+        return IMAGE_SECTION_CHARACTERISTICS(value ^ other.value)
+    }
+    public operator func !(): IMAGE_SECTION_CHARACTERISTICS {
+        return IMAGE_SECTION_CHARACTERISTICS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_TYPE_NO_PAD = IMAGE_SECTION_CHARACTERISTICS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_CNT_CODE = IMAGE_SECTION_CHARACTERISTICS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_CNT_INITIALIZED_DATA = IMAGE_SECTION_CHARACTERISTICS(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_CNT_UNINITIALIZED_DATA = IMAGE_SECTION_CHARACTERISTICS(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_LNK_OTHER = IMAGE_SECTION_CHARACTERISTICS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_LNK_INFO = IMAGE_SECTION_CHARACTERISTICS(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_LNK_REMOVE = IMAGE_SECTION_CHARACTERISTICS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_LNK_COMDAT = IMAGE_SECTION_CHARACTERISTICS(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_NO_DEFER_SPEC_EXC = IMAGE_SECTION_CHARACTERISTICS(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_GPREL = IMAGE_SECTION_CHARACTERISTICS(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_FARDATA = IMAGE_SECTION_CHARACTERISTICS(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_PURGEABLE = IMAGE_SECTION_CHARACTERISTICS(131072)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_16BIT = IMAGE_SECTION_CHARACTERISTICS(131072)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_LOCKED = IMAGE_SECTION_CHARACTERISTICS(262144)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_PRELOAD = IMAGE_SECTION_CHARACTERISTICS(524288)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_1BYTES = IMAGE_SECTION_CHARACTERISTICS(1048576)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_2BYTES = IMAGE_SECTION_CHARACTERISTICS(2097152)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_4BYTES = IMAGE_SECTION_CHARACTERISTICS(3145728)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_8BYTES = IMAGE_SECTION_CHARACTERISTICS(4194304)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_16BYTES = IMAGE_SECTION_CHARACTERISTICS(5242880)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_32BYTES = IMAGE_SECTION_CHARACTERISTICS(6291456)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_64BYTES = IMAGE_SECTION_CHARACTERISTICS(7340032)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_128BYTES = IMAGE_SECTION_CHARACTERISTICS(8388608)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_256BYTES = IMAGE_SECTION_CHARACTERISTICS(9437184)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_512BYTES = IMAGE_SECTION_CHARACTERISTICS(10485760)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_1024BYTES = IMAGE_SECTION_CHARACTERISTICS(11534336)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_2048BYTES = IMAGE_SECTION_CHARACTERISTICS(12582912)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_4096BYTES = IMAGE_SECTION_CHARACTERISTICS(13631488)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_8192BYTES = IMAGE_SECTION_CHARACTERISTICS(14680064)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_ALIGN_MASK = IMAGE_SECTION_CHARACTERISTICS(15728640)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_LNK_NRELOC_OVFL = IMAGE_SECTION_CHARACTERISTICS(16777216)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_DISCARDABLE = IMAGE_SECTION_CHARACTERISTICS(33554432)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_NOT_CACHED = IMAGE_SECTION_CHARACTERISTICS(67108864)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_NOT_PAGED = IMAGE_SECTION_CHARACTERISTICS(134217728)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_SHARED = IMAGE_SECTION_CHARACTERISTICS(268435456)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_EXECUTE = IMAGE_SECTION_CHARACTERISTICS(536870912)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_READ = IMAGE_SECTION_CHARACTERISTICS(1073741824)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_MEM_WRITE = IMAGE_SECTION_CHARACTERISTICS(2147483648)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SECTION_CHARACTERISTICS_IMAGE_SCN_SCALE_INDEX = IMAGE_SECTION_CHARACTERISTICS(1)
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_SECTION_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_SECTION_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_SECTION_HEADER {
+    public var Name: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
+    public var Misc: IMAGE_SECTION_HEADER__Misc_e__Union = IMAGE_SECTION_HEADER__Misc_e__Union()
+    public var VirtualAddress: UInt32 = 0u32
+    public var SizeOfRawData: UInt32 = 0u32
+    public var PointerToRawData: UInt32 = 0u32
+    public var PointerToRelocations: UInt32 = 0u32
+    public var PointerToLinenumbers: UInt32 = 0u32
+    public var NumberOfRelocations: UInt16 = 0u16
+    public var NumberOfLinenumbers: UInt16 = 0u16
+    public var Characteristics: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_SECTION_HEADER._Misc_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_SECTION_HEADER__Misc_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IMAGE_SECTION_HEADER__Misc_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop PhysicalAddress: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop VirtualSize: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IMAGE_SUBSYSTEM (synthetic:Windows_Win32_System_Diagnostics_Debug_IMAGE_SUBSYSTEM)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IMAGE_SUBSYSTEM {
+    public let value: UInt16
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt16) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_UNKNOWN = IMAGE_SUBSYSTEM(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_NATIVE = IMAGE_SUBSYSTEM(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_WINDOWS_GUI = IMAGE_SUBSYSTEM(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_WINDOWS_CUI = IMAGE_SUBSYSTEM(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_OS2_CUI = IMAGE_SUBSYSTEM(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_POSIX_CUI = IMAGE_SUBSYSTEM(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_NATIVE_WINDOWS = IMAGE_SUBSYSTEM(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_WINDOWS_CE_GUI = IMAGE_SUBSYSTEM(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_EFI_APPLICATION = IMAGE_SUBSYSTEM(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_EFI_BOOT_SERVICE_DRIVER = IMAGE_SUBSYSTEM(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER = IMAGE_SUBSYSTEM(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_EFI_ROM = IMAGE_SUBSYSTEM(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_XBOX = IMAGE_SUBSYSTEM(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION = IMAGE_SUBSYSTEM(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IMAGE_SUBSYSTEM_IMAGE_SUBSYSTEM_XBOX_CODE_CATALOG = IMAGE_SUBSYSTEM(17)
+
+// Windows.Win32.System.Diagnostics.Debug.IObjectSafety (synthetic:Windows_Win32_System_Diagnostics_Debug_IObjectSafety)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IObjectSafety <: Resource & windows_core.HandleWinrtType<IObjectSafety> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IObjectSafety.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IObjectSafety"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3411795073u32, 37825u16, 4559u16, 143u8, 32u8, 0u8, 128u8, 95u8, 44u8, 208u8, 100u8)
+    }
+
+    public static func intoWinrtHandle(value: IObjectSafety): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IObjectSafety): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IObjectSafety.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IObjectSafety {
+        IObjectSafety(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IObjectSafety {
+        IObjectSafety(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IObjectSafety): IObjectSafety {
+        let raw = IObjectSafety.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IObjectSafety(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IObjectSafetyVtbl (synthetic:IObjectSafetyVtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IObjectSafetyVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetInterfaceSafetyOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetInterfaceSafetyOptions: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IPMI_OS_SEL_RECORD (synthetic:Windows_Win32_System_Diagnostics_Debug_IPMI_OS_SEL_RECORD)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IPMI_OS_SEL_RECORD {
+    public var Signature: UInt32 = 0u32
+    public var Version: UInt32 = 0u32
+    public var Length: UInt32 = 0u32
+    public var RecordType: Int32 = 0i32
+    public var DataLength: UInt32 = 0u32
+    public var Data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IPMI_OS_SEL_RECORD_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_IPMI_OS_SEL_RECORD_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct IPMI_OS_SEL_RECORD_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeWhea = IPMI_OS_SEL_RECORD_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeOther = IPMI_OS_SEL_RECORD_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeWheaErrorXpfMca = IPMI_OS_SEL_RECORD_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeWheaErrorPci = IPMI_OS_SEL_RECORD_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeWheaErrorNmi = IPMI_OS_SEL_RECORD_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeWheaErrorOther = IPMI_OS_SEL_RECORD_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeRaw = IPMI_OS_SEL_RECORD_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeDriver = IPMI_OS_SEL_RECORD_TYPE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeBugcheckRecovery = IPMI_OS_SEL_RECORD_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeBugcheckData = IPMI_OS_SEL_RECORD_TYPE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const IPMI_OS_SEL_RECORD_TYPE_IpmiOsSelRecordTypeMax = IPMI_OS_SEL_RECORD_TYPE(10)
+
+// Windows.Win32.System.Diagnostics.Debug.IPerPropertyBrowsing2 (synthetic:Windows_Win32_System_Diagnostics_Debug_IPerPropertyBrowsing2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public class IPerPropertyBrowsing2 <: Resource & windows_core.HandleWinrtType<IPerPropertyBrowsing2> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            IPerPropertyBrowsing2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Diagnostics.Debug.IPerPropertyBrowsing2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1368865876u32, 51980u16, 4560u16, 181u8, 201u8, 0u8, 160u8, 36u8, 74u8, 14u8, 122u8)
+    }
+
+    public static func intoWinrtHandle(value: IPerPropertyBrowsing2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: IPerPropertyBrowsing2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        IPerPropertyBrowsing2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): IPerPropertyBrowsing2 {
+        IPerPropertyBrowsing2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): IPerPropertyBrowsing2 {
+        IPerPropertyBrowsing2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: IPerPropertyBrowsing2): IPerPropertyBrowsing2 {
+        let raw = IPerPropertyBrowsing2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        IPerPropertyBrowsing2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.IPerPropertyBrowsing2Vtbl (synthetic:IPerPropertyBrowsing2Vtbl)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct IPerPropertyBrowsing2Vtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var GetDisplayString: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>())
+    public var MapPropertyToPage: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetPredefinedStrings: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetPredefinedValue: CFunc<(CPointer<Unit>, Int32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Diagnostics.Debug.KDHELP (synthetic:Windows_Win32_System_Diagnostics_Debug_KDHELP)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct KDHELP {
+    public var Thread: UInt32 = 0u32
+    public var ThCallbackStack: UInt32 = 0u32
+    public var NextCallback: UInt32 = 0u32
+    public var FramePointer: UInt32 = 0u32
+    public var KiCallUserMode: UInt32 = 0u32
+    public var KeUserCallbackDispatcher: UInt32 = 0u32
+    public var SystemRangeStart: UInt32 = 0u32
+    public var ThCallbackBStore: UInt32 = 0u32
+    public var KiUserExceptionDispatcher: UInt32 = 0u32
+    public var StackBase: UInt32 = 0u32
+    public var StackLimit: UInt32 = 0u32
+    public var Reserved: VArray<UInt32, $5> = VArray<UInt32, $5>(repeat: 0u32)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.KDHELP64 (synthetic:Windows_Win32_System_Diagnostics_Debug_KDHELP64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct KDHELP64 {
+    public var Thread: UInt64 = 0u64
+    public var ThCallbackStack: UInt32 = 0u32
+    public var ThCallbackBStore: UInt32 = 0u32
+    public var NextCallback: UInt32 = 0u32
+    public var FramePointer: UInt32 = 0u32
+    public var KiCallUserMode: UInt64 = 0u64
+    public var KeUserCallbackDispatcher: UInt64 = 0u64
+    public var SystemRangeStart: UInt64 = 0u64
+    public var KiUserExceptionDispatcher: UInt64 = 0u64
+    public var StackBase: UInt64 = 0u64
+    public var StackLimit: UInt64 = 0u64
+    public var BuildVersion: UInt32 = 0u32
+    public var RetpolineStubFunctionTableSize: UInt32 = 0u32
+    public var RetpolineStubFunctionTable: UInt64 = 0u64
+    public var RetpolineStubOffset: UInt32 = 0u32
+    public var RetpolineStubSize: UInt32 = 0u32
+    public var Reserved0: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS (synthetic:Windows_Win32_System_Diagnostics_Debug_KNONVOLATILE_CONTEXT_POINTERS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct KNONVOLATILE_CONTEXT_POINTERS {
+    public var X19: CPointer<Unit> = CPointer<Unit>()
+    public var X20: CPointer<Unit> = CPointer<Unit>()
+    public var X21: CPointer<Unit> = CPointer<Unit>()
+    public var X22: CPointer<Unit> = CPointer<Unit>()
+    public var X23: CPointer<Unit> = CPointer<Unit>()
+    public var X24: CPointer<Unit> = CPointer<Unit>()
+    public var X25: CPointer<Unit> = CPointer<Unit>()
+    public var X26: CPointer<Unit> = CPointer<Unit>()
+    public var X27: CPointer<Unit> = CPointer<Unit>()
+    public var X28: CPointer<Unit> = CPointer<Unit>()
+    public var Fp: CPointer<Unit> = CPointer<Unit>()
+    public var Lr: CPointer<Unit> = CPointer<Unit>()
+    public var D8: CPointer<Unit> = CPointer<Unit>()
+    public var D9: CPointer<Unit> = CPointer<Unit>()
+    public var D10: CPointer<Unit> = CPointer<Unit>()
+    public var D11: CPointer<Unit> = CPointer<Unit>()
+    public var D12: CPointer<Unit> = CPointer<Unit>()
+    public var D13: CPointer<Unit> = CPointer<Unit>()
+    public var D14: CPointer<Unit> = CPointer<Unit>()
+    public var D15: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS._Anonymous1_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_KNONVOLATILE_CONTEXT_POINTERS__Anonymous1_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct KNONVOLATILE_CONTEXT_POINTERS__Anonymous1_e__Union {
+    public var _raw: VArray<UInt64, $16> = VArray<UInt64, $16>(repeat: 0u64)
+
+    public mut prop FloatingContext: VArray<CPointer<Unit>, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CPointer<Unit>, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CPointer<Unit>, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous: KNONVOLATILE_CONTEXT_POINTERS__Anonymous1_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<KNONVOLATILE_CONTEXT_POINTERS__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<KNONVOLATILE_CONTEXT_POINTERS__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS._Anonymous1_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_KNONVOLATILE_CONTEXT_POINTERS__Anonymous1_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct KNONVOLATILE_CONTEXT_POINTERS__Anonymous1_e__Union__Anonymous_e__Struct {
+    public var Xmm0: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm1: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm2: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm3: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm4: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm5: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm6: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm7: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm8: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm9: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm10: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm11: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm12: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm13: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm14: CPointer<Unit> = CPointer<Unit>()
+    public var Xmm15: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS._Anonymous2_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_KNONVOLATILE_CONTEXT_POINTERS__Anonymous2_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct KNONVOLATILE_CONTEXT_POINTERS__Anonymous2_e__Union {
+    public var _raw: VArray<UInt64, $16> = VArray<UInt64, $16>(repeat: 0u64)
+
+    public mut prop IntegerContext: VArray<CPointer<Unit>, $16> {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CPointer<Unit>, $16>>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<VArray<CPointer<Unit>, $16>>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous: KNONVOLATILE_CONTEXT_POINTERS__Anonymous2_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<KNONVOLATILE_CONTEXT_POINTERS__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<KNONVOLATILE_CONTEXT_POINTERS__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.KNONVOLATILE_CONTEXT_POINTERS._Anonymous2_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_KNONVOLATILE_CONTEXT_POINTERS__Anonymous2_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct KNONVOLATILE_CONTEXT_POINTERS__Anonymous2_e__Union__Anonymous_e__Struct {
+    public var Rax: CPointer<Unit> = CPointer<Unit>()
+    public var Rcx: CPointer<Unit> = CPointer<Unit>()
+    public var Rdx: CPointer<Unit> = CPointer<Unit>()
+    public var Rbx: CPointer<Unit> = CPointer<Unit>()
+    public var Rsp: CPointer<Unit> = CPointer<Unit>()
+    public var Rbp: CPointer<Unit> = CPointer<Unit>()
+    public var Rsi: CPointer<Unit> = CPointer<Unit>()
+    public var Rdi: CPointer<Unit> = CPointer<Unit>()
+    public var R8: CPointer<Unit> = CPointer<Unit>()
+    public var R9: CPointer<Unit> = CPointer<Unit>()
+    public var R10: CPointer<Unit> = CPointer<Unit>()
+    public var R11: CPointer<Unit> = CPointer<Unit>()
+    public var R12: CPointer<Unit> = CPointer<Unit>()
+    public var R13: CPointer<Unit> = CPointer<Unit>()
+    public var R14: CPointer<Unit> = CPointer<Unit>()
+    public var R15: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.LDT_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_LDT_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct LDT_ENTRY {
+    public var LimitLow: UInt16 = 0u16
+    public var BaseLow: UInt16 = 0u16
+    public var HighWord: LDT_ENTRY__HighWord_e__Union = LDT_ENTRY__HighWord_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.LDT_ENTRY._HighWord_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_LDT_ENTRY__HighWord_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct LDT_ENTRY__HighWord_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Bytes: LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Bits: LDT_ENTRY__HighWord_e__Union__Bits_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<LDT_ENTRY__HighWord_e__Union__Bits_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<LDT_ENTRY__HighWord_e__Union__Bits_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.LDT_ENTRY._HighWord_e__Union._Bits_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_LDT_ENTRY__HighWord_e__Union__Bits_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct LDT_ENTRY__HighWord_e__Union__Bits_e__Struct {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop BaseMid: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 8)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 8, val)
+        }
+    }
+
+    public mut prop Type: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 8, 5)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 8, 5, val)
+        }
+    }
+
+    public mut prop Dpl: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 13, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 13, 2, val)
+        }
+    }
+
+    public mut prop Pres: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 15, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 15, 1, val)
+        }
+    }
+
+    public mut prop LimitHi: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 16, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 16, 4, val)
+        }
+    }
+
+    public mut prop Sys: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 20, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 20, 1, val)
+        }
+    }
+
+    public mut prop Reserved_0: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 21, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 21, 1, val)
+        }
+    }
+
+    public mut prop Default_Big: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 22, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 22, 1, val)
+        }
+    }
+
+    public mut prop Granularity: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 23, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 23, 1, val)
+        }
+    }
+
+    public mut prop BaseHi: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 24, 8)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 24, 8, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.LDT_ENTRY._HighWord_e__Union._Bytes_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct {
+    public var BaseMid: UInt8 = 0u8
+    public var Flags1: UInt8 = 0u8
+    public var Flags2: UInt8 = 0u8
+    public var BaseHi: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.LOADED_IMAGE (synthetic:Windows_Win32_System_Diagnostics_Debug_LOADED_IMAGE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct LOADED_IMAGE {
+    public var ModuleName: CPointer<UInt8> = CPointer<UInt8>()
+    public var hFile: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var MappedAddress: CPointer<Unit> = CPointer<Unit>()
+    public var FileHeader: CPointer<Unit> = CPointer<Unit>()
+    public var LastRvaSection: CPointer<Unit> = CPointer<Unit>()
+    public var NumberOfSections: UInt32 = 0u32
+    public var Sections: CPointer<Unit> = CPointer<Unit>()
+    public var Characteristics: UInt32 = 0u32
+    public var fSystemImage: UInt8 = 0u8
+    public var fDOSImage: UInt8 = 0u8
+    public var fReadOnly: UInt8 = 0u8
+    public var Version: UInt8 = 0u8
+    public var Links: Windows_Win32_System_Kernel.LIST_ENTRY = Windows_Win32_System_Kernel.LIST_ENTRY()
+    public var SizeOfImage: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.LOAD_DLL_DEBUG_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_LOAD_DLL_DEBUG_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct LOAD_DLL_DEBUG_INFO {
+    public var hFile: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var lpBaseOfDll: CPointer<Unit> = CPointer<Unit>()
+    public var dwDebugInfoFileOffset: UInt32 = 0u32
+    public var nDebugInfoSize: UInt32 = 0u32
+    public var lpImageName: CPointer<Unit> = CPointer<Unit>()
+    public var fUnicode: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Diagnostics.Debug.LPCALL_BACK_USER_INTERRUPT_ROUTINE (synthetic:Windows_Win32_System_Diagnostics_Debug_LPCALL_BACK_USER_INTERRUPT_ROUTINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type LPCALL_BACK_USER_INTERRUPT_ROUTINE = CFunc<() -> UInt32>
+
+// Windows.Win32.System.Diagnostics.Debug.LPTOP_LEVEL_EXCEPTION_FILTER (synthetic:Windows_Win32_System_Diagnostics_Debug_LPTOP_LEVEL_EXCEPTION_FILTER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type LPTOP_LEVEL_EXCEPTION_FILTER = CFunc<(CPointer<Unit>) -> Int32>
+
 // Windows.Win32.System.Diagnostics.Debug.M128A (synthetic:Windows_Win32_System_Diagnostics_Debug_M128A)
 @When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct M128A {
     public var Low: UInt64 = 0u64
     public var High: Int64 = 0i64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MEMORY_DEFECT (synthetic:Windows_Win32_System_Diagnostics_Debug_MEMORY_DEFECT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MEMORY_DEFECT {
+    public var Version: UInt32 = 0u32
+    public var DimmInfo: DIMM_INFO = DIMM_INFO()
+    public var ErrType: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_INFORMATION {
+    public var CallbackRoutine: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var CallbackParam: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_INPUT (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_INPUT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_INPUT {
+    public var ProcessId: UInt32 = 0u32
+    public var ProcessHandle: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var CallbackType: UInt32 = 0u32
+    public var Anonymous: MINIDUMP_CALLBACK_INPUT__Anonymous_e__Union = MINIDUMP_CALLBACK_INPUT__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_INPUT._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_INPUT__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_INPUT__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop Status: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Thread: MINIDUMP_THREAD_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_THREAD_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_THREAD_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ThreadEx: MINIDUMP_THREAD_EX_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_THREAD_EX_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_THREAD_EX_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Module: MINIDUMP_MODULE_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_MODULE_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_MODULE_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop IncludeThread: MINIDUMP_INCLUDE_THREAD_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_INCLUDE_THREAD_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_INCLUDE_THREAD_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop IncludeModule: MINIDUMP_INCLUDE_MODULE_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_INCLUDE_MODULE_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_INCLUDE_MODULE_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Io: MINIDUMP_IO_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_IO_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_IO_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ReadMemoryFailure: MINIDUMP_READ_MEMORY_FAILURE_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_READ_MEMORY_FAILURE_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_READ_MEMORY_FAILURE_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop SecondaryFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop VmQuery: MINIDUMP_VM_QUERY_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_VM_QUERY_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_VM_QUERY_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop VmPreRead: MINIDUMP_VM_PRE_READ_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_VM_PRE_READ_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_VM_PRE_READ_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop VmPostRead: MINIDUMP_VM_POST_READ_CALLBACK {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_VM_POST_READ_CALLBACK>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_VM_POST_READ_CALLBACK>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_OUTPUT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_OUTPUT {
+    public var Anonymous: MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union = MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop ModuleWriteFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ThreadWriteFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop SecondaryFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous1: MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous1_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous1_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous1_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous2: MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous2_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous2_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous2_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Handle: Windows_Win32_Foundation.HANDLE {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_Foundation.HANDLE>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<Windows_Win32_Foundation.HANDLE>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous3: MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous3_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous3_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous3_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous4: MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous4_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous4_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous4_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous5: MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous5_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous5_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous5_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Status: Int32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT._Anonymous_e__Union._Anonymous1_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous1_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous1_e__Struct {
+    public var MemoryBase: UInt64 = 0u64
+    public var MemorySize: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT._Anonymous_e__Union._Anonymous2_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous2_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous2_e__Struct {
+    public var CheckCancel: Int32 = 0i32
+    public var Cancel: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT._Anonymous_e__Union._Anonymous3_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous3_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous3_e__Struct {
+    public var VmRegion: MINIDUMP_MEMORY_INFO = MINIDUMP_MEMORY_INFO()
+    public var Continue: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT._Anonymous_e__Union._Anonymous4_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous4_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous4_e__Struct {
+    public var VmQueryStatus: Int32 = 0i32
+    public var VmQueryResult: MINIDUMP_MEMORY_INFO = MINIDUMP_MEMORY_INFO()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT._Anonymous_e__Union._Anonymous5_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous5_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_CALLBACK_OUTPUT__Anonymous_e__Union__Anonymous5_e__Struct {
+    public var VmReadStatus: Int32 = 0i32
+    public var VmReadBytesCompleted: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_ROUTINE (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_ROUTINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type MINIDUMP_CALLBACK_ROUTINE = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_CALLBACK_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MINIDUMP_CALLBACK_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_ModuleCallback = MINIDUMP_CALLBACK_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_ThreadCallback = MINIDUMP_CALLBACK_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_ThreadExCallback = MINIDUMP_CALLBACK_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_IncludeThreadCallback = MINIDUMP_CALLBACK_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_IncludeModuleCallback = MINIDUMP_CALLBACK_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_MemoryCallback = MINIDUMP_CALLBACK_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_CancelCallback = MINIDUMP_CALLBACK_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_WriteKernelMinidumpCallback = MINIDUMP_CALLBACK_TYPE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_KernelMinidumpStatusCallback = MINIDUMP_CALLBACK_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_RemoveMemoryCallback = MINIDUMP_CALLBACK_TYPE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_IncludeVmRegionCallback = MINIDUMP_CALLBACK_TYPE(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_IoStartCallback = MINIDUMP_CALLBACK_TYPE(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_IoWriteAllCallback = MINIDUMP_CALLBACK_TYPE(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_IoFinishCallback = MINIDUMP_CALLBACK_TYPE(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_ReadMemoryFailureCallback = MINIDUMP_CALLBACK_TYPE(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_SecondaryFlagsCallback = MINIDUMP_CALLBACK_TYPE(15)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_IsProcessSnapshotCallback = MINIDUMP_CALLBACK_TYPE(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_VmStartCallback = MINIDUMP_CALLBACK_TYPE(17)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_VmQueryCallback = MINIDUMP_CALLBACK_TYPE(18)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_VmPreReadCallback = MINIDUMP_CALLBACK_TYPE(19)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_CALLBACK_TYPE_VmPostReadCallback = MINIDUMP_CALLBACK_TYPE(20)
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_DIRECTORY (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_DIRECTORY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_DIRECTORY {
+    public var StreamType: UInt32 = 0u32
+    public var Location: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_EXCEPTION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_EXCEPTION {
+    public var ExceptionCode: UInt32 = 0u32
+    public var ExceptionFlags: UInt32 = 0u32
+    public var ExceptionRecord: UInt64 = 0u64
+    public var ExceptionAddress: UInt64 = 0u64
+    public var NumberParameters: UInt32 = 0u32
+    public var __unusedAlignment: UInt32 = 0u32
+    public var ExceptionInformation: VArray<UInt64, $15> = VArray<UInt64, $15>(repeat: 0u64)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_EXCEPTION_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_EXCEPTION_INFORMATION {
+    public var ThreadId: UInt32 = 0u32
+    public var ExceptionPointers: CPointer<Unit> = CPointer<Unit>()
+    public var ClientPointers: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION_INFORMATION64 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_EXCEPTION_INFORMATION64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_EXCEPTION_INFORMATION64 {
+    public var ThreadId: UInt32 = 0u32
+    public var ExceptionRecord: UInt64 = 0u64
+    public var ContextRecord: UInt64 = 0u64
+    public var ClientPointers: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION_STREAM (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_EXCEPTION_STREAM)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_EXCEPTION_STREAM {
+    public var ThreadId: UInt32 = 0u32
+    public var __alignment: UInt32 = 0u32
+    public var ExceptionRecord: MINIDUMP_EXCEPTION = MINIDUMP_EXCEPTION()
+    public var ThreadContext: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_FUNCTION_TABLE_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_FUNCTION_TABLE_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_FUNCTION_TABLE_DESCRIPTOR {
+    public var MinimumAddress: UInt64 = 0u64
+    public var MaximumAddress: UInt64 = 0u64
+    public var BaseAddress: UInt64 = 0u64
+    public var EntryCount: UInt32 = 0u32
+    public var SizeOfAlignPad: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_FUNCTION_TABLE_STREAM (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_FUNCTION_TABLE_STREAM)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_FUNCTION_TABLE_STREAM {
+    public var SizeOfHeader: UInt32 = 0u32
+    public var SizeOfDescriptor: UInt32 = 0u32
+    public var SizeOfNativeDescriptor: UInt32 = 0u32
+    public var SizeOfFunctionEntry: UInt32 = 0u32
+    public var NumberOfDescriptors: UInt32 = 0u32
+    public var SizeOfAlignPad: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_DATA_STREAM (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HANDLE_DATA_STREAM)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_HANDLE_DATA_STREAM {
+    public var SizeOfHeader: UInt32 = 0u32
+    public var SizeOfDescriptor: UInt32 = 0u32
+    public var NumberOfDescriptors: UInt32 = 0u32
+    public var Reserved: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HANDLE_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_HANDLE_DESCRIPTOR {
+    public var Handle: UInt64 = 0u64
+    public var TypeNameRva: UInt32 = 0u32
+    public var ObjectNameRva: UInt32 = 0u32
+    public var Attributes: UInt32 = 0u32
+    public var GrantedAccess: UInt32 = 0u32
+    public var HandleCount: UInt32 = 0u32
+    public var PointerCount: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_DESCRIPTOR_2 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HANDLE_DESCRIPTOR_2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_HANDLE_DESCRIPTOR_2 {
+    public var Handle: UInt64 = 0u64
+    public var TypeNameRva: UInt32 = 0u32
+    public var ObjectNameRva: UInt32 = 0u32
+    public var Attributes: UInt32 = 0u32
+    public var GrantedAccess: UInt32 = 0u32
+    public var HandleCount: UInt32 = 0u32
+    public var PointerCount: UInt32 = 0u32
+    public var ObjectInfoRva: UInt32 = 0u32
+    public var Reserved0: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_OBJECT_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HANDLE_OBJECT_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_HANDLE_OBJECT_INFORMATION {
+    public var NextInfoRva: UInt32 = 0u32
+    public var InfoType: UInt32 = 0u32
+    public var SizeOfInfo: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniHandleObjectInformationNone = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniThreadInformation1 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniMutantInformation1 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniMutantInformation2 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniProcessInformation1 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniProcessInformation2 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniEventInformation1 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniSectionInformation1 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniSemaphoreInformation1 = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE_MiniHandleObjectInformationTypeMax = MINIDUMP_HANDLE_OBJECT_INFORMATION_TYPE(9)
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_OPERATION_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HANDLE_OPERATION_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_HANDLE_OPERATION_LIST {
+    public var SizeOfHeader: UInt32 = 0u32
+    public var SizeOfEntry: UInt32 = 0u32
+    public var NumberOfEntries: UInt32 = 0u32
+    public var Reserved: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_HEADER {
+    public var Signature: UInt32 = 0u32
+    public var Version: UInt32 = 0u32
+    public var NumberOfStreams: UInt32 = 0u32
+    public var StreamDirectoryRva: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var Anonymous: MINIDUMP_HEADER__Anonymous_e__Union = MINIDUMP_HEADER__Anonymous_e__Union()
+    public var Flags: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HEADER._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_HEADER__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_HEADER__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop Reserved: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop TimeDateStamp: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_INCLUDE_MODULE_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_INCLUDE_MODULE_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_INCLUDE_MODULE_CALLBACK {
+    public var BaseOfImage: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_INCLUDE_THREAD_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_INCLUDE_THREAD_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_INCLUDE_THREAD_CALLBACK {
+    public var ThreadId: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_IO_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_IO_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_IO_CALLBACK {
+    public var Handle: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var Offset: UInt64 = 0u64
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var BufferBytes: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_LOCATION_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_LOCATION_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_LOCATION_DESCRIPTOR {
+    public var DataSize: UInt32 = 0u32
+    public var Rva: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_LOCATION_DESCRIPTOR64 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_LOCATION_DESCRIPTOR64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_LOCATION_DESCRIPTOR64 {
+    public var DataSize: UInt64 = 0u64
+    public var Rva: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MEMORY64_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MEMORY64_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MEMORY64_LIST {
+    public var NumberOfMemoryRanges: UInt64 = 0u64
+    public var BaseRva: UInt64 = 0u64
+    public var MemoryRanges: VArray<MINIDUMP_MEMORY_DESCRIPTOR64, $1> = VArray<MINIDUMP_MEMORY_DESCRIPTOR64, $1>(repeat: MINIDUMP_MEMORY_DESCRIPTOR64())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MEMORY_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MEMORY_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MEMORY_DESCRIPTOR {
+    public var StartOfMemoryRange: UInt64 = 0u64
+    public var Memory: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MEMORY_DESCRIPTOR64 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MEMORY_DESCRIPTOR64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MEMORY_DESCRIPTOR64 {
+    public var StartOfMemoryRange: UInt64 = 0u64
+    public var DataSize: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MEMORY_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MEMORY_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MEMORY_INFO {
+    public var BaseAddress: UInt64 = 0u64
+    public var AllocationBase: UInt64 = 0u64
+    public var AllocationProtect: UInt32 = 0u32
+    public var __alignment1: UInt32 = 0u32
+    public var RegionSize: UInt64 = 0u64
+    public var State: UInt32 = 0u32
+    public var Protect: UInt32 = 0u32
+    public var Type: UInt32 = 0u32
+    public var __alignment2: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MEMORY_INFO_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MEMORY_INFO_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MEMORY_INFO_LIST {
+    public var SizeOfHeader: UInt32 = 0u32
+    public var SizeOfEntry: UInt32 = 0u32
+    public var NumberOfEntries: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MEMORY_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MEMORY_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MEMORY_LIST {
+    public var NumberOfMemoryRanges: UInt32 = 0u32
+    public var MemoryRanges: VArray<MINIDUMP_MEMORY_DESCRIPTOR, $1> = VArray<MINIDUMP_MEMORY_DESCRIPTOR, $1>(repeat: MINIDUMP_MEMORY_DESCRIPTOR())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MISC_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MISC_INFO {
+    public var SizeOfInfo: UInt32 = 0u32
+    public var Flags1: UInt32 = 0u32
+    public var ProcessId: UInt32 = 0u32
+    public var ProcessCreateTime: UInt32 = 0u32
+    public var ProcessUserTime: UInt32 = 0u32
+    public var ProcessKernelTime: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_2 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MISC_INFO_2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MISC_INFO_2 {
+    public var SizeOfInfo: UInt32 = 0u32
+    public var Flags1: UInt32 = 0u32
+    public var ProcessId: UInt32 = 0u32
+    public var ProcessCreateTime: UInt32 = 0u32
+    public var ProcessUserTime: UInt32 = 0u32
+    public var ProcessKernelTime: UInt32 = 0u32
+    public var ProcessorMaxMhz: UInt32 = 0u32
+    public var ProcessorCurrentMhz: UInt32 = 0u32
+    public var ProcessorMhzLimit: UInt32 = 0u32
+    public var ProcessorMaxIdleState: UInt32 = 0u32
+    public var ProcessorCurrentIdleState: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_3 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MISC_INFO_3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MISC_INFO_3 {
+    public var SizeOfInfo: UInt32 = 0u32
+    public var Flags1: UInt32 = 0u32
+    public var ProcessId: UInt32 = 0u32
+    public var ProcessCreateTime: UInt32 = 0u32
+    public var ProcessUserTime: UInt32 = 0u32
+    public var ProcessKernelTime: UInt32 = 0u32
+    public var ProcessorMaxMhz: UInt32 = 0u32
+    public var ProcessorCurrentMhz: UInt32 = 0u32
+    public var ProcessorMhzLimit: UInt32 = 0u32
+    public var ProcessorMaxIdleState: UInt32 = 0u32
+    public var ProcessorCurrentIdleState: UInt32 = 0u32
+    public var ProcessIntegrityLevel: UInt32 = 0u32
+    public var ProcessExecuteFlags: UInt32 = 0u32
+    public var ProtectedProcess: UInt32 = 0u32
+    public var TimeZoneId: UInt32 = 0u32
+    public var TimeZone: Windows_Win32_System_Time.TIME_ZONE_INFORMATION = Windows_Win32_System_Time.TIME_ZONE_INFORMATION()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_4 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MISC_INFO_4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MISC_INFO_4 {
+    public var SizeOfInfo: UInt32 = 0u32
+    public var Flags1: UInt32 = 0u32
+    public var ProcessId: UInt32 = 0u32
+    public var ProcessCreateTime: UInt32 = 0u32
+    public var ProcessUserTime: UInt32 = 0u32
+    public var ProcessKernelTime: UInt32 = 0u32
+    public var ProcessorMaxMhz: UInt32 = 0u32
+    public var ProcessorCurrentMhz: UInt32 = 0u32
+    public var ProcessorMhzLimit: UInt32 = 0u32
+    public var ProcessorMaxIdleState: UInt32 = 0u32
+    public var ProcessorCurrentIdleState: UInt32 = 0u32
+    public var ProcessIntegrityLevel: UInt32 = 0u32
+    public var ProcessExecuteFlags: UInt32 = 0u32
+    public var ProtectedProcess: UInt32 = 0u32
+    public var TimeZoneId: UInt32 = 0u32
+    public var TimeZone: Windows_Win32_System_Time.TIME_ZONE_INFORMATION = Windows_Win32_System_Time.TIME_ZONE_INFORMATION()
+    public var BuildString: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0u16)
+    public var DbgBldStr: VArray<UInt16, $40> = VArray<UInt16, $40>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_5 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MISC_INFO_5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MISC_INFO_5 {
+    public var SizeOfInfo: UInt32 = 0u32
+    public var Flags1: UInt32 = 0u32
+    public var ProcessId: UInt32 = 0u32
+    public var ProcessCreateTime: UInt32 = 0u32
+    public var ProcessUserTime: UInt32 = 0u32
+    public var ProcessKernelTime: UInt32 = 0u32
+    public var ProcessorMaxMhz: UInt32 = 0u32
+    public var ProcessorCurrentMhz: UInt32 = 0u32
+    public var ProcessorMhzLimit: UInt32 = 0u32
+    public var ProcessorMaxIdleState: UInt32 = 0u32
+    public var ProcessorCurrentIdleState: UInt32 = 0u32
+    public var ProcessIntegrityLevel: UInt32 = 0u32
+    public var ProcessExecuteFlags: UInt32 = 0u32
+    public var ProtectedProcess: UInt32 = 0u32
+    public var TimeZoneId: UInt32 = 0u32
+    public var TimeZone: Windows_Win32_System_Time.TIME_ZONE_INFORMATION = Windows_Win32_System_Time.TIME_ZONE_INFORMATION()
+    public var BuildString: VArray<UInt16, $260> = VArray<UInt16, $260>(repeat: 0u16)
+    public var DbgBldStr: VArray<UInt16, $40> = VArray<UInt16, $40>(repeat: 0u16)
+    public var XStateData: XSTATE_CONFIG_FEATURE_MSC_INFO = XSTATE_CONFIG_FEATURE_MSC_INFO()
+    public var ProcessCookie: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MISC_INFO_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MINIDUMP_MISC_INFO_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: MINIDUMP_MISC_INFO_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: MINIDUMP_MISC_INFO_FLAGS): MINIDUMP_MISC_INFO_FLAGS {
+        return MINIDUMP_MISC_INFO_FLAGS(value | other.value)
+    }
+    public operator func &(other: MINIDUMP_MISC_INFO_FLAGS): MINIDUMP_MISC_INFO_FLAGS {
+        return MINIDUMP_MISC_INFO_FLAGS(value & other.value)
+    }
+    public operator func ^(other: MINIDUMP_MISC_INFO_FLAGS): MINIDUMP_MISC_INFO_FLAGS {
+        return MINIDUMP_MISC_INFO_FLAGS(value ^ other.value)
+    }
+    public operator func !(): MINIDUMP_MISC_INFO_FLAGS {
+        return MINIDUMP_MISC_INFO_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_MISC_INFO_FLAGS_MINIDUMP_MISC1_PROCESS_ID = MINIDUMP_MISC_INFO_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_MISC_INFO_FLAGS_MINIDUMP_MISC1_PROCESS_TIMES = MINIDUMP_MISC_INFO_FLAGS(2)
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MODULE (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MODULE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MODULE {
+    public var BaseOfImage: UInt64 = 0u64
+    public var SizeOfImage: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var ModuleNameRva: UInt32 = 0u32
+    public var VersionInfo: Windows_Win32_Storage_FileSystem.VS_FIXEDFILEINFO = Windows_Win32_Storage_FileSystem.VS_FIXEDFILEINFO()
+    public var CvRecord: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+    public var MiscRecord: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+    public var Reserved0: UInt64 = 0u64
+    public var Reserved1: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MODULE_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MODULE_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MODULE_CALLBACK {
+    public var FullPath: CPointer<UInt16> = CPointer<UInt16>()
+    public var BaseOfImage: UInt64 = 0u64
+    public var SizeOfImage: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var VersionInfo: Windows_Win32_Storage_FileSystem.VS_FIXEDFILEINFO = Windows_Win32_Storage_FileSystem.VS_FIXEDFILEINFO()
+    public var CvRecord: CPointer<Unit> = CPointer<Unit>()
+    public var SizeOfCvRecord: UInt32 = 0u32
+    public var MiscRecord: CPointer<Unit> = CPointer<Unit>()
+    public var SizeOfMiscRecord: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MODULE_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_MODULE_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_MODULE_LIST {
+    public var NumberOfModules: UInt32 = 0u32
+    public var Modules: VArray<MINIDUMP_MODULE, $1> = VArray<MINIDUMP_MODULE, $1>(repeat: MINIDUMP_MODULE())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_PROCESS_VM_COUNTERS_1 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_PROCESS_VM_COUNTERS_1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_PROCESS_VM_COUNTERS_1 {
+    public var Revision: UInt16 = 0u16
+    public var PageFaultCount: UInt32 = 0u32
+    public var PeakWorkingSetSize: UInt64 = 0u64
+    public var WorkingSetSize: UInt64 = 0u64
+    public var QuotaPeakPagedPoolUsage: UInt64 = 0u64
+    public var QuotaPagedPoolUsage: UInt64 = 0u64
+    public var QuotaPeakNonPagedPoolUsage: UInt64 = 0u64
+    public var QuotaNonPagedPoolUsage: UInt64 = 0u64
+    public var PagefileUsage: UInt64 = 0u64
+    public var PeakPagefileUsage: UInt64 = 0u64
+    public var PrivateUsage: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_PROCESS_VM_COUNTERS_2 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_PROCESS_VM_COUNTERS_2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_PROCESS_VM_COUNTERS_2 {
+    public var Revision: UInt16 = 0u16
+    public var Flags: UInt16 = 0u16
+    public var PageFaultCount: UInt32 = 0u32
+    public var PeakWorkingSetSize: UInt64 = 0u64
+    public var WorkingSetSize: UInt64 = 0u64
+    public var QuotaPeakPagedPoolUsage: UInt64 = 0u64
+    public var QuotaPagedPoolUsage: UInt64 = 0u64
+    public var QuotaPeakNonPagedPoolUsage: UInt64 = 0u64
+    public var QuotaNonPagedPoolUsage: UInt64 = 0u64
+    public var PagefileUsage: UInt64 = 0u64
+    public var PeakPagefileUsage: UInt64 = 0u64
+    public var PeakVirtualSize: UInt64 = 0u64
+    public var VirtualSize: UInt64 = 0u64
+    public var PrivateUsage: UInt64 = 0u64
+    public var PrivateWorkingSetSize: UInt64 = 0u64
+    public var SharedCommitUsage: UInt64 = 0u64
+    public var JobSharedCommitUsage: UInt64 = 0u64
+    public var JobPrivateCommitUsage: UInt64 = 0u64
+    public var JobPeakPrivateCommitUsage: UInt64 = 0u64
+    public var JobPrivateCommitLimit: UInt64 = 0u64
+    public var JobTotalCommitLimit: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_READ_MEMORY_FAILURE_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_READ_MEMORY_FAILURE_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_READ_MEMORY_FAILURE_CALLBACK {
+    public var Offset: UInt64 = 0u64
+    public var Bytes: UInt32 = 0u32
+    public var FailureStatus: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SECONDARY_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SECONDARY_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MINIDUMP_SECONDARY_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_SECONDARY_FLAGS_MiniSecondaryWithoutPowerInfo = MINIDUMP_SECONDARY_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_SECONDARY_FLAGS_MiniSecondaryValidFlags = MINIDUMP_SECONDARY_FLAGS(1)
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_STREAM_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_STREAM_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MINIDUMP_STREAM_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_UnusedStream = MINIDUMP_STREAM_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ReservedStream0 = MINIDUMP_STREAM_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ReservedStream1 = MINIDUMP_STREAM_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ThreadListStream = MINIDUMP_STREAM_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ModuleListStream = MINIDUMP_STREAM_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_MemoryListStream = MINIDUMP_STREAM_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ExceptionStream = MINIDUMP_STREAM_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_SystemInfoStream = MINIDUMP_STREAM_TYPE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ThreadExListStream = MINIDUMP_STREAM_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_Memory64ListStream = MINIDUMP_STREAM_TYPE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_CommentStreamA = MINIDUMP_STREAM_TYPE(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_CommentStreamW = MINIDUMP_STREAM_TYPE(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_HandleDataStream = MINIDUMP_STREAM_TYPE(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_FunctionTableStream = MINIDUMP_STREAM_TYPE(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_UnloadedModuleListStream = MINIDUMP_STREAM_TYPE(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_MiscInfoStream = MINIDUMP_STREAM_TYPE(15)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_MemoryInfoListStream = MINIDUMP_STREAM_TYPE(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ThreadInfoListStream = MINIDUMP_STREAM_TYPE(17)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_HandleOperationListStream = MINIDUMP_STREAM_TYPE(18)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_TokenStream = MINIDUMP_STREAM_TYPE(19)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_JavaScriptDataStream = MINIDUMP_STREAM_TYPE(20)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_SystemMemoryInfoStream = MINIDUMP_STREAM_TYPE(21)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ProcessVmCountersStream = MINIDUMP_STREAM_TYPE(22)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_IptTraceStream = MINIDUMP_STREAM_TYPE(23)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ThreadNamesStream = MINIDUMP_STREAM_TYPE(24)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamNull = MINIDUMP_STREAM_TYPE(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamSystemInfo = MINIDUMP_STREAM_TYPE(32769)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamException = MINIDUMP_STREAM_TYPE(32770)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamModuleList = MINIDUMP_STREAM_TYPE(32771)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamProcessList = MINIDUMP_STREAM_TYPE(32772)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamThreadList = MINIDUMP_STREAM_TYPE(32773)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamThreadContextList = MINIDUMP_STREAM_TYPE(32774)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamThreadCallStackList = MINIDUMP_STREAM_TYPE(32775)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamMemoryVirtualList = MINIDUMP_STREAM_TYPE(32776)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamMemoryPhysicalList = MINIDUMP_STREAM_TYPE(32777)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamBucketParameters = MINIDUMP_STREAM_TYPE(32778)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamProcessModuleMap = MINIDUMP_STREAM_TYPE(32779)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_ceStreamDiagnosisList = MINIDUMP_STREAM_TYPE(32780)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_STREAM_TYPE_LastReservedStream = MINIDUMP_STREAM_TYPE(65535)
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_STRING (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_STRING)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_STRING {
+    public var Length: UInt32 = 0u32
+    public var Buffer: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_BASIC_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_BASIC_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_BASIC_INFORMATION {
+    public var TimerResolution: UInt32 = 0u32
+    public var PageSize: UInt32 = 0u32
+    public var NumberOfPhysicalPages: UInt32 = 0u32
+    public var LowestPhysicalPageNumber: UInt32 = 0u32
+    public var HighestPhysicalPageNumber: UInt32 = 0u32
+    public var AllocationGranularity: UInt32 = 0u32
+    public var MinimumUserModeAddress: UInt64 = 0u64
+    public var MaximumUserModeAddress: UInt64 = 0u64
+    public var ActiveProcessorsAffinityMask: UInt64 = 0u64
+    public var NumberOfProcessors: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION {
+    public var AvailablePages: UInt64 = 0u64
+    public var CommittedPages: UInt64 = 0u64
+    public var CommitLimit: UInt64 = 0u64
+    public var PeakCommitment: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_FILECACHE_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_FILECACHE_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_FILECACHE_INFORMATION {
+    public var CurrentSize: UInt64 = 0u64
+    public var PeakSize: UInt64 = 0u64
+    public var PageFaultCount: UInt32 = 0u32
+    public var MinimumWorkingSet: UInt64 = 0u64
+    public var MaximumWorkingSet: UInt64 = 0u64
+    public var CurrentSizeIncludingTransitionInPages: UInt64 = 0u64
+    public var PeakSizeIncludingTransitionInPages: UInt64 = 0u64
+    public var TransitionRePurposeCount: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_INFO {
+    public var ProcessorArchitecture: UInt16 = 0u16
+    public var ProcessorLevel: UInt16 = 0u16
+    public var ProcessorRevision: UInt16 = 0u16
+    public var Anonymous1: MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union = MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union()
+    public var MajorVersion: UInt32 = 0u32
+    public var MinorVersion: UInt32 = 0u32
+    public var BuildNumber: UInt32 = 0u32
+    public var PlatformId: UInt32 = 0u32
+    public var CSDVersionRva: UInt32 = 0u32
+    public var Anonymous2: MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union = MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union()
+    public var Cpu: CPU_INFORMATION = CPU_INFORMATION()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_INFO._Anonymous1_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union {
+    public var _raw: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0u16)
+
+    public mut prop Reserved0: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous: MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_INFO._Anonymous1_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_INFO__Anonymous1_e__Union__Anonymous_e__Struct {
+    public var NumberOfProcessors: UInt8 = 0u8
+    public var ProductType: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_INFO._Anonymous2_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop Reserved1: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous: MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_INFO._Anonymous2_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_INFO__Anonymous2_e__Union__Anonymous_e__Struct {
+    public var SuiteMask: UInt16 = 0u16
+    public var Reserved2: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_MEMORY_INFO_1 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_MEMORY_INFO_1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_MEMORY_INFO_1 {
+    public var Revision: UInt16 = 0u16
+    public var Flags: UInt16 = 0u16
+    public var BasicInfo: MINIDUMP_SYSTEM_BASIC_INFORMATION = MINIDUMP_SYSTEM_BASIC_INFORMATION()
+    public var FileCacheInfo: MINIDUMP_SYSTEM_FILECACHE_INFORMATION = MINIDUMP_SYSTEM_FILECACHE_INFORMATION()
+    public var BasicPerfInfo: MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION = MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION()
+    public var PerfInfo: MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION = MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_MEMORY_INFO_2 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_MEMORY_INFO_2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_MEMORY_INFO_2 {
+    public var Revision: UInt16 = 0u16
+    public var Flags: UInt16 = 0u16
+    public var BasicInfo: MINIDUMP_SYSTEM_BASIC_INFORMATION = MINIDUMP_SYSTEM_BASIC_INFORMATION()
+    public var FileCacheInfo: MINIDUMP_SYSTEM_FILECACHE_INFORMATION = MINIDUMP_SYSTEM_FILECACHE_INFORMATION()
+    public var BasicPerfInfo: MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION = MINIDUMP_SYSTEM_BASIC_PERFORMANCE_INFORMATION()
+    public var PerfInfo: MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2 = MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION {
+    public var IdleProcessTime: UInt64 = 0u64
+    public var IoReadTransferCount: UInt64 = 0u64
+    public var IoWriteTransferCount: UInt64 = 0u64
+    public var IoOtherTransferCount: UInt64 = 0u64
+    public var IoReadOperationCount: UInt32 = 0u32
+    public var IoWriteOperationCount: UInt32 = 0u32
+    public var IoOtherOperationCount: UInt32 = 0u32
+    public var AvailablePages: UInt32 = 0u32
+    public var CommittedPages: UInt32 = 0u32
+    public var CommitLimit: UInt32 = 0u32
+    public var PeakCommitment: UInt32 = 0u32
+    public var PageFaultCount: UInt32 = 0u32
+    public var CopyOnWriteCount: UInt32 = 0u32
+    public var TransitionCount: UInt32 = 0u32
+    public var CacheTransitionCount: UInt32 = 0u32
+    public var DemandZeroCount: UInt32 = 0u32
+    public var PageReadCount: UInt32 = 0u32
+    public var PageReadIoCount: UInt32 = 0u32
+    public var CacheReadCount: UInt32 = 0u32
+    public var CacheIoCount: UInt32 = 0u32
+    public var DirtyPagesWriteCount: UInt32 = 0u32
+    public var DirtyWriteIoCount: UInt32 = 0u32
+    public var MappedPagesWriteCount: UInt32 = 0u32
+    public var MappedWriteIoCount: UInt32 = 0u32
+    public var PagedPoolPages: UInt32 = 0u32
+    public var NonPagedPoolPages: UInt32 = 0u32
+    public var PagedPoolAllocs: UInt32 = 0u32
+    public var PagedPoolFrees: UInt32 = 0u32
+    public var NonPagedPoolAllocs: UInt32 = 0u32
+    public var NonPagedPoolFrees: UInt32 = 0u32
+    public var FreeSystemPtes: UInt32 = 0u32
+    public var ResidentSystemCodePage: UInt32 = 0u32
+    public var TotalSystemDriverPages: UInt32 = 0u32
+    public var TotalSystemCodePages: UInt32 = 0u32
+    public var NonPagedPoolLookasideHits: UInt32 = 0u32
+    public var PagedPoolLookasideHits: UInt32 = 0u32
+    public var AvailablePagedPoolPages: UInt32 = 0u32
+    public var ResidentSystemCachePage: UInt32 = 0u32
+    public var ResidentPagedPoolPage: UInt32 = 0u32
+    public var ResidentSystemDriverPage: UInt32 = 0u32
+    public var CcFastReadNoWait: UInt32 = 0u32
+    public var CcFastReadWait: UInt32 = 0u32
+    public var CcFastReadResourceMiss: UInt32 = 0u32
+    public var CcFastReadNotPossible: UInt32 = 0u32
+    public var CcFastMdlReadNoWait: UInt32 = 0u32
+    public var CcFastMdlReadWait: UInt32 = 0u32
+    public var CcFastMdlReadResourceMiss: UInt32 = 0u32
+    public var CcFastMdlReadNotPossible: UInt32 = 0u32
+    public var CcMapDataNoWait: UInt32 = 0u32
+    public var CcMapDataWait: UInt32 = 0u32
+    public var CcMapDataNoWaitMiss: UInt32 = 0u32
+    public var CcMapDataWaitMiss: UInt32 = 0u32
+    public var CcPinMappedDataCount: UInt32 = 0u32
+    public var CcPinReadNoWait: UInt32 = 0u32
+    public var CcPinReadWait: UInt32 = 0u32
+    public var CcPinReadNoWaitMiss: UInt32 = 0u32
+    public var CcPinReadWaitMiss: UInt32 = 0u32
+    public var CcCopyReadNoWait: UInt32 = 0u32
+    public var CcCopyReadWait: UInt32 = 0u32
+    public var CcCopyReadNoWaitMiss: UInt32 = 0u32
+    public var CcCopyReadWaitMiss: UInt32 = 0u32
+    public var CcMdlReadNoWait: UInt32 = 0u32
+    public var CcMdlReadWait: UInt32 = 0u32
+    public var CcMdlReadNoWaitMiss: UInt32 = 0u32
+    public var CcMdlReadWaitMiss: UInt32 = 0u32
+    public var CcReadAheadIos: UInt32 = 0u32
+    public var CcLazyWriteIos: UInt32 = 0u32
+    public var CcLazyWritePages: UInt32 = 0u32
+    public var CcDataFlushes: UInt32 = 0u32
+    public var CcDataPages: UInt32 = 0u32
+    public var ContextSwitches: UInt32 = 0u32
+    public var FirstLevelTbFills: UInt32 = 0u32
+    public var SecondLevelTbFills: UInt32 = 0u32
+    public var SystemCalls: UInt32 = 0u32
+    public var CcTotalDirtyPages: UInt64 = 0u64
+    public var CcDirtyPageThreshold: UInt64 = 0u64
+    public var ResidentAvailablePages: Int64 = 0i64
+    public var SharedCommittedPages: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2 (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_SYSTEM_PERFORMANCE_INFORMATION_2 {
+    public var IdleProcessTime: UInt64 = 0u64
+    public var IoReadTransferCount: UInt64 = 0u64
+    public var IoWriteTransferCount: UInt64 = 0u64
+    public var IoOtherTransferCount: UInt64 = 0u64
+    public var IoReadOperationCount: UInt32 = 0u32
+    public var IoWriteOperationCount: UInt32 = 0u32
+    public var IoOtherOperationCount: UInt32 = 0u32
+    public var AvailablePages: UInt32 = 0u32
+    public var CommittedPages: UInt32 = 0u32
+    public var CommitLimit: UInt32 = 0u32
+    public var PeakCommitment: UInt32 = 0u32
+    public var PageFaultCount: UInt32 = 0u32
+    public var CopyOnWriteCount: UInt32 = 0u32
+    public var TransitionCount: UInt32 = 0u32
+    public var CacheTransitionCount: UInt32 = 0u32
+    public var DemandZeroCount: UInt32 = 0u32
+    public var PageReadCount: UInt32 = 0u32
+    public var PageReadIoCount: UInt32 = 0u32
+    public var CacheReadCount: UInt32 = 0u32
+    public var CacheIoCount: UInt32 = 0u32
+    public var DirtyPagesWriteCount: UInt32 = 0u32
+    public var DirtyWriteIoCount: UInt32 = 0u32
+    public var MappedPagesWriteCount: UInt32 = 0u32
+    public var MappedWriteIoCount: UInt32 = 0u32
+    public var PagedPoolPages: UInt32 = 0u32
+    public var NonPagedPoolPages: UInt32 = 0u32
+    public var PagedPoolAllocs: UInt32 = 0u32
+    public var PagedPoolFrees: UInt32 = 0u32
+    public var NonPagedPoolAllocs: UInt32 = 0u32
+    public var NonPagedPoolFrees: UInt32 = 0u32
+    public var FreeSystemPtes: UInt32 = 0u32
+    public var ResidentSystemCodePage: UInt32 = 0u32
+    public var TotalSystemDriverPages: UInt32 = 0u32
+    public var TotalSystemCodePages: UInt32 = 0u32
+    public var NonPagedPoolLookasideHits: UInt32 = 0u32
+    public var PagedPoolLookasideHits: UInt32 = 0u32
+    public var AvailablePagedPoolPages: UInt32 = 0u32
+    public var ResidentSystemCachePage: UInt32 = 0u32
+    public var ResidentPagedPoolPage: UInt32 = 0u32
+    public var ResidentSystemDriverPage: UInt32 = 0u32
+    public var CcFastReadNoWait: UInt32 = 0u32
+    public var CcFastReadWait: UInt32 = 0u32
+    public var CcFastReadResourceMiss: UInt32 = 0u32
+    public var CcFastReadNotPossible: UInt32 = 0u32
+    public var CcFastMdlReadNoWait: UInt32 = 0u32
+    public var CcFastMdlReadWait: UInt32 = 0u32
+    public var CcFastMdlReadResourceMiss: UInt32 = 0u32
+    public var CcFastMdlReadNotPossible: UInt32 = 0u32
+    public var CcMapDataNoWait: UInt32 = 0u32
+    public var CcMapDataWait: UInt32 = 0u32
+    public var CcMapDataNoWaitMiss: UInt32 = 0u32
+    public var CcMapDataWaitMiss: UInt32 = 0u32
+    public var CcPinMappedDataCount: UInt32 = 0u32
+    public var CcPinReadNoWait: UInt32 = 0u32
+    public var CcPinReadWait: UInt32 = 0u32
+    public var CcPinReadNoWaitMiss: UInt32 = 0u32
+    public var CcPinReadWaitMiss: UInt32 = 0u32
+    public var CcCopyReadNoWait: UInt32 = 0u32
+    public var CcCopyReadWait: UInt32 = 0u32
+    public var CcCopyReadNoWaitMiss: UInt32 = 0u32
+    public var CcCopyReadWaitMiss: UInt32 = 0u32
+    public var CcMdlReadNoWait: UInt32 = 0u32
+    public var CcMdlReadWait: UInt32 = 0u32
+    public var CcMdlReadNoWaitMiss: UInt32 = 0u32
+    public var CcMdlReadWaitMiss: UInt32 = 0u32
+    public var CcReadAheadIos: UInt32 = 0u32
+    public var CcLazyWriteIos: UInt32 = 0u32
+    public var CcLazyWritePages: UInt32 = 0u32
+    public var CcDataFlushes: UInt32 = 0u32
+    public var CcDataPages: UInt32 = 0u32
+    public var ContextSwitches: UInt32 = 0u32
+    public var FirstLevelTbFills: UInt32 = 0u32
+    public var SecondLevelTbFills: UInt32 = 0u32
+    public var SystemCalls: UInt32 = 0u32
+    public var CcTotalDirtyPages: UInt64 = 0u64
+    public var CcDirtyPageThreshold: UInt64 = 0u64
+    public var ResidentAvailablePages: Int64 = 0i64
+    public var SharedCommittedPages: UInt64 = 0u64
+    public var MdlPagesAllocated: UInt64 = 0u64
+    public var PfnDatabaseCommittedPages: UInt64 = 0u64
+    public var SystemPageTableCommittedPages: UInt64 = 0u64
+    public var ContiguousPagesAllocated: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD {
+    public var ThreadId: UInt32 = 0u32
+    public var SuspendCount: UInt32 = 0u32
+    public var PriorityClass: UInt32 = 0u32
+    public var Priority: UInt32 = 0u32
+    public var Teb: UInt64 = 0u64
+    public var Stack: MINIDUMP_MEMORY_DESCRIPTOR = MINIDUMP_MEMORY_DESCRIPTOR()
+    public var ThreadContext: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_CALLBACK {
+    public var ThreadId: UInt32 = 0u32
+    public var ThreadHandle: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var Pad: UInt32 = 0u32
+    public var Context: CONTEXT = CONTEXT()
+    public var SizeOfContext: UInt32 = 0u32
+    public var StackBase: UInt64 = 0u64
+    public var StackEnd: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_EX)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_EX {
+    public var ThreadId: UInt32 = 0u32
+    public var SuspendCount: UInt32 = 0u32
+    public var PriorityClass: UInt32 = 0u32
+    public var Priority: UInt32 = 0u32
+    public var Teb: UInt64 = 0u64
+    public var Stack: MINIDUMP_MEMORY_DESCRIPTOR = MINIDUMP_MEMORY_DESCRIPTOR()
+    public var ThreadContext: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+    public var BackingStore: MINIDUMP_MEMORY_DESCRIPTOR = MINIDUMP_MEMORY_DESCRIPTOR()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_EX_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_EX_CALLBACK {
+    public var ThreadId: UInt32 = 0u32
+    public var ThreadHandle: Windows_Win32_Foundation.HANDLE = Windows_Win32_Foundation.HANDLE()
+    public var Pad: UInt32 = 0u32
+    public var Context: CONTEXT = CONTEXT()
+    public var SizeOfContext: UInt32 = 0u32
+    public var StackBase: UInt64 = 0u64
+    public var StackEnd: UInt64 = 0u64
+    public var BackingStoreBase: UInt64 = 0u64
+    public var BackingStoreEnd: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_EX_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_EX_LIST {
+    public var NumberOfThreads: UInt32 = 0u32
+    public var Threads: VArray<MINIDUMP_THREAD_EX, $1> = VArray<MINIDUMP_THREAD_EX, $1>(repeat: MINIDUMP_THREAD_EX())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_INFO {
+    public var ThreadId: UInt32 = 0u32
+    public var DumpFlags: UInt32 = 0u32
+    public var DumpError: UInt32 = 0u32
+    public var ExitStatus: UInt32 = 0u32
+    public var CreateTime: UInt64 = 0u64
+    public var ExitTime: UInt64 = 0u64
+    public var KernelTime: UInt64 = 0u64
+    public var UserTime: UInt64 = 0u64
+    public var StartAddress: UInt64 = 0u64
+    public var Affinity: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_INFO_DUMP_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_INFO_DUMP_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MINIDUMP_THREAD_INFO_DUMP_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_THREAD_INFO_DUMP_FLAGS_MINIDUMP_THREAD_INFO_ERROR_THREAD = MINIDUMP_THREAD_INFO_DUMP_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_THREAD_INFO_DUMP_FLAGS_MINIDUMP_THREAD_INFO_EXITED_THREAD = MINIDUMP_THREAD_INFO_DUMP_FLAGS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_THREAD_INFO_DUMP_FLAGS_MINIDUMP_THREAD_INFO_INVALID_CONTEXT = MINIDUMP_THREAD_INFO_DUMP_FLAGS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_THREAD_INFO_DUMP_FLAGS_MINIDUMP_THREAD_INFO_INVALID_INFO = MINIDUMP_THREAD_INFO_DUMP_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_THREAD_INFO_DUMP_FLAGS_MINIDUMP_THREAD_INFO_INVALID_TEB = MINIDUMP_THREAD_INFO_DUMP_FLAGS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_THREAD_INFO_DUMP_FLAGS_MINIDUMP_THREAD_INFO_WRITING_THREAD = MINIDUMP_THREAD_INFO_DUMP_FLAGS(2)
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_INFO_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_INFO_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_INFO_LIST {
+    public var SizeOfHeader: UInt32 = 0u32
+    public var SizeOfEntry: UInt32 = 0u32
+    public var NumberOfEntries: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_LIST {
+    public var NumberOfThreads: UInt32 = 0u32
+    public var Threads: VArray<MINIDUMP_THREAD, $1> = VArray<MINIDUMP_THREAD, $1>(repeat: MINIDUMP_THREAD())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_NAME (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_NAME)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_NAME {
+    public var ThreadId: UInt32 = 0u32
+    public var RvaOfThreadName: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_NAME_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_THREAD_NAME_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_THREAD_NAME_LIST {
+    public var NumberOfThreadNames: UInt32 = 0u32
+    public var ThreadNames: VArray<MINIDUMP_THREAD_NAME, $1> = VArray<MINIDUMP_THREAD_NAME, $1>(repeat: MINIDUMP_THREAD_NAME())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_TOKEN_INFO_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_TOKEN_INFO_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_TOKEN_INFO_HEADER {
+    public var TokenSize: UInt32 = 0u32
+    public var TokenId: UInt32 = 0u32
+    public var TokenHandle: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_TOKEN_INFO_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_TOKEN_INFO_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_TOKEN_INFO_LIST {
+    public var TokenListSize: UInt32 = 0u32
+    public var TokenListEntries: UInt32 = 0u32
+    public var ListHeaderSize: UInt32 = 0u32
+    public var ElementHeaderSize: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MINIDUMP_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: MINIDUMP_TYPE): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: MINIDUMP_TYPE): MINIDUMP_TYPE {
+        return MINIDUMP_TYPE(value | other.value)
+    }
+    public operator func &(other: MINIDUMP_TYPE): MINIDUMP_TYPE {
+        return MINIDUMP_TYPE(value & other.value)
+    }
+    public operator func ^(other: MINIDUMP_TYPE): MINIDUMP_TYPE {
+        return MINIDUMP_TYPE(value ^ other.value)
+    }
+    public operator func !(): MINIDUMP_TYPE {
+        return MINIDUMP_TYPE(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpNormal = MINIDUMP_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithDataSegs = MINIDUMP_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithFullMemory = MINIDUMP_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithHandleData = MINIDUMP_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpFilterMemory = MINIDUMP_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpScanMemory = MINIDUMP_TYPE(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithUnloadedModules = MINIDUMP_TYPE(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithIndirectlyReferencedMemory = MINIDUMP_TYPE(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpFilterModulePaths = MINIDUMP_TYPE(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithProcessThreadData = MINIDUMP_TYPE(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithPrivateReadWriteMemory = MINIDUMP_TYPE(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithoutOptionalData = MINIDUMP_TYPE(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithFullMemoryInfo = MINIDUMP_TYPE(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithThreadInfo = MINIDUMP_TYPE(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithCodeSegs = MINIDUMP_TYPE(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithoutAuxiliaryState = MINIDUMP_TYPE(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithFullAuxiliaryState = MINIDUMP_TYPE(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithPrivateWriteCopyMemory = MINIDUMP_TYPE(65536)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpIgnoreInaccessibleMemory = MINIDUMP_TYPE(131072)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithTokenInformation = MINIDUMP_TYPE(262144)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithModuleHeaders = MINIDUMP_TYPE(524288)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpFilterTriage = MINIDUMP_TYPE(1048576)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithAvxXStateContext = MINIDUMP_TYPE(2097152)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpWithIptTrace = MINIDUMP_TYPE(4194304)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpScanInaccessiblePartialPages = MINIDUMP_TYPE(8388608)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpFilterWriteCombinedMemory = MINIDUMP_TYPE(16777216)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpValidTypeFlags = MINIDUMP_TYPE(33554431)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpNoIgnoreInaccessibleMemory = MINIDUMP_TYPE(33554432)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MINIDUMP_TYPE_MiniDumpValidTypeFlagsEx = MINIDUMP_TYPE(67108863)
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_UNLOADED_MODULE (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_UNLOADED_MODULE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_UNLOADED_MODULE {
+    public var BaseOfImage: UInt64 = 0u64
+    public var SizeOfImage: UInt32 = 0u32
+    public var CheckSum: UInt32 = 0u32
+    public var TimeDateStamp: UInt32 = 0u32
+    public var ModuleNameRva: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_UNLOADED_MODULE_LIST (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_UNLOADED_MODULE_LIST)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_UNLOADED_MODULE_LIST {
+    public var SizeOfHeader: UInt32 = 0u32
+    public var SizeOfEntry: UInt32 = 0u32
+    public var NumberOfEntries: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_RECORD (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_USER_RECORD)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_USER_RECORD {
+    public var Type: UInt32 = 0u32
+    public var Memory: MINIDUMP_LOCATION_DESCRIPTOR = MINIDUMP_LOCATION_DESCRIPTOR()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_USER_STREAM)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_USER_STREAM {
+    public var Type: UInt32 = 0u32
+    public var BufferSize: UInt32 = 0u32
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_STREAM_INFORMATION (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_USER_STREAM_INFORMATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_USER_STREAM_INFORMATION {
+    public var UserStreamCount: UInt32 = 0u32
+    public var UserStreamArray: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_VM_POST_READ_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_VM_POST_READ_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_VM_POST_READ_CALLBACK {
+    public var Offset: UInt64 = 0u64
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var Size: UInt32 = 0u32
+    public var Completed: UInt32 = 0u32
+    public var Status: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_VM_PRE_READ_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_VM_PRE_READ_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_VM_PRE_READ_CALLBACK {
+    public var Offset: UInt64 = 0u64
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+    public var Size: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MINIDUMP_VM_QUERY_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_MINIDUMP_VM_QUERY_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MINIDUMP_VM_QUERY_CALLBACK {
+    public var Offset: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MODLOAD_CVMISC (synthetic:Windows_Win32_System_Diagnostics_Debug_MODLOAD_CVMISC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MODLOAD_CVMISC {
+    public var oCV: UInt32 = 0u32
+    public var cCV: CPointer<Unit> = CPointer<Unit>()
+    public var oMisc: UInt32 = 0u32
+    public var cMisc: CPointer<Unit> = CPointer<Unit>()
+    public var dtImage: UInt32 = 0u32
+    public var cImage: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MODLOAD_DATA (synthetic:Windows_Win32_System_Diagnostics_Debug_MODLOAD_DATA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MODLOAD_DATA {
+    public var ssize: UInt32 = 0u32
+    public var ssig: UInt32 = 0u32
+    public var data: CPointer<Unit> = CPointer<Unit>()
+    public var size: UInt32 = 0u32
+    public var flags: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MODLOAD_DATA_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_MODLOAD_DATA_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MODLOAD_DATA_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODLOAD_DATA_TYPE_DBHHEADER_DEBUGDIRS = MODLOAD_DATA_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODLOAD_DATA_TYPE_DBHHEADER_CVMISC = MODLOAD_DATA_TYPE(2)
+
+// Windows.Win32.System.Diagnostics.Debug.MODLOAD_PDBGUID_PDBAGE (synthetic:Windows_Win32_System_Diagnostics_Debug_MODLOAD_PDBGUID_PDBAGE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MODLOAD_PDBGUID_PDBAGE {
+    public var PdbGuid: GUID = GUID()
+    public var PdbAge: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MODULE_TYPE_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_MODULE_TYPE_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct MODULE_TYPE_INFO {
+    public var dataLength: UInt16 = 0u16
+    public var leaf: UInt16 = 0u16
+    public var data: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.MODULE_WRITE_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_MODULE_WRITE_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct MODULE_WRITE_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODULE_WRITE_FLAGS_ModuleWriteModule = MODULE_WRITE_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODULE_WRITE_FLAGS_ModuleWriteDataSeg = MODULE_WRITE_FLAGS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODULE_WRITE_FLAGS_ModuleWriteMiscRecord = MODULE_WRITE_FLAGS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODULE_WRITE_FLAGS_ModuleWriteCvRecord = MODULE_WRITE_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODULE_WRITE_FLAGS_ModuleReferencedByMemory = MODULE_WRITE_FLAGS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODULE_WRITE_FLAGS_ModuleWriteTlsData = MODULE_WRITE_FLAGS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const MODULE_WRITE_FLAGS_ModuleWriteCodeSegs = MODULE_WRITE_FLAGS(64)
+
+// Windows.Win32.System.Diagnostics.Debug.OBJECT_ATTRIB_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_OBJECT_ATTRIB_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct OBJECT_ATTRIB_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_NO_ATTRIB = OBJECT_ATTRIB_FLAGS(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_NO_NAME = OBJECT_ATTRIB_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_NO_TYPE = OBJECT_ATTRIB_FLAGS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_NO_VALUE = OBJECT_ATTRIB_FLAGS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_VALUE_IS_INVALID = OBJECT_ATTRIB_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_VALUE_IS_OBJECT = OBJECT_ATTRIB_FLAGS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_VALUE_IS_ENUM = OBJECT_ATTRIB_FLAGS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_VALUE_IS_CUSTOM = OBJECT_ATTRIB_FLAGS(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_OBJECT_IS_EXPANDABLE = OBJECT_ATTRIB_FLAGS(112)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_VALUE_HAS_CODE = OBJECT_ATTRIB_FLAGS(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_TYPE_IS_OBJECT = OBJECT_ATTRIB_FLAGS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_TYPE_HAS_CODE = OBJECT_ATTRIB_FLAGS(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_TYPE_IS_EXPANDABLE = OBJECT_ATTRIB_FLAGS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_SLOT_IS_CATEGORY = OBJECT_ATTRIB_FLAGS(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_VALUE_READONLY = OBJECT_ATTRIB_FLAGS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_ACCESS_PUBLIC = OBJECT_ATTRIB_FLAGS(4096)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_ACCESS_PRIVATE = OBJECT_ATTRIB_FLAGS(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_ACCESS_PROTECTED = OBJECT_ATTRIB_FLAGS(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_ACCESS_FINAL = OBJECT_ATTRIB_FLAGS(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_STORAGE_GLOBAL = OBJECT_ATTRIB_FLAGS(65536)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_STORAGE_STATIC = OBJECT_ATTRIB_FLAGS(131072)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_STORAGE_FIELD = OBJECT_ATTRIB_FLAGS(262144)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_STORAGE_VIRTUAL = OBJECT_ATTRIB_FLAGS(524288)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_TYPE_IS_CONSTANT = OBJECT_ATTRIB_FLAGS(1048576)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_TYPE_IS_SYNCHRONIZED = OBJECT_ATTRIB_FLAGS(2097152)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_TYPE_IS_VOLATILE = OBJECT_ATTRIB_FLAGS(4194304)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_HAS_EXTENDED_ATTRIBS = OBJECT_ATTRIB_FLAGS(8388608)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_CLASS = OBJECT_ATTRIB_FLAGS(16777216)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_FUNCTION = OBJECT_ATTRIB_FLAGS(33554432)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_VARIABLE = OBJECT_ATTRIB_FLAGS(67108864)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_PROPERTY = OBJECT_ATTRIB_FLAGS(134217728)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_MACRO = OBJECT_ATTRIB_FLAGS(268435456)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_TYPE = OBJECT_ATTRIB_FLAGS(536870912)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_INHERITED = OBJECT_ATTRIB_FLAGS(1073741824)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OBJECT_ATTRIB_FLAGS_OBJECT_ATTRIB_IS_INTERFACE = OBJECT_ATTRIB_FLAGS(-2147483648)
+
+// Windows.Win32.System.Diagnostics.Debug.OMAP (synthetic:Windows_Win32_System_Diagnostics_Debug_OMAP)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct OMAP {
+    public var rva: UInt32 = 0u32
+    public var rvaTo: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS_WCT_ASYNC_OPEN_FLAG = OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS(1)
+
+// Windows.Win32.System.Diagnostics.Debug.OUTPUT_DEBUG_STRING_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_OUTPUT_DEBUG_STRING_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct OUTPUT_DEBUG_STRING_INFO {
+    public var lpDebugStringData: CPointer<UInt8> = CPointer<UInt8>()
+    public var fUnicode: UInt16 = 0u16
+    public var nDebugStringLength: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Diagnostics.Debug.PAGE_OFFLINE_ERROR_TYPES (synthetic:Windows_Win32_System_Diagnostics_Debug_PAGE_OFFLINE_ERROR_TYPES)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct PAGE_OFFLINE_ERROR_TYPES {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PAGE_OFFLINE_ERROR_TYPES_BitErrorDdr4 = PAGE_OFFLINE_ERROR_TYPES(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PAGE_OFFLINE_ERROR_TYPES_RowErrorDdr4 = PAGE_OFFLINE_ERROR_TYPES(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PAGE_OFFLINE_ERROR_TYPES_BitErrorDdr5 = PAGE_OFFLINE_ERROR_TYPES(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PAGE_OFFLINE_ERROR_TYPES_RowErrorDdr5 = PAGE_OFFLINE_ERROR_TYPES(3)
+
+// Windows.Win32.System.Diagnostics.Debug.PAGE_OFFLINE_VALID_BITS (synthetic:Windows_Win32_System_Diagnostics_Debug_PAGE_OFFLINE_VALID_BITS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct PAGE_OFFLINE_VALID_BITS {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Anonymous: PAGE_OFFLINE_VALID_BITS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PAGE_OFFLINE_VALID_BITS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<PAGE_OFFLINE_VALID_BITS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsUINT8: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.PAGE_OFFLINE_VALID_BITS._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_PAGE_OFFLINE_VALID_BITS__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct PAGE_OFFLINE_VALID_BITS__Anonymous_e__Struct {
+    public var _bitfield: UInt8 = 0u8
+
+    public mut prop PhysicalAddress: UInt8 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt8(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt8(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop MemDefect: UInt8 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt8(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt8(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt8 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt8(_bitfield, 2, 6)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt8(_bitfield, 2, 6, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.PCOGETACTIVATIONSTATE (synthetic:Windows_Win32_System_Diagnostics_Debug_PCOGETACTIVATIONSTATE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PCOGETACTIVATIONSTATE = CFunc<(GUID, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PCOGETCALLSTATE (synthetic:Windows_Win32_System_Diagnostics_Debug_PCOGETCALLSTATE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PCOGETCALLSTATE = CFunc<(Int32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PDBGHELP_CREATE_USER_DUMP_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PDBGHELP_CREATE_USER_DUMP_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PDBGHELP_CREATE_USER_DUMP_CALLBACK = CFunc<(UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PENUMDIRTREE_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PENUMDIRTREE_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PENUMDIRTREE_CALLBACK = CFunc<(CPointer<UInt8>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PENUMDIRTREE_CALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PENUMDIRTREE_CALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PENUMDIRTREE_CALLBACKW = CFunc<(CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PENUMLOADED_MODULES_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PENUMLOADED_MODULES_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PENUMLOADED_MODULES_CALLBACK = CFunc<(CPointer<UInt8>, UInt32, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PENUMLOADED_MODULES_CALLBACK64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PENUMLOADED_MODULES_CALLBACK64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PENUMLOADED_MODULES_CALLBACK64 = CFunc<(CPointer<UInt8>, UInt64, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PENUMLOADED_MODULES_CALLBACKW64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PENUMLOADED_MODULES_CALLBACKW64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PENUMLOADED_MODULES_CALLBACKW64 = CFunc<(CPointer<UInt16>, UInt64, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PENUMSOURCEFILETOKENSCALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PENUMSOURCEFILETOKENSCALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PENUMSOURCEFILETOKENSCALLBACK = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PFINDFILEINPATHCALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PFINDFILEINPATHCALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFINDFILEINPATHCALLBACK = CFunc<(CPointer<UInt8>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PFINDFILEINPATHCALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PFINDFILEINPATHCALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFINDFILEINPATHCALLBACKW = CFunc<(CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PFIND_DEBUG_FILE_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PFIND_DEBUG_FILE_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFIND_DEBUG_FILE_CALLBACK = CFunc<(Windows_Win32_Foundation.HANDLE, CPointer<UInt8>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PFIND_DEBUG_FILE_CALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PFIND_DEBUG_FILE_CALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFIND_DEBUG_FILE_CALLBACKW = CFunc<(Windows_Win32_Foundation.HANDLE, CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PFIND_EXE_FILE_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PFIND_EXE_FILE_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFIND_EXE_FILE_CALLBACK = CFunc<(Windows_Win32_Foundation.HANDLE, CPointer<UInt8>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PFIND_EXE_FILE_CALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PFIND_EXE_FILE_CALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFIND_EXE_FILE_CALLBACKW = CFunc<(Windows_Win32_Foundation.HANDLE, CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PFUNCTION_TABLE_ACCESS_ROUTINE (synthetic:Windows_Win32_System_Diagnostics_Debug_PFUNCTION_TABLE_ACCESS_ROUTINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFUNCTION_TABLE_ACCESS_ROUTINE = CFunc<(Windows_Win32_Foundation.HANDLE, UInt32) -> CPointer<Unit>>
+
+// Windows.Win32.System.Diagnostics.Debug.PFUNCTION_TABLE_ACCESS_ROUTINE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PFUNCTION_TABLE_ACCESS_ROUTINE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PFUNCTION_TABLE_ACCESS_ROUTINE64 = CFunc<(Windows_Win32_Foundation.HANDLE, UInt64) -> CPointer<Unit>>
+
+// Windows.Win32.System.Diagnostics.Debug.PGET_MODULE_BASE_ROUTINE (synthetic:Windows_Win32_System_Diagnostics_Debug_PGET_MODULE_BASE_ROUTINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PGET_MODULE_BASE_ROUTINE = CFunc<(Windows_Win32_Foundation.HANDLE, UInt32) -> UInt32>
+
+// Windows.Win32.System.Diagnostics.Debug.PGET_MODULE_BASE_ROUTINE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PGET_MODULE_BASE_ROUTINE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PGET_MODULE_BASE_ROUTINE64 = CFunc<(Windows_Win32_Foundation.HANDLE, UInt64) -> UInt64>
+
+// Windows.Win32.System.Diagnostics.Debug.PGET_RUNTIME_FUNCTION_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PGET_RUNTIME_FUNCTION_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PGET_RUNTIME_FUNCTION_CALLBACK = CFunc<(UInt64, CPointer<Unit>) -> CPointer<Unit>>
+
+// Windows.Win32.System.Diagnostics.Debug.PGET_TARGET_ATTRIBUTE_VALUE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PGET_TARGET_ATTRIBUTE_VALUE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PGET_TARGET_ATTRIBUTE_VALUE64 = CFunc<(Windows_Win32_Foundation.HANDLE, UInt32, UInt64, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PHYSICAL_MEMORY_DESCRIPTOR32 (synthetic:Windows_Win32_System_Diagnostics_Debug_PHYSICAL_MEMORY_DESCRIPTOR32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct PHYSICAL_MEMORY_DESCRIPTOR32 {
+    public var NumberOfRuns: UInt32 = 0u32
+    public var NumberOfPages: UInt32 = 0u32
+    public var Run: VArray<PHYSICAL_MEMORY_RUN32, $1> = VArray<PHYSICAL_MEMORY_RUN32, $1>(repeat: PHYSICAL_MEMORY_RUN32())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.PHYSICAL_MEMORY_DESCRIPTOR64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PHYSICAL_MEMORY_DESCRIPTOR64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct PHYSICAL_MEMORY_DESCRIPTOR64 {
+    public var NumberOfRuns: UInt32 = 0u32
+    public var NumberOfPages: UInt64 = 0u64
+    public var Run: VArray<PHYSICAL_MEMORY_RUN64, $1> = VArray<PHYSICAL_MEMORY_RUN64, $1>(repeat: PHYSICAL_MEMORY_RUN64())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.PHYSICAL_MEMORY_RUN32 (synthetic:Windows_Win32_System_Diagnostics_Debug_PHYSICAL_MEMORY_RUN32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct PHYSICAL_MEMORY_RUN32 {
+    public var BasePage: UInt32 = 0u32
+    public var PageCount: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.PHYSICAL_MEMORY_RUN64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PHYSICAL_MEMORY_RUN64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct PHYSICAL_MEMORY_RUN64 {
+    public var BasePage: UInt64 = 0u64
+    public var PageCount: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.PIMAGEHLP_STATUS_ROUTINE (synthetic:Windows_Win32_System_Diagnostics_Debug_PIMAGEHLP_STATUS_ROUTINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PIMAGEHLP_STATUS_ROUTINE = CFunc<(Int32, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PIMAGEHLP_STATUS_ROUTINE32 (synthetic:Windows_Win32_System_Diagnostics_Debug_PIMAGEHLP_STATUS_ROUTINE32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PIMAGEHLP_STATUS_ROUTINE32 = CFunc<(Int32, CPointer<UInt8>, CPointer<UInt8>, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PIMAGEHLP_STATUS_ROUTINE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PIMAGEHLP_STATUS_ROUTINE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PIMAGEHLP_STATUS_ROUTINE64 = CFunc<(Int32, CPointer<UInt8>, CPointer<UInt8>, UInt64, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PREAD_PROCESS_MEMORY_ROUTINE (synthetic:Windows_Win32_System_Diagnostics_Debug_PREAD_PROCESS_MEMORY_ROUTINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PREAD_PROCESS_MEMORY_ROUTINE = CFunc<(Windows_Win32_Foundation.HANDLE, UInt32, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PREAD_PROCESS_MEMORY_ROUTINE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PREAD_PROCESS_MEMORY_ROUTINE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PREAD_PROCESS_MEMORY_ROUTINE64 = CFunc<(Windows_Win32_Foundation.HANDLE, UInt64, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PROP_INFO_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_PROP_INFO_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct PROP_INFO_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PROP_INFO_FLAGS_PROP_INFO_NAME = PROP_INFO_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PROP_INFO_FLAGS_PROP_INFO_TYPE = PROP_INFO_FLAGS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PROP_INFO_FLAGS_PROP_INFO_VALUE = PROP_INFO_FLAGS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PROP_INFO_FLAGS_PROP_INFO_FULLNAME = PROP_INFO_FLAGS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PROP_INFO_FLAGS_PROP_INFO_ATTRIBUTES = PROP_INFO_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PROP_INFO_FLAGS_PROP_INFO_DEBUGPROP = PROP_INFO_FLAGS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const PROP_INFO_FLAGS_PROP_INFO_AUTOEXPAND = PROP_INFO_FLAGS(134217728)
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERBYINDEXPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERBYINDEXPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERBYINDEXPROC = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERBYINDEXPROCA (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERBYINDEXPROCA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERBYINDEXPROCA = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERBYINDEXPROCW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERBYINDEXPROCW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERBYINDEXPROCW = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERCALLBACKPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERCALLBACKPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERCALLBACKPROC = CFunc<(CPointer<Unit>, UInt64, UInt64) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERCLOSEPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERCLOSEPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERCLOSEPROC = CFunc<() -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERDELTANAME (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERDELTANAME)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERDELTANAME = CFunc<(CPointer<UInt8>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, UInt32, UInt32, CPointer<UInt8>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERDELTANAMEW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERDELTANAMEW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERDELTANAMEW = CFunc<(CPointer<UInt16>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, UInt32, UInt32, CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERGETINDEXSTRING (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERGETINDEXSTRING)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERGETINDEXSTRING = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<UInt8>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERGETINDEXSTRINGW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERGETINDEXSTRINGW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERGETINDEXSTRINGW = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERGETOPTIONDATAPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERGETOPTIONDATAPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERGETOPTIONDATAPROC = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERGETOPTIONSPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERGETOPTIONSPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERGETOPTIONSPROC = CFunc<() -> CPointer<Unit>>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERGETSUPPLEMENT (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERGETSUPPLEMENT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERGETSUPPLEMENT = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERGETSUPPLEMENTW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERGETSUPPLEMENTW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERGETSUPPLEMENTW = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERGETVERSION (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERGETVERSION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERGETVERSION = CFunc<(CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERISSTORE (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERISSTORE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERISSTORE = CFunc<(CPointer<UInt8>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERISSTOREW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERISSTOREW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERISSTOREW = CFunc<(CPointer<UInt16>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERMESSAGEPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERMESSAGEPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERMESSAGEPROC = CFunc<(CPointer<Unit>, UInt64, UInt64) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVEROPENPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVEROPENPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVEROPENPROC = CFunc<() -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERPINGPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERPINGPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERPINGPROC = CFunc<(CPointer<UInt8>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERPINGPROCA (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERPINGPROCA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERPINGPROCA = CFunc<(CPointer<UInt8>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERPINGPROCW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERPINGPROCW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERPINGPROCW = CFunc<(CPointer<UInt16>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERPINGPROCWEX (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERPINGPROCWEX)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERPINGPROCWEX = CFunc<(CPointer<UInt16>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERPROC = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt8>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERPROCA (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERPROCA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERPROCA = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt8>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERPROCW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERPROCW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERPROCW = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt16>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERSETHTTPAUTHHEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERSETHTTPAUTHHEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERSETHTTPAUTHHEADER = CFunc<(CPointer<UInt16>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERSETOPTIONSPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERSETOPTIONSPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERSETOPTIONSPROC = CFunc<(CPointer<Unit>, UInt64) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERSETOPTIONSWPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERSETOPTIONSWPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERSETOPTIONSWPROC = CFunc<(CPointer<Unit>, UInt64) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERSTOREFILE (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERSTOREFILE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERSTOREFILE = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt8>, CPointer<Unit>, UInt32) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERSTOREFILEW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERSTOREFILEW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERSTOREFILEW = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt16>, CPointer<Unit>, UInt32) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERSTORESUPPLEMENT (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERSTORESUPPLEMENT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERSTORESUPPLEMENT = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, UInt32) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERSTORESUPPLEMENTW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERSTORESUPPLEMENTW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERSTORESUPPLEMENTW = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, UInt32) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERVERSION (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERVERSION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERVERSION = CFunc<() -> UInt32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOLSERVERWEXPROC (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOLSERVERWEXPROC)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOLSERVERWEXPROC = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt16>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOL_FUNCENTRY_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOL_FUNCENTRY_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOL_FUNCENTRY_CALLBACK = CFunc<(Windows_Win32_Foundation.HANDLE, UInt32, CPointer<Unit>) -> CPointer<Unit>>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOL_FUNCENTRY_CALLBACK64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOL_FUNCENTRY_CALLBACK64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOL_FUNCENTRY_CALLBACK64 = CFunc<(Windows_Win32_Foundation.HANDLE, UInt64, UInt64) -> CPointer<Unit>>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOL_REGISTERED_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOL_REGISTERED_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOL_REGISTERED_CALLBACK = CFunc<(Windows_Win32_Foundation.HANDLE, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYMBOL_REGISTERED_CALLBACK64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYMBOL_REGISTERED_CALLBACK64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYMBOL_REGISTERED_CALLBACK64 = CFunc<(Windows_Win32_Foundation.HANDLE, UInt32, UInt64, UInt64) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMERATESYMBOLS_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMERATESYMBOLS_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMERATESYMBOLS_CALLBACK = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMERATESYMBOLS_CALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMERATESYMBOLS_CALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMERATESYMBOLS_CALLBACKW = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMLINES_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMLINES_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMLINES_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMLINES_CALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMLINES_CALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMLINES_CALLBACKW = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMMODULES_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMMODULES_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMMODULES_CALLBACK = CFunc<(CPointer<UInt8>, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMMODULES_CALLBACK64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMMODULES_CALLBACK64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMMODULES_CALLBACK64 = CFunc<(CPointer<UInt8>, UInt64, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMMODULES_CALLBACKW64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMMODULES_CALLBACKW64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMMODULES_CALLBACKW64 = CFunc<(CPointer<UInt16>, UInt64, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMPROCESSES_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMPROCESSES_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMPROCESSES_CALLBACK = CFunc<(Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMSOURCEFILES_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMSOURCEFILES_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMSOURCEFILES_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMSOURCEFILES_CALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMSOURCEFILES_CALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMSOURCEFILES_CALLBACKW = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMSYMBOLS_CALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMSYMBOLS_CALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMSYMBOLS_CALLBACK = CFunc<(CPointer<UInt8>, UInt32, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMSYMBOLS_CALLBACK64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMSYMBOLS_CALLBACK64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMSYMBOLS_CALLBACK64 = CFunc<(CPointer<UInt8>, UInt64, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMSYMBOLS_CALLBACK64W (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMSYMBOLS_CALLBACK64W)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMSYMBOLS_CALLBACK64W = CFunc<(CPointer<UInt16>, UInt64, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PSYM_ENUMSYMBOLS_CALLBACKW (synthetic:Windows_Win32_System_Diagnostics_Debug_PSYM_ENUMSYMBOLS_CALLBACKW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PSYM_ENUMSYMBOLS_CALLBACKW = CFunc<(CPointer<UInt16>, UInt32, UInt32, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PTRANSLATE_ADDRESS_ROUTINE (synthetic:Windows_Win32_System_Diagnostics_Debug_PTRANSLATE_ADDRESS_ROUTINE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PTRANSLATE_ADDRESS_ROUTINE = CFunc<(Windows_Win32_Foundation.HANDLE, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> UInt32>
+
+// Windows.Win32.System.Diagnostics.Debug.PTRANSLATE_ADDRESS_ROUTINE64 (synthetic:Windows_Win32_System_Diagnostics_Debug_PTRANSLATE_ADDRESS_ROUTINE64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PTRANSLATE_ADDRESS_ROUTINE64 = CFunc<(Windows_Win32_Foundation.HANDLE, Windows_Win32_Foundation.HANDLE, CPointer<Unit>) -> UInt64>
+
+// Windows.Win32.System.Diagnostics.Debug.PVECTORED_EXCEPTION_HANDLER (synthetic:Windows_Win32_System_Diagnostics_Debug_PVECTORED_EXCEPTION_HANDLER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PVECTORED_EXCEPTION_HANDLER = CFunc<(CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.PWAITCHAINCALLBACK (synthetic:Windows_Win32_System_Diagnostics_Debug_PWAITCHAINCALLBACK)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type PWAITCHAINCALLBACK = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Unit>
+
+// Windows.Win32.System.Diagnostics.Debug.RIP_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_RIP_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct RIP_INFO {
+    public var dwError: UInt32 = 0u32
+    public var dwType: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.RIP_INFO_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_RIP_INFO_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct RIP_INFO_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const RIP_INFO_TYPE_SLE_ERROR = RIP_INFO_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const RIP_INFO_TYPE_SLE_MINORERROR = RIP_INFO_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const RIP_INFO_TYPE_SLE_WARNING = RIP_INFO_TYPE(3)
+
+// Windows.Win32.System.Diagnostics.Debug.RTL_VIRTUAL_UNWIND_HANDLER_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_RTL_VIRTUAL_UNWIND_HANDLER_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct RTL_VIRTUAL_UNWIND_HANDLER_TYPE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const RTL_VIRTUAL_UNWIND_HANDLER_TYPE_UNW_FLAG_NHANDLER = RTL_VIRTUAL_UNWIND_HANDLER_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const RTL_VIRTUAL_UNWIND_HANDLER_TYPE_UNW_FLAG_EHANDLER = RTL_VIRTUAL_UNWIND_HANDLER_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const RTL_VIRTUAL_UNWIND_HANDLER_TYPE_UNW_FLAG_UHANDLER = RTL_VIRTUAL_UNWIND_HANDLER_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const RTL_VIRTUAL_UNWIND_HANDLER_TYPE_UNW_FLAG_CHAININFO = RTL_VIRTUAL_UNWIND_HANDLER_TYPE(4)
+
+// Windows.Win32.System.Diagnostics.Debug.SOURCEFILE (synthetic:Windows_Win32_System_Diagnostics_Debug_SOURCEFILE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SOURCEFILE {
+    public var ModBase: UInt64 = 0u64
+    public var FileName: CPointer<UInt8> = CPointer<UInt8>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SOURCEFILEW (synthetic:Windows_Win32_System_Diagnostics_Debug_SOURCEFILEW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SOURCEFILEW {
+    public var ModBase: UInt64 = 0u64
+    public var FileName: CPointer<UInt16> = CPointer<UInt16>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SRCCODEINFO (synthetic:Windows_Win32_System_Diagnostics_Debug_SRCCODEINFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SRCCODEINFO {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Key: CPointer<Unit> = CPointer<Unit>()
+    public var ModBase: UInt64 = 0u64
+    public var Obj: VArray<Int8, $261> = VArray<Int8, $261>(repeat: 0i8)
+    public var FileName: VArray<Int8, $261> = VArray<Int8, $261>(repeat: 0i8)
+    public var LineNumber: UInt32 = 0u32
+    public var Address: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SRCCODEINFOW (synthetic:Windows_Win32_System_Diagnostics_Debug_SRCCODEINFOW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SRCCODEINFOW {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var Key: CPointer<Unit> = CPointer<Unit>()
+    public var ModBase: UInt64 = 0u64
+    public var Obj: VArray<UInt16, $261> = VArray<UInt16, $261>(repeat: 0u16)
+    public var FileName: VArray<UInt16, $261> = VArray<UInt16, $261>(repeat: 0u16)
+    public var LineNumber: UInt32 = 0u32
+    public var Address: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.STACKFRAME (synthetic:Windows_Win32_System_Diagnostics_Debug_STACKFRAME)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct STACKFRAME {
+    public var AddrPC: ADDRESS = ADDRESS()
+    public var AddrReturn: ADDRESS = ADDRESS()
+    public var AddrFrame: ADDRESS = ADDRESS()
+    public var AddrStack: ADDRESS = ADDRESS()
+    public var FuncTableEntry: CPointer<Unit> = CPointer<Unit>()
+    public var Params: VArray<UInt32, $4> = VArray<UInt32, $4>(repeat: 0u32)
+    public var Far: Int32 = 0i32
+    public var Virtual: Int32 = 0i32
+    public var Reserved: VArray<UInt32, $3> = VArray<UInt32, $3>(repeat: 0u32)
+    public var KdHelp: KDHELP = KDHELP()
+    public var AddrBStore: ADDRESS = ADDRESS()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.STACKFRAME64 (synthetic:Windows_Win32_System_Diagnostics_Debug_STACKFRAME64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct STACKFRAME64 {
+    public var AddrPC: ADDRESS64 = ADDRESS64()
+    public var AddrReturn: ADDRESS64 = ADDRESS64()
+    public var AddrFrame: ADDRESS64 = ADDRESS64()
+    public var AddrStack: ADDRESS64 = ADDRESS64()
+    public var AddrBStore: ADDRESS64 = ADDRESS64()
+    public var FuncTableEntry: CPointer<Unit> = CPointer<Unit>()
+    public var Params: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0u64)
+    public var Far: Int32 = 0i32
+    public var Virtual: Int32 = 0i32
+    public var Reserved: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0u64)
+    public var KdHelp: KDHELP64 = KDHELP64()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.STACKFRAME_EX (synthetic:Windows_Win32_System_Diagnostics_Debug_STACKFRAME_EX)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct STACKFRAME_EX {
+    public var AddrPC: ADDRESS64 = ADDRESS64()
+    public var AddrReturn: ADDRESS64 = ADDRESS64()
+    public var AddrFrame: ADDRESS64 = ADDRESS64()
+    public var AddrStack: ADDRESS64 = ADDRESS64()
+    public var AddrBStore: ADDRESS64 = ADDRESS64()
+    public var FuncTableEntry: CPointer<Unit> = CPointer<Unit>()
+    public var Params: VArray<UInt64, $4> = VArray<UInt64, $4>(repeat: 0u64)
+    public var Far: Int32 = 0i32
+    public var Virtual: Int32 = 0i32
+    public var Reserved: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0u64)
+    public var KdHelp: KDHELP64 = KDHELP64()
+    public var StackFrameSize: UInt32 = 0u32
+    public var InlineFrameContext: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYMADDSOURCESTREAM (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMADDSOURCESTREAM)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type SYMADDSOURCESTREAM = CFunc<(Windows_Win32_Foundation.HANDLE, UInt64, CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.SYMADDSOURCESTREAMA (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMADDSOURCESTREAMA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type SYMADDSOURCESTREAMA = CFunc<(Windows_Win32_Foundation.HANDLE, UInt64, CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMBOL_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SYMBOL_INFO {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var TypeIndex: UInt32 = 0u32
+    public var Reserved: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
+    public var Index: UInt32 = 0u32
+    public var Size: UInt32 = 0u32
+    public var ModBase: UInt64 = 0u64
+    public var Flags: UInt32 = 0u32
+    public var Value: UInt64 = 0u64
+    public var Address: UInt64 = 0u64
+    public var Register: UInt32 = 0u32
+    public var Scope: UInt32 = 0u32
+    public var Tag: UInt32 = 0u32
+    public var NameLen: UInt32 = 0u32
+    public var MaxNameLen: UInt32 = 0u32
+    public var Name: VArray<Int8, $1> = VArray<Int8, $1>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFOW (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMBOL_INFOW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SYMBOL_INFOW {
+    public var SizeOfStruct: UInt32 = 0u32
+    public var TypeIndex: UInt32 = 0u32
+    public var Reserved: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
+    public var Index: UInt32 = 0u32
+    public var Size: UInt32 = 0u32
+    public var ModBase: UInt64 = 0u64
+    public var Flags: UInt32 = 0u32
+    public var Value: UInt64 = 0u64
+    public var Address: UInt64 = 0u64
+    public var Register: UInt32 = 0u32
+    public var Scope: UInt32 = 0u32
+    public var Tag: UInt32 = 0u32
+    public var NameLen: UInt32 = 0u32
+    public var MaxNameLen: UInt32 = 0u32
+    public var Name: VArray<UInt16, $1> = VArray<UInt16, $1>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMBOL_INFO_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct SYMBOL_INFO_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: SYMBOL_INFO_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: SYMBOL_INFO_FLAGS): SYMBOL_INFO_FLAGS {
+        return SYMBOL_INFO_FLAGS(value | other.value)
+    }
+    public operator func &(other: SYMBOL_INFO_FLAGS): SYMBOL_INFO_FLAGS {
+        return SYMBOL_INFO_FLAGS(value & other.value)
+    }
+    public operator func ^(other: SYMBOL_INFO_FLAGS): SYMBOL_INFO_FLAGS {
+        return SYMBOL_INFO_FLAGS(value ^ other.value)
+    }
+    public operator func !(): SYMBOL_INFO_FLAGS {
+        return SYMBOL_INFO_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_CLR_TOKEN = SYMBOL_INFO_FLAGS(262144)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_CONSTANT = SYMBOL_INFO_FLAGS(256)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_EXPORT = SYMBOL_INFO_FLAGS(512)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_FORWARDER = SYMBOL_INFO_FLAGS(1024)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_FRAMEREL = SYMBOL_INFO_FLAGS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_FUNCTION = SYMBOL_INFO_FLAGS(2048)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_ILREL = SYMBOL_INFO_FLAGS(65536)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_LOCAL = SYMBOL_INFO_FLAGS(128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_METADATA = SYMBOL_INFO_FLAGS(131072)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_PARAMETER = SYMBOL_INFO_FLAGS(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_REGISTER = SYMBOL_INFO_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_REGREL = SYMBOL_INFO_FLAGS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_SLOT = SYMBOL_INFO_FLAGS(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_THUNK = SYMBOL_INFO_FLAGS(8192)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_TLSREL = SYMBOL_INFO_FLAGS(16384)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_VALUEPRESENT = SYMBOL_INFO_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYMBOL_INFO_FLAGS_SYMFLAG_VIRTUAL = SYMBOL_INFO_FLAGS(4096)
+
+// Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO_PACKAGE (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMBOL_INFO_PACKAGE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SYMBOL_INFO_PACKAGE {
+    public var si: SYMBOL_INFO = SYMBOL_INFO()
+    public var name: VArray<Int8, $2001> = VArray<Int8, $2001>(repeat: 0i8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYMBOL_INFO_PACKAGEW (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMBOL_INFO_PACKAGEW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SYMBOL_INFO_PACKAGEW {
+    public var si: SYMBOL_INFOW = SYMBOL_INFOW()
+    public var name: VArray<UInt16, $2001> = VArray<UInt16, $2001>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYMSRV_EXTENDED_OUTPUT_DATA (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMSRV_EXTENDED_OUTPUT_DATA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SYMSRV_EXTENDED_OUTPUT_DATA {
+    public var sizeOfStruct: UInt32 = 0u32
+    public var version: UInt32 = 0u32
+    public var filePtrMsg: VArray<UInt16, $261> = VArray<UInt16, $261>(repeat: 0u16)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYMSRV_INDEX_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMSRV_INDEX_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SYMSRV_INDEX_INFO {
+    public var sizeofstruct: UInt32 = 0u32
+    public var file: VArray<Int8, $261> = VArray<Int8, $261>(repeat: 0i8)
+    public var stripped: Int32 = 0i32
+    public var timestamp: UInt32 = 0u32
+    public var size: UInt32 = 0u32
+    public var dbgfile: VArray<Int8, $261> = VArray<Int8, $261>(repeat: 0i8)
+    public var pdbfile: VArray<Int8, $261> = VArray<Int8, $261>(repeat: 0i8)
+    public var guid: GUID = GUID()
+    public var sig: UInt32 = 0u32
+    public var age: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYMSRV_INDEX_INFOW (synthetic:Windows_Win32_System_Diagnostics_Debug_SYMSRV_INDEX_INFOW)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct SYMSRV_INDEX_INFOW {
+    public var sizeofstruct: UInt32 = 0u32
+    public var file: VArray<UInt16, $261> = VArray<UInt16, $261>(repeat: 0u16)
+    public var stripped: Int32 = 0i32
+    public var timestamp: UInt32 = 0u32
+    public var size: UInt32 = 0u32
+    public var dbgfile: VArray<UInt16, $261> = VArray<UInt16, $261>(repeat: 0u16)
+    public var pdbfile: VArray<UInt16, $261> = VArray<UInt16, $261>(repeat: 0u16)
+    public var guid: GUID = GUID()
+    public var sig: UInt32 = 0u32
+    public var age: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.SYM_FIND_ID_OPTION (synthetic:Windows_Win32_System_Diagnostics_Debug_SYM_FIND_ID_OPTION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct SYM_FIND_ID_OPTION {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_FIND_ID_OPTION_SSRVOPT_DWORD = SYM_FIND_ID_OPTION(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_FIND_ID_OPTION_SSRVOPT_DWORDPTR = SYM_FIND_ID_OPTION(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_FIND_ID_OPTION_SSRVOPT_GUIDPTR = SYM_FIND_ID_OPTION(8)
+
+// Windows.Win32.System.Diagnostics.Debug.SYM_LOAD_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_SYM_LOAD_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct SYM_LOAD_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: SYM_LOAD_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: SYM_LOAD_FLAGS): SYM_LOAD_FLAGS {
+        return SYM_LOAD_FLAGS(value | other.value)
+    }
+    public operator func &(other: SYM_LOAD_FLAGS): SYM_LOAD_FLAGS {
+        return SYM_LOAD_FLAGS(value & other.value)
+    }
+    public operator func ^(other: SYM_LOAD_FLAGS): SYM_LOAD_FLAGS {
+        return SYM_LOAD_FLAGS(value ^ other.value)
+    }
+    public operator func !(): SYM_LOAD_FLAGS {
+        return SYM_LOAD_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_LOAD_FLAGS_SLMFLAG_NONE = SYM_LOAD_FLAGS(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_LOAD_FLAGS_SLMFLAG_VIRTUAL = SYM_LOAD_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_LOAD_FLAGS_SLMFLAG_ALT_INDEX = SYM_LOAD_FLAGS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_LOAD_FLAGS_SLMFLAG_NO_SYMBOLS = SYM_LOAD_FLAGS(4)
+
+// Windows.Win32.System.Diagnostics.Debug.SYM_SRV_STORE_FILE_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_SYM_SRV_STORE_FILE_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct SYM_SRV_STORE_FILE_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_SRV_STORE_FILE_FLAGS_SYMSTOREOPT_COMPRESS = SYM_SRV_STORE_FILE_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_SRV_STORE_FILE_FLAGS_SYMSTOREOPT_OVERWRITE = SYM_SRV_STORE_FILE_FLAGS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_SRV_STORE_FILE_FLAGS_SYMSTOREOPT_PASS_IF_EXISTS = SYM_SRV_STORE_FILE_FLAGS(64)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_SRV_STORE_FILE_FLAGS_SYMSTOREOPT_POINTER = SYM_SRV_STORE_FILE_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_SRV_STORE_FILE_FLAGS_SYMSTOREOPT_RETURNINDEX = SYM_SRV_STORE_FILE_FLAGS(4)
+
+// Windows.Win32.System.Diagnostics.Debug.SYM_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_SYM_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct SYM_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymNone = SYM_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymCoff = SYM_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymCv = SYM_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymPdb = SYM_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymExport = SYM_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymDeferred = SYM_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymSym = SYM_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymDia = SYM_TYPE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_SymVirtual = SYM_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const SYM_TYPE_NumSymTypes = SYM_TYPE(9)
+
+// Windows.Win32.System.Diagnostics.Debug.THREAD_ERROR_MODE (synthetic:Windows_Win32_System_Diagnostics_Debug_THREAD_ERROR_MODE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct THREAD_ERROR_MODE {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: THREAD_ERROR_MODE): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: THREAD_ERROR_MODE): THREAD_ERROR_MODE {
+        return THREAD_ERROR_MODE(value | other.value)
+    }
+    public operator func &(other: THREAD_ERROR_MODE): THREAD_ERROR_MODE {
+        return THREAD_ERROR_MODE(value & other.value)
+    }
+    public operator func ^(other: THREAD_ERROR_MODE): THREAD_ERROR_MODE {
+        return THREAD_ERROR_MODE(value ^ other.value)
+    }
+    public operator func !(): THREAD_ERROR_MODE {
+        return THREAD_ERROR_MODE(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_ERROR_MODE_SEM_ALL_ERRORS = THREAD_ERROR_MODE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_ERROR_MODE_SEM_FAILCRITICALERRORS = THREAD_ERROR_MODE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_ERROR_MODE_SEM_NOGPFAULTERRORBOX = THREAD_ERROR_MODE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_ERROR_MODE_SEM_NOOPENFILEERRORBOX = THREAD_ERROR_MODE(32768)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_ERROR_MODE_SEM_NOALIGNMENTFAULTEXCEPT = THREAD_ERROR_MODE(4)
+
+// Windows.Win32.System.Diagnostics.Debug.THREAD_WRITE_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_THREAD_WRITE_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct THREAD_WRITE_FLAGS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_WRITE_FLAGS_ThreadWriteThread = THREAD_WRITE_FLAGS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_WRITE_FLAGS_ThreadWriteStack = THREAD_WRITE_FLAGS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_WRITE_FLAGS_ThreadWriteContext = THREAD_WRITE_FLAGS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_WRITE_FLAGS_ThreadWriteBackingStore = THREAD_WRITE_FLAGS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_WRITE_FLAGS_ThreadWriteInstructionWindow = THREAD_WRITE_FLAGS(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_WRITE_FLAGS_ThreadWriteThreadData = THREAD_WRITE_FLAGS(32)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const THREAD_WRITE_FLAGS_ThreadWriteThreadInfo = THREAD_WRITE_FLAGS(64)
+
+// Windows.Win32.System.Diagnostics.Debug.TI_FINDCHILDREN_PARAMS (synthetic:Windows_Win32_System_Diagnostics_Debug_TI_FINDCHILDREN_PARAMS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct TI_FINDCHILDREN_PARAMS {
+    public var Count: UInt32 = 0u32
+    public var Start: UInt32 = 0u32
+    public var ChildId: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS (synthetic:Windows_Win32_System_Diagnostics_Debug_TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS {
+    public var Count: UInt32 = 0u32
+    public var Start: UInt32 = 0u32
+    public var Range: VArray<DISCRIMINATEDUNION_TAG_VALUE, $1> = VArray<DISCRIMINATEDUNION_TAG_VALUE, $1>(repeat: DISCRIMINATEDUNION_TAG_VALUE())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.UNLOAD_DLL_DEBUG_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_UNLOAD_DLL_DEBUG_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct UNLOAD_DLL_DEBUG_INFO {
+    public var lpBaseOfDll: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.UNWIND_HISTORY_TABLE (synthetic:Windows_Win32_System_Diagnostics_Debug_UNWIND_HISTORY_TABLE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct UNWIND_HISTORY_TABLE {
+    public var Count: UInt32 = 0u32
+    public var LocalHint: UInt8 = 0u8
+    public var GlobalHint: UInt8 = 0u8
+    public var Search: UInt8 = 0u8
+    public var Once: UInt8 = 0u8
+    public var LowAddress: CPointer<Unit> = CPointer<Unit>()
+    public var HighAddress: CPointer<Unit> = CPointer<Unit>()
+    public var Entry: VArray<UNWIND_HISTORY_TABLE_ENTRY, $12> = VArray<UNWIND_HISTORY_TABLE_ENTRY, $12>(repeat: UNWIND_HISTORY_TABLE_ENTRY())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.UNWIND_HISTORY_TABLE_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_UNWIND_HISTORY_TABLE_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct UNWIND_HISTORY_TABLE_ENTRY {
+    public var ImageBase: CPointer<Unit> = CPointer<Unit>()
+    public var FunctionEntry: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.VER_PLATFORM (synthetic:Windows_Win32_System_Diagnostics_Debug_VER_PLATFORM)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct VER_PLATFORM {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const VER_PLATFORM_VER_PLATFORM_WIN32s = VER_PLATFORM(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const VER_PLATFORM_VER_PLATFORM_WIN32_WINDOWS = VER_PLATFORM(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const VER_PLATFORM_VER_PLATFORM_WIN32_NT = VER_PLATFORM(2)
+
+// Windows.Win32.System.Diagnostics.Debug.WAITCHAIN_NODE_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_WAITCHAIN_NODE_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WAITCHAIN_NODE_INFO {
+    public var ObjectType: Int32 = 0i32
+    public var ObjectStatus: Int32 = 0i32
+    public var Anonymous: WAITCHAIN_NODE_INFO__Anonymous_e__Union = WAITCHAIN_NODE_INFO__Anonymous_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WAITCHAIN_NODE_INFO._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_WAITCHAIN_NODE_INFO__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WAITCHAIN_NODE_INFO__Anonymous_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop LockObject: WAITCHAIN_NODE_INFO__Anonymous_e__Union__LockObject_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WAITCHAIN_NODE_INFO__Anonymous_e__Union__LockObject_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WAITCHAIN_NODE_INFO__Anonymous_e__Union__LockObject_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop ThreadObject: WAITCHAIN_NODE_INFO__Anonymous_e__Union__ThreadObject_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WAITCHAIN_NODE_INFO__Anonymous_e__Union__ThreadObject_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WAITCHAIN_NODE_INFO__Anonymous_e__Union__ThreadObject_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WAITCHAIN_NODE_INFO._Anonymous_e__Union._LockObject_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WAITCHAIN_NODE_INFO__Anonymous_e__Union__LockObject_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WAITCHAIN_NODE_INFO__Anonymous_e__Union__LockObject_e__Struct {
+    public var ObjectName: VArray<UInt16, $128> = VArray<UInt16, $128>(repeat: 0u16)
+    public var Timeout: Int64 = 0i64
+    public var Alertable: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WAITCHAIN_NODE_INFO._Anonymous_e__Union._ThreadObject_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WAITCHAIN_NODE_INFO__Anonymous_e__Union__ThreadObject_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WAITCHAIN_NODE_INFO__Anonymous_e__Union__ThreadObject_e__Struct {
+    public var ProcessId: UInt32 = 0u32
+    public var ThreadId: UInt32 = 0u32
+    public var WaitTime: UInt32 = 0u32
+    public var ContextSwitches: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WAIT_CHAIN_THREAD_OPTIONS (synthetic:Windows_Win32_System_Diagnostics_Debug_WAIT_CHAIN_THREAD_OPTIONS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct WAIT_CHAIN_THREAD_OPTIONS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WAIT_CHAIN_THREAD_OPTIONS_WCT_OUT_OF_PROC_COM_FLAG = WAIT_CHAIN_THREAD_OPTIONS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WAIT_CHAIN_THREAD_OPTIONS_WCT_OUT_OF_PROC_CS_FLAG = WAIT_CHAIN_THREAD_OPTIONS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WAIT_CHAIN_THREAD_OPTIONS_WCT_OUT_OF_PROC_FLAG = WAIT_CHAIN_THREAD_OPTIONS(1)
+
+// Windows.Win32.System.Diagnostics.Debug.WCT_OBJECT_STATUS (synthetic:Windows_Win32_System_Diagnostics_Debug_WCT_OBJECT_STATUS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct WCT_OBJECT_STATUS {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusNoAccess = WCT_OBJECT_STATUS(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusRunning = WCT_OBJECT_STATUS(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusBlocked = WCT_OBJECT_STATUS(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusPidOnly = WCT_OBJECT_STATUS(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusPidOnlyRpcss = WCT_OBJECT_STATUS(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusOwned = WCT_OBJECT_STATUS(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusNotOwned = WCT_OBJECT_STATUS(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusAbandoned = WCT_OBJECT_STATUS(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusUnknown = WCT_OBJECT_STATUS(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusError = WCT_OBJECT_STATUS(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_STATUS_WctStatusMax = WCT_OBJECT_STATUS(11)
+
+// Windows.Win32.System.Diagnostics.Debug.WCT_OBJECT_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_WCT_OBJECT_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct WCT_OBJECT_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctCriticalSectionType = WCT_OBJECT_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctSendMessageType = WCT_OBJECT_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctMutexType = WCT_OBJECT_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctAlpcType = WCT_OBJECT_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctComType = WCT_OBJECT_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctThreadWaitType = WCT_OBJECT_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctProcessWaitType = WCT_OBJECT_TYPE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctThreadType = WCT_OBJECT_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctComActivationType = WCT_OBJECT_TYPE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctUnknownType = WCT_OBJECT_TYPE(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctSocketIoType = WCT_OBJECT_TYPE(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctSmbIoType = WCT_OBJECT_TYPE(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WCT_OBJECT_TYPE_WctMaxType = WCT_OBJECT_TYPE(13)
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_AER_BRIDGE_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_AER_BRIDGE_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_AER_BRIDGE_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var Reserved: UInt8 = 0u8
+    public var BusNumber: UInt32 = 0u32
+    public var Slot: WHEA_PCI_SLOT_NUMBER = WHEA_PCI_SLOT_NUMBER()
+    public var DeviceControl: UInt16 = 0u16
+    public var Flags: AER_BRIDGE_DESCRIPTOR_FLAGS = AER_BRIDGE_DESCRIPTOR_FLAGS()
+    public var UncorrectableErrorMask: UInt32 = 0u32
+    public var UncorrectableErrorSeverity: UInt32 = 0u32
+    public var CorrectableErrorMask: UInt32 = 0u32
+    public var AdvancedCapsAndControl: UInt32 = 0u32
+    public var SecondaryUncorrectableErrorMask: UInt32 = 0u32
+    public var SecondaryUncorrectableErrorSev: UInt32 = 0u32
+    public var SecondaryCapsAndControl: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_AER_ENDPOINT_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_AER_ENDPOINT_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_AER_ENDPOINT_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var Reserved: UInt8 = 0u8
+    public var BusNumber: UInt32 = 0u32
+    public var Slot: WHEA_PCI_SLOT_NUMBER = WHEA_PCI_SLOT_NUMBER()
+    public var DeviceControl: UInt16 = 0u16
+    public var Flags: AER_ENDPOINT_DESCRIPTOR_FLAGS = AER_ENDPOINT_DESCRIPTOR_FLAGS()
+    public var UncorrectableErrorMask: UInt32 = 0u32
+    public var UncorrectableErrorSeverity: UInt32 = 0u32
+    public var CorrectableErrorMask: UInt32 = 0u32
+    public var AdvancedCapsAndControl: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_AER_ROOTPORT_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_AER_ROOTPORT_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_AER_ROOTPORT_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var Reserved: UInt8 = 0u8
+    public var BusNumber: UInt32 = 0u32
+    public var Slot: WHEA_PCI_SLOT_NUMBER = WHEA_PCI_SLOT_NUMBER()
+    public var DeviceControl: UInt16 = 0u16
+    public var Flags: AER_ROOTPORT_DESCRIPTOR_FLAGS = AER_ROOTPORT_DESCRIPTOR_FLAGS()
+    public var UncorrectableErrorMask: UInt32 = 0u32
+    public var UncorrectableErrorSeverity: UInt32 = 0u32
+    public var CorrectableErrorMask: UInt32 = 0u32
+    public var AdvancedCapsAndControl: UInt32 = 0u32
+    public var RootErrorCommand: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_DEVICE_DRIVER_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_DEVICE_DRIVER_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_DEVICE_DRIVER_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var Reserved: UInt8 = 0u8
+    public var SourceGuid: GUID = GUID()
+    public var LogTag: UInt16 = 0u16
+    public var Reserved2: UInt16 = 0u16
+    public var PacketLength: UInt32 = 0u32
+    public var PacketCount: UInt32 = 0u32
+    public var PacketBuffer: CPointer<Unit> = CPointer<Unit>()
+    public var Config: WHEA_ERROR_SOURCE_CONFIGURATION_DD = WHEA_ERROR_SOURCE_CONFIGURATION_DD()
+    public var CreatorId: GUID = GUID()
+    public var PartitionId: GUID = GUID()
+    public var MaxSectionDataLength: UInt32 = 0u32
+    public var MaxSectionsPerRecord: UInt32 = 0u32
+    public var PacketStateBuffer: CPointer<Unit> = CPointer<Unit>()
+    public var OpenHandles: Int32 = 0i32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_DRIVER_BUFFER_SET (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_DRIVER_BUFFER_SET)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_DRIVER_BUFFER_SET {
+    public var Version: UInt32 = 0u32
+    public var Data: CPointer<Unit> = CPointer<Unit>()
+    public var DataSize: UInt32 = 0u32
+    public var SectionTypeGuid: CPointer<Unit> = CPointer<Unit>()
+    public var SectionFriendlyName: CPointer<Unit> = CPointer<Unit>()
+    public var Flags: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_CONFIGURATION_DD (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_CONFIGURATION_DD)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_ERROR_SOURCE_CONFIGURATION_DD {
+    public var Initialize: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Uninitialize: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Correct: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER {
+    public var Version: UInt32 = 0u32
+    public var SourceGuid: GUID = GUID()
+    public var LogTag: UInt16 = 0u16
+    public var Reserved: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0u8)
+    public var Initialize: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Uninitialize: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var MaxSectionDataLength: UInt32 = 0u32
+    public var MaxSectionsPerReport: UInt32 = 0u32
+    public var CreatorId: GUID = GUID()
+    public var PartitionId: GUID = GUID()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER_V1 (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER_V1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_ERROR_SOURCE_CONFIGURATION_DEVICE_DRIVER_V1 {
+    public var Version: UInt32 = 0u32
+    public var SourceGuid: GUID = GUID()
+    public var LogTag: UInt16 = 0u16
+    public var Reserved: VArray<UInt8, $6> = VArray<UInt8, $6>(repeat: 0u8)
+    public var Initialize: CFunc<(CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Uninitialize: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_ERROR_SOURCE_DESCRIPTOR {
+    public var Length: UInt32 = 0u32
+    public var Version: UInt32 = 0u32
+    public var Type: Int32 = 0i32
+    public var State: Int32 = 0i32
+    public var MaxRawDataLength: UInt32 = 0u32
+    public var NumRecordsToPreallocate: UInt32 = 0u32
+    public var MaxSectionsPerRecord: UInt32 = 0u32
+    public var ErrorSourceId: UInt32 = 0u32
+    public var PlatformErrorSourceId: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var Info: WHEA_ERROR_SOURCE_DESCRIPTOR__Info_e__Union = WHEA_ERROR_SOURCE_DESCRIPTOR__Info_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_DESCRIPTOR._Info_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_DESCRIPTOR__Info_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_ERROR_SOURCE_DESCRIPTOR__Info_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop XpfMceDescriptor: WHEA_XPF_MCE_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_XPF_MCE_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_XPF_MCE_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop XpfCmcDescriptor: WHEA_XPF_CMC_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_XPF_CMC_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_XPF_CMC_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop XpfNmiDescriptor: WHEA_XPF_NMI_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_XPF_NMI_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_XPF_NMI_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop IpfMcaDescriptor: WHEA_IPF_MCA_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_IPF_MCA_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_IPF_MCA_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop IpfCmcDescriptor: WHEA_IPF_CMC_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_IPF_CMC_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_IPF_CMC_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop IpfCpeDescriptor: WHEA_IPF_CPE_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_IPF_CPE_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_IPF_CPE_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AerRootportDescriptor: WHEA_AER_ROOTPORT_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_AER_ROOTPORT_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_AER_ROOTPORT_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AerEndpointDescriptor: WHEA_AER_ENDPOINT_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_AER_ENDPOINT_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_AER_ENDPOINT_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AerBridgeDescriptor: WHEA_AER_BRIDGE_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_AER_BRIDGE_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_AER_BRIDGE_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop GenErrDescriptor: WHEA_GENERIC_ERROR_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_GENERIC_ERROR_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_GENERIC_ERROR_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop GenErrDescriptorV2: WHEA_GENERIC_ERROR_DESCRIPTOR_V2 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_GENERIC_ERROR_DESCRIPTOR_V2>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_GENERIC_ERROR_DESCRIPTOR_V2>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop DeviceDriverDescriptor: WHEA_DEVICE_DRIVER_DESCRIPTOR {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_DEVICE_DRIVER_DESCRIPTOR>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_DEVICE_DRIVER_DESCRIPTOR>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER = CFunc<(CPointer<Unit>, UInt32) -> Int32>
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_STATE (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_STATE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct WHEA_ERROR_SOURCE_STATE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_STATE_WheaErrSrcStateStopped = WHEA_ERROR_SOURCE_STATE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_STATE_WheaErrSrcStateStarted = WHEA_ERROR_SOURCE_STATE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_STATE_WheaErrSrcStateRemoved = WHEA_ERROR_SOURCE_STATE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_STATE_WheaErrSrcStateRemovePending = WHEA_ERROR_SOURCE_STATE(4)
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_TYPE (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_TYPE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct WHEA_ERROR_SOURCE_TYPE {
+    public let value: Int32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: Int32) {
+        this.value = value
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeMCE = WHEA_ERROR_SOURCE_TYPE(0)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeCMC = WHEA_ERROR_SOURCE_TYPE(1)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeCPE = WHEA_ERROR_SOURCE_TYPE(2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeNMI = WHEA_ERROR_SOURCE_TYPE(3)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypePCIe = WHEA_ERROR_SOURCE_TYPE(4)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeGeneric = WHEA_ERROR_SOURCE_TYPE(5)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeINIT = WHEA_ERROR_SOURCE_TYPE(6)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeBOOT = WHEA_ERROR_SOURCE_TYPE(7)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeSCIGeneric = WHEA_ERROR_SOURCE_TYPE(8)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeIPFMCA = WHEA_ERROR_SOURCE_TYPE(9)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeIPFCMC = WHEA_ERROR_SOURCE_TYPE(10)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeIPFCPE = WHEA_ERROR_SOURCE_TYPE(11)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeGenericV2 = WHEA_ERROR_SOURCE_TYPE(12)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeSCIGenericV2 = WHEA_ERROR_SOURCE_TYPE(13)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeBMC = WHEA_ERROR_SOURCE_TYPE(14)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypePMEM = WHEA_ERROR_SOURCE_TYPE(15)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeDeviceDriver = WHEA_ERROR_SOURCE_TYPE(16)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeSea = WHEA_ERROR_SOURCE_TYPE(17)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeSei = WHEA_ERROR_SOURCE_TYPE(18)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WHEA_ERROR_SOURCE_TYPE_WheaErrSrcTypeMax = WHEA_ERROR_SOURCE_TYPE(19)
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public type WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER = CFunc<(CPointer<Unit>) -> Unit>
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_GENERIC_ERROR_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_GENERIC_ERROR_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_GENERIC_ERROR_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Reserved: UInt8 = 0u8
+    public var Enabled: UInt8 = 0u8
+    public var ErrStatusBlockLength: UInt32 = 0u32
+    public var RelatedErrorSourceId: UInt32 = 0u32
+    public var ErrStatusAddressSpaceID: UInt8 = 0u8
+    public var ErrStatusAddressBitWidth: UInt8 = 0u8
+    public var ErrStatusAddressBitOffset: UInt8 = 0u8
+    public var ErrStatusAddressAccessSize: UInt8 = 0u8
+    public var ErrStatusAddress: Int64 = 0i64
+    public var Notify: WHEA_NOTIFICATION_DESCRIPTOR = WHEA_NOTIFICATION_DESCRIPTOR()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_GENERIC_ERROR_DESCRIPTOR_V2 (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_GENERIC_ERROR_DESCRIPTOR_V2)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_GENERIC_ERROR_DESCRIPTOR_V2 {
+    public var Type: UInt16 = 0u16
+    public var Reserved: UInt8 = 0u8
+    public var Enabled: UInt8 = 0u8
+    public var ErrStatusBlockLength: UInt32 = 0u32
+    public var RelatedErrorSourceId: UInt32 = 0u32
+    public var ErrStatusAddressSpaceID: UInt8 = 0u8
+    public var ErrStatusAddressBitWidth: UInt8 = 0u8
+    public var ErrStatusAddressBitOffset: UInt8 = 0u8
+    public var ErrStatusAddressAccessSize: UInt8 = 0u8
+    public var ErrStatusAddress: Int64 = 0i64
+    public var Notify: WHEA_NOTIFICATION_DESCRIPTOR = WHEA_NOTIFICATION_DESCRIPTOR()
+    public var ReadAckAddressSpaceID: UInt8 = 0u8
+    public var ReadAckAddressBitWidth: UInt8 = 0u8
+    public var ReadAckAddressBitOffset: UInt8 = 0u8
+    public var ReadAckAddressAccessSize: UInt8 = 0u8
+    public var ReadAckAddress: Int64 = 0i64
+    public var ReadAckPreserveMask: UInt64 = 0u64
+    public var ReadAckWriteMask: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_IPF_CMC_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_IPF_CMC_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_IPF_CMC_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var Reserved: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_IPF_CPE_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_IPF_CPE_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_IPF_CPE_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var Reserved: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_IPF_MCA_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_IPF_MCA_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_IPF_MCA_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var Reserved: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR {
+    public var Type: UInt8 = 0u8
+    public var Length: UInt8 = 0u8
+    public var Flags: WHEA_NOTIFICATION_FLAGS = WHEA_NOTIFICATION_FLAGS()
+    public var u: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union = WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Polled: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Polled_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Polled_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Polled_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Interrupt: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Interrupt_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Interrupt_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Interrupt_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop LocalInterrupt: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__LocalInterrupt_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__LocalInterrupt_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__LocalInterrupt_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Sci: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sci_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sci_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sci_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Nmi: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Nmi_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Nmi_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Nmi_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Sea: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sea_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sea_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sea_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Sei: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sei_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sei_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sei_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Gsiv: WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Gsiv_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Gsiv_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Gsiv_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._Gsiv_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Gsiv_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Gsiv_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+    public var Vector: UInt32 = 0u32
+    public var SwitchToPollingThreshold: UInt32 = 0u32
+    public var SwitchToPollingWindow: UInt32 = 0u32
+    public var ErrorThreshold: UInt32 = 0u32
+    public var ErrorThresholdWindow: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._Interrupt_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Interrupt_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Interrupt_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+    public var Vector: UInt32 = 0u32
+    public var SwitchToPollingThreshold: UInt32 = 0u32
+    public var SwitchToPollingWindow: UInt32 = 0u32
+    public var ErrorThreshold: UInt32 = 0u32
+    public var ErrorThresholdWindow: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._LocalInterrupt_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__LocalInterrupt_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__LocalInterrupt_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+    public var Vector: UInt32 = 0u32
+    public var SwitchToPollingThreshold: UInt32 = 0u32
+    public var SwitchToPollingWindow: UInt32 = 0u32
+    public var ErrorThreshold: UInt32 = 0u32
+    public var ErrorThresholdWindow: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._Nmi_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Nmi_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Nmi_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+    public var Vector: UInt32 = 0u32
+    public var SwitchToPollingThreshold: UInt32 = 0u32
+    public var SwitchToPollingWindow: UInt32 = 0u32
+    public var ErrorThreshold: UInt32 = 0u32
+    public var ErrorThresholdWindow: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._Polled_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Polled_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Polled_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._Sci_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sci_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sci_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+    public var Vector: UInt32 = 0u32
+    public var SwitchToPollingThreshold: UInt32 = 0u32
+    public var SwitchToPollingWindow: UInt32 = 0u32
+    public var ErrorThreshold: UInt32 = 0u32
+    public var ErrorThresholdWindow: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._Sea_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sea_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sea_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+    public var Vector: UInt32 = 0u32
+    public var SwitchToPollingThreshold: UInt32 = 0u32
+    public var SwitchToPollingWindow: UInt32 = 0u32
+    public var ErrorThreshold: UInt32 = 0u32
+    public var ErrorThresholdWindow: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_DESCRIPTOR._u_e__Union._Sei_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sei_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_DESCRIPTOR__u_e__Union__Sei_e__Struct {
+    public var PollInterval: UInt32 = 0u32
+    public var Vector: UInt32 = 0u32
+    public var SwitchToPollingThreshold: UInt32 = 0u32
+    public var SwitchToPollingWindow: UInt32 = 0u32
+    public var ErrorThreshold: UInt32 = 0u32
+    public var ErrorThresholdWindow: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_FLAGS {
+    public var _raw: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
+
+    public mut prop Anonymous: WHEA_NOTIFICATION_FLAGS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_FLAGS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_NOTIFICATION_FLAGS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsUSHORT: UInt16 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt16(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt16(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_NOTIFICATION_FLAGS._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_NOTIFICATION_FLAGS__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_NOTIFICATION_FLAGS__Anonymous_e__Struct {
+    public var _bitfield: UInt16 = 0u16
+
+    public mut prop PollIntervalRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop SwitchToPollingThresholdRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop SwitchToPollingWindowRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 2, 1, val)
+        }
+    }
+
+    public mut prop ErrorThresholdRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 3, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 3, 1, val)
+        }
+    }
+
+    public mut prop ErrorThresholdWindowRW: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 4, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 4, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt16 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt16(_bitfield, 5, 11)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt16(_bitfield, 5, 11, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_PCI_SLOT_NUMBER (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_PCI_SLOT_NUMBER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_PCI_SLOT_NUMBER {
+    public var u: WHEA_PCI_SLOT_NUMBER__u_e__Union = WHEA_PCI_SLOT_NUMBER__u_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_PCI_SLOT_NUMBER._u_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_PCI_SLOT_NUMBER__u_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_PCI_SLOT_NUMBER__u_e__Union {
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public mut prop bits: WHEA_PCI_SLOT_NUMBER__u_e__Union__bits_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_PCI_SLOT_NUMBER__u_e__Union__bits_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WHEA_PCI_SLOT_NUMBER__u_e__Union__bits_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsULONG: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_PCI_SLOT_NUMBER._u_e__Union._bits_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_PCI_SLOT_NUMBER__u_e__Union__bits_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_PCI_SLOT_NUMBER__u_e__Union__bits_e__Struct {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop DeviceNumber: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 5)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 5, val)
+        }
+    }
+
+    public mut prop FunctionNumber: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 5, 3)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 5, 3, val)
+        }
+    }
+
+    public mut prop Reserved: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 8, 24)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 8, 24, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_XPF_CMC_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_XPF_CMC_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_XPF_CMC_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var NumberOfBanks: UInt8 = 0u8
+    public var Reserved: UInt32 = 0u32
+    public var Notify: WHEA_NOTIFICATION_DESCRIPTOR = WHEA_NOTIFICATION_DESCRIPTOR()
+    public var Banks: VArray<WHEA_XPF_MC_BANK_DESCRIPTOR, $32> = VArray<WHEA_XPF_MC_BANK_DESCRIPTOR, $32>(repeat: WHEA_XPF_MC_BANK_DESCRIPTOR())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_XPF_MCE_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_XPF_MCE_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_XPF_MCE_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+    public var NumberOfBanks: UInt8 = 0u8
+    public var Flags: XPF_MCE_FLAGS = XPF_MCE_FLAGS()
+    public var MCG_Capability: UInt64 = 0u64
+    public var MCG_GlobalControl: UInt64 = 0u64
+    public var Banks: VArray<WHEA_XPF_MC_BANK_DESCRIPTOR, $32> = VArray<WHEA_XPF_MC_BANK_DESCRIPTOR, $32>(repeat: WHEA_XPF_MC_BANK_DESCRIPTOR())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_XPF_MC_BANK_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_XPF_MC_BANK_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_XPF_MC_BANK_DESCRIPTOR {
+    public var BankNumber: UInt8 = 0u8
+    public var ClearOnInitialization: UInt8 = 0u8
+    public var StatusDataFormat: UInt8 = 0u8
+    public var Flags: XPF_MC_BANK_FLAGS = XPF_MC_BANK_FLAGS()
+    public var ControlMsr: UInt32 = 0u32
+    public var StatusMsr: UInt32 = 0u32
+    public var AddressMsr: UInt32 = 0u32
+    public var MiscMsr: UInt32 = 0u32
+    public var ControlData: UInt64 = 0u64
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WHEA_XPF_NMI_DESCRIPTOR (synthetic:Windows_Win32_System_Diagnostics_Debug_WHEA_XPF_NMI_DESCRIPTOR)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WHEA_XPF_NMI_DESCRIPTOR {
+    public var Type: UInt16 = 0u16
+    public var Enabled: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_CONTEXT (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_CONTEXT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WOW64_CONTEXT {
+    public var ContextFlags: UInt32 = 0u32
+    public var Dr0: UInt32 = 0u32
+    public var Dr1: UInt32 = 0u32
+    public var Dr2: UInt32 = 0u32
+    public var Dr3: UInt32 = 0u32
+    public var Dr6: UInt32 = 0u32
+    public var Dr7: UInt32 = 0u32
+    public var FloatSave: WOW64_FLOATING_SAVE_AREA = WOW64_FLOATING_SAVE_AREA()
+    public var SegGs: UInt32 = 0u32
+    public var SegFs: UInt32 = 0u32
+    public var SegEs: UInt32 = 0u32
+    public var SegDs: UInt32 = 0u32
+    public var Edi: UInt32 = 0u32
+    public var Esi: UInt32 = 0u32
+    public var Ebx: UInt32 = 0u32
+    public var Edx: UInt32 = 0u32
+    public var Ecx: UInt32 = 0u32
+    public var Eax: UInt32 = 0u32
+    public var Ebp: UInt32 = 0u32
+    public var Eip: UInt32 = 0u32
+    public var SegCs: UInt32 = 0u32
+    public var EFlags: UInt32 = 0u32
+    public var Esp: UInt32 = 0u32
+    public var SegSs: UInt32 = 0u32
+    public var ExtendedRegisters: VArray<UInt8, $512> = VArray<UInt8, $512>(repeat: 0u8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_CONTEXT_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_CONTEXT_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public struct WOW64_CONTEXT_FLAGS {
+    public let value: UInt32
+    public const init() {
+        this.value = 0
+    }
+    public const init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: WOW64_CONTEXT_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: WOW64_CONTEXT_FLAGS): WOW64_CONTEXT_FLAGS {
+        return WOW64_CONTEXT_FLAGS(value | other.value)
+    }
+    public operator func &(other: WOW64_CONTEXT_FLAGS): WOW64_CONTEXT_FLAGS {
+        return WOW64_CONTEXT_FLAGS(value & other.value)
+    }
+    public operator func ^(other: WOW64_CONTEXT_FLAGS): WOW64_CONTEXT_FLAGS {
+        return WOW64_CONTEXT_FLAGS(value ^ other.value)
+    }
+    public operator func !(): WOW64_CONTEXT_FLAGS {
+        return WOW64_CONTEXT_FLAGS(!value)
+    }
+}
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_X86 = WOW64_CONTEXT_FLAGS(65536)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_CONTROL = WOW64_CONTEXT_FLAGS(65537)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_INTEGER = WOW64_CONTEXT_FLAGS(65538)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_SEGMENTS = WOW64_CONTEXT_FLAGS(65540)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_FLOATING_POINT = WOW64_CONTEXT_FLAGS(65544)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_DEBUG_REGISTERS = WOW64_CONTEXT_FLAGS(65552)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_EXTENDED_REGISTERS = WOW64_CONTEXT_FLAGS(65568)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_FULL = WOW64_CONTEXT_FLAGS(65543)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_ALL = WOW64_CONTEXT_FLAGS(65599)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_XSTATE = WOW64_CONTEXT_FLAGS(65600)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_EXCEPTION_ACTIVE = WOW64_CONTEXT_FLAGS(134217728)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_SERVICE_ACTIVE = WOW64_CONTEXT_FLAGS(268435456)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_EXCEPTION_REQUEST = WOW64_CONTEXT_FLAGS(1073741824)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+public const WOW64_CONTEXT_FLAGS_WOW64_CONTEXT_EXCEPTION_REPORTING = WOW64_CONTEXT_FLAGS(2147483648)
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_DESCRIPTOR_TABLE_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_DESCRIPTOR_TABLE_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WOW64_DESCRIPTOR_TABLE_ENTRY {
+    public var Selector: UInt32 = 0u32
+    public var Descriptor: WOW64_LDT_ENTRY = WOW64_LDT_ENTRY()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_FLOATING_SAVE_AREA (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_FLOATING_SAVE_AREA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WOW64_FLOATING_SAVE_AREA {
+    public var ControlWord: UInt32 = 0u32
+    public var StatusWord: UInt32 = 0u32
+    public var TagWord: UInt32 = 0u32
+    public var ErrorOffset: UInt32 = 0u32
+    public var ErrorSelector: UInt32 = 0u32
+    public var DataOffset: UInt32 = 0u32
+    public var DataSelector: UInt32 = 0u32
+    public var RegisterArea: VArray<UInt8, $80> = VArray<UInt8, $80>(repeat: 0u8)
+    public var Cr0NpxState: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_LDT_ENTRY (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_LDT_ENTRY)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WOW64_LDT_ENTRY {
+    public var LimitLow: UInt16 = 0u16
+    public var BaseLow: UInt16 = 0u16
+    public var HighWord: WOW64_LDT_ENTRY__HighWord_e__Union = WOW64_LDT_ENTRY__HighWord_e__Union()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_LDT_ENTRY._HighWord_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_LDT_ENTRY__HighWord_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WOW64_LDT_ENTRY__HighWord_e__Union {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Bytes: WOW64_LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WOW64_LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WOW64_LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Bits: WOW64_LDT_ENTRY__HighWord_e__Union__Bits_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WOW64_LDT_ENTRY__HighWord_e__Union__Bits_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<WOW64_LDT_ENTRY__HighWord_e__Union__Bits_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_LDT_ENTRY._HighWord_e__Union._Bits_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_LDT_ENTRY__HighWord_e__Union__Bits_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WOW64_LDT_ENTRY__HighWord_e__Union__Bits_e__Struct {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop BaseMid: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 8)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 8, val)
+        }
+    }
+
+    public mut prop Type: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 8, 5)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 8, 5, val)
+        }
+    }
+
+    public mut prop Dpl: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 13, 2)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 13, 2, val)
+        }
+    }
+
+    public mut prop Pres: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 15, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 15, 1, val)
+        }
+    }
+
+    public mut prop LimitHi: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 16, 4)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 16, 4, val)
+        }
+    }
+
+    public mut prop Sys: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 20, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 20, 1, val)
+        }
+    }
+
+    public mut prop Reserved_0: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 21, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 21, 1, val)
+        }
+    }
+
+    public mut prop Default_Big: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 22, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 22, 1, val)
+        }
+    }
+
+    public mut prop Granularity: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 23, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 23, 1, val)
+        }
+    }
+
+    public mut prop BaseHi: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 24, 8)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 24, 8, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.WOW64_LDT_ENTRY._HighWord_e__Union._Bytes_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_WOW64_LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct WOW64_LDT_ENTRY__HighWord_e__Union__Bytes_e__Struct {
+    public var BaseMid: UInt8 = 0u8
+    public var Flags1: UInt8 = 0u8
+    public var Flags2: UInt8 = 0u8
+    public var BaseHi: UInt8 = 0u8
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XPF_MCE_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_XPF_MCE_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XPF_MCE_FLAGS {
+    public var _raw: VArray<UInt8, $4> = VArray<UInt8, $4>(repeat: 0u8)
+
+    public mut prop Anonymous: XPF_MCE_FLAGS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<XPF_MCE_FLAGS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<XPF_MCE_FLAGS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsULONG: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XPF_MCE_FLAGS._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_XPF_MCE_FLAGS__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XPF_MCE_FLAGS__Anonymous_e__Struct {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop MCG_CapabilityRW: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop MCG_GlobalControlRW: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 2, 30)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 2, 30, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XPF_MC_BANK_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_XPF_MC_BANK_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XPF_MC_BANK_FLAGS {
+    public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
+
+    public mut prop Anonymous: XPF_MC_BANK_FLAGS__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<XPF_MC_BANK_FLAGS__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<XPF_MC_BANK_FLAGS__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop AsUCHAR: UInt8 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt8(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt8(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XPF_MC_BANK_FLAGS._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_XPF_MC_BANK_FLAGS__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XPF_MC_BANK_FLAGS__Anonymous_e__Struct {
+    public var _bitfield: UInt8 = 0u8
+
+    public mut prop ClearOnInitializationRW: UInt8 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt8(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt8(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop ControlDataRW: UInt8 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt8(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt8(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop Reserved: UInt8 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt8(_bitfield, 2, 6)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt8(_bitfield, 2, 6, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSAVE_AREA (synthetic:Windows_Win32_System_Diagnostics_Debug_XSAVE_AREA)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSAVE_AREA {
+    public var LegacyState: XSAVE_FORMAT = XSAVE_FORMAT()
+    public var Header: XSAVE_AREA_HEADER = XSAVE_AREA_HEADER()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSAVE_AREA_HEADER (synthetic:Windows_Win32_System_Diagnostics_Debug_XSAVE_AREA_HEADER)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSAVE_AREA_HEADER {
+    public var Mask: UInt64 = 0u64
+    public var CompactionMask: UInt64 = 0u64
+    public var Reserved2: VArray<UInt64, $6> = VArray<UInt64, $6>(repeat: 0u64)
 }
 
 // Windows.Win32.System.Diagnostics.Debug.XSAVE_FORMAT (synthetic:Windows_Win32_System_Diagnostics_Debug_XSAVE_FORMAT)
@@ -394,4 +12398,135 @@ public struct XSAVE_FORMAT {
     public var FloatRegisters: VArray<M128A, $8> = VArray<M128A, $8>(repeat: M128A())
     public var XmmRegisters: VArray<M128A, $16> = VArray<M128A, $16>(repeat: M128A())
     public var Reserved4: VArray<UInt8, $96> = VArray<UInt8, $96>(repeat: 0u8)
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSTATE_CONFIGURATION (synthetic:Windows_Win32_System_Diagnostics_Debug_XSTATE_CONFIGURATION)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSTATE_CONFIGURATION {
+    public var EnabledFeatures: UInt64 = 0u64
+    public var EnabledVolatileFeatures: UInt64 = 0u64
+    public var Size: UInt32 = 0u32
+    public var Anonymous: XSTATE_CONFIGURATION__Anonymous_e__Union = XSTATE_CONFIGURATION__Anonymous_e__Union()
+    public var Features: VArray<XSTATE_FEATURE, $64> = VArray<XSTATE_FEATURE, $64>(repeat: XSTATE_FEATURE())
+    public var EnabledSupervisorFeatures: UInt64 = 0u64
+    public var AlignedFeatures: UInt64 = 0u64
+    public var AllFeatureSize: UInt32 = 0u32
+    public var AllFeatures: VArray<UInt32, $64> = VArray<UInt32, $64>(repeat: 0u32)
+    public var EnabledUserVisibleSupervisorFeatures: UInt64 = 0u64
+    public var ExtendedFeatureDisableFeatures: UInt64 = 0u64
+    public var AllNonLargeFeatureSize: UInt32 = 0u32
+    public var MaxSveVectorLength: UInt16 = 0u16
+    public var Spare1: UInt16 = 0u16
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSTATE_CONFIGURATION._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_XSTATE_CONFIGURATION__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSTATE_CONFIGURATION__Anonymous_e__Union {
+    public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
+
+    public mut prop ControlFlags: UInt32 {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                return windows_polyfill.unionReadUInt32(base, 0)
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                windows_polyfill.unionWriteUInt32(base, 0, val)
+                _raw = rawStorage
+            }
+        }
+    }
+
+    public mut prop Anonymous: XSTATE_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct {
+        get() {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<XSTATE_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                return ptr.read()
+            }
+        }
+        set(val) {
+            unsafe {
+                var rawStorage = _raw
+                let base = CPointer<UInt8>(inout rawStorage)
+                let p = base
+                let ptr = CPointer<XSTATE_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct>(p)
+                ptr.write(val)
+                _raw = rawStorage
+            }
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSTATE_CONFIGURATION._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_XSTATE_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSTATE_CONFIGURATION__Anonymous_e__Union__Anonymous_e__Struct {
+    public var _bitfield: UInt32 = 0u32
+
+    public mut prop OptimizedSave: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 0, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 0, 1, val)
+        }
+    }
+
+    public mut prop CompactionEnabled: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 1, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 1, 1, val)
+        }
+    }
+
+    public mut prop ExtendedFeatureDisable: UInt32 {
+        get() {
+            return windows_polyfill.bitfieldReadUInt32(_bitfield, 2, 1)
+        }
+        set(val) {
+            _bitfield = windows_polyfill.bitfieldWriteUInt32(_bitfield, 2, 1, val)
+        }
+    }
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSTATE_CONFIG_FEATURE_MSC_INFO (synthetic:Windows_Win32_System_Diagnostics_Debug_XSTATE_CONFIG_FEATURE_MSC_INFO)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSTATE_CONFIG_FEATURE_MSC_INFO {
+    public var SizeOfInfo: UInt32 = 0u32
+    public var ContextSize: UInt32 = 0u32
+    public var EnabledFeatures: UInt64 = 0u64
+    public var Features: VArray<XSTATE_FEATURE, $64> = VArray<XSTATE_FEATURE, $64>(repeat: XSTATE_FEATURE())
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSTATE_CONTEXT (synthetic:Windows_Win32_System_Diagnostics_Debug_XSTATE_CONTEXT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSTATE_CONTEXT {
+    public var Mask: UInt64 = 0u64
+    public var Length: UInt32 = 0u32
+    public var Flags: UInt8 = 0u8
+    public var Reserved0: VArray<UInt8, $3> = VArray<UInt8, $3>(repeat: 0u8)
+    public var Area: CPointer<Unit> = CPointer<Unit>()
+    public var Buffer: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.System.Diagnostics.Debug.XSTATE_FEATURE (synthetic:Windows_Win32_System_Diagnostics_Debug_XSTATE_FEATURE)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
+@C
+public struct XSTATE_FEATURE {
+    public var Offset: UInt32 = 0u32
+    public var Size: UInt32 = 0u32
 }

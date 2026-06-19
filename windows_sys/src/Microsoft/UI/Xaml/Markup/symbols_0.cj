@@ -9,6 +9,390 @@ import windows_interface.macros.Interface
 
 @When[Microsoft_UI_Xaml == "on"]
 import windows_sys.Microsoft.UI.Xaml as Microsoft_UI_Xaml
+@When[Windows_Foundation == "on"]
+import windows_sys.Foundation as Windows_Foundation
+@When[Windows_Foundation_Collections == "on"]
+import windows_sys.Foundation.Collections as Windows_Foundation_Collections
+@When[Windows_Storage_Streams == "on"]
+import windows_sys.Storage.Streams as Windows_Storage_Streams
+@When[Windows_UI_Xaml_Interop == "on"]
+import windows_sys.UI.Xaml.Interop as Windows_UI_Xaml_Interop
+
+// Microsoft.UI.Xaml.Markup.ContentPropertyAttribute (synthetic:Microsoft_UI_Xaml_Markup_ContentPropertyAttribute)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class ContentPropertyAttribute <: Resource & windows_core.HandleWinrtType<ContentPropertyAttribute> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            ContentPropertyAttribute.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Microsoft.UI.Xaml.Markup.ContentPropertyAttribute"
+    }
+    public static func projectionKind(): String {
+        return "class"
+    }
+
+    public static func intoWinrtHandle(value: ContentPropertyAttribute): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: ContentPropertyAttribute): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        ContentPropertyAttribute.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ContentPropertyAttribute {
+        ContentPropertyAttribute(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ContentPropertyAttribute {
+        ContentPropertyAttribute(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: ContentPropertyAttribute): ContentPropertyAttribute {
+        let raw = ContentPropertyAttribute.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ContentPropertyAttribute(raw, takeOwnership: true)
+    }
+}
+
+// Microsoft.UI.Xaml.Markup.FullXamlMetadataProviderAttribute (synthetic:Microsoft_UI_Xaml_Markup_FullXamlMetadataProviderAttribute)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class FullXamlMetadataProviderAttribute <: Resource & windows_core.HandleWinrtType<FullXamlMetadataProviderAttribute> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            FullXamlMetadataProviderAttribute.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Microsoft.UI.Xaml.Markup.FullXamlMetadataProviderAttribute"
+    }
+    public static func projectionKind(): String {
+        return "class"
+    }
+
+    public static func intoWinrtHandle(value: FullXamlMetadataProviderAttribute): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: FullXamlMetadataProviderAttribute): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        FullXamlMetadataProviderAttribute.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): FullXamlMetadataProviderAttribute {
+        FullXamlMetadataProviderAttribute(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): FullXamlMetadataProviderAttribute {
+        FullXamlMetadataProviderAttribute(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: FullXamlMetadataProviderAttribute): FullXamlMetadataProviderAttribute {
+        let raw = FullXamlMetadataProviderAttribute.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        FullXamlMetadataProviderAttribute(raw, takeOwnership: true)
+    }
+}
+
+// Microsoft.UI.Xaml.Markup.IComponentConnector (synthetic:Microsoft_UI_Xaml_Markup_IComponentConnector)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["ad401812-b091-51d0-b915-2d682cd2af10", "Microsoft.UI.Xaml.Markup.IComponentConnector", "GetBindingConnector.result=Com"]
+public interface IComponentConnector <: IInspectable {
+    func Connect(connectionId: Int32, target: CPointer<Unit>): Int32
+    func GetBindingConnector(connectionId: Int32, target: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IDataTemplateComponent (synthetic:Microsoft_UI_Xaml_Markup_IDataTemplateComponent)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["1743ddf7-38ba-58c9-a2a6-b0ae28713bee", "Microsoft.UI.Xaml.Markup.IDataTemplateComponent"]
+public interface IDataTemplateComponent <: IInspectable {
+    func Recycle(): Int32
+    func ProcessBindings(item: CPointer<Unit>, itemIndex: Int32, phase: Int32, nextPhase: CPointer<Int32>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IMarkupExtension (synthetic:Microsoft_UI_Xaml_Markup_IMarkupExtension)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["c355371e-091d-5136-af4a-baf5e00616bd", "Microsoft.UI.Xaml.Markup.IMarkupExtension"]
+public interface IMarkupExtension <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Markup.IMarkupExtensionFactory (synthetic:Microsoft_UI_Xaml_Markup_IMarkupExtensionFactory)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["20651afa-5f3a-5f0c-adb1-b6551f53a6a0", "Microsoft.UI.Xaml.Markup.IMarkupExtensionFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
+public interface IMarkupExtensionFactory <: IInspectable {
+    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IMarkupExtensionOverrides (synthetic:Microsoft_UI_Xaml_Markup_IMarkupExtensionOverrides)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["a12aa575-5d31-5b68-a30f-8495412a351d", "Microsoft.UI.Xaml.Markup.IMarkupExtensionOverrides", "ProvideValue.result=Com;ProvideValueWithIXamlServiceProvider.result=Com"]
+public interface IMarkupExtensionOverrides <: IInspectable {
+    func ProvideValue(result: CPointer<CPointer<Unit>>): Int32
+    func ProvideValueWithIXamlServiceProvider(serviceProvider: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IProvideValueTarget (synthetic:Microsoft_UI_Xaml_Markup_IProvideValueTarget)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["3f01ff68-3efd-591d-a506-de13fcaabd83", "Microsoft.UI.Xaml.Markup.IProvideValueTarget", "TargetObject.value=Com;TargetProperty.value=Com"]
+public interface IProvideValueTarget <: IInspectable {
+    func TargetObject(value: CPointer<CPointer<Unit>>): Int32
+    func TargetProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IProvideValueTargetProperty (synthetic:Microsoft_UI_Xaml_Markup_IProvideValueTargetProperty)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["ce777b1f-b42e-59d1-870d-12fdf0629133", "Microsoft.UI.Xaml.Markup.IProvideValueTargetProperty", "Name.value=HString"]
+public interface IProvideValueTargetProperty <: IInspectable {
+    func Name(value: CPointer<CPointer<Unit>>): Int32
+    func Type(value: CPointer<Windows_UI_Xaml_Interop.TypeName>): Int32
+    func DeclaringType(value: CPointer<Windows_UI_Xaml_Interop.TypeName>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IRootObjectProvider (synthetic:Microsoft_UI_Xaml_Markup_IRootObjectProvider)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["13d63599-352f-5eb8-81c1-bc62fb12d6da", "Microsoft.UI.Xaml.Markup.IRootObjectProvider", "RootObject.value=Com"]
+public interface IRootObjectProvider <: IInspectable {
+    func RootObject(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IUriContext (synthetic:Microsoft_UI_Xaml_Markup_IUriContext)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["fb8605f6-8f05-52ee-a01c-3a9e118a6ea2", "Microsoft.UI.Xaml.Markup.IUriContext", "BaseUri.value=Com"]
+public interface IUriContext <: IInspectable {
+    func BaseUri(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlBinaryWriter (synthetic:Microsoft_UI_Xaml_Markup_IXamlBinaryWriter)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["8fb45e3b-e689-55bf-aa11-d83b1c1cdda1", "Microsoft.UI.Xaml.Markup.IXamlBinaryWriter"]
+public interface IXamlBinaryWriter <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlBinaryWriterStatics (synthetic:Microsoft_UI_Xaml_Markup_IXamlBinaryWriterStatics)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["774907fc-c846-517f-abcc-c3f7e8c3ffc9", "Microsoft.UI.Xaml.Markup.IXamlBinaryWriterStatics"]
+public interface IXamlBinaryWriterStatics <: IInspectable {
+    func Write(inputStreams: CPointer<Unit>, outputStreams: CPointer<Unit>, xamlMetadataProvider: CPointer<Unit>, result: CPointer<XamlBinaryWriterErrorInformation>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlBindScopeDiagnostics (synthetic:Microsoft_UI_Xaml_Markup_IXamlBindScopeDiagnostics)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["3ea84e4e-fdfe-55a8-a561-edf5697846d7", "Microsoft.UI.Xaml.Markup.IXamlBindScopeDiagnostics"]
+public interface IXamlBindScopeDiagnostics <: IInspectable {
+    func Disable(lineNumber: Int32, columnNumber: Int32): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlBindingHelper (synthetic:Microsoft_UI_Xaml_Markup_IXamlBindingHelper)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["607a9bf2-5a6d-5c89-a756-bb44f24f28f8", "Microsoft.UI.Xaml.Markup.IXamlBindingHelper"]
+public interface IXamlBindingHelper <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlBindingHelperStatics (synthetic:Microsoft_UI_Xaml_Markup_IXamlBindingHelperStatics)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["93c7dad3-f9c2-5372-84dc-9e9c4661d083", "Microsoft.UI.Xaml.Markup.IXamlBindingHelperStatics", "DataTemplateComponentProperty.value=Com;GetDataTemplateComponent.result=Com;ConvertValue.result=Com"]
+public interface IXamlBindingHelperStatics <: IInspectable {
+    func DataTemplateComponentProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetDataTemplateComponent(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetDataTemplateComponent(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func SuspendRendering(target: CPointer<Unit>): Int32
+    func ResumeRendering(target: CPointer<Unit>): Int32
+    func ConvertValue(type_: Windows_UI_Xaml_Interop.TypeName, value: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetPropertyFromString(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func SetPropertyFromBoolean(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Bool): Int32
+    func SetPropertyFromChar16(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: UInt16): Int32
+    func SetPropertyFromDateTime(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Windows_Foundation.DateTime): Int32
+    func SetPropertyFromDouble(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Float64): Int32
+    func SetPropertyFromInt32(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Int32): Int32
+    func SetPropertyFromUInt32(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: UInt32): Int32
+    func SetPropertyFromInt64(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Int64): Int32
+    func SetPropertyFromUInt64(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: UInt64): Int32
+    func SetPropertyFromSingle(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Float32): Int32
+    func SetPropertyFromPoint(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Windows_Foundation.Point): Int32
+    func SetPropertyFromRect(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Windows_Foundation.Rect): Int32
+    func SetPropertyFromSize(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Windows_Foundation.Size): Int32
+    func SetPropertyFromTimeSpan(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: Windows_Foundation.TimeSpan): Int32
+    func SetPropertyFromByte(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: UInt8): Int32
+    func SetPropertyFromUri(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func SetPropertyFromObject(dependencyObject: CPointer<Unit>, propertyToSet: CPointer<Unit>, value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlCondition (synthetic:Microsoft_UI_Xaml_Markup_IXamlCondition)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["9124118d-cdfa-545f-8c12-4cf7bcc5fffa", "Microsoft.UI.Xaml.Markup.IXamlCondition"]
+public interface IXamlCondition <: IInspectable {
+    func Evaluate(argument: CPointer<Unit>, result: CPointer<Bool>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlMarkupHelper (synthetic:Microsoft_UI_Xaml_Markup_IXamlMarkupHelper)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["cd677310-3b06-5a13-b31a-401849570858", "Microsoft.UI.Xaml.Markup.IXamlMarkupHelper"]
+public interface IXamlMarkupHelper <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlMarkupHelperStatics (synthetic:Microsoft_UI_Xaml_Markup_IXamlMarkupHelperStatics)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["d9a0f6e3-c6cc-5cb6-8999-85788701f339", "Microsoft.UI.Xaml.Markup.IXamlMarkupHelperStatics"]
+public interface IXamlMarkupHelperStatics <: IInspectable {
+    func UnloadObject(element: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlMember (synthetic:Microsoft_UI_Xaml_Markup_IXamlMember)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["bf3a2913-5c63-50ec-8660-61809be7b9b9", "Microsoft.UI.Xaml.Markup.IXamlMember", "Name.value=HString;TargetType.value=Com;Type.value=Com;GetValue.result=Com"]
+public interface IXamlMember <: IInspectable {
+    func IsAttachable(value: CPointer<Bool>): Int32
+    func IsDependencyProperty(value: CPointer<Bool>): Int32
+    func IsReadOnly(value: CPointer<Bool>): Int32
+    func Name(value: CPointer<CPointer<Unit>>): Int32
+    func TargetType(value: CPointer<CPointer<Unit>>): Int32
+    func Type(value: CPointer<CPointer<Unit>>): Int32
+    func GetValue(instance: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetValue(instance: CPointer<Unit>, value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlMetadataProvider (synthetic:Microsoft_UI_Xaml_Markup_IXamlMetadataProvider)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["a96251f0-2214-5d53-8746-ce99a2593cd7", "Microsoft.UI.Xaml.Markup.IXamlMetadataProvider", "GetXamlType.result=Com;GetXamlTypeByFullName.result=Com;GetXmlnsDefinitions.result=Array<XmlnsDefinition>"]
+public interface IXamlMetadataProvider <: IInspectable {
+    func GetXamlType(type_: Windows_UI_Xaml_Interop.TypeName, result: CPointer<CPointer<Unit>>): Int32
+    func GetXamlTypeByFullName(fullName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetXmlnsDefinitions(resultSize: CPointer<UInt32>, result: CPointer<CPointer<XmlnsDefinition>>): Int32
+}
 
 // Microsoft.UI.Xaml.Markup.IXamlReader (synthetic:Microsoft_UI_Xaml_Markup_IXamlReader)
 @When[Microsoft_UI_Xaml_Markup == "on"]
@@ -22,6 +406,933 @@ public interface IXamlReader <: IInspectable {
 public interface IXamlReaderStatics <: IInspectable {
     func Load(xaml: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
     func LoadWithInitialTemplateValidation(xaml: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlType (synthetic:Microsoft_UI_Xaml_Markup_IXamlType)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["d24219df-7ec9-57f1-a27b-6af251d9c5bc", "Microsoft.UI.Xaml.Markup.IXamlType", "BaseType.value=Com;ContentProperty.value=Com;FullName.value=HString;ItemType.value=Com;KeyType.value=Com;BoxedType.value=Com;ActivateInstance.result=Com;CreateFromString.result=Com;GetMember.result=Com"]
+public interface IXamlType <: IInspectable {
+    func BaseType(value: CPointer<CPointer<Unit>>): Int32
+    func ContentProperty(value: CPointer<CPointer<Unit>>): Int32
+    func FullName(value: CPointer<CPointer<Unit>>): Int32
+    func IsArray(value: CPointer<Bool>): Int32
+    func IsCollection(value: CPointer<Bool>): Int32
+    func IsConstructible(value: CPointer<Bool>): Int32
+    func IsDictionary(value: CPointer<Bool>): Int32
+    func IsMarkupExtension(value: CPointer<Bool>): Int32
+    func IsBindable(value: CPointer<Bool>): Int32
+    func ItemType(value: CPointer<CPointer<Unit>>): Int32
+    func KeyType(value: CPointer<CPointer<Unit>>): Int32
+    func BoxedType(value: CPointer<CPointer<Unit>>): Int32
+    func UnderlyingType(value: CPointer<Windows_UI_Xaml_Interop.TypeName>): Int32
+    func ActivateInstance(result: CPointer<CPointer<Unit>>): Int32
+    func CreateFromString(value: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func GetMember(name: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func AddToVector(instance: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func AddToMap(instance: CPointer<Unit>, key: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func RunInitializer(): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.IXamlTypeResolver (synthetic:Microsoft_UI_Xaml_Markup_IXamlTypeResolver)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@Interface["3fa15615-cacf-547f-b1ed-89dae8c67452", "Microsoft.UI.Xaml.Markup.IXamlTypeResolver"]
+public interface IXamlTypeResolver <: IInspectable {
+    func Resolve(qualifiedTypeName: CPointer<Unit>, result: CPointer<Windows_UI_Xaml_Interop.TypeName>): Int32
+}
+
+// Microsoft.UI.Xaml.Markup.MarkupExtension (synthetic:Microsoft_UI_Xaml_Markup_MarkupExtension)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class MarkupExtension <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<MarkupExtension> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): MarkupExtension {
+        MarkupExtension(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): MarkupExtension {
+        MarkupExtension(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IMarkupExtension.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<MarkupExtension> {
+        let ancestors = [IMarkupExtension.iid(), IMarkupExtensionOverrides.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<MarkupExtension>("MarkupExtension", IMarkupExtension.iid(), ancestors, { raw => MarkupExtension.fromAbiTake(raw) }, { raw => MarkupExtension.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IMarkupExtension {
+        match (unsafe { query(IMarkupExtension.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIMarkupExtension(): IMarkupExtension {
+        defaultInterface()
+    }
+
+    public func asIMarkupExtensionOverrides(): IMarkupExtensionOverrides {
+        match (unsafe { query<IMarkupExtensionOverrides>(IMarkupExtensionOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): MarkupExtension {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<MarkupExtension, IMarkupExtensionFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<MarkupExtension>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return MarkupExtension.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Markup.MarkupExtension"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Markup.MarkupExtension;{" + IMarkupExtension.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Markup.MarkupExtension", MarkupExtension.signature(), IMarkupExtension.iid())
+    }
+
+    public static func intoWinrtHandle(value: MarkupExtension): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MarkupExtension {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MarkupExtension.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MarkupExtension {
+        MarkupExtension.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Markup.MarkupExtensionReturnTypeAttribute (synthetic:Microsoft_UI_Xaml_Markup_MarkupExtensionReturnTypeAttribute)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class MarkupExtensionReturnTypeAttribute <: Resource & windows_core.HandleWinrtType<MarkupExtensionReturnTypeAttribute> {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            MarkupExtensionReturnTypeAttribute.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Microsoft.UI.Xaml.Markup.MarkupExtensionReturnTypeAttribute"
+    }
+    public static func projectionKind(): String {
+        return "class"
+    }
+
+    public static func intoWinrtHandle(value: MarkupExtensionReturnTypeAttribute): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: MarkupExtensionReturnTypeAttribute): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        MarkupExtensionReturnTypeAttribute.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): MarkupExtensionReturnTypeAttribute {
+        MarkupExtensionReturnTypeAttribute(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): MarkupExtensionReturnTypeAttribute {
+        MarkupExtensionReturnTypeAttribute(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: MarkupExtensionReturnTypeAttribute): MarkupExtensionReturnTypeAttribute {
+        let raw = MarkupExtensionReturnTypeAttribute.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        MarkupExtensionReturnTypeAttribute(raw, takeOwnership: true)
+    }
+}
+
+// Microsoft.UI.Xaml.Markup.ProvideValueTargetProperty (synthetic:Microsoft_UI_Xaml_Markup_ProvideValueTargetProperty)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class ProvideValueTargetProperty <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<ProvideValueTargetProperty> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): ProvideValueTargetProperty {
+        ProvideValueTargetProperty(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): ProvideValueTargetProperty {
+        ProvideValueTargetProperty(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IProvideValueTargetProperty.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<ProvideValueTargetProperty> {
+        let ancestors = [IProvideValueTargetProperty.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<ProvideValueTargetProperty>("ProvideValueTargetProperty", IProvideValueTargetProperty.iid(), ancestors, { raw => ProvideValueTargetProperty.fromAbiTake(raw) }, { raw => ProvideValueTargetProperty.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IProvideValueTargetProperty {
+        match (unsafe { query(IProvideValueTargetProperty.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIProvideValueTargetProperty(): IProvideValueTargetProperty {
+        defaultInterface()
+    }
+
+    public prop DeclaringType: Windows_UI_Xaml_Interop.TypeName {
+        get() {
+            var result__ = Windows_UI_Xaml_Interop.TypeName()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DeclaringType(CPointer<Windows_UI_Xaml_Interop.TypeName>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Name: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Name(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public prop Type: Windows_UI_Xaml_Interop.TypeName {
+        get() {
+            var result__ = Windows_UI_Xaml_Interop.TypeName()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Type(CPointer<Windows_UI_Xaml_Interop.TypeName>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func new(): ProvideValueTargetProperty {
+        var created__: Option<ProvideValueTargetProperty> = Option<ProvideValueTargetProperty>.None
+        try (factory__ = windows_core.factory<ProvideValueTargetProperty, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<ProvideValueTargetProperty>(ProvideValueTargetProperty.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ProvideValueTargetProperty")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Markup.ProvideValueTargetProperty"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Markup.ProvideValueTargetProperty;{" + IProvideValueTargetProperty.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Markup.ProvideValueTargetProperty", ProvideValueTargetProperty.signature(), IProvideValueTargetProperty.iid())
+    }
+
+    public static func intoWinrtHandle(value: ProvideValueTargetProperty): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ProvideValueTargetProperty {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        ProvideValueTargetProperty.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): ProvideValueTargetProperty {
+        ProvideValueTargetProperty.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Markup.XamlBinaryWriter (synthetic:Microsoft_UI_Xaml_Markup_XamlBinaryWriter)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class XamlBinaryWriter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<XamlBinaryWriter> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): XamlBinaryWriter {
+        XamlBinaryWriter(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): XamlBinaryWriter {
+        XamlBinaryWriter(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IXamlBinaryWriter.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<XamlBinaryWriter> {
+        let ancestors = [IXamlBinaryWriter.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<XamlBinaryWriter>("XamlBinaryWriter", IXamlBinaryWriter.iid(), ancestors, { raw => XamlBinaryWriter.fromAbiTake(raw) }, { raw => XamlBinaryWriter.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IXamlBinaryWriter {
+        match (unsafe { query(IXamlBinaryWriter.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIXamlBinaryWriter(): IXamlBinaryWriter {
+        defaultInterface()
+    }
+
+    public static func Write(inputStreams: Windows_Foundation_Collections.IVector<Windows_Storage_Streams.IRandomAccessStream>, outputStreams: Windows_Foundation_Collections.IVector<Windows_Storage_Streams.IRandomAccessStream>, xamlMetadataProvider: IXamlMetadataProvider): XamlBinaryWriterErrorInformation {
+        var result__ = XamlBinaryWriterErrorInformation()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IVector<Windows_Storage_Streams.IRandomAccessStream>>(inputStreams)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections.IVector<Windows_Storage_Streams.IRandomAccessStream>>(outputStreams)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<IXamlMetadataProvider>(xamlMetadataProvider)) {
+                    try (factory__ = windows_core.factory<XamlBinaryWriter, IXamlBinaryWriterStatics>().unwrap()) {
+                        hr__ = unsafe { factory__.Write(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<XamlBinaryWriterErrorInformation>(inout result__)) }
+                    }
+                }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Markup.XamlBinaryWriter"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Markup.XamlBinaryWriter;{" + IXamlBinaryWriter.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Markup.XamlBinaryWriter", XamlBinaryWriter.signature(), IXamlBinaryWriter.iid())
+    }
+
+    public static func intoWinrtHandle(value: XamlBinaryWriter): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): XamlBinaryWriter {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        XamlBinaryWriter.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): XamlBinaryWriter {
+        XamlBinaryWriter.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Markup.XamlBinaryWriterErrorInformation (synthetic:Microsoft_UI_Xaml_Markup_XamlBinaryWriterErrorInformation)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@C
+public struct XamlBinaryWriterErrorInformation {
+    public var InputStreamIndex: UInt32 = 0u32
+    public var LineNumber: UInt32 = 0u32
+    public var LinePosition: UInt32 = 0u32
+}
+
+// Microsoft.UI.Xaml.Markup.XamlBindingHelper (synthetic:Microsoft_UI_Xaml_Markup_XamlBindingHelper)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class XamlBindingHelper <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<XamlBindingHelper> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): XamlBindingHelper {
+        XamlBindingHelper(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): XamlBindingHelper {
+        XamlBindingHelper(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IXamlBindingHelper.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<XamlBindingHelper> {
+        let ancestors = [IXamlBindingHelper.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<XamlBindingHelper>("XamlBindingHelper", IXamlBindingHelper.iid(), ancestors, { raw => XamlBindingHelper.fromAbiTake(raw) }, { raw => XamlBindingHelper.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IXamlBindingHelper {
+        match (unsafe { query(IXamlBindingHelper.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIXamlBindingHelper(): IXamlBindingHelper {
+        defaultInterface()
+    }
+
+    public static func DataTemplateComponentProperty(): Microsoft_UI_Xaml.DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DataTemplateComponentProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml.DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDataTemplateComponent(element: Microsoft_UI_Xaml.DependencyObject): IDataTemplateComponent {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetDataTemplateComponent(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<IDataTemplateComponent>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return IDataTemplateComponent.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SetDataTemplateComponent(element: Microsoft_UI_Xaml.DependencyObject, value: IDataTemplateComponent): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<IDataTemplateComponent>(value)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetDataTemplateComponent(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SuspendRendering(target: Microsoft_UI_Xaml.UIElement): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.UIElement>(target)) {
+            try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SuspendRendering(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ResumeRendering(target: Microsoft_UI_Xaml.UIElement): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.UIElement>(target)) {
+            try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ResumeRendering(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ConvertValue(type_: Windows_UI_Xaml_Interop.TypeName, value: windows_interface.IInspectable): windows_interface.IInspectable {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+            try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                hr__ = unsafe { factory__.ConvertValue(type_, __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SetPropertyFromString(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                    try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                        hr__ = unsafe { factory__.SetPropertyFromString(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw()) }
+                    }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromBoolean(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromBoolean(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromChar16(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: UInt16): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromChar16(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromDateTime(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Windows_Foundation.DateTime): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromDateTime(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromDouble(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Float64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromDouble(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromInt32(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromInt32(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromUInt32(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: UInt32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromUInt32(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromInt64(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Int64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromInt64(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromUInt64(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: UInt64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromUInt64(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromSingle(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Float32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromSingle(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromPoint(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Windows_Foundation.Point): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromPoint(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromRect(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Windows_Foundation.Rect): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromRect(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromSize(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Windows_Foundation.Size): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromSize(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromTimeSpan(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Windows_Foundation.TimeSpan): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromTimeSpan(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromByte(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: UInt8): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetPropertyFromByte(__argBorrow0.asRaw(), __argBorrow1.asRaw(), value) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromUri(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: Windows_Foundation.Uri): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<Windows_Foundation.Uri>(value)) {
+                    try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                        hr__ = unsafe { factory__.SetPropertyFromUri(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw()) }
+                    }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SetPropertyFromObject(dependencyObject: windows_interface.IInspectable, propertyToSet: Microsoft_UI_Xaml.DependencyProperty, value: windows_interface.IInspectable): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(dependencyObject)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyProperty>(propertyToSet)) {
+                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                    try (factory__ = windows_core.factory<XamlBindingHelper, IXamlBindingHelperStatics>().unwrap()) {
+                        hr__ = unsafe { factory__.SetPropertyFromObject(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw()) }
+                    }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Markup.XamlBindingHelper"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Markup.XamlBindingHelper;{" + IXamlBindingHelper.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Markup.XamlBindingHelper", XamlBindingHelper.signature(), IXamlBindingHelper.iid())
+    }
+
+    public static func intoWinrtHandle(value: XamlBindingHelper): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): XamlBindingHelper {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        XamlBindingHelper.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): XamlBindingHelper {
+        XamlBindingHelper.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Markup.XamlMarkupHelper (synthetic:Microsoft_UI_Xaml_Markup_XamlMarkupHelper)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+public class XamlMarkupHelper <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<XamlMarkupHelper> {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): XamlMarkupHelper {
+        XamlMarkupHelper(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): XamlMarkupHelper {
+        XamlMarkupHelper(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        IXamlMarkupHelper.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<XamlMarkupHelper> {
+        let ancestors = [IXamlMarkupHelper.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<XamlMarkupHelper>("XamlMarkupHelper", IXamlMarkupHelper.iid(), ancestors, { raw => XamlMarkupHelper.fromAbiTake(raw) }, { raw => XamlMarkupHelper.viewOf(raw) })
+    }
+
+    public func defaultInterface(): IXamlMarkupHelper {
+        match (unsafe { query(IXamlMarkupHelper.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIXamlMarkupHelper(): IXamlMarkupHelper {
+        defaultInterface()
+    }
+
+    public static func UnloadObject(element: Microsoft_UI_Xaml.DependencyObject): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<XamlMarkupHelper, IXamlMarkupHelperStatics>().unwrap()) {
+                hr__ = unsafe { factory__.UnloadObject(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Markup.XamlMarkupHelper"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Markup.XamlMarkupHelper;{" + IXamlMarkupHelper.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Markup.XamlMarkupHelper", XamlMarkupHelper.signature(), IXamlMarkupHelper.iid())
+    }
+
+    public static func intoWinrtHandle(value: XamlMarkupHelper): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): XamlMarkupHelper {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        XamlMarkupHelper.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): XamlMarkupHelper {
+        XamlMarkupHelper.viewOf(raw)
+    }
 }
 
 // Microsoft.UI.Xaml.Markup.XamlReader (synthetic:Microsoft_UI_Xaml_Markup_XamlReader)
@@ -129,4 +1440,12 @@ public class XamlReader <: windows_interface.InterfaceWrapperBase & windows_inte
     public static func viewWinrtHandle(raw: CPointer<Unit>): XamlReader {
         XamlReader.viewOf(raw)
     }
+}
+
+// Microsoft.UI.Xaml.Markup.XmlnsDefinition (synthetic:Microsoft_UI_Xaml_Markup_XmlnsDefinition)
+@When[Microsoft_UI_Xaml_Markup == "on"]
+@C
+public struct XmlnsDefinition {
+    public var XmlNamespace: CPointer<Unit> = CPointer<Unit>()
+    public var Namespace: CPointer<Unit> = CPointer<Unit>()
 }

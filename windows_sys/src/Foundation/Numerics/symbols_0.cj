@@ -39,6 +39,14 @@ public struct Matrix4x4 {
     public var M44: Float32 = 0.0f32
 }
 
+// Windows.Foundation.Numerics.Plane (synthetic:Windows_Foundation_Numerics_Plane)
+@When[Windows_Foundation_Numerics == "on"]
+@C
+public struct Plane {
+    public var Normal: Vector3 = Vector3()
+    public var D: Float32 = 0.0f32
+}
+
 // Windows.Foundation.Numerics.Quaternion (synthetic:Windows_Foundation_Numerics_Quaternion)
 @When[Windows_Foundation_Numerics == "on"]
 @C
@@ -47,6 +55,14 @@ public struct Quaternion {
     public var Y: Float32 = 0.0f32
     public var Z: Float32 = 0.0f32
     public var W: Float32 = 0.0f32
+}
+
+// Windows.Foundation.Numerics.Rational (synthetic:Windows_Foundation_Numerics_Rational)
+@When[Windows_Foundation_Numerics == "on"]
+@C
+public struct Rational {
+    public var Numerator: UInt32 = 0u32
+    public var Denominator: UInt32 = 0u32
 }
 
 // Windows.Foundation.Numerics.Vector2 (synthetic:Windows_Foundation_Numerics_Vector2)

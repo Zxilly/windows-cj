@@ -9,10 +9,10 @@ import windows_sys.Foundation as Windows_Foundation
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public struct DragDropModifiers {
     public let value: UInt32
-    public init() {
+    public const init() {
         this.value = 0
     }
-    public init(value: UInt32) {
+    public const init(value: UInt32) {
         this.value = value
     }
     public func contains(other: DragDropModifiers): Bool {
@@ -32,16 +32,16 @@ public struct DragDropModifiers {
     }
 }
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-public let DragDropModifiers_None = DragDropModifiers(0)
+public const DragDropModifiers_None = DragDropModifiers(0)
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-public let DragDropModifiers_Shift = DragDropModifiers(1)
+public const DragDropModifiers_Shift = DragDropModifiers(1)
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-public let DragDropModifiers_Control = DragDropModifiers(2)
+public const DragDropModifiers_Control = DragDropModifiers(2)
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-public let DragDropModifiers_Alt = DragDropModifiers(4)
+public const DragDropModifiers_Alt = DragDropModifiers(4)
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-public let DragDropModifiers_LeftButton = DragDropModifiers(8)
+public const DragDropModifiers_LeftButton = DragDropModifiers(8)
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-public let DragDropModifiers_MiddleButton = DragDropModifiers(16)
+public const DragDropModifiers_MiddleButton = DragDropModifiers(16)
 @When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
-public let DragDropModifiers_RightButton = DragDropModifiers(32)
+public const DragDropModifiers_RightButton = DragDropModifiers(32)

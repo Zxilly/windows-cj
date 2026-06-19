@@ -27,14 +27,14 @@ import windows_sys.Win32.Security.PSECURITY_DESCRIPTOR
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoBuildVersion(): UInt32 {
-    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("ole32.dll", "CoBuildVersion"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("ole32.dll", "CoBuildVersion"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoInitialize(): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInitialize"))
-    return unsafe { proc(CPointer<Unit>()) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInitialize"))
+    return unsafe { proc__(CPointer<Unit>()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -48,8 +48,8 @@ public func CoInitializeChecked(): windows_core.Result<windows_core.HRESULT> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterMallocSpy(pMallocSpy: CPointer<Unit>): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterMallocSpy"))
-    return unsafe { proc(pMallocSpy) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterMallocSpy"))
+    return unsafe { proc__(pMallocSpy) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -59,8 +59,8 @@ public func CoRegisterMallocSpyChecked(pMallocSpy: CPointer<Unit>): windows_core
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRevokeMallocSpy(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeMallocSpy"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeMallocSpy"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -70,8 +70,8 @@ public func CoRevokeMallocSpyChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterInitializeSpy(pSpy: CPointer<Unit>, puliCookie: CPointer<UInt64>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterInitializeSpy"))
-    return unsafe { proc(pSpy, puliCookie) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterInitializeSpy"))
+    return unsafe { proc__(pSpy, puliCookie) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -81,8 +81,8 @@ public func CoRegisterInitializeSpyChecked(pSpy: CPointer<Unit>, puliCookie: CPo
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRevokeInitializeSpy(uliCookie: UInt64): Int32 {
-    let proc = CFunc<(UInt64) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeInitializeSpy"))
-    return unsafe { proc(uliCookie) }
+    let proc__ = CFunc<(UInt64) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeInitializeSpy"))
+    return unsafe { proc__(uliCookie) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -92,8 +92,8 @@ public func CoRevokeInitializeSpyChecked(uliCookie: UInt64): windows_core.Result
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetSystemSecurityPermissions(comSDType: Int32, ppSD: CPointer<PSECURITY_DESCRIPTOR>): Int32 {
-    let proc = CFunc<(Int32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetSystemSecurityPermissions"))
-    return unsafe { proc(comSDType, CPointer<CPointer<Unit>>(ppSD)) }
+    let proc__ = CFunc<(Int32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetSystemSecurityPermissions"))
+    return unsafe { proc__(comSDType, CPointer<CPointer<Unit>>(ppSD)) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -130,28 +130,28 @@ public func CoGetSystemSecurityPermissionsChecked(comSDType: Int32, ppSD: CPoint
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoLoadLibrary(lpszLibName: windows_strings.PWSTR, bAutoFree: Bool): HINSTANCE {
-    let proc = CFunc<(CPointer<UInt16>, Int32) -> CPointer<Unit>>(windows_libloading.resolveProc("OLE32.dll", "CoLoadLibrary"))
+    let proc__ = CFunc<(CPointer<UInt16>, Int32) -> CPointer<Unit>>(windows_libloading.resolveProc("OLE32.dll", "CoLoadLibrary"))
     var result = HINSTANCE()
-    result.Value = unsafe { proc(lpszLibName.asPtr(), if (bAutoFree) { 1 } else { 0 }) }
+    result.Value = unsafe { proc__(lpszLibName.asPtr(), if (bAutoFree) { 1 } else { 0 }) }
     result
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoFreeLibrary(hInst: HINSTANCE): Unit {
-    let proc = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeLibrary"))
-    unsafe { proc(hInst.Value) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeLibrary"))
+    unsafe { proc__(hInst.Value) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoFreeAllLibraries(): Unit {
-    let proc = CFunc<() -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeAllLibraries"))
-    unsafe { proc() }
+    let proc__ = CFunc<() -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeAllLibraries"))
+    unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoAllowSetForegroundWindow(pUnk: windows_interface.IUnknown): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoAllowSetForegroundWindow"))
-    return unsafe { proc(pUnk.asRaw(), CPointer<Unit>()) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoAllowSetForegroundWindow"))
+    return unsafe { proc__(pUnk.asRaw(), CPointer<Unit>()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -161,8 +161,8 @@ public func CoAllowSetForegroundWindowChecked(pUnk: windows_interface.IUnknown):
 
 @When[Windows_Win32_System_Com == "on"]
 public func DcomChannelSetHResult(pvReserved: CPointer<Unit>, pulReserved: CPointer<UInt32>, appsHR: Int32): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt32>, Int32) -> Int32>(windows_libloading.resolveProc("ole32.dll", "DcomChannelSetHResult"))
-    return unsafe { proc(pvReserved, pulReserved, appsHR) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt32>, Int32) -> Int32>(windows_libloading.resolveProc("ole32.dll", "DcomChannelSetHResult"))
+    return unsafe { proc__(pvReserved, pulReserved, appsHR) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -172,14 +172,14 @@ public func DcomChannelSetHResultChecked(pvReserved: CPointer<Unit>, pulReserved
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoIsOle1Class(rclsid: CPointer<GUID>): Bool {
-    let proc = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CoIsOle1Class"))
-    return unsafe { proc(rclsid) } != 0
+    let proc__ = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CoIsOle1Class"))
+    return unsafe { proc__(rclsid) } != 0
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CLSIDFromProgIDEx(lpszProgID: windows_strings.PWSTR, lpclsid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CLSIDFromProgIDEx"))
-    return unsafe { proc(lpszProgID.asPtr(), lpclsid) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CLSIDFromProgIDEx"))
+    return unsafe { proc__(lpszProgID.asPtr(), lpclsid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -189,20 +189,20 @@ public func CLSIDFromProgIDExChecked(lpszProgID: windows_strings.PWSTR, lpclsid:
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoFileTimeToDosDateTime(lpFileTime: CPointer<FILETIME>, lpDosDate: CPointer<UInt16>, lpDosTime: CPointer<UInt16>): Bool {
-    let proc = CFunc<(CPointer<FILETIME>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoFileTimeToDosDateTime"))
-    return unsafe { proc(lpFileTime, lpDosDate, lpDosTime) } != 0
+    let proc__ = CFunc<(CPointer<FILETIME>, CPointer<UInt16>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoFileTimeToDosDateTime"))
+    return unsafe { proc__(lpFileTime, lpDosDate, lpDosTime) } != 0
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoDosDateTimeToFileTime(nDosDate: UInt16, nDosTime: UInt16, lpFileTime: CPointer<FILETIME>): Bool {
-    let proc = CFunc<(UInt16, UInt16, CPointer<FILETIME>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDosDateTimeToFileTime"))
-    return unsafe { proc(nDosDate, nDosTime, lpFileTime) } != 0
+    let proc__ = CFunc<(UInt16, UInt16, CPointer<FILETIME>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDosDateTimeToFileTime"))
+    return unsafe { proc__(nDosDate, nDosTime, lpFileTime) } != 0
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoFileTimeNow(lpFileTime: CPointer<FILETIME>): Int32 {
-    let proc = CFunc<(CPointer<FILETIME>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoFileTimeNow"))
-    return unsafe { proc(lpFileTime) }
+    let proc__ = CFunc<(CPointer<FILETIME>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoFileTimeNow"))
+    return unsafe { proc__(lpFileTime) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -212,8 +212,8 @@ public func CoFileTimeNowChecked(lpFileTime: CPointer<FILETIME>): windows_core.R
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterChannelHook(ExtensionUuid: CPointer<GUID>, pChannelHook: CPointer<Unit>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CoRegisterChannelHook"))
-    return unsafe { proc(ExtensionUuid, pChannelHook) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CoRegisterChannelHook"))
+    return unsafe { proc__(ExtensionUuid, pChannelHook) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -223,8 +223,8 @@ public func CoRegisterChannelHookChecked(ExtensionUuid: CPointer<GUID>, pChannel
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoTreatAsClass(clsidOld: CPointer<GUID>, clsidNew: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoTreatAsClass"))
-    return unsafe { proc(clsidOld, clsidNew) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoTreatAsClass"))
+    return unsafe { proc__(clsidOld, clsidNew) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -234,8 +234,8 @@ public func CoTreatAsClassChecked(clsidOld: CPointer<GUID>, clsidNew: CPointer<G
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateDataAdviseHolder(ppDAHolder: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateDataAdviseHolder"))
-    return unsafe { proc(ppDAHolder) }
+    let proc__ = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateDataAdviseHolder"))
+    return unsafe { proc__(ppDAHolder) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -258,8 +258,8 @@ public func CreateDataAdviseHolderChecked(ppDAHolder: CPointer<CPointer<Unit>>):
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateDataCache(pUnkOuter: windows_interface.IUnknown, rclsid: CPointer<GUID>, iid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateDataCache"))
-    return unsafe { proc(pUnkOuter.asRaw(), rclsid, iid, ppv) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateDataCache"))
+    return unsafe { proc__(pUnkOuter.asRaw(), rclsid, iid, ppv) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -282,8 +282,8 @@ public func CreateDataCacheChecked(pUnkOuter: windows_interface.IUnknown, rclsid
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoInstall(pbc: CPointer<Unit>, dwFlags: UInt32, pClassSpec: CPointer<uCLSSPEC>, pQuery: CPointer<QUERYCONTEXT>, pszCodeBase: windows_strings.PWSTR): Int32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<uCLSSPEC>, CPointer<QUERYCONTEXT>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CoInstall"))
-    return unsafe { proc(pbc, dwFlags, pClassSpec, pQuery, pszCodeBase.asPtr()) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<uCLSSPEC>, CPointer<QUERYCONTEXT>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CoInstall"))
+    return unsafe { proc__(pbc, dwFlags, pClassSpec, pQuery, pszCodeBase.asPtr()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -293,8 +293,8 @@ public func CoInstallChecked(pbc: CPointer<Unit>, dwFlags: UInt32, pClassSpec: C
 
 @When[Windows_Win32_System_Com == "on"]
 public func BindMoniker(pmk: CPointer<Unit>, grfOpt: UInt32, iidResult: CPointer<GUID>, ppvResult: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "BindMoniker"))
-    return unsafe { proc(pmk, grfOpt, iidResult, ppvResult) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "BindMoniker"))
+    return unsafe { proc__(pmk, grfOpt, iidResult, ppvResult) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -317,8 +317,8 @@ public func BindMonikerChecked(pmk: CPointer<Unit>, grfOpt: UInt32, iidResult: C
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetObject(pszName: windows_strings.PWSTR, pBindOptions: CPointer<BIND_OPTS>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<BIND_OPTS>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetObject"))
-    return unsafe { proc(pszName.asPtr(), pBindOptions, riid, ppv) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<BIND_OPTS>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetObject"))
+    return unsafe { proc__(pszName.asPtr(), pBindOptions, riid, ppv) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -341,8 +341,8 @@ public func CoGetObjectChecked(pszName: windows_strings.PWSTR, pBindOptions: CPo
 
 @When[Windows_Win32_System_Com == "on"]
 public func MkParseDisplayName(pbc: CPointer<Unit>, szUserName: windows_strings.PWSTR, pchEaten: CPointer<UInt32>, ppmk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "MkParseDisplayName"))
-    return unsafe { proc(pbc, szUserName.asPtr(), pchEaten, ppmk) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "MkParseDisplayName"))
+    return unsafe { proc__(pbc, szUserName.asPtr(), pchEaten, ppmk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -365,8 +365,8 @@ public func MkParseDisplayNameChecked(pbc: CPointer<Unit>, szUserName: windows_s
 
 @When[Windows_Win32_System_Com == "on"]
 public func MonikerRelativePathTo(pmkSrc: CPointer<Unit>, pmkDest: CPointer<Unit>, ppmkRelPath: CPointer<CPointer<Unit>>, dwReserved: Bool): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, Int32) -> Int32>(windows_libloading.resolveProc("ole32.dll", "MonikerRelativePathTo"))
-    return unsafe { proc(pmkSrc, pmkDest, ppmkRelPath, if (dwReserved) { 1 } else { 0 }) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, Int32) -> Int32>(windows_libloading.resolveProc("ole32.dll", "MonikerRelativePathTo"))
+    return unsafe { proc__(pmkSrc, pmkDest, ppmkRelPath, if (dwReserved) { 1 } else { 0 }) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -389,8 +389,8 @@ public func MonikerRelativePathToChecked(pmkSrc: CPointer<Unit>, pmkDest: CPoint
 
 @When[Windows_Win32_System_Com == "on"]
 public func MonikerCommonPrefixWith(pmkThis: CPointer<Unit>, pmkOther: CPointer<Unit>, ppmkCommon: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "MonikerCommonPrefixWith"))
-    return unsafe { proc(pmkThis, pmkOther, ppmkCommon) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "MonikerCommonPrefixWith"))
+    return unsafe { proc__(pmkThis, pmkOther, ppmkCommon) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -413,8 +413,8 @@ public func MonikerCommonPrefixWithChecked(pmkThis: CPointer<Unit>, pmkOther: CP
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateBindCtx(reserved: UInt32, ppbc: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateBindCtx"))
-    return unsafe { proc(reserved, ppbc) }
+    let proc__ = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateBindCtx"))
+    return unsafe { proc__(reserved, ppbc) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -437,8 +437,8 @@ public func CreateBindCtxChecked(reserved: UInt32, ppbc: CPointer<CPointer<Unit>
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateGenericComposite(pmkFirst: CPointer<Unit>, pmkRest: CPointer<Unit>, ppmkComposite: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateGenericComposite"))
-    return unsafe { proc(pmkFirst, pmkRest, ppmkComposite) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateGenericComposite"))
+    return unsafe { proc__(pmkFirst, pmkRest, ppmkComposite) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -461,8 +461,8 @@ public func CreateGenericCompositeChecked(pmkFirst: CPointer<Unit>, pmkRest: CPo
 
 @When[Windows_Win32_System_Com == "on"]
 public func GetClassFile(szFilename: windows_strings.PWSTR, pclsid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "GetClassFile"))
-    return unsafe { proc(szFilename.asPtr(), pclsid) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "GetClassFile"))
+    return unsafe { proc__(szFilename.asPtr(), pclsid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -472,8 +472,8 @@ public func GetClassFileChecked(szFilename: windows_strings.PWSTR, pclsid: CPoin
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateClassMoniker(rclsid: CPointer<GUID>, ppmk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateClassMoniker"))
-    return unsafe { proc(rclsid, ppmk) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateClassMoniker"))
+    return unsafe { proc__(rclsid, ppmk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -496,8 +496,8 @@ public func CreateClassMonikerChecked(rclsid: CPointer<GUID>, ppmk: CPointer<CPo
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateFileMoniker(lpszPathName: windows_strings.PWSTR, ppmk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateFileMoniker"))
-    return unsafe { proc(lpszPathName.asPtr(), ppmk) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateFileMoniker"))
+    return unsafe { proc__(lpszPathName.asPtr(), ppmk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -520,8 +520,8 @@ public func CreateFileMonikerChecked(lpszPathName: windows_strings.PWSTR, ppmk: 
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateItemMoniker(lpszDelim: windows_strings.PWSTR, lpszItem: windows_strings.PWSTR, ppmk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateItemMoniker"))
-    return unsafe { proc(lpszDelim.asPtr(), lpszItem.asPtr(), ppmk) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateItemMoniker"))
+    return unsafe { proc__(lpszDelim.asPtr(), lpszItem.asPtr(), ppmk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -544,8 +544,8 @@ public func CreateItemMonikerChecked(lpszDelim: windows_strings.PWSTR, lpszItem:
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateAntiMoniker(ppmk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateAntiMoniker"))
-    return unsafe { proc(ppmk) }
+    let proc__ = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateAntiMoniker"))
+    return unsafe { proc__(ppmk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -568,8 +568,8 @@ public func CreateAntiMonikerChecked(ppmk: CPointer<CPointer<Unit>>): windows_co
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreatePointerMoniker(punk: windows_interface.IUnknown, ppmk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreatePointerMoniker"))
-    return unsafe { proc(punk.asRaw(), ppmk) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreatePointerMoniker"))
+    return unsafe { proc__(punk.asRaw(), ppmk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -592,8 +592,8 @@ public func CreatePointerMonikerChecked(punk: windows_interface.IUnknown, ppmk: 
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateObjrefMoniker(punk: windows_interface.IUnknown, ppmk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateObjrefMoniker"))
-    return unsafe { proc(punk.asRaw(), ppmk) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CreateObjrefMoniker"))
+    return unsafe { proc__(punk.asRaw(), ppmk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -616,8 +616,8 @@ public func CreateObjrefMonikerChecked(punk: windows_interface.IUnknown, ppmk: C
 
 @When[Windows_Win32_System_Com == "on"]
 public func GetRunningObjectTable(reserved: UInt32, pprot: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "GetRunningObjectTable"))
-    return unsafe { proc(reserved, pprot) }
+    let proc__ = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "GetRunningObjectTable"))
+    return unsafe { proc__(reserved, pprot) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -640,8 +640,8 @@ public func GetRunningObjectTableChecked(reserved: UInt32, pprot: CPointer<CPoin
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateStdProgressIndicator(hwndParent: HWND, pszTitle: windows_strings.PWSTR, pIbscCaller: CPointer<Unit>, ppIbsc: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CreateStdProgressIndicator"))
-    return unsafe { proc(hwndParent.Value, pszTitle.asPtr(), pIbscCaller, ppIbsc) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ole32.dll", "CreateStdProgressIndicator"))
+    return unsafe { proc__(hwndParent.Value, pszTitle.asPtr(), pIbscCaller, ppIbsc) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -664,8 +664,8 @@ public func CreateStdProgressIndicatorChecked(hwndParent: HWND, pszTitle: window
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetMalloc(dwMemContext: UInt32, ppMalloc: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetMalloc"))
-    return unsafe { proc(dwMemContext, ppMalloc) }
+    let proc__ = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetMalloc"))
+    return unsafe { proc__(dwMemContext, ppMalloc) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -688,20 +688,20 @@ public func CoGetMallocChecked(dwMemContext: UInt32, ppMalloc: CPointer<CPointer
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoUninitialize(): Unit {
-    let proc = CFunc<() -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoUninitialize"))
-    unsafe { proc() }
+    let proc__ = CFunc<() -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoUninitialize"))
+    unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetCurrentProcess(): UInt32 {
-    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCurrentProcess"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCurrentProcess"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoInitializeEx(dwCoInit: COINIT): Int32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInitializeEx"))
-    return unsafe { proc(CPointer<Unit>(), UInt32(dwCoInit)) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInitializeEx"))
+    return unsafe { proc__(CPointer<Unit>(), UInt32(dwCoInit)) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -715,8 +715,8 @@ public func CoInitializeExChecked(dwCoInit: COINIT): windows_core.Result<windows
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetCallerTID(lpdwTID: CPointer<UInt32>): Int32 {
-    let proc = CFunc<(CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCallerTID"))
-    return unsafe { proc(lpdwTID) }
+    let proc__ = CFunc<(CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCallerTID"))
+    return unsafe { proc__(lpdwTID) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -726,8 +726,8 @@ public func CoGetCallerTIDChecked(lpdwTID: CPointer<UInt32>): windows_core.Resul
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetCurrentLogicalThreadId(pguid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCurrentLogicalThreadId"))
-    return unsafe { proc(pguid) }
+    let proc__ = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCurrentLogicalThreadId"))
+    return unsafe { proc__(pguid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -737,8 +737,8 @@ public func CoGetCurrentLogicalThreadIdChecked(pguid: CPointer<GUID>): windows_c
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetContextToken(pToken: CPointer<UIntNative>): Int32 {
-    let proc = CFunc<(CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetContextToken"))
-    return unsafe { proc(pToken) }
+    let proc__ = CFunc<(CPointer<UIntNative>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetContextToken"))
+    return unsafe { proc__(pToken) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -748,8 +748,8 @@ public func CoGetContextTokenChecked(pToken: CPointer<UIntNative>): windows_core
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetApartmentType(pAptType: CPointer<Int32>, pAptQualifier: CPointer<Int32>): Int32 {
-    let proc = CFunc<(CPointer<Int32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetApartmentType"))
-    return unsafe { proc(pAptType, pAptQualifier) }
+    let proc__ = CFunc<(CPointer<Int32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetApartmentType"))
+    return unsafe { proc__(pAptType, pAptQualifier) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -759,8 +759,8 @@ public func CoGetApartmentTypeChecked(pAptType: CPointer<Int32>, pAptQualifier: 
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoIncrementMTAUsage(pCookie: CPointer<CO_MTA_USAGE_COOKIE>): Int32 {
-    let proc = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoIncrementMTAUsage"))
-    return unsafe { proc(CPointer<CPointer<Unit>>(pCookie)) }
+    let proc__ = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoIncrementMTAUsage"))
+    return unsafe { proc__(CPointer<CPointer<Unit>>(pCookie)) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -770,8 +770,8 @@ public func CoIncrementMTAUsageChecked(pCookie: CPointer<CO_MTA_USAGE_COOKIE>): 
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoDecrementMTAUsage(Cookie: CO_MTA_USAGE_COOKIE): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDecrementMTAUsage"))
-    return unsafe { proc(Cookie.Value) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDecrementMTAUsage"))
+    return unsafe { proc__(Cookie.Value) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -781,8 +781,8 @@ public func CoDecrementMTAUsageChecked(Cookie: CO_MTA_USAGE_COOKIE): windows_cor
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoAllowUnmarshalerCLSID(clsid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoAllowUnmarshalerCLSID"))
-    return unsafe { proc(clsid) }
+    let proc__ = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoAllowUnmarshalerCLSID"))
+    return unsafe { proc__(clsid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -792,8 +792,8 @@ public func CoAllowUnmarshalerCLSIDChecked(clsid: CPointer<GUID>): windows_core.
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetObjectContext(riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetObjectContext"))
-    return unsafe { proc(riid, ppv) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetObjectContext"))
+    return unsafe { proc__(riid, ppv) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -816,8 +816,8 @@ public func CoGetObjectContextChecked(riid: CPointer<GUID>, ppv: CPointer<CPoint
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetClassObject(rclsid: CPointer<GUID>, dwClsContext: CLSCTX, pvReserved: CPointer<Unit>, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, UInt32, CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetClassObject"))
-    return unsafe { proc(rclsid, dwClsContext, pvReserved, riid, ppv) }
+    let proc__ = CFunc<(CPointer<GUID>, UInt32, CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetClassObject"))
+    return unsafe { proc__(rclsid, dwClsContext, pvReserved, riid, ppv) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -840,8 +840,8 @@ public func CoGetClassObjectChecked(rclsid: CPointer<GUID>, dwClsContext: CLSCTX
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterClassObject(rclsid: CPointer<GUID>, pUnk: windows_interface.IUnknown, dwClsContext: UInt32, flags: REGCLS, lpdwRegister: CPointer<UInt32>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterClassObject"))
-    return unsafe { proc(rclsid, pUnk.asRaw(), dwClsContext, UInt32(flags), lpdwRegister) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterClassObject"))
+    return unsafe { proc__(rclsid, pUnk.asRaw(), dwClsContext, UInt32(flags), lpdwRegister) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -851,8 +851,8 @@ public func CoRegisterClassObjectChecked(rclsid: CPointer<GUID>, pUnk: windows_i
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRevokeClassObject(dwRegister: UInt32): Int32 {
-    let proc = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeClassObject"))
-    return unsafe { proc(dwRegister) }
+    let proc__ = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeClassObject"))
+    return unsafe { proc__(dwRegister) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -862,8 +862,8 @@ public func CoRevokeClassObjectChecked(dwRegister: UInt32): windows_core.Result<
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoResumeClassObjects(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoResumeClassObjects"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoResumeClassObjects"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -873,8 +873,8 @@ public func CoResumeClassObjectsChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoSuspendClassObjects(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSuspendClassObjects"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSuspendClassObjects"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -884,20 +884,20 @@ public func CoSuspendClassObjectsChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoAddRefServerProcess(): UInt32 {
-    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("OLE32.dll", "CoAddRefServerProcess"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("OLE32.dll", "CoAddRefServerProcess"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoReleaseServerProcess(): UInt32 {
-    let proc = CFunc<() -> UInt32>(windows_libloading.resolveProc("OLE32.dll", "CoReleaseServerProcess"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("OLE32.dll", "CoReleaseServerProcess"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetPSClsid(riid: CPointer<GUID>, pClsid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetPSClsid"))
-    return unsafe { proc(riid, pClsid) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetPSClsid"))
+    return unsafe { proc__(riid, pClsid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -907,8 +907,8 @@ public func CoGetPSClsidChecked(riid: CPointer<GUID>, pClsid: CPointer<GUID>): w
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterPSClsid(riid: CPointer<GUID>, rclsid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterPSClsid"))
-    return unsafe { proc(riid, rclsid) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterPSClsid"))
+    return unsafe { proc__(riid, rclsid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -918,8 +918,8 @@ public func CoRegisterPSClsidChecked(riid: CPointer<GUID>, rclsid: CPointer<GUID
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterSurrogate(pSurrogate: CPointer<Unit>): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterSurrogate"))
-    return unsafe { proc(pSurrogate) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterSurrogate"))
+    return unsafe { proc__(pSurrogate) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -929,8 +929,8 @@ public func CoRegisterSurrogateChecked(pSurrogate: CPointer<Unit>): windows_core
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoDisconnectObject(pUnk: windows_interface.IUnknown): Int32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDisconnectObject"))
-    return unsafe { proc(pUnk.asRaw(), 0u32) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDisconnectObject"))
+    return unsafe { proc__(pUnk.asRaw(), 0u32) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -940,8 +940,8 @@ public func CoDisconnectObjectChecked(pUnk: windows_interface.IUnknown): windows
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoLockObjectExternal(pUnk: windows_interface.IUnknown, fLock: Bool, fLastUnlockReleases: Bool): Int32 {
-    let proc = CFunc<(CPointer<Unit>, Int32, Int32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoLockObjectExternal"))
-    return unsafe { proc(pUnk.asRaw(), if (fLock) { 1 } else { 0 }, if (fLastUnlockReleases) { 1 } else { 0 }) }
+    let proc__ = CFunc<(CPointer<Unit>, Int32, Int32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoLockObjectExternal"))
+    return unsafe { proc__(pUnk.asRaw(), if (fLock) { 1 } else { 0 }, if (fLastUnlockReleases) { 1 } else { 0 }) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -951,14 +951,14 @@ public func CoLockObjectExternalChecked(pUnk: windows_interface.IUnknown, fLock:
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoIsHandlerConnected(pUnk: windows_interface.IUnknown): Bool {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoIsHandlerConnected"))
-    return unsafe { proc(pUnk.asRaw()) } != 0
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoIsHandlerConnected"))
+    return unsafe { proc__(pUnk.asRaw()) } != 0
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoCreateFreeThreadedMarshaler(punkOuter: windows_interface.IUnknown, ppunkMarshal: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateFreeThreadedMarshaler"))
-    return unsafe { proc(punkOuter.asRaw(), ppunkMarshal) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateFreeThreadedMarshaler"))
+    return unsafe { proc__(punkOuter.asRaw(), ppunkMarshal) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -981,20 +981,20 @@ public func CoCreateFreeThreadedMarshalerChecked(punkOuter: windows_interface.IU
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoFreeUnusedLibraries(): Unit {
-    let proc = CFunc<() -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeUnusedLibraries"))
-    unsafe { proc() }
+    let proc__ = CFunc<() -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeUnusedLibraries"))
+    unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoFreeUnusedLibrariesEx(dwUnloadDelay: UInt32): Unit {
-    let proc = CFunc<(UInt32, UInt32) -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeUnusedLibrariesEx"))
-    unsafe { proc(dwUnloadDelay, 0u32) }
+    let proc__ = CFunc<(UInt32, UInt32) -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoFreeUnusedLibrariesEx"))
+    unsafe { proc__(dwUnloadDelay, 0u32) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoDisconnectContext(dwTimeout: UInt32): Int32 {
-    let proc = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDisconnectContext"))
-    return unsafe { proc(dwTimeout) }
+    let proc__ = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDisconnectContext"))
+    return unsafe { proc__(dwTimeout) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1004,8 +1004,8 @@ public func CoDisconnectContextChecked(dwTimeout: UInt32): windows_core.Result<U
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoInitializeSecurity(pSecDesc: PSECURITY_DESCRIPTOR, cAuthSvc: Int32, asAuthSvc: CPointer<SOLE_AUTHENTICATION_SERVICE>, dwAuthnLevel: UInt32, dwImpLevel: UInt32, pAuthList: CPointer<Unit>, dwCapabilities: EOLE_AUTHENTICATION_CAPABILITIES): Int32 {
-    let proc = CFunc<(CPointer<Unit>, Int32, CPointer<SOLE_AUTHENTICATION_SERVICE>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInitializeSecurity"))
-    return unsafe { proc(pSecDesc.Value, cAuthSvc, asAuthSvc, CPointer<Unit>(), dwAuthnLevel, dwImpLevel, pAuthList, UInt32(dwCapabilities), CPointer<Unit>()) }
+    let proc__ = CFunc<(CPointer<Unit>, Int32, CPointer<SOLE_AUTHENTICATION_SERVICE>, CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInitializeSecurity"))
+    return unsafe { proc__(pSecDesc.Value, cAuthSvc, asAuthSvc, CPointer<Unit>(), dwAuthnLevel, dwImpLevel, pAuthList, UInt32(dwCapabilities), CPointer<Unit>()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1015,8 +1015,8 @@ public func CoInitializeSecurityChecked(pSecDesc: PSECURITY_DESCRIPTOR, cAuthSvc
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetCallContext(riid: CPointer<GUID>, ppInterface: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCallContext"))
-    return unsafe { proc(riid, ppInterface) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCallContext"))
+    return unsafe { proc__(riid, ppInterface) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1039,8 +1039,8 @@ public func CoGetCallContextChecked(riid: CPointer<GUID>, ppInterface: CPointer<
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoQueryProxyBlanket(pProxy: windows_interface.IUnknown, pwAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pAuthInfo: CPointer<CPointer<Unit>>, pCapabilites: CPointer<UInt32>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<UInt16>>, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoQueryProxyBlanket"))
-    return unsafe { proc(pProxy.asRaw(), pwAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<UInt16>>, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoQueryProxyBlanket"))
+    return unsafe { proc__(pProxy.asRaw(), pwAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pAuthInfo, pCapabilites) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1071,8 +1071,8 @@ public func CoQueryProxyBlanketChecked(pProxy: windows_interface.IUnknown, pwAut
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoSetProxyBlanket(pProxy: windows_interface.IUnknown, dwAuthnSvc: UInt32, dwAuthzSvc: UInt32, pServerPrincName: windows_strings.PWSTR, dwAuthnLevel: UInt32, dwImpLevel: UInt32, pAuthInfo: CPointer<Unit>, dwCapabilities: EOLE_AUTHENTICATION_CAPABILITIES): Int32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<UInt16>, UInt32, UInt32, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSetProxyBlanket"))
-    return unsafe { proc(pProxy.asRaw(), dwAuthnSvc, dwAuthzSvc, pServerPrincName.asPtr(), dwAuthnLevel, dwImpLevel, pAuthInfo, UInt32(dwCapabilities)) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<UInt16>, UInt32, UInt32, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSetProxyBlanket"))
+    return unsafe { proc__(pProxy.asRaw(), dwAuthnSvc, dwAuthzSvc, pServerPrincName.asPtr(), dwAuthnLevel, dwImpLevel, pAuthInfo, UInt32(dwCapabilities)) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1082,8 +1082,8 @@ public func CoSetProxyBlanketChecked(pProxy: windows_interface.IUnknown, dwAuthn
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoCopyProxy(pProxy: windows_interface.IUnknown, ppCopy: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCopyProxy"))
-    return unsafe { proc(pProxy.asRaw(), ppCopy) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCopyProxy"))
+    return unsafe { proc__(pProxy.asRaw(), ppCopy) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1106,8 +1106,8 @@ public func CoCopyProxyChecked(pProxy: windows_interface.IUnknown, ppCopy: CPoin
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoQueryClientBlanket(pAuthnSvc: CPointer<UInt32>, pAuthzSvc: CPointer<UInt32>, pServerPrincName: CPointer<CPointer<UInt16>>, pAuthnLevel: CPointer<UInt32>, pImpLevel: CPointer<UInt32>, pPrivs: CPointer<CPointer<Unit>>, pCapabilities: CPointer<UInt32>): Int32 {
-    let proc = CFunc<(CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<UInt16>>, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoQueryClientBlanket"))
-    return unsafe { proc(pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pPrivs, pCapabilities) }
+    let proc__ = CFunc<(CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<UInt16>>, CPointer<UInt32>, CPointer<UInt32>, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoQueryClientBlanket"))
+    return unsafe { proc__(pAuthnSvc, pAuthzSvc, pServerPrincName, pAuthnLevel, pImpLevel, pPrivs, pCapabilities) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1138,8 +1138,8 @@ public func CoQueryClientBlanketChecked(pAuthnSvc: CPointer<UInt32>, pAuthzSvc: 
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoImpersonateClient(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoImpersonateClient"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoImpersonateClient"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1149,8 +1149,8 @@ public func CoImpersonateClientChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRevertToSelf(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevertToSelf"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevertToSelf"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1160,8 +1160,8 @@ public func CoRevertToSelfChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoQueryAuthenticationServices(pcAuthSvc: CPointer<UInt32>, asAuthSvc: CPointer<CPointer<SOLE_AUTHENTICATION_SERVICE>>): Int32 {
-    let proc = CFunc<(CPointer<UInt32>, CPointer<CPointer<SOLE_AUTHENTICATION_SERVICE>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoQueryAuthenticationServices"))
-    return unsafe { proc(pcAuthSvc, asAuthSvc) }
+    let proc__ = CFunc<(CPointer<UInt32>, CPointer<CPointer<SOLE_AUTHENTICATION_SERVICE>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoQueryAuthenticationServices"))
+    return unsafe { proc__(pcAuthSvc, asAuthSvc) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1198,8 +1198,8 @@ public func CoQueryAuthenticationServicesChecked(pcAuthSvc: CPointer<UInt32>, as
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoSwitchCallContext(pNewObject: windows_interface.IUnknown, ppOldObject: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSwitchCallContext"))
-    return unsafe { proc(pNewObject.asRaw(), ppOldObject) }
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSwitchCallContext"))
+    return unsafe { proc__(pNewObject.asRaw(), ppOldObject) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1222,8 +1222,8 @@ public func CoSwitchCallContextChecked(pNewObject: windows_interface.IUnknown, p
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoCreateInstance(rclsid: CPointer<GUID>, pUnkOuter: windows_interface.IUnknown, dwClsContext: UInt32, riid: CPointer<GUID>, ppv: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateInstance"))
-    return unsafe { proc(rclsid, pUnkOuter.asRaw(), dwClsContext, riid, ppv) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateInstance"))
+    return unsafe { proc__(rclsid, pUnkOuter.asRaw(), dwClsContext, riid, ppv) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1246,8 +1246,8 @@ public func CoCreateInstanceChecked(rclsid: CPointer<GUID>, pUnkOuter: windows_i
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoCreateInstanceEx(Clsid: CPointer<GUID>, punkOuter: windows_interface.IUnknown, dwClsCtx: UInt32, pServerInfo: CPointer<COSERVERINFO>, dwCount: UInt32, pResults: CPointer<MULTI_QI>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<COSERVERINFO>, UInt32, CPointer<MULTI_QI>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateInstanceEx"))
-    return unsafe { proc(Clsid, punkOuter.asRaw(), dwClsCtx, pServerInfo, dwCount, pResults) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<COSERVERINFO>, UInt32, CPointer<MULTI_QI>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateInstanceEx"))
+    return unsafe { proc__(Clsid, punkOuter.asRaw(), dwClsCtx, pServerInfo, dwCount, pResults) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1261,8 +1261,8 @@ public func CoCreateInstanceExChecked(Clsid: CPointer<GUID>, punkOuter: windows_
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoCreateInstanceFromApp(Clsid: CPointer<GUID>, punkOuter: windows_interface.IUnknown, dwClsCtx: UInt32, reserved: CPointer<Unit>, dwCount: UInt32, pResults: CPointer<MULTI_QI>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<MULTI_QI>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateInstanceFromApp"))
-    return unsafe { proc(Clsid, punkOuter.asRaw(), dwClsCtx, reserved, dwCount, pResults) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<MULTI_QI>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateInstanceFromApp"))
+    return unsafe { proc__(Clsid, punkOuter.asRaw(), dwClsCtx, reserved, dwCount, pResults) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1276,8 +1276,8 @@ public func CoCreateInstanceFromAppChecked(Clsid: CPointer<GUID>, punkOuter: win
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterActivationFilter(pActivationFilter: CPointer<Unit>): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterActivationFilter"))
-    return unsafe { proc(pActivationFilter) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterActivationFilter"))
+    return unsafe { proc__(pActivationFilter) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1287,8 +1287,8 @@ public func CoRegisterActivationFilterChecked(pActivationFilter: CPointer<Unit>)
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetCancelObject(dwThreadId: UInt32, iid: CPointer<GUID>, ppUnk: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCancelObject"))
-    return unsafe { proc(dwThreadId, iid, ppUnk) }
+    let proc__ = CFunc<(UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetCancelObject"))
+    return unsafe { proc__(dwThreadId, iid, ppUnk) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1311,8 +1311,8 @@ public func CoGetCancelObjectChecked(dwThreadId: UInt32, iid: CPointer<GUID>, pp
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoSetCancelObject(pUnk: windows_interface.IUnknown): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSetCancelObject"))
-    return unsafe { proc(pUnk.asRaw()) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoSetCancelObject"))
+    return unsafe { proc__(pUnk.asRaw()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1322,8 +1322,8 @@ public func CoSetCancelObjectChecked(pUnk: windows_interface.IUnknown): windows_
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoCancelCall(dwThreadId: UInt32, ulTimeout: UInt32): Int32 {
-    let proc = CFunc<(UInt32, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCancelCall"))
-    return unsafe { proc(dwThreadId, ulTimeout) }
+    let proc__ = CFunc<(UInt32, UInt32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCancelCall"))
+    return unsafe { proc__(dwThreadId, ulTimeout) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1333,8 +1333,8 @@ public func CoCancelCallChecked(dwThreadId: UInt32, ulTimeout: UInt32): windows_
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoTestCancel(): Int32 {
-    let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoTestCancel"))
-    return unsafe { proc() }
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoTestCancel"))
+    return unsafe { proc__() }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1344,8 +1344,8 @@ public func CoTestCancelChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoEnableCallCancellation(): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoEnableCallCancellation"))
-    return unsafe { proc(CPointer<Unit>()) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoEnableCallCancellation"))
+    return unsafe { proc__(CPointer<Unit>()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1355,8 +1355,8 @@ public func CoEnableCallCancellationChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoDisableCallCancellation(): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDisableCallCancellation"))
-    return unsafe { proc(CPointer<Unit>()) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoDisableCallCancellation"))
+    return unsafe { proc__(CPointer<Unit>()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1366,8 +1366,8 @@ public func CoDisableCallCancellationChecked(): windows_core.Result<Unit> {
 
 @When[Windows_Win32_System_Com == "on"]
 public func StringFromCLSID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "StringFromCLSID"))
-    return unsafe { proc(rclsid, lplpsz) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "StringFromCLSID"))
+    return unsafe { proc__(rclsid, lplpsz) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1404,8 +1404,8 @@ public func StringFromCLSIDChecked(rclsid: CPointer<GUID>, lplpsz: CPointer<CPoi
 
 @When[Windows_Win32_System_Com == "on"]
 public func CLSIDFromString(lpsz: windows_strings.PWSTR, pclsid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CLSIDFromString"))
-    return unsafe { proc(lpsz.asPtr(), pclsid) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CLSIDFromString"))
+    return unsafe { proc__(lpsz.asPtr(), pclsid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1415,8 +1415,8 @@ public func CLSIDFromStringChecked(lpsz: windows_strings.PWSTR, pclsid: CPointer
 
 @When[Windows_Win32_System_Com == "on"]
 public func StringFromIID(rclsid: CPointer<GUID>, lplpsz: CPointer<CPointer<UInt16>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "StringFromIID"))
-    return unsafe { proc(rclsid, lplpsz) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "StringFromIID"))
+    return unsafe { proc__(rclsid, lplpsz) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1453,8 +1453,8 @@ public func StringFromIIDChecked(rclsid: CPointer<GUID>, lplpsz: CPointer<CPoint
 
 @When[Windows_Win32_System_Com == "on"]
 public func IIDFromString(lpsz: windows_strings.PWSTR, lpiid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "IIDFromString"))
-    return unsafe { proc(lpsz.asPtr(), lpiid) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "IIDFromString"))
+    return unsafe { proc__(lpsz.asPtr(), lpiid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1464,8 +1464,8 @@ public func IIDFromStringChecked(lpsz: windows_strings.PWSTR, lpiid: CPointer<GU
 
 @When[Windows_Win32_System_Com == "on"]
 public func ProgIDFromCLSID(clsid: CPointer<GUID>, lplpszProgID: CPointer<CPointer<UInt16>>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "ProgIDFromCLSID"))
-    return unsafe { proc(clsid, lplpszProgID) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "ProgIDFromCLSID"))
+    return unsafe { proc__(clsid, lplpszProgID) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1502,8 +1502,8 @@ public func ProgIDFromCLSIDChecked(clsid: CPointer<GUID>, lplpszProgID: CPointer
 
 @When[Windows_Win32_System_Com == "on"]
 public func CLSIDFromProgID(lpszProgID: windows_strings.PWSTR, lpclsid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CLSIDFromProgID"))
-    return unsafe { proc(lpszProgID.asPtr(), lpclsid) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CLSIDFromProgID"))
+    return unsafe { proc__(lpszProgID.asPtr(), lpclsid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1513,14 +1513,14 @@ public func CLSIDFromProgIDChecked(lpszProgID: windows_strings.PWSTR, lpclsid: C
 
 @When[Windows_Win32_System_Com == "on"]
 public func StringFromGUID2(rguid: CPointer<GUID>, lpsz: windows_strings.PWSTR, cchMax: Int32): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<UInt16>, Int32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "StringFromGUID2"))
-    return unsafe { proc(rguid, lpsz.asPtr(), cchMax) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<UInt16>, Int32) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "StringFromGUID2"))
+    return unsafe { proc__(rguid, lpsz.asPtr(), cchMax) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoCreateGuid(pguid: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateGuid"))
-    return unsafe { proc(pguid) }
+    let proc__ = CFunc<(CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoCreateGuid"))
+    return unsafe { proc__(pguid) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1530,8 +1530,8 @@ public func CoCreateGuidChecked(pguid: CPointer<GUID>): windows_core.Result<Unit
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoWaitForMultipleHandles(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<HANDLE>, lpdwindex: CPointer<UInt32>): Int32 {
-    let proc = CFunc<(UInt32, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoWaitForMultipleHandles"))
-    return unsafe { proc(dwFlags, dwTimeout, cHandles, CPointer<CPointer<Unit>>(pHandles), lpdwindex) }
+    let proc__ = CFunc<(UInt32, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoWaitForMultipleHandles"))
+    return unsafe { proc__(dwFlags, dwTimeout, cHandles, CPointer<CPointer<Unit>>(pHandles), lpdwindex) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1541,8 +1541,8 @@ public func CoWaitForMultipleHandlesChecked(dwFlags: UInt32, dwTimeout: UInt32, 
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoWaitForMultipleObjects(dwFlags: UInt32, dwTimeout: UInt32, cHandles: UInt32, pHandles: CPointer<HANDLE>, lpdwindex: CPointer<UInt32>): Int32 {
-    let proc = CFunc<(UInt32, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoWaitForMultipleObjects"))
-    return unsafe { proc(dwFlags, dwTimeout, cHandles, CPointer<CPointer<Unit>>(pHandles), lpdwindex) }
+    let proc__ = CFunc<(UInt32, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoWaitForMultipleObjects"))
+    return unsafe { proc__(dwFlags, dwTimeout, cHandles, CPointer<CPointer<Unit>>(pHandles), lpdwindex) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1552,8 +1552,8 @@ public func CoWaitForMultipleObjectsChecked(dwFlags: UInt32, dwTimeout: UInt32, 
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoGetTreatAsClass(clsidOld: CPointer<GUID>, pClsidNew: CPointer<GUID>): Int32 {
-    let proc = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetTreatAsClass"))
-    return unsafe { proc(clsidOld, pClsidNew) }
+    let proc__ = CFunc<(CPointer<GUID>, CPointer<GUID>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoGetTreatAsClass"))
+    return unsafe { proc__(clsidOld, pClsidNew) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1567,8 +1567,8 @@ public func CoGetTreatAsClassChecked(clsidOld: CPointer<GUID>, pClsidNew: CPoint
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoInvalidateRemoteMachineBindings(pszMachineName: windows_strings.PWSTR): Int32 {
-    let proc = CFunc<(CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInvalidateRemoteMachineBindings"))
-    return unsafe { proc(pszMachineName.asPtr()) }
+    let proc__ = CFunc<(CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoInvalidateRemoteMachineBindings"))
+    return unsafe { proc__(pszMachineName.asPtr()) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1578,26 +1578,26 @@ public func CoInvalidateRemoteMachineBindingsChecked(pszMachineName: windows_str
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
-    let proc = CFunc<(UIntNative) -> CPointer<Unit>>(windows_libloading.resolveProc("OLE32.dll", "CoTaskMemAlloc"))
-    return unsafe { proc(cb) }
+    let proc__ = CFunc<(UIntNative) -> CPointer<Unit>>(windows_libloading.resolveProc("OLE32.dll", "CoTaskMemAlloc"))
+    return unsafe { proc__(cb) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit> {
-    let proc = CFunc<(CPointer<Unit>, UIntNative) -> CPointer<Unit>>(windows_libloading.resolveProc("OLE32.dll", "CoTaskMemRealloc"))
-    return unsafe { proc(pv, cb) }
+    let proc__ = CFunc<(CPointer<Unit>, UIntNative) -> CPointer<Unit>>(windows_libloading.resolveProc("OLE32.dll", "CoTaskMemRealloc"))
+    return unsafe { proc__(pv, cb) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoTaskMemFree(pv: CPointer<Unit>): Unit {
-    let proc = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoTaskMemFree"))
-    unsafe { proc(pv) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("OLE32.dll", "CoTaskMemFree"))
+    unsafe { proc__(pv) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRegisterDeviceCatalog(deviceInstanceId: windows_strings.PWSTR, cookie: CPointer<CO_DEVICE_CATALOG_COOKIE>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterDeviceCatalog"))
-    return unsafe { proc(deviceInstanceId.asPtr(), CPointer<CPointer<Unit>>(cookie)) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRegisterDeviceCatalog"))
+    return unsafe { proc__(deviceInstanceId.asPtr(), CPointer<CPointer<Unit>>(cookie)) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1607,8 +1607,8 @@ public func CoRegisterDeviceCatalogChecked(deviceInstanceId: windows_strings.PWS
 
 @When[Windows_Win32_System_Com == "on"]
 public func CoRevokeDeviceCatalog(cookie: CO_DEVICE_CATALOG_COOKIE): Int32 {
-    let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeDeviceCatalog"))
-    return unsafe { proc(cookie.Value) }
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLE32.dll", "CoRevokeDeviceCatalog"))
+    return unsafe { proc__(cookie.Value) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1618,8 +1618,8 @@ public func CoRevokeDeviceCatalogChecked(cookie: CO_DEVICE_CATALOG_COOKIE): wind
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateUri(pwzURI: windows_strings.PWSTR, dwFlags: UInt32, ppURI: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("URLMON.dll", "CreateUri"))
-    return unsafe { proc(pwzURI.asPtr(), dwFlags, 0, ppURI) }
+    let proc__ = CFunc<(CPointer<UInt16>, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("URLMON.dll", "CreateUri"))
+    return unsafe { proc__(pwzURI.asPtr(), dwFlags, 0, ppURI) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1642,8 +1642,8 @@ public func CreateUriChecked(pwzURI: windows_strings.PWSTR, dwFlags: UInt32, ppU
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateUriWithFragment(pwzURI: windows_strings.PWSTR, pwzFragment: windows_strings.PWSTR, dwFlags: UInt32, ppURI: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("URLMON.dll", "CreateUriWithFragment"))
-    return unsafe { proc(pwzURI.asPtr(), pwzFragment.asPtr(), dwFlags, 0, ppURI) }
+    let proc__ = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("URLMON.dll", "CreateUriWithFragment"))
+    return unsafe { proc__(pwzURI.asPtr(), pwzFragment.asPtr(), dwFlags, 0, ppURI) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1666,8 +1666,8 @@ public func CreateUriWithFragmentChecked(pwzURI: windows_strings.PWSTR, pwzFragm
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateUriFromMultiByteString(pszANSIInputUri: windows_strings.PSTR, dwEncodingFlags: UInt32, dwCodePage: UInt32, dwCreateFlags: UInt32, ppUri: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<UInt8>, UInt32, UInt32, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("urlmon.dll", "CreateUriFromMultiByteString"))
-    return unsafe { proc(pszANSIInputUri.asPtr(), dwEncodingFlags, dwCodePage, dwCreateFlags, 0, ppUri) }
+    let proc__ = CFunc<(CPointer<UInt8>, UInt32, UInt32, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("urlmon.dll", "CreateUriFromMultiByteString"))
+    return unsafe { proc__(pszANSIInputUri.asPtr(), dwEncodingFlags, dwCodePage, dwCreateFlags, 0, ppUri) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1690,8 +1690,8 @@ public func CreateUriFromMultiByteStringChecked(pszANSIInputUri: windows_strings
 
 @When[Windows_Win32_System_Com == "on"]
 public func CreateIUriBuilder(pIUri: CPointer<Unit>, dwFlags: UInt32, dwReserved: UIntNative, ppIUriBuilder: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(CPointer<Unit>, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("URLMON.dll", "CreateIUriBuilder"))
-    return unsafe { proc(pIUri, dwFlags, dwReserved, ppIUriBuilder) }
+    let proc__ = CFunc<(CPointer<Unit>, UInt32, UIntNative, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("URLMON.dll", "CreateIUriBuilder"))
+    return unsafe { proc__(pIUri, dwFlags, dwReserved, ppIUriBuilder) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1714,8 +1714,8 @@ public func CreateIUriBuilderChecked(pIUri: CPointer<Unit>, dwFlags: UInt32, dwR
 
 @When[Windows_Win32_System_Com == "on"]
 public func SetErrorInfo(dwReserved: UInt32, perrinfo: CPointer<Unit>): Int32 {
-    let proc = CFunc<(UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLEAUT32.dll", "SetErrorInfo"))
-    return unsafe { proc(dwReserved, perrinfo) }
+    let proc__ = CFunc<(UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("OLEAUT32.dll", "SetErrorInfo"))
+    return unsafe { proc__(dwReserved, perrinfo) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
@@ -1725,8 +1725,8 @@ public func SetErrorInfoChecked(dwReserved: UInt32, perrinfo: CPointer<Unit>): w
 
 @When[Windows_Win32_System_Com == "on"]
 public func GetErrorInfo(dwReserved: UInt32, pperrinfo: CPointer<CPointer<Unit>>): Int32 {
-    let proc = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLEAUT32.dll", "GetErrorInfo"))
-    return unsafe { proc(dwReserved, pperrinfo) }
+    let proc__ = CFunc<(UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("OLEAUT32.dll", "GetErrorInfo"))
+    return unsafe { proc__(dwReserved, pperrinfo) }
 }
 
 @When[Windows_Win32_System_Com == "on"]
