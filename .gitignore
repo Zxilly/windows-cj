@@ -43,3 +43,15 @@ windows-cj-link-options.txt
 # OS/editor noise.
 .DS_Store
 Thumbs.db
+
+# Session scratch / experiment probes (binary-size + narrow-binding + SCC verification).
+/_narrow_sys/
+/_narrow_sys_app/
+/_narrow_sys_bytype/
+/_reflect_scratch/
+/_scctest/
+/_trim_scratch/
+/_white4_repro/
+/windows_reactor_narrow/
+/scripts/narrow_*.json
+/scripts/narrow_*.txt
