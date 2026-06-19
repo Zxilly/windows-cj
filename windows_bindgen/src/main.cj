@@ -64,6 +64,7 @@ class CliConfig {
     public var implement: Bool = false
     public var noComment: Bool = false
     public var flat: Bool = false
+    public var minimal: Bool = false
     public var defaultWinmdInput: Bool = false
     public let derives: ArrayList<String> = ArrayList<String>()
     public let referenceArgs: ArrayList<String> = ArrayList<String>()
@@ -88,6 +89,7 @@ public class BindgenConfig {
     public let implement: Bool
     public let noComment: Bool
     public let flat: Bool
+    public let minimal: Bool
     public let derives: Array<String>
     public let referenceArgs: Array<String>
 
@@ -110,6 +112,7 @@ public class BindgenConfig {
         this.implement = config.implement
         this.noComment = config.noComment
         this.flat = config.flat
+        this.minimal = config.minimal
         this.derives = copyStrings(config.derives)
         this.referenceArgs = copyStrings(config.referenceArgs)
     }
@@ -205,6 +208,11 @@ public class BindgenBuilder {
 
     public func sys(): BindgenBuilder {
         config.sys = true
+        return this
+    }
+
+    public func minimal(): BindgenBuilder {
+        config.minimal = true
         return this
     }
 
@@ -415,6 +423,12 @@ func parseArgs(args: Array<String>): CliConfig {
                     throw Exception("--filter requires a value")
                 }
                 addUnique(config.filters, args[i])
+            case "--filter-file" =>
+                i += 1
+                if (i >= Int64(args.size)) {
+                    throw Exception("--filter-file requires a value")
+                }
+                loadFilterRulesFromFile(config, args[i])
             case "--input-json" =>
                 i += 1
                 if (i >= Int64(args.size)) {
@@ -467,6 +481,7 @@ func parseArgs(args: Array<String>): CliConfig {
             case "--print-link-option" => config.printLinkOptions = true
             case "--sys" => config.sys = true
             case "--flat" => config.flat = true
+            case "--minimal" => config.minimal = true
             case "--implement" => config.implement = true
             case "--no-comment" => config.noComment = true
             case "--derive" =>
@@ -498,6 +513,27 @@ func parseArgs(args: Array<String>): CliConfig {
     }
     finalizeConfigDefaults(config)
     return config
+}
+
+// Load filter rules from a newline-delimited file (one `--filter` rule per line).
+// Blank lines and lines whose first non-whitespace byte is `#` are skipped. This
+// avoids the Windows command-line length limit when a method-level filter set has
+// hundreds of rules (each `--filter <rule>` pair would otherwise overflow the
+// 32 KB argv cap).
+func loadFilterRulesFromFile(config: CliConfig, path: String): Unit {
+    let bytes = try {
+        File.readFrom(path)
+    } catch (err: Exception) {
+        throw Exception("--filter-file: cannot read ${path}: ${err}")
+    }
+    let content = String.fromUtf8(bytes)
+    for (line in splitString(content, b'\n')) {
+        let rule = trimAscii(line)
+        if (rule.isEmpty() || startsWithString(rule, "#")) {
+            continue
+        }
+        addUnique(config.filters, rule)
+    }
 }
 
 func parseInputArgument(config: CliConfig, arg: String): Unit {
@@ -560,6 +596,11 @@ func loadSymbolRecords(config: CliConfig): ArrayList<SymbolRecord> {
     if (config.help) {
         return ArrayList<SymbolRecord>()
     }
+    // Install the minimal closure-truncation mode before symbols are indexed:
+    // buildSymbolRecords -> typeDependencies reads this flag to truncate interface
+    // member-signature dependencies. Set unconditionally from config so a non-
+    // minimal run clears any flag a prior in-process run may have left set.
+    setMinimalInterfaceTruncation(config.minimal)
     // .winmd inputs are always parsed natively (loadWinmdFilesNative). The only
     // invalid combination is handing a raw .winmd to --input-json, which expects
     // already-converted JSON.
@@ -731,6 +772,12 @@ func winmdJsonFlagInputError(path: String): String {
 }
 
 func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
+    // Keep the minimal closure-truncation mode in force through selection:
+    // filterRecordMembers recomputes typeDependencies for filter-selected records,
+    // and that recomputation must also truncate interface member dependencies. The
+    // records passed in were already indexed under this flag (loadSymbolRecords),
+    // so setting it here only matters for callers that build records separately.
+    setMinimalInterfaceTruncation(config.minimal)
     ensureCommonFeatureSelection(config)
     validateRequestedFeatures(config.features, records)
     validateRequestedFilters(config.filters, records)
@@ -1023,6 +1070,7 @@ func validateRequestedFeatures(features: ArrayList<String>, records: ArrayList<S
 }
 
 func validateRequestedFilters(filters: ArrayList<String>, records: ArrayList<SymbolRecord>): Unit {
+    let unknown = ArrayList<String>()
     for (filter in filters) {
         let pattern = selectionRulePattern(filter)
         if (pattern.isEmpty()) {
@@ -1039,8 +1087,18 @@ func validateRequestedFilters(filters: ArrayList<String>, records: ArrayList<Sym
             }
         }
         if (!found) {
-            throw Exception("unknown filter: ${filter}")
+            unknown.add(filter)
         }
+    }
+    // Report ALL unmatched filter rules at once (one per line) rather than
+    // aborting on the first. A method-level filter set has hundreds of rules; a
+    // single message per run keeps the iterate-and-fix loop fast.
+    if (!unknown.isEmpty()) {
+        let lines = ArrayList<String>()
+        for (rule in unknown) {
+            lines.add("  ${rule}")
+        }
+        throw Exception("unknown filter rules (${unknown.size}):\n${joinStrings(lines, "\n")}")
     }
 }
 
@@ -1201,13 +1259,71 @@ func selectedRecordForName(
     }
 }
 
+// Accessor method names a kept property/event needs rendered alongside it. A WinRT
+// property renders as a Cangjie `prop` only when its getter (and, for read-write,
+// setter) METHOD survives in the pruned method list — `renderRuntimeClassProperty`
+// looks the accessor methods up by name. If a member rule keeps a property by its
+// setter name (`put_X`) but the getter method gets pruned, the property degrades to
+// a standalone write-only `func SetX`, which then collides with any same-named
+// static attached-property setter. Keeping a kept property's/event's accessor
+// methods preserves the `prop`/event projection (and the renderer skips them as
+// standalone methods, so no double render). The accessors take/return the member's
+// own type, so this adds no new dependency-closure types.
+func requiredAccessorMethodNames(
+    properties: ArrayList<PropertyRecord>,
+    events: ArrayList<EventRecord>
+): HashSet<String> {
+    let names = HashSet<String>()
+    for (property in properties) {
+        names.add(runtimeAccessorMethodName(property.accessors, "Getter") ?? "get_${property.name}")
+        names.add(runtimeAccessorMethodName(property.accessors, "Setter") ?? "put_${property.name}")
+    }
+    for (event in events) {
+        names.add(runtimeAccessorMethodName(event.accessors, "Adder") ?? "add_${event.name}")
+        names.add(runtimeAccessorMethodName(event.accessors, "Remover") ?? "remove_${event.name}")
+    }
+    return names
+}
+
+func filterMethodsKeepingAccessors(
+    methods: ArrayList<MethodRecord>,
+    containerFullName: String,
+    filters: ArrayList<String>,
+    requiredAccessors: HashSet<String>
+): ArrayList<MethodRecord> {
+    let selected = ArrayList<MethodRecord>()
+    for (method in methods) {
+        if (requiredAccessors.contains(method.name) ||
+            selectionRulesIncludeMethod(filters, containerFullName, method)) {
+            selected.add(method)
+        }
+    }
+    return selected
+}
+
 func filterRecordMembers(record: SymbolRecord, filters: ArrayList<String>): SymbolRecord {
     match (record.typeDef) {
         case Some(typeDef) =>
+            // ABI-critical (--minimal): an interface's vtable struct is laid out in
+            // declaration order with no slot padding, so pruning its methods would
+            // compress the vtable and break the COM ABI. In minimal mode a selected
+            // interface therefore keeps ALL its methods (full vtable / correct slot
+            // order) and is rendered unchanged; only its CLOSURE dependencies are
+            // narrowed to the signature types of the member-rule-matched methods.
+            // That honors a member rule like `ICompositor.CreateScalarKeyFrameAnimation`
+            // (seeding the projected type it names) without dragging in the whole
+            // interface's high-level signature graph. A whole-type-selected interface
+            // (no member rules target it) matches nothing here and contributes no
+            // member dependencies.
+            if (minimalInterfaceTruncation && isWinrtInterfaceType(typeDef) && !isValueType(typeDef)) {
+                return minimalInterfaceRecordWithSeededDependencies(record, typeDef, filters)
+            }
             let fields = filterFieldsBySelectionRules(typeDef.fields, record.fullName, filters)
-            let methods = filterMethodsBySelectionRules(typeDef.methods, record.fullName, filters)
             let properties = filterPropertiesBySelectionRules(typeDef.properties, record.fullName, filters)
             let events = filterEventsBySelectionRules(typeDef.events, record.fullName, filters)
+            let methods = filterMethodsKeepingAccessors(
+                typeDef.methods, record.fullName, filters,
+                requiredAccessorMethodNames(properties, events))
             let matchedMembers = fields.size + methods.size + properties.size + events.size
             if (matchedMembers == 0) {
                 return record
@@ -1248,6 +1364,80 @@ func filterRecordMembers(record: SymbolRecord, filters: ArrayList<String>): Symb
     }
 }
 
+// Minimal-mode interface record: keep the FULL interface (every method, full
+// vtable, unchanged rendering) but recompute its closure dependencies as the union
+// of (a) the interface's structural dependencies under truncation (base interface,
+// IID/attribute types, implemented interfaces) and (b) the signature types of only
+// the methods/properties/events selected by member rules. The full typeDef is
+// preserved so the renderer emits every vtable slot; the narrowed dependency list
+// is what keeps the selection closure from cascading through unseeded members.
+func minimalInterfaceRecordWithSeededDependencies(
+    record: SymbolRecord,
+    typeDef: TypeDefinitionRecord,
+    filters: ArrayList<String>
+): SymbolRecord {
+    // (a) Structural dependencies: typeDependencies already truncates an
+    // interface's member-signature dependencies in minimal mode, so this yields
+    // exactly {base interface, IID/custom-attribute types, implemented interfaces}.
+    let dependencies = ArrayList<String>()
+    for (dependency in typeDependencies(typeDef, record.fullName)) {
+        addUnique(dependencies, dependency)
+    }
+    // (b) Seeded-member signature dependencies: build a typeDef holding only the
+    // member-rule-matched methods/properties/events, then compute its dependencies
+    // with interface truncation temporarily OFF so the seeded members' signature
+    // types are collected. The full interface's methods are NOT touched.
+    let seededProperties = filterPropertiesBySelectionRules(typeDef.properties, record.fullName, filters)
+    let seededEvents = filterEventsBySelectionRules(typeDef.events, record.fullName, filters)
+    let seededMethods = filterMethodsKeepingAccessors(
+        typeDef.methods, record.fullName, filters,
+        requiredAccessorMethodNames(seededProperties, seededEvents))
+    if (!seededMethods.isEmpty() || !seededProperties.isEmpty() || !seededEvents.isEmpty()) {
+        let seededTypeDef = TypeDefinitionRecord(
+            typeDef.namespace,
+            typeDef.name,
+            metadataToken: typeDef.metadataToken,
+            baseType: typeDef.baseType,
+            hasBaseType: typeDef.hasBaseType,
+            isNested: typeDef.isNested,
+            attributes: typeDef.attributes,
+            customAttributes: typeDef.customAttributes,
+            fields: ArrayList<FieldRecord>(),
+            interfaceImplementations: typeDef.interfaceImplementations,
+            layout: typeDef.layout,
+            methods: seededMethods,
+            nestedTypes: ArrayList<TypeDefinitionRecord>(),
+            genericParameters: typeDef.genericParameters,
+            events: seededEvents,
+            properties: seededProperties,
+            supportedArchitectures: typeDef.supportedArchitectures,
+            supportedOsPlatform: typeDef.supportedOsPlatform,
+            isExperimental: typeDef.isExperimental,
+            sourceSet: typeDef.sourceSet
+        )
+        let saved = minimalInterfaceTruncation
+        minimalInterfaceTruncation = false
+        let seededDeps = typeDependencies(seededTypeDef, record.fullName)
+        minimalInterfaceTruncation = saved
+        for (dependency in seededDeps) {
+            addUnique(dependencies, dependency)
+        }
+    }
+    sortStrings(dependencies)
+    // The interface itself is unchanged (full vtable); only its dependency list is
+    // narrowed, so re-attach the original typeDef.
+    return SymbolRecord(
+        record.fullName,
+        record.namespace,
+        record.name,
+        record.implName,
+        dependencies,
+        implSource: record.implSource,
+        metadataToken: record.metadataToken,
+        typeDef: Some(typeDef)
+    )
+}
+
 func filterFieldsBySelectionRules(
     fields: ArrayList<FieldRecord>,
     containerFullName: String,
@@ -1262,6 +1452,41 @@ func filterFieldsBySelectionRules(
     return selected
 }
 
+// Names a method can be referenced by in a `Type.member` filter rule: its raw
+// metadata name (an accessor like `get_Flyout` / `put_Padding` / `add_Click`, or
+// a plain method like `SetPresenter`) plus, for an overloaded WinRT method, its
+// OverloadAttribute projection name (the friendly name the renderer surfaces,
+// e.g. raw `SetPresenter` -> `SetPresenterByKind`). The reference projection's
+// member rules use whichever name the renderer emits, so a filter must accept
+// both. Accessors and non-overloaded methods carry no honored overload name, so
+// only the raw name is added for them — the accessor prefix is preserved (this is
+// NOT the prefix-stripped projected base name used for the rendered identifier).
+func methodFilterNames(method: MethodRecord): ArrayList<String> {
+    let names = ArrayList<String>()
+    names.add(method.name)
+    match (methodOverloadProjectionName(method)) {
+        case Some(name) =>
+            if (name != method.name) {
+                names.add(name)
+            }
+        case None => ()
+    }
+    return names
+}
+
+func selectionRulesIncludeMethod(
+    rules: ArrayList<String>,
+    containerFullName: String,
+    method: MethodRecord
+): Bool {
+    for (name in methodFilterNames(method)) {
+        if (selectionRulesIncludeMember(rules, containerFullName, name)) {
+            return true
+        }
+    }
+    return false
+}
+
 func filterMethodsBySelectionRules(
     methods: ArrayList<MethodRecord>,
     containerFullName: String,
@@ -1269,7 +1494,7 @@ func filterMethodsBySelectionRules(
 ): ArrayList<MethodRecord> {
     let selected = ArrayList<MethodRecord>()
     for (method in methods) {
-        if (selectionRulesIncludeMember(filters, containerFullName, method.name)) {
+        if (selectionRulesIncludeMethod(filters, containerFullName, method)) {
             selected.add(method)
         }
     }
@@ -1283,11 +1508,39 @@ func filterPropertiesBySelectionRules(
 ): ArrayList<PropertyRecord> {
     let selected = ArrayList<PropertyRecord>()
     for (property in properties) {
-        if (selectionRulesIncludeMember(filters, containerFullName, property.name)) {
+        if (selectionRulesIncludeProperty(filters, containerFullName, property)) {
             selected.add(property)
         }
     }
     return selected
+}
+
+// Names a property can be referenced by in a `Type.member` filter rule: its
+// projected property name (e.g. `Flyout`) plus its raw accessor method names
+// (`get_Flyout` / `put_Flyout`). A WinRT property is rendered as a Cangjie `prop`
+// from the property RECORD, not from the standalone accessor methods (those are
+// SpecialName methods the renderer skips), so a member rule written against the
+// accessor name — which is how the reference projection lists property members —
+// must keep the property record itself, or the rendered `prop` is lost entirely.
+func propertyFilterNames(property: PropertyRecord): ArrayList<String> {
+    let names = ArrayList<String>()
+    names.add(property.name)
+    names.add(runtimeAccessorMethodName(property.accessors, "Getter") ?? "get_${property.name}")
+    names.add(runtimeAccessorMethodName(property.accessors, "Setter") ?? "put_${property.name}")
+    return names
+}
+
+func selectionRulesIncludeProperty(
+    rules: ArrayList<String>,
+    containerFullName: String,
+    property: PropertyRecord
+): Bool {
+    for (name in propertyFilterNames(property)) {
+        if (selectionRulesIncludeMember(rules, containerFullName, name)) {
+            return true
+        }
+    }
+    return false
 }
 
 func filterEventsBySelectionRules(
@@ -1297,11 +1550,36 @@ func filterEventsBySelectionRules(
 ): ArrayList<EventRecord> {
     let selected = ArrayList<EventRecord>()
     for (event in events) {
-        if (selectionRulesIncludeMember(filters, containerFullName, event.name)) {
+        if (selectionRulesIncludeEvent(filters, containerFullName, event)) {
             selected.add(event)
         }
     }
     return selected
+}
+
+// Names an event can be referenced by: its projected name (e.g. `Click`) plus its
+// raw accessor method names (`add_Click` / `remove_Click`). Same rationale as
+// propertyFilterNames — events render from the event RECORD, and the reference
+// projection lists event members by their `add_`/`remove_` accessor names.
+func eventFilterNames(event: EventRecord): ArrayList<String> {
+    let names = ArrayList<String>()
+    names.add(event.name)
+    names.add(runtimeAccessorMethodName(event.accessors, "Adder") ?? "add_${event.name}")
+    names.add(runtimeAccessorMethodName(event.accessors, "Remover") ?? "remove_${event.name}")
+    return names
+}
+
+func selectionRulesIncludeEvent(
+    rules: ArrayList<String>,
+    containerFullName: String,
+    event: EventRecord
+): Bool {
+    for (name in eventFilterNames(event)) {
+        if (selectionRulesIncludeMember(rules, containerFullName, name)) {
+            return true
+        }
+    }
+    return false
 }
 
 func featureRulesIncludeRecord(features: ArrayList<String>, record: SymbolRecord): Bool {
@@ -1399,6 +1677,21 @@ func selectionPatternMatchesRecord(pattern: String, record: SymbolRecord): Bool 
 }
 
 func selectionPatternMatchesRecordMember(pattern: String, record: SymbolRecord): Bool {
+    // Fast reject: a dotted, non-wildcard member pattern `Container.member` can
+    // only match a member whose full name `record.fullName + "." + memberName`
+    // equals the pattern. A member name is a bare identifier and never contains a
+    // dot, so for a dotted pattern the `memberName == pattern` branch is always
+    // false — the pattern can match a member of THIS record only if record.fullName
+    // is the pattern's container prefix. A whole-type pattern that equals
+    // record.fullName is already resolved by the caller before this point, so
+    // skipping the per-member scan for every unrelated record is semantics-
+    // preserving and turns an O(records × rules × members) sweep into
+    // O(records × rules) for the non-matching majority.
+    if (!stringContainsByte(pattern, b'*') && stringContainsByte(pattern, b'.')) {
+        if (!startsWithString(pattern, "${record.fullName}.")) {
+            return false
+        }
+    }
     match (record.typeDef) {
         case Some(typeDef) =>
             for (field in typeDef.fields) {
@@ -1407,18 +1700,24 @@ func selectionPatternMatchesRecordMember(pattern: String, record: SymbolRecord):
                 }
             }
             for (method in typeDef.methods) {
-                if (selectionPatternMatchesMember(pattern, record.fullName, method.name)) {
-                    return true
+                for (name in methodFilterNames(method)) {
+                    if (selectionPatternMatchesMember(pattern, record.fullName, name)) {
+                        return true
+                    }
                 }
             }
             for (property in typeDef.properties) {
-                if (selectionPatternMatchesMember(pattern, record.fullName, property.name)) {
-                    return true
+                for (name in propertyFilterNames(property)) {
+                    if (selectionPatternMatchesMember(pattern, record.fullName, name)) {
+                        return true
+                    }
                 }
             }
             for (event in typeDef.events) {
-                if (selectionPatternMatchesMember(pattern, record.fullName, event.name)) {
-                    return true
+                for (name in eventFilterNames(event)) {
+                    if (selectionPatternMatchesMember(pattern, record.fullName, name)) {
+                        return true
+                    }
                 }
             }
         case None => ()

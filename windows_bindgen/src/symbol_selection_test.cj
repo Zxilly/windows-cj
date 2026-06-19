@@ -4,6 +4,7 @@ import std.collection.*
 import std.fs.*
 import std.unittest.*
 import std.unittest.testmacro.*
+import stdx.encoding.json.*
 
 @Test
 func testCommonModeScansNativeSupportPackages() {
@@ -584,4 +585,89 @@ func testQualifyMangledFullNameRespectsActiveReferences() {
     @Expect(outsideRef, "Windows_Foundation_IThing")
     @Expect(insideRef, "windows_collections.Windows_Foundation_Collections_IVector")
     @Expect(clearedRef, "Windows_Foundation_Collections_IVector")
+}
+
+// Build a WinRT interface exclusive to a runtime class, with a base interface and
+// a method whose return type is a high-level class. Used to exercise the
+// --minimal closure truncation.
+func minimalTestExclusiveInterface(): TypeDefinitionRecord {
+    let typeAttributes = ArrayList<String>()
+    typeAttributes.add("Public")
+    typeAttributes.add("Interface")
+    typeAttributes.add("WindowsRuntime")
+
+    // ExclusiveToAttribute(typeof(Tiny.Controls.Widget)) -- the back-edge that
+    // would otherwise drag the whole runtime class into the closure.
+    let exclusiveArgs = ArrayList<CustomAttributeFixedArgumentRecord>()
+    exclusiveArgs.add(CustomAttributeFixedArgumentRecord(
+        SignatureRecord("Type", name: "Type", namespace: "System", hasNamespace: true),
+        value: Some(JsonString("Tiny.Controls.Widget"))
+    ))
+    let typeCustomAttributes = ArrayList<CustomAttributeRecord>()
+    typeCustomAttributes.add(CustomAttributeRecord(
+        "Windows.Foundation.Metadata.GuidAttribute"
+    ))
+    typeCustomAttributes.add(CustomAttributeRecord(
+        "Windows.Foundation.Metadata.ExclusiveToAttribute",
+        fixedArguments: exclusiveArgs
+    ))
+
+    // A method whose return type is a high-level class (Tiny.Controls.Panel).
+    let methodAttributes = ArrayList<String>()
+    methodAttributes.add("Public")
+    methodAttributes.add("Virtual")
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord(
+        "GetPanel",
+        MethodSignatureRecord(
+            SignatureRecord("Type", name: "Panel", namespace: "Tiny.Controls", hasNamespace: true),
+            requiredParameterCount: 0
+        ),
+        attributes: methodAttributes
+    ))
+
+    // A required base interface (Tiny.Controls.IControl).
+    let interfaceImplementations = ArrayList<InterfaceImplementationRecord>()
+    interfaceImplementations.add(InterfaceImplementationRecord(
+        interfaceSignature: Some(
+            SignatureRecord("Type", name: "IControl", namespace: "Tiny.Controls", hasNamespace: true)
+        )
+    ))
+
+    return TypeDefinitionRecord(
+        "Tiny.Controls",
+        "IWidget",
+        attributes: typeAttributes,
+        customAttributes: typeCustomAttributes,
+        interfaceImplementations: interfaceImplementations,
+        methods: methods
+    )
+}
+
+@Test
+func testMinimalModeKeepsFullInterfaceClosureWhenDisabled() {
+    clearMinimalInterfaceTruncation()
+    let typeDef = minimalTestExclusiveInterface()
+    let deps = typeDependencies(typeDef, "Tiny.Controls.IWidget")
+
+    // Default (non-minimal): the method return type, the ExclusiveTo class, and
+    // the required base interface are all pulled.
+    @Expect(containsExactString(deps, "Tiny.Controls.Panel"), true)
+    @Expect(containsExactString(deps, "Tiny.Controls.Widget"), true)
+    @Expect(containsExactString(deps, "Tiny.Controls.IControl"), true)
+}
+
+@Test
+func testMinimalModeTruncatesInterfaceMemberAndExclusiveDependencies() {
+    setMinimalInterfaceTruncation(true)
+    let typeDef = minimalTestExclusiveInterface()
+    let deps = typeDependencies(typeDef, "Tiny.Controls.IWidget")
+    clearMinimalInterfaceTruncation()
+
+    // Minimal: the method return type (high-level projection) and the ExclusiveTo
+    // class back-edge are dropped, but the required base interface is preserved so
+    // the interface's structural identity (and QueryInterface routing) stays intact.
+    @Expect(containsExactString(deps, "Tiny.Controls.Panel"), false)
+    @Expect(containsExactString(deps, "Tiny.Controls.Widget"), false)
+    @Expect(containsExactString(deps, "Tiny.Controls.IControl"), true)
 }

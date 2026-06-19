@@ -14,6 +14,35 @@ let CANGJIE_RESERVED_IDENTIFIERS: Array<String> = [
     "try", "type", "unsafe", "var", "where", "while", "This"
 ]
 
+// Minimal closure-truncation mode (`--minimal`).
+//
+// When enabled, a COM/WinRT INTERFACE contributes only its structural
+// dependencies to the selection closure -- its base interface, the types named by
+// its custom attributes (IID etc.), and the interfaces it implements -- and NOT
+// the high-level projected types named in its method/property/event signatures
+// (e.g. FlyoutBase). This is sound because an interface's vtable is rendered with
+// raw ABI types (CPointer<Unit>, scalars) and never references those high-level
+// types unless they happen to be selected by another path: interfaceSlotAbiType
+// projects an unselected non-System type to CPointer<Unit>, and the runtime-class
+// projection of an interface method projects an unselected type to
+// windows_interface.IInspectable -- both ABI-equivalent object handles. So the
+// interface vtable stays full-slot/correct-order (ABI preserved) while the
+// dependency closure stops cascading through every method signature.
+//
+// Value types (struct/enum/delegate) are unaffected -- their full signature
+// recursion is required so their byte layout is complete. Left disabled (the
+// default) the closure is the full transitive graph, so every existing test and
+// non-minimal generation mode is unchanged.
+var minimalInterfaceTruncation: Bool = false
+
+public func setMinimalInterfaceTruncation(enabled: Bool): Unit {
+    minimalInterfaceTruncation = enabled
+}
+
+public func clearMinimalInterfaceTruncation(): Unit {
+    minimalInterfaceTruncation = false
+}
+
 public func buildSymbolRecords(winmdFiles: ArrayList<WinmdFileRecord>): ArrayList<SymbolRecord> {
     let symbols = ArrayList<SymbolRecord>()
     let symbolsByName = HashMap<String, SymbolRecord>()
@@ -162,29 +191,79 @@ func typeDependencies(typeDef: TypeDefinitionRecord, selfFullName: String): Arra
     if (typeDef.hasBaseType) {
         addUnique(dependencies, typeDef.baseType)
     }
-    addCustomAttributeTypeDependencies(dependencies, selfFullName, typeDef.customAttributes)
-    for (field in typeDef.fields) {
-        addSignatureDependencies(dependencies, field.signature, selfFullName)
-        addCustomAttributeTypeDependencies(dependencies, selfFullName, field.customAttributes)
+    // In --minimal mode an interface contributes no member-signature dependencies:
+    // its vtable is raw ABI, so the high-level method/property/event signature
+    // types are not needed to render it, and skipping them is what truncates the
+    // selection closure at every interface boundary. The base interface, IID/custom-
+    // attribute types, and implemented interfaces below are still collected, so the
+    // interface's structural identity is preserved.
+    //
+    // A WinRT runtime CLASS is treated the same way for its member signatures: it
+    // projects its default interface's high-level members (e.g.
+    // DependencyObject.Dispatcher: CoreDispatcher) and the class metadata duplicates
+    // those member signatures onto the class, so without truncation the class drags
+    // every projected member's high-level type into the closure. Those projected
+    // members reference other runtime classes / interfaces (object handles), which
+    // the renderer degrades to windows_interface.IInspectable when unselected -- an
+    // ABI-equivalent object handle -- so dropping them from the closure is sound.
+    // The class still pulls its base class and every implemented interface (kept
+    // below), which the ancestor-IID / QueryInterface routing requires, and keeps
+    // all its custom attributes (the Composable/Activatable factory interfaces a
+    // `new()` needs live there). Member signature types a SEEDED method actually
+    // uses are re-added by the seeded-dependency path in filterRecordMembers.
+    // Only WinRT interfaces are truncated. A native (non-WindowsRuntime) COM
+    // interface renders its vtable CFunc parameters with the REAL projected types
+    // of the interface it points at (e.g. ISwapChainPanelNative.SetSwapChain takes
+    // IDXGISwapChain), so dropping those signature dependencies would leave the
+    // vtable referencing an undeclared type. Such interfaces keep full closures.
+    //
+    // A value type is never truncated even if it also carries Class/WindowsRuntime
+    // attributes: some WinRT structs (e.g. Windows.UI.Xaml.Interop.TypeName) are
+    // marked Class+WindowsRuntime yet render as a @C value struct, and a @C struct
+    // field must name its real CType (its enum/struct field types), not a degraded
+    // object handle. renderSymbolImplWithGate dispatches value types before the
+    // runtime-class path, so the truncation classification mirrors that precedence.
+    let truncateInterface = minimalInterfaceTruncation && isWinrtInterfaceType(typeDef) && !isValueType(typeDef)
+    let truncateClassMembers = minimalInterfaceTruncation && isWinrtClassType(typeDef) && !isValueType(typeDef)
+    let truncateMembers = truncateInterface || truncateClassMembers
+    // An interface's type-level custom attributes include ExclusiveToAttribute,
+    // whose type argument is the runtime CLASS the interface is exclusive to (e.g.
+    // IButton -> Button). Following that back-edge would drag the entire class --
+    // its base-class chain and every interface it implements -- into the closure,
+    // which is the dominant source of the closure explosion. The interface's vtable
+    // never references its exclusive class, so in minimal mode that one attribute's
+    // dependency is dropped while every other attribute (notably the GUID/IID) is
+    // still collected. A runtime class keeps ALL its attributes (factory back-edges
+    // are needed), so only the interface path skips ExclusiveTo.
+    if (truncateInterface) {
+        addInterfaceTypeAttributeDependencies(dependencies, selfFullName, typeDef.customAttributes)
+    } else {
+        addCustomAttributeTypeDependencies(dependencies, selfFullName, typeDef.customAttributes)
     }
-    for (method in typeDef.methods) {
-        addMethodSignatureDependencies(dependencies, method.signature, selfFullName)
-        addCustomAttributeTypeDependencies(dependencies, selfFullName, method.customAttributes)
-        for (parameter in method.parameters) {
-            match (parameter.signature) {
-                case Some(signature) => addSignatureDependencies(dependencies, signature, selfFullName)
-                case None => ()
-            }
-            addCustomAttributeTypeDependencies(dependencies, selfFullName, parameter.customAttributes)
+    if (!truncateMembers) {
+        for (field in typeDef.fields) {
+            addSignatureDependencies(dependencies, field.signature, selfFullName)
+            addCustomAttributeTypeDependencies(dependencies, selfFullName, field.customAttributes)
         }
-    }
-    for (property in typeDef.properties) {
-        addMethodSignatureDependencies(dependencies, property.signature, selfFullName)
-        addCustomAttributeTypeDependencies(dependencies, selfFullName, property.customAttributes)
-    }
-    for (event in typeDef.events) {
-        addSignatureDependencies(dependencies, event.typeSig, selfFullName)
-        addCustomAttributeTypeDependencies(dependencies, selfFullName, event.customAttributes)
+        for (method in typeDef.methods) {
+            addMethodSignatureDependencies(dependencies, method.signature, selfFullName)
+            addCustomAttributeTypeDependencies(dependencies, selfFullName, method.customAttributes)
+            for (parameter in method.parameters) {
+                match (parameter.signature) {
+                    case Some(signature) => addSignatureDependencies(dependencies, signature, selfFullName)
+                    case None => ()
+                }
+                addCustomAttributeTypeDependencies(dependencies, selfFullName, parameter.customAttributes)
+            }
+        }
+        for (property in typeDef.properties) {
+            addMethodSignatureDependencies(dependencies, property.signature, selfFullName)
+            addCustomAttributeTypeDependencies(dependencies, selfFullName, property.customAttributes)
+        }
+        for (event in typeDef.events) {
+            addSignatureDependencies(dependencies, event.typeSig, selfFullName)
+            addCustomAttributeTypeDependencies(dependencies, selfFullName, event.customAttributes)
+        }
     }
     for (impl in typeDef.interfaceImplementations) {
         match (impl.interfaceSignature) {
@@ -223,6 +302,27 @@ func addCustomAttributeTypeDependencies(
     for (attribute in attributes) {
         for (fullName in customAttributeTypeNameArgumentFullNames(attribute)) {
             addCustomAttributeTypeDependency(dependencies, ownerFullName, fullName)
+        }
+        addAssociatedEnumStringAttributeDependency(dependencies, ownerFullName, attribute)
+    }
+}
+
+// Minimal-mode variant for an INTERFACE's type-level custom attributes: identical
+// to addCustomAttributeTypeDependencies except it drops ExclusiveToAttribute's
+// type-argument dependency (the runtime class the interface is exclusive to). That
+// back-edge is what otherwise pulls the whole exclusive class -- and transitively
+// its base chain and every interface it implements -- into the selection closure.
+// All other attributes (GUID/IID, AssociatedEnum string targets, etc.) are kept.
+func addInterfaceTypeAttributeDependencies(
+    dependencies: ArrayList<String>,
+    ownerFullName: String,
+    attributes: ArrayList<CustomAttributeRecord>
+): Unit {
+    for (attribute in attributes) {
+        if (!hasAttributeName(attribute, "ExclusiveToAttribute")) {
+            for (fullName in customAttributeTypeNameArgumentFullNames(attribute)) {
+                addCustomAttributeTypeDependency(dependencies, ownerFullName, fullName)
+            }
         }
         addAssociatedEnumStringAttributeDependency(dependencies, ownerFullName, attribute)
     }

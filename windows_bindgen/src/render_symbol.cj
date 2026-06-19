@@ -436,6 +436,14 @@ func isWinrtClassType(typeDef: TypeDefinitionRecord): Bool {
     contains(typeDef.attributes, "Class") && contains(typeDef.attributes, "WindowsRuntime")
 }
 
+// A WinRT interface (Interface + WindowsRuntime). Its vtable is rendered with raw
+// ABI parameter types (CPointer<Unit>/scalars), so unlike a native COM interface
+// it never references the high-level types named in its method signatures, which
+// is what makes the --minimal closure truncation safe for it.
+func isWinrtInterfaceType(typeDef: TypeDefinitionRecord): Bool {
+    return isInterfaceType(typeDef) && contains(typeDef.attributes, "WindowsRuntime")
+}
+
 func isWinrtDelegateType(typeDef: TypeDefinitionRecord): Bool {
     return isDelegateType(typeDef) && contains(typeDef.attributes, "WindowsRuntime")
 }
