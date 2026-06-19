@@ -1487,20 +1487,6 @@ func selectionRulesIncludeMethod(
     return false
 }
 
-func filterMethodsBySelectionRules(
-    methods: ArrayList<MethodRecord>,
-    containerFullName: String,
-    filters: ArrayList<String>
-): ArrayList<MethodRecord> {
-    let selected = ArrayList<MethodRecord>()
-    for (method in methods) {
-        if (selectionRulesIncludeMethod(filters, containerFullName, method)) {
-            selected.add(method)
-        }
-    }
-    return selected
-}
-
 func filterPropertiesBySelectionRules(
     properties: ArrayList<PropertyRecord>,
     containerFullName: String,
