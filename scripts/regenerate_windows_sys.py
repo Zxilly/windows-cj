@@ -147,6 +147,22 @@ def regenerate(timeout_seconds: int) -> None:
     (WINDOWS_SYS / "cjpm.lock").write_text(WINDOWS_SYS_LOCK_CONTENT, encoding="utf-8")
 
 
+def rewire_consumers(timeout_seconds: int) -> None:
+    """Refresh every consumer's cfg from the freshly regenerated dependency graph.
+
+    The per-namespace closure each consumer needs is derived entirely from the
+    generator's output (``namespace-deps.json``) plus the consumer's own
+    windows_sys imports — nobody hand-specifies namespaces. Running this as the
+    final regeneration step keeps every consumer's ``override-compile-option`` in
+    lockstep with the graph, so a regeneration that adds/moves cross-namespace
+    references can never leave a consumer with a stale, now-incomplete cfg (the
+    failure mode that broke fresh consumer builds before this was automated).
+    """
+    wire = ROOT / "tools" / "wire_all_consumers.py"
+    print("Re-wiring all windows_sys consumers from the regenerated graph", flush=True)
+    run([sys.executable, str(wire)], timeout_seconds=timeout_seconds)
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Regenerate the checked-in windows_sys package in place.")
     parser.add_argument(
@@ -171,6 +187,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         build_generator(args.timeout_seconds)
     regenerate(args.timeout_seconds)
+    rewire_consumers(args.timeout_seconds)
     manifest = windows_sys_manifest.load_manifest(WINDOWS_SYS)
     files = windows_sys_manifest.manifest_files(manifest)
     symbols = manifest.get("selected_symbols", [])
