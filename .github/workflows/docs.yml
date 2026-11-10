@@ -42,7 +42,10 @@ jobs:
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v2
         with:
-          mdbook-version: latest
+          mdbook-version: '0.5.4'
+
+      - name: Install mdBook sitemap backend
+        run: cargo install mdbook-sitemap --version 0.1.1 --locked
 
       - name: Build book
         run: python web/build.py
@@ -51,8 +54,8 @@ jobs:
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
-          # book.toml 未改 build-dir，mdBook 默认输出到 <book 根>/book。
-          path: web/book/book
+          # 多输出后端分别写入 html/ 和 sitemap/；build.py 将规范 sitemap 放入 html/。
+          path: web/book/book/html
 
   deploy:
     name: deploy

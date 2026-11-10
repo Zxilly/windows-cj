@@ -189,7 +189,8 @@ import windows_foundation.*
 本地构建文档：
 
 ```powershell
-mdbook build web/book
+cargo install mdbook-sitemap --version 0.1.1 --locked
+python web/build.py
 ```
 
 ## 发布

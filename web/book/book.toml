@@ -5,6 +5,10 @@ authors = ["windows-cj contributors"]
 language = "zh-CN"
 src = "src"
 
+[output.sitemap]
+base-url = "https://windows.cj.zxilly.dev/"
+include-lastmod = false
+
 [output.html]
 default-theme = "light"
 preferred-dark-theme = "navy"

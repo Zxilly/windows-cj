@@ -4,6 +4,7 @@ from html import escape, unescape
 from pathlib import Path
 import re
 import subprocess
+import xml.etree.ElementTree as ET
 
 SITE = "https://windows.cj.zxilly.dev"
 ROOT = Path(__file__).resolve().parent
@@ -28,8 +29,7 @@ SUMMARIES = {
 
 def main():
     subprocess.run(["mdbook", "build", str(ROOT / "book")], check=True)
-    output = ROOT / "book" / "book"
-    urls = set()
+    output = ROOT / "book" / "book" / "html"
     for page in sorted(output.rglob("*.html")):
         source = page.read_text(encoding="utf-8")
         relative = page.relative_to(output).as_posix()
@@ -42,7 +42,6 @@ def main():
             title = unescape(re.search(r"<title>(.*?)</title>", source, re.S)[1])
             path = relative.removesuffix("index.html") if page.name == "index.html" else relative
             canonical = SITE + "/" + path
-            urls.add(canonical)
             source = re.sub(r'<meta name="description"[^>]*>', "", source)
             tags = [f'<link rel="canonical" href="{escape(canonical, quote=True)}">',
                     f'<meta name="description" content="{escape(description, quote=True)}">']
@@ -51,11 +50,16 @@ def main():
                 tags.append(f'<meta property="{prop}" content="{escape(value, quote=True)}">')
             source = source.replace("</head>", "\n".join(tags) + "\n</head>")
         page.write_text(source, encoding="utf-8")
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    sitemap += "".join(f"  <url><loc>{escape(url)}</loc></url>\n" for url in sorted(urls))
-    (output / "sitemap.xml").write_text(sitemap + "</urlset>\n", encoding="utf-8")
+    # mdbook-sitemap owns chapter discovery and XML generation. Match the
+    # published directory canonicals without changing the plugin's URL list.
+    ET.register_namespace("", "http://www.sitemaps.org/schemas/sitemap/0.9")
+    sitemap = ET.parse(output.parent / "sitemap" / "sitemap.xml")
+    locations = sitemap.findall(".//{*}loc")
+    for location in locations:
+        location.text = location.text.removesuffix("index.html")
+    sitemap.write(output / "sitemap.xml", encoding="utf-8", xml_declaration=True)
     (output / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
-    print(f"Generated metadata and sitemap for {len(urls)} documentation pages.")
+    print(f"Added metadata and canonical paths to {len(locations)} plugin sitemap URLs.")
 
 
 if __name__ == "__main__":
