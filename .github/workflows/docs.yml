@@ -45,7 +45,7 @@ jobs:
           mdbook-version: latest
 
       - name: Build book
-        run: mdbook build web/book
+        run: python web/build.py
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
